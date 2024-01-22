@@ -12,8 +12,8 @@ To call a function you created at [https://platform.opper.ai](https://platform.o
 
 
 ```python
-from opper import Client
-from opper.types import ChatPayload, Message
+from opperai import Client
+from opperai.types import ChatPayload, Message
 
 # Use AsyncClient for async operations
 client = Client(api_key="your-api-key") 
