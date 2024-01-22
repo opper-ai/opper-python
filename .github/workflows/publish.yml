@@ -1,6 +1,10 @@
 name: Build & Publish
 
-on: push
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   build:
@@ -83,9 +87,7 @@ jobs:
         path: dist/
     - name: Publish distribution 📦 to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
-      with:
-          repository-url: https://pypi.org/legacy/
-          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+      
 
   github-release:
     name: >-
