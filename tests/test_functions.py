@@ -1,13 +1,13 @@
 import pytest
-from opper import AsyncClient, Client
-from opper.types import ChatPayload, Message
+from opperai import AsyncClient, Client
+from opperai.types import ChatPayload, Message
 
 from unittest.mock import patch
 
 api_key = "key"
 
 
-@patch("opper.client._http_client.do_request")
+@patch("opperai.client._http_client.do_request")
 def test_chat(mock_do_request):
     mock_do_request.return_value = {"message": "Bonjour"}
     client = Client(api_key=api_key)
@@ -20,7 +20,7 @@ def test_chat(mock_do_request):
 
 
 @pytest.mark.asyncio
-@patch("opper.client._async_http_client.do_request")
+@patch("opperai.client._async_http_client.do_request")
 async def test_async_chat(mock_do_request):
     mock_do_request.return_value = {"message": "Bonjour"}
     client = AsyncClient(api_key="op-dev-api-key", api_url="http://localhost:8000")
