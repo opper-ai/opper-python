@@ -1,4 +1,4 @@
-name: Build & Publish ${{ github.event.head_commit.message }}
+name: Build & Publish
 
 on: push
 
