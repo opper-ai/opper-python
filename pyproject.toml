@@ -3,8 +3,8 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "opper"
-version = "0.0.5"
+name = "opperai"
+version = "0.0.1"
 description = "Opper Python client"
 authors = [
   {name = "Opper", email = "opper@opper.ai"},
