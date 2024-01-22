@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "opper"
+version = "0.0.3"
+description = "Opper Python client"
+authors = [
+  {name = "Opper", email = "opper@opper.ai"},
+]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "pydantic",
+    "httpx"
+]
+readme = "README.md"
+
+[project.urls]
+Homepage = "https://opper.ai"
+Documentation = "https://docs.opper.ai"
+Platform = "https://platform.opper.ai"
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-asyncio"
+]
+
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "src"
+]
