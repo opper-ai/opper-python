@@ -19,12 +19,12 @@ jobs:
         pip install poetry
         poetry install
     - name: Run lint
-        run: |
-          pip install ruff==0.1.11
-          ruff format --check .
+      run: |
+        pip install ruff==0.1.11
+        ruff format --check .
     - name: Run tests
-        run: |
-          python -m pytest
+      run: |
+        python -m pytest
     - name: Install pypa/build
       run: >-
         python3 -m
