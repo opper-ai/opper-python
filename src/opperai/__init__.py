@@ -1,1 +1,1 @@
-from .client import AsyncClient, Client
+from ._client import AsyncClient, Client

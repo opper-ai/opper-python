@@ -17,7 +17,8 @@ classifiers = [
 ]
 dependencies = [
     "pydantic",
-    "httpx"
+    "httpx",
+    "httpx-sse"
 ]
 readme = "README.md"
 

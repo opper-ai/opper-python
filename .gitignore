@@ -11,3 +11,4 @@ venv.bak
 .vscode
 dist
 *.egg-info
+main.py

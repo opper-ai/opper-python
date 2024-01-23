@@ -1,5 +1,7 @@
 import httpx
-from .functions import Functions, AsyncFunctions
+from ._functions import Functions, AsyncFunctions
+from httpx_sse import aconnect_sse, connect_sse
+import json
 
 DEFAULT_API_URL = "https://api.opper.ai"
 
@@ -28,6 +30,15 @@ class _async_http_client:
             raise Exception(f"Request failed with status {response.status_code}")
         return response.json()
 
+    async def stream(self, method: str, path: str):
+        with aconnect_sse(
+            self.session,
+            method,
+            path,
+        ) as event_source:
+            for sse in event_source.iter_sse():
+                yield json.loads(sse.data)
+
 
 class _http_client:
     def __init__(self, api_key: str, api_url: str):
@@ -40,3 +51,13 @@ class _http_client:
         if response.status_code != 200:
             raise Exception(f"Request failed with status {response.status_code}")
         return response.json()
+
+    def stream(self, method: str, path: str, **kwargs):
+        with connect_sse(
+            self.session,
+            method,
+            path,
+            **kwargs,
+        ) as event_source:
+            for sse in event_source.iter_sse():
+                yield json.loads(sse.data)

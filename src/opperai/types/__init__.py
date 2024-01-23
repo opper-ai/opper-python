@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import List, Optional
+from typing import List, Optional, Union
 
 
 class Message(BaseModel):
@@ -10,25 +10,27 @@ class Message(BaseModel):
 class ChatPayload(BaseModel):
     messages: List[Message]
 
+    class Config:
+        extra = "allow"
+
+
+class FileMetadata(BaseModel):
+    file_name: str
+
 
 class ContextData(BaseModel):
-    embeddings_id: str
-    embeddings_table: str
     dataset_id: int
     content: str
-    score: Optional[float]
-
-
-class DebugData(BaseModel):
-    context: List[ContextData]
+    metadata: Union[Optional[dict], FileMetadata] = Field(default=None)
 
 
 class StreamingChunk(BaseModel):
-    delta: str
+    delta: Optional[str] = None
     error: Optional[str] = None
+    context: Optional[List[ContextData]] = None
 
 
 class FunctionResponse(BaseModel):
     message: str
     error: Optional[str] = None
-    debug: Optional[DebugData] = None
+    context: Optional[List[ContextData]] = None
