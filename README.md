@@ -1,4 +1,4 @@
-# [Opper](https//opper.ai) Python SDK
+# Opper Python SDK
 
 ## Install
 
