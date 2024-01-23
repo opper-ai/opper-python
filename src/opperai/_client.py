@@ -5,6 +5,8 @@ import json
 
 DEFAULT_API_URL = "https://api.opper.ai"
 
+Timeout = httpx.Timeout(60.0)
+
 
 class AsyncClient:
     def __init__(self, api_key: str, api_url: str = DEFAULT_API_URL):
@@ -21,7 +23,9 @@ class Client:
 class _async_http_client:
     def __init__(self, api_key: str, api_url):
         self.session = httpx.AsyncClient(
-            base_url=api_url, headers={"X-OPPER-API-KEY": f"{api_key}"}
+            base_url=api_url,
+            headers={"X-OPPER-API-KEY": f"{api_key}"},
+            timeout=Timeout,
         )
 
     async def do_request(self, method: str, path: str, **kwargs):
@@ -43,7 +47,9 @@ class _async_http_client:
 class _http_client:
     def __init__(self, api_key: str, api_url: str):
         self.session = httpx.Client(
-            base_url=api_url, headers={"X-OPPER-API-KEY": f"{api_key}"}
+            base_url=api_url,
+            headers={"X-OPPER-API-KEY": f"{api_key}"},
+            timeout=Timeout,
         )
 
     def do_request(self, method: str, path: str, **kwargs):
