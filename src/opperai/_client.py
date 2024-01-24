@@ -28,11 +28,18 @@ class _async_http_client:
             timeout=Timeout,
         )
 
-    async def do_request(self, method: str, path: str, **kwargs):
-        response = await self.session.request(method, path, **kwargs)
-        if response.status_code != 200:
-            raise Exception(f"Request failed with status {response.status_code}")
-        return response.json()
+    async def do_request(self, method: str, path: str, retries: int = 3, **kwargs):
+        for attempt in range(retries):
+            response = await self.session.request(method, path, **kwargs)
+            if response.status_code == 200:
+                return response.json()
+            elif response.status_code == 500:
+                if attempt < retries - 1:
+                    continue
+                else:
+                    raise Exception("Max retries reached for 500 error")
+            else:
+                raise Exception(f"Request failed with status {response.status_code}")
 
     async def stream(self, method: str, path: str):
         with aconnect_sse(
@@ -52,11 +59,18 @@ class _http_client:
             timeout=Timeout,
         )
 
-    def do_request(self, method: str, path: str, **kwargs):
-        response = self.session.request(method, path, **kwargs)
-        if response.status_code != 200:
-            raise Exception(f"Request failed with status {response.status_code}")
-        return response.json()
+    def do_request(self, method: str, path: str, retries: int = 3, **kwargs):
+        for attempt in range(retries):
+            response = self.session.request(method, path, **kwargs)
+            if response.status_code == 200:
+                return response.json()
+            elif response.status_code == 500:
+                if attempt < retries - 1:
+                    continue
+                else:
+                    raise Exception("Max retries reached for 500 error")
+            else:
+                raise Exception(f"Request failed with status {response.status_code}")
 
     def stream(self, method: str, path: str, **kwargs):
         with connect_sse(
