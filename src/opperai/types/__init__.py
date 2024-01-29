@@ -1,5 +1,6 @@
-from pydantic import BaseModel, Field
 from typing import List, Optional, Union
+
+from pydantic import BaseModel, Field
 
 
 class Message(BaseModel):
@@ -31,6 +32,7 @@ class StreamingChunk(BaseModel):
 
 
 class FunctionResponse(BaseModel):
-    message: str
+    message: str = None
+    json_payload: Optional[dict] = None
     error: Optional[str] = None
     context: Optional[List[ContextData]] = None
