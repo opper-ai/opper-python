@@ -1,4 +1,4 @@
-from typing import List, Optional, Union
+from typing import Any, Dict, List, Optional, Union
 
 from pydantic import BaseModel, Field
 
@@ -32,7 +32,7 @@ class StreamingChunk(BaseModel):
 
 
 class FunctionResponse(BaseModel):
-    message: str = None
-    json_payload: Optional[dict] = None
+    message: Optional[str] = None
+    json_payload: Optional[Union[dict, List]] = None
     error: Optional[str] = None
     context: Optional[List[ContextData]] = None
