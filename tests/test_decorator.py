@@ -1,5 +1,6 @@
 import os
 from typing import Dict, List, Optional, Union
+from unittest.mock import MagicMock, patch
 
 from opperai import fn
 from opperai.functions.decorator._schemas import (
@@ -11,17 +12,25 @@ os.environ["OPPER_API_KEY"] = "op-dev-api-key"
 os.environ["OPPER_API_URL"] = "http://localhost:8000"
 
 
-@fn()
-def translate(text: str, target_language: str) -> str:
-    """Translate text to a target language."""
+@patch("opperai._http_clients._http_client.do_request")
+def test_decorator(mock_do_request):
+    mock_do_request.side_effect = [
+        MagicMock(status_code=404),
+        MagicMock(status_code=200, json=lambda: {"id": 1}),
+        MagicMock(status_code=404),
+        MagicMock(status_code=200, json=lambda: {"id": 2}),
+        MagicMock(status_code=200, json=lambda: {"json_payload": "Hola"}),
+        MagicMock(status_code=200, json=lambda: {"json_payload": ["Hola", "Bonjour"]}),
+    ]
 
+    @fn()
+    def translate(text: str, target_language: str) -> str:
+        """Translate text to a target language."""
 
-@fn()
-def translate_list(text: str, target_languages: List[str]) -> List[str]:
-    """Translate text to a list of target languages."""
+    @fn()
+    def translate_list(text: str, target_languages: List[str]) -> List[str]:
+        """Translate text to a list of target languages."""
 
-
-def test_decorator():
     assert translate("Hello", "es") == "Hola"
     assert translate_list("Hello", ["es", "fr"]) == ["Hola", "Bonjour"]
 
