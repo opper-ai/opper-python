@@ -33,7 +33,7 @@ class StreamingChunk(BaseModel):
 
 class FunctionResponse(BaseModel):
     message: Optional[str] = None
-    json_payload: Optional[Union[dict, List]] = None
+    json_payload: Optional[Union[dict, List, Any]] = None
     error: Optional[str] = None
     context: Optional[List[ContextData]] = None
 

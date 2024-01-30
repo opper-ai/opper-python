@@ -34,7 +34,7 @@ class Functions:
         )
         if response.status_code != 200:
             raise APIError(
-                f"Failed to update function {function.path} with status {response.status_code}"
+                f"Failed to update function `{function.path}` with status {response.status_code}"
             )
         return response.json()["id"]
 
@@ -73,6 +73,7 @@ class Functions:
         if f is None:
             return self._create_function(function)
         elif update:
+            function.id = f.id
             return self.update_function(function)
         return None
 

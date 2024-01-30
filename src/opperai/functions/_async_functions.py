@@ -71,6 +71,7 @@ class AsyncFunctions:
         if f is None:
             return await self._create_function(function)
         elif update:
+            function.id = f.id
             return await self.update_function(function)
         return None
 
