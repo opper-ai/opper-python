@@ -8,8 +8,7 @@ from opperai.functions.decorator._schemas import (
 )
 from pydantic import BaseModel
 
-os.environ["OPPER_API_KEY"] = "op-dev-api-key"
-os.environ["OPPER_API_URL"] = "http://localhost:8000"
+os.environ["OPPER_API_KEY"] = "api-key"
 
 
 @patch("opperai._http_clients._http_client.do_request")
