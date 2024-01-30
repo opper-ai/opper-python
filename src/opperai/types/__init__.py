@@ -36,3 +36,17 @@ class FunctionResponse(BaseModel):
     json_payload: Optional[Union[dict, List]] = None
     error: Optional[str] = None
     context: Optional[List[ContextData]] = None
+
+
+class FunctionDescription(BaseModel):
+    id: Optional[int] = None
+    path: str = Field(
+        ...,
+        pattern=r"^[a-zA-Z0-9_]+(\/[a-zA-Z0-9_-]+)*$",
+        description="Path should not contain characters that could break URLs.",
+    )
+    description: str
+    input_schema: Optional[Dict[str, Any]] = None
+    out_schema: Optional[Dict[str, Any]] = None
+    instructions: str
+    dataset_ids: Optional[List[int]] = None
