@@ -86,5 +86,4 @@ def get_output_schema(func):
     else:
         schema = {"type": "unknown"}
 
-    print(schema)
     return schema
