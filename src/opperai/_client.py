@@ -23,6 +23,8 @@ class AsyncClient:
             cls._instance = super(AsyncClient, cls).__new__(cls)
             cls._instance.http_client = _async_http_client(api_key, api_url)
             cls._instance.functions = AsyncFunctions(cls._instance.http_client)
+            cls._instance.api_key = api_key
+            cls._instance.api_url = api_url
         return cls._instance
 
 
@@ -36,10 +38,12 @@ class Client:
                 raise Exception(
                     "API key is not provided and OPPER_API_KEY environment variable is not set."
                 )
-            if api_url is None:
-                api_url = os.getenv("OPPER_API_URL", DEFAULT_API_URL)
+        if api_url is None:
+            api_url = os.getenv("OPPER_API_URL", DEFAULT_API_URL)
         if cls._instance is None:
             cls._instance = super(Client, cls).__new__(cls)
             cls._instance.http_client = _http_client(api_key, api_url)
             cls._instance.functions = Functions(cls._instance.http_client)
+            cls._instance.api_key = api_key
+            cls._instance.api_url = api_url
         return cls._instance

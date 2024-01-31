@@ -14,7 +14,12 @@ from ._schemas import convert_function_call_to_json, get_output_schema
 
 def fn(path=None, client=None, json_encoder=None):
     def decorator(func):
-        sync_client = Client()
+        if isinstance(client, AsyncClient):
+            sync_client = Client(api_key=client.api_key, api_url=client.api_url)
+        elif isinstance(client, Client):
+            sync_client = client
+        else:
+            sync_client = Client()
         func_path = path or func.__name__
 
         function = FunctionDescription(
