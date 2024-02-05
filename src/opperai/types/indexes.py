@@ -1,4 +1,5 @@
 import datetime
+from typing import Optional
 
 from pydantic import UUID4, BaseModel, Field
 
@@ -9,8 +10,8 @@ class IndexRetrieveResponse(BaseModel):
 
 
 class DocumentIn(BaseModel):
-    id: str | None = None
-    key: str | None = None
+    id: Optional[str] = None
+    key: Optional[str] = None
     content: str = Field(..., min_length=1)
     metadata: dict = dict()
 
