@@ -3,15 +3,13 @@ import json
 import httpx
 from httpx_sse import aconnect_sse, connect_sse
 
-Timeout = httpx.Timeout(60.0)
-
 
 class _async_http_client:
-    def __init__(self, api_key: str, api_url):
+    def __init__(self, api_key: str, api_url, timeout):
         self.session = httpx.AsyncClient(
             base_url=api_url,
             headers={"X-OPPER-API-KEY": f"{api_key}"},
-            timeout=Timeout,
+            timeout=httpx.Timeout(timeout),
         )
 
     async def do_request(self, method: str, path: str, **kwargs):
@@ -28,11 +26,11 @@ class _async_http_client:
 
 
 class _http_client:
-    def __init__(self, api_key: str, api_url: str):
+    def __init__(self, api_key: str, api_url: str, timeout):
         self.session = httpx.Client(
             base_url=api_url,
             headers={"X-OPPER-API-KEY": f"{api_key}"},
-            timeout=Timeout,
+            timeout=httpx.Timeout(timeout),
         )
 
     def do_request(self, method: str, path: str, **kwargs):

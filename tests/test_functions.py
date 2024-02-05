@@ -67,7 +67,7 @@ async def test_create_function(mock_do_request):
     mock_do_request.assert_any_call(
         "POST",
         "/api/v1/functions",
-        json=function.dict(),
+        json=function.model_dump(),
     )
 
 
