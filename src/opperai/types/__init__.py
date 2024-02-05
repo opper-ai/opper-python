@@ -20,7 +20,7 @@ class FileMetadata(BaseModel):
 
 
 class ContextData(BaseModel):
-    dataset_id: int
+    index_id: int
     content: str
     metadata: Union[Optional[dict], FileMetadata] = Field(default=None)
 
@@ -49,4 +49,4 @@ class FunctionDescription(BaseModel):
     input_schema: Optional[Dict[str, Any]] = None
     out_schema: Optional[Dict[str, Any]] = None
     instructions: str
-    dataset_ids: Optional[List[int]] = None
+    index_ids: Optional[List[int]] = None
