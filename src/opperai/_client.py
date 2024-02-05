@@ -3,6 +3,8 @@ import os
 from ._http_clients import _async_http_client, _http_client
 from .functions._async_functions import AsyncFunctions
 from .functions._functions import Functions
+from .indexes._async_indexes import AsyncIndexes
+from .indexes._indexes import Indexes
 
 DEFAULT_API_URL = "https://api.opper.ai"
 
@@ -23,6 +25,7 @@ class AsyncClient:
             cls._instance = super(AsyncClient, cls).__new__(cls)
             cls._instance.http_client = _async_http_client(api_key, api_url)
             cls._instance.functions = AsyncFunctions(cls._instance.http_client)
+            cls._instance.indexes = AsyncIndexes(cls._instance.http_client)
             cls._instance.api_key = api_key
             cls._instance.api_url = api_url
         return cls._instance
@@ -44,6 +47,7 @@ class Client:
             cls._instance = super(Client, cls).__new__(cls)
             cls._instance.http_client = _http_client(api_key, api_url)
             cls._instance.functions = Functions(cls._instance.http_client)
+            cls._instance.indexes = Indexes(cls._instance.http_client)
             cls._instance.api_key = api_key
             cls._instance.api_url = api_url
         return cls._instance

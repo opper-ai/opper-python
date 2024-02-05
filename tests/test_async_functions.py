@@ -1,7 +1,7 @@
 from unittest.mock import MagicMock, patch
 
 import pytest
-from opperai import AsyncClient, Client
+from opperai import AsyncClient
 from opperai.types import ChatPayload, FunctionDescription, Message
 
 
