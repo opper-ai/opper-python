@@ -16,8 +16,8 @@ class _async_http_client:
         return await self.session.request(method, path, **kwargs)
 
     async def stream(self, method: str, path: str, **kwargs):
-        with aconnect_sse(self.session, method, path, **kwargs) as event_source:
-            for sse in event_source.iter_sse():
+        async with aconnect_sse(self.session, method, path, **kwargs) as event_source:
+            async for sse in event_source.aiter_sse():
                 yield json.loads(sse.data)
 
 
