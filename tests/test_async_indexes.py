@@ -67,7 +67,7 @@ async def test_async_indexes_index(mock_do_request):
     assert doc_out.key == "test_key"
     mock_do_request.assert_called_once_with(
         "POST",
-        "/v1/indexes/index",
+        "/v1/indexes/42/index",
         json=doc_in.model_dump(),
     )
 
