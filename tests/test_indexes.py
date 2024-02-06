@@ -1,4 +1,6 @@
-from unittest.mock import MagicMock, patch
+import os
+import tempfile
+from unittest.mock import ANY, MagicMock, call, patch
 
 from opperai import Client
 from opperai.types.indexes import DocumentIn
@@ -82,4 +84,44 @@ def test_indexes_list(mock_do_request):
     mock_do_request.assert_called_once_with(
         "GET",
         "/v1/indexes",
+    )
+
+
+@patch("opperai._http_clients._http_client.do_request")
+def test_indexes_upload_file(mock_do_request):
+    mock_do_request.side_effect = [
+        MagicMock(
+            status_code=200,
+            json=lambda: {
+                "url": "http://localhost:8000/upload",
+                "fields": {"key": "value"},
+                "uuid": "123e4567-e89b-12d3-a456-426614174000",
+            },
+        ),
+        MagicMock(status_code=204),
+        MagicMock(
+            status_code=200,
+            json=lambda: {"uuid": "123e4567-e89b-12d3-a456-426614174000"},
+        ),
+    ]
+    client = Client(api_key="op-dev-api-key", api_url="http://localhost:8000")
+    with tempfile.NamedTemporaryFile(mode="w", delete=False) as tmp_file:
+        tmp_file.write("Some test content")
+        tmp_file_path = tmp_file.name
+    response = client.indexes.upload_file(index_id=1, file_path=tmp_file_path)
+    os.remove(tmp_file_path)  # Clean up the temporary file after use
+
+    assert response == {"uuid": "123e4567-e89b-12d3-a456-426614174000"}
+    mock_do_request.assert_has_calls(
+        [
+            call("GET", "/v1/indexes/1/upload_url", params={"filename": ANY}),
+            call(
+                "POST", "http://localhost:8000/upload", files=ANY, data={"key": "value"}
+            ),
+            call(
+                "POST",
+                "/v1/indexes/1/register_file",
+                json={"uuid": "123e4567-e89b-12d3-a456-426614174000"},
+            ),
+        ]
     )

@@ -44,6 +44,13 @@ print(response)
 
 This more traditional API is better targeted for chat use cases.
 
+## Retrieval
+
+```python
+client.indexes.retrieve(index_id=42, "Who is the president of the USA?", 3)
+
+```
+
 ## Configuration
 
 ### Environment variable
