@@ -89,10 +89,10 @@ class AsyncIndexes:
 
         return register_file_response.json()
 
-    async def index(self, doc: DocumentIn) -> DocumentOut:
+    async def index(self, index_id: int, doc: DocumentIn) -> DocumentOut:
         response = await self.http_client.do_request(
             "POST",
-            "/v1/indexes/index",
+            f"/v1/indexes/{index_id}/index",
             json=doc.model_dump(),
         )
         if response.status_code != 200:

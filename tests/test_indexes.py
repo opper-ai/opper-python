@@ -56,7 +56,7 @@ def test_indexes_index(mock_do_request):
     )
     client = Client(api_key="op-dev-api-key", api_url="http://localhost:8000")
     doc_in = DocumentIn(content="Hello", metadata={"source": "test"})
-    doc_out = client.indexes.index(doc=doc_in)
+    doc_out = client.indexes.index(index_id=42, doc=doc_in)
 
     assert doc_out.id == 1
     assert str(doc_out.uuid) == "506768ec-54ac-4233-8a7b-ea9d1f12b879"
