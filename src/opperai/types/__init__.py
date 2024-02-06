@@ -20,7 +20,7 @@ class FileMetadata(BaseModel):
 
 
 class ContextData(BaseModel):
-    dataset_id: int
+    index_id: int
     content: str
     metadata: Union[Optional[dict], FileMetadata] = Field(default=None)
 
