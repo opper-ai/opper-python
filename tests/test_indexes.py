@@ -31,12 +31,12 @@ def test_indexes_retrieve(mock_do_request):
 def test_indexes_create(mock_do_request):
     mock_do_request.return_value = MagicMock(
         status_code=200,
-        json=lambda: {"dataset_id": 123},
+        json=lambda: {"id": 123},
     )
     client = Client(api_key="op-dev-api-key", api_url="http://localhost:8000")
-    dataset_id = client.indexes.create(name="test_index")
+    index_id = client.indexes.create(name="test_index")
 
-    assert dataset_id == 123
+    assert index_id == 123
     mock_do_request.assert_called_once_with(
         "POST",
         "/v1/indexes",

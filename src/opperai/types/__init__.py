@@ -49,4 +49,4 @@ class FunctionDescription(BaseModel):
     input_schema: Optional[Dict[str, Any]] = None
     out_schema: Optional[Dict[str, Any]] = None
     instructions: str
-    dataset_ids: Optional[List[int]] = None
+    index_ids: Optional[List[int]] = None

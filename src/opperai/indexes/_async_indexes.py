@@ -22,7 +22,7 @@ class AsyncIndexes:
         )
         if response.status_code != 200:
             raise APIError(f"Failed to create index with status {response.status_code}")
-        return response.json()["dataset_id"]
+        return response.json()["id"]
 
     async def delete(self, index_id: int):
         response = await self.http_client.do_request(
