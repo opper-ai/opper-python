@@ -20,7 +20,7 @@ class Indexes:
         )
         if response.status_code != 200:
             raise APIError(f"Failed to create index with status {response.status_code}")
-        return response.json()["dataset_id"]
+        return response.json()["id"]
 
     def delete(self, index_id: int):
         response = self.http_client.do_request(
