@@ -1,3 +1,5 @@
+from typing import List
+
 from opperai._http_clients import _http_client
 from opperai.types.exceptions import APIError
 from opperai.types.indexes import (
@@ -47,7 +49,7 @@ class Indexes:
                 return index
         raise APIError(f"Index with name {name} not found")
 
-    def upload_file(self, index_id: int, file_path: str):
+    def upload_file(self, index_id: int, file_path: str, **kwargs):
         # Get upload URL
         upload_url_response = self.http_client.do_request(
             "GET",
@@ -79,7 +81,7 @@ class Indexes:
         register_file_response = self.http_client.do_request(
             "POST",
             f"/v1/indexes/{index_id}/register_file",
-            json={"uuid": upload_url_data["uuid"]},
+            json={"uuid": upload_url_data["uuid"]} | kwargs,
         )
         if register_file_response.status_code != 200:
             raise APIError(
@@ -98,7 +100,9 @@ class Indexes:
             raise APIError(f"Failed to add document with status {response.status_code}")
         return DocumentOut.model_validate(response.json())
 
-    def retrieve(self, index_id: int, query: str, k: int):
+    def retrieve(
+        self, index_id: int, query: str, k: int
+    ) -> List[IndexRetrieveResponse]:
         response = self.http_client.do_request(
             "POST",
             f"/v1/indexes/{index_id}/query",

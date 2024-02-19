@@ -28,7 +28,7 @@ def fn(path=None, client=None, json_encoder=None):
             instructions=f"Operation: {func.__name__}\n\nOperation description: {func.__doc__}",
             out_schema=get_output_schema(func),
         )
-        sync_client.functions.create_function(function)
+        sync_client.functions.create(function)
 
         if asyncio.iscoroutinefunction(func):
             c = AsyncClient() or client
