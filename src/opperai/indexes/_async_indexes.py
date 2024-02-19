@@ -49,7 +49,7 @@ class AsyncIndexes:
                 return index
         raise APIError(f"Index with name {name} not found")
 
-    async def upload_file(self, index_id: int, file_path: str):
+    async def upload_file(self, index_id: int, file_path: str, **kwargs):
         # Get upload URL
         upload_url_response = await self.http_client.do_request(
             "GET",
@@ -80,7 +80,7 @@ class AsyncIndexes:
         register_file_response = await self.http_client.do_request(
             "POST",
             f"/v1/indexes/{index_id}/register_file",
-            json={"uuid": upload_url_data["uuid"]},
+            json={"uuid": upload_url_data["uuid"]} | kwargs,
         )
         if register_file_response.status_code != 200:
             raise APIError(

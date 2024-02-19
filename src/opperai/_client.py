@@ -15,6 +15,8 @@ DEFAULT_API_URL = "https://api.opper.ai"
 class AsyncClient:
     _instance = None
 
+    functions: AsyncFunctions
+
     def __new__(cls, api_key: str = None, api_url: str = None, timeout: int = 60):
         if api_key is None:
             api_key = os.getenv("OPPER_API_KEY")
@@ -36,6 +38,8 @@ class AsyncClient:
 
 class Client:
     _instance = None
+
+    functions: Functions
 
     def __new__(cls, api_key: str = None, api_url: str = None, timeout: int = 60):
         if api_key is None:

@@ -1,6 +1,8 @@
 from typing import Any, Dict, List, Optional, Union
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator, ConfigDict
+
+from .validators import validate_id_xor_path
 
 
 class Message(BaseModel):
@@ -9,10 +11,9 @@ class Message(BaseModel):
 
 
 class ChatPayload(BaseModel):
-    messages: List[Message]
+    model_config: ConfigDict = ConfigDict(extra="allow")
 
-    class Config:
-        extra = "allow"
+    messages: List[Message]
 
 
 class FileMetadata(BaseModel):
