@@ -42,7 +42,9 @@ class Functions:
         return response.json()["id"]
 
     @validate_id_xor_path
-    def get(self, id: str = None, path: str = None) -> FunctionDescription | None:
+    def get(
+        self, id: str | None = None, path: str | None = None
+    ) -> FunctionDescription | None:
         if path is not None:
             if id is not None:
                 raise ValueError("Only one of id or path should be provided")
@@ -93,7 +95,7 @@ class Functions:
             return fn.id
 
     @validate_id_xor_path
-    def delete(self, id: str = None, path: str = None) -> None:
+    def delete(self, id: str | None = None, path: str | None = None) -> None:
         if path is not None:
             try:
                 self._delete_by_path(path)
