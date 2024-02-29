@@ -18,6 +18,7 @@ def trace(
     *,
     name: Optional[str] = None,
     client: Optional[Client] = None,
+    trace_io: bool = False,
 ):
     def decorator_trace(func):
         @wraps(func)
@@ -28,12 +29,17 @@ def trace(
             parent_event_id = _current_event_id.get()
             span_id = str(uuid4())
             event_name = name if name is not None else func.__name__
+            inputs = None
+            if trace_io:
+                inputs = json.dumps(
+                    convert_function_call_to_json(func, *args, **kwargs)
+                )
             event = Event(
                 uuid=span_id,
                 parent_uuid=parent_event_id if parent_event_id is not None else None,
                 project=project,
                 name=event_name,
-                input=json.dumps(convert_function_call_to_json(func, *args, **kwargs)),
+                input=inputs,
                 start_time=datetime.datetime.utcnow(),
             )
             event_uuid = c.events.create(event)
@@ -44,7 +50,7 @@ def trace(
                 c.events.update(
                     event_uuid,
                     end_time=datetime.datetime.utcnow(),
-                    output=json.dumps(result),
+                    output=json.dumps(result) if trace_io else None,
                 )
 
             finally:
