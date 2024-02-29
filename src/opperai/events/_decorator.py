@@ -1,3 +1,4 @@
+import asyncio
 import contextvars
 import datetime
 import json
@@ -22,7 +23,7 @@ def trace(
 ):
     def decorator_trace(func):
         @wraps(func)
-        def wrapper(*args, **kwargs):
+        async def async_wrapper(*args, **kwargs):
             c = client if client is not None else Client()
 
             project = os.environ.get("OPPER_PROJECT", "missing_project")
@@ -46,19 +47,28 @@ def trace(
 
             event_token = _current_event_id.set(span_id)
             try:
-                result = func(*args, **kwargs)
+                if asyncio.iscoroutinefunction(func):
+                    result = await func(*args, **kwargs)
+                else:
+                    result = func(*args, **kwargs)
                 c.events.update(
                     event_uuid,
                     end_time=datetime.datetime.utcnow(),
                     output=json.dumps(result) if trace_io else None,
                 )
-
             finally:
                 _current_event_id.reset(event_token)
 
             return result
 
-        return wrapper
+        @wraps(func)
+        def sync_wrapper(*args, **kwargs):
+            return async_wrapper(*args, **kwargs)
+
+        if asyncio.iscoroutinefunction(func):
+            return async_wrapper
+        else:
+            return sync_wrapper
 
     if _func is None:
         return decorator_trace
