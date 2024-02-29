@@ -1,19 +1,7 @@
 import inspect
-from inspect import signature
 from typing import Dict, List, Union, get_args, get_origin, get_type_hints
 
 from pydantic import BaseModel
-
-
-def convert_function_call_to_json(func, *args, **kwargs):
-    input_data = dict(zip(signature(func).parameters, args))
-    input_data.update(kwargs)
-    for key, value in input_data.items():
-        if isinstance(value, BaseModel):
-            input_data[key] = value.model_dump()
-        elif isinstance(value, list) and all(isinstance(v, BaseModel) for v in value):
-            input_data[key] = [v.model_dump() for v in value]
-    return input_data
 
 
 def type_to_json_schema(type_hint):

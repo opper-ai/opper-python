@@ -8,7 +8,7 @@ from opperai.types import (
     StreamingChunk,
     validate_id_xor_path,
 )
-from opperai.types.exceptions import APIError
+from opperai.types.exceptions import APIError, RateLimitError
 
 
 class Functions:
@@ -127,6 +127,9 @@ class Functions:
             f"/v1/chat/{function_path}",
             json=serialized_data | kwargs,
         )
+        if response.status_code == 429:
+            raise RateLimitError("Rate limit error: please retry in a few seconds")
+
         if response.status_code != 200:
             raise APIError(
                 f"Failed to run function {function_path} with status {response.status_code}"

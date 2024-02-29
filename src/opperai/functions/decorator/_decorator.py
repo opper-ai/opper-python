@@ -7,41 +7,56 @@ from typing import List, get_args, get_origin, get_type_hints
 from pydantic import BaseModel
 
 from opperai import AsyncClient, Client
+from opperai.events._decorator import _current_event_id
 from opperai.types import ChatPayload, FunctionDescription, Message
 
-from ._schemas import convert_function_call_to_json, get_output_schema
+from ...utils import convert_function_call_to_json
+from ._schemas import get_output_schema
 
 
-def fn(path=None, client=None, json_encoder=None):
+def fn(_func=None, *, path=None, client=None, json_encoder=None):
     def decorator(func):
-        if isinstance(client, AsyncClient):
-            sync_client = Client(api_key=client.api_key, api_url=client.api_url)
-        elif isinstance(client, Client):
-            sync_client = client
-        else:
-            sync_client = Client()
         func_path = path or func.__name__
+        setup_done = False
+        sync_client = None
+        c = None
 
-        function = FunctionDescription(
-            path=func_path,
-            description=func.__doc__,
-            instructions=f"Operation: {func.__name__}\n\nOperation description: {func.__doc__}",
-            out_schema=get_output_schema(func),
-        )
-        sync_client.functions.create(function)
+        def setup():
+            nonlocal setup_done, sync_client, c
+            if setup_done:
+                return
 
-        if asyncio.iscoroutinefunction(func):
-            c = AsyncClient() or client
-        else:
-            c = sync_client or client
+            if isinstance(client, AsyncClient):
+                sync_client = Client(api_key=client.api_key, api_url=client.api_url)
+            elif isinstance(client, Client):
+                sync_client = client
+            else:
+                sync_client = Client()
+
+            function = FunctionDescription(
+                path=func_path,
+                description=func.__doc__,
+                instructions=f"Operation: {func.__name__}\n\nOperation description: {func.__doc__}",
+                out_schema=get_output_schema(func),
+            )
+            sync_client.functions.create(function)
+
+            if asyncio.iscoroutinefunction(func):
+                c = AsyncClient() or client
+            else:
+                c = sync_client or client
+
+            setup_done = True
 
         @wraps(func)
         async def async_wrapper(*args, **kwargs):
+            setup()
             input = convert_function_call_to_json(func, *args, **kwargs)
             payload = ChatPayload(
+                parent_event_uuid=_current_event_id.get(),
                 messages=[
                     Message(role="user", content=json.dumps(input, cls=json_encoder))
-                ]
+                ],
             )
             response = await c.functions.chat(func_path, payload)
             answer = response.json_payload
@@ -60,11 +75,13 @@ def fn(path=None, client=None, json_encoder=None):
             return answer
 
         def sync_wrapper(*args, **kwargs):
+            setup()
             input = convert_function_call_to_json(func, *args, **kwargs)
             payload = ChatPayload(
+                parent_event_uuid=_current_event_id.get(),
                 messages=[
                     Message(role="user", content=json.dumps(input, cls=json_encoder))
-                ]
+                ],
             )
             answer = c.functions.chat(func_path, payload).json_payload
 
@@ -82,4 +99,7 @@ def fn(path=None, client=None, json_encoder=None):
 
         return async_wrapper if asyncio.iscoroutinefunction(func) else sync_wrapper
 
-    return decorator
+    if _func is None:
+        return decorator
+    else:
+        return decorator(_func)

@@ -1,6 +1,7 @@
+# ruff: noqa: F401
 from typing import Any, Dict, List, Optional, Union
 
-from pydantic import BaseModel, Field, field_validator, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 from .validators import validate_id_xor_path
 
@@ -12,6 +13,7 @@ class Message(BaseModel):
 
 class ChatPayload(BaseModel):
     model_config: ConfigDict = ConfigDict(extra="allow")
+    parent_event_uuid: Optional[str] = None
 
     messages: List[Message]
 
