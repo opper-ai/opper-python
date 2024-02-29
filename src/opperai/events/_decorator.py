@@ -63,7 +63,38 @@ def trace(
 
         @wraps(func)
         def sync_wrapper(*args, **kwargs):
-            return async_wrapper(*args, **kwargs)
+            c = client if client is not None else Client()
+            project = os.environ.get("OPPER_PROJECT", "missing_project")
+            parent_event_id = _current_event_id.get()
+            span_id = str(uuid4())
+            event_name = name if name is not None else func.__name__
+            inputs = None
+            if trace_io:
+                inputs = json.dumps(
+                    convert_function_call_to_json(func, *args, **kwargs)
+                )
+            event = Event(
+                uuid=span_id,
+                parent_uuid=parent_event_id if parent_event_id is not None else None,
+                project=project,
+                name=event_name,
+                input=inputs,
+                start_time=datetime.datetime.utcnow(),
+            )
+            event_uuid = c.events.create(event)
+
+            event_token = _current_event_id.set(span_id)
+            try:
+                result = func(*args, **kwargs)
+                c.events.update(
+                    event_uuid,
+                    end_time=datetime.datetime.utcnow(),
+                    output=json.dumps(result) if trace_io else None,
+                )
+            finally:
+                _current_event_id.reset(event_token)
+
+            return result
 
         if asyncio.iscoroutinefunction(func):
             return async_wrapper
