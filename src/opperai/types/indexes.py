@@ -1,7 +1,7 @@
 import datetime
-from typing import Optional
+from typing import Annotated, List, Optional, Union
 
-from pydantic import UUID4, BaseModel, Field
+from pydantic import UUID4, BaseModel, Field, field_validator
 
 
 class IndexRetrieveResponse(BaseModel):
@@ -26,3 +26,9 @@ class IndexOut(BaseModel):
     id: int
     name: str
     created_at: datetime.datetime
+
+
+class Filter(BaseModel):
+    key: str
+    operation: Annotated[str, Field(pattern=r"^=|!=|>|<|in$")]
+    value: Union[str, int, float, List[Union[str, int, float]]]

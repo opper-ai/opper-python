@@ -1,10 +1,11 @@
-from typing import List
+from typing import List, Optional
 
 from opperai._http_clients import _async_http_client
 from opperai.types.exceptions import APIError
 from opperai.types.indexes import (
     DocumentIn,
     DocumentOut,
+    Filter,
     IndexOut,
     IndexRetrieveResponse,
 )
@@ -47,7 +48,7 @@ class AsyncIndexes:
         for index in indexes:
             if index.name == name:
                 return index
-        raise APIError(f"Index with name {name} not found")
+        return None
 
     async def upload_file(self, index_id: int, file_path: str, **kwargs):
         # Get upload URL
@@ -100,12 +101,12 @@ class AsyncIndexes:
         return DocumentOut.model_validate(response.json())
 
     async def retrieve(
-        self, index_id: int, query: str, k: int
+        self, index_id: int, query: str, k: int, filters: Optional[List[Filter]] = None
     ) -> List[IndexRetrieveResponse]:
         response = await self.http_client.do_request(
             "POST",
             f"/v1/indexes/{index_id}/query",
-            json={"q": query, "k": k},
+            json={"q": query, "k": k, "filters": filters or []},
         )
         if response.status_code != 200:
             raise APIError(
