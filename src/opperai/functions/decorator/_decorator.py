@@ -14,7 +14,7 @@ from ...utils import convert_function_call_to_json
 from ._schemas import get_output_schema
 
 
-def fn(_func=None, *, path=None, client=None, json_encoder=None):
+def fn(_func=None, *, path=None, client=None, json_encoder=None, model=None):
     def decorator(func):
         func_path = path or func.__name__
         setup_done = False
@@ -39,6 +39,9 @@ def fn(_func=None, *, path=None, client=None, json_encoder=None):
                 instructions=f"Operation: {func.__name__}\n\nOperation description: {func.__doc__}",
                 out_schema=get_output_schema(func),
             )
+            if model:
+                function.model=model
+
             sync_client.functions.create(function)
 
             if asyncio.iscoroutinefunction(func):
