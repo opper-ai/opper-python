@@ -32,6 +32,28 @@ def test_decorator(mock_do_request):
 
     assert translate("Hello", "es") == "Hola"
     assert translate_list("Hello", ["es", "fr"]) == ["Hola", "Bonjour"]
+    
+@patch("opperai._http_clients._http_client.do_request")
+def test_decorator_supply_model(mock_do_request):
+    mock_do_request.side_effect = [
+        MagicMock(status_code=404),
+        MagicMock(status_code=200, json=lambda: {"id": 1}),
+        MagicMock(status_code=200, json=lambda: {"json_payload": "Hola"}),
+        MagicMock(status_code=404),
+        MagicMock(status_code=200, json=lambda: {"id": 2}),
+        MagicMock(status_code=200, json=lambda: {"json_payload": ["Hola", "Bonjour"]}),
+    ]
+
+    @fn(model="gpt-4-0125-preview")
+    def translate(text: str, target_language: str) -> str:
+        """Translate text to a target language."""
+
+    @fn()
+    def translate_list(text: str, target_languages: List[str]) -> List[str]:
+        """Translate text to a list of target languages."""
+
+    assert translate("Hello", "es") == "Hola"
+    assert translate_list("Hello", ["es", "fr"]) == ["Hola", "Bonjour"]
 
 
 class NestedModel(BaseModel):
