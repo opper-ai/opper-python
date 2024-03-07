@@ -40,7 +40,7 @@ def fn(_func=None, *, path=None, client=None, json_encoder=None, model=None):
                 out_schema=get_output_schema(func),
             )
             if model:
-                function.model=model
+                function.model = model
 
             sync_client.functions.create(function)
 

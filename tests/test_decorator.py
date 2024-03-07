@@ -32,7 +32,8 @@ def test_decorator(mock_do_request):
 
     assert translate("Hello", "es") == "Hola"
     assert translate_list("Hello", ["es", "fr"]) == ["Hola", "Bonjour"]
-    
+
+
 @patch("opperai._http_clients._http_client.do_request")
 def test_decorator_supply_model(mock_do_request):
     mock_do_request.side_effect = [
