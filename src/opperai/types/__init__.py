@@ -1,5 +1,6 @@
 # ruff: noqa: F401
 from typing import Any, Dict, List, Optional, Union
+from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -29,12 +30,14 @@ class ContextData(BaseModel):
 
 
 class StreamingChunk(BaseModel):
+    event_id: Optional[str] = None
     delta: Optional[str] = None
     error: Optional[str] = None
     context: Optional[List[ContextData]] = None
 
 
 class FunctionResponse(BaseModel):
+    event_id: Optional[str] = None
     message: Optional[str] = None
     json_payload: Optional[Union[dict, List, Any]] = None
     error: Optional[str] = None

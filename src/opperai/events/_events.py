@@ -43,3 +43,15 @@ class Events:
             )
 
         return response.json()["uuid"]
+
+    async def save_example(self, uuid: str, **kwargs) -> str:
+        response = self.http_client.do_request(
+            "POST",
+            f"/v1/events/{uuid}/save_examples",
+        )
+        if response.status_code != 200:
+            raise APIError(
+                f"Failed to save examples for event {uuid} with status {response.status_code}"
+            )
+
+        return response.json()["uuid"]
