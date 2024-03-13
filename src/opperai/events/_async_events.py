@@ -30,7 +30,7 @@ class AsyncEvents:
             event.model_dump(exclude_none=True), cls=DateTimeEncoder
         )
         response = await self.http_client.do_request(
-            "POST",
+            "PUT",
             f"/v1/events/{event.uuid}",
             data=json_payload,
         )
