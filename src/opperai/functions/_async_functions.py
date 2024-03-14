@@ -12,8 +12,9 @@ from opperai.types.exceptions import APIError, RateLimitError
 
 
 class AsyncFunctions:
-    def __init__(self, http_client: _async_http_client):
+    def __init__(self, http_client: _async_http_client, default_model: str = None):
         self.http_client = http_client
+        self.default_model = default_model
 
     async def _create(self, function: FunctionDescription, **kwargs) -> int:
         response = await self.http_client.do_request(

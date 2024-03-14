@@ -19,7 +19,13 @@ class AsyncClient:
     indexes: AsyncIndexes
     events: AsyncEvents
 
-    def __new__(cls, api_key: str = None, api_url: str = None, timeout: int = 60):
+    def __new__(
+        cls,
+        api_key: str = None,
+        api_url: str = None,
+        default_model: str = None,
+        timeout: int = 60,
+    ):
         if api_key is None:
             api_key = os.getenv("OPPER_API_KEY")
             if api_key is None:
@@ -28,10 +34,14 @@ class AsyncClient:
                 )
         if api_url is None:
             api_url = os.getenv("OPPER_API_URL", DEFAULT_API_URL)
+        if default_model is None:
+            default_model = os.getenv("OPPER_DEFAULT_MODEL")
         if cls._instance is None:
             cls._instance = super(AsyncClient, cls).__new__(cls)
             cls._instance.http_client = _async_http_client(api_key, api_url, timeout)
-            cls._instance.functions = AsyncFunctions(cls._instance.http_client)
+            cls._instance.functions = AsyncFunctions(
+                cls._instance.http_client, default_model=default_model
+            )
             cls._instance.indexes = AsyncIndexes(cls._instance.http_client)
             cls._instance.events = AsyncEvents(cls._instance.http_client)
             cls._instance.api_key = api_key
@@ -46,7 +56,13 @@ class Client:
     indexes: Indexes
     events: Events
 
-    def __new__(cls, api_key: str = None, api_url: str = None, timeout: int = 60):
+    def __new__(
+        cls,
+        api_key: str = None,
+        api_url: str = None,
+        default_model: str = None,
+        timeout: int = 60,
+    ):
         if api_key is None:
             api_key = os.getenv("OPPER_API_KEY")
             if api_key is None:
@@ -55,10 +71,14 @@ class Client:
                 )
         if api_url is None:
             api_url = os.getenv("OPPER_API_URL", DEFAULT_API_URL)
+        if default_model is None:
+            default_model = os.getenv("OPPER_DEFAULT_MODEL")
         if cls._instance is None:
             instance = super(Client, cls).__new__(cls)
             instance.http_client = _http_client(api_key, api_url, timeout)
-            instance.functions = Functions(instance.http_client)
+            instance.functions = Functions(
+                instance.http_client, default_model=default_model
+            )
             instance.indexes = Indexes(instance.http_client)
             instance.events = Events(instance.http_client)
             instance.api_key = api_key
