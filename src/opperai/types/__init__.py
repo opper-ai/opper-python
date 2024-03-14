@@ -1,6 +1,7 @@
 # ruff: noqa: F401
 from typing import Any, Dict, List, Optional, Union
 from uuid import UUID
+from .events import EventFeedback
 
 from pydantic import BaseModel, ConfigDict, Field
 

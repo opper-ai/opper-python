@@ -2,7 +2,7 @@ import json
 from uuid import UUID
 
 from opperai._http_clients import _http_client
-from opperai.types.events import Event
+from opperai.types.events import Event, EventFeedback
 from opperai.types.exceptions import APIError
 from opperai.utils import DateTimeEncoder
 
@@ -44,7 +44,7 @@ class Events:
 
         return response.json()["uuid"]
 
-    async def save_example(self, uuid: str, **kwargs) -> str:
+    def save_example(self, uuid: str, **kwargs) -> str:
         response = self.http_client.do_request(
             "POST",
             f"/v1/events/{uuid}/save_examples",
@@ -55,3 +55,16 @@ class Events:
             )
 
         return response.json()["uuid"]
+
+    def save_feedback(self, uuid: str, feedback: EventFeedback, **kwargs) -> str:
+        response = self.http_client.do_request(
+            "POST",
+            f"/v1/events/{uuid}/feedbacks",
+            json=feedback.model_dump(exclude_unset=True),
+        )
+        if response.status_code != 200:
+            raise APIError(
+                f"Failed to add feedback for event {uuid} with status {response.status_code}"
+            )
+
+        return response.json()["trace_event_id"]
