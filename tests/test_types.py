@@ -1,5 +1,6 @@
 import pytest
-from opperai.types import validate_id_xor_path
+from pydantic import ValidationError
+from opperai.types import validate_id_xor_path, EventFeedback
 
 
 def test_id_xor_path():
@@ -19,3 +20,13 @@ def test_id_xor_path():
 
     with pytest.raises(ValueError):
         test_function(id=1, path="test", other="other")
+
+
+def test_feedback_score_in_range():
+    assert EventFeedback(score=0.5).score == 0.5
+    assert EventFeedback(score=0).score == 0
+    assert EventFeedback(score=1).score == 1
+    with pytest.raises(ValidationError):
+        EventFeedback(score=1.1)
+    with pytest.raises(ValidationError):
+        EventFeedback(score=-0.1)

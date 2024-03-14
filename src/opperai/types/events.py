@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Optional
 from uuid import UUID
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class Event(BaseModel):
@@ -18,3 +18,9 @@ class Event(BaseModel):
     meta: Optional[dict] = None
     evaluations: Optional[dict] = None
     score: Optional[int] = None
+
+
+class EventFeedback(BaseModel):
+    dimension: Optional[str] = None
+    score: Optional[float] = Field(None, ge=0, le=1)
+    comment: Optional[str] = None
