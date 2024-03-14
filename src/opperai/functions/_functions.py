@@ -12,10 +12,13 @@ from opperai.types.exceptions import APIError, RateLimitError
 
 
 class Functions:
-    def __init__(self, http_client: _http_client):
+    def __init__(self, http_client: _http_client, default_model: str = None):
         self.http_client = http_client
+        self.default_model = default_model
 
     def _create(self, function: FunctionDescription, **kwargs) -> int:
+        if not function.model and self.default_model:
+            function.model = self.default_model
         response = self.http_client.do_request(
             "POST",
             "/api/v1/functions",
