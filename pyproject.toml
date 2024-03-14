@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "opperai"
-version = "0.1.7"
+version = "0.1.8"
 description = "Opper Python client"
 authors = [
   {name = "Opper", email = "opper@opper.ai"},
