@@ -57,3 +57,6 @@ class FunctionDescription(BaseModel):
     instructions: str
     model: Optional[str] = None
     index_ids: Optional[List[int]] = None
+    use_semantic_search: Optional[bool] = None
+    few_shot: Optional[bool] = None
+    few_shot_count: Optional[int] = None

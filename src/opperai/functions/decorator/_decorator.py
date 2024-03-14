@@ -1,6 +1,7 @@
 import asyncio
 import inspect
 import json
+import os
 from functools import wraps
 from typing import List, get_args, get_origin, get_type_hints
 
@@ -14,7 +15,16 @@ from ...utils import convert_function_call_to_json
 from ._schemas import get_output_schema
 
 
-def fn(_func=None, *, path=None, client=None, json_encoder=None, model=None):
+def fn(
+    _func=None,
+    *,
+    path=None,
+    client=None,
+    json_encoder=None,
+    model=None,
+    few_shot=None,
+    few_shot_count=None,
+):
     def decorator(func):
         func_path = path or func.__name__
         setup_done = False
@@ -33,12 +43,17 @@ def fn(_func=None, *, path=None, client=None, json_encoder=None, model=None):
             else:
                 sync_client = Client()
 
+            use_few_shot = few_shot or os.environ.get("OPPER_USE_FEW_SHOT", False)
             function = FunctionDescription(
                 path=func_path,
                 description=func.__doc__,
                 instructions=f"Operation: {func.__name__}\n\nOperation description: {func.__doc__}",
                 out_schema=get_output_schema(func),
+                few_shot=use_few_shot,
             )
+            if use_few_shot:
+                function.use_semantic_search = True
+                function.few_shot_count = few_shot_count or 2
             if model:
                 function.model = model
 
