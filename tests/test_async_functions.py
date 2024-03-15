@@ -1,14 +1,9 @@
-from unittest.mock import MagicMock, patch
-from vcr import VCR
+import vcr
 import os
+import re
 import pytest
 from opperai import AsyncClient
 from opperai.types import ChatPayload, FunctionDescription, Message
-
-
-@pytest.fixture(scope="module")
-def client() -> AsyncClient:
-    yield AsyncClient()
 
 
 DEFAULT_NAME = "test_function"
@@ -39,26 +34,6 @@ async def function(
     )
 
     return await client.functions.create(fdesc)
-
-
-@pytest.fixture
-def vcr_cassette(request):
-    test_name = request.node.name
-    module_file = request.module.__file__
-    file_name = os.path.splitext(os.path.basename(module_file))[0]
-
-    cassette_name = f"{file_name}/{test_name}.yaml"
-
-    my_vcr = VCR(
-        cassette_library_dir="tests/fixtures/vcr_cassettes",
-        path_transformer=VCR.ensure_suffix(".yaml"),
-        filter_headers=[
-            "x-opper-api-key",
-        ],
-    )
-
-    with my_vcr.use_cassette(cassette_name):
-        yield
 
 
 @pytest.mark.asyncio(scope="module")
@@ -120,10 +95,10 @@ async def test_delete_function_by_id(client: AsyncClient, function, vcr_cassette
 
 
 @pytest.mark.parametrize(
-    "function", [{"name": "test_delete_function_by_id"}], indirect=True
+    "function", [{"name": "test_delete_function_by_path"}], indirect=True
 )
 @pytest.mark.asyncio(scope="module")
-async def test_delete_function_by_id(client: AsyncClient, function, vcr_cassette):
+async def test_delete_function_by_path(client: AsyncClient, function, vcr_cassette):
     fid = await function
     f = await client.functions.get(id=fid)
     assert f is not None
