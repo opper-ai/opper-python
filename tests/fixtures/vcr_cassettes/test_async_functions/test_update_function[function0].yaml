@@ -1,0 +1,182 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - api.opper.ai
+      user-agent:
+      - python-httpx/0.27.0
+    method: GET
+    uri: https://api.opper.ai/api/v1/functions/by_path/test/sdk/test_update_function
+  response:
+    body:
+      string: '{"id":1468,"path":"test/sdk/test_update_function","description":"Test
+        function","input_schema":null,"dataset_uuid":"2427d84d-f695-475d-b7ae-d7275553043b","out_schema":null,"instructions":"Do
+        something else","use_semantic_search":false,"few_shot":false,"few_shot_count":2,"revision":4,"org_id":1,"index_ids":[],"linked_functions_ids":[],"model":"azure/gpt4-eu","language_model_id":8}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '382'
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 15 Mar 2024 14:51:53 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"id": 1468, "path": "test/sdk/test_update_function", "description": "Test
+      function", "input_schema": null, "out_schema": null, "instructions": "Do something",
+      "model": null, "index_ids": null, "use_semantic_search": null, "few_shot": null,
+      "few_shot_count": null}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '264'
+      content-type:
+      - application/json
+      host:
+      - api.opper.ai
+      user-agent:
+      - python-httpx/0.27.0
+    method: POST
+    uri: https://api.opper.ai/api/v1/functions/1468
+  response:
+    body:
+      string: '{"id":1468}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '11'
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 15 Mar 2024 14:51:53 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - api.opper.ai
+      user-agent:
+      - python-httpx/0.27.0
+    method: GET
+    uri: https://api.opper.ai/api/v1/functions/1468
+  response:
+    body:
+      string: '{"id":1468,"path":"test/sdk/test_update_function","description":"Test
+        function","input_schema":null,"dataset_uuid":"2427d84d-f695-475d-b7ae-d7275553043b","out_schema":null,"instructions":"Do
+        something","use_semantic_search":false,"few_shot":false,"few_shot_count":2,"revision":5,"org_id":1,"index_ids":[],"linked_functions_ids":[],"model":"azure/gpt4-eu","language_model_id":8}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '377'
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 15 Mar 2024 14:51:53 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"id": 1468, "path": "test/sdk/test_update_function", "description": "Test
+      function", "input_schema": null, "out_schema": null, "instructions": "Do something
+      else", "model": "azure/gpt4-eu", "index_ids": [], "use_semantic_search": false,
+      "few_shot": false, "few_shot_count": 2}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '277'
+      content-type:
+      - application/json
+      host:
+      - api.opper.ai
+      user-agent:
+      - python-httpx/0.27.0
+    method: POST
+    uri: https://api.opper.ai/api/v1/functions/1468
+  response:
+    body:
+      string: '{"id":1468}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '11'
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 15 Mar 2024 14:51:53 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - api.opper.ai
+      user-agent:
+      - python-httpx/0.27.0
+    method: GET
+    uri: https://api.opper.ai/api/v1/functions/1468
+  response:
+    body:
+      string: '{"id":1468,"path":"test/sdk/test_update_function","description":"Test
+        function","input_schema":null,"dataset_uuid":"2427d84d-f695-475d-b7ae-d7275553043b","out_schema":null,"instructions":"Do
+        something else","use_semantic_search":false,"few_shot":false,"few_shot_count":2,"revision":6,"org_id":1,"index_ids":[],"linked_functions_ids":[],"model":"azure/gpt4-eu","language_model_id":8}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '382'
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 15 Mar 2024 14:51:53 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+version: 1
