@@ -17,6 +17,8 @@ class AsyncFunctions:
         self.default_model = default_model
 
     async def _create(self, function: FunctionDescription, **kwargs) -> int:
+        if not function.model and self.default_model:
+            function.model = self.default_model
         response = await self.http_client.do_request(
             "POST",
             "/api/v1/functions",

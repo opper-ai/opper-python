@@ -55,7 +55,9 @@ def fn(
                 function.use_semantic_search = True
                 function.few_shot_count = few_shot_count or 2
             if model:
-                function.model = model
+                function.model = (
+                    model if model else os.environ.get("OPPER_DEFAULT_MODEL", None)
+                )
 
             sync_client.functions.create(function)
 
