@@ -22,7 +22,7 @@ class Functions:
         response = self.http_client.do_request(
             "POST",
             "/api/v1/functions",
-            json=function.model_dump() | kwargs,
+            json={**function.model_dump(), **kwargs},
         )
         if response.status_code != 200:
             raise APIError(
@@ -35,7 +35,7 @@ class Functions:
         response = self.http_client.do_request(
             "POST",
             f"/api/v1/functions/{function.id}",
-            json=function.model_dump() | kwargs,
+            json={**function.model_dump(), **kwargs},
         )
         if response.status_code != 200:
             raise APIError(
@@ -45,9 +45,7 @@ class Functions:
         return response.json()["id"]
 
     @validate_id_xor_path
-    def get(
-        self, id: str | None = None, path: str | None = None
-    ) -> FunctionDescription | None:
+    def get(self, id: str = None, path: str = None) -> FunctionDescription:
         if path is not None:
             if id is not None:
                 raise ValueError("Only one of id or path should be provided")
@@ -57,7 +55,7 @@ class Functions:
         else:
             return None
 
-    def get_by_path(self, function_path: str) -> FunctionDescription | None:
+    def get_by_path(self, function_path: str) -> FunctionDescription:
         response = self.http_client.do_request(
             "GET",
             f"/api/v1/functions/by_path/{function_path}",
@@ -71,7 +69,7 @@ class Functions:
 
         return FunctionDescription(**response.json())
 
-    def get_by_id(self, function_id: str) -> FunctionDescription | None:
+    def get_by_id(self, function_id: str) -> FunctionDescription:
         response = self.http_client.do_request(
             "GET",
             f"/api/v1/functions/{function_id}",
@@ -98,7 +96,7 @@ class Functions:
             return fn.id
 
     @validate_id_xor_path
-    def delete(self, id: str | None = None, path: str | None = None) -> None:
+    def delete(self, id: str = None, path: str = None) -> None:
         if path is not None:
             try:
                 self._delete_by_path(path)
@@ -128,7 +126,7 @@ class Functions:
         response = self.http_client.do_request(
             "POST",
             f"/v1/chat/{function_path}",
-            json=serialized_data | kwargs,
+            json={**serialized_data, **kwargs},
         )
         if response.status_code == 429:
             raise RateLimitError("Rate limit error: please retry in a few seconds")
@@ -147,7 +145,7 @@ class Functions:
         gen = self.http_client.stream(
             "POST",
             f"/v1/chat/{function_path}",
-            json=serialized_data | kwargs,
+            json={**serialized_data, **kwargs},
             params={"stream": "True"},
         )
         for item in gen:
