@@ -1,175 +1,143 @@
-from unittest.mock import MagicMock, patch
-
+import vcr
+import os
+import re
 import pytest
 from opperai import AsyncClient
 from opperai.types import ChatPayload, FunctionDescription, Message
 
 
-@pytest.mark.asyncio
-@patch("opperai._http_clients._async_http_client.do_request")
-async def test_async_chat(mock_do_request):
-    mock_do_request.return_value = MagicMock(
-        status_code=200, json=lambda: {"message": "Bonjour"}
+DEFAULT_NAME = "test_function"
+DEFAULT_DESCRIPTION = "Test function"
+DEFAULT_INSTRUCTIONS = "Do something"
+
+
+@pytest.fixture
+async def function(
+    request: pytest.FixtureRequest,
+    client: AsyncClient,
+):
+    name = DEFAULT_NAME
+    description = DEFAULT_DESCRIPTION
+    instructions = DEFAULT_INSTRUCTIONS
+
+    try:
+        name = request.param.get("name", DEFAULT_NAME)
+        description = request.param.get("description", DEFAULT_DESCRIPTION)
+        instructions = request.param.get("instructions", DEFAULT_INSTRUCTIONS)
+    except AttributeError:
+        pass
+
+    fdesc = FunctionDescription(
+        path=f"test/sdk/{name}",
+        description=description,
+        instructions=instructions,
     )
-    client = AsyncClient(api_key="op-dev-api-key", api_url="http://localhost:8000")
+
+    return await client.functions.create(fdesc)
+
+
+@pytest.mark.asyncio(scope="module")
+async def test_create_function(function, vcr_cassette):
+    fid = await function
+    assert fid is not None
+
+
+@pytest.mark.parametrize("function", [{"name": "test_get_by_id"}], indirect=True)
+@pytest.mark.asyncio(scope="module")
+async def test_get_by_id(client: AsyncClient, function, vcr_cassette):
+    fid = await function
+    f_by_id = await client.functions.get_by_id(fid)
+    assert f_by_id.path == "test/sdk/test_get_by_id"
+
+
+@pytest.mark.parametrize("function", [{"name": "test_get_by_path"}], indirect=True)
+@pytest.mark.asyncio(scope="module")
+async def test_get_by_path(client: AsyncClient, function, vcr_cassette):
+    await function
+    f_by_path = await client.functions.get_by_path("test/sdk/test_get_by_path")
+    assert f_by_path.path == "test/sdk/test_get_by_path"
+
+
+@pytest.mark.parametrize("function", [{"name": "test_get"}], indirect=True)
+@pytest.mark.asyncio(scope="module")
+async def test_get(client: AsyncClient, function, vcr_cassette):
+    fid = await function
+    f_by_id = await client.functions.get(id=fid)
+    assert f_by_id.path == "test/sdk/test_get"
+
+    f_by_id = await client.functions.get(path="test/sdk/test_get")
+    assert f_by_id.path == "test/sdk/test_get"
+
+
+@pytest.mark.parametrize("function", [{"name": "test_update_function"}], indirect=True)
+@pytest.mark.asyncio(scope="module")
+async def test_update_function(client: AsyncClient, function, vcr_cassette):
+    fid = await function
+    f = await client.functions.get_by_id(fid)
+    f.instructions = "Do something else"
+    fn_id = await client.functions.update(f)
+    f1 = await client.functions.get_by_id(fn_id)
+
+    assert f1.instructions == "Do something else"
+
+
+@pytest.mark.parametrize(
+    "function", [{"name": "test_delete_function_by_id"}], indirect=True
+)
+@pytest.mark.asyncio(scope="module")
+async def test_delete_function_by_id(client: AsyncClient, function, vcr_cassette):
+    fid = await function
+    f = await client.functions.get(id=fid)
+    assert f is not None
+    await client.functions.delete(id=f.id)
+    f = await client.functions.get(id=f.id)
+    assert f is None
+
+
+@pytest.mark.parametrize(
+    "function", [{"name": "test_delete_function_by_path"}], indirect=True
+)
+@pytest.mark.asyncio(scope="module")
+async def test_delete_function_by_path(client: AsyncClient, function, vcr_cassette):
+    fid = await function
+    f = await client.functions.get(id=fid)
+    assert f is not None
+    await client.functions.delete(path=f.path)
+    f = await client.functions.get(path=f.path)
+    assert f is None
+
+
+@pytest.mark.parametrize(
+    "function",
+    [{"name": "test_async_chat", "instructions": "translate to french"}],
+    indirect=True,
+)
+@pytest.mark.asyncio(scope="module")
+async def test_async_chat(function, client: AsyncClient, vcr_cassette):
+    fid = await function
+    f = await client.functions.get_by_id(fid)
     resp = await client.functions.chat(
-        "french", ChatPayload(messages=[Message(role="user", content="hello")])
+        f.path, ChatPayload(messages=[Message(role="user", content="hello")])
     )
 
     assert resp.message == "Bonjour"
-    mock_do_request.assert_called_once()
 
 
-@pytest.mark.asyncio
-@patch("opperai._http_clients._async_http_client.stream")
-async def test_async_chat_stream(mock_stream):
-    async def gen():
-        yield {"delta": "Bon"}
-        yield {"delta": "Jour"}
-
-    mock_stream.return_value = gen()
-    client = AsyncClient(api_key="op-dev-api-key", api_url="http://localhost:8000")
+@pytest.mark.parametrize(
+    "function",
+    [{"name": "test_async_chat_stream", "instructions": "translate to french"}],
+    indirect=True,
+)
+@pytest.mark.asyncio(scope="module")
+async def test_async_chat_stream(function, client: AsyncClient, vcr_cassette):
+    fid = await function
+    f = await client.functions.get_by_id(fid)
     gen = await client.functions.chat(
-        "french",
+        f.path,
         ChatPayload(messages=[Message(role="user", content="hello")]),
         stream=True,
     )
-    resp = ""
-    async for message in gen:
-        resp += message.delta
 
-    assert resp == "BonJour"
+    resp = "".join([message.delta async for message in gen if message.delta])
 
-
-@pytest.mark.asyncio
-@patch("opperai._http_clients._async_http_client.do_request")
-async def test_create_function(mock_do_request):
-    mock_do_request.side_effect = [
-        MagicMock(
-            status_code=404,
-        ),  # Response for get_function_by_path
-        MagicMock(status_code=200, json=lambda: {"id": 1}),  # Response for create
-    ]
-    client = AsyncClient(api_key="op-dev-api-key", api_url="http://localhost:8000")
-    function = FunctionDescription(
-        path="test/path", description="Test function", instructions="Do something"
-    )
-    fn_id = await client.functions.create(function)
-    assert fn_id == 1
-    assert mock_do_request.call_count == 2
-    mock_do_request.assert_any_call(
-        "GET",
-        "/api/v1/functions/by_path/test/path",
-    )
-    mock_do_request.assert_any_call(
-        "POST",
-        "/api/v1/functions",
-        json=function.model_dump(),
-    )
-
-
-@pytest.mark.asyncio
-@patch("opperai._http_clients._async_http_client.do_request")
-async def test_update_function(mock_do_request):
-    mock_do_request.return_value = MagicMock(status_code=200, json=lambda: {"id": 1})
-    client = AsyncClient(api_key="op-dev-api-key", api_url="http://localhost:8000")
-    function = FunctionDescription(
-        id=1,
-        path="test/path",
-        description="Updated Test function",
-        instructions="Do something else",
-    )
-    fn_id = await client.functions.update(function)
-    assert fn_id == function.id
-    mock_do_request.assert_called_once()
-
-
-@pytest.mark.asyncio
-@patch("opperai._http_clients._async_http_client.do_request")
-async def test_get(mock_do_request):
-    mock_do_request.side_effect = [
-        MagicMock(
-            status_code=200,
-            json=lambda: {
-                "id": 1,
-                "path": "test/path",
-                "description": "Test function",
-                "instructions": "Do something",
-            },
-        ),
-        MagicMock(
-            status_code=200,
-            json=lambda: {
-                "id": 1,
-                "path": "test/path",
-                "description": "Test function",
-                "instructions": "Do something",
-            },
-        ),
-    ]
-    client = AsyncClient(api_key="op-dev-api-key", api_url="http://localhost:8000")
-    function_description = await client.functions.get(path="test/path")
-    assert function_description.id == 1
-    assert function_description.path == "test/path"
-    assert function_description.description == "Test function"
-    mock_do_request.assert_called_once_with(
-        "GET",
-        "/api/v1/functions/by_path/test/path",
-    )
-
-    mock_do_request.reset_mock()
-
-    function_description = await client.functions.get(id=1)
-    assert function_description.id == 1
-    assert function_description.path == "test/path"
-    assert function_description.description == "Test function"
-    mock_do_request.assert_called_once_with(
-        "GET",
-        "/api/v1/functions/1",
-    )
-
-
-@pytest.mark.asyncio
-@patch("opperai._http_clients._async_http_client.do_request")
-async def test_get_function_by_path(mock_do_request):
-    mock_do_request.return_value = MagicMock(
-        status_code=200,
-        json=lambda: {
-            "id": 1,
-            "path": "test/path",
-            "description": "Test function",
-            "instructions": "Do something",
-        },
-    )
-    client = AsyncClient(api_key="op-dev-api-key", api_url="http://localhost:8000")
-    function_description = await client.functions.get_by_path("test/path")
-    assert function_description.id == 1
-    assert function_description.path == "test/path"
-    assert function_description.description == "Test function"
-    mock_do_request.assert_called_once_with(
-        "GET",
-        "/api/v1/functions/by_path/test/path",
-    )
-
-
-@pytest.mark.asyncio
-@patch("opperai._http_clients._async_http_client.do_request")
-async def test_get_function_by_id(mock_do_request):
-    mock_do_request.return_value = MagicMock(
-        status_code=200,
-        json=lambda: {
-            "id": 1,
-            "path": "test/path",
-            "description": "Test function",
-            "instructions": "Do something",
-        },
-    )
-    client = AsyncClient(api_key="op-dev-api-key", api_url="http://localhost:8000")
-    function_description = await client.functions.get_by_id("1")
-    assert function_description.id == 1
-    assert function_description.path == "test/path"
-    assert function_description.description == "Test function"
-    mock_do_request.assert_called_once_with(
-        "GET",
-        "/api/v1/functions/1",
-    )
+    assert resp == "Bonjour"

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "opperai"
-version = "0.1.11"
+version = "0.1.12"
 description = "Opper Python client"
 authors = [
   {name = "Opper", email = "opper@opper.ai"},
@@ -30,7 +30,8 @@ Platform = "https://platform.opper.ai"
 [project.optional-dependencies]
 test = [
     "pytest",
-    "pytest-asyncio"
+    "pytest-asyncio",
+    "vcrpy"
 ]
 
 
@@ -38,3 +39,4 @@ test = [
 pythonpath = [
   "src"
 ]
+asyncio_mode = "auto"
