@@ -1,7 +1,7 @@
 import datetime
-from typing import Annotated, List, Optional, Union
+from typing import List, Optional, Union
 
-from pydantic import UUID4, BaseModel, Field, field_validator
+from pydantic import UUID4, BaseModel, Field
 
 
 class IndexRetrieveResponse(BaseModel):
@@ -30,5 +30,7 @@ class IndexOut(BaseModel):
 
 class Filter(BaseModel):
     key: str
-    operation: Annotated[str, Field(pattern=r"^=|!=|>|<|in$")]
+    operation: str = Field(
+        ..., description="The operation to perform on the key", pattern=r"^=|!=|>|<|in$"
+    )
     value: Union[str, int, float, List[Union[str, int, float]]]

@@ -22,7 +22,7 @@ class AsyncFunctions:
         response = await self.http_client.do_request(
             "POST",
             "/api/v1/functions",
-            json=function.model_dump() | kwargs,
+            json={**function.model_dump(), **kwargs},
         )
         if response.status_code != 200:
             raise APIError(
@@ -35,7 +35,7 @@ class AsyncFunctions:
         response = await self.http_client.do_request(
             "POST",
             f"/api/v1/functions/{function.id}",
-            json=function.model_dump() | kwargs,
+            json={**function.model_dump(), **kwargs},
         )
         if response.status_code != 200:
             raise APIError(
@@ -45,7 +45,7 @@ class AsyncFunctions:
         return response.json()["id"]
 
     @validate_id_xor_path
-    async def get(self, id: str = None, path: str = None) -> FunctionDescription | None:
+    async def get(self, id: str = None, path: str = None) -> FunctionDescription:
         if path is not None:
             if id is not None:
                 raise ValueError("Only one of id or path should be provided")
@@ -55,7 +55,7 @@ class AsyncFunctions:
         else:
             return None
 
-    async def get_by_path(self, function_path: str) -> FunctionDescription | None:
+    async def get_by_path(self, function_path: str) -> FunctionDescription:
         response = await self.http_client.do_request(
             "GET",
             f"/api/v1/functions/by_path/{function_path}",
@@ -69,7 +69,7 @@ class AsyncFunctions:
 
         return FunctionDescription(**response.json())
 
-    async def get_by_id(self, function_id: str) -> FunctionDescription | None:
+    async def get_by_id(self, function_id: str) -> FunctionDescription:
         response = await self.http_client.do_request(
             "GET",
             f"/api/v1/functions/{function_id}",
@@ -85,7 +85,7 @@ class AsyncFunctions:
 
     async def create(
         self, function: FunctionDescription, update: bool = True, **kwargs
-    ) -> int | None:
+    ) -> int:
         fn = await self.get_by_path(function.path)
         if fn is None:
             return await self._create(function, **kwargs)
@@ -125,7 +125,7 @@ class AsyncFunctions:
         response = await self.http_client.do_request(
             "POST",
             f"/v1/chat/{function_path}",
-            json=serialized_data | kwargs,
+            json={**serialized_data, **kwargs},
         )
         if response.status_code == 429:
             raise RateLimitError("Rate limit error: please retry in a few seconds")
@@ -141,7 +141,7 @@ class AsyncFunctions:
         gen = self.http_client.stream(
             "POST",
             f"/v1/chat/{function_path}",
-            json=data.model_dump() | kwargs,
+            json={**data.model_dump(), **kwargs},
             params={"stream": "True"},
         )
         async for item in gen:

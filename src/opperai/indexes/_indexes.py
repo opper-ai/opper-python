@@ -82,7 +82,7 @@ class Indexes:
         register_file_response = self.http_client.do_request(
             "POST",
             f"/v1/indexes/{index_id}/register_file",
-            json={"uuid": upload_url_data["uuid"]} | kwargs,
+            json={"uuid": upload_url_data["uuid"], **kwargs},
         )
         if register_file_response.status_code != 200:
             raise APIError(
