@@ -29,7 +29,7 @@ jobs:
           pip install .[test]
       - name: Run lint
         run: |
-          pip install ruff==0.1.11
+          pip install ruff==0.3.3
           ruff format --check .
 
   test:
@@ -69,7 +69,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.12'
           cache: pip
       - name: Install dependencies
         run: |
