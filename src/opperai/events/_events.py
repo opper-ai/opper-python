@@ -1,5 +1,6 @@
 import json
 from uuid import UUID
+from typing import Dict, Any
 
 from opperai._http_clients import _http_client
 from opperai.types.events import Event, EventFeedback
@@ -56,10 +57,12 @@ class Events:
 
         return response.json()["uuid"]
 
-    def save_feedback(self, uuid: str, feedback: EventFeedback, **kwargs) -> str:
+    def save_feedback(
+        self, uuid: str, feedback: EventFeedback, **kwargs
+    ) -> Dict[str, Any]:
         response = self.http_client.do_request(
             "POST",
-            f"/v1/events/{uuid}/feedbacks",
+            f"/v1/spans/{uuid}/feedbacks",
             json=feedback.model_dump(exclude_unset=True),
         )
         if response.status_code != 200:
@@ -67,4 +70,4 @@ class Events:
                 f"Failed to add feedback for event {uuid} with status {response.status_code}"
             )
 
-        return response.json()["trace_event_id"]
+        return response.json()
