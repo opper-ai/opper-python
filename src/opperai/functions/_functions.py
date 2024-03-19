@@ -26,7 +26,7 @@ class Functions:
         )
         if response.status_code != 200:
             raise APIError(
-                f"Failed to create function {function.path} with status {response.status_code}"
+                f"Failed to create function {function.path} with status {response.status_code}: {response.text}"
             )
 
         return response.json()["id"]
@@ -39,7 +39,7 @@ class Functions:
         )
         if response.status_code != 200:
             raise APIError(
-                f"Failed to update function `{function.path}` with status {response.status_code}"
+                f"Failed to update function `{function.path}` with status {response.status_code}: {response.text}"
             )
 
         return response.json()["id"]
