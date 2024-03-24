@@ -64,4 +64,4 @@ class AsyncEvents:
                 f"Failed to add feedback for event {uuid} with status {response.status_code}"
             )
 
-        return response.json()["trace_event_id"]
+        return response.json()
