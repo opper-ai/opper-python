@@ -1,12 +1,12 @@
 import os
 
 from ._http_clients import _async_http_client, _http_client
-from .events._async_events import AsyncEvents
-from .events._events import Events
 from .functions._async_functions import AsyncFunctions
 from .functions._functions import Functions
 from .indexes._async_indexes import AsyncIndexes
 from .indexes._indexes import Indexes
+from .spans._async_spans import AsyncSpans
+from .spans._spans import Spans
 
 
 DEFAULT_API_URL = "https://api.opper.ai"
@@ -17,7 +17,7 @@ class AsyncClient:
 
     functions: AsyncFunctions
     indexes: AsyncIndexes
-    events: AsyncEvents
+    spans: AsyncSpans
 
     def __new__(
         cls,
@@ -43,7 +43,7 @@ class AsyncClient:
                 cls._instance.http_client, default_model=default_model
             )
             cls._instance.indexes = AsyncIndexes(cls._instance.http_client)
-            cls._instance.events = AsyncEvents(cls._instance.http_client)
+            cls._instance.spans = AsyncSpans(cls._instance.http_client)
             cls._instance.api_key = api_key
             cls._instance.api_url = api_url
         return cls._instance
@@ -54,7 +54,7 @@ class Client:
 
     functions: Functions
     indexes: Indexes
-    events: Events
+    spans: Spans
 
     def __new__(
         cls,
@@ -80,7 +80,7 @@ class Client:
                 instance.http_client, default_model=default_model
             )
             instance.indexes = Indexes(instance.http_client)
-            instance.events = Events(instance.http_client)
+            instance.spans = Spans(instance.http_client)
             instance.api_key = api_key
             instance.api_url = api_url
             cls._instance = instance

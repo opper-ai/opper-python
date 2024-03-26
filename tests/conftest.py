@@ -2,12 +2,17 @@ import os
 import re
 import vcr
 import pytest
-from opperai import AsyncClient
+from opperai import AsyncClient, Client
 
 
 @pytest.fixture(scope="module")
-def client() -> AsyncClient:
+def aclient() -> AsyncClient:
     yield AsyncClient()
+
+
+@pytest.fixture(scope="module")
+def client() -> Client:
+    yield Client()
 
 
 def uri_matcher(r1, r2):

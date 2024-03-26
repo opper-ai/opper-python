@@ -1,7 +1,7 @@
 # ruff: noqa: F401
 from typing import Any, Dict, List, Optional, Union
 from uuid import UUID
-from .events import EventFeedback
+from .spans import SpanFeedback
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -15,7 +15,7 @@ class Message(BaseModel):
 
 class ChatPayload(BaseModel):
     model_config: ConfigDict = ConfigDict(extra="allow")
-    parent_event_uuid: Optional[str] = None
+    parent_span_uuid: Optional[str] = None
 
     messages: List[Message]
 
@@ -31,14 +31,14 @@ class ContextData(BaseModel):
 
 
 class StreamingChunk(BaseModel):
-    event_id: Optional[str] = None
+    span_id: Optional[str] = None
     delta: Optional[str] = None
     error: Optional[str] = None
     context: Optional[List[ContextData]] = None
 
 
 class FunctionResponse(BaseModel):
-    event_id: Optional[str] = None
+    span_id: Optional[str] = None
     message: Optional[str] = None
     json_payload: Optional[Union[dict, List, Any]] = None
     error: Optional[str] = None

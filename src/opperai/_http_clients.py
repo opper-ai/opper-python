@@ -6,6 +6,7 @@ from httpx_sse import aconnect_sse, connect_sse
 
 class _async_http_client:
     def __init__(self, api_key: str, api_url, timeout):
+        print(f"api_key: {api_key}")
         self.session = httpx.AsyncClient(
             base_url=api_url,
             headers={"X-OPPER-API-KEY": f"{api_key}"},

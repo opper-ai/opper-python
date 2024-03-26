@@ -8,7 +8,7 @@ from typing import List, get_args, get_origin, get_type_hints
 from pydantic import BaseModel
 
 from opperai import AsyncClient, Client
-from opperai.events._decorator import _current_event_id
+from opperai.spans._decorator import _current_span_id
 from opperai.types import ChatPayload, FunctionDescription, Message
 
 from ...utils import convert_function_call_to_json
@@ -73,7 +73,7 @@ def fn(
             setup()
             input = convert_function_call_to_json(func, *args, **kwargs)
             payload = ChatPayload(
-                parent_event_uuid=_current_event_id.get(),
+                parent_span_uuid=_current_span_id.get(),
                 messages=[
                     Message(role="user", content=json.dumps(input, cls=json_encoder))
                 ],
@@ -98,7 +98,7 @@ def fn(
             setup()
             input = convert_function_call_to_json(func, *args, **kwargs)
             payload = ChatPayload(
-                parent_event_uuid=_current_event_id.get(),
+                parent_span_uuid=_current_span_id.get(),
                 messages=[
                     Message(role="user", content=json.dumps(input, cls=json_encoder))
                 ],

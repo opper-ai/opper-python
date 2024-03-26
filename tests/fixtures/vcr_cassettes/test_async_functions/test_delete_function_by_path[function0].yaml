@@ -21,7 +21,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 18 Mar 2024 10:18:03 GMT
+      - Tue, 26 Mar 2024 13:10:37 GMT
       server:
       - uvicorn
     status:
@@ -49,14 +49,14 @@ interactions:
     uri: http://localhost:8000/api/v1/functions
   response:
     body:
-      string: '{"id":8}'
+      string: '{"id":22}'
     headers:
       content-length:
-      - '8'
+      - '9'
       content-type:
       - application/json
       date:
-      - Mon, 18 Mar 2024 10:18:03 GMT
+      - Tue, 26 Mar 2024 13:10:37 GMT
       server:
       - uvicorn
     status:
@@ -74,19 +74,19 @@ interactions:
       user-agent:
       - python-httpx/0.27.0
     method: GET
-    uri: http://localhost:8000/api/v1/functions/8
+    uri: http://localhost:8000/api/v1/functions/22
   response:
     body:
-      string: '{"id":8,"path":"test/sdk/test_delete_function_by_path","description":"Test
-        function","input_schema":null,"dataset_uuid":"e922bfdc-3d17-40cf-ac80-c8a7eeb57b4c","out_schema":null,"instructions":"Do
+      string: '{"id":22,"path":"test/sdk/test_delete_function_by_path","description":"Test
+        function","input_schema":null,"dataset_uuid":"c1c11c35-f790-4de2-a228-4b58d4a68fb7","out_schema":null,"instructions":"Do
         something","use_semantic_search":false,"few_shot":false,"few_shot_count":2,"revision":1,"org_id":1,"index_ids":[],"linked_functions_ids":[],"model":"azure/gpt4-eu","language_model_id":8}'
     headers:
       content-length:
-      - '382'
+      - '383'
       content-type:
       - application/json
       date:
-      - Mon, 18 Mar 2024 10:18:03 GMT
+      - Tue, 26 Mar 2024 13:10:37 GMT
       server:
       - uvicorn
     status:
@@ -114,7 +114,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 18 Mar 2024 10:18:03 GMT
+      - Tue, 26 Mar 2024 13:10:37 GMT
       server:
       - uvicorn
     status:
@@ -142,7 +142,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 18 Mar 2024 10:18:03 GMT
+      - Tue, 26 Mar 2024 13:10:38 GMT
       server:
       - uvicorn
     status:
