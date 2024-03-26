@@ -5,7 +5,7 @@ from uuid import UUID
 from pydantic import BaseModel, Field
 
 
-class Event(BaseModel):
+class Span(BaseModel):
     uuid: Optional[UUID] = None
     project: Optional[str] = None
     name: Optional[str] = None
@@ -20,7 +20,7 @@ class Event(BaseModel):
     score: Optional[int] = None
 
 
-class EventFeedback(BaseModel):
+class SpanFeedback(BaseModel):
     dimension: Optional[str] = None
     score: Optional[float] = Field(None, ge=0, le=1)
     comment: Optional[str] = None

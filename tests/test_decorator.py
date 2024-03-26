@@ -8,8 +8,6 @@ from opperai.utils import (
 )
 from pydantic import BaseModel
 
-os.environ["OPPER_API_KEY"] = "api-key"
-
 
 @patch("opperai._http_clients._http_client.do_request")
 def test_decorator(mock_do_request):
