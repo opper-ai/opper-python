@@ -1,5 +1,4 @@
 import asyncio
-import contextvars
 import datetime
 import json
 import os
@@ -9,10 +8,9 @@ from typing import Callable, Optional
 from uuid import uuid4
 
 from opperai import Client
+from opperai.spans import _current_span_id
 from opperai.types.spans import Span
 from opperai.utils import convert_function_call_to_json
-
-_current_span_id = contextvars.ContextVar("_current_span_id", default=None)
 
 
 class SpanContext:

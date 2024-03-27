@@ -1,6 +1,7 @@
 from typing import Generator
 
 from opperai._http_clients import _async_http_client
+from opperai.spans import get_current_span_id
 from opperai.types import (
     ChatPayload,
     FunctionDescription,
@@ -119,6 +120,8 @@ class AsyncFunctions:
     async def chat(
         self, function_path, data: ChatPayload, stream=False, **kwargs
     ) -> FunctionResponse:
+        if data.parent_span_uuid is None:
+            data.parent_span_uuid = get_current_span_id()
         if stream:
             return self._chat_stream(function_path, data, **kwargs)
         serialized_data = data.model_dump()
