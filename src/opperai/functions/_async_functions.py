@@ -149,3 +149,11 @@ class AsyncFunctions:
         )
         async for item in gen:
             yield StreamingChunk(**item)
+
+    async def flush_cache(self, id: int) -> None:
+        response = await self.http_client.do_request(
+            "DELETE",
+            f"/api/v1/functions/{id}/cache",
+        )
+        if response.status_code != 204:
+            f"Failed to flush cache for function with id={id} with status {response.status_code}"

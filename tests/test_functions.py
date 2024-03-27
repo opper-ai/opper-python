@@ -201,3 +201,36 @@ def test_create_function_with_cache(client: Client, vcr_cassette):
     assert res.cached
 
     client.functions.delete(path=fdesc.path)
+
+
+def test_create_function_with_cache_flush(client: Client, vcr_cassette):
+    fdesc = FunctionDescription(
+        path="test/sdk/test_create_function_with_cache_sync_flush",
+        description="Test function",
+        instructions="Do something",
+        cache_configuration=CacheConfiguration(exact_match_cache_ttl=10),
+    )
+
+    fid = client.functions.create(fdesc)
+    assert fid is not None
+
+    res = client.functions.chat(
+        fdesc.path, ChatPayload(messages=[Message(role="user", content="hello")])
+    )
+    print(res)
+    assert not res.cached
+
+    res = client.functions.chat(
+        fdesc.path, ChatPayload(messages=[Message(role="user", content="hello")])
+    )
+    print(res)
+    assert res.cached
+
+    client.functions.flush_cache(id=fid)
+    res = client.functions.chat(
+        fdesc.path, ChatPayload(messages=[Message(role="user", content="hello")])
+    )
+    print(res)
+    assert not res.cached
+
+    client.functions.delete(path=fdesc.path)

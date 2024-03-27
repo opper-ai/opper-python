@@ -1,0 +1,222 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      user-agent:
+      - python-httpx/0.27.0
+    method: GET
+    uri: http://localhost:8000/api/v1/functions/by_path/test/sdk/test_create_function_with_cache_sync_flush
+  response:
+    body:
+      string: '{"detail":"Function not found"}'
+    headers:
+      content-length:
+      - '31'
+      content-type:
+      - application/json
+      date:
+      - Wed, 27 Mar 2024 19:23:42 GMT
+      server:
+      - uvicorn
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: '{"id": null, "path": "test/sdk/test_create_function_with_cache_sync_flush",
+      "description": "Test function", "input_schema": null, "out_schema": null, "instructions":
+      "Do something", "model": null, "index_ids": null, "use_semantic_search": null,
+      "few_shot": null, "few_shot_count": null, "cache_configuration": {"exact_match_cache_ttl":
+      10, "semantic_cache_threshold": null, "semantic_cache_ttl": null}}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '402'
+      content-type:
+      - application/json
+      user-agent:
+      - python-httpx/0.27.0
+    method: POST
+    uri: http://localhost:8000/api/v1/functions
+  response:
+    body:
+      string: '{"id":48}'
+    headers:
+      content-length:
+      - '9'
+      content-type:
+      - application/json
+      date:
+      - Wed, 27 Mar 2024 19:23:42 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"parent_span_uuid": null, "messages": [{"role": "user", "content": "hello"}]}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '78'
+      content-type:
+      - application/json
+      user-agent:
+      - python-httpx/0.27.0
+    method: POST
+    uri: http://localhost:8000/v1/chat/test/sdk/test_create_function_with_cache_sync_flush
+  response:
+    body:
+      string: '{"event_id":"ffb29e9d-620c-4ddd-9b7d-91352bcbbc24","message":"Hello!
+        How can I assist you today? If you have any questions or need information
+        on a specific topic, feel free to ask.","json_payload":null,"error":null,"context":null,"cached":false}'
+    headers:
+      content-length:
+      - '246'
+      content-type:
+      - application/json
+      date:
+      - Wed, 27 Mar 2024 19:23:42 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"parent_span_uuid": null, "messages": [{"role": "user", "content": "hello"}]}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '78'
+      content-type:
+      - application/json
+      user-agent:
+      - python-httpx/0.27.0
+    method: POST
+    uri: http://localhost:8000/v1/chat/test/sdk/test_create_function_with_cache_sync_flush
+  response:
+    body:
+      string: '{"event_id":"0456a4f4-bb55-4df1-880e-0b7b3004a918","message":"Hello!
+        How can I assist you today? If you have any questions or need information
+        on a specific topic, feel free to ask.","json_payload":null,"error":null,"context":null,"cached":true}'
+    headers:
+      content-length:
+      - '245'
+      content-type:
+      - application/json
+      date:
+      - Wed, 27 Mar 2024 19:23:50 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      user-agent:
+      - python-httpx/0.27.0
+    method: DELETE
+    uri: http://localhost:8000/api/v1/functions/48/cache
+  response:
+    body:
+      string: ''
+    headers:
+      content-type:
+      - application/json
+      date:
+      - Wed, 27 Mar 2024 19:23:50 GMT
+      server:
+      - uvicorn
+    status:
+      code: 204
+      message: No Content
+- request:
+    body: '{"parent_span_uuid": null, "messages": [{"role": "user", "content": "hello"}]}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '78'
+      content-type:
+      - application/json
+      user-agent:
+      - python-httpx/0.27.0
+    method: POST
+    uri: http://localhost:8000/v1/chat/test/sdk/test_create_function_with_cache_sync_flush
+  response:
+    body:
+      string: '{"event_id":"a0cc6bf3-460f-4685-a7b6-1fb4849c66b0","message":"Hello!
+        How can I assist you today? If you have any questions or need information
+        on a particular topic, feel free to ask.","json_payload":null,"error":null,"context":null,"cached":false}'
+    headers:
+      content-length:
+      - '248'
+      content-type:
+      - application/json
+      date:
+      - Wed, 27 Mar 2024 19:23:50 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      user-agent:
+      - python-httpx/0.27.0
+    method: DELETE
+    uri: http://localhost:8000/api/v1/functions/by_path/test/sdk/test_create_function_with_cache_sync_flush
+  response:
+    body:
+      string: '{"detail":"Function and associated generations deleted successfully"}'
+    headers:
+      content-length:
+      - '69'
+      content-type:
+      - application/json
+      date:
+      - Wed, 27 Mar 2024 19:23:57 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+version: 1

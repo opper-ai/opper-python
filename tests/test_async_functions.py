@@ -164,3 +164,37 @@ async def test_create_function_with_cache(aclient: AsyncClient, vcr_cassette):
     assert res.cached
 
     await aclient.functions.delete(path=fdesc.path)
+
+
+@pytest.mark.asyncio(scope="module")
+async def test_create_function_with_cache_flush(aclient: AsyncClient, vcr_cassette):
+    fdesc = FunctionDescription(
+        path="test/sdk/test_create_function_with_cache_async_flush",
+        description="Test function",
+        instructions="Do something",
+        cache_configuration=CacheConfiguration(exact_match_cache_ttl=10),
+    )
+
+    fid = await aclient.functions.create(fdesc)
+    assert fid is not None
+
+    res = await aclient.functions.chat(
+        fdesc.path, ChatPayload(messages=[Message(role="user", content="hello")])
+    )
+    print(res)
+    assert not res.cached
+
+    res = await aclient.functions.chat(
+        fdesc.path, ChatPayload(messages=[Message(role="user", content="hello")])
+    )
+    print(res)
+    assert res.cached
+
+    await aclient.functions.flush_cache(id=fid)
+    res = await aclient.functions.chat(
+        fdesc.path, ChatPayload(messages=[Message(role="user", content="hello")])
+    )
+    print(res)
+    assert not res.cached
+
+    await aclient.functions.delete(path=fdesc.path)
