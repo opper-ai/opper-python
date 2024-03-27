@@ -1,8 +1,9 @@
 from unittest.mock import MagicMock, patch
 
 import pytest
+import random
 from opperai import Client
-from opperai.types import ChatPayload, FunctionDescription, Message
+from opperai.types import ChatPayload, FunctionDescription, Message, CacheConfiguration
 
 api_key = "key"
 
@@ -174,3 +175,29 @@ async def test_get_function_by_id(mock_do_request):
         "GET",
         "/api/v1/functions/1",
     )
+
+
+def test_create_function_with_cache(client: Client, vcr_cassette):
+    fdesc = FunctionDescription(
+        path="test/sdk/test_create_function_with_cache_sync",
+        description="Test function",
+        instructions="Do something",
+        cache_configuration=CacheConfiguration(exact_match_cache_ttl=10),
+    )
+
+    fid = client.functions.create(fdesc)
+    assert fid is not None
+
+    res = client.functions.chat(
+        fdesc.path, ChatPayload(messages=[Message(role="user", content="hello")])
+    )
+    print(res)
+    assert not res.cached
+
+    res = client.functions.chat(
+        fdesc.path, ChatPayload(messages=[Message(role="user", content="hello")])
+    )
+    print(res)
+    assert res.cached
+
+    client.functions.delete(path=fdesc.path)

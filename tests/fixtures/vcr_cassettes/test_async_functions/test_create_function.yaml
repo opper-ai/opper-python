@@ -14,25 +14,24 @@ interactions:
     uri: http://localhost:8000/api/v1/functions/by_path/test/sdk/test_function
   response:
     body:
-      string: '{"id":12,"path":"test/sdk/test_function","description":"Test function","input_schema":null,"dataset_uuid":"52c1c042-a570-496f-8a3d-a6ed8456cf50","out_schema":null,"instructions":"Do
-        something","use_semantic_search":false,"few_shot":false,"few_shot_count":2,"revision":1,"org_id":1,"index_ids":[],"linked_functions_ids":[],"model":"azure/gpt4-eu","language_model_id":8}'
+      string: '{"detail":"Function not found"}'
     headers:
       content-length:
-      - '368'
+      - '31'
       content-type:
       - application/json
       date:
-      - Tue, 26 Mar 2024 13:10:37 GMT
+      - Wed, 27 Mar 2024 11:05:21 GMT
       server:
       - uvicorn
     status:
-      code: 200
-      message: OK
+      code: 404
+      message: Not Found
 - request:
-    body: '{"id": 12, "path": "test/sdk/test_function", "description": "Test function",
+    body: '{"id": null, "path": "test/sdk/test_function", "description": "Test function",
       "input_schema": null, "out_schema": null, "instructions": "Do something", "model":
       null, "index_ids": null, "use_semantic_search": null, "few_shot": null, "few_shot_count":
-      null}'
+      null, "cache_configuration": null}'
     headers:
       accept:
       - '*/*'
@@ -41,23 +40,23 @@ interactions:
       connection:
       - keep-alive
       content-length:
-      - '255'
+      - '286'
       content-type:
       - application/json
       user-agent:
       - python-httpx/0.27.0
     method: POST
-    uri: http://localhost:8000/api/v1/functions/12
+    uri: http://localhost:8000/api/v1/functions
   response:
     body:
-      string: '{"id":12}'
+      string: '{"id":35}'
     headers:
       content-length:
       - '9'
       content-type:
       - application/json
       date:
-      - Tue, 26 Mar 2024 13:10:37 GMT
+      - Wed, 27 Mar 2024 11:05:21 GMT
       server:
       - uvicorn
     status:
