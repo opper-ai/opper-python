@@ -1,8 +1,6 @@
 import pytest
-import random
 from opperai import AsyncClient
-from opperai.types import ChatPayload, FunctionDescription, Message, CacheConfiguration
-
+from opperai.types import CacheConfiguration, ChatPayload, FunctionDescription, Message
 
 DEFAULT_NAME = "test_function"
 DEFAULT_DESCRIPTION = "Test function"

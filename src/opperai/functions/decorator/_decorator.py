@@ -8,7 +8,7 @@ from typing import List, get_args, get_origin, get_type_hints
 from pydantic import BaseModel
 
 from opperai import AsyncClient, Client
-from opperai.spans._decorator import _current_span_id
+from opperai.spans import _current_span_id
 from opperai.types import ChatPayload, FunctionDescription, Message
 
 from ...utils import convert_function_call_to_json
