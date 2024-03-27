@@ -11,7 +11,7 @@ interactions:
       user-agent:
       - python-httpx/0.27.0
     method: GET
-    uri: http://localhost:8000/api/v1/functions/by_path/test/sdk/test_delete_function_by_id
+    uri: http://localhost:8000/api/v1/functions/by_path/test/sdk/test_create_function_with_cache_sync
   response:
     body:
       string: '{"detail":"Function not found"}'
@@ -21,17 +21,18 @@ interactions:
       content-type:
       - application/json
       date:
-      - Wed, 27 Mar 2024 11:05:21 GMT
+      - Wed, 27 Mar 2024 11:05:34 GMT
       server:
       - uvicorn
     status:
       code: 404
       message: Not Found
 - request:
-    body: '{"id": null, "path": "test/sdk/test_delete_function_by_id", "description":
+    body: '{"id": null, "path": "test/sdk/test_create_function_with_cache_sync", "description":
       "Test function", "input_schema": null, "out_schema": null, "instructions": "Do
       something", "model": null, "index_ids": null, "use_semantic_search": null, "few_shot":
-      null, "few_shot_count": null, "cache_configuration": null}'
+      null, "few_shot_count": null, "cache_configuration": {"exact_match_cache_ttl":
+      10, "semantic_cache_threshold": null, "semantic_cache_ttl": null}}'
     headers:
       accept:
       - '*/*'
@@ -40,7 +41,7 @@ interactions:
       connection:
       - keep-alive
       content-length:
-      - '299'
+      - '396'
       content-type:
       - application/json
       user-agent:
@@ -49,21 +50,21 @@ interactions:
     uri: http://localhost:8000/api/v1/functions
   response:
     body:
-      string: '{"id":40}'
+      string: '{"id":45}'
     headers:
       content-length:
       - '9'
       content-type:
       - application/json
       date:
-      - Wed, 27 Mar 2024 11:05:21 GMT
+      - Wed, 27 Mar 2024 11:05:34 GMT
       server:
       - uvicorn
     status:
       code: 200
       message: OK
 - request:
-    body: ''
+    body: '{"parent_span_uuid": null, "messages": [{"role": "user", "content": "hello"}]}'
     headers:
       accept:
       - '*/*'
@@ -71,29 +72,33 @@ interactions:
       - gzip, deflate
       connection:
       - keep-alive
+      content-length:
+      - '78'
+      content-type:
+      - application/json
       user-agent:
       - python-httpx/0.27.0
-    method: GET
-    uri: http://localhost:8000/api/v1/functions/40
+    method: POST
+    uri: http://localhost:8000/v1/chat/test/sdk/test_create_function_with_cache_sync
   response:
     body:
-      string: '{"id":40,"path":"test/sdk/test_delete_function_by_id","description":"Test
-        function","input_schema":null,"dataset_uuid":"d00e9a7e-1666-499a-a61a-13221b858665","out_schema":null,"instructions":"Do
-        something","use_semantic_search":false,"few_shot":false,"few_shot_count":2,"revision":1,"org_id":1,"index_ids":[],"linked_functions_ids":[],"model":"azure/gpt4-eu","language_model_id":8}'
+      string: '{"event_id":"517d59e6-067e-4b08-aef9-72d2de0508e3","message":"Hello!
+        How can I assist you today? If you have any questions or need information
+        on a topic, feel free to ask.","json_payload":null,"error":null,"context":null,"cached":false}'
     headers:
       content-length:
-      - '381'
+      - '237'
       content-type:
       - application/json
       date:
-      - Wed, 27 Mar 2024 11:05:21 GMT
+      - Wed, 27 Mar 2024 11:05:34 GMT
       server:
       - uvicorn
     status:
       code: 200
       message: OK
 - request:
-    body: ''
+    body: '{"parent_span_uuid": null, "messages": [{"role": "user", "content": "hello"}]}'
     headers:
       accept:
       - '*/*'
@@ -101,22 +106,26 @@ interactions:
       - gzip, deflate
       connection:
       - keep-alive
+      content-length:
+      - '78'
+      content-type:
+      - application/json
       user-agent:
       - python-httpx/0.27.0
-    method: GET
-    uri: http://localhost:8000/api/v1/functions/40
+    method: POST
+    uri: http://localhost:8000/v1/chat/test/sdk/test_create_function_with_cache_sync
   response:
     body:
-      string: '{"id":40,"path":"test/sdk/test_delete_function_by_id","description":"Test
-        function","input_schema":null,"dataset_uuid":"d00e9a7e-1666-499a-a61a-13221b858665","out_schema":null,"instructions":"Do
-        something","use_semantic_search":false,"few_shot":false,"few_shot_count":2,"revision":1,"org_id":1,"index_ids":[],"linked_functions_ids":[],"model":"azure/gpt4-eu","language_model_id":8}'
+      string: '{"event_id":"4762ff4b-e5ba-4819-a893-2d0eecd23bec","message":"Hello!
+        How can I assist you today? If you have any questions or need information
+        on a topic, feel free to ask.","json_payload":null,"error":null,"context":null,"cached":true}'
     headers:
       content-length:
-      - '381'
+      - '236'
       content-type:
       - application/json
       date:
-      - Wed, 27 Mar 2024 11:05:21 GMT
+      - Wed, 27 Mar 2024 11:05:37 GMT
       server:
       - uvicorn
     status:
@@ -134,7 +143,7 @@ interactions:
       user-agent:
       - python-httpx/0.27.0
     method: DELETE
-    uri: http://localhost:8000/api/v1/functions/by_path/test/sdk/test_delete_function_by_id
+    uri: http://localhost:8000/api/v1/functions/by_path/test/sdk/test_create_function_with_cache_sync
   response:
     body:
       string: '{"detail":"Function and associated generations deleted successfully"}'
@@ -144,38 +153,10 @@ interactions:
       content-type:
       - application/json
       date:
-      - Wed, 27 Mar 2024 11:05:21 GMT
+      - Wed, 27 Mar 2024 11:05:37 GMT
       server:
       - uvicorn
     status:
       code: 200
       message: OK
-- request:
-    body: ''
-    headers:
-      accept:
-      - '*/*'
-      accept-encoding:
-      - gzip, deflate
-      connection:
-      - keep-alive
-      user-agent:
-      - python-httpx/0.27.0
-    method: GET
-    uri: http://localhost:8000/api/v1/functions/40
-  response:
-    body:
-      string: '{"detail":"Function not found"}'
-    headers:
-      content-length:
-      - '31'
-      content-type:
-      - application/json
-      date:
-      - Wed, 27 Mar 2024 11:05:21 GMT
-      server:
-      - uvicorn
-    status:
-      code: 404
-      message: Not Found
 version: 1

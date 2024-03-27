@@ -43,6 +43,13 @@ class FunctionResponse(BaseModel):
     json_payload: Optional[Union[dict, List, Any]] = None
     error: Optional[str] = None
     context: Optional[List[ContextData]] = None
+    cached: Optional[bool] = None
+
+
+class CacheConfiguration(BaseModel):
+    exact_match_cache_ttl: Optional[int] = None
+    semantic_cache_threshold: Optional[float] = None
+    semantic_cache_ttl: Optional[int] = None
 
 
 class FunctionDescription(BaseModel):
@@ -61,3 +68,4 @@ class FunctionDescription(BaseModel):
     use_semantic_search: Optional[bool] = None
     few_shot: Optional[bool] = None
     few_shot_count: Optional[int] = None
+    cache_configuration: Optional[CacheConfiguration] = None
