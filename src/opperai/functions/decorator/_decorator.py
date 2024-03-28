@@ -11,7 +11,7 @@ from pydantic import BaseModel
 
 from opperai import AsyncClient, Client
 from opperai.spans import _current_span_id
-from opperai.types import ChatPayload, FunctionDescription, Message
+from opperai.types import CacheConfiguration, ChatPayload, FunctionDescription, Message
 
 from ...utils import convert_function_call_to_json
 from ._schemas import get_output_schema
@@ -42,6 +42,7 @@ def fn(
     model=None,
     few_shot=None,
     few_shot_count=None,
+    cache_config: CacheConfiguration = None,
 ):
     def decorator(func):
         func_path = path or func.__name__
@@ -72,6 +73,8 @@ def fn(
             if use_few_shot:
                 function.use_semantic_search = True
                 function.few_shot_count = few_shot_count or 2
+            if cache_config:
+                function.cache_configuration = cache_config
 
             function.model = (
                 model if model else os.environ.get("OPPER_DEFAULT_MODEL", None)
