@@ -1,7 +1,9 @@
 import asyncio
+import contextlib
 import inspect
 import json
 import os
+import threading
 from functools import wraps
 from typing import List, get_args, get_origin, get_type_hints
 
@@ -13,6 +15,22 @@ from opperai.types import ChatPayload, FunctionDescription, Message
 
 from ...utils import convert_function_call_to_json
 from ._schemas import get_output_schema
+
+_thread_local = threading.local()
+
+
+@contextlib.contextmanager
+def span_id_context():
+    _thread_local.span_id = None
+    try:
+        yield
+    finally:
+        del _thread_local.span_id
+
+
+def get_last_span_id() -> str:
+    """Retrieve the last span ID from thread-local storage."""
+    return getattr(_thread_local, "span_id", None)
 
 
 def fn(
@@ -78,9 +96,11 @@ def fn(
                     Message(role="user", content=json.dumps(input, cls=json_encoder))
                 ],
             )
+
             response = await c.functions.chat(func_path, payload)
             answer = response.json_payload
 
+            _thread_local.span_id = response.span_id
             return_type = get_type_hints(func).get("return")
 
             if return_type is not None:
@@ -103,7 +123,9 @@ def fn(
                     Message(role="user", content=json.dumps(input, cls=json_encoder))
                 ],
             )
-            answer = c.functions.chat(func_path, payload).json_payload
+            response = c.functions.chat(func_path, payload)
+            answer = response.json_payload
+            _thread_local.span_id = response.span_id
 
             return_type = get_type_hints(func).get("return")
             if return_type is not None:
