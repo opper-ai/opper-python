@@ -104,7 +104,7 @@ class Functions:
             except APIError:
                 pass
         elif id is not None:
-            fn = self.get(id)
+            fn = self.get(id=id)
             if fn:
                 self._delete_by_path(fn.path)
 
