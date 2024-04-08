@@ -21,7 +21,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Wed, 27 Mar 2024 19:30:28 GMT
+      - Mon, 08 Apr 2024 13:32:56 GMT
       server:
       - uvicorn
     status:
@@ -50,14 +50,14 @@ interactions:
     uri: http://localhost:8000/api/v1/functions
   response:
     body:
-      string: '{"id":50}'
+      string: '{"id":112}'
     headers:
       content-length:
-      - '9'
+      - '10'
       content-type:
       - application/json
       date:
-      - Wed, 27 Mar 2024 19:30:28 GMT
+      - Mon, 08 Apr 2024 13:32:56 GMT
       server:
       - uvicorn
     status:
@@ -82,16 +82,16 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_create_function_with_cache_async_flush
   response:
     body:
-      string: '{"event_id":"b74364d9-70c2-4597-997a-f1cb683d5078","message":"Hello!
-        How can I assist you today? If you have any questions or need information,
-        feel free to ask.","json_payload":null,"error":null,"context":null,"cached":false}'
+      string: '{"span_id":"790b934f-f1b3-4004-8d7d-0956628f7f8e","message":"Hello!
+        How can I assist you today? If you have any questions or need information
+        on a particular topic, feel free to ask!","json_payload":null,"error":null,"context":null,"cached":false}'
     headers:
       content-length:
-      - '226'
+      - '247'
       content-type:
       - application/json
       date:
-      - Wed, 27 Mar 2024 19:30:28 GMT
+      - Mon, 08 Apr 2024 13:32:56 GMT
       server:
       - uvicorn
     status:
@@ -116,16 +116,16 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_create_function_with_cache_async_flush
   response:
     body:
-      string: '{"event_id":"090dfc40-a839-43bb-a4c1-6de0a410ea4a","message":"Hello!
-        How can I assist you today? If you have any questions or need information,
-        feel free to ask.","json_payload":null,"error":null,"context":null,"cached":true}'
+      string: '{"span_id":"1640856c-b1e5-4f61-917b-796abfb18c3f","message":"Hello!
+        How can I assist you today? If you have any questions or need information
+        on a particular topic, feel free to ask!","json_payload":null,"error":null,"context":null,"cached":true}'
     headers:
       content-length:
-      - '225'
+      - '246'
       content-type:
       - application/json
       date:
-      - Wed, 27 Mar 2024 19:30:30 GMT
+      - Mon, 08 Apr 2024 13:33:03 GMT
       server:
       - uvicorn
     status:
@@ -143,7 +143,7 @@ interactions:
       user-agent:
       - python-httpx/0.27.0
     method: DELETE
-    uri: http://localhost:8000/api/v1/functions/50/cache
+    uri: http://localhost:8000/api/v1/functions/112/cache
   response:
     body:
       string: ''
@@ -151,7 +151,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Wed, 27 Mar 2024 19:30:30 GMT
+      - Mon, 08 Apr 2024 13:33:03 GMT
       server:
       - uvicorn
     status:
@@ -176,16 +176,16 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_create_function_with_cache_async_flush
   response:
     body:
-      string: '{"event_id":"508b2680-acdb-4fcf-880a-438f34f3455c","message":"Hello!
-        How can I assist you today? If you have any questions or need information,
-        feel free to ask.","json_payload":null,"error":null,"context":null,"cached":false}'
+      string: '{"span_id":"d2b6c1b6-6b3c-4e55-9c55-1333cdd15362","message":"Hello!
+        How can I assist you today? If you have any questions or need information
+        on a specific topic, feel free to ask.","json_payload":null,"error":null,"context":null,"cached":false}'
     headers:
       content-length:
-      - '226'
+      - '245'
       content-type:
       - application/json
       date:
-      - Wed, 27 Mar 2024 19:30:30 GMT
+      - Mon, 08 Apr 2024 13:33:03 GMT
       server:
       - uvicorn
     status:
@@ -213,7 +213,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Wed, 27 Mar 2024 19:30:34 GMT
+      - Mon, 08 Apr 2024 13:33:21 GMT
       server:
       - uvicorn
     status:
