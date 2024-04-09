@@ -66,7 +66,6 @@ class Indexes:
         # Upload file
         with open(file_path, "rb") as file:
             files = {"file": (file_path.split("/")[-1], file)}
-            print(upload_url_data)
             upload_response = self.http_client.do_request(
                 "POST",
                 upload_url_data["url"],
