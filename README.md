@@ -23,7 +23,7 @@ print(translate("Hello","fr"))
 
 The `fn` decorator automatically creates an Opper function ready to be called like any other function in your code. They're no different than any other function!
 
-## Calling functions manually
+## Calling functions
 
 To call a function you created at [https://platform.opper.ai](https://platform.opper.ai) you can use the following code:
 
@@ -32,17 +32,80 @@ To call a function you created at [https://platform.opper.ai](https://platform.o
 from opperai import Client
 from opperai.types import ChatPayload, Message
 
-# Use AsyncClient for async operations
 client = Client(api_key="your-api-key") 
 response = client.functions.chat("your-function-path", 
- ChatPayload(messages=[Message(role="user", content="hello")])
+  ChatPayload(messages=[Message(role="user", content="hello")])
 )
 
 print(response)
-
 ```
 
-This more traditional API is better targeted for chat use cases.
+## Async function calling
+
+```python
+import asyncio
+from opperai import AsyncClient
+from opperai.types import ChatPayload, Message
+
+opper = AsyncClient(api_key="your-api-key")
+
+async def main():
+    message = ""
+    async for response in await opper.functions.chat(
+        "your-function-path",
+        ChatPayload(messages=[Message(role="user", content="Hello, world!")]),
+        stream=True,
+    ):
+        if response.delta is not None:
+            message += response.delta
+
+    print(message)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+## Streaming responses
+
+```python
+from opperai import Client
+from opperai.types import ChatPayload, Message
+
+client = Client(api_key="op-xxxx")
+response = client.functions.chat(
+    "joch/test",
+    ChatPayload(
+        messages=[Message(role="user", content="tell me a story.")],
+    ),
+    stream=True,
+)
+for data in response:
+    print(data.delta, end="", flush=True)
+```
+
+## Async streaming responses
+
+```python
+import asyncio
+from opperai import AsyncClient
+from opperai.types import ChatPayload, Message
+
+client = AsyncClient(api_key="your-api-key")
+
+async def main():
+    async for response in await client.functions.chat(
+        "your-function-path",
+        ChatPayload(
+            messages=[Message(role="user", content="tell me a story.")],
+        ),
+        stream=True,
+    ):
+        print(response.delta, end="", flush=True)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
 
 ## Retrieval
 
