@@ -18,14 +18,14 @@ interactions:
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '{"id":88,"name":"test_get_by_id"}'
+      string: '{"id":261,"name":"test_get_by_id","files":[],"created_at":"2024-04-11T16:26:34.290381Z"}'
     headers:
       content-length:
-      - '33'
+      - '88'
       content-type:
       - application/json
       date:
-      - Wed, 10 Apr 2024 13:45:39 GMT
+      - Thu, 11 Apr 2024 16:26:34 GMT
       server:
       - uvicorn
     status:
@@ -43,17 +43,17 @@ interactions:
       user-agent:
       - python-httpx/0.27.0
     method: GET
-    uri: http://localhost:8000/v1/indexes/88
+    uri: http://localhost:8000/v1/indexes/261
   response:
     body:
-      string: '{"id":88,"name":"test_get_by_id","files":[],"created_at":"2024-04-10T13:45:39.408344Z"}'
+      string: '{"id":261,"name":"test_get_by_id","files":[],"created_at":"2024-04-11T16:26:34.290381Z"}'
     headers:
       content-length:
-      - '87'
+      - '88'
       content-type:
       - application/json
       date:
-      - Wed, 10 Apr 2024 13:45:39 GMT
+      - Thu, 11 Apr 2024 16:26:34 GMT
       server:
       - uvicorn
     status:
@@ -71,17 +71,17 @@ interactions:
       user-agent:
       - python-httpx/0.27.0
     method: DELETE
-    uri: http://localhost:8000/v1/indexes/88
+    uri: http://localhost:8000/v1/indexes/261
   response:
     body:
-      string: '{"message":"Index deleted successfully","index":88}'
+      string: 'true'
     headers:
       content-length:
-      - '51'
+      - '4'
       content-type:
       - application/json
       date:
-      - Wed, 10 Apr 2024 13:45:39 GMT
+      - Thu, 11 Apr 2024 16:26:34 GMT
       server:
       - uvicorn
     status:

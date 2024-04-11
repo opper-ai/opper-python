@@ -19,7 +19,7 @@ class Spans:
         response = self.http_client.do_request(
             "POST",
             "/v1/spans",
-            data=json_payload,
+            content=json_payload,
         )
         if response.status_code != 200:
             raise APIError(
@@ -35,7 +35,7 @@ class Spans:
         response = self.http_client.do_request(
             "PUT",
             f"/v1/spans/{span.uuid}",
-            data=json_payload,
+            content=json_payload,
         )
         if response.status_code != 200:
             raise APIError(

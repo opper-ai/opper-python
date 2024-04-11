@@ -3,11 +3,11 @@ from typing import List, Optional
 from opperai._http_clients import _http_client
 from opperai.types.exceptions import APIError
 from opperai.types.indexes import (
-    DocumentIn,
-    DocumentOut,
+    Document,
+    Document,
     Filter,
-    IndexOut,
-    IndexRetrieveResponse,
+    Index,
+    RetrievalResponse,
 )
 from pydantic import BaseModel
 
@@ -22,7 +22,7 @@ class Indexes:
     def __init__(self, http_client: _http_client):
         self.http_client = http_client
 
-    def create(self, name: str) -> int:
+    def create(self, name: str) -> Index:
         response = self.http_client.do_request(
             "POST",
             "/v1/indexes",
@@ -30,20 +30,20 @@ class Indexes:
         )
         if response.status_code != 200:
             raise APIError(f"Failed to create index with status {response.status_code}")
-        return response.json()["id"]
+        return Index.model_validate(response.json())
 
-    def delete(self, id: int):
+    def delete(self, id: int) -> bool:
         response = self.http_client.do_request(
             "DELETE",
             f"/v1/indexes/{id}",
         )
         if response.status_code == 404:
-            return None
+            return False
         if response.status_code != 200:
             raise APIError(f"Failed to delete index with status {response.status_code}")
-        return response.json()
+        return True
 
-    def get(self, id: int = None, name: str = None) -> IndexOut:
+    def get(self, id: int = None, name: str = None) -> Optional[Index]:
         if id is None and name is None:
             raise ValueError("Either id or name must be provided")
         if id is not None and name is not None:
@@ -54,7 +54,7 @@ class Indexes:
         if name is not None:
             return self._get_by_name(name)
 
-    def _get_by_id(self, id: int) -> IndexOut:
+    def _get_by_id(self, id: int) -> Optional[Index]:
         response = self.http_client.do_request(
             "GET",
             f"/v1/indexes/{id}",
@@ -64,24 +64,23 @@ class Indexes:
         if response.status_code != 200:
             raise APIError(f"Failed to get index with status {response.status_code}")
 
-        print(response.json())
-        return IndexOut.model_validate(response.json())
+        return Index.model_validate(response.json())
 
-    def _get_by_name(self, name: str) -> IndexOut:
+    def _get_by_name(self, name: str) -> Optional[Index]:
         indexes = self.list()
         for index in indexes:
             if index.name == name:
                 return index
         return None
 
-    def list(self):
+    def list(self) -> List[Index]:
         response = self.http_client.do_request(
             "GET",
             "/v1/indexes",
         )
         if response.status_code != 200:
             raise APIError(f"Failed to list indexes with status {response.status_code}")
-        return [IndexOut.model_validate(item) for item in response.json()]
+        return [Index.model_validate(item) for item in response.json()]
 
     def upload_file(self, id: int, file_path: str, **kwargs):
         # Get upload URL
@@ -123,7 +122,7 @@ class Indexes:
 
         return register_file_response.json()
 
-    def index(self, id: int, doc: DocumentIn) -> DocumentOut:
+    def index(self, id: int, doc: Document) -> Document:
         response = self.http_client.do_request(
             "POST",
             f"/v1/indexes/{id}/index",
@@ -131,11 +130,11 @@ class Indexes:
         )
         if response.status_code != 200:
             raise APIError(f"Failed to add document with status {response.status_code}")
-        return DocumentOut.model_validate(response.json())
+        return Document.model_validate(response.json())
 
     def retrieve(
         self, id: int, query: str, k: int, filters: Optional[List[Filter]] = None
-    ) -> List[IndexRetrieveResponse]:
+    ) -> List[RetrievalResponse]:
         response = self.http_client.do_request(
             "POST",
             f"/v1/indexes/{id}/query",
@@ -145,4 +144,4 @@ class Indexes:
             raise APIError(
                 f"Failed to retrieve index {id} with status {response.status_code}"
             )
-        return [IndexRetrieveResponse.model_validate(item) for item in response.json()]
+        return [RetrievalResponse.model_validate(item) for item in response.json()]

@@ -18,14 +18,14 @@ interactions:
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '{"id":174,"name":"test_delete_index"}'
+      string: '{"id":251,"name":"test_delete_index","files":[],"created_at":"2024-04-11T16:25:34.116650Z"}'
     headers:
       content-length:
-      - '37'
+      - '91'
       content-type:
       - application/json
       date:
-      - Wed, 10 Apr 2024 18:45:33 GMT
+      - Thu, 11 Apr 2024 16:25:33 GMT
       server:
       - uvicorn
     status:
@@ -43,17 +43,17 @@ interactions:
       user-agent:
       - python-httpx/0.27.0
     method: DELETE
-    uri: http://localhost:8000/v1/indexes/174
+    uri: http://localhost:8000/v1/indexes/251
   response:
     body:
-      string: '{"message":"Index deleted successfully","index":174}'
+      string: 'true'
     headers:
       content-length:
-      - '52'
+      - '4'
       content-type:
       - application/json
       date:
-      - Wed, 10 Apr 2024 18:45:33 GMT
+      - Thu, 11 Apr 2024 16:25:33 GMT
       server:
       - uvicorn
     status:
@@ -71,7 +71,7 @@ interactions:
       user-agent:
       - python-httpx/0.27.0
     method: GET
-    uri: http://localhost:8000/v1/indexes/174
+    uri: http://localhost:8000/v1/indexes/251
   response:
     body:
       string: '{"detail":"Index not found"}'
@@ -81,7 +81,35 @@ interactions:
       content-type:
       - application/json
       date:
-      - Wed, 10 Apr 2024 18:45:33 GMT
+      - Thu, 11 Apr 2024 16:25:33 GMT
+      server:
+      - uvicorn
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      user-agent:
+      - python-httpx/0.27.0
+    method: DELETE
+    uri: http://localhost:8000/v1/indexes/251
+  response:
+    body:
+      string: '{"detail":"Index not found"}'
+    headers:
+      content-length:
+      - '28'
+      content-type:
+      - application/json
+      date:
+      - Thu, 11 Apr 2024 16:25:33 GMT
       server:
       - uvicorn
     status:

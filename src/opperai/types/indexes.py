@@ -1,28 +1,23 @@
 import datetime
-from typing import List, Optional, Union
+from typing import Any, Dict, List, Optional, Union
 
 from pydantic import UUID4, BaseModel, Field
 
 
-class IndexRetrieveResponse(BaseModel):
+class RetrievalResponse(BaseModel):
     content: str
-    metadata: dict
+    metadata: Dict[str, Any]
 
 
-class DocumentIn(BaseModel):
-    id: Optional[str] = None
+class Document(BaseModel):
+    id: Optional[int] = None
+    uuid: Optional[UUID4] = None
     key: Optional[str] = None
-    content: str = Field(..., min_length=1)
-    metadata: dict = dict()
+    content: Optional[str] = Field(None, min_length=1)
+    metadata: Optional[Dict[str, Any]] = None
 
 
-class DocumentOut(BaseModel):
-    id: int
-    uuid: UUID4
-    key: str
-
-
-class IndexOut(BaseModel):
+class Index(BaseModel):
     id: int
     name: str
     created_at: datetime.datetime
