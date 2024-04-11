@@ -1,10 +1,10 @@
-from typing import Generator
+from typing import Generator, Optional
 
 from opperai._http_clients import _async_http_client
 from opperai.spans import get_current_span_id
 from opperai.types import (
     ChatPayload,
-    FunctionDescription,
+    Function,
     FunctionResponse,
     StreamingChunk,
     validate_id_xor_path,
@@ -17,7 +17,7 @@ class AsyncFunctions:
         self.http_client = http_client
         self.default_model = default_model
 
-    async def _create(self, function: FunctionDescription, **kwargs) -> int:
+    async def _create(self, function: Function, **kwargs) -> Function:
         if not function.model and self.default_model:
             function.model = self.default_model
         response = await self.http_client.do_request(
@@ -30,9 +30,9 @@ class AsyncFunctions:
                 f"Failed to create function {function.path} with status {response.status_code}"
             )
 
-        return response.json()["id"]
+        return Function.model_validate(response.json())
 
-    async def update(self, function: FunctionDescription, **kwargs) -> int:
+    async def update(self, function: Function, **kwargs) -> Function:
         response = await self.http_client.do_request(
             "POST",
             f"/api/v1/functions/{function.id}",
@@ -43,20 +43,20 @@ class AsyncFunctions:
                 f"Failed to update function {function.path} with status {response.status_code}"
             )
 
-        return response.json()["id"]
+        return Function.model_validate(response.json())
 
     @validate_id_xor_path
-    async def get(self, id: str = None, path: str = None) -> FunctionDescription:
+    async def get(self, id: str = None, path: str = None) -> Optional[Function]:
         if path is not None:
             if id is not None:
                 raise ValueError("Only one of id or path should be provided")
-            return await self.get_by_path(path)
+            return await self._get_by_path(path)
         elif id is not None:
-            return await self.get_by_id(id)
+            return await self._get_by_id(id)
         else:
             return None
 
-    async def get_by_path(self, function_path: str) -> FunctionDescription:
+    async def _get_by_path(self, function_path: str) -> Function:
         response = await self.http_client.do_request(
             "GET",
             f"/api/v1/functions/by_path/{function_path}",
@@ -68,9 +68,9 @@ class AsyncFunctions:
                 f"Failed to get function {function_path} with status {response.status_code}"
             )
 
-        return FunctionDescription(**response.json())
+        return Function.model_validate(response.json())
 
-    async def get_by_id(self, function_id: str) -> FunctionDescription:
+    async def _get_by_id(self, function_id: str) -> Function:
         response = await self.http_client.do_request(
             "GET",
             f"/api/v1/functions/{function_id}",
@@ -82,18 +82,18 @@ class AsyncFunctions:
                 f"Failed to get function {function_id} with status {response.status_code}"
             )
 
-        return FunctionDescription(**response.json())
+        return Function.model_validate(response.json())
 
     async def create(
-        self, function: FunctionDescription, update: bool = True, **kwargs
-    ) -> int:
-        fn = await self.get_by_path(function.path)
+        self, function: Function, update: bool = True, **kwargs
+    ) -> Function:
+        fn = await self.get(path=function.path)
         if fn is None:
             return await self._create(function, **kwargs)
         elif update:
             function.id = fn.id
             return await self.update(function, **kwargs)
-        return fn.id
+        return fn
 
     @validate_id_xor_path
     async def delete(self, id: str = None, path: str = None):

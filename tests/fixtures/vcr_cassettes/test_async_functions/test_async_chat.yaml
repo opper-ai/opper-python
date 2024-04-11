@@ -14,24 +14,23 @@ interactions:
     uri: http://localhost:8000/api/v1/functions/by_path/test/sdk/test_async_chat
   response:
     body:
-      string: '{"id":109,"path":"test/sdk/test_async_chat","description":"Test function","input_schema":null,"dataset_uuid":"11836154-8ecb-4cb9-95df-065e511b93b4","out_schema":null,"instructions":"Do
-        something","use_semantic_search":false,"few_shot":false,"few_shot_count":2,"revision":1,"org_id":1,"index_ids":[],"linked_functions_ids":[],"model":"azure/gpt4-eu","language_model_id":8}'
+      string: '{"detail":"Function not found"}'
     headers:
       content-length:
-      - '371'
+      - '31'
       content-type:
       - application/json
       date:
-      - Mon, 08 Apr 2024 13:32:37 GMT
+      - Thu, 11 Apr 2024 16:23:54 GMT
       server:
       - uvicorn
     status:
-      code: 200
-      message: OK
+      code: 404
+      message: Not Found
 - request:
-    body: '{"id": 109, "path": "test/sdk/test_async_chat", "description": "Translate
+    body: '{"id": null, "path": "test/sdk/test_async_chat", "description": "Translate
       to French", "input_schema": null, "out_schema": null, "instructions": "Translate
-      to French", "model": null, "index_ids": null, "use_semantic_search": null, "few_shot":
+      to French", "model": null, "index_ids": [], "use_semantic_search": null, "few_shot":
       null, "few_shot_count": null, "cache_configuration": null}'
     headers:
       accept:
@@ -41,53 +40,25 @@ interactions:
       connection:
       - keep-alive
       content-length:
-      - '300'
+      - '299'
       content-type:
       - application/json
       user-agent:
       - python-httpx/0.27.0
     method: POST
-    uri: http://localhost:8000/api/v1/functions/109
+    uri: http://localhost:8000/api/v1/functions
   response:
     body:
-      string: '{"id":109}'
+      string: '{"id":48,"path":"test/sdk/test_async_chat","description":"Translate
+        to French","input_schema":null,"out_schema":null,"instructions":"Translate
+        to French","few_shot":false,"few_shot_count":2,"dataset_uuid":"7223ad03-9f13-433d-a2c7-27052da2195d","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
     headers:
       content-length:
-      - '10'
+      - '400'
       content-type:
       - application/json
       date:
-      - Mon, 08 Apr 2024 13:32:37 GMT
-      server:
-      - uvicorn
-    status:
-      code: 200
-      message: OK
-- request:
-    body: ''
-    headers:
-      accept:
-      - '*/*'
-      accept-encoding:
-      - gzip, deflate
-      connection:
-      - keep-alive
-      user-agent:
-      - python-httpx/0.27.0
-    method: GET
-    uri: http://localhost:8000/api/v1/functions/109
-  response:
-    body:
-      string: '{"id":109,"path":"test/sdk/test_async_chat","description":"Translate
-        to French","input_schema":null,"dataset_uuid":"11836154-8ecb-4cb9-95df-065e511b93b4","out_schema":null,"instructions":"Translate
-        to French","use_semantic_search":false,"few_shot":false,"few_shot_count":2,"revision":2,"org_id":1,"index_ids":[],"linked_functions_ids":[],"model":"azure/gpt4-eu","language_model_id":8}'
-    headers:
-      content-length:
-      - '384'
-      content-type:
-      - application/json
-      date:
-      - Mon, 08 Apr 2024 13:32:37 GMT
+      - Thu, 11 Apr 2024 16:23:54 GMT
       server:
       - uvicorn
     status:
@@ -112,14 +83,14 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_async_chat
   response:
     body:
-      string: '{"span_id":"a76d70f2-4173-4c45-9f60-b8d786cf8c17","message":"Bonjour","json_payload":null,"error":null,"context":null,"cached":false}'
+      string: '{"span_id":"84b5d901-47f0-4abd-8cf4-d5dc18800756","message":"Bonjour","json_payload":null,"error":null,"context":null,"cached":false}'
     headers:
       content-length:
       - '133'
       content-type:
       - application/json
       date:
-      - Mon, 08 Apr 2024 13:32:37 GMT
+      - Thu, 11 Apr 2024 16:23:54 GMT
       server:
       - uvicorn
     status:
@@ -137,19 +108,19 @@ interactions:
       user-agent:
       - python-httpx/0.27.0
     method: GET
-    uri: http://localhost:8000/api/v1/functions/109
+    uri: http://localhost:8000/api/v1/functions/48
   response:
     body:
-      string: '{"id":109,"path":"test/sdk/test_async_chat","description":"Translate
-        to French","input_schema":null,"dataset_uuid":"11836154-8ecb-4cb9-95df-065e511b93b4","out_schema":null,"instructions":"Translate
-        to French","use_semantic_search":false,"few_shot":false,"few_shot_count":2,"revision":2,"org_id":1,"index_ids":[],"linked_functions_ids":[],"model":"azure/gpt4-eu","language_model_id":8}'
+      string: '{"id":48,"path":"test/sdk/test_async_chat","description":"Translate
+        to French","input_schema":null,"dataset_uuid":"7223ad03-9f13-433d-a2c7-27052da2195d","out_schema":null,"instructions":"Translate
+        to French","use_semantic_search":false,"few_shot":false,"few_shot_count":2,"revision":1,"org_id":1,"index_ids":[],"linked_functions_ids":[],"model":"azure/gpt4-eu","language_model_id":8}'
     headers:
       content-length:
-      - '384'
+      - '383'
       content-type:
       - application/json
       date:
-      - Mon, 08 Apr 2024 13:32:46 GMT
+      - Thu, 11 Apr 2024 16:23:55 GMT
       server:
       - uvicorn
     status:
@@ -177,7 +148,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 08 Apr 2024 13:32:46 GMT
+      - Thu, 11 Apr 2024 16:23:55 GMT
       server:
       - uvicorn
     status:

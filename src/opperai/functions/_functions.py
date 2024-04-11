@@ -1,10 +1,10 @@
-from typing import Generator
+from typing import Generator, Optional
 
 from opperai._http_clients import _http_client
 from opperai.spans import get_current_span_id
 from opperai.types import (
     ChatPayload,
-    FunctionDescription,
+    Function,
     FunctionResponse,
     StreamingChunk,
     validate_id_xor_path,
@@ -17,7 +17,17 @@ class Functions:
         self.http_client = http_client
         self.default_model = default_model
 
-    def _create(self, function: FunctionDescription, **kwargs) -> int:
+    def create(self, function: Function, update: bool = True, **kwargs) -> Function:
+        fn = self.get(path=function.path)
+        if fn is None:
+            return self._create(function, **kwargs)
+        elif update:
+            function.id = fn.id
+            return self.update(function, **kwargs)
+        else:
+            return fn
+
+    def _create(self, function: Function, **kwargs) -> Function:
         if not function.model and self.default_model:
             function.model = self.default_model
         response = self.http_client.do_request(
@@ -30,9 +40,9 @@ class Functions:
                 f"Failed to create function {function.path} with status {response.status_code}: {response.text}"
             )
 
-        return response.json()["id"]
+        return Function.model_validate(response.json())
 
-    def update(self, function: FunctionDescription, **kwargs) -> int:
+    def update(self, function: Function, **kwargs) -> Function:
         response = self.http_client.do_request(
             "POST",
             f"/api/v1/functions/{function.id}",
@@ -43,20 +53,20 @@ class Functions:
                 f"Failed to update function `{function.path}` with status {response.status_code}: {response.text}"
             )
 
-        return response.json()["id"]
+        return Function.model_validate(response.json())
 
     @validate_id_xor_path
-    def get(self, id: str = None, path: str = None) -> FunctionDescription:
+    def get(self, id: str = None, path: str = None) -> Optional[Function]:
         if path is not None:
             if id is not None:
                 raise ValueError("Only one of id or path should be provided")
-            return self.get_by_path(path)
+            return self._get_by_path(path)
         elif id is not None:
-            return self.get_by_id(id)
+            return self._get_by_id(id)
         else:
             return None
 
-    def get_by_path(self, function_path: str) -> FunctionDescription:
+    def _get_by_path(self, function_path: str) -> Optional[Function]:
         response = self.http_client.do_request(
             "GET",
             f"/api/v1/functions/by_path/{function_path}",
@@ -68,9 +78,9 @@ class Functions:
                 f"Failed to get function {function_path} with status {response.status_code}"
             )
 
-        return FunctionDescription(**response.json())
+        return Function.model_validate(response.json())
 
-    def get_by_id(self, function_id: str) -> FunctionDescription:
+    def _get_by_id(self, function_id: str) -> Optional[Function]:
         response = self.http_client.do_request(
             "GET",
             f"/api/v1/functions/{function_id}",
@@ -82,33 +92,21 @@ class Functions:
                 f"Failed to get function {function_id} with status {response.status_code}"
             )
 
-        return FunctionDescription(**response.json())
-
-    def create(
-        self, function: FunctionDescription, update: bool = True, **kwargs
-    ) -> int:
-        fn = self.get(path=function.path)
-        if fn is None:
-            return self._create(function, **kwargs)
-        elif update:
-            function.id = fn.id
-            return self.update(function, **kwargs)
-        else:
-            return fn.id
+        return Function.model_validate(response.json())
 
     @validate_id_xor_path
-    def delete(self, id: str = None, path: str = None) -> None:
+    def delete(self, id: str = None, path: str = None) -> bool:
         if path is not None:
             try:
-                self._delete_by_path(path)
+                return self._delete_by_path(path)
             except APIError:
                 pass
         elif id is not None:
             fn = self.get(id=id)
             if fn:
-                self._delete_by_path(fn.path)
+                return self._delete_by_path(fn.path)
 
-    def _delete_by_path(self, function_path: str) -> None:
+    def _delete_by_path(self, function_path: str) -> bool:
         response = self.http_client.do_request(
             "DELETE",
             f"/api/v1/functions/by_path/{function_path}",
@@ -117,6 +115,7 @@ class Functions:
             raise APIError(
                 f"Failed to delete function {function_path} with status {response.status_code}"
             )
+        return True
 
     def chat(
         self, function_path, data: ChatPayload, stream=False, **kwargs
@@ -140,7 +139,7 @@ class Functions:
                 f"Failed to run function {function_path} with status {response.status_code}"
             )
 
-        return FunctionResponse(**response.json())
+        return FunctionResponse.model_validate(response.json())
 
     def _chat_stream(
         self, function_path, data: ChatPayload, **kwargs
@@ -155,7 +154,7 @@ class Functions:
         for item in gen:
             yield StreamingChunk(**item)
 
-    def flush_cache(self, id: int) -> None:
+    def flush_cache(self, id: int) -> bool:
         response = self.http_client.do_request(
             "DELETE",
             f"/api/v1/functions/{id}/cache",
@@ -164,3 +163,5 @@ class Functions:
             raise APIError(
                 f"Failed to flush cache for function with id={id} with status {response.status_code}"
             )
+
+        return True

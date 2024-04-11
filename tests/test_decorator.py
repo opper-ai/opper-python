@@ -13,10 +13,26 @@ from pydantic import BaseModel
 def test_decorator(mock_do_request):
     mock_do_request.side_effect = [
         MagicMock(status_code=404),
-        MagicMock(status_code=200, json=lambda: {"id": 1}),
+        MagicMock(
+            status_code=200,
+            json=lambda: {
+                "id": 1,
+                "path": "path",
+                "description": "description",
+                "instructions": "instructions",
+            },
+        ),
         MagicMock(status_code=200, json=lambda: {"json_payload": "Hola"}),
         MagicMock(status_code=404),
-        MagicMock(status_code=200, json=lambda: {"id": 2}),
+        MagicMock(
+            status_code=200,
+            json=lambda: {
+                "id": 2,
+                "path": "path",
+                "description": "description",
+                "instructions": "instructions",
+            },
+        ),
         MagicMock(status_code=200, json=lambda: {"json_payload": ["Hola", "Bonjour"]}),
     ]
 
@@ -36,10 +52,26 @@ def test_decorator(mock_do_request):
 def test_decorator_supply_model(mock_do_request):
     mock_do_request.side_effect = [
         MagicMock(status_code=404),
-        MagicMock(status_code=200, json=lambda: {"id": 1}),
+        MagicMock(
+            status_code=200,
+            json=lambda: {
+                "id": 1,
+                "path": "path",
+                "description": "description",
+                "instructions": "instructions",
+            },
+        ),
         MagicMock(status_code=200, json=lambda: {"json_payload": "Hola"}),
         MagicMock(status_code=404),
-        MagicMock(status_code=200, json=lambda: {"id": 2}),
+        MagicMock(
+            status_code=200,
+            json=lambda: {
+                "id": 2,
+                "path": "path",
+                "description": "description",
+                "instructions": "instructions",
+            },
+        ),
         MagicMock(status_code=200, json=lambda: {"json_payload": ["Hola", "Bonjour"]}),
     ]
 

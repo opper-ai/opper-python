@@ -11,7 +11,7 @@ from pydantic import BaseModel
 
 from opperai import AsyncClient, Client
 from opperai.spans import _current_span_id
-from opperai.types import CacheConfiguration, ChatPayload, FunctionDescription, Message
+from opperai.types import CacheConfiguration, ChatPayload, Function, Message
 
 from ...utils import convert_function_call_to_json
 from ._schemas import get_output_schema
@@ -63,7 +63,7 @@ def fn(
                 sync_client = Client()
 
             use_few_shot = few_shot or os.environ.get("OPPER_USE_FEW_SHOT", False)
-            function = FunctionDescription(
+            function = Function(
                 path=func_path,
                 description=func.__doc__,
                 instructions=f"Operation: {func.__name__}\n\nOperation description: {func.__doc__}",

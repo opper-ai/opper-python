@@ -52,7 +52,7 @@ class CacheConfiguration(BaseModel):
     semantic_cache_ttl: Optional[int] = None
 
 
-class FunctionDescription(BaseModel):
+class Function(BaseModel):
     id: Optional[int] = None
     path: str = Field(
         ...,
@@ -64,7 +64,7 @@ class FunctionDescription(BaseModel):
     out_schema: Optional[Dict[str, Any]] = None
     instructions: str
     model: Optional[str] = None
-    index_ids: Optional[List[int]] = None
+    index_ids: Optional[List[int]] = []
     use_semantic_search: Optional[bool] = None
     few_shot: Optional[bool] = None
     few_shot_count: Optional[int] = None

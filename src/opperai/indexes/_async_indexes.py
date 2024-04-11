@@ -3,11 +3,10 @@ from typing import List, Optional
 from opperai._http_clients import _async_http_client
 from opperai.types.exceptions import APIError
 from opperai.types.indexes import (
-    DocumentIn,
-    DocumentOut,
+    Document,
     Filter,
-    IndexOut,
-    IndexRetrieveResponse,
+    Index,
+    RetrievalResponse,
 )
 from ._indexes import RetrieveQuery
 
@@ -16,7 +15,7 @@ class AsyncIndexes:
     def __init__(self, http_client: _async_http_client):
         self.http_client = http_client
 
-    async def create(self, name: str) -> int:
+    async def create(self, name: str) -> Index:
         response = await self.http_client.do_request(
             "POST",
             "/v1/indexes",
@@ -24,20 +23,20 @@ class AsyncIndexes:
         )
         if response.status_code != 200:
             raise APIError(f"Failed to create index with status {response.status_code}")
-        return response.json()["id"]
+        return Index.model_validate(response.json())
 
-    async def delete(self, id: int):
+    async def delete(self, id: int) -> bool:
         response = await self.http_client.do_request(
             "DELETE",
             f"/v1/indexes/{id}",
         )
         if response.status_code == 404:
-            return None
+            return False
         if response.status_code != 200:
             raise APIError(f"Failed to delete index with status {response.status_code}")
-        return response.json()
+        return True
 
-    async def get(self, id: int = None, name: str = None) -> IndexOut:
+    async def get(self, id: int = None, name: str = None) -> Index:
         if id is None and name is None:
             raise ValueError("Either id or name must be provided")
         if id is not None and name is not None:
@@ -48,7 +47,7 @@ class AsyncIndexes:
         if name is not None:
             return await self._get_by_name(name)
 
-    async def _get_by_id(self, id: int) -> IndexOut:
+    async def _get_by_id(self, id: int) -> Index:
         response = await self.http_client.do_request(
             "GET",
             f"/v1/indexes/{id}",
@@ -59,23 +58,23 @@ class AsyncIndexes:
             raise APIError(
                 f"Failed to get index {id} with status {response.status_code}"
             )
-        return IndexOut.model_validate(response.json())
+        return Index.model_validate(response.json())
 
-    async def _get_by_name(self, name: str) -> IndexOut:
+    async def _get_by_name(self, name: str) -> Index:
         indexes = await self.list()
         for index in indexes:
             if index.name == name:
                 return index
         return None
 
-    async def list(self):
+    async def list(self) -> List[Index]:
         response = await self.http_client.do_request(
             "GET",
             "/v1/indexes",
         )
         if response.status_code != 200:
             raise APIError(f"Failed to list indexes with status {response.status_code}")
-        return [IndexOut.model_validate(item) for item in response.json()]
+        return [Index.model_validate(item) for item in response.json()]
 
     async def upload_file(self, id: int, file_path: str, **kwargs):
         # Get upload URL
@@ -117,7 +116,7 @@ class AsyncIndexes:
 
         return register_file_response.json()
 
-    async def index(self, id: int, doc: DocumentIn) -> DocumentOut:
+    async def index(self, id: int, doc: Document) -> Document:
         response = await self.http_client.do_request(
             "POST",
             f"/v1/indexes/{id}/index",
@@ -125,11 +124,11 @@ class AsyncIndexes:
         )
         if response.status_code != 200:
             raise APIError(f"Failed to add document with status {response.status_code}")
-        return DocumentOut.model_validate(response.json())
+        return Document.model_validate(response.json())
 
     async def retrieve(
         self, id: int, query: str, k: int, filters: Optional[List[Filter]] = None
-    ) -> List[IndexRetrieveResponse]:
+    ) -> List[RetrievalResponse]:
         response = await self.http_client.do_request(
             "POST",
             f"/v1/indexes/{id}/query",
@@ -139,4 +138,4 @@ class AsyncIndexes:
             raise APIError(
                 f"Failed to retrieve index {id} with status {response.status_code}"
             )
-        return [IndexRetrieveResponse.model_validate(item) for item in response.json()]
+        return [RetrievalResponse.model_validate(item) for item in response.json()]
