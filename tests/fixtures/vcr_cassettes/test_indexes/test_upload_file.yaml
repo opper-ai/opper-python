@@ -1,0 +1,209 @@
+interactions:
+- request:
+    body: '{"name": "test_upload_file"}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '28'
+      content-type:
+      - application/json
+      user-agent:
+      - python-httpx/0.27.0
+    method: POST
+    uri: http://localhost:8000/v1/indexes
+  response:
+    body:
+      string: '{"id":84,"name":"test_upload_file"}'
+    headers:
+      content-length:
+      - '35'
+      content-type:
+      - application/json
+      date:
+      - Wed, 10 Apr 2024 13:45:35 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      user-agent:
+      - python-httpx/0.27.0
+    method: GET
+    uri: http://localhost:8000/v1/indexes/84/upload_url?filename=test.txt
+  response:
+    body:
+      string: '{"url":"http://localhost:9000/indexes","fields":{"x-amz-meta-original_filename":"test.txt","x-amz-meta-uuid":"b742b315-dae7-4d74-8879-e756d8ac03c7","key":"1/84/b742b315-dae7-4d74-8879-e756d8ac03c7","AWSAccessKeyId":"opper","policy":"eyJleHBpcmF0aW9uIjogIjIwMjQtMDQtMTBUMTQ6NDU6MzZaIiwgImNvbmRpdGlvbnMiOiBbWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsIDEsIDUwMDAwMDAwMF0sIFsic3RhcnRzLXdpdGgiLCAiJHgtYW16LW1ldGEtb3JpZ2luYWxfZmlsZW5hbWUiLCAidGVzdC50eHQiXSwgWyJzdGFydHMtd2l0aCIsICIkeC1hbXotbWV0YS11dWlkIiwgImI3NDJiMzE1LWRhZTctNGQ3NC04ODc5LWU3NTZkOGFjMDNjNyJdLCBbInN0YXJ0cy13aXRoIiwgIiRrZXkiLCAiIl0sIFsic3RhcnRzLXdpdGgiLCAiJHBvbGljeSIsICIiXSwgWyJzdGFydHMtd2l0aCIsICIkQVdTQWNjZXNzS2V5SWQiLCAiIl0sIFsic3RhcnRzLXdpdGgiLCAiJHNpZ25hdHVyZSIsICIiXSwgeyJidWNrZXQiOiAiaW5kZXhlcyJ9LCB7ImtleSI6ICIxLzg0L2I3NDJiMzE1LWRhZTctNGQ3NC04ODc5LWU3NTZkOGFjMDNjNyJ9XX0=","signature":"ssVQS3cE7uJ1NBBP9cdtANycsnU="},"uuid":"b742b315-dae7-4d74-8879-e756d8ac03c7"}'
+    headers:
+      content-length:
+      - '921'
+      content-type:
+      - application/json
+      date:
+      - Wed, 10 Apr 2024 13:45:35 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: "--ef087718aa5562d2f423effd3a65cff0\r\nContent-Disposition: form-data; name=\"x-amz-meta-original_filename\"\r\n\r\ntest.txt\r\n--ef087718aa5562d2f423effd3a65cff0\r\nContent-Disposition:
+      form-data; name=\"x-amz-meta-uuid\"\r\n\r\nb742b315-dae7-4d74-8879-e756d8ac03c7\r\n--ef087718aa5562d2f423effd3a65cff0\r\nContent-Disposition:
+      form-data; name=\"key\"\r\n\r\n1/84/b742b315-dae7-4d74-8879-e756d8ac03c7\r\n--ef087718aa5562d2f423effd3a65cff0\r\nContent-Disposition:
+      form-data; name=\"AWSAccessKeyId\"\r\n\r\nopper\r\n--ef087718aa5562d2f423effd3a65cff0\r\nContent-Disposition:
+      form-data; name=\"policy\"\r\n\r\neyJleHBpcmF0aW9uIjogIjIwMjQtMDQtMTBUMTQ6NDU6MzZaIiwgImNvbmRpdGlvbnMiOiBbWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsIDEsIDUwMDAwMDAwMF0sIFsic3RhcnRzLXdpdGgiLCAiJHgtYW16LW1ldGEtb3JpZ2luYWxfZmlsZW5hbWUiLCAidGVzdC50eHQiXSwgWyJzdGFydHMtd2l0aCIsICIkeC1hbXotbWV0YS11dWlkIiwgImI3NDJiMzE1LWRhZTctNGQ3NC04ODc5LWU3NTZkOGFjMDNjNyJdLCBbInN0YXJ0cy13aXRoIiwgIiRrZXkiLCAiIl0sIFsic3RhcnRzLXdpdGgiLCAiJHBvbGljeSIsICIiXSwgWyJzdGFydHMtd2l0aCIsICIkQVdTQWNjZXNzS2V5SWQiLCAiIl0sIFsic3RhcnRzLXdpdGgiLCAiJHNpZ25hdHVyZSIsICIiXSwgeyJidWNrZXQiOiAiaW5kZXhlcyJ9LCB7ImtleSI6ICIxLzg0L2I3NDJiMzE1LWRhZTctNGQ3NC04ODc5LWU3NTZkOGFjMDNjNyJ9XX0=\r\n--ef087718aa5562d2f423effd3a65cff0\r\nContent-Disposition:
+      form-data; name=\"signature\"\r\n\r\nssVQS3cE7uJ1NBBP9cdtANycsnU=\r\n--ef087718aa5562d2f423effd3a65cff0\r\nContent-Disposition:
+      form-data; name=\"file\"; filename=\"test.txt\"\r\nContent-Type: text/plain\r\n\r\nHello\r\n--ef087718aa5562d2f423effd3a65cff0--\r\n"
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '1450'
+      content-type:
+      - multipart/form-data; boundary=ef087718aa5562d2f423effd3a65cff0
+      user-agent:
+      - python-httpx/0.27.0
+    method: POST
+    uri: http://localhost:9000/indexes
+  response:
+    body:
+      string: ''
+    headers:
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - text/plain; charset=utf-8
+      Date:
+      - Wed, 10 Apr 2024 13:45:36 GMT
+      ETag:
+      - '"8b1a9953c4611296a827abf8c47804d7"'
+      Location:
+      - http://localhost:9000/indexes/1/84/b742b315-dae7-4d74-8879-e756d8ac03c7
+      Server:
+      - MinIO
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Origin
+      - Accept-Encoding
+      X-Amz-Id-2:
+      - dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8
+      X-Amz-Request-Id:
+      - 17C4EF2D45EA3921
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+    status:
+      code: 204
+      message: No Content
+- request:
+    body: '{"uuid": "b742b315-dae7-4d74-8879-e756d8ac03c7"}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '48'
+      content-type:
+      - application/json
+      user-agent:
+      - python-httpx/0.27.0
+    method: POST
+    uri: http://localhost:8000/v1/indexes/84/register_file
+  response:
+    body:
+      string: '{"uuid":"b742b315-dae7-4d74-8879-e756d8ac03c7","key":"1/84/b742b315-dae7-4d74-8879-e756d8ac03c7","original_filename":"test.txt","document_id":42}'
+    headers:
+      content-length:
+      - '145'
+      content-type:
+      - application/json
+      date:
+      - Wed, 10 Apr 2024 13:45:35 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"q": "Hello", "k": 1, "filters": null}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '39'
+      content-type:
+      - application/json
+      user-agent:
+      - python-httpx/0.27.0
+    method: POST
+    uri: http://localhost:8000/v1/indexes/84/query
+  response:
+    body:
+      string: '[{"uuid":"1376da1b-df07-448c-b32e-c2ee9b1d4053","content":"Hello","metadata":{"source":"/var/folders/xm/m5_vhmvj11v2nqwpg73ql7xc0000gn/T/tmpow_a53d9","file_name":"test.txt","_opper_key":"1/84/b742b315-dae7-4d74-8879-e756d8ac03c7","_opper_index_file_id":17},"document_id":null,"score":29.458036422729492,"source_uuids":["1376da1b-df07-448c-b32e-c2ee9b1d4053"]}]'
+    headers:
+      content-length:
+      - '360'
+      content-type:
+      - application/json
+      date:
+      - Wed, 10 Apr 2024 13:45:35 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      user-agent:
+      - python-httpx/0.27.0
+    method: DELETE
+    uri: http://localhost:8000/v1/indexes/84
+  response:
+    body:
+      string: '{"message":"Index deleted successfully","index":84}'
+    headers:
+      content-length:
+      - '51'
+      content-type:
+      - application/json
+      date:
+      - Wed, 10 Apr 2024 13:45:35 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+version: 1

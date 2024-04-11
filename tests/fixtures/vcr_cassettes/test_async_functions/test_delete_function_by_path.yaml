@@ -1,0 +1,179 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      user-agent:
+      - python-httpx/0.27.0
+    method: GET
+    uri: http://localhost:8000/api/v1/functions/by_path/test/sdk/test_delete_function_by_path
+  response:
+    body:
+      string: '{"detail":"Function not found"}'
+    headers:
+      content-length:
+      - '31'
+      content-type:
+      - application/json
+      date:
+      - Mon, 08 Apr 2024 13:34:13 GMT
+      server:
+      - uvicorn
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: '{"id": null, "path": "test/sdk/test_delete_function_by_path", "description":
+      "Test function", "input_schema": null, "out_schema": null, "instructions": "Do
+      something", "model": null, "index_ids": null, "use_semantic_search": null, "few_shot":
+      null, "few_shot_count": null, "cache_configuration": null}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '301'
+      content-type:
+      - application/json
+      user-agent:
+      - python-httpx/0.27.0
+    method: POST
+    uri: http://localhost:8000/api/v1/functions
+  response:
+    body:
+      string: '{"id":118}'
+    headers:
+      content-length:
+      - '10'
+      content-type:
+      - application/json
+      date:
+      - Mon, 08 Apr 2024 13:34:13 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      user-agent:
+      - python-httpx/0.27.0
+    method: GET
+    uri: http://localhost:8000/api/v1/functions/118
+  response:
+    body:
+      string: '{"id":118,"path":"test/sdk/test_delete_function_by_path","description":"Test
+        function","input_schema":null,"dataset_uuid":"98cf36c4-3b86-4952-abb8-dd418620b5c5","out_schema":null,"instructions":"Do
+        something","use_semantic_search":false,"few_shot":false,"few_shot_count":2,"revision":1,"org_id":1,"index_ids":[],"linked_functions_ids":[],"model":"azure/gpt4-eu","language_model_id":8}'
+    headers:
+      content-length:
+      - '384'
+      content-type:
+      - application/json
+      date:
+      - Mon, 08 Apr 2024 13:34:13 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      user-agent:
+      - python-httpx/0.27.0
+    method: DELETE
+    uri: http://localhost:8000/api/v1/functions/by_path/test/sdk/test_delete_function_by_path
+  response:
+    body:
+      string: '{"detail":"Function and associated generations deleted successfully"}'
+    headers:
+      content-length:
+      - '69'
+      content-type:
+      - application/json
+      date:
+      - Mon, 08 Apr 2024 13:34:13 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      user-agent:
+      - python-httpx/0.27.0
+    method: GET
+    uri: http://localhost:8000/api/v1/functions/by_path/test/sdk/test_delete_function_by_path
+  response:
+    body:
+      string: '{"detail":"Function not found"}'
+    headers:
+      content-length:
+      - '31'
+      content-type:
+      - application/json
+      date:
+      - Mon, 08 Apr 2024 13:34:13 GMT
+      server:
+      - uvicorn
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      user-agent:
+      - python-httpx/0.27.0
+    method: GET
+    uri: http://localhost:8000/api/v1/functions/118
+  response:
+    body:
+      string: '{"detail":"Function not found"}'
+    headers:
+      content-length:
+      - '31'
+      content-type:
+      - application/json
+      date:
+      - Mon, 08 Apr 2024 13:34:13 GMT
+      server:
+      - uvicorn
+    status:
+      code: 404
+      message: Not Found
+version: 1

@@ -1,0 +1,62 @@
+interactions:
+- request:
+    body: '{"name": "test_create_index"}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '29'
+      content-type:
+      - application/json
+      user-agent:
+      - python-httpx/0.27.0
+    method: POST
+    uri: http://localhost:8000/v1/indexes
+  response:
+    body:
+      string: '{"id":173,"name":"test_create_index"}'
+    headers:
+      content-length:
+      - '37'
+      content-type:
+      - application/json
+      date:
+      - Wed, 10 Apr 2024 18:45:33 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      user-agent:
+      - python-httpx/0.27.0
+    method: DELETE
+    uri: http://localhost:8000/v1/indexes/173
+  response:
+    body:
+      string: '{"message":"Index deleted successfully","index":173}'
+    headers:
+      content-length:
+      - '52'
+      content-type:
+      - application/json
+      date:
+      - Wed, 10 Apr 2024 18:45:33 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+version: 1

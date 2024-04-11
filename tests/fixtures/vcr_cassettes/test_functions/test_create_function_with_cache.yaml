@@ -1,0 +1,162 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      user-agent:
+      - python-httpx/0.27.0
+    method: GET
+    uri: http://localhost:8000/api/v1/functions/by_path/test/sdk/test_create_function_with_cache_sync
+  response:
+    body:
+      string: '{"detail":"Function not found"}'
+    headers:
+      content-length:
+      - '31'
+      content-type:
+      - application/json
+      date:
+      - Mon, 08 Apr 2024 13:48:43 GMT
+      server:
+      - uvicorn
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: '{"id": null, "path": "test/sdk/test_create_function_with_cache_sync", "description":
+      "Test function", "input_schema": null, "out_schema": null, "instructions": "Do
+      something", "model": null, "index_ids": null, "use_semantic_search": null, "few_shot":
+      null, "few_shot_count": null, "cache_configuration": {"exact_match_cache_ttl":
+      10, "semantic_cache_threshold": null, "semantic_cache_ttl": null}}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '396'
+      content-type:
+      - application/json
+      user-agent:
+      - python-httpx/0.27.0
+    method: POST
+    uri: http://localhost:8000/api/v1/functions
+  response:
+    body:
+      string: '{"id":128}'
+    headers:
+      content-length:
+      - '10'
+      content-type:
+      - application/json
+      date:
+      - Mon, 08 Apr 2024 13:48:43 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"parent_span_uuid": null, "messages": [{"role": "user", "content": "hello"}]}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '78'
+      content-type:
+      - application/json
+      user-agent:
+      - python-httpx/0.27.0
+    method: POST
+    uri: http://localhost:8000/v1/chat/test/sdk/test_create_function_with_cache_sync
+  response:
+    body:
+      string: '{"span_id":"3417f9f5-b5ef-422a-9bb0-715a0ee4b32f","message":"Hello!
+        How can I assist you today? If you have any questions or need information
+        on a specific topic, feel free to ask.","json_payload":null,"error":null,"context":null,"cached":false}'
+    headers:
+      content-length:
+      - '245'
+      content-type:
+      - application/json
+      date:
+      - Mon, 08 Apr 2024 13:48:43 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"parent_span_uuid": null, "messages": [{"role": "user", "content": "hello"}]}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '78'
+      content-type:
+      - application/json
+      user-agent:
+      - python-httpx/0.27.0
+    method: POST
+    uri: http://localhost:8000/v1/chat/test/sdk/test_create_function_with_cache_sync
+  response:
+    body:
+      string: '{"span_id":"c5a7f1ea-de9e-4a2b-900a-220a10ad01c3","message":"Hello!
+        How can I assist you today? If you have any questions or need information
+        on a specific topic, feel free to ask.","json_payload":null,"error":null,"context":null,"cached":true}'
+    headers:
+      content-length:
+      - '244'
+      content-type:
+      - application/json
+      date:
+      - Mon, 08 Apr 2024 13:48:55 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      user-agent:
+      - python-httpx/0.27.0
+    method: DELETE
+    uri: http://localhost:8000/api/v1/functions/by_path/test/sdk/test_create_function_with_cache_sync
+  response:
+    body:
+      string: '{"detail":"Function and associated generations deleted successfully"}'
+    headers:
+      content-length:
+      - '69'
+      content-type:
+      - application/json
+      date:
+      - Mon, 08 Apr 2024 13:48:55 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+version: 1

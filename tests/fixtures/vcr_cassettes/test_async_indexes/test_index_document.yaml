@@ -1,0 +1,94 @@
+interactions:
+- request:
+    body: '{"name": "test_index_document"}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '31'
+      content-type:
+      - application/json
+      user-agent:
+      - python-httpx/0.27.0
+    method: POST
+    uri: http://localhost:8000/v1/indexes
+  response:
+    body:
+      string: '{"id":179,"name":"test_index_document"}'
+    headers:
+      content-length:
+      - '39'
+      content-type:
+      - application/json
+      date:
+      - Wed, 10 Apr 2024 18:45:33 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"id": null, "key": null, "content": "Hello", "metadata": {"source": "test"}}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '77'
+      content-type:
+      - application/json
+      user-agent:
+      - python-httpx/0.27.0
+    method: POST
+    uri: http://localhost:8000/v1/indexes/179/index
+  response:
+    body:
+      string: '{"id":61,"uuid":"79517f46-7c9c-48be-ad74-8824e524d830","key":"79517f46-7c9c-48be-ad74-8824e524d830"}'
+    headers:
+      content-length:
+      - '100'
+      content-type:
+      - application/json
+      date:
+      - Wed, 10 Apr 2024 18:45:33 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      user-agent:
+      - python-httpx/0.27.0
+    method: DELETE
+    uri: http://localhost:8000/v1/indexes/179
+  response:
+    body:
+      string: '{"message":"Index deleted successfully","index":179}'
+    headers:
+      content-length:
+      - '52'
+      content-type:
+      - application/json
+      date:
+      - Wed, 10 Apr 2024 18:45:34 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+version: 1
