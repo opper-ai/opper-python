@@ -9,7 +9,8 @@ from opperai.types import (
     StreamingChunk,
     validate_id_xor_path,
 )
-from opperai.types.exceptions import APIError, RateLimitError
+from http import HTTPStatus
+from opperai.types.exceptions import APIError, RateLimitError, StructuredGenerationError
 
 
 class AsyncFunctions:
@@ -25,7 +26,7 @@ class AsyncFunctions:
             "/api/v1/functions",
             json={**function.model_dump(), **kwargs},
         )
-        if response.status_code != 200:
+        if response.status_code != HTTPStatus.OK:
             raise APIError(
                 f"Failed to create function {function.path} with status {response.status_code}"
             )
@@ -38,7 +39,7 @@ class AsyncFunctions:
             f"/api/v1/functions/{function.id}",
             json={**function.model_dump(), **kwargs},
         )
-        if response.status_code != 200:
+        if response.status_code != HTTPStatus.OK:
             raise APIError(
                 f"Failed to update function {function.path} with status {response.status_code}"
             )
@@ -61,9 +62,9 @@ class AsyncFunctions:
             "GET",
             f"/api/v1/functions/by_path/{function_path}",
         )
-        if response.status_code == 404:
+        if response.status_code == HTTPStatus.NOT_FOUND:
             return None
-        if response.status_code != 200:
+        if response.status_code != HTTPStatus.OK:
             raise APIError(
                 f"Failed to get function {function_path} with status {response.status_code}"
             )
@@ -75,9 +76,9 @@ class AsyncFunctions:
             "GET",
             f"/api/v1/functions/{function_id}",
         )
-        if response.status_code == 404:
+        if response.status_code == HTTPStatus.NOT_FOUND:
             return None
-        if response.status_code != 200:
+        if response.status_code != HTTPStatus.OK:
             raise APIError(
                 f"Failed to get function {function_id} with status {response.status_code}"
             )
@@ -112,7 +113,7 @@ class AsyncFunctions:
             "DELETE",
             f"/api/v1/functions/by_path/{function_path}",
         )
-        if response.status_code != 200:
+        if response.status_code != HTTPStatus.OK:
             raise APIError(
                 f"Failed to delete function {function_path} with status {response.status_code}"
             )
@@ -130,13 +131,17 @@ class AsyncFunctions:
             f"/v1/chat/{function_path}",
             json={**serialized_data, **kwargs},
         )
-        if response.status_code == 429:
+
+        if response.status_code == HTTPStatus.OK:
+            return FunctionResponse.model_validate(response.json())
+        elif response.status_code == HTTPStatus.TOO_MANY_REQUESTS:
             raise RateLimitError("Rate limit error: please retry in a few seconds")
-        if response.status_code != 200:
-            raise APIError(
-                f"Failed to run function {function_path} with status {response.status_code}"
-            )
-        return FunctionResponse(**response.json())
+        elif response.status_code == HTTPStatus.BAD_REQUEST:
+            raise StructuredGenerationError(response.text)
+
+        raise APIError(
+            f"Failed to run function {function_path} with status {response.status_code}"
+        )
 
     async def _chat_stream(
         self, function_path, data: ChatPayload, **kwargs
@@ -155,5 +160,7 @@ class AsyncFunctions:
             "DELETE",
             f"/api/v1/functions/{id}/cache",
         )
-        if response.status_code != 204:
-            f"Failed to flush cache for function with id={id} with status {response.status_code}"
+        if response.status_code != HTTPStatus.NO_CONTENT:
+            raise APIError(
+                f"Failed to flush cache for function with id={id} with status {response.status_code}"
+            )

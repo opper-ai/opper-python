@@ -4,3 +4,7 @@ class APIError(Exception):
 
 class RateLimitError(Exception):
     pass
+
+
+class StructuredGenerationError(Exception):
+    pass
