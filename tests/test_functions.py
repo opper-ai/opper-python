@@ -1,6 +1,8 @@
 from opperai import Client
 from opperai.types import CacheConfiguration, ChatPayload, Function, Message
 from contextlib import contextmanager
+import pytest
+from opperai.types.exceptions import StructuredGenerationError
 
 
 @contextmanager
@@ -182,3 +184,59 @@ def test_create_function_with_cache_flush(client: Client, vcr_cassette):
         )
         print(res)
         assert not res.cached
+
+
+def test_failed_structured_generation(client: Client, vcr_cassette):
+    with _function(
+        Function(
+            model="mistral/mistral-tiny-eu",
+            path="test/sdk/test_failed_structured_generation",
+            description="test structured generation exception",
+            instructions="You translate the incoming text to french",
+            out_schema={
+                "type": "object",
+                "properties": {
+                    "universityName": {"type": "string"},
+                    "location": {"type": "string"},
+                    "departments": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "departmentName": {"type": "string"},
+                                "head": {"type": "string"},
+                                "courses": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "courseId": {"type": "string"},
+                                            "courseName": {"type": "string"},
+                                            "credits": {
+                                                "type": "integer",
+                                                "minimum": 1,
+                                                "maximum": 10,
+                                            },
+                                        },
+                                        "required": [
+                                            "courseId",
+                                            "courseName",
+                                            "credits",
+                                        ],
+                                    },
+                                },
+                            },
+                            "required": ["departmentName", "head", "courses"],
+                        },
+                    },
+                },
+                "required": ["universityName", "location", "departments"],
+            },
+        ),
+        client,
+    ) as function:
+        with pytest.raises(StructuredGenerationError):
+            client.functions.chat(
+                function.path,
+                ChatPayload(messages=[Message(role="user", content="hello")]),
+            )
