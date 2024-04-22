@@ -48,6 +48,34 @@ class AsyncFunctions:
 
     @validate_id_xor_path
     async def get(self, id: str = None, path: str = None) -> Optional[Function]:
+        """ Retrieve an Opper function by its ID or path.
+
+        This method allows fetching the details of a specific Opper function, either by specifying its unique ID or its path. If the function is found, it returns an instance of the Function class representing the function's configuration and details. If no function matches the given ID or path, or if both parameters are omitted, None is returned.
+
+        Args:
+            id (str, optional): The unique identifier of the function to retrieve. Defaults to None.
+            path (str, optional): The path of the function to retrieve. Defaults to None.
+
+        Returns:
+            Optional[Function]: An instance of the Function class if the function is found, otherwise None.
+
+        Raises:
+            ValueError: If both `id` and `path` are provided, indicating ambiguous parameters.
+
+        Examples:
+            >>> from opperai import AsyncClient
+            >>> client = AsyncClient(api_key="your_api_key_here")
+            >>> function_by_id = asyncio.run(client.functions.get(id="123"))
+            >>> print(function_by_id)
+            Function(id='123', path='example/function', ...)
+
+            >>> function_by_path = asyncio.run(client.functions.get(path="example/function"))
+            >>> print(function_by_path)
+            Function(id='123', path='example/function', ...)
+
+        Note:
+            It is recommended to provide either `id` or `path`, but not both, to avoid ambiguity. If neither is provided, the method will return None.
+        """
         if path is not None:
             if id is not None:
                 raise ValueError("Only one of id or path should be provided")
