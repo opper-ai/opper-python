@@ -88,6 +88,37 @@ class AsyncFunctions:
     async def create(
         self, function: Function, update: bool = True, **kwargs
     ) -> Function:
+        """ Create an Opper function. 
+        
+        Args:
+            function: An object of type Function, representing the configuration of the function such as model.
+            update: If set to true, the existing function will be updated when a function with the same path already exists.
+            kwargs: Additional keyword arguments that will be included in the request payload.
+
+        Returns:
+            Returns Function object.
+        
+        Exceptions:
+            Throws an APIError if the creation or update fails.
+
+        Examples:
+            from opperai import Client
+            from opperai.types import Function
+
+            client = Client(api_key="opper_api_key")
+
+            function = Function(
+                path="test/function",
+                description="A function to translate text to French",
+                instructions="Translate the given text to French."
+            )
+
+            response = client.functions.create(function, update=True)
+            
+            print(response)
+            
+            >>> id=93 path='test/function' description='A function to translate text to French' input_schema=None out_schema=None instructions='Translate the given text to French.' model='azure/gpt4-eu' index_ids=[] use_semantic_search=None few_shot=False few_shot_count=2 cache_configuration=None
+        """
         fn = await self.get(path=function.path)
         if fn is None:
             return await self._create(function, **kwargs)
@@ -98,6 +129,28 @@ class AsyncFunctions:
 
     @validate_id_xor_path
     async def delete(self, id: str = None, path: str = None):
+        """ Delete an Opper function by its id or path
+        
+        Args:
+            id: Id of the function to delete
+            path: Path of the function to delete
+         
+        Returns:
+            True if successful, else False
+        
+        Examples:
+            from opperai import Client
+            from opperai.types import Function
+
+            client = Client(api_key="opper_api_key")
+
+            response = client.functions.delete(path="test/function")
+
+            print(response)
+            
+            >>> True
+        """
+        
         if path is not None:
             try:
                 await self._delete_by_path(path)
@@ -121,6 +174,36 @@ class AsyncFunctions:
     async def chat(
         self, function_path, data: ChatPayload, stream=False, **kwargs
     ) -> FunctionResponse:
+        """ Send messages to a specific Opper function and receive a response. 
+        
+        Args:
+            function_path: The path identifier for the target Opper function. This should be obtained through the app interface or API.
+            data: An object of type ChatPayload, representing the content to be processed during the interaction.
+            stream: When set to True, initializes a generator that yields incremental results. Defaults to False for single message exchanges.
+
+        Returns:
+            Returns FunctionResponse by default. With stream=True it yields StreamingChunk generator.  
+
+        Examples:
+            import os
+            from opperai import Client
+            from opperai.types import ChatPayload, Message
+
+            client = Client(api_key=os.environ["OPPER_API_KEY"])
+
+            response = client.functions.chat(
+                "test/function",
+                ChatPayload(
+                    messages=[Message(role="user", content="hello")]
+                )
+            )
+
+            print(response.message)
+            
+            >>> print(response.message)
+            Bonjour    
+        """
+
         if data.parent_span_uuid is None:
             data.parent_span_uuid = get_current_span_id()
         if stream:
