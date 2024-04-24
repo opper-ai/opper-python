@@ -1,8 +1,12 @@
 import sys
 sys.path.append('../src')
 from opperai import AsyncClient
-from opperai import fn
+from opperai import fn, start_span
+from opperai.types.indexes import Index, Document
+from pydantic import BaseModel, Field
+from typing import List, Dict
 import inspect
+import json
 
 client = AsyncClient()
 
@@ -42,6 +46,7 @@ template = """
   - Throws **APIError**: If the function creation or update fails.
 
   </Col>
+
   <Col sticky>
 
 ```python
@@ -66,25 +71,71 @@ except Exception as e:
   </Col>
 </Row> """
 
+class Param(BaseModel):
+    param: str = Field(description="The parameters name")
+    type: str = Field(description="The parameters type")
+    description: str = Field(description="The parameters description")
+
+class Elements(BaseModel):
+    heading: str = Field(description="Very short title of the method, for example 'Index a document', 'Create a function', 'Save an Example'")
+    label: str
+    description: str = Field(description="High level description of what the method does")
+    required_parameters: List[Param] = Field(description="List of required parameters and their type and description")
+    optional_parameters: List[Param] = Field(description="List of optional parameters and their type and description")
+    returns: List[Param] = Field(description="List of returns and their type and description")
+    exceptions: List[Param] = Field(description="List of exceptions and their type and description")
+    examples: str = Field(description="String of code examples. Remove any >>> syntax")
+
+
+@fn(path="test/get_elements", model="openai/gpt4-turbo")
+def get_elements(docstring=str, template=str ) -> Elements:
+  """ Parse the docstring into Elements so that it can be used in template"""
 
 @fn(path="test/docgen", model="openai/gpt4-turbo")
-def generate_doc(docstring=str, template=str ) -> str:
-    """ Given docstring, generate documentation in line with template. 
-    The docstring contains the facts, the template is only for structural guidence.
-    Make sure to put examples in a col sticky element """
+def generate_doc(elements=Elements, template=str ) -> str:
+    """ You are an agent that generates documentation snippets in mdx form from docstrings. 
+    When called, you are provided a docstring for a function and your task is to use the template to generate a similar snippet of documentation.
+    You will notice in the template that all documentation snippets starts with a title and a label highlighting the method name.
+    The title should always be a very simple such as "Create a Function" or "Start a trace"
+    You will notice that each documentation snippet is wrapped in a <row> element, with two <col> elements.
+    In the first col you put heading, label, then a description, then Required Parameters, then Optional Parameters, then Returns, then Exceptions and then other elemens, finally the Examples in a separate col.
+    The first col is non sticky, and the second col is.
 
-def write_method_docs(client_attrs):
-    with open("docs.mdx", 'w') as file:
-        for client_attr in client_attrs:
-            for func_name in dir(client_attr):
-                func = getattr(client_attr, func_name)
-                # Check if func is a bound method
-                if callable(func) and inspect.ismethod(func):
-                    docstring = func.__doc__
-                    if docstring and len(docstring) > 50:
-                        print(f"{func_name} method docstring:")
-                        doc = generate_doc(docstring=docstring, template=template)
-                        print(doc)
-                        file.write(doc + "\n\n" + "---" +"\n\n")
+    Here are rules to follow:
+    - The Elements contains the *facts*, use the template only for structural guidence.
+    - Make sure to put examples in a col sticky element """
 
-write_method_docs([client.functions, client.indexes])
+def collect_docstrings(client_attrs):
+    docstrings = []
+    for client_attr in client_attrs:
+        for func_name in dir(client_attr):
+            func = getattr(client_attr, func_name)
+            # Check if func is a bound method
+            if (callable(func) and inspect.ismethod(func)) or func_name == "start_span":
+                docstring = func.__doc__
+                if docstring and len(docstring) > 25:
+                    print(f"{client_attr.__class__.__name__}.{func_name}")
+                    docstrings.append((f"{client_attr.__class__.__name__}.{func_name}", docstring))
+    return docstrings
+
+
+def build_docs(docstrings):
+    with open("docs.mdx", 'w') as mdx_file, open("docs.json", 'w') as json_file:
+        as_dict = {}
+        for func_name, docstring in docstrings:
+            elements = get_elements(docstring=docstring, template=template)
+            doc = generate_doc(elements=elements, template=template)
+            mdx_file.write(doc + "\n\n" + "---" + "\n\n")
+            as_dict[func_name] = elements.dict()
+        
+        json_file.write(json.dumps(as_dict))
+
+
+async def write_method_docs(client_attrs):
+    docstrings = collect_docstrings(client_attrs)
+    build_docs(docstrings)
+
+                      
+import asyncio               
+with start_span(name="docsgen"):
+      asyncio.run(write_method_docs([client.functions, client.indexes, client.spans]))
