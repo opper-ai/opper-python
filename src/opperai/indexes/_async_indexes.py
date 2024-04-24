@@ -16,7 +16,7 @@ class AsyncIndexes:
         self.http_client = http_client
 
     async def create(self, name: str) -> Index:
-        """Create a new index with the specified name.
+        """Create an index.
 
         This method sends a request to create a new index in the OpperAI service. If the index is successfully created, it returns an instance of the Index class representing the newly created index's configuration and details.
 
@@ -48,7 +48,7 @@ class AsyncIndexes:
         return Index.model_validate(response.json())
 
     async def delete(self, id: int) -> bool:
-        """ Deletes an index by its ID.
+        """ Delete an index.
 
         This method sends a DELETE request to the OpperAI service to remove an index specified by its unique identifier. If the index does not exist, it returns False. If the deletion is successful, it returns True. If there's an issue with the request, it raises an APIError.
 
@@ -79,7 +79,7 @@ class AsyncIndexes:
         return True
 
     async def get(self, id: int = None, name: str = None) -> Index:
-        """ Retrieves an index by its ID or name.
+        """ Retrieve an index.
 
         This method fetches the details of an index from the Opper service. It can retrieve the index information either by its unique identifier (ID) or by its name. At least one of the parameters, `id` or `name`, must be provided. If both are provided, a ValueError is raised.
 
@@ -181,7 +181,7 @@ class AsyncIndexes:
         return register_file_response.json()
 
     async def index(self, id: int, doc: Document) -> Document:
-        """ Adds a document to an index.
+        """ Index a document.
 
         This method sends a POST request to the OpperAI service to add a document to the specified index by its unique identifier. If the operation is successful, it returns the added document as an instance of the Document class.
 
@@ -216,7 +216,7 @@ class AsyncIndexes:
     async def retrieve(
         self, id: int, query: str, k: int, filters: Optional[List[Filter]] = None
     ) -> List[RetrievalResponse]:
-        """ Retrieves documents from an index based on a query.
+        """ Retrive documents
 
         This method sends a POST request to the OpperAI service to retrieve documents from the specified index. The documents are returned based on their relevance to the provided query string. The number of documents to return is specified by the `k` parameter. Optional filters can be applied to further refine the search results.
 

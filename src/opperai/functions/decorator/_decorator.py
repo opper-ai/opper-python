@@ -44,6 +44,41 @@ def fn(
     few_shot_count=None,
     cache_config: CacheConfiguration = None,
 ):
+    """ Decorator to to create a function in OpperAI's API.
+
+    This decorator can automatically handle both synchronous and asynchronous functions, 
+    wrapping them to perform necessary setup before invoking the OpperAI API. It allows 
+    for the specification of various parameters to customize the API request, including 
+    the use of few-shot learning, caching, and custom JSON encoding.
+
+    Parameters:
+    - path (str, optional): The API path for the function. Defaults to the decorated function's name.
+    - client (Client or AsyncClient, optional): The OpperAI client instance to use. If not provided, a new instance is created.
+    - json_encoder (JSONEncoder, optional): Custom JSON encoder for serializing the request payload.
+    - model (str, optional): The model to use for the request. If not provided, defaults to the environment's default model.
+    - few_shot (bool, optional): Whether to enable few-shot learning. Defaults to False or the environment setting.
+    - few_shot_count (int, optional): The number of few-shot examples to use. Only relevant if few_shot is True.
+    - cache_config (CacheConfiguration, optional): Configuration for caching API responses.
+
+    Returns:
+    - A decorated function that, when called, sets up the necessary OpperAI function and invokes the API, handling both synchronous and asynchronous execution as needed.
+
+    Examples:
+    >>> from opperai import fn
+    >>> from pydantic import BaseModel
+    
+    >>> class Data(BaseModel):
+    >>>     keywords: str
+    >>>     sentiment: str
+
+    >>> @fn
+    >>> def extract(text = str) -> Data:
+    >>>     ''' Extract keywords and sentiment from text. '''
+
+    >>> result = extract(text="Opper is a lovely API that wraps the world of AI")
+    >>> print(results)    
+    """
+    
     def decorator(func):
         func_path = path or func.__name__
         setup_done = False

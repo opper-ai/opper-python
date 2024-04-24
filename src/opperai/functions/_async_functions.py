@@ -48,7 +48,7 @@ class AsyncFunctions:
 
     @validate_id_xor_path
     async def get(self, id: str = None, path: str = None) -> Optional[Function]:
-        """ Retrieve an Opper function by its ID or path.
+        """ Get a function.
 
         This method allows fetching the details of a specific Opper function, either by specifying its unique ID or its path. If the function is found, it returns an instance of the Function class representing the function's configuration and details. If no function matches the given ID or path, or if both parameters are omitted, None is returned.
 
@@ -116,7 +116,7 @@ class AsyncFunctions:
     async def create(
         self, function: Function, update: bool = True, **kwargs
     ) -> Function:
-        """ Create or update an Opper function.
+        """ Create a function.
 
         Args:
             function (Function): An instance of the Function class, representing the configuration
@@ -145,8 +145,16 @@ class AsyncFunctions:
             ... )
             >>> created_function = asyncio.run(client.functions.create(function))
             >>> print(created_function)
-            
-            id=93 path='test/function' description='A function to translate text to French' input_schema=None out_schema=None instructions='Translate the given text to French.' model='azure/gpt4-eu' index_ids=[] use_semantic_search=None few_shot=False few_shot_count=2 cache_configuration=None
+            >>> # id=93 path='test/function' description='A function to translate text to French' input_schema=None out_schema=None instructions='Translate the given text to French.' model='azure/gpt4-eu' index_ids=[] use_semantic_search=None few_shot=False few_shot_count=2 cache_configuration=None
+            >>>
+            >>> # Using a decorator:
+            >>> from opperai import fn
+            >>>
+            >>> fn(path="test/test", model="openai/gpt4-turbo")
+            >>> def translate(text=str) -> str:
+            >>>     ''' Translate the given text to French'''
+            >>> print(translate("This is a text"))
+            >>> # 'Ceci est un texte'
         """
         fn = await self.get(path=function.path)
         if fn is None:
@@ -158,7 +166,7 @@ class AsyncFunctions:
 
     @validate_id_xor_path
     async def delete(self, id: str = None, path: str = None):
-        """ Delete an Opper function by its ID or path.
+        """ Delete a function.
 
         This method allows for the deletion of a function either by specifying its unique ID or its path. 
         If the deletion is successful, the method returns True. If the function cannot be found or the deletion 
@@ -210,7 +218,7 @@ class AsyncFunctions:
     async def chat(
         self, function_path, data: ChatPayload, stream=False, **kwargs
     ) -> FunctionResponse:
-        """ Send messages to a specific Opper function and receive a response.
+        """ Send a message to a function.
 
         This method allows sending a message or a series of messages to a specified Opper function,
         identified by its path. The function processes the message(s) and returns a response. This

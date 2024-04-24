@@ -27,6 +27,24 @@ def start_span(
     metadata: Optional[dict] = None,
     client: Optional[Client] = None,
 ):
+    """
+    Context manager to start a new span for operation tracing.
+
+    Args:
+        name (str): The name of the span.
+        input (Optional[str]): The input data for the span, defaults to None.
+        metadata (Optional[dict]): Additional metadata for the span, defaults to None.
+        client (Optional[Client]): Custom client instance, defaults to None.
+
+    Yields:
+        SpanContext: The context of the current span.
+
+    Examples:
+
+        >>> with start_span(name="process_data", metadata={"user": "123"}) as span:
+        >>>     # your calls
+    """
+
     c = client if client is not None else Client()
     project = os.environ.get("OPPER_PROJECT", "missing_project")
     parent_span_id = _current_span_id.get()
