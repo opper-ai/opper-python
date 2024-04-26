@@ -5,10 +5,10 @@ from opperai import fn, start_span
 from opperai.types.indexes import Index, Document
 from pydantic import BaseModel, Field
 from typing import List, Dict
+import asyncio               
 import inspect
 import json
 
-client = AsyncClient()
 
 template = """ 
 ## Create a Function {{ label: 'client.functions.create' }}
@@ -135,7 +135,9 @@ async def write_method_docs(client_attrs):
     docstrings = collect_docstrings(client_attrs)
     build_docs(docstrings)
 
-                      
-import asyncio               
+  
+
+client = AsyncClient()
+            
 with start_span(name="docsgen"):
       asyncio.run(write_method_docs([client.functions, client.indexes, client.spans]))
