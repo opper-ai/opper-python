@@ -8,8 +8,8 @@ from .indexes._indexes import Indexes
 from .spans._async_spans import AsyncSpans
 from .spans._spans import Spans
 
-
 DEFAULT_API_URL = "https://api.opper.ai"
+DEFAULT_TIMEOUT = 120
 
 
 class AsyncClient:
@@ -24,7 +24,7 @@ class AsyncClient:
         api_key: str = None,
         api_url: str = None,
         default_model: str = None,
-        timeout: int = 60,
+        timeout: int = DEFAULT_TIMEOUT,
     ):
         if api_key is None:
             api_key = os.getenv("OPPER_API_KEY")
@@ -61,7 +61,7 @@ class Client:
         api_key: str = None,
         api_url: str = None,
         default_model: str = None,
-        timeout: int = 60,
+        timeout: int = DEFAULT_TIMEOUT,
     ):
         if api_key is None:
             api_key = os.getenv("OPPER_API_KEY")
