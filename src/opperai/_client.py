@@ -1,12 +1,13 @@
 import os
 
-from ._http_clients import _async_http_client, _http_client
-from .functions._async_functions import AsyncFunctions
-from .functions._functions import Functions
-from .indexes._async_indexes import AsyncIndexes
-from .indexes._indexes import Indexes
-from .spans._async_spans import AsyncSpans
-from .spans._spans import Spans
+from opperai.core.functions._async_functions import AsyncFunctions
+from opperai.core.functions._functions import Functions
+from opperai.core.indexes._async_indexes import AsyncIndexes
+from opperai.core.indexes._indexes import Indexes
+from opperai.core.spans._async_spans import AsyncSpans
+from opperai.core.spans._spans import Spans
+
+from .core._http_clients import _async_http_client, _http_client
 
 DEFAULT_API_URL = "https://api.opper.ai"
 DEFAULT_TIMEOUT = 120

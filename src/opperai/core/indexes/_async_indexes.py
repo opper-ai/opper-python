@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from opperai._http_clients import _async_http_client
+from opperai.core._http_clients import _async_http_client
 from opperai.types.exceptions import APIError
 from opperai.types.indexes import (
     Document,

@@ -1,7 +1,8 @@
+from contextlib import contextmanager
+
+import pytest
 from opperai import Client
 from opperai.types import CacheConfiguration, ChatPayload, Function, Message
-from contextlib import contextmanager
-import pytest
 from opperai.types.exceptions import StructuredGenerationError
 
 

@@ -20,14 +20,14 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 10:52:26 GMT
+      - Thu, 02 May 2024 13:23:01 GMT
       server:
       - uvicorn
     status:
       code: 200
       message: OK
 - request:
-    body: '{"dimension": "dim", "score": 0.5, "comment": "comment"}'
+    body: '{"dimension": "dim", "value": 0.5, "comment": "comment"}'
     headers:
       accept:
       - '*/*'
@@ -41,14 +41,14 @@ interactions:
     uri: http://localhost:8000/v1/spans/bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4133/metrics
   response:
     body:
-      string: '{"id":"653adfc3-1f94-411a-aaf9-0af14591e0dc","span_id":"bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4133","dimension":"dim","score":0.5,"comment":"comment","updated_at":null,"created_at":"2024-05-02T10:52:26.701979Z"}'
+      string: '{"id":"0bf87615-d886-405b-a696-e10e9eacf787","span_id":"bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4133","dimension":"dim","value":null,"comment":"comment","updated_at":null,"created_at":"2024-05-02T13:23:02.650064Z"}'
     headers:
       content-length:
-      - '205'
+      - '206'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 10:52:26 GMT
+      - Thu, 02 May 2024 13:23:01 GMT
       server:
       - uvicorn
     status:
@@ -70,7 +70,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 10:52:26 GMT
+      - Thu, 02 May 2024 13:23:01 GMT
       server:
       - uvicorn
     status:

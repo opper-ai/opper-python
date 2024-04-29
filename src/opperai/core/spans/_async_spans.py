@@ -2,10 +2,10 @@ import json
 from typing import Any, Dict
 from uuid import UUID
 
-from opperai._http_clients import _async_http_client
+from opperai.core._http_clients import _async_http_client
+from opperai.core.utils import DateTimeEncoder
 from opperai.types.exceptions import APIError
 from opperai.types.spans import Span, SpanMetric
-from opperai.utils import DateTimeEncoder
 
 
 class AsyncSpans:

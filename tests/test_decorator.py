@@ -4,14 +4,12 @@ from unittest.mock import MagicMock, patch
 import pytest
 from jsonschema import validate
 from opperai import fn
-from opperai.functions.decorator._schemas import type_to_json_schema
-from opperai.utils import (
-    convert_function_call_to_json,
-)
+from opperai.core.functions.decorator._schemas import type_to_json_schema
+from opperai.core.utils import convert_function_call_to_json
 from pydantic import BaseModel
 
 
-@patch("opperai._http_clients._http_client.do_request")
+@patch("opperai.core._http_clients._http_client.do_request")
 def test_decorator(mock_do_request):
     mock_do_request.side_effect = [
         MagicMock(status_code=404),
@@ -50,7 +48,7 @@ def test_decorator(mock_do_request):
     assert translate_list("Hello", ["es", "fr"]) == ["Hola", "Bonjour"]
 
 
-@patch("opperai._http_clients._http_client.do_request")
+@patch("opperai.core._http_clients._http_client.do_request")
 def test_decorator_supply_model(mock_do_request):
     mock_do_request.side_effect = [
         MagicMock(status_code=404),

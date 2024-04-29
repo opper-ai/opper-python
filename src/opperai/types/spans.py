@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Optional
 from uuid import UUID
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class Span(BaseModel):
@@ -22,5 +22,5 @@ class Span(BaseModel):
 
 class SpanMetric(BaseModel):
     dimension: Optional[str] = None
-    score: Optional[float] = Field(None, ge=0, le=1)
+    value: Optional[float] = None
     comment: Optional[str] = None
