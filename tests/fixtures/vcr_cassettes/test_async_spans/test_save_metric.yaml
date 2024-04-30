@@ -12,7 +12,7 @@ interactions:
       content-length:
       - '141'
       user-agent:
-      - python-httpx/0.26.0
+      - python-httpx/0.27.0
     method: POST
     uri: http://localhost:8000/v1/spans
   response:
@@ -42,7 +42,7 @@ interactions:
       content-type:
       - application/json
       user-agent:
-      - python-httpx/0.26.0
+      - python-httpx/0.27.0
     method: POST
     uri: http://localhost:8000/v1/spans/bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4133/metrics
   response:
@@ -68,7 +68,7 @@ interactions:
       connection:
       - keep-alive
       user-agent:
-      - python-httpx/0.26.0
+      - python-httpx/0.27.0
     method: DELETE
     uri: http://localhost:8000/v1/spans/bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4133
   response:
