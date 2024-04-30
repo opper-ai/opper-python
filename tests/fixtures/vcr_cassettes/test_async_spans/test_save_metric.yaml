@@ -14,18 +14,16 @@ interactions:
       user-agent:
       - python-httpx/0.26.0
     method: POST
-    uri: https://api.opper.ai/v1/spans
+    uri: http://localhost:8000/v1/spans
   response:
     content: '{"uuid":"bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4133"}'
     headers:
-      Connection:
-      - keep-alive
-      Content-Length:
+      content-length:
       - '47'
-      Content-Type:
+      content-type:
       - application/json
-      Date:
-      - Tue, 30 Apr 2024 18:46:03 GMT
+      date:
+      - Tue, 30 Apr 2024 18:57:37 GMT
       server:
       - uvicorn
     http_version: HTTP/1.1
@@ -46,18 +44,16 @@ interactions:
       user-agent:
       - python-httpx/0.26.0
     method: POST
-    uri: https://api.opper.ai/v1/spans/bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4133/metrics
+    uri: http://localhost:8000/v1/spans/bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4133/metrics
   response:
-    content: '{"id":"f560406a-8f98-4643-9197-8428f89f3c43","span_id":"bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4133","dimension":"dim","score":0.5,"comment":"comment","updated_at":null,"created_at":"2024-04-30T18:46:03.156728Z"}'
+    content: '{"id":"75f72199-87ed-4b71-9513-5ade7c94c40d","span_id":"bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4133","dimension":"dim","score":0.5,"comment":"comment","updated_at":null,"created_at":"2024-04-30T18:57:38.088687Z"}'
     headers:
-      Connection:
-      - keep-alive
-      Content-Length:
+      content-length:
       - '205'
-      Content-Type:
+      content-type:
       - application/json
-      Date:
-      - Tue, 30 Apr 2024 18:46:03 GMT
+      date:
+      - Tue, 30 Apr 2024 18:57:37 GMT
       server:
       - uvicorn
     http_version: HTTP/1.1
@@ -74,16 +70,14 @@ interactions:
       user-agent:
       - python-httpx/0.26.0
     method: DELETE
-    uri: https://api.opper.ai/v1/spans/bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4133
+    uri: http://localhost:8000/v1/spans/bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4133
   response:
     content: ''
     headers:
-      Connection:
-      - keep-alive
-      Content-Type:
+      content-type:
       - application/json
-      Date:
-      - Tue, 30 Apr 2024 18:46:03 GMT
+      date:
+      - Tue, 30 Apr 2024 18:57:37 GMT
       server:
       - uvicorn
     http_version: HTTP/1.1
