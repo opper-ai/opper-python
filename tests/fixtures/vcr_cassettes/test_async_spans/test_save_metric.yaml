@@ -6,7 +6,7 @@ interactions:
       accept:
       - '*/*'
       accept-encoding:
-      - gzip, deflate, br
+      - gzip, deflate
       connection:
       - keep-alive
       content-length:
@@ -34,7 +34,7 @@ interactions:
       accept:
       - '*/*'
       accept-encoding:
-      - gzip, deflate, br
+      - gzip, deflate
       connection:
       - keep-alive
       content-length:
@@ -64,7 +64,7 @@ interactions:
       accept:
       - '*/*'
       accept-encoding:
-      - gzip, deflate, br
+      - gzip, deflate
       connection:
       - keep-alive
       user-agent:
