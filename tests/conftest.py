@@ -1,7 +1,8 @@
 import os
 import re
-import vcr
+
 import pytest
+import vcr
 from opperai import AsyncClient, Client
 
 
