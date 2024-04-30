@@ -20,7 +20,7 @@ class Span(BaseModel):
     score: Optional[int] = None
 
 
-class SpanFeedback(BaseModel):
+class SpanMetric(BaseModel):
     dimension: Optional[str] = None
     score: Optional[float] = Field(None, ge=0, le=1)
     comment: Optional[str] = None
