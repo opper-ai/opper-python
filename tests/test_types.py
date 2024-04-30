@@ -1,6 +1,6 @@
 import pytest
+from opperai.types import SpanMetric, validate_id_xor_path
 from pydantic import ValidationError
-from opperai.types import validate_id_xor_path, SpanFeedback
 
 
 def test_id_xor_path():
@@ -23,10 +23,10 @@ def test_id_xor_path():
 
 
 def test_feedback_score_in_range():
-    assert SpanFeedback(score=0.5).score == 0.5
-    assert SpanFeedback(score=0).score == 0
-    assert SpanFeedback(score=1).score == 1
+    assert SpanMetric(score=0.5).score == 0.5
+    assert SpanMetric(score=0).score == 0
+    assert SpanMetric(score=1).score == 1
     with pytest.raises(ValidationError):
-        SpanFeedback(score=1.1)
+        SpanMetric(score=1.1)
     with pytest.raises(ValidationError):
-        SpanFeedback(score=-0.1)
+        SpanMetric(score=-0.1)

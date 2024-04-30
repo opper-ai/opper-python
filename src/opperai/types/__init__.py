@@ -1,10 +1,10 @@
 # ruff: noqa: F401
 from typing import Any, Dict, List, Optional, Union
 from uuid import UUID
-from .spans import SpanFeedback
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from .spans import SpanMetric
 from .validators import validate_id_xor_path
 
 

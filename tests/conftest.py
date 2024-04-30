@@ -1,7 +1,8 @@
 import os
 import re
-import vcr
+
 import pytest
+import vcr
 from opperai import AsyncClient, Client
 
 
@@ -34,10 +35,7 @@ def vcr_cassette(request):
     my_vcr = vcr.VCR(
         cassette_library_dir="tests/fixtures/vcr_cassettes",
         path_transformer=vcr.VCR.ensure_suffix(".yaml"),
-        filter_headers=[
-            "x-opper-api-key",
-            "host",
-        ],
+        filter_headers=["x-opper-api-key", "host", "accept-encoding", "user-agent"],
     )
     my_vcr.register_matcher("uri_matcher", uri_matcher)
     my_vcr.match_on = ["method", "body", "headers", "uri_matcher"]
