@@ -4,14 +4,10 @@ interactions:
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
-      user-agent:
-      - python-httpx/0.27.0
     method: GET
-    uri: http://localhost:8000/api/v1/functions/by_path/test/sdk/test_chat
+    uri: http://localhost:8000/v1/functions/by_path/test/sdk/test_chat
   response:
     body:
       string: '{"detail":"Function not found"}'
@@ -21,7 +17,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 11 Apr 2024 16:26:07 GMT
+      - Thu, 02 May 2024 09:17:37 GMT
       server:
       - uvicorn
     status:
@@ -35,29 +31,25 @@ interactions:
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
       content-length:
       - '293'
       content-type:
       - application/json
-      user-agent:
-      - python-httpx/0.27.0
     method: POST
-    uri: http://localhost:8000/api/v1/functions
+    uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":58,"path":"test/sdk/test_chat","description":"Translate to French","input_schema":null,"out_schema":null,"instructions":"Translate
-        to French","few_shot":false,"few_shot_count":2,"dataset_uuid":"efe3192c-0172-445b-a379-e52fe2d5af16","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
+      string: '{"id":26,"path":"test/sdk/test_chat","description":"Translate to French","input_schema":null,"out_schema":null,"instructions":"Translate
+        to French","few_shot":false,"few_shot_count":2,"dataset_uuid":"6b3d0427-baac-4be2-ad81-6b15bfbec58a","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
     headers:
       content-length:
       - '394'
       content-type:
       - application/json
       date:
-      - Thu, 11 Apr 2024 16:26:07 GMT
+      - Thu, 02 May 2024 09:17:37 GMT
       server:
       - uvicorn
     status:
@@ -68,25 +60,21 @@ interactions:
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
-      user-agent:
-      - python-httpx/0.27.0
     method: GET
-    uri: http://localhost:8000/api/v1/functions/58
+    uri: http://localhost:8000/v1/functions/26
   response:
     body:
-      string: '{"id":58,"path":"test/sdk/test_chat","description":"Translate to French","input_schema":null,"dataset_uuid":"efe3192c-0172-445b-a379-e52fe2d5af16","out_schema":null,"instructions":"Translate
-        to French","use_semantic_search":false,"few_shot":false,"few_shot_count":2,"revision":1,"org_id":1,"index_ids":[],"linked_functions_ids":[],"model":"azure/gpt4-eu","language_model_id":8}'
+      string: '{"id":26,"path":"test/sdk/test_chat","description":"Translate to French","input_schema":null,"out_schema":null,"instructions":"Translate
+        to French","few_shot":false,"few_shot_count":2,"dataset_uuid":"6b3d0427-baac-4be2-ad81-6b15bfbec58a","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
     headers:
       content-length:
-      - '377'
+      - '472'
       content-type:
       - application/json
       date:
-      - Thu, 11 Apr 2024 16:26:07 GMT
+      - Thu, 02 May 2024 09:17:37 GMT
       server:
       - uvicorn
     status:
@@ -97,28 +85,24 @@ interactions:
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
       content-length:
       - '78'
       content-type:
       - application/json
-      user-agent:
-      - python-httpx/0.27.0
     method: POST
     uri: http://localhost:8000/v1/chat/test/sdk/test_chat
   response:
     body:
-      string: '{"span_id":"1f8d71fd-89cf-4f8e-b29d-648aee6e5d2b","message":"Bonjour","json_payload":null,"error":null,"context":null,"cached":false}'
+      string: '{"span_id":"41f52b87-85c1-4495-a89a-a4b24d983f33","message":"Bonjour","json_payload":null,"error":null,"context":null,"cached":false}'
     headers:
       content-length:
       - '133'
       content-type:
       - application/json
       date:
-      - Thu, 11 Apr 2024 16:26:07 GMT
+      - Thu, 02 May 2024 09:17:37 GMT
       server:
       - uvicorn
     status:
@@ -129,56 +113,21 @@ interactions:
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
-      user-agent:
-      - python-httpx/0.27.0
-    method: GET
-    uri: http://localhost:8000/api/v1/functions/58
-  response:
-    body:
-      string: '{"id":58,"path":"test/sdk/test_chat","description":"Translate to French","input_schema":null,"dataset_uuid":"efe3192c-0172-445b-a379-e52fe2d5af16","out_schema":null,"instructions":"Translate
-        to French","use_semantic_search":false,"few_shot":false,"few_shot_count":2,"revision":1,"org_id":1,"index_ids":[],"linked_functions_ids":[],"model":"azure/gpt4-eu","language_model_id":8}'
-    headers:
-      content-length:
-      - '377'
-      content-type:
-      - application/json
-      date:
-      - Thu, 11 Apr 2024 16:26:08 GMT
-      server:
-      - uvicorn
-    status:
-      code: 200
-      message: OK
-- request:
-    body: ''
-    headers:
-      accept:
-      - '*/*'
-      accept-encoding:
-      - gzip, deflate
-      connection:
-      - keep-alive
-      user-agent:
-      - python-httpx/0.27.0
     method: DELETE
-    uri: http://localhost:8000/api/v1/functions/by_path/test/sdk/test_chat
+    uri: http://localhost:8000/v1/functions/26
   response:
     body:
-      string: '{"detail":"Function and associated generations deleted successfully"}'
+      string: ''
     headers:
-      content-length:
-      - '69'
       content-type:
       - application/json
       date:
-      - Thu, 11 Apr 2024 16:26:08 GMT
+      - Thu, 02 May 2024 09:17:38 GMT
       server:
       - uvicorn
     status:
-      code: 200
-      message: OK
+      code: 204
+      message: No Content
 version: 1

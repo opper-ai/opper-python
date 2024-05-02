@@ -5,14 +5,10 @@ interactions:
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
       content-length:
       - '141'
-      user-agent:
-      - python-httpx/0.27.0
     method: POST
     uri: http://localhost:8000/v1/spans
   response:
@@ -24,7 +20,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 11 Apr 2024 16:26:35 GMT
+      - Thu, 02 May 2024 10:52:26 GMT
       server:
       - uvicorn
     status:
@@ -37,14 +33,10 @@ interactions:
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
       content-length:
       - '196'
-      user-agent:
-      - python-httpx/0.27.0
     method: POST
     uri: http://localhost:8000/v1/spans
   response:
@@ -56,7 +48,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 11 Apr 2024 16:26:35 GMT
+      - Thu, 02 May 2024 10:52:26 GMT
       server:
       - uvicorn
     status:
@@ -68,14 +60,10 @@ interactions:
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
       content-length:
       - '103'
-      user-agent:
-      - python-httpx/0.27.0
     method: PUT
     uri: http://localhost:8000/v1/spans/cfc1c3c4-0c3c-4c3c-8c3c-0c3c4c3c4c3c
   response:
@@ -87,7 +75,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 11 Apr 2024 16:26:35 GMT
+      - Thu, 02 May 2024 10:52:26 GMT
       server:
       - uvicorn
     status:
@@ -99,14 +87,10 @@ interactions:
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
       content-length:
       - '103'
-      user-agent:
-      - python-httpx/0.27.0
     method: PUT
     uri: http://localhost:8000/v1/spans/bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4b3b
   response:
@@ -118,7 +102,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 11 Apr 2024 16:26:35 GMT
+      - Thu, 02 May 2024 10:52:26 GMT
       server:
       - uvicorn
     status:
@@ -129,12 +113,8 @@ interactions:
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
-      user-agent:
-      - python-httpx/0.27.0
     method: DELETE
     uri: http://localhost:8000/v1/spans/cfc1c3c4-0c3c-4c3c-8c3c-0c3c4c3c4c3c
   response:
@@ -144,7 +124,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 11 Apr 2024 16:26:35 GMT
+      - Thu, 02 May 2024 10:52:26 GMT
       server:
       - uvicorn
     status:
@@ -155,12 +135,8 @@ interactions:
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
-      user-agent:
-      - python-httpx/0.27.0
     method: DELETE
     uri: http://localhost:8000/v1/spans/bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4b3b
   response:
@@ -170,7 +146,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 11 Apr 2024 16:26:35 GMT
+      - Thu, 02 May 2024 10:52:26 GMT
       server:
       - uvicorn
     status:

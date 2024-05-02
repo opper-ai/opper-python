@@ -4,28 +4,24 @@ interactions:
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
       content-length:
       - '28'
       content-type:
       - application/json
-      user-agent:
-      - python-httpx/0.27.0
     method: POST
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '{"id":253,"name":"test_get_by_name","files":[],"created_at":"2024-04-11T16:25:34.227196Z"}'
+      string: '{"id":25,"name":"test_get_by_name","files":[],"created_at":"2024-05-02T10:54:43.459696Z"}'
     headers:
       content-length:
-      - '90'
+      - '89'
       content-type:
       - application/json
       date:
-      - Thu, 11 Apr 2024 16:25:33 GMT
+      - Thu, 02 May 2024 10:54:43 GMT
       server:
       - uvicorn
     status:
@@ -36,25 +32,21 @@ interactions:
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
-      user-agent:
-      - python-httpx/0.27.0
     method: GET
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '[{"id":253,"org_id":1,"org_name":null,"name":"test_get_by_name","created_by":"Mattias
-        Lundell","created_at":"2024-04-11T16:25:34.227196Z","updated_at":"2024-04-11T16:25:34.227196Z","count":0}]'
+      string: '[{"id":25,"org_id":1,"org_name":null,"name":"test_get_by_name","created_by":"Mattias
+        Lundell","created_at":"2024-05-02T10:54:43.459696Z","updated_at":"2024-05-02T10:54:43.459696Z","count":0}]'
     headers:
       content-length:
-      - '192'
+      - '191'
       content-type:
       - application/json
       date:
-      - Thu, 11 Apr 2024 16:25:33 GMT
+      - Thu, 02 May 2024 10:54:43 GMT
       server:
       - uvicorn
     status:
@@ -65,14 +57,10 @@ interactions:
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
-      user-agent:
-      - python-httpx/0.27.0
     method: DELETE
-    uri: http://localhost:8000/v1/indexes/253
+    uri: http://localhost:8000/v1/indexes/25
   response:
     body:
       string: 'true'
@@ -82,7 +70,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 11 Apr 2024 16:25:33 GMT
+      - Thu, 02 May 2024 10:54:43 GMT
       server:
       - uvicorn
     status:

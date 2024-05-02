@@ -4,14 +4,10 @@ interactions:
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
-      user-agent:
-      - python-httpx/0.27.0
     method: GET
-    uri: http://localhost:8000/api/v1/functions/by_path/test/sdk/test_delete_function
+    uri: http://localhost:8000/v1/functions/by_path/test/sdk/test_delete_function
   response:
     body:
       string: '{"detail":"Function not found"}'
@@ -21,7 +17,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 11 Apr 2024 16:23:54 GMT
+      - Thu, 02 May 2024 10:52:28 GMT
       server:
       - uvicorn
     status:
@@ -35,29 +31,25 @@ interactions:
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
       content-length:
       - '291'
       content-type:
       - application/json
-      user-agent:
-      - python-httpx/0.27.0
     method: POST
-    uri: http://localhost:8000/api/v1/functions
+    uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":47,"path":"test/sdk/test_delete_function","description":"Test
-        function","input_schema":null,"out_schema":null,"instructions":"Do something","few_shot":false,"few_shot_count":2,"dataset_uuid":"f3529aba-20a8-407b-9f68-b6eca214d9d6","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
+      string: '{"id":70,"path":"test/sdk/test_delete_function","description":"Test
+        function","input_schema":null,"out_schema":null,"instructions":"Do something","few_shot":false,"few_shot_count":2,"dataset_uuid":"a40bf43d-a236-4b34-9095-9a4e73330f65","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
     headers:
       content-length:
       - '392'
       content-type:
       - application/json
       date:
-      - Thu, 11 Apr 2024 16:23:54 GMT
+      - Thu, 02 May 2024 10:52:28 GMT
       server:
       - uvicorn
     status:
@@ -68,72 +60,32 @@ interactions:
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
-      user-agent:
-      - python-httpx/0.27.0
-    method: GET
-    uri: http://localhost:8000/api/v1/functions/47
-  response:
-    body:
-      string: '{"id":47,"path":"test/sdk/test_delete_function","description":"Test
-        function","input_schema":null,"dataset_uuid":"f3529aba-20a8-407b-9f68-b6eca214d9d6","out_schema":null,"instructions":"Do
-        something","use_semantic_search":false,"few_shot":false,"few_shot_count":2,"revision":1,"org_id":1,"index_ids":[],"linked_functions_ids":[],"model":"azure/gpt4-eu","language_model_id":8}'
-    headers:
-      content-length:
-      - '375'
-      content-type:
-      - application/json
-      date:
-      - Thu, 11 Apr 2024 16:23:54 GMT
-      server:
-      - uvicorn
-    status:
-      code: 200
-      message: OK
-- request:
-    body: ''
-    headers:
-      accept:
-      - '*/*'
-      accept-encoding:
-      - gzip, deflate
-      connection:
-      - keep-alive
-      user-agent:
-      - python-httpx/0.27.0
     method: DELETE
-    uri: http://localhost:8000/api/v1/functions/by_path/test/sdk/test_delete_function
+    uri: http://localhost:8000/v1/functions/70
   response:
     body:
-      string: '{"detail":"Function and associated generations deleted successfully"}'
+      string: ''
     headers:
-      content-length:
-      - '69'
       content-type:
       - application/json
       date:
-      - Thu, 11 Apr 2024 16:23:54 GMT
+      - Thu, 02 May 2024 10:52:28 GMT
       server:
       - uvicorn
     status:
-      code: 200
-      message: OK
+      code: 204
+      message: No Content
 - request:
     body: ''
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
-      user-agent:
-      - python-httpx/0.27.0
     method: GET
-    uri: http://localhost:8000/api/v1/functions/47
+    uri: http://localhost:8000/v1/functions/70
   response:
     body:
       string: '{"detail":"Function not found"}'
@@ -143,7 +95,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 11 Apr 2024 16:23:54 GMT
+      - Thu, 02 May 2024 10:52:28 GMT
       server:
       - uvicorn
     status:

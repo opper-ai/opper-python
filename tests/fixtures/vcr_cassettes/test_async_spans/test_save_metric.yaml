@@ -5,81 +5,75 @@ interactions:
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
       content-length:
       - '141'
-      user-agent:
-      - python-httpx/0.27.0
     method: POST
     uri: http://localhost:8000/v1/spans
   response:
-    content: '{"uuid":"bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4133"}'
+    body:
+      string: '{"uuid":"bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4133"}'
     headers:
       content-length:
       - '47'
       content-type:
       - application/json
       date:
-      - Tue, 30 Apr 2024 18:57:37 GMT
+      - Thu, 02 May 2024 10:52:26 GMT
       server:
       - uvicorn
-    http_version: HTTP/1.1
-    status_code: 200
+    status:
+      code: 200
+      message: OK
 - request:
     body: '{"dimension": "dim", "score": 0.5, "comment": "comment"}'
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
       content-length:
       - '56'
       content-type:
       - application/json
-      user-agent:
-      - python-httpx/0.27.0
     method: POST
     uri: http://localhost:8000/v1/spans/bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4133/metrics
   response:
-    content: '{"id":"75f72199-87ed-4b71-9513-5ade7c94c40d","span_id":"bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4133","dimension":"dim","score":0.5,"comment":"comment","updated_at":null,"created_at":"2024-04-30T18:57:38.088687Z"}'
+    body:
+      string: '{"id":"653adfc3-1f94-411a-aaf9-0af14591e0dc","span_id":"bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4133","dimension":"dim","score":0.5,"comment":"comment","updated_at":null,"created_at":"2024-05-02T10:52:26.701979Z"}'
     headers:
       content-length:
       - '205'
       content-type:
       - application/json
       date:
-      - Tue, 30 Apr 2024 18:57:37 GMT
+      - Thu, 02 May 2024 10:52:26 GMT
       server:
       - uvicorn
-    http_version: HTTP/1.1
-    status_code: 200
+    status:
+      code: 200
+      message: OK
 - request:
     body: ''
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
-      user-agent:
-      - python-httpx/0.27.0
     method: DELETE
     uri: http://localhost:8000/v1/spans/bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4133
   response:
-    content: ''
+    body:
+      string: ''
     headers:
       content-type:
       - application/json
       date:
-      - Tue, 30 Apr 2024 18:57:37 GMT
+      - Thu, 02 May 2024 10:52:26 GMT
       server:
       - uvicorn
-    http_version: HTTP/1.1
-    status_code: 204
+    status:
+      code: 204
+      message: No Content
 version: 1
