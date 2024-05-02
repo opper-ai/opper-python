@@ -48,7 +48,7 @@ class AsyncFunctions:
 
     @validate_id_xor_path
     async def get(self, id: str = None, path: str = None) -> Optional[Function]:
-        """ Get a function.
+        """Get a function
 
         This method allows fetching the details of a specific Opper function, either by specifying its unique ID or its path. If the function is found, it returns an instance of the Function class representing the function's configuration and details. If no function matches the given ID or path, or if both parameters are omitted, None is returned.
 
@@ -116,7 +116,7 @@ class AsyncFunctions:
     async def create(
         self, function: Function, update: bool = True, **kwargs
     ) -> Function:
-        """ Create a function.
+        """Create a function
 
         Args:
             function (Function): An instance of the Function class, representing the configuration
@@ -166,10 +166,10 @@ class AsyncFunctions:
 
     @validate_id_xor_path
     async def delete(self, id: str = None, path: str = None):
-        """ Delete a function.
+        """Delete a function
 
-        This method allows for the deletion of a function either by specifying its unique ID or its path. 
-        If the deletion is successful, the method returns True. If the function cannot be found or the deletion 
+        This method allows for the deletion of a function either by specifying its unique ID or its path.
+        If the deletion is successful, the method returns True. If the function cannot be found or the deletion
         fails, the method returns False.
 
         Args:
@@ -191,10 +191,10 @@ class AsyncFunctions:
             True
 
         Note:
-            It's important to provide either `id` or `path`, but not both. If neither is provided, the method 
+            It's important to provide either `id` or `path`, but not both. If neither is provided, the method
             will raise a ValueError to indicate the issue.
         """
-        
+
         if path is not None:
             try:
                 await self._delete_by_path(path)
@@ -218,7 +218,7 @@ class AsyncFunctions:
     async def chat(
         self, function_path, data: ChatPayload, stream=False, **kwargs
     ) -> FunctionResponse:
-        """ Send a message to a function.
+        """Send a message to a function
 
         This method allows sending a message or a series of messages to a specified Opper function,
         identified by its path. The function processes the message(s) and returns a response. This
