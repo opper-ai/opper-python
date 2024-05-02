@@ -1,8 +1,9 @@
-from datetime import datetime
-import pytest
-from opperai.types.spans import Span, SpanFeedback
-from opperai import AsyncClient
 from contextlib import asynccontextmanager
+from datetime import datetime
+
+import pytest
+from opperai import AsyncClient
+from opperai.types.spans import Span, SpanMetric
 
 
 @asynccontextmanager
@@ -62,7 +63,7 @@ async def test_async_crud(aclient: AsyncClient, vcr_cassette):
 
 
 @pytest.mark.asyncio(scope="module")
-async def test_save_feedback(aclient: AsyncClient, vcr_cassette):
+async def test_save_metric(aclient: AsyncClient, vcr_cassette):
     async with span(
         Span(
             uuid="bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4133",
@@ -73,6 +74,6 @@ async def test_save_feedback(aclient: AsyncClient, vcr_cassette):
         ),
         aclient,
     ) as _span:
-        await aclient.spans.save_feedback(
-            _span.uuid, SpanFeedback(dimension="dim", score=0.5, comment="comment")
+        await aclient.spans.save_metric(
+            _span.uuid, SpanMetric(dimension="dim", score=0.5, comment="comment")
         )

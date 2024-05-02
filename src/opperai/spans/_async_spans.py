@@ -1,11 +1,11 @@
 import json
+from typing import Any, Dict
 from uuid import UUID
 
 from opperai._http_clients import _async_http_client
-from opperai.types.spans import Span, SpanFeedback
 from opperai.types.exceptions import APIError
+from opperai.types.spans import Span, SpanMetric
 from opperai.utils import DateTimeEncoder
-from typing import Dict, Any
 
 
 class AsyncSpans:
@@ -95,8 +95,8 @@ class AsyncSpans:
 
         return response.json()
 
-    async def save_feedback(
-        self, uuid: str, feedback: SpanFeedback, **kwargs
+    async def save_metric(
+        self, uuid: str, metric: SpanMetric, **kwargs
     ) -> Dict[str, Any]:
         """
         Saves feedback for a specific span.
@@ -131,12 +131,12 @@ class AsyncSpans:
         
         response = await self.http_client.do_request(
             "POST",
-            f"/v1/spans/{uuid}/feedbacks",
-            json=feedback.model_dump(exclude_unset=True),
+            f"/v1/spans/{uuid}/metrics",
+            json=metric.model_dump(exclude_unset=True),
         )
         if response.status_code != 200:
             raise APIError(
-                f"Failed to add feedback for span {uuid} with status {response.status_code}"
+                f"Failed to add metric for span {uuid} with status {response.status_code}"
             )
 
         return response.json()

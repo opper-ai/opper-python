@@ -1,8 +1,10 @@
-import os
 from typing import Dict, List, Optional, Union
 from unittest.mock import MagicMock, patch
 
+import pytest
+from jsonschema import validate
 from opperai import fn
+from opperai.functions.decorator._schemas import type_to_json_schema
 from opperai.utils import (
     convert_function_call_to_json,
 )
@@ -137,3 +139,71 @@ def test_convert_func_to_json():
         "target_language": "es",
         "model": model.model_dump(),
     }
+
+
+class ToyModel(BaseModel):
+    name: str
+
+
+class ChildModel(BaseModel):
+    toy: ToyModel
+    toys: List[ToyModel]
+
+
+class ParentModel(BaseModel):
+    child: ChildModel
+    children: List[ChildModel]
+
+
+@pytest.mark.parametrize(
+    "type_input,  example_input",
+    [
+        (int, 1),
+        (str, "string"),
+        (float, 1.0),
+        (bool, True),
+        (List[int], [1, 2, 3]),
+        (
+            ParentModel,
+            {
+                "child": {
+                    "toy": {"name": "name"},
+                    "toys": [{"name": "name"}],
+                },
+                "children": [{"toy": {"name": "name"}, "toys": [{"name": "name"}]}],
+            },
+        ),
+        (
+            List[ParentModel],
+            [
+                {
+                    "child": {
+                        "toy": {"name": "name"},
+                        "toys": [{"name": "name"}],
+                    },
+                    "children": [{"toy": {"name": "name"}, "toys": [{"name": "name"}]}],
+                }
+            ],
+        ),
+        (
+            List[List[ParentModel]],
+            [
+                [
+                    {
+                        "child": {
+                            "toy": {"name": "name"},
+                            "toys": [{"name": "name"}],
+                        },
+                        "children": [
+                            {"toy": {"name": "name"}, "toys": [{"name": "name"}]}
+                        ],
+                    }
+                ],
+            ],
+        ),
+    ],
+)
+def test_type_to_json_schema(type_input, example_input):
+    schema = type_to_json_schema(type_input)
+    print(schema)
+    assert validate(example_input, schema) is None

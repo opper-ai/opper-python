@@ -5,6 +5,30 @@ from pydantic import BaseModel
 
 
 def type_to_json_schema(type_hint):
+    schema = _type_to_json_schema(type_hint)
+    schema, defs = _lift_defs(schema, {})
+    schema["$defs"] = defs
+    return schema
+
+
+def _lift_defs(schema: Dict, defs: Dict = {}):
+    if "$defs" in schema:
+        for k, v in schema["$defs"].items():
+            defs[k] = v
+        schema.pop("$defs")
+
+    for k, v in schema.items():
+        if isinstance(v, dict):
+            _lift_defs(v, defs)
+        elif isinstance(v, list):
+            for item in v:
+                if isinstance(item, dict):
+                    _lift_defs(item, defs)
+
+    return schema, defs
+
+
+def _type_to_json_schema(type_hint):
     """Convert a Python type to a JSON schema."""
     if type_hint == int:
         return {"type": "integer"}
@@ -19,17 +43,17 @@ def type_to_json_schema(type_hint):
     elif hasattr(type_hint, "__origin__"):
         # Handling generic types (List, Dict, etc.)
         if get_origin(type_hint) == Union and type(None) in get_args(type_hint):
-            return type_to_json_schema(get_args(type_hint)[0])  # for Optional
+            return _type_to_json_schema(get_args(type_hint)[0])  # for Optional
         elif type_hint.__origin__ in (List, list):
             item_type = get_args(type_hint)[0]
             if inspect.isclass(item_type):
-                return {"type": "array", "items": type_to_json_schema(item_type)}
+                return {"type": "array", "items": _type_to_json_schema(item_type)}
             if get_origin(item_type) == List:
-                return {"type": "array", "items": type_to_json_schema(item_type)}
+                return {"type": "array", "items": _type_to_json_schema(item_type)}
             elif inspect.isclass(item_type) and issubclass(item_type, BaseModel):
-                return {"type": "array", "items": item_type.schema()}
+                return {"type": "array", "items": item_type.model_json_schema()}
             else:
-                return {"type": "array", "items": type_to_json_schema(item_type)}
+                return {"type": "array", "items": _type_to_json_schema(item_type)}
         elif get_origin(type_hint) == Dict:
             return {"type": "object"}
         else:
