@@ -16,7 +16,7 @@ class AsyncIndexes:
         self.http_client = http_client
 
     async def create(self, name: str) -> Index:
-        """Create an index.
+        """Create an index
 
         This method sends a request to create a new index in the OpperAI service. If the index is successfully created, it returns an instance of the Index class representing the newly created index's configuration and details.
 
@@ -48,7 +48,7 @@ class AsyncIndexes:
         return Index.model_validate(response.json())
 
     async def delete(self, id: int) -> bool:
-        """ Delete an index.
+        """Delete an index
 
         This method sends a DELETE request to the OpperAI service to remove an index specified by its unique identifier. If the index does not exist, it returns False. If the deletion is successful, it returns True. If there's an issue with the request, it raises an APIError.
 
@@ -79,7 +79,7 @@ class AsyncIndexes:
         return True
 
     async def get(self, id: int = None, name: str = None) -> Index:
-        """ Retrieve an index.
+        """Retrieve an index.
 
         This method fetches the details of an index from the Opper service. It can retrieve the index information either by its unique identifier (ID) or by its name. At least one of the parameters, `id` or `name`, must be provided. If both are provided, a ValueError is raised.
 
@@ -132,6 +132,23 @@ class AsyncIndexes:
         return None
 
     async def list(self) -> List[Index]:
+        """List all indexes
+
+        This method sends a GET request to the OpperAI service to retrieve a list of all indexes. It returns a list of Index instances, each representing an index's configuration and details.
+
+        Returns:
+            List[Index]: A list of Index instances representing all the indexes available.
+
+        Raises:
+            APIError: If the listing operation fails due to server-side issues.
+
+        Examples:
+            >>> from opperai import AsyncClient
+            >>> opper = AsyncClient(api_key="your-api-key")
+            >>> indexes = asyncio.run(opper.indexes.list())
+            >>> for index in indexes:
+            >>>     print(index)
+        """
         response = await self.http_client.do_request(
             "GET",
             "/v1/indexes",
@@ -141,6 +158,27 @@ class AsyncIndexes:
         return [Index.model_validate(item) for item in response.json()]
 
     async def upload_file(self, id: int, file_path: str, **kwargs):
+        """Upload a file to a specific index
+
+        This method handles the uploading of a file to a specified index by first obtaining an upload URL, then uploading the file to that URL, and finally registering the file with the index.
+
+        Args:
+            id (int): The unique identifier of the index to which the file will be uploaded.
+            file_path (str): The path to the file that needs to be uploaded.
+            **kwargs: Additional parameters that can be passed to the register file API call.
+
+        Returns:
+            dict: A dictionary containing the response from the register file API call.
+
+        Raises:
+            APIError: If obtaining the upload URL, uploading the file, or registering the file fails.
+
+        Examples:
+            >>> from opperai import AsyncClient
+            >>> opper = AsyncClient(api_key="your-api-key")
+            >>> response = asyncio.run(opper.indexes.upload_file(123, "/path/to/file.txt"))
+            >>> print(response)
+        """
         # Get upload URL
         upload_url_response = await self.http_client.do_request(
             "GET",
@@ -181,7 +219,7 @@ class AsyncIndexes:
         return register_file_response.json()
 
     async def index(self, id: int, doc: Document) -> Document:
-        """ Index a document.
+        """Index a document.
 
         This method sends a POST request to the OpperAI service to add a document to the specified index by its unique identifier. If the operation is successful, it returns the added document as an instance of the Document class.
 
@@ -196,7 +234,7 @@ class AsyncIndexes:
             APIError: If the document addition fails for reasons such as the index not existing or the document being invalid.
 
         Examples:
-            >>> from opperai import AsyncClient, 
+            >>> from opperai import AsyncClient,
             >>> from opperai.types import Document
             >>> opper = AsyncClient(api_key="your-api-key")
             >>> doc = Document(id="doc1", content="This is a test document.")
@@ -216,7 +254,7 @@ class AsyncIndexes:
     async def retrieve(
         self, id: int, query: str, k: int, filters: Optional[List[Filter]] = None
     ) -> List[RetrievalResponse]:
-        """ Retrive documents
+        """Retrive documents
 
         This method sends a POST request to the OpperAI service to retrieve documents from the specified index. The documents are returned based on their relevance to the provided query string. The number of documents to return is specified by the `k` parameter. Optional filters can be applied to further refine the search results.
 
@@ -233,7 +271,7 @@ class AsyncIndexes:
             APIError: If the retrieval operation fails for reasons such as the index not existing or the query being malformed.
 
         Examples:
-            >>> from opperai import AsyncClient 
+            >>> from opperai import AsyncClient
             >>> from opperai.types import RetrievalResponse, Filter
             >>> opper = AsyncClient(api_key="your-api-key")
             >>> filters = [Filter(field="category", value="technology")]

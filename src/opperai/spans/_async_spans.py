@@ -13,7 +13,35 @@ class AsyncSpans:
         self.http_client = http_client
 
     async def create(self, span: Span, **kwargs) -> Span:
-        
+        """
+        Create a new span in the system.
+
+        This method sends a POST request to the server to create a new span with the provided details. The span's data is serialized into JSON format, excluding any unset attributes, before being sent as the request payload.
+
+        Args:
+            span (Span): An instance of the Span class, representing the span to be created.
+            **kwargs: Additional keyword arguments that will be included in the request payload.
+
+        Returns:
+            Span: An instance of the Span class, representing the newly created span, including its server-assigned UUID and any other relevant information.
+
+        Raises:
+            APIError: If the span creation fails due to an API error.
+
+        Examples:
+            >>> from opperai import Client
+            >>> from opperai.types.spans import Span
+            >>> client = Client(api_key="your_api_key_here")
+            >>> new_span = Span(
+            ...     name="New Span",
+            ...     start_time="2021-07-21T17:32:28Z",
+            ...     end_time="2021-07-21T18:32:28Z",
+            ...     metadata={"key": "value"}
+            ... )
+            >>> created_span = asyncio.run(client.spans.create(new_span))
+            >>> print(created_span)
+            Span(uuid='123e4567-e89b-12d3-a456-426614174000', name='New Span', ...)
+        """
         span_data = span.model_dump(exclude_none=True)
         json_payload = json.dumps(span_data, cls=DateTimeEncoder)
         response = await self.http_client.do_request(
@@ -29,6 +57,35 @@ class AsyncSpans:
         return Span.model_validate(response.json())
 
     async def update(self, span_uuid: UUID, **kwargs) -> Span:
+        """
+        Update an existing span in the system.
+
+        This method sends a PUT request to the server to update an existing span identified by its UUID with the provided details. The span's data is serialized into JSON format, excluding any unset attributes, before being sent as the request payload.
+
+        Args:
+            span_uuid (UUID): The UUID of the span to be updated.
+            **kwargs: Additional keyword arguments that will be included in the request payload.
+
+        Returns:
+            Span: An instance of the Span class, representing the updated span, including its server-assigned UUID and any other relevant information.
+
+        Raises:
+            APIError: If the span update fails due to an API error.
+
+        Examples:
+            >>> from opperai import Client
+            >>> from opperai.types.spans import Span
+            >>> client = Client(api_key="your_api_key_here")
+            >>> updated_span = Span(
+            ...     name="Updated Span",
+            ...     start_time="2021-07-21T17:32:28Z",
+            ...     end_time="2021-07-21T18:32:28Z",
+            ...     metadata={"key": "new_value"}
+            ... )
+            >>> result = asyncio.run(client.spans.update("123e4567-e89b-12d3-a456-426614174000", updated_span))
+            >>> print(result)
+            Span(uuid='123e4567-e89b-12d3-a456-426614174000', name='Updated Span', ...)
+        """
         span = Span(uuid=span_uuid, **kwargs)
         json_payload = json.dumps(
             span.model_dump(exclude_none=True), cls=DateTimeEncoder
@@ -46,13 +103,35 @@ class AsyncSpans:
         return Span.model_validate(response.json())
 
     async def delete(self, span_uuid: UUID) -> bool:
+        """
+        Delete an existing span from the system.
+
+        This method sends a DELETE request to the server to remove a span identified by its UUID. If the deletion is successful, the method returns True, indicating that the span has been successfully removed from the system.
+
+        Args:
+            span_uuid (UUID): The UUID of the span to be deleted.
+
+        Returns:
+            bool: True if the span was successfully deleted, False otherwise.
+
+        Raises:
+            APIError: If the span deletion fails due to an API error.
+
+        Examples:
+            >>> from opperai import Client
+            >>> client = Client(api_key="your_api_key_here")
+            >>> span_uuid = "123e4567-e89b-12d3-a456-426614174000"
+            >>> result = asyncio.run(client.spans.delete(span_uuid))
+            >>> print(result)
+            True
+        """
         response = await self.http_client.do_request(
             "DELETE",
             f"/v1/spans/{span_uuid}",
         )
         if response.status_code != 204:
             raise APIError(
-                f"Failed to update span `{span_uuid}` with status {response.status_code}"
+                f"Failed to delete span `{span_uuid}` with status {response.status_code}"
             )
 
         return True
@@ -65,7 +144,7 @@ class AsyncSpans:
         The UUID in the URL is replaced with the UUID of the span for which the example is being saved.
 
         Args:
-            uuid (str): The UUID of the span for which the example is being saved 
+            uuid (str): The UUID of the span for which the example is being saved
             **kwargs: Additional keyword arguments that can be used for future extensions or to include additional data
                     in the request. These are not used in the current implementation.
 
@@ -128,7 +207,7 @@ class AsyncSpans:
             >>> result = await opper.spans.save_feedback(span_uuid, feedback)
             >>> print(result)
         """
-        
+
         response = await self.http_client.do_request(
             "POST",
             f"/v1/spans/{uuid}/metrics",
