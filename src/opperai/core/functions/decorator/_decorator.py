@@ -7,13 +7,12 @@ import threading
 from functools import wraps
 from typing import List, get_args, get_origin, get_type_hints
 
+from opperai._client import AsyncClient, Client
+from opperai.core.spans import get_current_span_id
+from opperai.core.utils import convert_function_call_to_json
+from opperai.types import CacheConfiguration, ChatPayload, Function, Message
 from pydantic import BaseModel
 
-from opperai import AsyncClient, Client
-from opperai.spans import _current_span_id
-from opperai.types import CacheConfiguration, ChatPayload, Function, Message
-
-from ...utils import convert_function_call_to_json
 from ._schemas import get_output_schema
 
 _thread_local = threading.local()
@@ -94,7 +93,7 @@ def fn(
             setup()
             input = convert_function_call_to_json(func, *args, **kwargs)
             payload = ChatPayload(
-                parent_span_uuid=_current_span_id.get(),
+                parent_span_uuid=get_current_span_id(),
                 messages=[
                     Message(role="user", content=json.dumps(input, cls=json_encoder))
                 ],
@@ -121,7 +120,7 @@ def fn(
             setup()
             input = convert_function_call_to_json(func, *args, **kwargs)
             payload = ChatPayload(
-                parent_span_uuid=_current_span_id.get(),
+                parent_span_uuid=get_current_span_id(),
                 messages=[
                     Message(role="user", content=json.dumps(input, cls=json_encoder))
                 ],

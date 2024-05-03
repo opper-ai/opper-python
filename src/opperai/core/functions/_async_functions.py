@@ -1,7 +1,8 @@
+from http import HTTPStatus
 from typing import Generator, Optional
 
-from opperai._http_clients import _async_http_client
-from opperai.spans import get_current_span_id
+from opperai.core._http_clients import _async_http_client
+from opperai.core.spans import get_current_span_id
 from opperai.types import (
     ChatPayload,
     Function,
@@ -9,7 +10,6 @@ from opperai.types import (
     StreamingChunk,
     validate_id_xor_path,
 )
-from http import HTTPStatus
 from opperai.types.exceptions import APIError, RateLimitError, StructuredGenerationError
 
 
@@ -18,30 +18,41 @@ class AsyncFunctions:
         self.http_client = http_client
         self.default_model = default_model
 
+    async def create(
+        self, function: Function, update: bool = True, **kwargs
+    ) -> Function:
+        fn = await self.get(path=function.path)
+        if fn is None:
+            return await self._create(function, **kwargs)
+        elif update:
+            function.id = fn.id
+            return await self.update(function, **kwargs)
+        return fn
+
     async def _create(self, function: Function, **kwargs) -> Function:
         if not function.model and self.default_model:
             function.model = self.default_model
         response = await self.http_client.do_request(
             "POST",
-            "/api/v1/functions",
+            "/v1/functions",
             json={**function.model_dump(), **kwargs},
         )
         if response.status_code != HTTPStatus.OK:
             raise APIError(
-                f"Failed to create function {function.path} with status {response.status_code}"
+                f"Failed to create function {function.path} with status {response.status_code}: {response.text}"
             )
 
         return Function.model_validate(response.json())
 
     async def update(self, function: Function, **kwargs) -> Function:
         response = await self.http_client.do_request(
-            "POST",
-            f"/api/v1/functions/{function.id}",
+            "PATCH",
+            f"/v1/functions/{function.id}",
             json={**function.model_dump(), **kwargs},
         )
         if response.status_code != HTTPStatus.OK:
             raise APIError(
-                f"Failed to update function {function.path} with status {response.status_code}"
+                f"Failed to update function {function.path} with status {response.status_code}: {response.text}"
             )
 
         return Function.model_validate(response.json())
@@ -57,10 +68,10 @@ class AsyncFunctions:
         else:
             return None
 
-    async def _get_by_path(self, function_path: str) -> Function:
+    async def _get_by_path(self, function_path: str) -> Optional[Function]:
         response = await self.http_client.do_request(
             "GET",
-            f"/api/v1/functions/by_path/{function_path}",
+            f"/v1/functions/by_path/{function_path}",
         )
         if response.status_code == HTTPStatus.NOT_FOUND:
             return None
@@ -71,10 +82,10 @@ class AsyncFunctions:
 
         return Function.model_validate(response.json())
 
-    async def _get_by_id(self, function_id: str) -> Function:
+    async def _get_by_id(self, function_id: str) -> Optional[Function]:
         response = await self.http_client.do_request(
             "GET",
-            f"/api/v1/functions/{function_id}",
+            f"/v1/functions/{function_id}",
         )
         if response.status_code == HTTPStatus.NOT_FOUND:
             return None
@@ -85,17 +96,6 @@ class AsyncFunctions:
 
         return Function.model_validate(response.json())
 
-    async def create(
-        self, function: Function, update: bool = True, **kwargs
-    ) -> Function:
-        fn = await self.get(path=function.path)
-        if fn is None:
-            return await self._create(function, **kwargs)
-        elif update:
-            function.id = fn.id
-            return await self.update(function, **kwargs)
-        return fn
-
     @validate_id_xor_path
     async def delete(self, id: str = None, path: str = None):
         if path is not None:
@@ -104,19 +104,34 @@ class AsyncFunctions:
             except APIError:
                 pass
         elif id is not None:
-            fn = await self.get(id=id)
-            if fn:
-                await self._delete_by_path(fn.path)
+            try:
+                await self._delete_by_id(id)
+            except APIError:
+                pass
+
+        return True
+
+    async def _delete_by_id(self, id: str):
+        response = await self.http_client.do_request(
+            "DELETE",
+            f"/v1/functions/{id}",
+        )
+        if response.status_code != HTTPStatus.NO_CONTENT:
+            raise APIError(
+                f"Failed to delete function {id} with status {response.status_code}"
+            )
+        return True
 
     async def _delete_by_path(self, function_path: str):
         response = await self.http_client.do_request(
             "DELETE",
-            f"/api/v1/functions/by_path/{function_path}",
+            f"/v1/functions/by_path/{function_path}",
         )
-        if response.status_code != HTTPStatus.OK:
+        if response.status_code != HTTPStatus.NO_CONTENT:
             raise APIError(
                 f"Failed to delete function {function_path} with status {response.status_code}"
             )
+        return True
 
     async def chat(
         self, function_path, data: ChatPayload, stream=False, **kwargs
@@ -158,9 +173,11 @@ class AsyncFunctions:
     async def flush_cache(self, id: int) -> None:
         response = await self.http_client.do_request(
             "DELETE",
-            f"/api/v1/functions/{id}/cache",
+            f"/v1/functions/{id}/cache",
         )
         if response.status_code != HTTPStatus.NO_CONTENT:
             raise APIError(
                 f"Failed to flush cache for function with id={id} with status {response.status_code}"
             )
+
+        return True

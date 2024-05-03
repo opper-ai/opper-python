@@ -1,15 +1,15 @@
 from typing import List, Optional
 
-from opperai._http_clients import _http_client
+from pydantic import BaseModel
+
+from opperai.core._http_clients import _http_client
 from opperai.types.exceptions import APIError
 from opperai.types.indexes import (
-    Document,
     Document,
     Filter,
     Index,
     RetrievalResponse,
 )
-from pydantic import BaseModel
 
 
 class RetrieveQuery(BaseModel):

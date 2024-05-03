@@ -75,5 +75,5 @@ async def test_save_metric(aclient: AsyncClient, vcr_cassette):
         aclient,
     ) as _span:
         await aclient.spans.save_metric(
-            _span.uuid, SpanMetric(dimension="dim", score=0.5, comment="comment")
+            _span.uuid, SpanMetric(dimension="dim", value=0.5, comment="comment")
         )

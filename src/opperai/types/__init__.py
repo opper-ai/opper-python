@@ -4,6 +4,7 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from .indexes import Document
 from .spans import SpanMetric
 from .validators import validate_id_xor_path
 

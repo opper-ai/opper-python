@@ -1,7 +1,8 @@
+from http import HTTPStatus
 from typing import Generator, Optional
 
-from opperai._http_clients import _http_client
-from opperai.spans import get_current_span_id
+from opperai.core._http_clients import _http_client
+from opperai.core.spans import get_current_span_id
 from opperai.types import (
     ChatPayload,
     Function,
@@ -9,12 +10,7 @@ from opperai.types import (
     StreamingChunk,
     validate_id_xor_path,
 )
-from http import HTTPStatus
-from opperai.types.exceptions import (
-    APIError,
-    RateLimitError,
-    StructuredGenerationError,
-)
+from opperai.types.exceptions import APIError, RateLimitError, StructuredGenerationError
 
 
 class Functions:
@@ -37,7 +33,7 @@ class Functions:
             function.model = self.default_model
         response = self.http_client.do_request(
             "POST",
-            "/api/v1/functions",
+            "/v1/functions",
             json={**function.model_dump(), **kwargs},
         )
         if response.status_code != HTTPStatus.OK:
@@ -49,8 +45,8 @@ class Functions:
 
     def update(self, function: Function, **kwargs) -> Function:
         response = self.http_client.do_request(
-            "POST",
-            f"/api/v1/functions/{function.id}",
+            "PATCH",
+            f"/v1/functions/{function.id}",
             json={**function.model_dump(), **kwargs},
         )
         if response.status_code != HTTPStatus.OK:
@@ -74,7 +70,7 @@ class Functions:
     def _get_by_path(self, function_path: str) -> Optional[Function]:
         response = self.http_client.do_request(
             "GET",
-            f"/api/v1/functions/by_path/{function_path}",
+            f"/v1/functions/by_path/{function_path}",
         )
         if response.status_code == HTTPStatus.NOT_FOUND:
             return None
@@ -88,7 +84,7 @@ class Functions:
     def _get_by_id(self, function_id: str) -> Optional[Function]:
         response = self.http_client.do_request(
             "GET",
-            f"/api/v1/functions/{function_id}",
+            f"/v1/functions/{function_id}",
         )
         if response.status_code == HTTPStatus.NOT_FOUND:
             return None
@@ -107,16 +103,30 @@ class Functions:
             except APIError:
                 pass
         elif id is not None:
-            fn = self.get(id=id)
-            if fn:
-                return self._delete_by_path(fn.path)
+            try:
+                return self._delete_by_id(id)
+            except APIError:
+                pass
+
+        return True
+
+    def _delete_by_id(self, id: str) -> bool:
+        response = self.http_client.do_request(
+            "DELETE",
+            f"/v1/functions/{id}",
+        )
+        if response.status_code != HTTPStatus.NO_CONTENT:
+            raise APIError(
+                f"Failed to delete function {id} with status {response.status_code}"
+            )
+        return True
 
     def _delete_by_path(self, function_path: str) -> bool:
         response = self.http_client.do_request(
             "DELETE",
-            f"/api/v1/functions/by_path/{function_path}",
+            f"/v1/functions/by_path/{function_path}",
         )
-        if response.status_code != HTTPStatus.OK:
+        if response.status_code != HTTPStatus.NO_CONTENT:
             raise APIError(
                 f"Failed to delete function {function_path} with status {response.status_code}"
             )
@@ -151,11 +161,10 @@ class Functions:
     def _chat_stream(
         self, function_path, data: ChatPayload, **kwargs
     ) -> Generator[StreamingChunk, None, None]:
-        serialized_data = data.model_dump()
         gen = self.http_client.stream(
             "POST",
             f"/v1/chat/{function_path}",
-            json={**serialized_data, **kwargs},
+            json={**data.model_dump(), **kwargs},
             params={"stream": "True"},
         )
         for item in gen:
@@ -164,7 +173,7 @@ class Functions:
     def flush_cache(self, id: int) -> bool:
         response = self.http_client.do_request(
             "DELETE",
-            f"/api/v1/functions/{id}/cache",
+            f"/v1/functions/{id}/cache",
         )
         if response.status_code != HTTPStatus.NO_CONTENT:
             raise APIError(
