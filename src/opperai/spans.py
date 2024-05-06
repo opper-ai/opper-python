@@ -33,9 +33,14 @@ class Span:
         )
 
 
-@dataclass
 class Spans:
-    _client: Client = Client()
+    _client: Client = None
+
+    def __init__(self, client: Client = None):
+        if client is None:
+            client = Client()
+
+        self._client = client
 
     @contextmanager
     def start(

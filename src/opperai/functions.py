@@ -69,25 +69,31 @@ class Function:
 
 @dataclass
 class Functions:
-    _client: Client = Client()
+    _client: Client = None
+
+    def __init__(self, client: Client = None):
+        if client is None:
+            client = Client()
+
+        self._client = client
 
     def create(
         self,
         path: str,
+        instructions: str,
         description: Optional[str] = None,
         input_type: Optional[Any] = None,
         output_type: Optional[Any] = None,
-        instructions: Optional[str] = None,
         model: Optional[str] = None,
     ) -> Function:
         try:
             function = self.get(path=path)
             if function:
                 return function.update(
+                    instructions=instructions,
                     description=description,
                     input_type=input_type,
                     output_type=output_type,
-                    instructions=instructions,
                     model=model,
                 )
         except Exception:
@@ -101,10 +107,10 @@ class Functions:
         function = self._client.functions.create(
             FunctionModel(
                 path=path,
+                instructions=instructions,
                 description=description,
                 input_schema=input_schema if input_type else None,
                 out_schema=output_schema if output_type else None,
-                instructions=instructions,
                 model=model,
             )
         )
