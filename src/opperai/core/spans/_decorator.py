@@ -27,8 +27,7 @@ def start_span(
     metadata: Optional[dict] = None,
     client: Optional[Client] = None,
 ):
-    """
-    Context manager to start a new span for operation tracing.
+    """Context manager to start a new span for operation tracing.
 
     Args:
         name (str): The name of the span.

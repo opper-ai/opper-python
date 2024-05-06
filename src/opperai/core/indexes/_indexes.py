@@ -23,8 +23,7 @@ class Indexes:
         self.http_client = http_client
 
     def create(self, name: str) -> Index:
-        """
-        Create an index
+        """Create an index
 
         This method allows for the creation of an index with the specified name. If the creation is successful, it returns an instance of the Index class, representing the newly created index.
 
@@ -55,8 +54,7 @@ class Indexes:
         return Index.model_validate(response.json())
 
     def delete(self, id: int) -> bool:
-        """
-        Delete an index
+        """Delete an index
 
         This method allows for the deletion of an index by specifying its unique identifier. If the deletion is successful, the method returns True. If the index cannot be found or the deletion fails, the method returns False.
 
@@ -88,8 +86,7 @@ class Indexes:
         return True
 
     def get(self, id: int = None, name: str = None) -> Optional[Index]:
-        """
-        Retrieve an index
+        """Retrieve an index
 
         This method fetches an index either by its unique identifier or by its name. If the index is found, it returns an instance of the Index class representing the index's details. If no index matches the given ID or name, or if both parameters are omitted, None is returned.
 
@@ -148,8 +145,7 @@ class Indexes:
         return None
 
     def list(self) -> List[Index]:
-        """
-        List all indexes
+        """List all indexes
 
         This method retrieves a list of all indexes available in the system. It returns a list of Index instances, each representing the details of an index.
 
@@ -178,8 +174,7 @@ class Indexes:
         return [Index.model_validate(item) for item in response.json()]
 
     def upload_file(self, id: int, file_path: str, **kwargs):
-        """
-        Upload a file to an index
+        """Upload a file to an index
 
         This method uploads a file to a specified index by its unique identifier. The file is uploaded to a pre-signed URL obtained from the server, and then the file is registered with the index.
 
@@ -242,8 +237,7 @@ class Indexes:
         return register_file_response.json()
 
     def index(self, id: int, doc: Document) -> Document:
-        """
-        Index a document
+        """Index a document
 
         This method adds a document to a specified index by its unique identifier. The document is indexed within the system, making it searchable or retrievable according to the index's configuration.
 
@@ -279,8 +273,7 @@ class Indexes:
     def retrieve(
         self, id: int, query: str, k: int, filters: Optional[List[Filter]] = None
     ) -> List[RetrievalResponse]:
-        """
-        Retrieve documents from an index
+        """Retrieve documents from an index
 
         This method retrieves documents from a specified index based on a query. It supports filtering and limiting the number of responses.
 

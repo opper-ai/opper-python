@@ -19,8 +19,7 @@ class Functions:
         self.default_model = default_model
 
     def create(self, function: Function, update: bool = True, **kwargs) -> Function:
-        """
-        Create a function
+        """Create a function
 
         This method allows for the creation or updating of a function based on the provided Function instance. If the function does not exist, it will be created. If it does exist and the update parameter is set to True, the function will be updated.
 
@@ -87,8 +86,7 @@ class Functions:
         return Function.model_validate(response.json())
 
     def update(self, function: Function, **kwargs) -> Function:
-        """
-        Update a function
+        """Update a function
 
         This method updates an existing function based on the provided Function instance. The function to be updated is identified by its unique ID, which must be set in the Function instance.
 
@@ -131,8 +129,7 @@ class Functions:
 
     @validate_id_xor_path
     def get(self, id: str = None, path: str = None) -> Optional[Function]:
-        """
-        Get a function
+        """Get a function
 
         This method allows fetching the details of a specific Opper function, either by specifying its unique ID or its path. If the function is found, it returns an instance of the Function class representing the function's configuration and details. If no function matches the given ID or path, or if both parameters are omitted, None is returned.
 
@@ -199,8 +196,7 @@ class Functions:
 
     @validate_id_xor_path
     def delete(self, id: str = None, path: str = None) -> bool:
-        """
-        Delete a function
+        """Delete a function
 
         This method allows for the deletion of a function either by specifying its unique ID or its path.
         If the deletion is successful, the method returns True. If the function cannot be found or the deletion
@@ -265,8 +261,7 @@ class Functions:
     def chat(
         self, function_path, data: ChatPayload, stream=False, **kwargs
     ) -> [FunctionResponse, Generator[StreamingChunk, None, None]]:
-        """
-        Send a message to a function
+        """Send a message to a function
 
         This method allows sending a message or a series of messages to a specified Opper function,
         identified by its path. The function processes the message(s) and returns a response. This

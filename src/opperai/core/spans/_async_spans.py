@@ -13,8 +13,7 @@ class AsyncSpans:
         self.http_client = http_client
 
     async def create(self, span: Span, **kwargs) -> Span:
-        """
-        Create a new span in the system.
+        """Create a new span in the system
 
         This method sends a POST request to the server to create a new span with the provided details. The span's data is serialized into JSON format, excluding any unset attributes, before being sent as the request payload.
 
@@ -57,8 +56,7 @@ class AsyncSpans:
         return Span.model_validate(response.json())
 
     async def update(self, span_uuid: UUID, **kwargs) -> Span:
-        """
-        Update an existing span in the system.
+        """Update an existing span in the system
 
         This method sends a PUT request to the server to update an existing span identified by its UUID with the provided details. The span's data is serialized into JSON format, excluding any unset attributes, before being sent as the request payload.
 
@@ -103,8 +101,7 @@ class AsyncSpans:
         return Span.model_validate(response.json())
 
     async def delete(self, span_uuid: UUID) -> bool:
-        """
-        Delete an existing span from the system.
+        """Delete an existing span from the system
 
         This method sends a DELETE request to the server to remove a span identified by its UUID. If the deletion is successful, the method returns True, indicating that the span has been successfully removed from the system.
 
@@ -137,8 +134,7 @@ class AsyncSpans:
         return True
 
     async def save_example(self, uuid: str, **kwargs) -> Dict[str, Any]:
-        """
-        Saves a span as an positive example.
+        """Saves a span as an positive example
 
         This method sends a POST request to the server's `/v1/spans/{uuid}/save_examples` endpoint.
         The UUID in the URL is replaced with the UUID of the span for which the example is being saved.
@@ -177,8 +173,7 @@ class AsyncSpans:
     async def save_metric(
         self, uuid: str, metric: SpanMetric, **kwargs
     ) -> Dict[str, Any]:
-        """
-        Saves feedback for a specific span.
+        """Saves feedback for a specific span
 
         This method sends a POST request to the server's `/v1/spans/{uuid}/feedbacks` endpoint, including the feedback data
         for the span identified by the given UUID. The feedback data is serialized into JSON format, excluding any unset

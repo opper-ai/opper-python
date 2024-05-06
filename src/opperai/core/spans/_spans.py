@@ -14,8 +14,7 @@ class Spans:
         self.http_client = http_client
 
     def create(self, span: Span, **kwargs) -> str:
-        """
-        Create a new span in the system.
+        """Create a new span in the system.
 
         This method sends a POST request to the server to create a new span with the provided details. The span's data is serialized into JSON format, excluding any unset attributes, before being sent as the request payload.
 
@@ -57,8 +56,7 @@ class Spans:
         return response.json()["uuid"]
 
     def update(self, span_uuid: UUID, **kwargs) -> str:
-        """
-        Update an existing span in the system.
+        """Update an existing span in the system
 
         This method sends a PUT request to the server to update an existing span identified by its UUID with the provided details. The span's data is serialized into JSON format, excluding any unset attributes, before being sent as the request payload.
 
@@ -104,8 +102,7 @@ class Spans:
         return response.json()["uuid"]
 
     def delete(self, span_uuid: UUID) -> bool:
-        """
-        Delete an existing span from the system.
+        """Delete an existing span from the system
 
         This method sends a DELETE request to the server to remove a span identified by its UUID. If the deletion is successful, the method returns True, indicating that the span has been successfully removed from the system.
 
@@ -138,8 +135,7 @@ class Spans:
         return True
 
     def save_example(self, uuid: str, **kwargs) -> str:
-        """
-        Saves a span as an example in the system.
+        """Saves a span as an example in the system
 
         This method sends a POST request to the server's `/v1/spans/{uuid}/save_examples` endpoint. The UUID in the URL is replaced with the UUID of the span for which the example is being saved.
 
@@ -173,8 +169,7 @@ class Spans:
         return response.json()["uuid"]
 
     def save_metric(self, uuid: str, metric: SpanMetric, **kwargs) -> Dict[str, Any]:
-        """
-        Saves a metric for a specific span.
+        """Saves a metric for a specific span
 
         This method sends a POST request to the server's `/v1/spans/{uuid}/metrics` endpoint, including the metric data for the span identified by the given UUID. The metric data is serialized into JSON format, excluding any unset attributes, before being sent as the request payload.
 
