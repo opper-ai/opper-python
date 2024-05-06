@@ -4,6 +4,7 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from .indexes import Document, Filter, RetrievalResponse
 from .spans import SpanMetric
 from .validators import validate_id_xor_path
 
@@ -59,7 +60,7 @@ class Function(BaseModel):
         pattern=r"^[a-zA-Z0-9_]+(\/[a-zA-Z0-9_-]+)*$",
         description="Path should not contain characters that could break URLs.",
     )
-    description: str
+    description: Optional[str] = None
     input_schema: Optional[Dict[str, Any]] = None
     out_schema: Optional[Dict[str, Any]] = None
     instructions: str

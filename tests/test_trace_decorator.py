@@ -1,16 +1,10 @@
-import os
 import uuid
 from unittest.mock import MagicMock, patch
-from datetime import datetime
 
-from uuid import uuid4
-from opperai.types.spans import Span
-from opperai import Client
-
-from opperai import trace
+from opperai import Client, trace
 
 
-@patch("opperai._http_clients._http_client.do_request")
+@patch("opperai.core._http_clients._http_client.do_request")
 def test_decorator(mock_do_request):
     mock_do_request.side_effect = [
         MagicMock(status_code=200, json=lambda: {"uuid": str(uuid.uuid4())}),

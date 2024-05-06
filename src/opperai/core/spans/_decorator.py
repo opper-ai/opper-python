@@ -7,10 +7,10 @@ from functools import wraps
 from typing import Callable, Optional
 from uuid import uuid4
 
-from opperai import Client
-from opperai.spans import _current_span_id
+from opperai._client import Client
+from opperai.core.spans import _current_span_id
+from opperai.core.utils import convert_function_call_to_json
 from opperai.types.spans import Span
-from opperai.utils import convert_function_call_to_json
 
 
 class SpanContext:

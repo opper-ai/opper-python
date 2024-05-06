@@ -4,28 +4,24 @@ interactions:
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
       content-length:
       - '34'
       content-type:
       - application/json
-      user-agent:
-      - python-httpx/0.27.0
     method: POST
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '{"id":266,"name":"test_retrieve_document","files":[],"created_at":"2024-04-11T16:26:34.595843Z"}'
+      string: '{"id":9,"name":"test_retrieve_document","files":[],"created_at":"2024-05-02T09:18:07.817552Z"}'
     headers:
       content-length:
-      - '96'
+      - '94'
       content-type:
       - application/json
       date:
-      - Thu, 11 Apr 2024 16:26:34 GMT
+      - Thu, 02 May 2024 09:18:07 GMT
       server:
       - uvicorn
     status:
@@ -37,28 +33,24 @@ interactions:
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
       content-length:
       - '91'
       content-type:
       - application/json
-      user-agent:
-      - python-httpx/0.27.0
     method: POST
-    uri: http://localhost:8000/v1/indexes/266/index
+    uri: http://localhost:8000/v1/indexes/9/index
   response:
     body:
-      string: '{"id":89,"uuid":"152d502b-f3d3-4f12-9871-9469bbb319cd","key":"152d502b-f3d3-4f12-9871-9469bbb319cd"}'
+      string: '{"id":7,"uuid":"4c7e92b0-950a-402e-8152-959b4b8bae86","key":"4c7e92b0-950a-402e-8152-959b4b8bae86"}'
     headers:
       content-length:
-      - '100'
+      - '99'
       content-type:
       - application/json
       date:
-      - Thu, 11 Apr 2024 16:26:34 GMT
+      - Thu, 02 May 2024 09:18:07 GMT
       server:
       - uvicorn
     status:
@@ -69,28 +61,24 @@ interactions:
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
       content-length:
       - '39'
       content-type:
       - application/json
-      user-agent:
-      - python-httpx/0.27.0
     method: POST
-    uri: http://localhost:8000/v1/indexes/266/query
+    uri: http://localhost:8000/v1/indexes/9/query
   response:
     body:
-      string: '[{"uuid":"0a6f9f4e-18be-4e84-8afd-77c4fbbe4279","content":"Hello","metadata":{"source":"test"},"document_id":null,"score":29.458036422729492,"source_uuids":["0a6f9f4e-18be-4e84-8afd-77c4fbbe4279"]}]'
+      string: '[{"uuid":"b6542583-f101-4af0-bde6-5a6f9cb54793","content":"Hello","metadata":{"source":"test"},"document_id":null,"score":29.458036422729492,"source_uuids":["b6542583-f101-4af0-bde6-5a6f9cb54793"]}]'
     headers:
       content-length:
       - '198'
       content-type:
       - application/json
       date:
-      - Thu, 11 Apr 2024 16:26:34 GMT
+      - Thu, 02 May 2024 09:18:07 GMT
       server:
       - uvicorn
     status:
@@ -101,14 +89,10 @@ interactions:
     headers:
       accept:
       - '*/*'
-      accept-encoding:
-      - gzip, deflate
       connection:
       - keep-alive
-      user-agent:
-      - python-httpx/0.27.0
     method: DELETE
-    uri: http://localhost:8000/v1/indexes/266
+    uri: http://localhost:8000/v1/indexes/9
   response:
     body:
       string: 'true'
@@ -118,7 +102,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 11 Apr 2024 16:26:34 GMT
+      - Thu, 02 May 2024 09:18:08 GMT
       server:
       - uvicorn
     status:
