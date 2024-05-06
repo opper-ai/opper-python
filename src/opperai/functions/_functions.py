@@ -44,24 +44,25 @@ class Functions:
             APIError: If the function creation or update fails due to an API error.
 
         Examples:
+            >>> # Basic usage:
             >>> from opperai import Client
             >>> from opperai.types import Function
             >>> client = Client(api_key="your_api_key_here")
             >>> function = Function(
             ...     path="example/function",
-            ...     description="A function to do something",
-            ...     model="gpt-3.5-turbo"
+            ...     instructions="Respond to questions. Be nice.",
+            ...     model="openai/gpt3.5-turbo"
             ... )
             >>> created_function = client.functions.create(function)
             >>> print(created_function)
-            Function(id='123', path='example/function', description='A function to do something', model='gpt-3.5-turbo')
+            Function(id='123', path='example/function', instructions="Respond to questions. Be nice.', model='openai/gpt3.5-turbo')
 
             >>> # Using a decorator:
             >>> from opperai import fn
             >>>
             >>> @fn(path="test/test", model="openai/gpt4-turbo")
             >>> def translate(text=str) -> str:
-            >>>     ''' Translate the given text to French'''
+            >>>     '''Translate the given text to French'''
             >>> print(translate("This is a text"))
             'Ceci est un texte'
         """
@@ -113,7 +114,7 @@ class Functions:
             >>> function = Function(
             ...     id='123',
             ...     path="example/function",
-            ...     description="An updated description",
+            ...     instructions="Respond to questions. Be nice.",
             ...     model="gpt-3.5-turbo"
             ... )
             >>> updated_function = client.functions.update(function)

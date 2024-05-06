@@ -140,7 +140,7 @@ class AsyncFunctions:
             >>> client = AsyncClient(api_key="your_api_key_here")
             >>> function = Function(
             ...     path="example/function",
-            ...     description="A function to do something",
+            ...     instructions="Respond to questions. Be nice.",
             ...     model="gpt-3.5-turbo"
             ... )
             >>> created_function = asyncio.run(client.functions.create(function))
