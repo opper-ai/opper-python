@@ -190,7 +190,7 @@ class AsyncSpans:
                             by the server's response schema for the metric submission endpoint.
 
         Raises:
-            APIError: If the server responds with a status code other than 200, indicating that the feedback was not
+            APIError: If the server responds with a status code other than 200, indicating that the metric was not
                     successfully saved for the span.
 
         Examples:
