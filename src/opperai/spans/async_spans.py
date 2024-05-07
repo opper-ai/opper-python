@@ -29,7 +29,7 @@ class AsyncSpan:
     async def save_metric(
         self, dimension: str, value: float, comment: str = None
     ) -> bool:
-        return self._client.spans.save_metric(
+        return await self._client.spans.save_metric(
             uuid=self._uuid,
             metric=SpanMetric(
                 dimension=dimension,

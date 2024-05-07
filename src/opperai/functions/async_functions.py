@@ -1,15 +1,14 @@
 from dataclasses import dataclass
 from typing import Any, Dict, Iterator, List, Optional, Union
 
-from pydantic import PrivateAttr
-
 from opperai._client import AsyncClient
-from opperai.core.functions.decorator._schemas import type_to_json_schema
+from opperai.functions.decorator._schemas import type_to_json_schema
 from opperai.types import ChatPayload, Message, StreamingChunk
 from opperai.types import Function as FunctionModel
 from opperai.types import FunctionResponse as FunctionResponseModel
+from pydantic import PrivateAttr
 
-from .async_spans import AsyncSpan
+from ..spans.async_spans import AsyncSpan
 
 
 class AsyncFunctionResponse(FunctionResponseModel):
