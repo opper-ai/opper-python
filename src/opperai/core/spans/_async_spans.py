@@ -199,7 +199,7 @@ class AsyncSpans:
             >>> opper = Client()
             >>> metric = SpanMetric(name="accuracy", value=0.9)
             >>> span_uuid = "123e4567-e89b-12d3-a456-426614174000"
-            >>> result = await opper.spans.save_feedback(span_uuid, feedback)
+            >>> result = await opper.spans.save_metric(span_uuid, metric)
             >>> print(result)
         """
 
