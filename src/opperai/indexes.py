@@ -46,6 +46,7 @@ class Indexes:
 
     def create(self, name: str) -> Index:
         """Create an index with the given name.
+
         If an index with the given name already exists, return it.
         """
         try:

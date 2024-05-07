@@ -34,7 +34,6 @@ class ContextData(BaseModel):
 class StreamingChunk(BaseModel):
     span_id: Optional[str] = None
     delta: Optional[str] = None
-    error: Optional[str] = None
     context: Optional[List[ContextData]] = None
 
 
@@ -42,7 +41,6 @@ class FunctionResponse(BaseModel):
     span_id: Optional[str] = None
     message: Optional[str] = None
     json_payload: Optional[Union[dict, List, Any]] = None
-    error: Optional[str] = None
     context: Optional[List[ContextData]] = None
     cached: Optional[bool] = None
 

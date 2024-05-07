@@ -39,12 +39,17 @@ To call a function you created at [https://platform.opper.ai](https://platform.o
 
 
 ```python
-from opperai import Client
-from opperai.types import ChatPayload, Message
+from opperai import Opper
+from opperai.types import Message
 
-client = Client(api_key="your-api-key") 
-response = client.functions.chat("your-function-path", 
-  ChatPayload(messages=[Message(role="user", content="hello")])
+opper = Opper()
+function = opper.functions.create(
+    "jokes/tell", 
+    instructions="given a topic tell a joke",
+)
+
+response = function.chat(
+    messages=[Message(role="user", content="topic: python")]
 )
 
 print(response)
@@ -62,8 +67,8 @@ opper = AsyncClient(api_key="your-api-key")
 async def main():
     message = ""
     async for response in await opper.functions.chat(
-        "your-function-path",
-        ChatPayload(messages=[Message(role="user", content="Hello, world!")]),
+        "jokes/tell",
+        ChatPayload(messages=[Message(role="user", content="topic: python")]),
         stream=True,
     ):
         if response.delta is not None:
@@ -78,19 +83,21 @@ if __name__ == "__main__":
 ## Streaming responses
 
 ```python
-from opperai import Client
-from opperai.types import ChatPayload, Message
+from opperai import Opper
+from opperai.types import Message
 
-client = Client(api_key="op-xxxx")
-response = client.functions.chat(
-    "joch/test",
-    ChatPayload(
-        messages=[Message(role="user", content="tell me a story.")],
-    ),
-    stream=True,
+opper = Opper()
+function = opper.functions.create(
+    "jokes/tell", 
+    instructions="given a topic tell a joke",
+    description="tell a joke",
 )
-for data in response:
-    print(data.delta, end="", flush=True)
+response = function.chat(
+    messages=[Message(role="user", content="topic: python")],
+    stream=True
+)
+for delta in response.deltas:
+    print(delta, end="", flush=True)
 ```
 
 ## Async streaming responses
@@ -104,9 +111,9 @@ client = AsyncClient(api_key="your-api-key")
 
 async def main():
     async for response in await client.functions.chat(
-        "your-function-path",
+        "jokes/tell",
         ChatPayload(
-            messages=[Message(role="user", content="tell me a story.")],
+            messages=[Message(role="user", content="topic: python")],
         ),
         stream=True,
     ):
@@ -117,11 +124,33 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## Retrieval
+## Indexes
 
 ```python
-client.indexes.retrieve(index_id=42, "Who is the president of the USA?", 3)
+from opperai import Opper
+from opperai.types import Document, Filter
 
+opper = Opper()
+
+# create a new (or get existing) index
+index = opper.indexes.create("my-index")
+
+# upload a file to the index
+index.upload_file("file.txt")
+
+# index a document
+index.index(Document(key="key1", content="Hello world", metadata={"score": 0}))
+
+# overwrite a document
+index.index(Document(key="key1", content="Hello world", metadata={"score": 1}))
+
+# query the index
+response = index.query("Hello")
+print(response)
+
+# query the index with a filter
+response = index.query("Hello", filters=[Filter(key="score", operation="=", value="1")])
+print(response)
 ```
 
 # Examples
