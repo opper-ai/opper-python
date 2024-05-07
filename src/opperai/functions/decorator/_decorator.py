@@ -5,17 +5,43 @@ import json
 import os
 import threading
 from functools import wraps
-from typing import List, get_args, get_origin, get_type_hints
+from typing import Any, List, Tuple, get_args, get_origin, get_type_hints
 
 from opperai._client import AsyncClient, Client
 from opperai.core.spans import get_current_span_id
 from opperai.core.utils import convert_function_call_to_json
+from opperai.functions.async_functions import AsyncFunctionResponse
+from opperai.functions.functions import FunctionResponse
 from opperai.types import CacheConfiguration, ChatPayload, Function, Message
 from pydantic import BaseModel
 
 from ._schemas import get_output_schema
 
 _thread_local = threading.local()
+
+
+class FunctionWrapper:
+    def __init__(self, func):
+        self.func = func
+
+    def __call__(self, *args, **kwargs) -> Any:
+        answer, _ = self.func(*args, **kwargs)
+        return answer
+
+    def call(self, *args, **kwargs) -> Tuple[Any, FunctionResponse]:
+        return self.func(*args, **kwargs)
+
+
+class AsyncFunctionWrapper:
+    def __init__(self, func):
+        self.func = func
+
+    async def __call__(self, *args, **kwargs) -> Any:
+        answer, _ = await self.func(*args, **kwargs)
+        return answer
+
+    async def call(self, *args, **kwargs) -> Tuple[Any, AsyncFunctionResponse]:
+        return await self.func(*args, **kwargs)
 
 
 @contextlib.contextmanager
@@ -84,18 +110,7 @@ def fn(
         sync_client = None
         c = None
 
-        def setup():
-            nonlocal setup_done, sync_client, c
-            if setup_done:
-                return
-
-            if isinstance(client, AsyncClient):
-                sync_client = Client(api_key=client.api_key, api_url=client.api_url)
-            elif isinstance(client, Client):
-                sync_client = client
-            else:
-                sync_client = Client()
-
+        def _prepare_function():
             use_few_shot = few_shot or os.environ.get("OPPER_USE_FEW_SHOT", False)
             function = Function(
                 path=func_path,
@@ -114,7 +129,21 @@ def fn(
                 model if model else os.environ.get("OPPER_DEFAULT_MODEL", None)
             )
 
-            sync_client.functions.create(function)
+            return function
+
+        def setup():
+            nonlocal setup_done, sync_client, c
+            if setup_done:
+                return
+
+            if isinstance(client, AsyncClient):
+                sync_client = Client(api_key=client.api_key, api_url=client.api_url)
+            elif isinstance(client, Client):
+                sync_client = client
+            else:
+                sync_client = Client()
+
+            sync_client.functions.create(_prepare_function())
 
             if asyncio.iscoroutinefunction(func):
                 c = AsyncClient() or client
@@ -123,60 +152,83 @@ def fn(
 
             setup_done = True
 
+        async def async_setup():
+            nonlocal setup_done, sync_client, c
+            if setup_done:
+                return
+
+            if isinstance(client, AsyncClient):
+                sync_client = client
+            elif isinstance(client, Client):
+                sync_client = AsyncClient(
+                    api_key=client.api_key, api_url=client.api_url
+                )
+            else:
+                sync_client = AsyncClient()
+
+            await sync_client.functions.create(_prepare_function())
+
+            c = client or sync_client
+
+            setup_done = True
+
+        def _unmarshal_response(response, return_type):
+            if return_type is not None:
+                if inspect.isclass(return_type) and issubclass(return_type, BaseModel):
+                    response = return_type(**response)
+                elif (
+                    (get_origin(return_type) == list or get_origin(return_type) == List)
+                    and inspect.isclass(get_args(return_type)[0])
+                    and issubclass(get_args(return_type)[0], BaseModel)
+                ):
+                    response = [get_args(return_type)[0](**item) for item in response]
+            return response
+
+        def _prepare_payload(input):
+            return ChatPayload(
+                parent_span_uuid=get_current_span_id(),
+                messages=[
+                    Message(role="user", content=json.dumps(input, cls=json_encoder))
+                ],
+            )
+
         @wraps(func)
         async def async_wrapper(*args, **kwargs):
-            setup()
+            await async_setup()
+
             input = convert_function_call_to_json(func, *args, **kwargs)
-            payload = ChatPayload(
-                parent_span_uuid=get_current_span_id(),
-                messages=[
-                    Message(role="user", content=json.dumps(input, cls=json_encoder))
-                ],
-            )
+            _response = await c.functions.chat(func_path, _prepare_payload(input))
 
-            response = await c.functions.chat(func_path, payload)
-            answer = response.json_payload
+            _thread_local.span_id = _response.span_id
 
-            _thread_local.span_id = response.span_id
             return_type = get_type_hints(func).get("return")
+            answer = _unmarshal_response(_response.json_payload, return_type)
 
-            if return_type is not None:
-                if inspect.isclass(return_type) and issubclass(return_type, BaseModel):
-                    answer = return_type(**answer)
-                elif (
-                    (get_origin(return_type) == list or get_origin(return_type) == List)
-                    and inspect.isclass(get_args(return_type)[0])
-                    and issubclass(get_args(return_type)[0], BaseModel)
-                ):
-                    answer = [get_args(return_type)[0](**item) for item in answer]
-            return answer
+            response = AsyncFunctionResponse(client=c, **_response.model_dump())
 
+            return answer, response
+
+        @wraps(func)
         def sync_wrapper(*args, **kwargs):
             setup()
+
             input = convert_function_call_to_json(func, *args, **kwargs)
-            payload = ChatPayload(
-                parent_span_uuid=get_current_span_id(),
-                messages=[
-                    Message(role="user", content=json.dumps(input, cls=json_encoder))
-                ],
-            )
-            response = c.functions.chat(func_path, payload)
-            answer = response.json_payload
-            _thread_local.span_id = response.span_id
+            _response = c.functions.chat(func_path, _prepare_payload(input))
+
+            _thread_local.span_id = _response.span_id
 
             return_type = get_type_hints(func).get("return")
-            if return_type is not None:
-                if inspect.isclass(return_type) and issubclass(return_type, BaseModel):
-                    answer = return_type(**answer)
-                elif (
-                    (get_origin(return_type) == list or get_origin(return_type) == List)
-                    and inspect.isclass(get_args(return_type)[0])
-                    and issubclass(get_args(return_type)[0], BaseModel)
-                ):
-                    answer = [get_args(return_type)[0](**item) for item in answer]
-            return answer
+            answer = _unmarshal_response(_response.json_payload, return_type)
 
-        return async_wrapper if asyncio.iscoroutinefunction(func) else sync_wrapper
+            response = FunctionResponse(client=c, **_response.model_dump())
+
+            return answer, response
+
+        return (
+            AsyncFunctionWrapper(async_wrapper)
+            if asyncio.iscoroutinefunction(func)
+            else FunctionWrapper(sync_wrapper)
+        )
 
     if _func is None:
         return decorator
