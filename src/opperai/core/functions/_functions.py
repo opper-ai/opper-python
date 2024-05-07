@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Generator, Optional
+from typing import Iterator, Optional, Union
 
 from opperai.core._http_clients import _http_client
 from opperai.core.spans import get_current_span_id
@@ -260,7 +260,7 @@ class Functions:
 
     def chat(
         self, function_path, data: ChatPayload, stream=False, **kwargs
-    ) -> [FunctionResponse, Generator[StreamingChunk, None, None]]:
+    ) -> Union[FunctionResponse, Iterator[StreamingChunk]]:
         """Send a message to a function
 
         This method allows sending a message or a series of messages to a specified Opper function,
@@ -319,6 +319,7 @@ class Functions:
 
         if stream:
             return self._chat_stream(function_path, data, **kwargs)
+
         serialized_data = data.model_dump()
         response = self.http_client.do_request(
             "POST",
@@ -339,7 +340,7 @@ class Functions:
 
     def _chat_stream(
         self, function_path, data: ChatPayload, **kwargs
-    ) -> Generator[StreamingChunk, None, None]:
+    ) -> Iterator[StreamingChunk]:
         gen = self.http_client.stream(
             "POST",
             f"/v1/chat/{function_path}",
