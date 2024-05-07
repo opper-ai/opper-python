@@ -173,21 +173,21 @@ class AsyncSpans:
     async def save_metric(
         self, uuid: str, metric: SpanMetric, **kwargs
     ) -> Dict[str, Any]:
-        """Saves feedback for a specific span
+        """Saves metric for a specific span
 
-        This method sends a POST request to the server's `/v1/spans/{uuid}/feedbacks` endpoint, including the feedback data
-        for the span identified by the given UUID. The feedback data is serialized into JSON format, excluding any unset
+        This method sends a POST request to the server's `/v1/spans/{uuid}/metrics` endpoint, including the metric data
+        for the span identified by the given UUID. The metric data is serialized into JSON format, excluding any unset
         attributes, before being sent as the request payload.
 
         Args:
-            uuid (str): The UUID of the span for which feedback is being saved.
-            feedback (SpanFeedback): The feedback object containing the feedback data for the span.
+            uuid (str): The UUID of the span for which metric is being saved.
+            metric (SpanMetric): The metric object containing the metric data for the span.
             **kwargs: Additional keyword arguments that can be used for future extensions or to include additional data
                     in the request. These are not used in the current implementation.
 
         Returns:
             Dict[str, Any]: A dictionary containing the server's response. The structure of this dictionary is determined
-                            by the server's response schema for the feedback submission endpoint.
+                            by the server's response schema for the metric submission endpoint.
 
         Raises:
             APIError: If the server responds with a status code other than 200, indicating that the feedback was not
@@ -195,9 +195,9 @@ class AsyncSpans:
 
         Examples:
             >>> from opperai import Client
-            >>> from opperai.types.spans import SpanFeedback
+            >>> from opperai.types.spans import SpanMetric
             >>> opper = Client()
-            >>> feedback = SpanFeedback(rating=5, comment="Very accurate")
+            >>> metric = SpanMetric(name="accuracy", value=0.9)
             >>> span_uuid = "123e4567-e89b-12d3-a456-426614174000"
             >>> result = await opper.spans.save_feedback(span_uuid, feedback)
             >>> print(result)
