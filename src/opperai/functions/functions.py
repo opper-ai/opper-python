@@ -2,15 +2,14 @@ import itertools
 from dataclasses import dataclass
 from typing import Any, Dict, Iterator, List, Optional, Union
 
-from pydantic import PrivateAttr
-
 from opperai._client import Client
-from opperai.core.functions.decorator._schemas import type_to_json_schema
+from opperai.functions.decorator._schemas import type_to_json_schema
 from opperai.types import ChatPayload, Message, StreamingChunk
 from opperai.types import Function as FunctionModel
 from opperai.types import FunctionResponse as FunctionResponseModel
+from pydantic import PrivateAttr
 
-from .spans import Span
+from ..spans.spans import Span
 
 
 class FunctionResponse(FunctionResponseModel):

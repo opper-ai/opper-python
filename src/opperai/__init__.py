@@ -1,12 +1,12 @@
 # ruff: noqa: F401
-from opperai.async_functions import AsyncFunctions
-from opperai.async_indexes import AsyncIndexes
-from opperai.async_spans import AsyncSpans
-from opperai.core.functions.decorator._decorator import fn, get_last_span_id
 from opperai.core.spans._decorator import start_span, trace
-from opperai.functions import Functions
-from opperai.indexes import Indexes
-from opperai.spans import Spans
+from opperai.functions.async_functions import AsyncFunctions
+from opperai.functions.decorator._decorator import fn, get_last_span_id
+from opperai.functions.functions import Functions
+from opperai.indexes.async_indexes import AsyncIndexes
+from opperai.indexes.indexes import Indexes
+from opperai.spans.async_spans import AsyncSpans
+from opperai.spans.spans import Spans
 
 from ._client import AsyncClient, Client
 

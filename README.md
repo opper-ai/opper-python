@@ -43,6 +43,7 @@ from opperai import Opper
 from opperai.types import Message
 
 opper = Opper()
+
 function = opper.functions.create(
     "jokes/tell", 
     instructions="given a topic tell a joke",
@@ -59,22 +60,22 @@ print(response)
 
 ```python
 import asyncio
-from opperai import AsyncClient
-from opperai.types import ChatPayload, Message
-
-opper = AsyncClient(api_key="your-api-key")
+from opperai import AsyncOpper
+from opperai.types import Message
 
 async def main():
-    message = ""
-    async for response in await opper.functions.chat(
-        "jokes/tell",
-        ChatPayload(messages=[Message(role="user", content="topic: python")]),
-        stream=True,
-    ):
-        if response.delta is not None:
-            message += response.delta
+    opper = AsyncOpper()
 
-    print(message)
+    function = await opper.functions.create(
+        "jokes/tell", 
+        instructions="given a topic tell a joke",
+    )
+    
+    response = await function.chat(
+        messages=[Message(role="user", content="topic: python")],
+    )
+
+    print(response)
 
 if __name__ == "__main__":
     asyncio.run(main())
@@ -87,15 +88,18 @@ from opperai import Opper
 from opperai.types import Message
 
 opper = Opper()
+
 function = opper.functions.create(
     "jokes/tell", 
     instructions="given a topic tell a joke",
     description="tell a joke",
 )
+
 response = function.chat(
     messages=[Message(role="user", content="topic: python")],
     stream=True
 )
+
 for delta in response.deltas:
     print(delta, end="", flush=True)
 ```
@@ -104,20 +108,26 @@ for delta in response.deltas:
 
 ```python
 import asyncio
-from opperai import AsyncClient
-from opperai.types import ChatPayload, Message
+from opperai import AsyncOpper
+from opperai.types import Message
 
-client = AsyncClient(api_key="your-api-key")
 
 async def main():
-    async for response in await client.functions.chat(
-        "jokes/tell",
-        ChatPayload(
-            messages=[Message(role="user", content="topic: python")],
-        ),
+    opper = AsyncOpper()
+    
+    function = await opper.functions.create(
+        "jokes/tell", 
+        instructions="given a topic tell a joke",
+        description="tell a joke",
+    )
+
+    response = await function.chat(
+        messages=[Message(role="user", content="topic: python")],
         stream=True,
-    ):
-        print(response.delta, end="", flush=True)
+    )
+
+    async for delta in response.deltas:
+        print(delta, end="", flush=True)
 
 
 if __name__ == "__main__":
@@ -132,23 +142,17 @@ from opperai.types import Document, Filter
 
 opper = Opper()
 
-# create a new (or get existing) index
 index = opper.indexes.create("my-index")
 
-# upload a file to the index
 index.upload_file("file.txt")
 
-# index a document
-index.index(Document(key="key1", content="Hello world", metadata={"score": 0}))
+index.index(Document(key="key1", content="Hello world 1", metadata={"score": 0}))
+index.index(Document(key="key1", content="Hello world 1", metadata={"score": 1}))
+index.index(Document(key="key2", content="Hello world 3", metadata={"score": 0}))
 
-# overwrite a document
-index.index(Document(key="key1", content="Hello world", metadata={"score": 1}))
-
-# query the index
 response = index.query("Hello")
 print(response)
 
-# query the index with a filter
 response = index.query("Hello", filters=[Filter(key="score", operation="=", value="1")])
 print(response)
 ```

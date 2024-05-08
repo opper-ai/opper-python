@@ -3,10 +3,39 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 from jsonschema import validate
-from opperai import fn
-from opperai.core.functions.decorator._schemas import type_to_json_schema
+from opperai import AsyncClient, Client, fn
 from opperai.core.utils import convert_function_call_to_json
+from opperai.functions.decorator._schemas import type_to_json_schema
 from pydantic import BaseModel
+
+
+def test_fn_decorator(client: Client, vcr_cassette):
+    @fn(client=client)
+    def translate(text: str, target_language: str) -> str:
+        """Translate text to a target language."""
+
+    translation = translate("Hello", "es")
+    assert translation == "Hola"
+
+    translation, response = translate.call("Hello", "es")
+    assert translation == "Hola"
+
+    response.span.save_metric("metric", 1)
+
+
+@pytest.mark.asyncio(scope="module")
+async def test_fn_decorator_async(aclient: AsyncClient, vcr_cassette):
+    @fn(client=aclient)
+    async def translate(text: str, target_language: str) -> str:
+        """Translate text to a target language."""
+
+    translation = await translate("Hello", "es")
+    assert translation == "Hola"
+
+    translation, response = await translate.call("Hello", "es")
+    assert translation == "Hola"
+
+    await response.span.save_metric("metric", 1)
 
 
 @patch("opperai.core._http_clients._http_client.do_request")
@@ -160,6 +189,7 @@ class ParentModel(BaseModel):
         (str, "string"),
         (float, 1.0),
         (bool, True),
+        # (Dict[str, int], {"key": 1}),
         (List[int], [1, 2, 3]),
         (
             ParentModel,
