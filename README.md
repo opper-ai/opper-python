@@ -146,9 +146,9 @@ index = opper.indexes.create("my-index")
 
 index.upload_file("file.txt")
 
-index.index(Document(key="key1", content="Hello world 1", metadata={"score": 0}))
-index.index(Document(key="key1", content="Hello world 1", metadata={"score": 1}))
-index.index(Document(key="key2", content="Hello world 3", metadata={"score": 0}))
+index.add(Document(key="key1", content="Hello world 1", metadata={"score": 0}))
+index.add(Document(key="key1", content="Hello world 1", metadata={"score": 1}))
+index.add(Document(key="key2", content="Hello world 3", metadata={"score": 0}))
 
 response = index.query("Hello")
 print(response)

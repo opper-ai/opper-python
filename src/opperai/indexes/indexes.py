@@ -17,7 +17,7 @@ class Index:
             id=self._index.id, file_path=file_path, **kwargs
         )
 
-    def index(self, doc: Document) -> Document:
+    def add(self, doc: Document) -> Document:
         """Index a document."""
         return self._client.indexes.index(id=self._index.id, doc=doc)
 

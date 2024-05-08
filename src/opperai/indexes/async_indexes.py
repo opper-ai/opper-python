@@ -17,7 +17,7 @@ class AsyncIndex:
             id=self._index.id, file_path=file_path, **kwargs
         )
 
-    async def index(self, doc: Document) -> Document:
+    async def add(self, doc: Document) -> Document:
         """Index a document."""
         return await self._client.indexes.index(id=self._index.id, doc=doc)
 
