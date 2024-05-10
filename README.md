@@ -1,5 +1,7 @@
 # Opper Python SDK
 
+This is the Opper Python SDK. See below for getting started, and the [docs](https://docs.opper.ai) for more information. The SDK has builtin documentation and examples in function docstrings, which should be visible in your code editor as you are using the functions.
+
 ## Install
 
 ```bash
