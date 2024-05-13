@@ -1,8 +1,15 @@
+from contextlib import asynccontextmanager
+
 import pytest
 from opperai import AsyncClient
-from opperai.types import CacheConfiguration, ChatPayload, Function, Message
+from opperai.types import (
+    CacheConfiguration,
+    ChatPayload,
+    Function,
+    Message,
+    MessageContent,
+)
 from opperai.types.exceptions import StructuredGenerationError
-from contextlib import asynccontextmanager
 
 
 @asynccontextmanager
@@ -98,6 +105,66 @@ async def test_delete_function(aclient: AsyncClient, vcr_cassette):
     await aclient.functions.delete(id=function.id)
     f = await aclient.functions.get(id=function.id)
     assert f is None
+
+
+@pytest.mark.asyncio(scope="module")
+async def test_image_url(aclient: AsyncClient, vcr_cassette):
+    async with _function(
+        Function(
+            path="test/sdk/test_image",
+            instructions="describe the image",
+            model="openai/gpt4-turbo",
+        ),
+        aclient,
+    ) as function:
+        f = await aclient.functions.get(id=function.id)
+        resp = await aclient.functions.chat(
+            f.path,
+            ChatPayload(
+                messages=[
+                    Message(
+                        role="user",
+                        content=[
+                            MessageContent.image_url(
+                                url="https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/e1/d3/e1d3fee9-9aaa-4599-ba67-1c71a6d0ed03/1200px-seymouria_fossil.jpg"
+                            )
+                        ],
+                    )
+                ]
+            ),
+        )
+
+        assert "fossil" in resp.message.lower()
+
+
+@pytest.mark.asyncio(scope="module")
+async def test_image_file(aclient: AsyncClient, vcr_cassette):
+    async with _function(
+        Function(
+            path="test/sdk/test_image",
+            instructions="describe the image",
+            model="openai/gpt4-turbo",
+        ),
+        aclient,
+    ) as function:
+        f = await aclient.functions.get(id=function.id)
+        resp = await aclient.functions.chat(
+            f.path,
+            ChatPayload(
+                messages=[
+                    Message(
+                        role="user",
+                        content=[
+                            MessageContent.image(
+                                path="tests/fixtures/images/fossil.jpg"
+                            )
+                        ],
+                    )
+                ]
+            ),
+        )
+
+        assert "fossil" in resp.message.lower()
 
 
 @pytest.mark.asyncio(scope="module")

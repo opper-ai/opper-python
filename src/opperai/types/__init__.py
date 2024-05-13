@@ -1,17 +1,70 @@
 # ruff: noqa: F401
+import base64
 from typing import Any, Dict, List, Optional, Union
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, computed_field
 
 from .indexes import Document, Filter, RetrievalResponse
 from .spans import SpanMetric
 from .validators import validate_id_xor_path
 
 
+class TextMessageContent(BaseModel):
+    type: str = "text"
+    text: str
+
+
+class ImageMessageUrl(BaseModel):
+    url: str
+
+
+class ImageMessageFile(BaseModel):
+    path: str = Field(exclude=True)
+
+    @computed_field
+    @property
+    def url(self) -> str:
+        if self.path.endswith(".png"):
+            with open(self.path, "rb") as image_file:
+                base64_image = base64.b64encode(image_file.read()).decode("utf-8")
+            return f"data:image/png;base64,{base64_image}"
+        elif self.path.endswith(".jpg"):
+            with open(self.path, "rb") as image_file:
+                base64_image = base64.b64encode(image_file.read()).decode("utf-8")
+            return f"data:image/jpeg;base64,{base64_image}"
+        elif self.path.endswith(".jpeg"):
+            with open(self.path, "rb") as image_file:
+                base64_image = base64.b64encode(image_file.read()).decode("utf-8")
+            return f"data:image/jpeg;base64,{base64_image}"
+        else:
+            raise ValueError(
+                "File type not supported. Supported types: .png, .jpg, .jpeg"
+            )
+
+
+class ImageMessageContent(BaseModel):
+    type: str = "image_url"
+    image_url: Union[ImageMessageUrl, ImageMessageFile]
+
+
+class MessageContent(BaseModel):
+    @classmethod
+    def text(cls, text: str) -> TextMessageContent:
+        return TextMessageContent(text=text)
+
+    @classmethod
+    def image(cls, path: str) -> ImageMessageContent:
+        return ImageMessageContent(image_url=ImageMessageFile(path=path))
+
+    @classmethod
+    def image_url(cls, url: str) -> ImageMessageContent:
+        return ImageMessageContent(image_url=ImageMessageUrl(url=url))
+
+
 class Message(BaseModel):
     role: str
-    content: str
+    content: Union[str, List[Union[TextMessageContent, ImageMessageContent]]]
 
 
 class ChatPayload(BaseModel):
