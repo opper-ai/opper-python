@@ -1,0 +1,139 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+    method: GET
+    uri: http://localhost:8000/v1/functions/by_path/test/sdk/test_image
+  response:
+    body:
+      string: '{"detail":"Function not found"}'
+    headers:
+      content-length:
+      - '31'
+      content-type:
+      - application/json
+      date:
+      - Mon, 13 May 2024 11:23:17 GMT
+      server:
+      - uvicorn
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: '{"id": null, "path": "test/sdk/test_image", "description": null, "input_schema":
+      null, "out_schema": null, "instructions": "describe the image", "model": "openai/gpt4-turbo",
+      "index_ids": [], "use_semantic_search": null, "few_shot": null, "few_shot_count":
+      null, "cache_configuration": null}'
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+      content-length:
+      - '291'
+      content-type:
+      - application/json
+    method: POST
+    uri: http://localhost:8000/v1/functions
+  response:
+    body:
+      string: '{"path":"test/sdk/test_image","instructions":"describe the image","id":181,"description":null,"input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"35a44240-ad9d-4151-8476-8b7b54f53ba5","use_semantic_search":false,"model":"openai/gpt4-turbo","language_model_id":1,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
+    headers:
+      content-length:
+      - '382'
+      content-type:
+      - application/json
+      date:
+      - Mon, 13 May 2024 11:23:17 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+    method: GET
+    uri: http://localhost:8000/v1/functions/181
+  response:
+    body:
+      string: '{"path":"test/sdk/test_image","instructions":"describe the image","id":181,"description":null,"input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"35a44240-ad9d-4151-8476-8b7b54f53ba5","use_semantic_search":false,"model":"openai/gpt4-turbo","language_model_id":1,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+    headers:
+      content-length:
+      - '460'
+      content-type:
+      - application/json
+      date:
+      - Mon, 13 May 2024 11:23:17 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"parent_span_uuid": null, "messages": [{"role": "user", "content": [{"type":
+      "image_url", "image_url": {"url": "https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/e1/d3/e1d3fee9-9aaa-4599-ba67-1c71a6d0ed03/1200px-seymouria_fossil.jpg"}}]}]}'
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+      content-length:
+      - '251'
+      content-type:
+      - application/json
+    method: POST
+    uri: http://localhost:8000/v1/chat/test/sdk/test_image
+  response:
+    body:
+      string: '{"span_id":"9f365d67-a09e-4faa-a859-5eccf58714e0","message":"This image
+        features a fossilized skeleton of a prehistoric creature, showcased on a sediment
+        rock slab. The bones are well-preserved and arranged in a nearly complete
+        skeletal form, including the skull, spine, ribs, legs, and tail. The fossil
+        is displayed against a dark backdrop, highlighting the intricate details and
+        contrast against the lighter color of the sediment. It appears to be an exhibit
+        possibly within a museum setting, aimed at educating visitors about ancient
+        wildlife and paleontological discoveries.","json_payload":null,"context":null,"cached":false}'
+    headers:
+      content-length:
+      - '630'
+      content-type:
+      - application/json
+      date:
+      - Mon, 13 May 2024 11:23:17 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+    method: DELETE
+    uri: http://localhost:8000/v1/functions/181
+  response:
+    body:
+      string: ''
+    headers:
+      content-type:
+      - application/json
+      date:
+      - Mon, 13 May 2024 11:23:30 GMT
+      server:
+      - uvicorn
+    status:
+      code: 204
+      message: No Content
+version: 1
