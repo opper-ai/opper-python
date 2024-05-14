@@ -20,6 +20,10 @@ class SpanContext:
         self.output = None
 
 
+def utcnow():
+    return datetime.datetime.now(datetime.timezone.utc)
+
+
 @contextmanager
 def start_span(
     name: str,
@@ -55,7 +59,7 @@ def start_span(
         parent_uuid=parent_span_id if parent_span_id is not None else None,
         project=project,
         name=name,
-        start_time=datetime.datetime.utcnow(),
+        start_time=utcnow(),
     )
     span_uuid = c.spans.create(span)
 
@@ -64,7 +68,7 @@ def start_span(
     try:
         yield span_context  # This allows the block inside the 'with' statement to execute and interact with the span_context
     finally:
-        end_time = datetime.datetime.utcnow()
+        end_time = utcnow()
         update_kwargs = {
             "end_time": end_time,
         }
@@ -102,7 +106,7 @@ def trace(
                 project=project,
                 name=span_name,
                 input=inputs,
-                start_time=datetime.datetime.utcnow(),
+                start_time=utcnow(),
             )
             span_uuid = c.spans.create(span)
 
@@ -114,7 +118,7 @@ def trace(
                     result = func(*args, **kwargs)
                 c.spans.update(
                     span_uuid,
-                    end_time=datetime.datetime.utcnow(),
+                    end_time=utcnow(),
                     output=json.dumps(result) if trace_io else None,
                 )
             finally:
@@ -140,7 +144,7 @@ def trace(
                 project=project,
                 name=span_name,
                 input=inputs,
-                start_time=datetime.datetime.utcnow(),
+                start_time=utcnow(),
             )
             span_uuid = c.spans.create(span)
 
@@ -149,7 +153,7 @@ def trace(
                 result = func(*args, **kwargs)
                 c.spans.update(
                     span_uuid,
-                    end_time=datetime.datetime.utcnow(),
+                    end_time=utcnow(),
                     output=json.dumps(result) if trace_io else None,
                 )
             finally:
