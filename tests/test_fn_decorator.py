@@ -6,7 +6,49 @@ from jsonschema import validate
 from opperai import AsyncClient, Client, fn
 from opperai.core.utils import convert_function_call_to_json
 from opperai.functions.decorator._schemas import type_to_json_schema
+from opperai.types import ImageContent
 from pydantic import BaseModel
+
+
+def test_fn_decorator_image(client: Client, vcr_cassette):
+    class Word(BaseModel):
+        letters: List[str]
+
+    @fn(client=client, model="openai/gpt-4o")
+    def extract_letters(
+        image: ImageContent,
+    ) -> Word:
+        """given an image extract the word it represents"""
+
+    word = extract_letters(
+        ImageContent.from_path("tests/fixtures/images/letters.png"),
+    )
+    print(word)
+
+    assert [x.lower() for x in word.letters] == ["l", "e", "t", "t", "e", "r"]
+
+
+@pytest.mark.asyncio(scope="module")
+async def test_fn_decorator_image_async(aclient: AsyncClient, vcr_cassette):
+    class Word(BaseModel):
+        letters: List[str]
+
+    @fn(client=aclient, model="openai/gpt-4o")
+    async def extract_letters(
+        image: ImageContent,
+    ) -> Word:
+        """given an image extract the word it represents"""
+
+    word = await extract_letters(
+        ImageContent.from_path("tests/fixtures/images/letters.png"),
+    )
+    print(word)
+
+    assert [x.lower() for x in word.letters] == ["l", "e", "t", "t", "e", "r"]
+
+
+def hola_in_word(word: str):
+    return "hola" in word.lower()
 
 
 def test_fn_decorator(client: Client, vcr_cassette):
@@ -15,10 +57,10 @@ def test_fn_decorator(client: Client, vcr_cassette):
         """Translate text to a target language."""
 
     translation = translate("Hello", "es")
-    assert translation == "Hola"
+    assert hola_in_word(translation)
 
     translation, response = translate.call("Hello", "es")
-    assert translation == "Hola"
+    assert hola_in_word(translation)
 
     response.span.save_metric("metric", 1)
 
@@ -30,10 +72,10 @@ async def test_fn_decorator_async(aclient: AsyncClient, vcr_cassette):
         """Translate text to a target language."""
 
     translation = await translate("Hello", "es")
-    assert translation == "Hola"
+    assert hola_in_word(translation)
 
     translation, response = await translate.call("Hello", "es")
-    assert translation == "Hola"
+    assert hola_in_word(translation)
 
     await response.span.save_metric("metric", 1)
 
@@ -138,8 +180,9 @@ def test_convert_func_to_json():
     def something(text: str, target_language: str) -> str:
         """Translate text to a target language."""
 
-    json = convert_function_call_to_json(something, "Hello", "es")
-    assert json == {"text": "Hello", "target_language": "es"}
+    input, media = convert_function_call_to_json(something, "Hello", "es")
+    assert input == {"text": "Hello", "target_language": "es"}
+    assert media == []
 
     model = ExampleModel(
         integer_field=1,
@@ -160,12 +203,24 @@ def test_convert_func_to_json():
     def advanced(text: str, target_language: str, model: ExampleModel) -> str:
         pass
 
-    json = convert_function_call_to_json(advanced, "Hello", "es", model)
-    assert json == {
+    input, media = convert_function_call_to_json(advanced, "Hello", "es", model)
+    assert input == {
         "text": "Hello",
         "target_language": "es",
         "model": model.model_dump(),
     }
+    assert media == []
+
+
+def test_convert_func_to_json_with_image():
+    def f(image: ImageContent, text: str) -> str:
+        pass
+
+    input, media = convert_function_call_to_json(
+        f, ImageContent.from_path("path"), "Hello"
+    )
+    assert input == {"text": "Hello"}
+    assert media == [ImageContent.from_path("path")]
 
 
 class ToyModel(BaseModel):

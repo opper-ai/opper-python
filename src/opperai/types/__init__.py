@@ -62,6 +62,16 @@ class MessageContent(BaseModel):
         return ImageMessageContent(image_url=ImageMessageUrl(url=url))
 
 
+class ImageContent:
+    @classmethod
+    def from_path(cls, path: str) -> ImageMessageContent:
+        return ImageMessageContent(image_url=ImageMessageFile(path=path))
+
+    @classmethod
+    def from_url(cls, url: str) -> ImageMessageContent:
+        return ImageMessageContent(image_url=ImageMessageUrl(url=url))
+
+
 class Message(BaseModel):
     role: str
     content: Union[str, List[Union[TextMessageContent, ImageMessageContent]]]

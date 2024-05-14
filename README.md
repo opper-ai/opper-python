@@ -35,6 +35,30 @@ print(translate("Hello","fr"))
 
 The `fn` decorator automatically creates an Opper function ready to be called like any other function in your code. They're no different than any other function!
 
+### Using the `fn` decorator with images as inputs
+
+```python
+from opperai import fn
+from opperai.types import ImageContent
+from pydantic import BaseModel
+from typing import List
+
+class Word(BaseModel):
+    letters: List[str]
+
+@fn(model="openai/gpt-4o")
+def extract_letters(image: ImageContent) -> Word:
+    """given an image extract the word it represents"""
+
+letters = extract_letters(
+    ImageContent.from_path("tests/fixtures/images/letters.png"),
+)
+
+print(letters)
+```
+
+Note: one need to select the model that can handle images as inputs, see [models](https://docs.opper.ai/functions/models)
+
 ## Calling functions
 
 To call a function you created at [https://platform.opper.ai](https://platform.opper.ai) you can use the following code:
