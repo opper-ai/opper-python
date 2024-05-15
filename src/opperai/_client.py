@@ -14,18 +14,16 @@ DEFAULT_TIMEOUT = 120
 
 
 class AsyncClient:
-    _instance = None
+    functions: AsyncFunctions = None
+    indexes: AsyncIndexes = None
+    spans: AsyncSpans = None
 
-    functions: AsyncFunctions
-    indexes: AsyncIndexes
-    spans: AsyncSpans
-
-    def __new__(
-        cls,
+    def __init__(
+        self,
         api_key: str = None,
         api_url: str = None,
         default_model: str = None,
-        timeout: int = DEFAULT_TIMEOUT,
+        timeout: float = DEFAULT_TIMEOUT,
     ):
         if api_key is None:
             api_key = os.getenv("OPPER_API_KEY")
@@ -37,32 +35,28 @@ class AsyncClient:
             api_url = os.getenv("OPPER_API_URL", DEFAULT_API_URL)
         if default_model is None:
             default_model = os.getenv("OPPER_DEFAULT_MODEL")
-        if cls._instance is None:
-            cls._instance = super(AsyncClient, cls).__new__(cls)
-            cls._instance.http_client = _async_http_client(api_key, api_url, timeout)
-            cls._instance.functions = AsyncFunctions(
-                cls._instance.http_client, default_model=default_model
-            )
-            cls._instance.indexes = AsyncIndexes(cls._instance.http_client)
-            cls._instance.spans = AsyncSpans(cls._instance.http_client)
-            cls._instance.api_key = api_key
-            cls._instance.api_url = api_url
-        return cls._instance
+
+        self.api_key = api_key
+        self.api_url = api_url
+        self.default_model = default_model
+
+        self.http_client = _async_http_client(api_key, api_url, timeout)
+        self.functions = AsyncFunctions(self.http_client, default_model=default_model)
+        self.indexes = AsyncIndexes(self.http_client)
+        self.spans = AsyncSpans(self.http_client)
 
 
 class Client:
-    _instance = None
-
     functions: Functions
     indexes: Indexes
     spans: Spans
 
-    def __new__(
-        cls,
+    def __init__(
+        self,
         api_key: str = None,
         api_url: str = None,
         default_model: str = None,
-        timeout: int = DEFAULT_TIMEOUT,
+        timeout: float = DEFAULT_TIMEOUT,
     ):
         if api_key is None:
             api_key = os.getenv("OPPER_API_KEY")
@@ -74,15 +68,12 @@ class Client:
             api_url = os.getenv("OPPER_API_URL", DEFAULT_API_URL)
         if default_model is None:
             default_model = os.getenv("OPPER_DEFAULT_MODEL")
-        if cls._instance is None:
-            instance = super(Client, cls).__new__(cls)
-            instance.http_client = _http_client(api_key, api_url, timeout)
-            instance.functions = Functions(
-                instance.http_client, default_model=default_model
-            )
-            instance.indexes = Indexes(instance.http_client)
-            instance.spans = Spans(instance.http_client)
-            instance.api_key = api_key
-            instance.api_url = api_url
-            cls._instance = instance
-        return cls._instance
+
+        self.api_key = api_key
+        self.api_url = api_url
+        self.default_model = default_model
+
+        self.http_client = _http_client(api_key, api_url, timeout)
+        self.functions = Functions(self.http_client, default_model=default_model)
+        self.indexes = Indexes(self.http_client)
+        self.spans = Spans(self.http_client)

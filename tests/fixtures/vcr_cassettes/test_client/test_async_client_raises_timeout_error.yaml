@@ -1,0 +1,58 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+    method: GET
+    uri: http://localhost:8000/v1/functions/by_path/test_async_client_raises_timeout_error
+  response:
+    body:
+      string: '{"path":"test_async_client_raises_timeout_error","instructions":"test","id":200,"description":null,"input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"67697841-d106-4621-877d-7b0b5a52ff88","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+    headers:
+      content-length:
+      - '461'
+      content-type:
+      - application/json
+      date:
+      - Fri, 17 May 2024 10:23:18 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"id": 200, "path": "test_async_client_raises_timeout_error", "description":
+      null, "input_schema": null, "out_schema": null, "instructions": "test", "model":
+      null, "index_ids": [], "use_semantic_search": false, "few_shot": false, "few_shot_count":
+      2, "cache_configuration": {"exact_match_cache_ttl": 0, "semantic_cache_threshold":
+      0.95, "semantic_cache_ttl": 0}}'
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+      content-length:
+      - '362'
+      content-type:
+      - application/json
+    method: PATCH
+    uri: http://localhost:8000/v1/functions/200
+  response:
+    body:
+      string: '{"path":"test_async_client_raises_timeout_error","instructions":"test","id":200,"description":null,"input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"67697841-d106-4621-877d-7b0b5a52ff88","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+    headers:
+      content-length:
+      - '461'
+      content-type:
+      - application/json
+      date:
+      - Fri, 17 May 2024 10:23:18 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+version: 1
