@@ -5,7 +5,7 @@ import json
 import os
 import threading
 from functools import wraps
-from typing import Any, List, Tuple, get_args, get_origin, get_type_hints
+from typing import List, get_args, get_origin, get_type_hints
 
 from opperai._client import AsyncClient, Client
 from opperai.core.spans import get_current_span_id
@@ -23,30 +23,6 @@ from pydantic import BaseModel
 from ._schemas import get_output_schema
 
 _thread_local = threading.local()
-
-
-class FunctionWrapper:
-    def __init__(self, func):
-        self.func = func
-
-    def __call__(self, *args, **kwargs) -> Any:
-        answer, _ = self.func(*args, **kwargs)
-        return answer
-
-    def call(self, *args, **kwargs) -> Tuple[Any, FunctionResponse]:
-        return self.func(*args, **kwargs)
-
-
-class AsyncFunctionWrapper:
-    def __init__(self, func):
-        self.func = func
-
-    async def __call__(self, *args, **kwargs) -> Any:
-        answer, _ = await self.func(*args, **kwargs)
-        return answer
-
-    async def call(self, *args, **kwargs) -> Tuple[Any, AsyncFunctionResponse]:
-        return await self.func(*args, **kwargs)
 
 
 @contextlib.contextmanager
@@ -203,6 +179,10 @@ def fn(
 
         @wraps(func)
         async def async_wrapper(*args, **kwargs):
+            answer, _ = await async_call(*args, **kwargs)
+            return answer
+
+        async def async_call(*args, **kwargs):
             await async_setup()
 
             input, media = convert_function_call_to_json(func, *args, **kwargs)
@@ -221,6 +201,10 @@ def fn(
 
         @wraps(func)
         def sync_wrapper(*args, **kwargs):
+            answer, _ = sync_call(*args, **kwargs)
+            return answer
+
+        def sync_call(*args, **kwargs):
             setup()
 
             input, media = convert_function_call_to_json(func, *args, **kwargs)
@@ -235,11 +219,12 @@ def fn(
 
             return answer, response
 
-        return (
-            AsyncFunctionWrapper(async_wrapper)
-            if asyncio.iscoroutinefunction(func)
-            else FunctionWrapper(sync_wrapper)
-        )
+        if asyncio.iscoroutinefunction(func):
+            async_wrapper.call = async_call
+            return async_wrapper
+        else:
+            sync_wrapper.call = sync_call
+            return sync_wrapper
 
     if _func is None:
         return decorator

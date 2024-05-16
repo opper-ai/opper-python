@@ -10,6 +10,41 @@ from opperai.types import ImageContent
 from pydantic import BaseModel
 
 
+def test_fn_decorator_on_method(client: Client, vcr_cassette):
+    class TestClass(BaseModel):
+        data: str
+
+        @fn(client=client)
+        def test_method(self, text: str) -> str:
+            """say hello"""
+
+    test = TestClass(data="Hello")
+
+    res = test.test_method()
+    assert "hello" in res.lower()
+
+    res, _ = test.test_method.call("Hello")
+    assert "hello" in res.lower()
+
+
+@pytest.mark.asyncio(scope="module")
+async def test_fn_decorator_on_method_async(aclient: AsyncClient, vcr_cassette):
+    class TestClass(BaseModel):
+        data: str
+
+        @fn(client=aclient)
+        async def test_method(self, text: str) -> str:
+            """say hello"""
+
+    test = TestClass(data="Hello")
+
+    res = await test.test_method()
+    assert "hello" in res.lower()
+
+    res, _ = await test.test_method.call("Hello")
+    assert "hello" in res.lower()
+
+
 def test_fn_decorator_image(client: Client, vcr_cassette):
     class Word(BaseModel):
         letters: List[str]
