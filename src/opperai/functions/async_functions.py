@@ -42,7 +42,7 @@ class AsyncStreamingResponse:
     async def initialize(self):
         self.stream = await self.stream
         try:
-            first_chunk = await anext(self.stream)
+            first_chunk = await self.stream.__anext__()
             self._span_id = (
                 first_chunk.span_id if first_chunk.span_id is not None else None
             )
