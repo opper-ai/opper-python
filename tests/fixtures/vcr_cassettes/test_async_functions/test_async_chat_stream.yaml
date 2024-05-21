@@ -10,14 +10,15 @@ interactions:
     uri: http://localhost:8000/v1/functions/by_path/test/sdk/test_async_chat_stream
   response:
     body:
-      string: '{"detail":"Function not found"}'
+      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
+        not found"}]}'
     headers:
       content-length:
-      - '31'
+      - '98'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 10:52:29 GMT
+      - Tue, 21 May 2024 10:10:03 GMT
       server:
       - uvicorn
     status:
@@ -41,16 +42,15 @@ interactions:
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":72,"path":"test/sdk/test_async_chat_stream","description":"Translate
-        to French","input_schema":null,"out_schema":null,"instructions":"Translate
-        to French","few_shot":false,"few_shot_count":2,"dataset_uuid":"c3d10f2b-3760-4cba-bf6d-60a4f011d093","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
+      string: '{"path":"test/sdk/test_async_chat_stream","instructions":"Translate
+        to French","id":34,"description":"Translate to French","input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"39480448-fe2c-4f18-a2f7-ce71c686467e","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
     headers:
       content-length:
       - '407'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 10:52:29 GMT
+      - Tue, 21 May 2024 10:10:03 GMT
       server:
       - uvicorn
     status:
@@ -73,7 +73,7 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_async_chat_stream?stream=True
   response:
     body:
-      string: "data: {\"span_id\": \"29fdf592-9b0b-4f20-b30e-0fcc972c12f5\"}\r\n\r\ndata:
+      string: "data: {\"span_id\": \"47f354e1-263d-4e37-9639-f5db39190653\"}\r\n\r\ndata:
         {\"delta\": \"Bonjour\"}\r\n\r\n"
     headers:
       Transfer-Encoding:
@@ -85,7 +85,7 @@ interactions:
       content-type:
       - text/event-stream; charset=utf-8
       date:
-      - Thu, 02 May 2024 10:52:29 GMT
+      - Tue, 21 May 2024 10:10:03 GMT
       server:
       - uvicorn
       x-accel-buffering:
@@ -101,7 +101,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/72
+    uri: http://localhost:8000/v1/functions/34
   response:
     body:
       string: ''
@@ -109,7 +109,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 10:52:29 GMT
+      - Tue, 21 May 2024 10:10:03 GMT
       server:
       - uvicorn
     status:

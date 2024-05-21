@@ -11,22 +11,22 @@ interactions:
   response:
     body:
       string: '{"path":"extract_letters","instructions":"Operation: extract_letters\n\nOperation
-        description: given an image extract the word it represents","id":190,"description":"given
-        an image extract the word it represents","input_schema":null,"out_schema":{"properties":{"letters":{"items":{"type":"string"},"title":"Letters","type":"array"}},"required":["letters"],"title":"Word","type":"object","$defs":{}},"few_shot":false,"few_shot_count":2,"dataset_uuid":"7eb2250e-88fd-495a-bb60-d8c10f54b4e4","use_semantic_search":false,"model":"openai/gpt-4o","language_model_id":20,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+        description: given an image extract the word it represents","id":24,"description":"given
+        an image extract the word it represents","input_schema":null,"out_schema":{"properties":{"letters":{"items":{"type":"string"},"title":"Letters","type":"array"}},"required":["letters"],"title":"Word","type":"object","$defs":{}},"few_shot":false,"few_shot_count":2,"dataset_uuid":"f3f7d90e-5a26-4143-9289-2cbfa7d3c2e8","use_semantic_search":false,"model":"openai/gpt-4o","language_model_id":20,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
     headers:
       content-length:
-      - '724'
+      - '723'
       content-type:
       - application/json
       date:
-      - Tue, 14 May 2024 19:46:24 GMT
+      - Tue, 21 May 2024 10:25:48 GMT
       server:
       - uvicorn
     status:
       code: 200
       message: OK
 - request:
-    body: '{"id": 190, "path": "extract_letters", "description": "given an image extract
+    body: '{"id": 24, "path": "extract_letters", "description": "given an image extract
       the word it represents", "input_schema": null, "out_schema": {"properties":
       {"letters": {"items": {"type": "string"}, "title": "Letters", "type": "array"}},
       "required": ["letters"], "title": "Word", "type": "object", "$defs": {}}, "instructions":
@@ -39,23 +39,23 @@ interactions:
       connection:
       - keep-alive
       content-length:
-      - '570'
+      - '569'
       content-type:
       - application/json
     method: PATCH
-    uri: http://localhost:8000/v1/functions/190
+    uri: http://localhost:8000/v1/functions/24
   response:
     body:
       string: '{"path":"extract_letters","instructions":"Operation: extract_letters\n\nOperation
-        description: given an image extract the word it represents","id":190,"description":"given
-        an image extract the word it represents","input_schema":null,"out_schema":{"properties":{"letters":{"items":{"type":"string"},"title":"Letters","type":"array"}},"required":["letters"],"title":"Word","type":"object","$defs":{}},"few_shot":false,"few_shot_count":2,"dataset_uuid":"7eb2250e-88fd-495a-bb60-d8c10f54b4e4","use_semantic_search":false,"model":"openai/gpt-4o","language_model_id":20,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+        description: given an image extract the word it represents","id":24,"description":"given
+        an image extract the word it represents","input_schema":null,"out_schema":{"properties":{"letters":{"items":{"type":"string"},"title":"Letters","type":"array"}},"required":["letters"],"title":"Word","type":"object","$defs":{}},"few_shot":false,"few_shot_count":2,"dataset_uuid":"f3f7d90e-5a26-4143-9289-2cbfa7d3c2e8","use_semantic_search":false,"model":"openai/gpt-4o","language_model_id":20,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
     headers:
       content-length:
-      - '724'
+      - '723'
       content-type:
       - application/json
       date:
-      - Tue, 14 May 2024 19:46:24 GMT
+      - Tue, 21 May 2024 10:25:48 GMT
       server:
       - uvicorn
     status:
@@ -77,14 +77,14 @@ interactions:
     uri: http://localhost:8000/v1/chat/extract_letters
   response:
     body:
-      string: '{"span_id":"c665fb97-7b2d-4c81-b9bd-b8ef1f619275","message":null,"json_payload":{"letters":["L","E","T","T","E","R"]},"context":null,"cached":false}'
+      string: '{"span_id":"a720f126-4ecc-47f8-acc9-1a46f38f8ef1","message":null,"json_payload":{"letters":["L","E","T","T","E","R"]},"context":null,"cached":false}'
     headers:
       content-length:
       - '148'
       content-type:
       - application/json
       date:
-      - Tue, 14 May 2024 19:46:24 GMT
+      - Tue, 21 May 2024 10:25:48 GMT
       server:
       - uvicorn
     status:

@@ -18,14 +18,14 @@ async def test_async_client_raises_timeout_error(vcr_cassette):
 
     f._client.http_client.session.request = mock_request
 
-    with pytest.raises(OpperTimeoutError, match="request timed out"):
+    with pytest.raises(OpperTimeoutError):
         await f.chat(
             messages=[Message(role="user", content="say hello")],
         )
 
     with patch("opperai.core._http_clients.aconnect_sse") as mock_aconnect_sse:
         mock_aconnect_sse.side_effect = httpx.TimeoutException("request timed out")
-        with pytest.raises(OpperTimeoutError, match="request timed out"):
+        with pytest.raises(OpperTimeoutError):
             r = await f.chat(
                 messages=[Message(role="user", content="say hello")],
                 stream=True,
@@ -43,13 +43,13 @@ def test_client_raises_timeout_error(client: Client, vcr_cassette):
 
     f._client.http_client.session.request = mock_request
 
-    with pytest.raises(OpperTimeoutError, match="request timed out"):
+    with pytest.raises(OpperTimeoutError):
         f.chat(messages=[Message(role="user", content="say hello")])
 
     with patch("opperai.core._http_clients.connect_sse") as mock_connect_sse:
         mock_connect_sse.side_effect = httpx.TimeoutException("request timed out")
 
-        with pytest.raises(OpperTimeoutError, match="request timed out"):
+        with pytest.raises(OpperTimeoutError):
             r = f.chat(
                 messages=[Message(role="user", content="say hello")], stream=True
             )

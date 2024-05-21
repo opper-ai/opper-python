@@ -10,7 +10,7 @@ from opperai.types import (
     StreamingChunk,
     validate_id_xor_path,
 )
-from opperai.types.exceptions import APIError, RateLimitError, StructuredGenerationError
+from opperai.types.exceptions import APIError
 
 
 class Functions:
@@ -329,13 +329,9 @@ class Functions:
 
         if response.status_code == HTTPStatus.OK:
             return FunctionResponse.model_validate(response.json())
-        elif response.status_code == HTTPStatus.TOO_MANY_REQUESTS:
-            raise RateLimitError("Rate limit error: please retry in a few seconds")
-        elif response.status_code == HTTPStatus.BAD_REQUEST:
-            raise StructuredGenerationError(response.text)
 
         raise APIError(
-            f"Failed to run function {function_path} with status {response.status_code}"
+            f"Failed to run function {function_path} with status {response.status_code}: {response.text}"
         )
 
     def _chat_stream(

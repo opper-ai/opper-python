@@ -17,7 +17,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:18:07 GMT
+      - Tue, 21 May 2024 10:10:58 GMT
       server:
       - uvicorn
     status:
@@ -38,14 +38,14 @@ interactions:
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '{"id":6,"name":"test_list_indexes","files":[],"created_at":"2024-05-02T09:18:07.426246Z"}'
+      string: '{"id":14,"name":"test_list_indexes","files":[],"created_at":"2024-05-21T10:10:58.827744Z"}'
     headers:
       content-length:
-      - '89'
+      - '90'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:18:07 GMT
+      - Tue, 21 May 2024 10:10:58 GMT
       server:
       - uvicorn
     status:
@@ -62,15 +62,15 @@ interactions:
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '[{"id":6,"org_id":1,"org_name":null,"name":"test_list_indexes","created_by":"Mattias
-        Lundell","created_at":"2024-05-02T09:18:07.426246Z","updated_at":"2024-05-02T09:18:07.426246Z","count":0}]'
+      string: '[{"id":14,"org_id":1,"org_name":null,"name":"test_list_indexes","created_by":"Mattias
+        Lundell","created_at":"2024-05-21T10:10:58.827744Z","updated_at":"2024-05-21T10:10:58.827744Z","count":0}]'
     headers:
       content-length:
-      - '191'
+      - '192'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:18:07 GMT
+      - Tue, 21 May 2024 10:10:58 GMT
       server:
       - uvicorn
     status:
@@ -91,14 +91,14 @@ interactions:
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '{"id":7,"name":"test_list_indexes_2","files":[],"created_at":"2024-05-02T09:18:07.459416Z"}'
+      string: '{"id":15,"name":"test_list_indexes_2","files":[],"created_at":"2024-05-21T10:10:58.862139Z"}'
     headers:
       content-length:
-      - '91'
+      - '92'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:18:07 GMT
+      - Tue, 21 May 2024 10:10:58 GMT
       server:
       - uvicorn
     status:
@@ -115,16 +115,16 @@ interactions:
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '[{"id":6,"org_id":1,"org_name":null,"name":"test_list_indexes","created_by":"Mattias
-        Lundell","created_at":"2024-05-02T09:18:07.426246Z","updated_at":"2024-05-02T09:18:07.426246Z","count":0},{"id":7,"org_id":1,"org_name":null,"name":"test_list_indexes_2","created_by":"Mattias
-        Lundell","created_at":"2024-05-02T09:18:07.459416Z","updated_at":"2024-05-02T09:18:07.459416Z","count":0}]'
+      string: '[{"id":14,"org_id":1,"org_name":null,"name":"test_list_indexes","created_by":"Mattias
+        Lundell","created_at":"2024-05-21T10:10:58.827744Z","updated_at":"2024-05-21T10:10:58.827744Z","count":0},{"id":15,"org_id":1,"org_name":null,"name":"test_list_indexes_2","created_by":"Mattias
+        Lundell","created_at":"2024-05-21T10:10:58.862139Z","updated_at":"2024-05-21T10:10:58.862139Z","count":0}]'
     headers:
       content-length:
-      - '383'
+      - '385'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:18:07 GMT
+      - Tue, 21 May 2024 10:10:58 GMT
       server:
       - uvicorn
     status:
@@ -138,7 +138,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/indexes/7
+    uri: http://localhost:8000/v1/indexes/15
   response:
     body:
       string: 'true'
@@ -148,7 +148,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:18:07 GMT
+      - Tue, 21 May 2024 10:10:58 GMT
       server:
       - uvicorn
     status:
@@ -162,7 +162,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/indexes/6
+    uri: http://localhost:8000/v1/indexes/14
   response:
     body:
       string: 'true'
@@ -172,7 +172,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:18:07 GMT
+      - Tue, 21 May 2024 10:10:58 GMT
       server:
       - uvicorn
     status:

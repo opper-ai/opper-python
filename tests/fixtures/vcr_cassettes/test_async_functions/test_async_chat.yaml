@@ -10,14 +10,15 @@ interactions:
     uri: http://localhost:8000/v1/functions/by_path/test/sdk/test_async_chat
   response:
     body:
-      string: '{"detail":"Function not found"}'
+      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
+        not found"}]}'
     headers:
       content-length:
-      - '31'
+      - '98'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 10:52:28 GMT
+      - Tue, 21 May 2024 10:10:02 GMT
       server:
       - uvicorn
     status:
@@ -41,16 +42,15 @@ interactions:
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":71,"path":"test/sdk/test_async_chat","description":"Translate
-        to French","input_schema":null,"out_schema":null,"instructions":"Translate
-        to French","few_shot":false,"few_shot_count":2,"dataset_uuid":"05a07dc3-f0a2-4a31-8283-b85ad16b8653","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
+      string: '{"path":"test/sdk/test_async_chat","instructions":"Translate to French","id":33,"description":"Translate
+        to French","input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"ebc1ad13-460f-4351-88e7-021375408546","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
     headers:
       content-length:
       - '400'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 10:52:28 GMT
+      - Tue, 21 May 2024 10:10:02 GMT
       server:
       - uvicorn
     status:
@@ -71,14 +71,14 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_async_chat
   response:
     body:
-      string: '{"span_id":"7099623e-78b8-450d-887c-2028f018caed","message":"Bonjour","json_payload":null,"error":null,"context":null,"cached":false}'
+      string: '{"span_id":"3010807e-b28a-4840-a9cc-828b8b9924a8","message":"Bonjour","json_payload":null,"context":null,"cached":false}'
     headers:
       content-length:
-      - '133'
+      - '120'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 10:52:28 GMT
+      - Tue, 21 May 2024 10:10:02 GMT
       server:
       - uvicorn
     status:
@@ -92,7 +92,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/71
+    uri: http://localhost:8000/v1/functions/33
   response:
     body:
       string: ''
@@ -100,7 +100,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 10:52:29 GMT
+      - Tue, 21 May 2024 10:10:03 GMT
       server:
       - uvicorn
     status:

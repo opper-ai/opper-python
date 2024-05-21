@@ -10,14 +10,15 @@ interactions:
     uri: http://localhost:8000/v1/functions/by_path/test/sdk/test_delete_function_by_id
   response:
     body:
-      string: '{"detail":"Function not found"}'
+      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
+        not found"}]}'
     headers:
       content-length:
-      - '31'
+      - '98'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:17:37 GMT
+      - Tue, 21 May 2024 10:10:21 GMT
       server:
       - uvicorn
     status:
@@ -41,15 +42,15 @@ interactions:
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":24,"path":"test/sdk/test_delete_function_by_id","description":"Test
-        function","input_schema":null,"out_schema":null,"instructions":"Do something","few_shot":false,"few_shot_count":2,"dataset_uuid":"55891e4f-91f2-48ef-a423-9f5dcb9fa61b","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
+      string: '{"path":"test/sdk/test_delete_function_by_id","instructions":"Do something","id":42,"description":"Test
+        function","input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"b787b478-20e7-4051-a4e7-bc88ec424121","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
     headers:
       content-length:
       - '398'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:17:37 GMT
+      - Tue, 21 May 2024 10:10:21 GMT
       server:
       - uvicorn
     status:
@@ -63,7 +64,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/24
+    uri: http://localhost:8000/v1/functions/42
   response:
     body:
       string: ''
@@ -71,7 +72,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:17:37 GMT
+      - Tue, 21 May 2024 10:10:21 GMT
       server:
       - uvicorn
     status:
@@ -85,17 +86,18 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/24
+    uri: http://localhost:8000/v1/functions/42
   response:
     body:
-      string: '{"detail":"Function not found"}'
+      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
+        not found"}]}'
     headers:
       content-length:
-      - '31'
+      - '98'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:17:37 GMT
+      - Tue, 21 May 2024 10:10:21 GMT
       server:
       - uvicorn
     status:

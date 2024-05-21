@@ -1,9 +1,11 @@
 # ruff: noqa: F401
+
 import base64
+from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, Field, computed_field
+from pydantic import BaseModel, ConfigDict, Field, FilePath, computed_field
 
 from .indexes import Document, Filter, RetrievalResponse
 from .spans import SpanMetric
@@ -20,21 +22,22 @@ class ImageMessageUrl(BaseModel):
 
 
 class ImageMessageFile(BaseModel):
-    path: str = Field(exclude=True)
+    path: FilePath = Field(exclude=True)
 
     @computed_field
     @property
     def url(self) -> str:
-        if self.path.endswith(".png"):
-            with open(self.path, "rb") as image_file:
+        path = self.path.as_posix()
+        if path.endswith(".png"):
+            with open(path, "rb") as image_file:
                 base64_image = base64.b64encode(image_file.read()).decode("utf-8")
             return f"data:image/png;base64,{base64_image}"
-        elif self.path.endswith(".jpg"):
-            with open(self.path, "rb") as image_file:
+        elif path.endswith(".jpg"):
+            with open(path, "rb") as image_file:
                 base64_image = base64.b64encode(image_file.read()).decode("utf-8")
             return f"data:image/jpeg;base64,{base64_image}"
-        elif self.path.endswith(".jpeg"):
-            with open(self.path, "rb") as image_file:
+        elif path.endswith(".jpeg"):
+            with open(path, "rb") as image_file:
                 base64_image = base64.b64encode(image_file.read()).decode("utf-8")
             return f"data:image/jpeg;base64,{base64_image}"
         else:
@@ -131,3 +134,13 @@ class Function(BaseModel):
     few_shot: Optional[bool] = None
     few_shot_count: Optional[int] = None
     cache_configuration: Optional[CacheConfiguration] = None
+
+
+class Error(BaseModel):
+    type: str
+    message: str
+    detail: Any
+
+
+class Errors(BaseModel):
+    errors: List[Error]

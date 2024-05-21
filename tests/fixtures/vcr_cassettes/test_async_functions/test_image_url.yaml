@@ -10,14 +10,15 @@ interactions:
     uri: http://localhost:8000/v1/functions/by_path/test/sdk/test_image
   response:
     body:
-      string: '{"detail":"Function not found"}'
+      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
+        not found"}]}'
     headers:
       content-length:
-      - '31'
+      - '98'
       content-type:
       - application/json
       date:
-      - Mon, 13 May 2024 11:24:37 GMT
+      - Tue, 21 May 2024 10:09:44 GMT
       server:
       - uvicorn
     status:
@@ -41,14 +42,14 @@ interactions:
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"path":"test/sdk/test_image","instructions":"describe the image","id":182,"description":null,"input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"91475eb6-b617-4160-92c6-253282b24961","use_semantic_search":false,"model":"openai/gpt4-turbo","language_model_id":1,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
+      string: '{"path":"test/sdk/test_image","instructions":"describe the image","id":31,"description":null,"input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"d3fdeb37-9dc4-4e05-a090-904016c00727","use_semantic_search":false,"model":"openai/gpt4-turbo","language_model_id":1,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
     headers:
       content-length:
-      - '382'
+      - '381'
       content-type:
       - application/json
       date:
-      - Mon, 13 May 2024 11:24:37 GMT
+      - Tue, 21 May 2024 10:09:44 GMT
       server:
       - uvicorn
     status:
@@ -62,17 +63,17 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/182
+    uri: http://localhost:8000/v1/functions/31
   response:
     body:
-      string: '{"path":"test/sdk/test_image","instructions":"describe the image","id":182,"description":null,"input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"91475eb6-b617-4160-92c6-253282b24961","use_semantic_search":false,"model":"openai/gpt4-turbo","language_model_id":1,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+      string: '{"path":"test/sdk/test_image","instructions":"describe the image","id":31,"description":null,"input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"d3fdeb37-9dc4-4e05-a090-904016c00727","use_semantic_search":false,"model":"openai/gpt4-turbo","language_model_id":1,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
     headers:
       content-length:
-      - '460'
+      - '459'
       content-type:
       - application/json
       date:
-      - Mon, 13 May 2024 11:24:37 GMT
+      - Tue, 21 May 2024 10:09:44 GMT
       server:
       - uvicorn
     status:
@@ -94,22 +95,25 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_image
   response:
     body:
-      string: '{"span_id":"8dcb500e-e2b6-4c31-8aba-bba667130742","message":"This image
-        displays a fossil embedded in a rock slab, which appears to be from a small
-        dinosaur or reptile. The fossil includes a well-preserved skeleton with a
-        clear outline of the skull, vertebrae, ribs, limbs, and tail. The rock matrix
-        surrounding the fossil is relatively smooth and light-colored, highlighting
-        the darker tones of the bones. This specimen is excellently preserved, showing
-        intricate details of the bone structure, which can be very helpful for scientific
-        study and educational purposes. The lighting and the dark background enhance
-        the visibility of the fossil''s details.","json_payload":null,"context":null,"cached":false}'
+      string: '{"span_id":"96558adf-59a6-4322-9ba8-6fa10fa268b1","message":"This image
+        features a fossil embedded in a flat stone slab, displayed under lighting
+        that highlights its details. The fossil appears to be that of a small reptilian
+        or lizard-like creature, possibly from a prehistoric era. You can clearly
+        see the skeletal structure, including the skull, spine, ribs, and limbs, which
+        are well-preserved and distinct. The texture of the stone slab is rough and
+        slightly uneven, providing a natural contrast to the dark fossil remains.
+        This kind of preservation suggests that the creature might have been rapidly
+        covered by sediment, aiding in the excellent preservation of its skeletal
+        features. Such fossils are crucial for scientific studies as they provide
+        valuable insights into the anatomy and evolutionary history of the species
+        they belonged to.","json_payload":null,"context":null,"cached":false}'
     headers:
       content-length:
-      - '705'
+      - '898'
       content-type:
       - application/json
       date:
-      - Mon, 13 May 2024 11:24:37 GMT
+      - Tue, 21 May 2024 10:09:44 GMT
       server:
       - uvicorn
     status:
@@ -123,7 +127,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/182
+    uri: http://localhost:8000/v1/functions/31
   response:
     body:
       string: ''
@@ -131,7 +135,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 13 May 2024 11:25:05 GMT
+      - Tue, 21 May 2024 10:09:52 GMT
       server:
       - uvicorn
     status:

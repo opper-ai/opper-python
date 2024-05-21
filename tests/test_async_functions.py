@@ -267,7 +267,7 @@ async def test_failed_structured_generation(aclient: AsyncClient, vcr_cassette):
             model="mistral/mistral-tiny-eu",
             path="test/sdk/test_failed_structured_generation",
             description="test structured generation exception",
-            instructions="You translate the incoming text to french",
+            instructions="You translate the incoming text to french returned as markdown ```",
             out_schema={
                 "type": "object",
                 "properties": {

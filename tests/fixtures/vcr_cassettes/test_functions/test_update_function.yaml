@@ -10,23 +10,22 @@ interactions:
     uri: http://localhost:8000/v1/functions/by_path/test/sdk/test_update_function
   response:
     body:
-      string: '{"id":23,"path":"test/sdk/test_update_function","description":"Test
-        function","input_schema":null,"out_schema":null,"instructions":"Do something
-        else","few_shot":false,"few_shot_count":2,"dataset_uuid":"22a1b039-cf65-441a-81b4-6306625067b9","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":2,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
+        not found"}]}'
     headers:
       content-length:
-      - '475'
+      - '98'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:17:37 GMT
+      - Tue, 21 May 2024 10:10:21 GMT
       server:
       - uvicorn
     status:
-      code: 200
-      message: OK
+      code: 404
+      message: Not Found
 - request:
-    body: '{"id": 23, "path": "test/sdk/test_update_function", "description": "Test
+    body: '{"id": null, "path": "test/sdk/test_update_function", "description": "Test
       function", "input_schema": null, "out_schema": null, "instructions": "Do something",
       "model": null, "index_ids": [], "use_semantic_search": null, "few_shot": null,
       "few_shot_count": null, "cache_configuration": null}'
@@ -36,22 +35,22 @@ interactions:
       connection:
       - keep-alive
       content-length:
-      - '289'
+      - '291'
       content-type:
       - application/json
-    method: PATCH
-    uri: http://localhost:8000/v1/functions/23
+    method: POST
+    uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":23,"path":"test/sdk/test_update_function","description":"Test
-        function","input_schema":null,"out_schema":null,"instructions":"Do something","few_shot":false,"few_shot_count":2,"dataset_uuid":"22a1b039-cf65-441a-81b4-6306625067b9","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":3,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+      string: '{"path":"test/sdk/test_update_function","instructions":"Do something","id":41,"description":"Test
+        function","input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"8f6ebb23-fd84-4733-901c-5dc90f9bba01","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
     headers:
       content-length:
-      - '470'
+      - '392'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:17:37 GMT
+      - Tue, 21 May 2024 10:10:21 GMT
       server:
       - uvicorn
     status:
@@ -65,25 +64,25 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/23
+    uri: http://localhost:8000/v1/functions/41
   response:
     body:
-      string: '{"id":23,"path":"test/sdk/test_update_function","description":"Test
-        function","input_schema":null,"out_schema":null,"instructions":"Do something","few_shot":false,"few_shot_count":2,"dataset_uuid":"22a1b039-cf65-441a-81b4-6306625067b9","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":3,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+      string: '{"path":"test/sdk/test_update_function","instructions":"Do something","id":41,"description":"Test
+        function","input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"8f6ebb23-fd84-4733-901c-5dc90f9bba01","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
     headers:
       content-length:
       - '470'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:17:37 GMT
+      - Tue, 21 May 2024 10:10:21 GMT
       server:
       - uvicorn
     status:
       code: 200
       message: OK
 - request:
-    body: '{"id": 23, "path": "test/sdk/test_update_function", "description": "Test
+    body: '{"id": 41, "path": "test/sdk/test_update_function", "description": "Test
       function", "input_schema": null, "out_schema": null, "instructions": "Do something
       else", "model": "azure/gpt4-eu", "index_ids": [], "use_semantic_search": false,
       "few_shot": false, "few_shot_count": 2, "cache_configuration": {"exact_match_cache_ttl":
@@ -98,19 +97,18 @@ interactions:
       content-type:
       - application/json
     method: PATCH
-    uri: http://localhost:8000/v1/functions/23
+    uri: http://localhost:8000/v1/functions/41
   response:
     body:
-      string: '{"id":23,"path":"test/sdk/test_update_function","description":"Test
-        function","input_schema":null,"out_schema":null,"instructions":"Do something
-        else","few_shot":false,"few_shot_count":2,"dataset_uuid":"22a1b039-cf65-441a-81b4-6306625067b9","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":4,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+      string: '{"path":"test/sdk/test_update_function","instructions":"Do something
+        else","id":41,"description":"Test function","input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"8f6ebb23-fd84-4733-901c-5dc90f9bba01","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":2,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
     headers:
       content-length:
       - '475'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:17:37 GMT
+      - Tue, 21 May 2024 10:10:21 GMT
       server:
       - uvicorn
     status:
@@ -124,19 +122,18 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/23
+    uri: http://localhost:8000/v1/functions/41
   response:
     body:
-      string: '{"id":23,"path":"test/sdk/test_update_function","description":"Test
-        function","input_schema":null,"out_schema":null,"instructions":"Do something
-        else","few_shot":false,"few_shot_count":2,"dataset_uuid":"22a1b039-cf65-441a-81b4-6306625067b9","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":4,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+      string: '{"path":"test/sdk/test_update_function","instructions":"Do something
+        else","id":41,"description":"Test function","input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"8f6ebb23-fd84-4733-901c-5dc90f9bba01","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":2,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
     headers:
       content-length:
       - '475'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:17:37 GMT
+      - Tue, 21 May 2024 10:10:21 GMT
       server:
       - uvicorn
     status:
@@ -150,7 +147,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/23
+    uri: http://localhost:8000/v1/functions/41
   response:
     body:
       string: ''
@@ -158,7 +155,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:17:37 GMT
+      - Tue, 21 May 2024 10:10:21 GMT
       server:
       - uvicorn
     status:
