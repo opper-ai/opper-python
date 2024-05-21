@@ -14,14 +14,14 @@ interactions:
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '{"id":10,"name":"test_retrieve_filters","files":[],"created_at":"2024-05-02T09:18:08.481814Z"}'
+      string: '{"id":18,"name":"test_retrieve_filters","files":[],"created_at":"2024-05-21T10:10:59.783712Z"}'
     headers:
       content-length:
       - '94'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:18:08 GMT
+      - Tue, 21 May 2024 10:10:59 GMT
       server:
       - uvicorn
     status:
@@ -40,17 +40,17 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/indexes/10/index
+    uri: http://localhost:8000/v1/indexes/18/index
   response:
     body:
-      string: '{"id":8,"uuid":"1ed107f4-29d9-40de-8b3a-550a61efe1d4","key":"1ed107f4-29d9-40de-8b3a-550a61efe1d4"}'
+      string: '{"id":6,"uuid":"ddf1dedc-a4f7-425e-a964-8e6082a4a1be","key":"ddf1dedc-a4f7-425e-a964-8e6082a4a1be"}'
     headers:
       content-length:
       - '99'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:18:08 GMT
+      - Tue, 21 May 2024 10:10:59 GMT
       server:
       - uvicorn
     status:
@@ -69,17 +69,17 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/indexes/10/query
+    uri: http://localhost:8000/v1/indexes/18/query
   response:
     body:
-      string: '[{"uuid":"9c9adf6d-f446-4cb2-b701-602b211f9491","content":"Bonjour","metadata":{"source":"test"},"document_id":null,"score":4.736573219299316,"source_uuids":["9c9adf6d-f446-4cb2-b701-602b211f9491"]}]'
+      string: '[{"uuid":"b936d313-7787-467c-84bb-7f3fcfe8a86a","content":"Bonjour","metadata":{"source":"test"},"document_id":null,"score":4.736573219299316,"source_uuids":["b936d313-7787-467c-84bb-7f3fcfe8a86a"]}]'
     headers:
       content-length:
       - '199'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:18:08 GMT
+      - Tue, 21 May 2024 10:10:59 GMT
       server:
       - uvicorn
     status:
@@ -93,7 +93,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/indexes/10
+    uri: http://localhost:8000/v1/indexes/18
   response:
     body:
       string: 'true'
@@ -103,7 +103,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:18:08 GMT
+      - Tue, 21 May 2024 10:10:59 GMT
       server:
       - uvicorn
     status:

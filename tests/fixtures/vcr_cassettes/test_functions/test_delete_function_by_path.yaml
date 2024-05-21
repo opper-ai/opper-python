@@ -10,14 +10,15 @@ interactions:
     uri: http://localhost:8000/v1/functions/by_path/test/sdk/test_delete_function_by_path
   response:
     body:
-      string: '{"detail":"Function not found"}'
+      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
+        not found"}]}'
     headers:
       content-length:
-      - '31'
+      - '98'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:17:37 GMT
+      - Tue, 21 May 2024 10:10:21 GMT
       server:
       - uvicorn
     status:
@@ -41,15 +42,15 @@ interactions:
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":25,"path":"test/sdk/test_delete_function_by_path","description":"Test
-        function","input_schema":null,"out_schema":null,"instructions":"Do something","few_shot":false,"few_shot_count":2,"dataset_uuid":"6df5d044-11cb-4b46-8505-2e6dd439978d","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
+      string: '{"path":"test/sdk/test_delete_function_by_path","instructions":"Do
+        something","id":43,"description":"Test function","input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"dbbab2e1-6a23-49e8-9486-4452155ef9e1","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
     headers:
       content-length:
       - '400'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:17:37 GMT
+      - Tue, 21 May 2024 10:10:21 GMT
       server:
       - uvicorn
     status:
@@ -71,7 +72,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:17:37 GMT
+      - Tue, 21 May 2024 10:10:21 GMT
       server:
       - uvicorn
     status:
@@ -88,14 +89,15 @@ interactions:
     uri: http://localhost:8000/v1/functions/by_path/test/sdk/test_delete_function_by_path
   response:
     body:
-      string: '{"detail":"Function not found"}'
+      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
+        not found"}]}'
     headers:
       content-length:
-      - '31'
+      - '98'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:17:37 GMT
+      - Tue, 21 May 2024 10:10:21 GMT
       server:
       - uvicorn
     status:

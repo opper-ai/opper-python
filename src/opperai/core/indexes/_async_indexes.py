@@ -8,6 +8,7 @@ from opperai.types.indexes import (
     Index,
     RetrievalResponse,
 )
+
 from ._indexes import RetrieveQuery
 
 
@@ -50,7 +51,9 @@ class AsyncIndexes:
     async def delete(self, id: int) -> bool:
         """Delete an index
 
-        This method sends a DELETE request to the OpperAI service to remove an index specified by its unique identifier. If the index does not exist, it returns False. If the deletion is successful, it returns True. If there's an issue with the request, it raises an APIError.
+        This method sends a DELETE request to the OpperAI service to remove an index specified by
+        its unique identifier. If the index does not exist, it returns False. If the deletion is
+        successful, it returns True. If there's an issue with the request, it raises an APIError.
 
         Args:
             id (int): The unique identifier of the index to be deleted.

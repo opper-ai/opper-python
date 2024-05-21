@@ -10,46 +10,71 @@ interactions:
     uri: http://localhost:8000/v1/functions/by_path/test_async_client_raises_timeout_error
   response:
     body:
-      string: '{"path":"test_async_client_raises_timeout_error","instructions":"test","id":200,"description":null,"input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"67697841-d106-4621-877d-7b0b5a52ff88","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
+        not found"}]}'
     headers:
       content-length:
-      - '461'
+      - '98'
       content-type:
       - application/json
       date:
-      - Fri, 17 May 2024 10:23:18 GMT
+      - Tue, 21 May 2024 09:54:24 GMT
       server:
       - uvicorn
     status:
-      code: 200
-      message: OK
+      code: 404
+      message: Not Found
 - request:
-    body: '{"id": 200, "path": "test_async_client_raises_timeout_error", "description":
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+    method: GET
+    uri: http://localhost:8000/v1/functions/by_path/test_async_client_raises_timeout_error
+  response:
+    body:
+      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
+        not found"}]}'
+    headers:
+      content-length:
+      - '98'
+      content-type:
+      - application/json
+      date:
+      - Tue, 21 May 2024 09:54:24 GMT
+      server:
+      - uvicorn
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: '{"id": null, "path": "test_async_client_raises_timeout_error", "description":
       null, "input_schema": null, "out_schema": null, "instructions": "test", "model":
-      null, "index_ids": [], "use_semantic_search": false, "few_shot": false, "few_shot_count":
-      2, "cache_configuration": {"exact_match_cache_ttl": 0, "semantic_cache_threshold":
-      0.95, "semantic_cache_ttl": 0}}'
+      null, "index_ids": [], "use_semantic_search": null, "few_shot": null, "few_shot_count":
+      null, "cache_configuration": null}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '362'
+      - '281'
       content-type:
       - application/json
-    method: PATCH
-    uri: http://localhost:8000/v1/functions/200
+    method: POST
+    uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"path":"test_async_client_raises_timeout_error","instructions":"test","id":200,"description":null,"input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"67697841-d106-4621-877d-7b0b5a52ff88","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+      string: '{"path":"test_async_client_raises_timeout_error","instructions":"test","id":21,"description":null,"input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"16136c20-2ca3-4887-93f3-b35a82134543","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
     headers:
       content-length:
-      - '461'
+      - '382'
       content-type:
       - application/json
       date:
-      - Fri, 17 May 2024 10:23:18 GMT
+      - Tue, 21 May 2024 09:54:24 GMT
       server:
       - uvicorn
     status:

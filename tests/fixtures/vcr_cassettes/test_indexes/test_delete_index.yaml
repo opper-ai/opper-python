@@ -14,14 +14,14 @@ interactions:
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '{"id":3,"name":"test_delete_index","files":[],"created_at":"2024-05-02T09:18:07.294338Z"}'
+      string: '{"id":11,"name":"test_delete_index","files":[],"created_at":"2024-05-21T10:10:58.634013Z"}'
     headers:
       content-length:
-      - '89'
+      - '90'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:18:07 GMT
+      - Tue, 21 May 2024 10:10:58 GMT
       server:
       - uvicorn
     status:
@@ -35,7 +35,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/indexes/3
+    uri: http://localhost:8000/v1/indexes/11
   response:
     body:
       string: 'true'
@@ -45,7 +45,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:18:07 GMT
+      - Tue, 21 May 2024 10:10:58 GMT
       server:
       - uvicorn
     status:
@@ -59,17 +59,18 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/indexes/3
+    uri: http://localhost:8000/v1/indexes/11
   response:
     body:
-      string: '{"detail":"Index not found"}'
+      string: '{"errors":[{"type":"HTTPException","message":"Index not found","detail":"Index
+        not found"}]}'
     headers:
       content-length:
-      - '28'
+      - '92'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:18:07 GMT
+      - Tue, 21 May 2024 10:10:58 GMT
       server:
       - uvicorn
     status:

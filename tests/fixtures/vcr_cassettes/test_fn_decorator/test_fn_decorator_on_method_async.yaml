@@ -11,21 +11,21 @@ interactions:
   response:
     body:
       string: '{"path":"test_method","instructions":"Operation: test_method\n\nOperation
-        description: say hello","id":199,"description":"say hello","input_schema":null,"out_schema":{"type":"string","$defs":{}},"few_shot":false,"few_shot_count":2,"dataset_uuid":"63ef2190-c132-424b-9266-e1051642e78e","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+        description: say hello","id":23,"description":"say hello","input_schema":null,"out_schema":{"type":"string","$defs":{}},"few_shot":false,"few_shot_count":2,"dataset_uuid":"22ca6525-a4c3-476f-be85-e65a1ec49976","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
     headers:
       content-length:
-      - '519'
+      - '518'
       content-type:
       - application/json
       date:
-      - Thu, 16 May 2024 11:49:32 GMT
+      - Tue, 21 May 2024 10:22:10 GMT
       server:
       - uvicorn
     status:
       code: 200
       message: OK
 - request:
-    body: '{"id": 199, "path": "test_method", "description": "say hello", "input_schema":
+    body: '{"id": 23, "path": "test_method", "description": "say hello", "input_schema":
       null, "out_schema": {"type": "string", "$defs": {}}, "instructions": "Operation:
       test_method\n\nOperation description: say hello", "model": null, "index_ids":
       [], "use_semantic_search": null, "few_shot": false, "few_shot_count": null,
@@ -36,22 +36,22 @@ interactions:
       connection:
       - keep-alive
       content-length:
-      - '342'
+      - '341'
       content-type:
       - application/json
     method: PATCH
-    uri: http://localhost:8000/v1/functions/199
+    uri: http://localhost:8000/v1/functions/23
   response:
     body:
       string: '{"path":"test_method","instructions":"Operation: test_method\n\nOperation
-        description: say hello","id":199,"description":"say hello","input_schema":null,"out_schema":{"type":"string","$defs":{}},"few_shot":false,"few_shot_count":2,"dataset_uuid":"63ef2190-c132-424b-9266-e1051642e78e","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+        description: say hello","id":23,"description":"say hello","input_schema":null,"out_schema":{"type":"string","$defs":{}},"few_shot":false,"few_shot_count":2,"dataset_uuid":"22ca6525-a4c3-476f-be85-e65a1ec49976","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
     headers:
       content-length:
-      - '519'
+      - '518'
       content-type:
       - application/json
       date:
-      - Thu, 16 May 2024 11:49:32 GMT
+      - Tue, 21 May 2024 10:22:10 GMT
       server:
       - uvicorn
     status:
@@ -73,14 +73,14 @@ interactions:
     uri: http://localhost:8000/v1/chat/test_method
   response:
     body:
-      string: '{"span_id":"86fcc8f5-dcf6-4df3-910f-f82625e88662","message":null,"json_payload":"Hello","context":null,"cached":false}'
+      string: '{"span_id":"073ef049-92fa-4d51-9d1c-62fcc103fe3a","message":null,"json_payload":"Hello","context":null,"cached":false}'
     headers:
       content-length:
       - '118'
       content-type:
       - application/json
       date:
-      - Thu, 16 May 2024 11:49:32 GMT
+      - Tue, 21 May 2024 10:22:10 GMT
       server:
       - uvicorn
     status:
@@ -102,14 +102,14 @@ interactions:
     uri: http://localhost:8000/v1/chat/test_method
   response:
     body:
-      string: '{"span_id":"57a964f0-a233-455e-85a7-5b47c7842f97","message":null,"json_payload":"Hello","context":null,"cached":false}'
+      string: '{"span_id":"c9082651-6777-46d2-bf3b-dd20aa4fba49","message":null,"json_payload":"Hello","context":null,"cached":false}'
     headers:
       content-length:
       - '118'
       content-type:
       - application/json
       date:
-      - Thu, 16 May 2024 11:49:34 GMT
+      - Tue, 21 May 2024 10:22:11 GMT
       server:
       - uvicorn
     status:

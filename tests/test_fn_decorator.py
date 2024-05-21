@@ -46,21 +46,21 @@ async def test_fn_decorator_on_method_async(aclient: AsyncClient, vcr_cassette):
 
 
 def test_fn_decorator_image(client: Client, vcr_cassette):
-    class Word(BaseModel):
-        letters: List[str]
+    class ImageDescription(BaseModel):
+        description: str
 
     @fn(client=client, model="openai/gpt-4o")
-    def extract_letters(
+    def describe_image(
         image: ImageContent,
-    ) -> Word:
-        """given an image extract the word it represents"""
+    ) -> ImageDescription:
+        """given an image describe what it is"""
 
-    word = extract_letters(
-        ImageContent.from_path("tests/fixtures/images/letters.png"),
+    description = describe_image(
+        ImageContent.from_path("tests/fixtures/images/fossil.png"),
     )
-    print(word)
+    print(description)
 
-    assert [x.lower() for x in word.letters] == ["l", "e", "t", "t", "e", "r"]
+    assert "fossil" in description.description.lower()
 
 
 @pytest.mark.asyncio(scope="module")
@@ -252,10 +252,10 @@ def test_convert_func_to_json_with_image():
         pass
 
     input, media = convert_function_call_to_json(
-        f, ImageContent.from_path("path"), "Hello"
+        f, ImageContent.from_path("tests/fixtures/images/fossil.png"), "Hello"
     )
     assert input == {"text": "Hello"}
-    assert media == [ImageContent.from_path("path")]
+    assert media == [ImageContent.from_path("tests/fixtures/images/fossil.png")]
 
 
 class ToyModel(BaseModel):

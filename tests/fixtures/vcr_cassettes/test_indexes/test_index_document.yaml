@@ -14,14 +14,14 @@ interactions:
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '{"id":8,"name":"test_index_document","files":[],"created_at":"2024-05-02T09:18:07.509002Z"}'
+      string: '{"id":16,"name":"test_index_document","files":[],"created_at":"2024-05-21T10:10:58.938484Z"}'
     headers:
       content-length:
-      - '91'
+      - '92'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:18:07 GMT
+      - Tue, 21 May 2024 10:10:58 GMT
       server:
       - uvicorn
     status:
@@ -40,17 +40,17 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/indexes/8/index
+    uri: http://localhost:8000/v1/indexes/16/index
   response:
     body:
-      string: '{"id":6,"uuid":"5b1ffc8c-d713-48a4-a3a5-2d6cfe8fc571","key":"5b1ffc8c-d713-48a4-a3a5-2d6cfe8fc571"}'
+      string: '{"id":4,"uuid":"92de1367-4e21-4e27-9573-a5863229aa15","key":"92de1367-4e21-4e27-9573-a5863229aa15"}'
     headers:
       content-length:
       - '99'
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:18:07 GMT
+      - Tue, 21 May 2024 10:10:58 GMT
       server:
       - uvicorn
     status:
@@ -64,7 +64,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/indexes/8
+    uri: http://localhost:8000/v1/indexes/16
   response:
     body:
       string: 'true'
@@ -74,7 +74,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 02 May 2024 09:18:07 GMT
+      - Tue, 21 May 2024 10:10:58 GMT
       server:
       - uvicorn
     status:
