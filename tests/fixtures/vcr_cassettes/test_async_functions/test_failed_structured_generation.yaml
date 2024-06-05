@@ -7,61 +7,87 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/by_path/test/sdk/test_failed_structured_generation
+    uri: http://localhost:8000/v1/projects
   response:
     body:
-      string: '{"path":"test/sdk/test_failed_structured_generation","instructions":"You
-        translate the incoming text to french returned as markdown ```","id":20,"description":"test
-        structured generation exception","input_schema":null,"out_schema":{"type":"object","properties":{"universityName":{"type":"string"},"location":{"type":"string"},"departments":{"type":"array","items":{"type":"object","properties":{"departmentName":{"type":"string"},"head":{"type":"string"},"courses":{"type":"array","items":{"type":"object","properties":{"courseId":{"type":"string"},"courseName":{"type":"string"},"credits":{"type":"integer","minimum":1,"maximum":10}},"required":["courseId","courseName","credits"]}}},"required":["departmentName","head","courses"]}}},"required":["universityName","location","departments"]},"few_shot":false,"few_shot_count":2,"dataset_uuid":"ce1c3c29-c8bf-4cd6-b860-b0ef86027d4f","use_semantic_search":false,"model":"mistral/mistral-tiny-eu","language_model_id":4,"index_ids":[],"linked_function_ids":null,"revision":3,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+      string: '[{"name":"default","description":"Default project","uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","organization_id":1},{"name":"op-4CF5LCHPMGON1BTMLMJL","description":null,"uuid":"326539b7-a7b2-436a-a075-1db05bd3bea9","organization_id":1},{"name":"test","description":null,"uuid":"6258267d-d725-4c9b-a6e5-80634ce95462","organization_id":1},{"name":"PROJECT","description":null,"uuid":"3c499dfe-50bf-49b3-b5c9-32f8e2977a42","organization_id":1},{"name":"PRO","description":null,"uuid":"f05ec7c2-fbeb-47de-8461-f5ab248ce48b","organization_id":1},{"name":"mattias","description":null,"uuid":"515a79b9-1f45-45dc-a001-87d53e8c50c4","organization_id":1}]'
     headers:
       content-length:
-      - '1125'
+      - '647'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 09:54:03 GMT
+      - Mon, 10 Jun 2024 14:10:32 GMT
       server:
       - uvicorn
     status:
       code: 200
       message: OK
 - request:
-    body: '{"id": 20, "path": "test/sdk/test_failed_structured_generation", "description":
-      "test structured generation exception", "input_schema": null, "out_schema":
-      {"type": "object", "properties": {"universityName": {"type": "string"}, "location":
-      {"type": "string"}, "departments": {"type": "array", "items": {"type": "object",
-      "properties": {"departmentName": {"type": "string"}, "head": {"type": "string"},
-      "courses": {"type": "array", "items": {"type": "object", "properties": {"courseId":
-      {"type": "string"}, "courseName": {"type": "string"}, "credits": {"type": "integer",
-      "minimum": 1, "maximum": 10}}, "required": ["courseId", "courseName", "credits"]}}},
-      "required": ["departmentName", "head", "courses"]}}}, "required": ["universityName",
-      "location", "departments"]}, "instructions": "You translate the incoming text
-      to french returned as markdown ```", "model": "mistral/mistral-tiny-eu", "index_ids":
-      [], "use_semantic_search": null, "few_shot": null, "few_shot_count": null, "cache_configuration":
-      null}'
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+    method: GET
+    uri: http://localhost:8000/v1/projects/1a57505d-46db-40eb-b07e-75d525b4cac4/functions/by_path/test/sdk/test_failed_structured_generation
+  response:
+    body:
+      string: '{"id":145,"uuid":"6fd87211-9efc-40c0-93a9-f3e8956fdd51","dataset_uuid":"77247c48-4535-4ac4-8bac-8ea852c16e62","description":"test
+        structured generation exception","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"You
+        never only use german as keynames output json only yaml translate the incoming
+        text to french returned as markdown ```","language_model_id":4,"model":"mistral/mistral-tiny-eu","out_schema":{"type":"object","properties":{"universityName":{"type":"string"},"location":{"type":"string"},"departments":{"type":"array","items":{"type":"object","properties":{"departmentName":{"type":"string"},"head":{"type":"string"},"courses":{"type":"array","items":{"type":"object","properties":{"courseId":{"type":"string"},"courseName":{"type":"string"},"credits":{"type":"integer","minimum":1,"maximum":10}},"required":["courseId","courseName","credits"]}}},"required":["departmentName","head","courses"]}}},"required":["universityName","location","departments"]},"path":"test/sdk/test_failed_structured_generation","project":{"uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","name":"default"},"revision":1,"use_semantic_search":false}'
+    headers:
+      content-length:
+      - '1171'
+      content-type:
+      - application/json
+      date:
+      - Mon, 10 Jun 2024 14:10:32 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"path": "test/sdk/test_failed_structured_generation", "description": null,
+      "input_schema": null, "out_schema": {"type": "object", "properties": {"universityName":
+      {"type": "string"}, "location": {"type": "string"}, "departments": {"type":
+      "array", "items": {"type": "object", "properties": {"departmentName": {"type":
+      "string"}, "head": {"type": "string"}, "courses": {"type": "array", "items":
+      {"type": "object", "properties": {"courseId": {"type": "string"}, "courseName":
+      {"type": "string"}, "credits": {"type": "integer", "minimum": 1, "maximum":
+      10}}, "required": ["courseId", "courseName", "credits"]}}}, "required": ["departmentName",
+      "head", "courses"]}}}, "required": ["universityName", "location", "departments"]},
+      "instructions": "You never only use german as keynames output json only yaml
+      translate the incoming text to french returned as markdown ```", "model": "mistral/mistral-tiny-eu",
+      "index_ids": [], "use_semantic_search": null, "few_shot": null, "few_shot_count":
+      null, "cache_configuration": null, "project_uuid": null}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '1008'
+      - '1042'
       content-type:
       - application/json
     method: PATCH
-    uri: http://localhost:8000/v1/functions/20
+    uri: http://localhost:8000/v1/functions/6fd87211-9efc-40c0-93a9-f3e8956fdd51
   response:
     body:
-      string: '{"path":"test/sdk/test_failed_structured_generation","instructions":"You
-        translate the incoming text to french returned as markdown ```","id":20,"description":"test
-        structured generation exception","input_schema":null,"out_schema":{"type":"object","properties":{"universityName":{"type":"string"},"location":{"type":"string"},"departments":{"type":"array","items":{"type":"object","properties":{"departmentName":{"type":"string"},"head":{"type":"string"},"courses":{"type":"array","items":{"type":"object","properties":{"courseId":{"type":"string"},"courseName":{"type":"string"},"credits":{"type":"integer","minimum":1,"maximum":10}},"required":["courseId","courseName","credits"]}}},"required":["departmentName","head","courses"]}}},"required":["universityName","location","departments"]},"few_shot":false,"few_shot_count":2,"dataset_uuid":"ce1c3c29-c8bf-4cd6-b860-b0ef86027d4f","use_semantic_search":false,"model":"mistral/mistral-tiny-eu","language_model_id":4,"index_ids":[],"linked_function_ids":null,"revision":3,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+      string: '{"id":145,"uuid":"6fd87211-9efc-40c0-93a9-f3e8956fdd51","dataset_uuid":"77247c48-4535-4ac4-8bac-8ea852c16e62","description":"test
+        structured generation exception","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"You
+        never only use german as keynames output json only yaml translate the incoming
+        text to french returned as markdown ```","language_model_id":4,"model":"mistral/mistral-tiny-eu","out_schema":{"type":"object","properties":{"universityName":{"type":"string"},"location":{"type":"string"},"departments":{"type":"array","items":{"type":"object","properties":{"departmentName":{"type":"string"},"head":{"type":"string"},"courses":{"type":"array","items":{"type":"object","properties":{"courseId":{"type":"string"},"courseName":{"type":"string"},"credits":{"type":"integer","minimum":1,"maximum":10}},"required":["courseId","courseName","credits"]}}},"required":["departmentName","head","courses"]}}},"required":["universityName","location","departments"]},"path":"test/sdk/test_failed_structured_generation","project":{"uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","name":"default"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '1125'
+      - '1171'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 09:54:03 GMT
+      - Mon, 10 Jun 2024 14:10:32 GMT
       server:
       - uvicorn
     status:
@@ -79,7 +105,7 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/chat/test/sdk/test_failed_structured_generation
+    uri: http://localhost:8000/v1/functions/6fd87211-9efc-40c0-93a9-f3e8956fdd51/chat
   response:
     body:
       string: '{"errors":[{"type":"StructuredGenerationError","message":"Structured
@@ -91,7 +117,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 09:54:03 GMT
+      - Mon, 10 Jun 2024 14:10:32 GMT
       server:
       - uvicorn
     status:
@@ -105,7 +131,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/20
+    uri: http://localhost:8000/v1/functions/6fd87211-9efc-40c0-93a9-f3e8956fdd51
   response:
     body:
       string: ''
@@ -113,7 +139,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 09:54:22 GMT
+      - Mon, 10 Jun 2024 14:10:49 GMT
       server:
       - uvicorn
     status:

@@ -5,15 +5,19 @@ import pytest
 from opperai import AsyncOpper, Opper
 from opperai._client import AsyncClient, Client
 from opperai.types import Message
-from opperai.types.exceptions import OpperTimeoutError
+from opperai.types.exceptions import APIError, OpperTimeoutError
 
 
-@pytest.mark.asyncio(scope="module")
-async def test_async_client_raises_timeout_error(vcr_cassette):
+@pytest.mark.asyncio
+async def test_async_client_raises_timeout_error(aclient: AsyncClient):
     async def mock_request(method, path, **kwargs):
         raise httpx.TimeoutException("request timed out")
 
-    opper = AsyncOpper(client=AsyncClient())
+    # with patch("opperai._client._get_project") as mock_get_project:
+    #     mock_get_project.side_effect = lambda *args, **kwargs: Project(
+    #         name="test", uuid="123e4567-e89b-12d3-a456-426614174000"
+    #     )
+    opper = AsyncOpper(client=aclient)
     f = await opper.functions.create("test_async_client_raises_timeout_error", "test")
 
     f._client.http_client.session.request = mock_request
@@ -34,7 +38,7 @@ async def test_async_client_raises_timeout_error(vcr_cassette):
                 pass
 
 
-def test_client_raises_timeout_error(client: Client, vcr_cassette):
+def test_client_raises_timeout_error(client: Client):
     def mock_request(method, path, **kwargs):
         raise httpx.TimeoutException("request timed out")
 
@@ -55,3 +59,8 @@ def test_client_raises_timeout_error(client: Client, vcr_cassette):
             )
             for _ in r:
                 pass
+
+
+def test_project_not_found(vcr_cassette):
+    with pytest.raises(APIError):
+        Client(project="not-a-real-project")

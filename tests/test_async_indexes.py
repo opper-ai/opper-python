@@ -1,8 +1,9 @@
-import pytest
 import asyncio
+from contextlib import asynccontextmanager
+
+import pytest
 from opperai import AsyncClient
 from opperai.types.indexes import Document, Filter
-from contextlib import asynccontextmanager
 
 
 @asynccontextmanager
@@ -14,37 +15,37 @@ async def _index(name, _client: AsyncClient):
         await _client.indexes.delete(id=index.id)
 
 
-@pytest.mark.asyncio(scope="module")
-async def test_create_index(aclient: AsyncClient, vcr_cassette):
+@pytest.mark.asyncio
+async def test_create_index(aclient: AsyncClient):
     async with _index("test_create_index", aclient) as index:
         assert index is not None
 
 
-@pytest.mark.asyncio(scope="module")
-async def test_delete_index(aclient: AsyncClient, vcr_cassette):
+@pytest.mark.asyncio
+async def test_delete_index(aclient: AsyncClient):
     async with _index("test_delete_index", aclient) as index:
         await aclient.indexes.delete(id=index.id)
         assert await aclient.indexes.get(id=index.id) is None
 
 
-@pytest.mark.asyncio(scope="module")
-async def test_get_by_id(vcr_cassette, aclient: AsyncClient):
+@pytest.mark.asyncio
+async def test_get_by_id(aclient: AsyncClient):
     async with _index("test_get_by_id", aclient) as index:
         idx_out = await aclient.indexes.get(id=index.id)
         assert idx_out.id == index.id
         assert idx_out.name == "test_get_by_id"
 
 
-@pytest.mark.asyncio(scope="module")
-async def test_get_by_name(vcr_cassette, aclient: AsyncClient):
+@pytest.mark.asyncio
+async def test_get_by_name(aclient: AsyncClient):
     async with _index("test_get_by_name", aclient) as index:
         idx_out = await aclient.indexes.get(name="test_get_by_name")
         assert idx_out.id == index.id
         assert idx_out.name == "test_get_by_name"
 
 
-@pytest.mark.asyncio(scope="module")
-async def test_list_indexes(vcr_cassette, aclient: AsyncClient):
+@pytest.mark.asyncio
+async def test_list_indexes(aclient: AsyncClient):
     idxs = await aclient.indexes.list()
     assert len(idxs) == 0
 
@@ -61,8 +62,8 @@ async def test_list_indexes(vcr_cassette, aclient: AsyncClient):
             assert idxs[1].name == "test_list_indexes_2"
 
 
-@pytest.mark.asyncio(scope="module")
-async def test_index_document(vcr_cassette, aclient: AsyncClient):
+@pytest.mark.asyncio
+async def test_index_document(aclient: AsyncClient):
     async with _index("test_index_document", aclient) as index:
         doc_in = Document(content="Hello", metadata={"source": "test"})
         doc_out = await aclient.indexes.index(id=index.id, doc=doc_in)
@@ -71,8 +72,8 @@ async def test_index_document(vcr_cassette, aclient: AsyncClient):
         assert doc_out.key is not None
 
 
-@pytest.mark.asyncio(scope="module")
-async def test_retrieve_document(vcr_cassette, aclient: AsyncClient):
+@pytest.mark.asyncio
+async def test_retrieve_document(aclient: AsyncClient):
     async with _index("test_retrieve_document", aclient) as index:
         doc_in = Document(content="Hello", metadata={"source": "test"})
         await aclient.indexes.index(id=index.id, doc=doc_in)
@@ -83,8 +84,8 @@ async def test_retrieve_document(vcr_cassette, aclient: AsyncClient):
 
 
 @pytest.mark.skip(reason="Disabled due to pre signed urls")
-@pytest.mark.asyncio(scope="module")
-async def test_upload_file(aclient: AsyncClient, vcr_cassette):
+@pytest.mark.asyncio
+async def test_upload_file(aclient: AsyncClient):
     async with _index("test_upload_file", aclient) as index:
         with open("/tmp/test.txt", "wb") as f:
             f.write(b"Hello")
@@ -97,8 +98,8 @@ async def test_upload_file(aclient: AsyncClient, vcr_cassette):
         assert doc_retrieved[0].content == "Hello"
 
 
-@pytest.mark.asyncio(scope="module")
-async def test_retrieve_filters(aclient: AsyncClient, vcr_cassette):
+@pytest.mark.asyncio
+async def test_retrieve_filters(aclient: AsyncClient):
     async with _index("test_retrieve_filters", aclient) as index:
         doc_in = Document(content="Bonjour", metadata={"source": "test"})
         await aclient.indexes.index(id=index.id, doc=doc_in)

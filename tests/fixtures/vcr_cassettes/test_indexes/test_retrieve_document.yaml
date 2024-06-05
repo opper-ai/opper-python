@@ -1,27 +1,51 @@
 interactions:
 - request:
-    body: '{"name": "test_retrieve_document"}'
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+    method: GET
+    uri: http://localhost:8000/v1/projects
+  response:
+    body:
+      string: '[{"name":"default","description":"Default project","uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","organization_id":1},{"name":"op-4CF5LCHPMGON1BTMLMJL","description":null,"uuid":"326539b7-a7b2-436a-a075-1db05bd3bea9","organization_id":1},{"name":"test","description":null,"uuid":"6258267d-d725-4c9b-a6e5-80634ce95462","organization_id":1},{"name":"PROJECT","description":null,"uuid":"3c499dfe-50bf-49b3-b5c9-32f8e2977a42","organization_id":1},{"name":"PRO","description":null,"uuid":"f05ec7c2-fbeb-47de-8461-f5ab248ce48b","organization_id":1},{"name":"mattias","description":null,"uuid":"515a79b9-1f45-45dc-a001-87d53e8c50c4","organization_id":1}]'
+    headers:
+      content-length:
+      - '647'
+      content-type:
+      - application/json
+      date:
+      - Tue, 11 Jun 2024 09:36:02 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"name": "test_retrieve_document", "project_uuid": "1a57505d-46db-40eb-b07e-75d525b4cac4"}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '34'
+      - '90'
       content-type:
       - application/json
     method: POST
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '{"id":17,"name":"test_retrieve_document","files":[],"created_at":"2024-05-21T10:10:59.242625Z"}'
+      string: '{"id":87,"name":"test_retrieve_document","project":{"uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","name":"default"},"files":[],"created_at":"2024-06-11T09:36:02.955650Z"}'
     headers:
       content-length:
-      - '95'
+      - '170'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:58 GMT
+      - Tue, 11 Jun 2024 09:36:02 GMT
       server:
       - uvicorn
     status:
@@ -40,17 +64,17 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/indexes/17/index
+    uri: http://localhost:8000/v1/indexes/87/index
   response:
     body:
-      string: '{"id":5,"uuid":"ba1d3d58-032d-4e15-9bad-5ae7d2e292de","key":"ba1d3d58-032d-4e15-9bad-5ae7d2e292de"}'
+      string: '{"id":25,"uuid":"3f41e920-ed6b-448c-8ef6-65ad6295eb4b","key":"3f41e920-ed6b-448c-8ef6-65ad6295eb4b"}'
     headers:
       content-length:
-      - '99'
+      - '100'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:58 GMT
+      - Tue, 11 Jun 2024 09:36:02 GMT
       server:
       - uvicorn
     status:
@@ -68,17 +92,17 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/indexes/17/query
+    uri: http://localhost:8000/v1/indexes/87/query
   response:
     body:
-      string: '[{"uuid":"17e7a097-53d7-4941-b47c-4d28cce727b4","content":"Hello","metadata":{"source":"test"},"document_id":null,"score":29.458036422729492,"source_uuids":["17e7a097-53d7-4941-b47c-4d28cce727b4"]}]'
+      string: '[{"uuid":"2100362b-5695-4b30-9bfc-f331a2241440","content":"Hello","metadata":{"source":"test"},"document_id":null,"score":29.458036422729492,"source_uuids":["2100362b-5695-4b30-9bfc-f331a2241440"]}]'
     headers:
       content-length:
       - '198'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:58 GMT
+      - Tue, 11 Jun 2024 09:36:02 GMT
       server:
       - uvicorn
     status:
@@ -92,7 +116,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/indexes/17
+    uri: http://localhost:8000/v1/indexes/87
   response:
     body:
       string: 'true'
@@ -102,7 +126,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:59 GMT
+      - Tue, 11 Jun 2024 09:36:02 GMT
       server:
       - uvicorn
     status:

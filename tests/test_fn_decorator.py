@@ -1,16 +1,16 @@
 from typing import Dict, List, Optional, Union
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 import pytest
 from jsonschema import validate
 from opperai import AsyncClient, Client, fn
 from opperai.core.utils import convert_function_call_to_json
 from opperai.functions.decorator._schemas import type_to_json_schema
-from opperai.types import ImageContent
+from opperai.types import ImageContent, Project
 from pydantic import BaseModel
 
 
-def test_fn_decorator_on_method(client: Client, vcr_cassette):
+def test_fn_decorator_on_method(client: Client):
     class TestClass(BaseModel):
         data: str
 
@@ -27,29 +27,34 @@ def test_fn_decorator_on_method(client: Client, vcr_cassette):
     assert "hello" in res.lower()
 
 
-@pytest.mark.asyncio(scope="module")
-async def test_fn_decorator_on_method_async(aclient: AsyncClient, vcr_cassette):
-    class TestClass(BaseModel):
-        data: str
+@pytest.mark.asyncio
+async def test_fn_decorator_on_method_async(aclient: AsyncClient):
+    with patch("opperai._client._get_project") as mock_get_project:
+        mock_get_project.side_effect = lambda *args, **kwargs: Project(
+            name="test", uuid="123e4567-e89b-12d3-a456-426614174000"
+        )
 
-        @fn(client=aclient)
-        async def test_method(self, text: str) -> str:
-            """say hello"""
+        class TestClass(BaseModel):
+            data: str
 
-    test = TestClass(data="Hello")
+            @fn(client=aclient)
+            async def test_method(self, text: str) -> str:
+                """say hello"""
 
-    res = await test.test_method()
-    assert "hello" in res.lower()
+        test = TestClass(data="Hello")
 
-    res, _ = await test.test_method.call("Hello")
-    assert "hello" in res.lower()
+        res = await test.test_method()
+        assert "hello" in res.lower()
+
+        res, _ = await test.test_method.call("Hello")
+        assert "hello" in res.lower()
 
 
-def test_fn_decorator_image(client: Client, vcr_cassette):
+def test_fn_decorator_image(client: Client):
     class ImageDescription(BaseModel):
         description: str
 
-    @fn(client=client, model="openai/gpt-4o")
+    @fn(client=client, model="openai/gpt4-turbo")
     def describe_image(
         image: ImageContent,
     ) -> ImageDescription:
@@ -63,30 +68,35 @@ def test_fn_decorator_image(client: Client, vcr_cassette):
     assert "fossil" in description.description.lower()
 
 
-@pytest.mark.asyncio(scope="module")
-async def test_fn_decorator_image_async(aclient: AsyncClient, vcr_cassette):
-    class Word(BaseModel):
-        letters: List[str]
+@pytest.mark.asyncio
+async def test_fn_decorator_image_async(aclient: AsyncClient):
+    with patch("opperai._client._get_project") as mock_get_project:
+        mock_get_project.side_effect = lambda *args, **kwargs: Project(
+            name="test", uuid="123e4567-e89b-12d3-a456-426614174000"
+        )
 
-    @fn(client=aclient, model="openai/gpt-4o")
-    async def extract_letters(
-        image: ImageContent,
-    ) -> Word:
-        """given an image extract the word it represents"""
+        class Word(BaseModel):
+            letters: List[str]
 
-    word = await extract_letters(
-        ImageContent.from_path("tests/fixtures/images/letters.png"),
-    )
-    print(word)
+        @fn(client=aclient, model="openai/gpt-4o")
+        async def extract_letters(
+            image: ImageContent,
+        ) -> Word:
+            """given an image extract the word it represents"""
 
-    assert [x.lower() for x in word.letters] == ["l", "e", "t", "t", "e", "r"]
+        word = await extract_letters(
+            ImageContent.from_path("tests/fixtures/images/letters.png"),
+        )
+        print(word)
+
+        assert [x.lower() for x in word.letters] == ["l", "e", "t", "t", "e", "r"]
 
 
 def hola_in_word(word: str):
     return "hola" in word.lower()
 
 
-def test_fn_decorator(client: Client, vcr_cassette):
+def test_fn_decorator(client: Client):
     @fn(client=client)
     def translate(text: str, target_language: str) -> str:
         """Translate text to a target language."""
@@ -100,53 +110,32 @@ def test_fn_decorator(client: Client, vcr_cassette):
     response.span.save_metric("metric", 1)
 
 
-@pytest.mark.asyncio(scope="module")
-async def test_fn_decorator_async(aclient: AsyncClient, vcr_cassette):
-    @fn(client=aclient)
-    async def translate(text: str, target_language: str) -> str:
-        """Translate text to a target language."""
+@pytest.mark.asyncio
+async def test_fn_decorator_async(aclient: AsyncClient):
+    with patch("opperai._client._get_project") as mock_get_project:
+        mock_get_project.side_effect = lambda *args, **kwargs: Project(
+            name="test", uuid="123e4567-e89b-12d3-a456-426614174000"
+        )
 
-    translation = await translate("Hello", "es")
-    assert hola_in_word(translation)
+        @fn(client=aclient)
+        async def translate(text: str, target_language: str) -> str:
+            """Translate text to a target language."""
 
-    translation, response = await translate.call("Hello", "es")
-    assert hola_in_word(translation)
+        translation = await translate("Hello", "es")
+        assert hola_in_word(translation)
 
-    await response.span.save_metric("metric", 1)
+        translation, response = await translate.call("Hello", "es")
+        assert hola_in_word(translation)
+
+        await response.span.save_metric("metric", 1)
 
 
-@patch("opperai.core._http_clients._http_client.do_request")
-def test_decorator(mock_do_request):
-    mock_do_request.side_effect = [
-        MagicMock(status_code=404),
-        MagicMock(
-            status_code=200,
-            json=lambda: {
-                "id": 1,
-                "path": "path",
-                "description": "description",
-                "instructions": "instructions",
-            },
-        ),
-        MagicMock(status_code=200, json=lambda: {"json_payload": "Hola"}),
-        MagicMock(status_code=404),
-        MagicMock(
-            status_code=200,
-            json=lambda: {
-                "id": 2,
-                "path": "path",
-                "description": "description",
-                "instructions": "instructions",
-            },
-        ),
-        MagicMock(status_code=200, json=lambda: {"json_payload": ["Hola", "Bonjour"]}),
-    ]
-
-    @fn()
+def test_decorator(client: Client):
+    @fn(client=client)
     def translate(text: str, target_language: str) -> str:
         """Translate text to a target language."""
 
-    @fn()
+    @fn(client=client)
     def translate_list(text: str, target_languages: List[str]) -> List[str]:
         """Translate text to a list of target languages."""
 
@@ -154,38 +143,12 @@ def test_decorator(mock_do_request):
     assert translate_list("Hello", ["es", "fr"]) == ["Hola", "Bonjour"]
 
 
-@patch("opperai.core._http_clients._http_client.do_request")
-def test_decorator_supply_model(mock_do_request):
-    mock_do_request.side_effect = [
-        MagicMock(status_code=404),
-        MagicMock(
-            status_code=200,
-            json=lambda: {
-                "id": 1,
-                "path": "path",
-                "description": "description",
-                "instructions": "instructions",
-            },
-        ),
-        MagicMock(status_code=200, json=lambda: {"json_payload": "Hola"}),
-        MagicMock(status_code=404),
-        MagicMock(
-            status_code=200,
-            json=lambda: {
-                "id": 2,
-                "path": "path",
-                "description": "description",
-                "instructions": "instructions",
-            },
-        ),
-        MagicMock(status_code=200, json=lambda: {"json_payload": ["Hola", "Bonjour"]}),
-    ]
-
-    @fn(model="gpt-4-0125-preview")
+def test_decorator_supply_model(client: Client):
+    @fn(client=client, model="openai/gpt4-turbo")
     def translate(text: str, target_language: str) -> str:
         """Translate text to a target language."""
 
-    @fn()
+    @fn(client=client, model="openai/gpt4-turbo")
     def translate_list(text: str, target_languages: List[str]) -> List[str]:
         """Translate text to a list of target languages."""
 

@@ -6,6 +6,7 @@ from opperai._client import Client
 from opperai.functions.decorator._schemas import type_to_json_schema
 from opperai.types import ChatPayload, Message, StreamingChunk
 from opperai.types import Function as FunctionModel
+from opperai.types import FunctionIn as FunctionInModel
 from opperai.types import FunctionResponse as FunctionResponseModel
 from pydantic import PrivateAttr
 
@@ -74,7 +75,7 @@ class Function:
                 )
 
             response: Iterator[StreamingChunk] = self._client.functions.chat(
-                function_path=self._function.path,
+                uuid=self._function.uuid,
                 data=ChatPayload(messages=messages, parent_span_uuid=parent_span_id),
                 stream=stream,
             )
@@ -82,7 +83,7 @@ class Function:
             return StreamingResponse(client=self._client, stream=response)
 
         response: FunctionResponseModel = self._client.functions.chat(
-            function_path=self._function.path,
+            uuid=self._function.uuid,
             data=ChatPayload(messages=messages, parent_span_uuid=parent_span_id),
             stream=stream,
         )
@@ -90,10 +91,10 @@ class Function:
         return FunctionResponse(client=self._client, **response.model_dump())
 
     def delete(self) -> bool:
-        return self._client.functions.delete(id=self._function.id)
+        return self._client.functions.delete(uuid=self._function.uuid)
 
     def flush_cache(self) -> bool:
-        return self._client.functions.flush_cache(id=self._function.id)
+        return self._client.functions.flush_cache(uuid=self._function.uuid)
 
     def update(self, **kwargs) -> "Function":
         updated = self._function.model_dump(exclude_none=True)
@@ -107,9 +108,11 @@ class Function:
         for key, value in kwargs.items():
             updated[key] = value
 
-        updated_model = FunctionModel.model_validate(updated)
+        updated_model = FunctionInModel.model_validate(updated)
+        updated_model.project_uuid = self._function.project.uuid
+
         updated_function = self._client.functions.update(
-            id=self._function.id, function=updated_model
+            uuid=self._function.uuid, function=updated_model
         )
         self._function = updated_function
 
@@ -154,7 +157,7 @@ class Functions:
             output_schema = type_to_json_schema(output_type)
 
         function = self._client.functions.create(
-            FunctionModel(
+            FunctionInModel(
                 path=path,
                 instructions=instructions,
                 description=description,
@@ -166,9 +169,9 @@ class Functions:
 
         return Function(self._client, function)
 
-    def get(self, id: int = None, path: str = None) -> Optional[Function]:
-        if id is not None:
-            function = self._client.functions.get(id=id)
+    def get(self, uuid: str = None, path: str = None) -> Optional[Function]:
+        if uuid is not None:
+            function = self._client.functions.get(uuid=uuid)
         elif path is not None:
             function = self._client.functions.get(path=path)
         else:
@@ -179,9 +182,9 @@ class Functions:
 
         return Function(self._client, function)
 
-    def delete(self, id: int = None, path: str = None) -> bool:
-        if id is not None:
-            return self._client.functions.delete(id=id)
+    def delete(self, uuid: str = None, path: str = None) -> bool:
+        if uuid is not None:
+            return self._client.functions.delete(uuid=uuid)
         elif path is not None:
             return self._client.functions.delete(path=path)
         else:

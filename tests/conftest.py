@@ -6,13 +6,13 @@ import vcr
 from opperai import AsyncClient, Client
 
 
-@pytest.fixture(scope="module")
-def aclient() -> AsyncClient:
+@pytest.fixture
+def aclient(vcr_cassette) -> AsyncClient:
     yield AsyncClient()
 
 
-@pytest.fixture(scope="module")
-def client() -> Client:
+@pytest.fixture
+def client(vcr_cassette) -> Client:
     yield Client()
 
 
@@ -36,6 +36,7 @@ def vcr_cassette(request):
         cassette_library_dir="tests/fixtures/vcr_cassettes",
         path_transformer=vcr.VCR.ensure_suffix(".yaml"),
         filter_headers=["x-opper-api-key", "host", "accept-encoding", "user-agent"],
+        record_mode="new_episodes",
     )
     my_vcr.register_matcher("uri_matcher", uri_matcher)
     my_vcr.match_on = ["method", "body", "headers", "uri_matcher"]

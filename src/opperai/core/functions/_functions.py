@@ -6,19 +6,27 @@ from opperai.core.spans import get_current_span_id
 from opperai.types import (
     ChatPayload,
     Function,
+    FunctionIn,
     FunctionResponse,
+    Project,
     StreamingChunk,
-    validate_id_xor_path,
+    validate_uuid_xor_path,
 )
 from opperai.types.exceptions import APIError
 
 
 class Functions:
-    def __init__(self, http_client: _http_client, default_model: str = None):
+    def __init__(
+        self,
+        http_client: _http_client,
+        project: Project,
+        default_model: str = None,
+    ):
         self.http_client = http_client
+        self.project = project
         self.default_model = default_model
 
-    def create(self, function: Function, update: bool = True, **kwargs) -> Function:
+    def create(self, function: FunctionIn, update: bool = True, **kwargs) -> Function:
         """Create a function
 
         This method allows for the creation or updating of a function based on the provided Function instance. If the function does not exist, it will be created. If it does exist and the update parameter is set to True, the function will be updated.
@@ -65,14 +73,16 @@ class Functions:
         if fn is None:
             return self._create(function, **kwargs)
         elif update:
-            function.id = fn.id
-            return self.update(function, **kwargs)
+            return self.update(fn.uuid, function, **kwargs)
         else:
             return fn
 
-    def _create(self, function: Function, **kwargs) -> Function:
+    def _create(self, function: FunctionIn, **kwargs) -> Function:
+        if function.project_uuid is None:
+            function.project_uuid = self.project.uuid
         if not function.model and self.default_model:
             function.model = self.default_model
+
         response = self.http_client.do_request(
             "POST",
             "/v1/functions",
@@ -85,7 +95,7 @@ class Functions:
 
         return Function.model_validate(response.json())
 
-    def update(self, function: Function, **kwargs) -> Function:
+    def update(self, uuid: str, function: FunctionIn, **kwargs) -> Function:
         """Update a function
 
         This method updates an existing function based on the provided Function instance. The function to be updated is identified by its unique ID, which must be set in the Function instance.
@@ -105,7 +115,7 @@ class Functions:
             >>> from opperai import Client
             >>> from opperai.types import Function
             >>> client = Client(api_key="your_api_key_here")
-            >>> function = Function(
+            >>> function = F /unction(
             ...     id='123',
             ...     path="example/function",
             ...     instructions="Respond to questions. Be nice.",
@@ -117,7 +127,7 @@ class Functions:
         """
         response = self.http_client.do_request(
             "PATCH",
-            f"/v1/functions/{function.id}",
+            f"/v1/functions/{uuid}",
             json={**function.model_dump(), **kwargs},
         )
         if response.status_code != HTTPStatus.OK:
@@ -127,21 +137,21 @@ class Functions:
 
         return Function.model_validate(response.json())
 
-    @validate_id_xor_path
-    def get(self, id: str = None, path: str = None) -> Optional[Function]:
+    @validate_uuid_xor_path
+    def get(self, uuid: str = None, path: str = None) -> Optional[Function]:
         """Get a function
 
         This method allows fetching the details of a specific Opper function, either by specifying its unique ID or its path. If the function is found, it returns an instance of the Function class representing the function's configuration and details. If no function matches the given ID or path, or if both parameters are omitted, None is returned.
 
         Args:
-            id (str, optional): The unique identifier of the function to retrieve. Defaults to None.
+            uuid (str, optional): The unique identifier of the function to retrieve. Defaults to None.
             path (str, optional): The path of the function to retrieve. Defaults to None.
 
         Returns:
             Optional[Function]: An instance of the Function class if the function is found, otherwise None.
 
         Raises:
-            ValueError: If both `id` and `path` are provided, indicating ambiguous parameters.
+            ValueError: If both `uuid` and `path` are provided, indicating ambiguous parameters.
 
         Examples:
             >>> from opperai import Client
@@ -158,44 +168,43 @@ class Functions:
             It is recommended to provide either `id` or `path`, but not both, to avoid ambiguity. If neither is provided, the method will return None.
         """
         if path is not None:
-            if id is not None:
-                raise ValueError("Only one of id or path should be provided")
+            if uuid is not None:
+                raise ValueError("Only one of uuid or path should be provided")
             return self._get_by_path(path)
-        elif id is not None:
-            return self._get_by_id(id)
+        elif uuid is not None:
+            return self._get_by_uuid(uuid)
         else:
             return None
 
-    def _get_by_path(self, function_path: str) -> Optional[Function]:
+    def _get_by_path(self, path: str) -> Optional[Function]:
         response = self.http_client.do_request(
             "GET",
-            f"/v1/functions/by_path/{function_path}",
+            f"/v1/projects/{self.project.uuid}/functions/by_path/{path}",
         )
         if response.status_code == HTTPStatus.NOT_FOUND:
             return None
         if response.status_code != HTTPStatus.OK:
             raise APIError(
-                f"Failed to get function {function_path} with status {response.status_code}"
+                f"Failed to get function {path} with status {response.status_code}"
             )
-
         return Function.model_validate(response.json())
 
-    def _get_by_id(self, function_id: str) -> Optional[Function]:
+    def _get_by_uuid(self, uuid: str) -> Optional[Function]:
         response = self.http_client.do_request(
             "GET",
-            f"/v1/functions/{function_id}",
+            f"/v1/functions/{uuid}",
         )
         if response.status_code == HTTPStatus.NOT_FOUND:
             return None
         if response.status_code != HTTPStatus.OK:
             raise APIError(
-                f"Failed to get function {function_id} with status {response.status_code}"
+                f"Failed to get function {uuid} with status {response.status_code}"
             )
 
         return Function.model_validate(response.json())
 
-    @validate_id_xor_path
-    def delete(self, id: str = None, path: str = None) -> bool:
+    @validate_uuid_xor_path
+    def delete(self, uuid: str = None, path: str = None) -> bool:
         """Delete a function
 
         This method allows for the deletion of a function either by specifying its unique ID or its path.
@@ -228,29 +237,29 @@ class Functions:
                 return self._delete_by_path(path)
             except APIError:
                 pass
-        elif id is not None:
+        elif uuid is not None:
             try:
-                return self._delete_by_id(id)
+                return self._delete_by_uuid(uuid)
             except APIError:
                 pass
 
         return True
 
-    def _delete_by_id(self, id: str) -> bool:
+    def _delete_by_uuid(self, uuid: str) -> bool:
         response = self.http_client.do_request(
             "DELETE",
-            f"/v1/functions/{id}",
+            f"/v1/functions/{uuid}",
         )
         if response.status_code != HTTPStatus.NO_CONTENT:
             raise APIError(
-                f"Failed to delete function {id} with status {response.status_code}"
+                f"Failed to delete function {uuid} with status {response.status_code}"
             )
         return True
 
     def _delete_by_path(self, function_path: str) -> bool:
         response = self.http_client.do_request(
             "DELETE",
-            f"/v1/functions/by_path/{function_path}",
+            f"/v1/projects/{self.project.uuid}/functions/by_path/{function_path}",
         )
         if response.status_code != HTTPStatus.NO_CONTENT:
             raise APIError(
@@ -259,7 +268,7 @@ class Functions:
         return True
 
     def chat(
-        self, function_path, data: ChatPayload, stream=False, **kwargs
+        self, uuid: str, data: ChatPayload, stream=False, **kwargs
     ) -> Union[FunctionResponse, Iterator[StreamingChunk]]:
         """Send a message to a function
 
@@ -270,7 +279,7 @@ class Functions:
         available.
 
         Args:
-            function_path (str): The path identifier for the target Opper function. This should be
+            uuid (str): The unique identifier of the target Opper function. This should be
                 obtained through the app interface or API.
             data (ChatPayload): An object of type ChatPayload, representing the content to be processed
                 during the interaction. It encapsulates the messages to be sent to the function.
@@ -318,12 +327,12 @@ class Functions:
             data.parent_span_uuid = get_current_span_id()
 
         if stream:
-            return self._chat_stream(function_path, data, **kwargs)
+            return self._chat_stream(uuid, data, **kwargs)
 
         serialized_data = data.model_dump()
         response = self.http_client.do_request(
             "POST",
-            f"/v1/chat/{function_path}",
+            f"/v1/functions/{uuid}/chat",
             json={**serialized_data, **kwargs},
         )
 
@@ -331,29 +340,29 @@ class Functions:
             return FunctionResponse.model_validate(response.json())
 
         raise APIError(
-            f"Failed to run function {function_path} with status {response.status_code}: {response.text}"
+            f"Failed to run function {uuid} with status {response.status_code}: {response.text}"
         )
 
     def _chat_stream(
-        self, function_path, data: ChatPayload, **kwargs
+        self, uuid: str, data: ChatPayload, **kwargs
     ) -> Iterator[StreamingChunk]:
         gen = self.http_client.stream(
             "POST",
-            f"/v1/chat/{function_path}",
+            f"/v1/functions/{uuid}/chat",
             json={**data.model_dump(), **kwargs},
             params={"stream": "True"},
         )
         for item in gen:
             yield StreamingChunk(**item)
 
-    def flush_cache(self, id: int) -> bool:
+    def flush_cache(self, uuid: str) -> bool:
         response = self.http_client.do_request(
             "DELETE",
-            f"/v1/functions/{id}/cache",
+            f"/v1/functions/{uuid}/cache",
         )
         if response.status_code != HTTPStatus.NO_CONTENT:
             raise APIError(
-                f"Failed to flush cache for function with id={id} with status {response.status_code}"
+                f"Failed to flush cache for function with uuid={uuid} with status {response.status_code}"
             )
 
         return True

@@ -4,7 +4,7 @@ from typing import Any, Dict, Iterator, List, Optional, Union
 from opperai._client import AsyncClient
 from opperai.functions.decorator._schemas import type_to_json_schema
 from opperai.types import ChatPayload, Message, StreamingChunk
-from opperai.types import Function as FunctionModel
+from opperai.types import FunctionIn as FunctionModel
 from opperai.types import FunctionResponse as FunctionResponseModel
 from pydantic import PrivateAttr
 
@@ -82,7 +82,7 @@ class AsyncFunction:
                 )
 
             response = self._client.functions.chat(
-                function_path=self._function.path,
+                uuid=self._function.uuid,
                 data=ChatPayload(messages=messages, parent_span_uuid=parent_span_id),
                 stream=stream,
             )
@@ -92,7 +92,7 @@ class AsyncFunction:
             return res
 
         response: FunctionResponseModel = await self._client.functions.chat(
-            function_path=self._function.path,
+            uuid=self._function.uuid,
             data=ChatPayload(messages=messages, parent_span_uuid=parent_span_id),
             stream=stream,
         )
@@ -103,7 +103,7 @@ class AsyncFunction:
         return await self._client.functions.delete(id=self._function.id)
 
     async def flush_cache(self) -> bool:
-        return await self._client.functions.flush_cache(id=self._function.id)
+        return await self._client.functions.flush_cache(uuid=self._function.uuid)
 
     async def update(self, **kwargs) -> "AsyncFunction":
         updated = self._function.model_dump(exclude_none=True)

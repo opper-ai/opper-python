@@ -1,8 +1,7 @@
 from typing import List, Optional
 
-from pydantic import BaseModel
-
 from opperai.core._http_clients import _http_client
+from opperai.types import Project
 from opperai.types.exceptions import APIError
 from opperai.types.indexes import (
     Document,
@@ -10,6 +9,7 @@ from opperai.types.indexes import (
     Index,
     RetrievalResponse,
 )
+from pydantic import BaseModel
 
 
 class RetrieveQuery(BaseModel):
@@ -19,8 +19,9 @@ class RetrieveQuery(BaseModel):
 
 
 class Indexes:
-    def __init__(self, http_client: _http_client):
+    def __init__(self, http_client: _http_client, project: Project):
         self.http_client = http_client
+        self.project = project
 
     def create(self, name: str) -> Index:
         """Create an index
@@ -47,7 +48,7 @@ class Indexes:
         response = self.http_client.do_request(
             "POST",
             "/v1/indexes",
-            json={"name": name},
+            json={"name": name, "project_uuid": self.project.uuid},
         )
         if response.status_code != 200:
             raise APIError(f"Failed to create index with status {response.status_code}")

@@ -5,13 +5,15 @@ from uuid import UUID
 
 from opperai.core._http_clients import _http_client
 from opperai.core.utils import DateTimeEncoder
+from opperai.types import Project
 from opperai.types.exceptions import APIError
 from opperai.types.spans import Span, SpanMetric
 
 
 class Spans:
-    def __init__(self, http_client: _http_client):
+    def __init__(self, http_client: _http_client, project: Project):
         self.http_client = http_client
+        self.project = project
 
     def create(self, span: Span, **kwargs) -> str:
         """Create a new span in the system.
@@ -43,6 +45,7 @@ class Spans:
             '123e4567-e89b-12d3-a456-426614174000'
         """
         span_data = span.model_dump(exclude_none=True)
+        span_data["project_uuid"] = self.project.uuid
         json_payload = json.dumps(span_data, cls=DateTimeEncoder)
         response = self.http_client.do_request(
             "POST",

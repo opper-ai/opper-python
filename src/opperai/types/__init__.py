@@ -9,7 +9,7 @@ from pydantic import BaseModel, ConfigDict, Field, FilePath, computed_field
 
 from .indexes import Document, Filter, RetrievalResponse
 from .spans import SpanMetric
-from .validators import validate_id_xor_path
+from .validators import validate_uuid_xor_path
 
 
 class TextMessageContent(BaseModel):
@@ -117,8 +117,12 @@ class CacheConfiguration(BaseModel):
     semantic_cache_ttl: Optional[int] = None
 
 
-class Function(BaseModel):
-    id: Optional[int] = None
+class Project(BaseModel):
+    name: str
+    uuid: str
+
+
+class FunctionIn(BaseModel):
     path: str = Field(
         ...,
         pattern=r"^[a-zA-Z0-9_]+(\/[a-zA-Z0-9_-]+)*$",
@@ -134,6 +138,12 @@ class Function(BaseModel):
     few_shot: Optional[bool] = None
     few_shot_count: Optional[int] = None
     cache_configuration: Optional[CacheConfiguration] = None
+    project_uuid: Optional[str] = None
+
+
+class Function(FunctionIn):
+    uuid: UUID
+    project: Project
 
 
 class Error(BaseModel):

@@ -7,49 +7,17 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/by_path/test/sdk/test_image
+    uri: http://localhost:8000/v1/projects
   response:
     body:
-      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
-        not found"}]}'
+      string: '[{"name":"default","description":"Default project","uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","organization_id":1},{"name":"op-4CF5LCHPMGON1BTMLMJL","description":null,"uuid":"326539b7-a7b2-436a-a075-1db05bd3bea9","organization_id":1},{"name":"test","description":null,"uuid":"6258267d-d725-4c9b-a6e5-80634ce95462","organization_id":1},{"name":"PROJECT","description":null,"uuid":"3c499dfe-50bf-49b3-b5c9-32f8e2977a42","organization_id":1},{"name":"PRO","description":null,"uuid":"f05ec7c2-fbeb-47de-8461-f5ab248ce48b","organization_id":1},{"name":"mattias","description":null,"uuid":"515a79b9-1f45-45dc-a001-87d53e8c50c4","organization_id":1}]'
     headers:
       content-length:
-      - '98'
+      - '647'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:21 GMT
-      server:
-      - uvicorn
-    status:
-      code: 404
-      message: Not Found
-- request:
-    body: '{"id": null, "path": "test/sdk/test_image", "description": null, "input_schema":
-      null, "out_schema": null, "instructions": "describe the image", "model": "openai/gpt4-turbo",
-      "index_ids": [], "use_semantic_search": null, "few_shot": null, "few_shot_count":
-      null, "cache_configuration": null}'
-    headers:
-      accept:
-      - '*/*'
-      connection:
-      - keep-alive
-      content-length:
-      - '291'
-      content-type:
-      - application/json
-    method: POST
-    uri: http://localhost:8000/v1/functions
-  response:
-    body:
-      string: '{"path":"test/sdk/test_image","instructions":"describe the image","id":44,"description":null,"input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"6db40da6-c469-4c3b-bb65-fcd752a431fb","use_semantic_search":false,"model":"openai/gpt4-turbo","language_model_id":1,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
-    headers:
-      content-length:
-      - '381'
-      content-type:
-      - application/json
-      date:
-      - Tue, 21 May 2024 10:10:21 GMT
+      - Tue, 11 Jun 2024 07:04:59 GMT
       server:
       - uvicorn
     status:
@@ -63,17 +31,75 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/44
+    uri: http://localhost:8000/v1/projects/1a57505d-46db-40eb-b07e-75d525b4cac4/functions/by_path/test/sdk/test_image
   response:
     body:
-      string: '{"path":"test/sdk/test_image","instructions":"describe the image","id":44,"description":null,"input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"6db40da6-c469-4c3b-bb65-fcd752a431fb","use_semantic_search":false,"model":"openai/gpt4-turbo","language_model_id":1,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+      string: '{"id":174,"uuid":"cb202cdb-5f4d-49f2-a041-b6836ecad07b","dataset_uuid":"148d731b-b967-401f-ab01-aaa5ff4e23be","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+        the image","language_model_id":1,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","name":"default"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '459'
+      - '449'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:21 GMT
+      - Tue, 11 Jun 2024 07:04:59 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"path": "test/sdk/test_image", "description": null, "input_schema": null,
+      "out_schema": null, "instructions": "describe the image", "model": "openai/gpt4-turbo",
+      "index_ids": [], "use_semantic_search": null, "few_shot": null, "few_shot_count":
+      null, "cache_configuration": null, "project_uuid": null}'
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+      content-length:
+      - '301'
+      content-type:
+      - application/json
+    method: PATCH
+    uri: http://localhost:8000/v1/functions/cb202cdb-5f4d-49f2-a041-b6836ecad07b
+  response:
+    body:
+      string: '{"id":174,"uuid":"cb202cdb-5f4d-49f2-a041-b6836ecad07b","dataset_uuid":"148d731b-b967-401f-ab01-aaa5ff4e23be","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+        the image","language_model_id":1,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","name":"default"},"revision":1,"use_semantic_search":false}'
+    headers:
+      content-length:
+      - '449'
+      content-type:
+      - application/json
+      date:
+      - Tue, 11 Jun 2024 07:04:59 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+    method: GET
+    uri: http://localhost:8000/v1/functions/cb202cdb-5f4d-49f2-a041-b6836ecad07b
+  response:
+    body:
+      string: '{"id":174,"uuid":"cb202cdb-5f4d-49f2-a041-b6836ecad07b","dataset_uuid":"148d731b-b967-401f-ab01-aaa5ff4e23be","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+        the image","language_model_id":1,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","name":"default"},"revision":1,"use_semantic_search":false}'
+    headers:
+      content-length:
+      - '449'
+      content-type:
+      - application/json
+      date:
+      - Tue, 11 Jun 2024 07:04:59 GMT
       server:
       - uvicorn
     status:
@@ -92,26 +118,57 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/chat/test/sdk/test_image
+    uri: http://localhost:8000/v1/functions/test/sdk/test_image/chat
   response:
     body:
-      string: '{"span_id":"9b17ef15-368e-446d-b9ea-a338423bc54f","message":"The image
-        displays a fossil of a prehistoric reptile, possibly a dinosaur or similar
-        creature, embedded in a stone slab. The fossil is remarkably well-preserved,
-        showing intricate details. The skeleton is largely intact with a clearly recognizable
-        skull, spine, ribs, and limbs. The texture of the stone contrasts with the
-        darker coloration of the fossilized remains, emphasizing the form and structure
-        of the creature. The backdrop is a simple black, which highlights the fossil
-        and the subtleties of its preservation on the slab. This type of specimen
-        is essential for paleontological studies, offering insights into the anatomy
-        and possible lifestyle of extinct species.","json_payload":null,"context":null,"cached":false}'
+      string: '{"errors":[{"type":"HTTPException","message":"Not Found","detail":"Not
+        Found"}]}'
     headers:
       content-length:
-      - '786'
+      - '80'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:21 GMT
+      - Tue, 11 Jun 2024 07:04:59 GMT
+      server:
+      - uvicorn
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: '{"parent_span_uuid": null, "messages": [{"role": "user", "content": [{"type":
+      "image_url", "image_url": {"url": "https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/e1/d3/e1d3fee9-9aaa-4599-ba67-1c71a6d0ed03/1200px-seymouria_fossil.jpg"}}]}]}'
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+      content-length:
+      - '251'
+      content-type:
+      - application/json
+    method: POST
+    uri: http://localhost:8000/v1/functions/cb202cdb-5f4d-49f2-a041-b6836ecad07b/chat
+  response:
+    body:
+      string: '{"span_id":"ae842d5c-e300-4b46-bfce-c8ed241091bd","message":"This picture
+        shows a fossil of a vertebrate animal embedded in a rock. The fossil is well-preserved
+        and displays the skeletal structure of the creature, which includes detailed
+        spinal vertebrae, ribs, leg bones, and a clearly visible skull. The bone color
+        contrasts with the light-colored rock, suggesting that it may have been treated
+        to highlight its features. The size and shape of the bones indicate that it
+        could be from a small prehistoric animal, possibly a reptile or an early mammal.
+        The positioning of the specimen and its preservation suggest it was probably
+        excavated from sedimentary rock, which is common in paleontological digs.
+        This setup is typically seen in museum exhibits or educational settings to
+        display and study ancient life forms.","json_payload":null,"context":null,"cached":false}'
+    headers:
+      content-length:
+      - '869'
+      content-type:
+      - application/json
+      date:
+      - Tue, 11 Jun 2024 07:05:58 GMT
       server:
       - uvicorn
     status:
@@ -125,7 +182,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/44
+    uri: http://localhost:8000/v1/functions/cb202cdb-5f4d-49f2-a041-b6836ecad07b
   response:
     body:
       string: ''
@@ -133,7 +190,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:30 GMT
+      - Tue, 11 Jun 2024 07:06:12 GMT
       server:
       - uvicorn
     status:

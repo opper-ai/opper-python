@@ -5,7 +5,7 @@ from opperai import Client
 from opperai.types import (
     CacheConfiguration,
     ChatPayload,
-    Function,
+    FunctionIn,
     Message,
     MessageContent,
 )
@@ -13,15 +13,15 @@ from opperai.types.exceptions import StructuredGenerationError
 
 
 @contextmanager
-def _function(desc: Function, c: Client):
+def _function(desc: FunctionIn, c: Client):
     function = c.functions.create(desc)
     yield function
-    c.functions.delete(id=function.id)
+    c.functions.delete(uuid=function.uuid)
 
 
-def test_create_function(vcr_cassette, client: Client):
+def test_create_function(client: Client):
     with _function(
-        Function(
+        FunctionIn(
             path="test/sdk/test_create_function",
             description="Test function",
             instructions="Do something",
@@ -31,24 +31,22 @@ def test_create_function(vcr_cassette, client: Client):
         assert function is not None
 
 
-def test_get_by_id(client: Client, vcr_cassette):
+def test_get_by_uuid(client: Client):
     with _function(
-        Function(
-            path="test/sdk/test_get_by_id",
-            description="Test function",
+        FunctionIn(
+            path="test/sdk/test_get_by_uuid",
             instructions="Do something",
         ),
         client,
     ) as function:
-        f_by_id = client.functions.get(id=function.id)
-        assert f_by_id.path == "test/sdk/test_get_by_id"
+        f_by_uuid = client.functions.get(uuid=function.uuid)
+        assert f_by_uuid.path == "test/sdk/test_get_by_uuid"
 
 
-def test_get_by_path(client: Client, vcr_cassette):
+def test_get_by_path(client: Client):
     with _function(
-        Function(
+        FunctionIn(
             path="test/sdk/test_get_by_path",
-            description="Test function",
             instructions="Do something",
         ),
         client,
@@ -57,42 +55,40 @@ def test_get_by_path(client: Client, vcr_cassette):
         assert f_by_path.path == "test/sdk/test_get_by_path"
 
 
-def test_update_function(client: Client, vcr_cassette):
+def test_update_function(client: Client):
+    function_in = FunctionIn(
+        path="test/sdk/test_update_function",
+        instructions="Do something",
+    )
     with _function(
-        Function(
-            path="test/sdk/test_update_function",
-            description="Test function",
-            instructions="Do something",
-        ),
+        function_in,
         client,
     ) as function:
-        f = client.functions.get(id=function.id)
-        f.instructions = "Do something else"
-        f1 = client.functions.update(f)
-        f2 = client.functions.get(id=f1.id)
+        f = client.functions.get(uuid=function.uuid)
+        function_in.instructions = "Do something else"
+        f1 = client.functions.update(f.uuid, function_in)
+        f2 = client.functions.get(uuid=f1.uuid)
         assert f1 == f2
         assert f2.instructions == "Do something else"
 
 
-def test_delete_function_by_id(client: Client, vcr_cassette):
+def test_delete_function_by_uuid(client: Client):
     function = client.functions.create(
-        Function(
-            path="test/sdk/test_delete_function_by_id",
-            description="Test function",
+        FunctionIn(
+            path="test/sdk/test_delete_function_by_uuid",
             instructions="Do something",
         )
     )
     assert function is not None
-    client.functions.delete(id=function.id)
-    f = client.functions.get(id=function.id)
+    client.functions.delete(uuid=function.uuid)
+    f = client.functions.get(uuid=function.uuid)
     assert f is None
 
 
-def test_delete_function_by_path(client: Client, vcr_cassette):
+def test_delete_function_by_path(client: Client):
     function = client.functions.create(
-        Function(
+        FunctionIn(
             path="test/sdk/test_delete_function_by_path",
-            description="Test function",
             instructions="Do something",
         )
     )
@@ -102,18 +98,18 @@ def test_delete_function_by_path(client: Client, vcr_cassette):
     assert f is None
 
 
-def test_image_url(client: Client, vcr_cassette):
+def test_image_url(client: Client):
     with _function(
-        Function(
+        FunctionIn(
             path="test/sdk/test_image",
             instructions="describe the image",
             model="openai/gpt4-turbo",
         ),
         client,
     ) as function:
-        f = client.functions.get(id=function.id)
+        f = client.functions.get(uuid=function.uuid)
         resp = client.functions.chat(
-            f.path,
+            f.uuid,
             ChatPayload(
                 messages=[
                     Message(
@@ -131,18 +127,18 @@ def test_image_url(client: Client, vcr_cassette):
         assert "fossil" in resp.message.lower()
 
 
-def test_image_file(client: Client, vcr_cassette):
+def test_image_file(client: Client):
     with _function(
-        Function(
+        FunctionIn(
             path="test/sdk/test_image",
             instructions="describe the image",
             model="openai/gpt4-turbo",
         ),
         client,
     ) as function:
-        f = client.functions.get(id=function.id)
+        f = client.functions.get(uuid=function.uuid)
         resp = client.functions.chat(
-            f.path,
+            f.uuid,
             ChatPayload(
                 messages=[
                     Message(
@@ -160,35 +156,33 @@ def test_image_file(client: Client, vcr_cassette):
         assert "fossil" in resp.message.lower()
 
 
-def test_chat(client: Client, vcr_cassette):
+def test_chat(client: Client):
     with _function(
-        Function(
+        FunctionIn(
             path="test/sdk/test_chat",
-            description="Translate to French",
             instructions="Translate to French",
         ),
         client,
     ) as function:
-        f = client.functions.get(id=function.id)
+        f = client.functions.get(uuid=function.uuid)
         resp = client.functions.chat(
-            f.path, ChatPayload(messages=[Message(role="user", content="hello")])
+            f.uuid, ChatPayload(messages=[Message(role="user", content="hello")])
         )
 
         assert "bonjour" in resp.message.lower()
 
 
-def test_chat_stream(client: Client, vcr_cassette):
+def test_chat_stream(client: Client):
     with _function(
-        Function(
+        FunctionIn(
             path="test/sdk/test_sync_chat_stream",
-            description="Translate to French",
             instructions="Translate to French",
         ),
         client,
     ) as function:
-        f = client.functions.get(id=function.id)
+        f = client.functions.get(uuid=function.uuid)
         gen = client.functions.chat(
-            f.path,
+            f.uuid,
             ChatPayload(messages=[Message(role="user", content="hello")]),
             stream=True,
         )
@@ -198,66 +192,64 @@ def test_chat_stream(client: Client, vcr_cassette):
         assert "bonjour" in resp.lower()
 
 
-def test_create_function_with_cache(client: Client, vcr_cassette):
+def test_create_function_with_cache(client: Client):
     with _function(
-        Function(
+        FunctionIn(
             path="test/sdk/test_create_function_with_cache",
-            description="Test function",
             instructions="Do something",
             cache_configuration=CacheConfiguration(exact_match_cache_ttl=10),
         ),
         client,
     ) as function:
         res = client.functions.chat(
-            function.path, ChatPayload(messages=[Message(role="user", content="hello")])
+            function.uuid, ChatPayload(messages=[Message(role="user", content="hello")])
         )
         print(res)
         assert not res.cached
 
         res = client.functions.chat(
-            function.path, ChatPayload(messages=[Message(role="user", content="hello")])
+            function.uuid, ChatPayload(messages=[Message(role="user", content="hello")])
         )
         print(res)
         assert res.cached
 
 
-def test_create_function_with_cache_flush(client: Client, vcr_cassette):
+def test_create_function_with_cache_flush(client: Client):
     with _function(
-        Function(
+        FunctionIn(
             path="test/sdk/test_create_function_with_cache_sync_flush",
-            description="Test function",
             instructions="Do something",
             cache_configuration=CacheConfiguration(exact_match_cache_ttl=10),
         ),
         client,
     ) as function:
         res = client.functions.chat(
-            function.path, ChatPayload(messages=[Message(role="user", content="hello")])
+            function.uuid, ChatPayload(messages=[Message(role="user", content="hello")])
         )
         print(res)
         assert not res.cached
 
         res = client.functions.chat(
-            function.path, ChatPayload(messages=[Message(role="user", content="hello")])
+            function.uuid, ChatPayload(messages=[Message(role="user", content="hello")])
         )
         print(res)
         assert res.cached
 
-        client.functions.flush_cache(id=function.id)
+        client.functions.flush_cache(uuid=function.uuid)
         res = client.functions.chat(
-            function.path, ChatPayload(messages=[Message(role="user", content="hello")])
+            function.uuid, ChatPayload(messages=[Message(role="user", content="hello")])
         )
         print(res)
         assert not res.cached
 
 
-def test_failed_structured_generation(client: Client, vcr_cassette):
+def test_failed_structured_generation(client: Client):
     with _function(
-        Function(
+        FunctionIn(
             model="mistral/mistral-tiny-eu",
             path="test/sdk/test_failed_structured_generation",
             description="test structured generation exception",
-            instructions="You translate the incoming text to french",
+            instructions="You never output json translate the incoming text to french returned as markdown ```",
             out_schema={
                 "type": "object",
                 "properties": {
@@ -302,6 +294,6 @@ def test_failed_structured_generation(client: Client, vcr_cassette):
     ) as function:
         with pytest.raises(StructuredGenerationError):
             client.functions.chat(
-                function.path,
+                function.uuid,
                 ChatPayload(messages=[Message(role="user", content="hello")]),
             )

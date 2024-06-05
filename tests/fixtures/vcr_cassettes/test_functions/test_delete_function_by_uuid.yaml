@@ -17,7 +17,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 11 Jun 2024 07:04:02 GMT
+      - Tue, 11 Jun 2024 07:04:03 GMT
       server:
       - uvicorn
     status:
@@ -31,52 +31,50 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/projects/1a57505d-46db-40eb-b07e-75d525b4cac4/functions/by_path/test/sdk/test_create_function
+    uri: http://localhost:8000/v1/projects/1a57505d-46db-40eb-b07e-75d525b4cac4/functions/by_path/test/sdk/test_delete_function_by_uuid
   response:
     body:
-      string: '{"id":159,"uuid":"b96fb377-10c9-4cdb-bf49-b7bbdbbb2aa4","dataset_uuid":"0a94ad06-173f-4fff-9f0c-eea139a8fa94","description":"Test
-        function","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Do
-        something","language_model_id":8,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_create_function","project":{"uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","name":"default"},"revision":1,"use_semantic_search":false}'
+      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
+        not found"}]}'
     headers:
       content-length:
-      - '460'
+      - '98'
       content-type:
       - application/json
       date:
-      - Tue, 11 Jun 2024 07:04:02 GMT
+      - Tue, 11 Jun 2024 07:04:03 GMT
       server:
       - uvicorn
     status:
-      code: 200
-      message: OK
+      code: 404
+      message: Not Found
 - request:
-    body: '{"path": "test/sdk/test_create_function", "description": "Test function",
+    body: '{"path": "test/sdk/test_delete_function_by_uuid", "description": null,
       "input_schema": null, "out_schema": null, "instructions": "Do something", "model":
       null, "index_ids": [], "use_semantic_search": null, "few_shot": null, "few_shot_count":
-      null, "cache_configuration": null, "project_uuid": null}'
+      null, "cache_configuration": null, "project_uuid": "1a57505d-46db-40eb-b07e-75d525b4cac4"}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '301'
+      - '332'
       content-type:
       - application/json
-    method: PATCH
-    uri: http://localhost:8000/v1/functions/b96fb377-10c9-4cdb-bf49-b7bbdbbb2aa4
+    method: POST
+    uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":159,"uuid":"b96fb377-10c9-4cdb-bf49-b7bbdbbb2aa4","dataset_uuid":"0a94ad06-173f-4fff-9f0c-eea139a8fa94","description":"Test
-        function","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Do
-        something","language_model_id":8,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_create_function","project":{"uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","name":"default"},"revision":1,"use_semantic_search":false}'
+      string: '{"id":172,"uuid":"3ffc6abd-8c50-4314-9b92-bd0c52da4dbd","dataset_uuid":"6a7190ff-ba13-4d36-8ffb-0707f3f9b483","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Do
+        something","language_model_id":8,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_delete_function_by_uuid","project":{"uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","name":"default"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '460'
+      - '457'
       content-type:
       - application/json
       date:
-      - Tue, 11 Jun 2024 07:04:02 GMT
+      - Tue, 11 Jun 2024 07:04:03 GMT
       server:
       - uvicorn
     status:
@@ -90,7 +88,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/b96fb377-10c9-4cdb-bf49-b7bbdbbb2aa4
+    uri: http://localhost:8000/v1/functions/3ffc6abd-8c50-4314-9b92-bd0c52da4dbd
   response:
     body:
       string: ''
@@ -104,4 +102,29 @@ interactions:
     status:
       code: 204
       message: No Content
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+    method: GET
+    uri: http://localhost:8000/v1/functions/3ffc6abd-8c50-4314-9b92-bd0c52da4dbd
+  response:
+    body:
+      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
+        not found"}]}'
+    headers:
+      content-length:
+      - '98'
+      content-type:
+      - application/json
+      date:
+      - Tue, 11 Jun 2024 07:04:03 GMT
+      server:
+      - uvicorn
+    status:
+      code: 404
+      message: Not Found
 version: 1

@@ -1,6 +1,7 @@
 from typing import List, Optional
 
 from opperai.core._http_clients import _async_http_client
+from opperai.types import Project
 from opperai.types.exceptions import APIError
 from opperai.types.indexes import (
     Document,
@@ -13,8 +14,9 @@ from ._indexes import RetrieveQuery
 
 
 class AsyncIndexes:
-    def __init__(self, http_client: _async_http_client):
+    def __init__(self, http_client: _async_http_client, project: Project):
         self.http_client = http_client
+        self.project = project
 
     async def create(self, name: str) -> Index:
         """Create an index
@@ -42,7 +44,7 @@ class AsyncIndexes:
         response = await self.http_client.do_request(
             "POST",
             "/v1/indexes",
-            json={"name": name},
+            json={"name": name, "project_uuid": self.project.uuid},
         )
         if response.status_code != 200:
             raise APIError(f"Failed to create index with status {response.status_code}")

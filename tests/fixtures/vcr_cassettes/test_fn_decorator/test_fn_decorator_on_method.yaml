@@ -7,51 +7,101 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/by_path/test_method
+    uri: http://localhost:8000/v1/projects
   response:
     body:
-      string: '{"path":"test_method","instructions":"Operation: test_method\n\nOperation
-        description: say hello","id":23,"description":"say hello","input_schema":null,"out_schema":{"type":"string","$defs":{}},"few_shot":false,"few_shot_count":2,"dataset_uuid":"22ca6525-a4c3-476f-be85-e65a1ec49976","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+      string: '[{"name":"default","description":"Default project","uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","organization_id":1},{"name":"op-4CF5LCHPMGON1BTMLMJL","description":null,"uuid":"326539b7-a7b2-436a-a075-1db05bd3bea9","organization_id":1},{"name":"test","description":null,"uuid":"6258267d-d725-4c9b-a6e5-80634ce95462","organization_id":1},{"name":"PROJECT","description":null,"uuid":"3c499dfe-50bf-49b3-b5c9-32f8e2977a42","organization_id":1},{"name":"PRO","description":null,"uuid":"f05ec7c2-fbeb-47de-8461-f5ab248ce48b","organization_id":1},{"name":"mattias","description":null,"uuid":"515a79b9-1f45-45dc-a001-87d53e8c50c4","organization_id":1}]'
     headers:
       content-length:
-      - '518'
+      - '647'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:22:07 GMT
+      - Tue, 11 Jun 2024 07:14:34 GMT
       server:
       - uvicorn
     status:
       code: 200
       message: OK
 - request:
-    body: '{"id": 23, "path": "test_method", "description": "say hello", "input_schema":
-      null, "out_schema": {"type": "string", "$defs": {}}, "instructions": "Operation:
-      test_method\n\nOperation description: say hello", "model": null, "index_ids":
-      [], "use_semantic_search": null, "few_shot": false, "few_shot_count": null,
-      "cache_configuration": null}'
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+    method: GET
+    uri: http://localhost:8000/v1/projects
+  response:
+    body:
+      string: '[{"name":"default","description":"Default project","uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","organization_id":1},{"name":"op-4CF5LCHPMGON1BTMLMJL","description":null,"uuid":"326539b7-a7b2-436a-a075-1db05bd3bea9","organization_id":1},{"name":"test","description":null,"uuid":"6258267d-d725-4c9b-a6e5-80634ce95462","organization_id":1},{"name":"PROJECT","description":null,"uuid":"3c499dfe-50bf-49b3-b5c9-32f8e2977a42","organization_id":1},{"name":"PRO","description":null,"uuid":"f05ec7c2-fbeb-47de-8461-f5ab248ce48b","organization_id":1},{"name":"mattias","description":null,"uuid":"515a79b9-1f45-45dc-a001-87d53e8c50c4","organization_id":1}]'
+    headers:
+      content-length:
+      - '647'
+      content-type:
+      - application/json
+      date:
+      - Tue, 11 Jun 2024 07:14:34 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+    method: GET
+    uri: http://localhost:8000/v1/projects/1a57505d-46db-40eb-b07e-75d525b4cac4/functions/by_path/test_method
+  response:
+    body:
+      string: '{"id":112,"uuid":"a65dfef9-fb05-4ae7-8be1-90f15cb3c1fc","dataset_uuid":"554ded88-23bc-4a18-814a-be61cef0aaea","description":"say
+        hello","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
+        test_method\n\nOperation description: say hello","language_model_id":8,"model":"azure/gpt4-eu","out_schema":{"type":"string","$defs":{}},"path":"test_method","project":{"uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","name":"default"},"revision":1,"use_semantic_search":false}'
+    headers:
+      content-length:
+      - '508'
+      content-type:
+      - application/json
+      date:
+      - Tue, 11 Jun 2024 07:17:08 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"path": "test_method", "description": "say hello", "input_schema": null,
+      "out_schema": {"type": "string", "$defs": {}}, "instructions": "Operation: test_method\n\nOperation
+      description: say hello", "model": null, "index_ids": [], "use_semantic_search":
+      null, "few_shot": false, "few_shot_count": null, "cache_configuration": null,
+      "project_uuid": null}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '341'
+      - '353'
       content-type:
       - application/json
     method: PATCH
-    uri: http://localhost:8000/v1/functions/23
+    uri: http://localhost:8000/v1/functions/a65dfef9-fb05-4ae7-8be1-90f15cb3c1fc
   response:
     body:
-      string: '{"path":"test_method","instructions":"Operation: test_method\n\nOperation
-        description: say hello","id":23,"description":"say hello","input_schema":null,"out_schema":{"type":"string","$defs":{}},"few_shot":false,"few_shot_count":2,"dataset_uuid":"22ca6525-a4c3-476f-be85-e65a1ec49976","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+      string: '{"id":112,"uuid":"a65dfef9-fb05-4ae7-8be1-90f15cb3c1fc","dataset_uuid":"554ded88-23bc-4a18-814a-be61cef0aaea","description":"say
+        hello","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
+        test_method\n\nOperation description: say hello","language_model_id":8,"model":"azure/gpt4-eu","out_schema":{"type":"string","$defs":{}},"path":"test_method","project":{"uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","name":"default"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '518'
+      - '508'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:22:07 GMT
+      - Tue, 11 Jun 2024 07:17:08 GMT
       server:
       - uvicorn
     status:
@@ -70,17 +120,178 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/chat/test_method
+    uri: http://localhost:8000/v1/functions/test_method/chat
   response:
     body:
-      string: '{"span_id":"19f39b2f-71ff-4fae-80c3-7317ceb119f8","message":null,"json_payload":"Hello","context":null,"cached":false}'
+      string: '{"errors":[{"type":"DataError","message":"(psycopg2.errors.InvalidTextRepresentation)
+        invalid input syntax for type uuid: \"test_method\"\nLINE 4: ...unctions.organization_id
+        = 1 AND functions.uuid = ''test_meth...\n                                                             ^\n\n[SQL:
+        SELECT anon_1.functions_id AS anon_1_functions_id, anon_1.functions_uuid AS
+        anon_1_functions_uuid, anon_1.functions_path AS anon_1_functions_path, anon_1.functions_owner_id
+        AS anon_1_functions_owner_id, anon_1.functions_organization_id AS anon_1_functions_organization_id,
+        anon_1.functions_description AS anon_1_functions_description, anon_1.functions_f_type
+        AS anon_1_functions_f_type, anon_1.functions_input_format AS anon_1_functions_input_format,
+        anon_1.functions_output_format AS anon_1_functions_output_format, anon_1.functions_model
+        AS anon_1_functions_model, anon_1.functions_language_model_id AS anon_1_functions_language_model_id,
+        anon_1.functions_dataset_uuid AS anon_1_functions_dataset_uuid, anon_1.functions_few_shot
+        AS anon_1_functions_few_shot, anon_1.functions_few_shot_count AS anon_1_functions_few_shot_count,
+        anon_1.functions_use_semantic_search AS anon_1_functions_use_semantic_search,
+        anon_1.functions_exact_match_cache_ttl AS anon_1_functions_exact_match_cache_ttl,
+        anon_1.functions_semantic_cache_threshold AS anon_1_functions_semantic_cache_threshold,
+        anon_1.functions_semantic_cache_ttl AS anon_1_functions_semantic_cache_ttl,
+        anon_1.functions_project_id AS anon_1_functions_project_id, anon_1.functions_created_at
+        AS anon_1_functions_created_at, anon_1.functions_updated_at AS anon_1_functions_updated_at,
+        language_models_1.id AS language_models_1_id, language_models_1.hosting_provider
+        AS language_models_1_hosting_provider, language_models_1.name AS language_models_1_name,
+        language_models_1.location AS language_models_1_location, language_models_1.identifier
+        AS language_models_1_identifier, language_models_1.is_default AS language_models_1_is_default,
+        language_models_1.is_public AS language_models_1_is_public, language_models_1.timeout
+        AS language_models_1_timeout, language_models_1.stream_timeout AS language_models_1_stream_timeout,
+        language_models_1.max_tokens AS language_models_1_max_tokens, language_models_1.tpm
+        AS language_models_1_tpm, language_models_1.rpm AS language_models_1_rpm,
+        language_models_1.extra AS language_models_1_extra, language_models_1.created_at
+        AS language_models_1_created_at, language_models_1.updated_at AS language_models_1_updated_at,
+        indexes_1.id AS indexes_1_id, indexes_1.uuid AS indexes_1_uuid, indexes_1.name
+        AS indexes_1_name, indexes_1.organization_id AS indexes_1_organization_id,
+        indexes_1.user_id AS indexes_1_user_id, indexes_1.project_id AS indexes_1_project_id,
+        indexes_1.created_at AS indexes_1_created_at, indexes_1.updated_at AS indexes_1_updated_at,
+        function_revisions_1.id AS function_revisions_1_id, function_revisions_1.function_id
+        AS function_revisions_1_function_id, function_revisions_1.revision AS function_revisions_1_revision,
+        function_revisions_1.instructions AS function_revisions_1_instructions, function_revisions_1.created_at
+        AS function_revisions_1_created_at, function_revisions_1.updated_at AS function_revisions_1_updated_at,
+        function_evals_1.id AS function_evals_1_id, function_evals_1.function_id AS
+        function_evals_1_function_id, function_evals_1.revision_id AS function_evals_1_revision_id,
+        function_evals_1.summary AS function_evals_1_summary, function_evals_1.improvements
+        AS function_evals_1_improvements, function_evals_1.improved_instructions AS
+        function_evals_1_improved_instructions, function_evals_1.score AS function_evals_1_score,
+        function_evals_1.generations_rated AS function_evals_1_generations_rated,
+        function_evals_1.created_at AS function_evals_1_created_at, function_evals_1.updated_at
+        AS function_evals_1_updated_at \nFROM (SELECT functions.id AS functions_id,
+        functions.uuid AS functions_uuid, functions.path AS functions_path, functions.owner_id
+        AS functions_owner_id, functions.organization_id AS functions_organization_id,
+        functions.description AS functions_description, functions.f_type AS functions_f_type,
+        functions.input_format AS functions_input_format, functions.output_format
+        AS functions_output_format, functions.model AS functions_model, functions.language_model_id
+        AS functions_language_model_id, functions.dataset_uuid AS functions_dataset_uuid,
+        functions.few_shot AS functions_few_shot, functions.few_shot_count AS functions_few_shot_count,
+        functions.use_semantic_search AS functions_use_semantic_search, functions.exact_match_cache_ttl
+        AS functions_exact_match_cache_ttl, functions.semantic_cache_threshold AS
+        functions_semantic_cache_threshold, functions.semantic_cache_ttl AS functions_semantic_cache_ttl,
+        functions.project_id AS functions_project_id, functions.created_at AS functions_created_at,
+        functions.updated_at AS functions_updated_at \nFROM functions \nWHERE functions.organization_id
+        = %(organization_id_1)s AND functions.uuid = %(uuid_1)s::UUID \n LIMIT %(param_1)s)
+        AS anon_1 LEFT OUTER JOIN language_models AS language_models_1 ON language_models_1.id
+        = anon_1.functions_language_model_id LEFT OUTER JOIN (function_index_association
+        AS function_index_association_1 JOIN indexes AS indexes_1 ON indexes_1.id
+        = function_index_association_1.index_id) ON anon_1.functions_id = function_index_association_1.function_id
+        LEFT OUTER JOIN function_revisions AS function_revisions_1 ON anon_1.functions_id
+        = function_revisions_1.function_id LEFT OUTER JOIN function_evals AS function_evals_1
+        ON anon_1.functions_id = function_evals_1.function_id ORDER BY function_revisions_1.revision
+        DESC, function_evals_1.created_at DESC]\n[parameters: {''organization_id_1'':
+        1, ''uuid_1'': ''test_method'', ''param_1'': 1}]\n(Background on this error
+        at: https://sqlalche.me/e/20/9h9h)","detail":"(psycopg2.errors.InvalidTextRepresentation)
+        invalid input syntax for type uuid: \"test_method\"\nLINE 4: ...unctions.organization_id
+        = 1 AND functions.uuid = ''test_meth...\n                                                             ^\n\n[SQL:
+        SELECT anon_1.functions_id AS anon_1_functions_id, anon_1.functions_uuid AS
+        anon_1_functions_uuid, anon_1.functions_path AS anon_1_functions_path, anon_1.functions_owner_id
+        AS anon_1_functions_owner_id, anon_1.functions_organization_id AS anon_1_functions_organization_id,
+        anon_1.functions_description AS anon_1_functions_description, anon_1.functions_f_type
+        AS anon_1_functions_f_type, anon_1.functions_input_format AS anon_1_functions_input_format,
+        anon_1.functions_output_format AS anon_1_functions_output_format, anon_1.functions_model
+        AS anon_1_functions_model, anon_1.functions_language_model_id AS anon_1_functions_language_model_id,
+        anon_1.functions_dataset_uuid AS anon_1_functions_dataset_uuid, anon_1.functions_few_shot
+        AS anon_1_functions_few_shot, anon_1.functions_few_shot_count AS anon_1_functions_few_shot_count,
+        anon_1.functions_use_semantic_search AS anon_1_functions_use_semantic_search,
+        anon_1.functions_exact_match_cache_ttl AS anon_1_functions_exact_match_cache_ttl,
+        anon_1.functions_semantic_cache_threshold AS anon_1_functions_semantic_cache_threshold,
+        anon_1.functions_semantic_cache_ttl AS anon_1_functions_semantic_cache_ttl,
+        anon_1.functions_project_id AS anon_1_functions_project_id, anon_1.functions_created_at
+        AS anon_1_functions_created_at, anon_1.functions_updated_at AS anon_1_functions_updated_at,
+        language_models_1.id AS language_models_1_id, language_models_1.hosting_provider
+        AS language_models_1_hosting_provider, language_models_1.name AS language_models_1_name,
+        language_models_1.location AS language_models_1_location, language_models_1.identifier
+        AS language_models_1_identifier, language_models_1.is_default AS language_models_1_is_default,
+        language_models_1.is_public AS language_models_1_is_public, language_models_1.timeout
+        AS language_models_1_timeout, language_models_1.stream_timeout AS language_models_1_stream_timeout,
+        language_models_1.max_tokens AS language_models_1_max_tokens, language_models_1.tpm
+        AS language_models_1_tpm, language_models_1.rpm AS language_models_1_rpm,
+        language_models_1.extra AS language_models_1_extra, language_models_1.created_at
+        AS language_models_1_created_at, language_models_1.updated_at AS language_models_1_updated_at,
+        indexes_1.id AS indexes_1_id, indexes_1.uuid AS indexes_1_uuid, indexes_1.name
+        AS indexes_1_name, indexes_1.organization_id AS indexes_1_organization_id,
+        indexes_1.user_id AS indexes_1_user_id, indexes_1.project_id AS indexes_1_project_id,
+        indexes_1.created_at AS indexes_1_created_at, indexes_1.updated_at AS indexes_1_updated_at,
+        function_revisions_1.id AS function_revisions_1_id, function_revisions_1.function_id
+        AS function_revisions_1_function_id, function_revisions_1.revision AS function_revisions_1_revision,
+        function_revisions_1.instructions AS function_revisions_1_instructions, function_revisions_1.created_at
+        AS function_revisions_1_created_at, function_revisions_1.updated_at AS function_revisions_1_updated_at,
+        function_evals_1.id AS function_evals_1_id, function_evals_1.function_id AS
+        function_evals_1_function_id, function_evals_1.revision_id AS function_evals_1_revision_id,
+        function_evals_1.summary AS function_evals_1_summary, function_evals_1.improvements
+        AS function_evals_1_improvements, function_evals_1.improved_instructions AS
+        function_evals_1_improved_instructions, function_evals_1.score AS function_evals_1_score,
+        function_evals_1.generations_rated AS function_evals_1_generations_rated,
+        function_evals_1.created_at AS function_evals_1_created_at, function_evals_1.updated_at
+        AS function_evals_1_updated_at \nFROM (SELECT functions.id AS functions_id,
+        functions.uuid AS functions_uuid, functions.path AS functions_path, functions.owner_id
+        AS functions_owner_id, functions.organization_id AS functions_organization_id,
+        functions.description AS functions_description, functions.f_type AS functions_f_type,
+        functions.input_format AS functions_input_format, functions.output_format
+        AS functions_output_format, functions.model AS functions_model, functions.language_model_id
+        AS functions_language_model_id, functions.dataset_uuid AS functions_dataset_uuid,
+        functions.few_shot AS functions_few_shot, functions.few_shot_count AS functions_few_shot_count,
+        functions.use_semantic_search AS functions_use_semantic_search, functions.exact_match_cache_ttl
+        AS functions_exact_match_cache_ttl, functions.semantic_cache_threshold AS
+        functions_semantic_cache_threshold, functions.semantic_cache_ttl AS functions_semantic_cache_ttl,
+        functions.project_id AS functions_project_id, functions.created_at AS functions_created_at,
+        functions.updated_at AS functions_updated_at \nFROM functions \nWHERE functions.organization_id
+        = %(organization_id_1)s AND functions.uuid = %(uuid_1)s::UUID \n LIMIT %(param_1)s)
+        AS anon_1 LEFT OUTER JOIN language_models AS language_models_1 ON language_models_1.id
+        = anon_1.functions_language_model_id LEFT OUTER JOIN (function_index_association
+        AS function_index_association_1 JOIN indexes AS indexes_1 ON indexes_1.id
+        = function_index_association_1.index_id) ON anon_1.functions_id = function_index_association_1.function_id
+        LEFT OUTER JOIN function_revisions AS function_revisions_1 ON anon_1.functions_id
+        = function_revisions_1.function_id LEFT OUTER JOIN function_evals AS function_evals_1
+        ON anon_1.functions_id = function_evals_1.function_id ORDER BY function_revisions_1.revision
+        DESC, function_evals_1.created_at DESC]\n[parameters: {''organization_id_1'':
+        1, ''uuid_1'': ''test_method'', ''param_1'': 1}]\n(Background on this error
+        at: https://sqlalche.me/e/20/9h9h)"}]}'
+    headers:
+      content-length:
+      - '11574'
+      content-type:
+      - application/json
+      date:
+      - Tue, 11 Jun 2024 07:17:08 GMT
+      server:
+      - uvicorn
+    status:
+      code: 500
+      message: Internal Server Error
+- request:
+    body: '{"parent_span_uuid": null, "messages": [{"role": "user", "content": "{\"self\":
+      {\"data\": \"Hello\"}}"}]}'
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+      content-length:
+      - '106'
+      content-type:
+      - application/json
+    method: POST
+    uri: http://localhost:8000/v1/functions/a65dfef9-fb05-4ae7-8be1-90f15cb3c1fc/chat
+  response:
+    body:
+      string: '{"span_id":"f6e52df3-8456-488b-b7fd-9b7115ccb8b9","message":null,"json_payload":"Hello","context":null,"cached":false}'
     headers:
       content-length:
       - '118'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:22:07 GMT
+      - Tue, 11 Jun 2024 07:21:03 GMT
       server:
       - uvicorn
     status:
@@ -99,17 +310,17 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/chat/test_method
+    uri: http://localhost:8000/v1/functions/a65dfef9-fb05-4ae7-8be1-90f15cb3c1fc/chat
   response:
     body:
-      string: '{"span_id":"913638f8-b968-4bcf-862f-c686c965d42d","message":null,"json_payload":"Hello","context":null,"cached":false}'
+      string: '{"span_id":"46d3c28a-64cb-4d97-a2b9-a915c04ac4da","message":null,"json_payload":"Hello","context":null,"cached":false}'
     headers:
       content-length:
       - '118'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:22:08 GMT
+      - Tue, 11 Jun 2024 07:21:04 GMT
       server:
       - uvicorn
     status:

@@ -7,23 +7,23 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/by_path/test_async_client_raises_timeout_error
+    uri: http://localhost:8000/v1/projects/123e4567-e89b-12d3-a456-426614174000/functions/by_path/test_async_client_raises_timeout_error
   response:
     body:
-      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
-        not found"}]}'
+      string: '{"errors":[{"type":"AttributeError","message":"''NoneType'' object
+        has no attribute ''id''","detail":"''NoneType'' object has no attribute ''id''"}]}'
     headers:
       content-length:
-      - '98'
+      - '141'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 09:54:24 GMT
+      - Tue, 11 Jun 2024 07:08:19 GMT
       server:
       - uvicorn
     status:
-      code: 404
-      message: Not Found
+      code: 500
+      message: Internal Server Error
 - request:
     body: ''
     headers:
@@ -32,49 +32,121 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/by_path/test_async_client_raises_timeout_error
+    uri: http://localhost:8000/v1/projects/123e4567-e89b-12d3-a456-426614174000/functions/by_path/test_async_client_raises_timeout_error
   response:
     body:
-      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
-        not found"}]}'
+      string: '{"errors":[{"type":"AttributeError","message":"''NoneType'' object
+        has no attribute ''id''","detail":"''NoneType'' object has no attribute ''id''"}]}'
     headers:
       content-length:
-      - '98'
+      - '141'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 09:54:24 GMT
+      - Tue, 11 Jun 2024 07:08:19 GMT
       server:
       - uvicorn
     status:
-      code: 404
-      message: Not Found
+      code: 500
+      message: Internal Server Error
 - request:
-    body: '{"id": null, "path": "test_async_client_raises_timeout_error", "description":
-      null, "input_schema": null, "out_schema": null, "instructions": "test", "model":
-      null, "index_ids": [], "use_semantic_search": null, "few_shot": null, "few_shot_count":
-      null, "cache_configuration": null}'
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+    method: GET
+    uri: http://localhost:8000/v1/projects
+  response:
+    body:
+      string: '[{"name":"default","description":"Default project","uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","organization_id":1},{"name":"op-4CF5LCHPMGON1BTMLMJL","description":null,"uuid":"326539b7-a7b2-436a-a075-1db05bd3bea9","organization_id":1},{"name":"test","description":null,"uuid":"6258267d-d725-4c9b-a6e5-80634ce95462","organization_id":1},{"name":"PROJECT","description":null,"uuid":"3c499dfe-50bf-49b3-b5c9-32f8e2977a42","organization_id":1},{"name":"PRO","description":null,"uuid":"f05ec7c2-fbeb-47de-8461-f5ab248ce48b","organization_id":1},{"name":"mattias","description":null,"uuid":"515a79b9-1f45-45dc-a001-87d53e8c50c4","organization_id":1}]'
+    headers:
+      content-length:
+      - '647'
+      content-type:
+      - application/json
+      date:
+      - Tue, 11 Jun 2024 07:13:08 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+    method: GET
+    uri: http://localhost:8000/v1/projects/1a57505d-46db-40eb-b07e-75d525b4cac4/functions/by_path/test_async_client_raises_timeout_error
+  response:
+    body:
+      string: '{"id":110,"uuid":"8c30b20b-0662-413c-98cf-0d1cec5e5031","dataset_uuid":"d5e27965-8950-4f46-a14b-083eaba00da8","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"test","language_model_id":8,"model":"azure/gpt4-eu","out_schema":null,"path":"test_async_client_raises_timeout_error","project":{"uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","name":"default"},"revision":1,"use_semantic_search":false}'
+    headers:
+      content-length:
+      - '450'
+      content-type:
+      - application/json
+      date:
+      - Tue, 11 Jun 2024 07:13:08 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"path": "test_async_client_raises_timeout_error", "description": null,
+      "input_schema": null, "out_schema": null, "instructions": "test", "model": null,
+      "index_ids": [], "use_semantic_search": null, "few_shot": null, "few_shot_count":
+      null, "cache_configuration": null, "project_uuid": null}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '281'
+      - '291'
       content-type:
       - application/json
-    method: POST
-    uri: http://localhost:8000/v1/functions
+    method: PATCH
+    uri: http://localhost:8000/v1/functions/8c30b20b-0662-413c-98cf-0d1cec5e5031
   response:
     body:
-      string: '{"path":"test_async_client_raises_timeout_error","instructions":"test","id":21,"description":null,"input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"16136c20-2ca3-4887-93f3-b35a82134543","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
+      string: '{"id":110,"uuid":"8c30b20b-0662-413c-98cf-0d1cec5e5031","dataset_uuid":"d5e27965-8950-4f46-a14b-083eaba00da8","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"test","language_model_id":8,"model":"azure/gpt4-eu","out_schema":null,"path":"test_async_client_raises_timeout_error","project":{"uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","name":"default"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '382'
+      - '450'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 09:54:24 GMT
+      - Tue, 11 Jun 2024 07:13:08 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+    method: GET
+    uri: http://localhost:8000/v1/projects/1a57505d-46db-40eb-b07e-75d525b4cac4/functions/by_path/test_async_client_raises_timeout_error
+  response:
+    body:
+      string: '{"id":110,"uuid":"8c30b20b-0662-413c-98cf-0d1cec5e5031","dataset_uuid":"d5e27965-8950-4f46-a14b-083eaba00da8","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"test","language_model_id":8,"model":"azure/gpt4-eu","out_schema":null,"path":"test_async_client_raises_timeout_error","project":{"uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","name":"default"},"revision":1,"use_semantic_search":false}'
+    headers:
+      content-length:
+      - '450'
+      content-type:
+      - application/json
+      date:
+      - Tue, 11 Jun 2024 07:14:03 GMT
       server:
       - uvicorn
     status:

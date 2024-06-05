@@ -1,18 +1,19 @@
-import uuid
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 from opperai import Client, trace
 
 
-@patch("opperai.core._http_clients._http_client.do_request")
-def test_decorator(mock_do_request):
-    mock_do_request.side_effect = [
-        MagicMock(status_code=200, json=lambda: {"uuid": str(uuid.uuid4())}),
-        MagicMock(status_code=200, json=lambda: {"uuid": str(uuid.uuid4())}),
-    ]
+def test_trace_decorator(client: Client, vcr_cassette):
+    span_uuid = "123e4567-e89b-12d3-a456-426614174002"
+    with patch("opperai.core.spans._decorator.uuid4") as mock_uuid:
+        mock_uuid.return_value = span_uuid
+        with patch("opperai.core.spans._decorator.utcnow") as mock_utcnow:
+            mock_utcnow.return_value = "2024-01-01 00:00:00"
 
-    @trace(client=Client(api_key="temporary", api_url="temporary"))
-    def something(text: str, target_language: str) -> str:
-        return "Hola"
+            @trace(client=client)
+            def something(text: str, target_language: str) -> str:
+                return "Hola"
 
-    assert something("Hello", "es") == "Hola"
+            assert something("Hello", "es") == "Hola"
+
+        client.spans.delete(span_uuid)

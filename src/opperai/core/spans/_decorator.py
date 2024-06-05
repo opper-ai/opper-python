@@ -2,10 +2,10 @@ import asyncio
 import datetime
 import json
 import os
+import uuid
 from contextlib import contextmanager
 from functools import wraps
 from typing import Callable, Optional
-from uuid import uuid4
 
 from opperai._client import Client
 from opperai.core.spans import _current_span_id
@@ -22,6 +22,10 @@ class SpanContext:
 
 def utcnow():
     return datetime.datetime.now(datetime.timezone.utc)
+
+
+def uuid4():
+    return str(uuid.uuid4())
 
 
 @contextmanager
@@ -51,7 +55,7 @@ def start_span(
     c = client if client is not None else Client()
     project = os.environ.get("OPPER_PROJECT", "missing_project")
     parent_span_id = _current_span_id.get()
-    span_id = str(uuid4())
+    span_id = uuid4()
     span = Span(
         uuid=span_id,
         meta=metadata,
@@ -93,7 +97,7 @@ def trace(
 
             project = os.environ.get("OPPER_PROJECT", "missing_project")
             parent_span_id = _current_span_id.get()
-            span_id = str(uuid4())
+            span_id = uuid4()
             span_name = name if name is not None else func.__name__
             inputs = None
             if trace_io:
@@ -131,7 +135,7 @@ def trace(
             c = client if client is not None else Client()
             project = os.environ.get("OPPER_PROJECT", "missing_project")
             parent_span_id = _current_span_id.get()
-            span_id = str(uuid4())
+            span_id = uuid4()
             span_name = name if name is not None else func.__name__
             inputs = None
             if trace_io:

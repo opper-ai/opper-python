@@ -7,49 +7,17 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/by_path/test/sdk/test_image
+    uri: http://localhost:8000/v1/projects
   response:
     body:
-      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
-        not found"}]}'
+      string: '[{"name":"default","description":"Default project","uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","organization_id":1},{"name":"op-4CF5LCHPMGON1BTMLMJL","description":null,"uuid":"326539b7-a7b2-436a-a075-1db05bd3bea9","organization_id":1},{"name":"test","description":null,"uuid":"6258267d-d725-4c9b-a6e5-80634ce95462","organization_id":1},{"name":"PROJECT","description":null,"uuid":"3c499dfe-50bf-49b3-b5c9-32f8e2977a42","organization_id":1},{"name":"PRO","description":null,"uuid":"f05ec7c2-fbeb-47de-8461-f5ab248ce48b","organization_id":1},{"name":"mattias","description":null,"uuid":"515a79b9-1f45-45dc-a001-87d53e8c50c4","organization_id":1}]'
     headers:
       content-length:
-      - '98'
+      - '647'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:09:52 GMT
-      server:
-      - uvicorn
-    status:
-      code: 404
-      message: Not Found
-- request:
-    body: '{"id": null, "path": "test/sdk/test_image", "description": null, "input_schema":
-      null, "out_schema": null, "instructions": "describe the image", "model": "openai/gpt4-turbo",
-      "index_ids": [], "use_semantic_search": null, "few_shot": null, "few_shot_count":
-      null, "cache_configuration": null}'
-    headers:
-      accept:
-      - '*/*'
-      connection:
-      - keep-alive
-      content-length:
-      - '291'
-      content-type:
-      - application/json
-    method: POST
-    uri: http://localhost:8000/v1/functions
-  response:
-    body:
-      string: '{"path":"test/sdk/test_image","instructions":"describe the image","id":32,"description":null,"input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"ae8b0e84-9aab-4b34-835f-0fc14e9682c9","use_semantic_search":false,"model":"openai/gpt4-turbo","language_model_id":1,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
-    headers:
-      content-length:
-      - '381'
-      content-type:
-      - application/json
-      date:
-      - Tue, 21 May 2024 10:09:52 GMT
+      - Mon, 10 Jun 2024 14:11:46 GMT
       server:
       - uvicorn
     status:
@@ -63,17 +31,75 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/32
+    uri: http://localhost:8000/v1/projects/1a57505d-46db-40eb-b07e-75d525b4cac4/functions/by_path/test/sdk/test_image
   response:
     body:
-      string: '{"path":"test/sdk/test_image","instructions":"describe the image","id":32,"description":null,"input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"ae8b0e84-9aab-4b34-835f-0fc14e9682c9","use_semantic_search":false,"model":"openai/gpt4-turbo","language_model_id":1,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
+        not found"}]}'
     headers:
       content-length:
-      - '459'
+      - '98'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:09:52 GMT
+      - Mon, 10 Jun 2024 14:11:46 GMT
+      server:
+      - uvicorn
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: '{"path": "test/sdk/test_image", "description": null, "input_schema": null,
+      "out_schema": null, "instructions": "describe the image", "model": "openai/gpt4-turbo",
+      "index_ids": [], "use_semantic_search": null, "few_shot": null, "few_shot_count":
+      null, "cache_configuration": null, "project_uuid": "1a57505d-46db-40eb-b07e-75d525b4cac4"}'
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+      content-length:
+      - '335'
+      content-type:
+      - application/json
+    method: POST
+    uri: http://localhost:8000/v1/functions
+  response:
+    body:
+      string: '{"id":155,"uuid":"60e36cb6-a32b-4b58-a599-b15ebb8351b7","dataset_uuid":"6dc2ae16-0f0a-438f-8119-dd95b927a016","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+        the image","language_model_id":1,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","name":"default"},"revision":1,"use_semantic_search":false}'
+    headers:
+      content-length:
+      - '449'
+      content-type:
+      - application/json
+      date:
+      - Mon, 10 Jun 2024 14:11:46 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+    method: GET
+    uri: http://localhost:8000/v1/functions/60e36cb6-a32b-4b58-a599-b15ebb8351b7
+  response:
+    body:
+      string: '{"id":155,"uuid":"60e36cb6-a32b-4b58-a599-b15ebb8351b7","dataset_uuid":"6dc2ae16-0f0a-438f-8119-dd95b927a016","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+        the image","language_model_id":1,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","name":"default"},"revision":1,"use_semantic_search":false}'
+    headers:
+      content-length:
+      - '449'
+      content-type:
+      - application/json
+      date:
+      - Mon, 10 Jun 2024 14:11:46 GMT
       server:
       - uvicorn
     status:
@@ -92,25 +118,28 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/chat/test/sdk/test_image
+    uri: http://localhost:8000/v1/functions/60e36cb6-a32b-4b58-a599-b15ebb8351b7/chat
   response:
     body:
-      string: '{"span_id":"d2157133-c047-45cb-9645-1c7980011402","message":"The image
-        shows a fossil embedded in a stone slab. The fossil appears to be that of
-        a small, reptilian creature, possibly a dinosaur or a similar prehistoric
-        animal. It is prominently displayed in a good state of preservation with clear
-        visibility of the skeletal structure, including the skull, vertebral column,
-        ribs, and limbs. The fossil is well-articulated, suggesting it was buried
-        quickly or in a low-energy environment that preserved its original arrangement.
-        Its presentation is museum-like, with the slab laid flat and illuminated,
-        likely to highlight details for educational or exhibition purposes.","json_payload":null,"context":null,"cached":false}'
+      string: '{"span_id":"916de5ae-7c9a-498a-8d4d-40e069692660","message":"This image
+        shows the fossilized remains of a prehistoric creature embedded within a large,
+        irregularly shaped rock. The fossil is remarkably well-preserved, displaying
+        a clear and detailed skeletal structure. The skull is large with visible openings
+        for eyes and possibly nostrils, suggesting it could be a reptilian or amphibian
+        creature. The spinal column is intact, with numerous ribs fanning out on both
+        sides. The limbs, including delicate bones that could be fingers or toes,
+        are also visible. The rock matrix surrounding the skeleton is pale, contrasting
+        with the darker color of the bones, which helps to highlight the details of
+        the fossil. This specimen could be an important scientific artifact used for
+        studying the anatomy, species classification, and evolutionary history of
+        the creature it represents.","json_payload":null,"context":null,"cached":false}'
     headers:
       content-length:
-      - '722'
+      - '929'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:09:52 GMT
+      - Mon, 10 Jun 2024 14:11:46 GMT
       server:
       - uvicorn
     status:
@@ -124,7 +153,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/32
+    uri: http://localhost:8000/v1/functions/60e36cb6-a32b-4b58-a599-b15ebb8351b7
   response:
     body:
       string: ''
@@ -132,7 +161,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:02 GMT
+      - Mon, 10 Jun 2024 14:12:01 GMT
       server:
       - uvicorn
     status:

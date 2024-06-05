@@ -7,55 +7,103 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/by_path/describe_image
+    uri: http://localhost:8000/v1/projects
   response:
     body:
-      string: '{"path":"describe_image","instructions":"Operation: describe_image\n\nOperation
-        description: given an image describe what it is","id":51,"description":"given
-        an image describe what it is","input_schema":null,"out_schema":{"properties":{"description":{"title":"Description","type":"string"}},"required":["description"],"title":"ImageDescription","type":"object","$defs":{}},"few_shot":false,"few_shot_count":2,"dataset_uuid":"aacafb54-0497-453b-8827-660a019eeabd","use_semantic_search":false,"model":"openai/gpt-4o","language_model_id":20,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+      string: '[{"name":"default","description":"Default project","uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","organization_id":1},{"name":"op-4CF5LCHPMGON1BTMLMJL","description":null,"uuid":"326539b7-a7b2-436a-a075-1db05bd3bea9","organization_id":1},{"name":"test","description":null,"uuid":"6258267d-d725-4c9b-a6e5-80634ce95462","organization_id":1},{"name":"PROJECT","description":null,"uuid":"3c499dfe-50bf-49b3-b5c9-32f8e2977a42","organization_id":1},{"name":"PRO","description":null,"uuid":"f05ec7c2-fbeb-47de-8461-f5ab248ce48b","organization_id":1},{"name":"mattias","description":null,"uuid":"515a79b9-1f45-45dc-a001-87d53e8c50c4","organization_id":1}]'
     headers:
       content-length:
-      - '698'
+      - '647'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:25:45 GMT
+      - Tue, 11 Jun 2024 09:35:46 GMT
       server:
       - uvicorn
     status:
       code: 200
       message: OK
 - request:
-    body: '{"id": 51, "path": "describe_image", "description": "given an image describe
-      what it is", "input_schema": null, "out_schema": {"properties": {"description":
-      {"title": "Description", "type": "string"}}, "required": ["description"], "title":
-      "ImageDescription", "type": "object", "$defs": {}}, "instructions": "Operation:
-      describe_image\n\nOperation description: given an image describe what it is",
-      "model": "openai/gpt-4o", "index_ids": [], "use_semantic_search": null, "few_shot":
-      false, "few_shot_count": null, "cache_configuration": null}'
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+    method: GET
+    uri: http://localhost:8000/v1/projects
+  response:
+    body:
+      string: '[{"name":"default","description":"Default project","uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","organization_id":1},{"name":"op-4CF5LCHPMGON1BTMLMJL","description":null,"uuid":"326539b7-a7b2-436a-a075-1db05bd3bea9","organization_id":1},{"name":"test","description":null,"uuid":"6258267d-d725-4c9b-a6e5-80634ce95462","organization_id":1},{"name":"PROJECT","description":null,"uuid":"3c499dfe-50bf-49b3-b5c9-32f8e2977a42","organization_id":1},{"name":"PRO","description":null,"uuid":"f05ec7c2-fbeb-47de-8461-f5ab248ce48b","organization_id":1},{"name":"mattias","description":null,"uuid":"515a79b9-1f45-45dc-a001-87d53e8c50c4","organization_id":1}]'
+    headers:
+      content-length:
+      - '647'
+      content-type:
+      - application/json
+      date:
+      - Tue, 11 Jun 2024 09:35:46 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+    method: GET
+    uri: http://localhost:8000/v1/projects/1a57505d-46db-40eb-b07e-75d525b4cac4/functions/by_path/describe_image
+  response:
+    body:
+      string: '{"id":30,"uuid":"20406447-26e1-4c56-9b26-a89fd415fcfc","dataset_uuid":"ee2b8749-e914-4b76-a267-bda9d25514d7","description":"given
+        an image describe what it is","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
+        describe_image\n\nOperation description: given an image describe what it is","language_model_id":1,"model":"openai/gpt4-turbo","out_schema":{"properties":{"description":{"title":"Description","type":"string"}},"required":["description"],"title":"ImageDescription","type":"object","$defs":{}},"path":"describe_image","project":{"uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","name":"default"},"revision":1,"use_semantic_search":false}'
+    headers:
+      content-length:
+      - '690'
+      content-type:
+      - application/json
+      date:
+      - Tue, 11 Jun 2024 09:35:46 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"path": "describe_image", "description": "given an image describe what
+      it is", "input_schema": null, "out_schema": {"properties": {"description": {"title":
+      "Description", "type": "string"}}, "required": ["description"], "title": "ImageDescription",
+      "type": "object", "$defs": {}}, "instructions": "Operation: describe_image\n\nOperation
+      description: given an image describe what it is", "model": "openai/gpt4-turbo",
+      "index_ids": [], "use_semantic_search": null, "few_shot": false, "few_shot_count":
+      null, "cache_configuration": null, "project_uuid": null}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '541'
+      - '557'
       content-type:
       - application/json
     method: PATCH
-    uri: http://localhost:8000/v1/functions/51
+    uri: http://localhost:8000/v1/functions/20406447-26e1-4c56-9b26-a89fd415fcfc
   response:
     body:
-      string: '{"path":"describe_image","instructions":"Operation: describe_image\n\nOperation
-        description: given an image describe what it is","id":51,"description":"given
-        an image describe what it is","input_schema":null,"out_schema":{"properties":{"description":{"title":"Description","type":"string"}},"required":["description"],"title":"ImageDescription","type":"object","$defs":{}},"few_shot":false,"few_shot_count":2,"dataset_uuid":"aacafb54-0497-453b-8827-660a019eeabd","use_semantic_search":false,"model":"openai/gpt-4o","language_model_id":20,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+      string: '{"id":30,"uuid":"20406447-26e1-4c56-9b26-a89fd415fcfc","dataset_uuid":"ee2b8749-e914-4b76-a267-bda9d25514d7","description":"given
+        an image describe what it is","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
+        describe_image\n\nOperation description: given an image describe what it is","language_model_id":1,"model":"openai/gpt4-turbo","out_schema":{"properties":{"description":{"title":"Description","type":"string"}},"required":["description"],"title":"ImageDescription","type":"object","$defs":{}},"path":"describe_image","project":{"uuid":"1a57505d-46db-40eb-b07e-75d525b4cac4","name":"default"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '698'
+      - '690'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:25:45 GMT
+      - Tue, 11 Jun 2024 09:35:46 GMT
       server:
       - uvicorn
     status:
@@ -74,21 +122,22 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/chat/describe_image
+    uri: http://localhost:8000/v1/functions/20406447-26e1-4c56-9b26-a89fd415fcfc/chat
   response:
     body:
-      string: '{"span_id":"359b78da-eeb8-49bb-b4b4-40baa272a617","message":null,"json_payload":{"description":"The
-        image shows a fossilized skeleton of a prehistoric animal embedded in a rock.
-        The animal appears to have had a long tail, four legs with visible bones,
-        and a relatively elongated head. The fossil is well-preserved and clearly
-        visible against the light-colored rock matrix."},"context":null,"cached":false}'
+      string: '{"span_id":"af02854b-3454-4178-9162-3499fe9ac971","message":null,"json_payload":{"description":"The
+        image displays a fossil embedded in rock. It shows the skeletal remains of
+        a small, possibly reptilian creature, preserved with distinct features including
+        the spine, ribs, and limbs. The fossil is well-articulated, suggesting it
+        might be a complete specimen. This find is typical of paleontological discoveries
+        that help scientists understand past life forms and their environments."},"context":null,"cached":false}'
     headers:
       content-length:
-      - '405'
+      - '516'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:25:45 GMT
+      - Tue, 11 Jun 2024 09:35:46 GMT
       server:
       - uvicorn
     status:
