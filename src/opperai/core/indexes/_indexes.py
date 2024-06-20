@@ -1,7 +1,5 @@
 from typing import List, Optional
 
-from pydantic import BaseModel
-
 from opperai.core._http_clients import _http_client
 from opperai.types.exceptions import APIError
 from opperai.types.indexes import (
@@ -10,12 +8,15 @@ from opperai.types.indexes import (
     Index,
     RetrievalResponse,
 )
+from pydantic import BaseModel, Field
 
 
 class RetrieveQuery(BaseModel):
-    q: str
-    k: int
-    filters: Optional[List[Filter]]
+    q: str = Field(description="Query string")
+    k: int = Field(default=3, description="Number of documents to retrieve")
+    filters: Optional[List[Filter]] = Field(
+        default=None, description="Filters to apply"
+    )
 
 
 class Indexes:
@@ -271,7 +272,12 @@ class Indexes:
         return Document.model_validate(response.json())
 
     def retrieve(
-        self, id: int, query: str, k: int, filters: Optional[List[Filter]] = None
+        self,
+        id: int,
+        query: str,
+        k: int,
+        filters: Optional[List[Filter]] = None,
+        **kwargs,
     ) -> List[RetrievalResponse]:
         """Retrieve documents from an index
 
@@ -303,7 +309,10 @@ class Indexes:
         response = self.http_client.do_request(
             "POST",
             f"/v1/indexes/{id}/query",
-            json=RetrieveQuery(q=query, k=k, filters=filters).model_dump(),
+            json={
+                **RetrieveQuery(q=query, k=k, filters=filters).model_dump(),
+                **kwargs,
+            },
         )
         if response.status_code != 200:
             raise APIError(

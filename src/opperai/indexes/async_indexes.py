@@ -22,12 +22,16 @@ class AsyncIndex:
         return await self._client.indexes.index(id=self._index.id, doc=doc)
 
     async def query(
-        self, query: str, k: int = 10, filters: List[Filter] = None
+        self,
+        query: str,
+        k: int = 10,
+        filters: List[Filter] = None,
+        **kwargs,
     ) -> List[RetrievalResponse]:
         """Retrieve documents from the index."""
 
         return await self._client.indexes.retrieve(
-            id=self._index.id, query=query, k=k, filters=filters
+            id=self._index.id, query=query, k=k, filters=filters, **kwargs
         )
 
     async def delete(self) -> bool:
