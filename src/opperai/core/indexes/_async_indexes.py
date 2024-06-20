@@ -255,7 +255,12 @@ class AsyncIndexes:
         return Document.model_validate(response.json())
 
     async def retrieve(
-        self, id: int, query: str, k: int, filters: Optional[List[Filter]] = None
+        self,
+        id: int,
+        query: str,
+        k: int,
+        filters: Optional[List[Filter]] = None,
+        **kwargs,
     ) -> List[RetrievalResponse]:
         """Retrive documents
 
@@ -285,7 +290,10 @@ class AsyncIndexes:
         response = await self.http_client.do_request(
             "POST",
             f"/v1/indexes/{id}/query",
-            json=RetrieveQuery(q=query, k=k, filters=filters).model_dump(),
+            json={
+                **RetrieveQuery(q=query, k=k, filters=filters).model_dump(),
+                **kwargs,
+            },
         )
         if response.status_code != 200:
             raise APIError(
