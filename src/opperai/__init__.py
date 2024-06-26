@@ -8,6 +8,7 @@ from opperai.indexes.indexes import Indexes
 from opperai.spans.async_spans import AsyncSpans
 from opperai.spans.spans import Spans
 
+from .__version__ import __version__
 from ._client import AsyncClient, Client
 
 
