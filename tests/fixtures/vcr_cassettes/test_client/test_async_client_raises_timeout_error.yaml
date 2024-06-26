@@ -18,7 +18,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 09:54:24 GMT
+      - Wed, 26 Jun 2024 08:42:27 GMT
       server:
       - uvicorn
     status:
@@ -43,14 +43,14 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 09:54:24 GMT
+      - Wed, 26 Jun 2024 08:42:27 GMT
       server:
       - uvicorn
     status:
       code: 404
       message: Not Found
 - request:
-    body: '{"id": null, "path": "test_async_client_raises_timeout_error", "description":
+    body: '{"uuid": null, "path": "test_async_client_raises_timeout_error", "description":
       null, "input_schema": null, "out_schema": null, "instructions": "test", "model":
       null, "index_ids": [], "use_semantic_search": null, "few_shot": null, "few_shot_count":
       null, "cache_configuration": null}'
@@ -60,21 +60,21 @@ interactions:
       connection:
       - keep-alive
       content-length:
-      - '281'
+      - '283'
       content-type:
       - application/json
     method: POST
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"path":"test_async_client_raises_timeout_error","instructions":"test","id":21,"description":null,"input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"16136c20-2ca3-4887-93f3-b35a82134543","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
+      string: '{"id":129,"uuid":"516db1a3-a681-4e3b-9bd8-1f66b9e0353e","dataset_uuid":"f6c7e433-0338-412e-82a4-19310f14310b","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"test","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test_async_client_raises_timeout_error","project":{"uuid":"f4747904-782d-41ce-988b-592950a70c0f","name":"test"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '382'
+      - '450'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 09:54:24 GMT
+      - Wed, 26 Jun 2024 08:42:27 GMT
       server:
       - uvicorn
     status:

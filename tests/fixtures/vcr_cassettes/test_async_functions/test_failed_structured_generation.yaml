@@ -10,23 +10,22 @@ interactions:
     uri: http://localhost:8000/v1/functions/by_path/test/sdk/test_failed_structured_generation
   response:
     body:
-      string: '{"path":"test/sdk/test_failed_structured_generation","instructions":"You
-        translate the incoming text to french returned as markdown ```","id":20,"description":"test
-        structured generation exception","input_schema":null,"out_schema":{"type":"object","properties":{"universityName":{"type":"string"},"location":{"type":"string"},"departments":{"type":"array","items":{"type":"object","properties":{"departmentName":{"type":"string"},"head":{"type":"string"},"courses":{"type":"array","items":{"type":"object","properties":{"courseId":{"type":"string"},"courseName":{"type":"string"},"credits":{"type":"integer","minimum":1,"maximum":10}},"required":["courseId","courseName","credits"]}}},"required":["departmentName","head","courses"]}}},"required":["universityName","location","departments"]},"few_shot":false,"few_shot_count":2,"dataset_uuid":"ce1c3c29-c8bf-4cd6-b860-b0ef86027d4f","use_semantic_search":false,"model":"mistral/mistral-tiny-eu","language_model_id":4,"index_ids":[],"linked_function_ids":null,"revision":3,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
+        not found"}]}'
     headers:
       content-length:
-      - '1125'
+      - '98'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 09:54:03 GMT
+      - Wed, 26 Jun 2024 08:32:19 GMT
       server:
       - uvicorn
     status:
-      code: 200
-      message: OK
+      code: 404
+      message: Not Found
 - request:
-    body: '{"id": 20, "path": "test/sdk/test_failed_structured_generation", "description":
+    body: '{"uuid": null, "path": "test/sdk/test_failed_structured_generation", "description":
       "test structured generation exception", "input_schema": null, "out_schema":
       {"type": "object", "properties": {"universityName": {"type": "string"}, "location":
       {"type": "string"}, "departments": {"type": "array", "items": {"type": "object",
@@ -45,23 +44,23 @@ interactions:
       connection:
       - keep-alive
       content-length:
-      - '1008'
+      - '1012'
       content-type:
       - application/json
-    method: PATCH
-    uri: http://localhost:8000/v1/functions/20
+    method: POST
+    uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"path":"test/sdk/test_failed_structured_generation","instructions":"You
-        translate the incoming text to french returned as markdown ```","id":20,"description":"test
-        structured generation exception","input_schema":null,"out_schema":{"type":"object","properties":{"universityName":{"type":"string"},"location":{"type":"string"},"departments":{"type":"array","items":{"type":"object","properties":{"departmentName":{"type":"string"},"head":{"type":"string"},"courses":{"type":"array","items":{"type":"object","properties":{"courseId":{"type":"string"},"courseName":{"type":"string"},"credits":{"type":"integer","minimum":1,"maximum":10}},"required":["courseId","courseName","credits"]}}},"required":["departmentName","head","courses"]}}},"required":["universityName","location","departments"]},"few_shot":false,"few_shot_count":2,"dataset_uuid":"ce1c3c29-c8bf-4cd6-b860-b0ef86027d4f","use_semantic_search":false,"model":"mistral/mistral-tiny-eu","language_model_id":4,"index_ids":[],"linked_function_ids":null,"revision":3,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+      string: '{"id":128,"uuid":"278d869d-fb2f-47c2-bc88-cc19dba8632e","dataset_uuid":"7276e0ff-5a94-4a79-99a0-650fff76d0fb","description":"test
+        structured generation exception","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"You
+        translate the incoming text to french returned as markdown ```","language_model_id":null,"model":"mistral/mistral-tiny-eu","out_schema":{"type":"object","properties":{"universityName":{"type":"string"},"location":{"type":"string"},"departments":{"type":"array","items":{"type":"object","properties":{"departmentName":{"type":"string"},"head":{"type":"string"},"courses":{"type":"array","items":{"type":"object","properties":{"courseId":{"type":"string"},"courseName":{"type":"string"},"credits":{"type":"integer","minimum":1,"maximum":10}},"required":["courseId","courseName","credits"]}}},"required":["departmentName","head","courses"]}}},"required":["universityName","location","departments"]},"path":"test/sdk/test_failed_structured_generation","project":{"uuid":"f4747904-782d-41ce-988b-592950a70c0f","name":"test"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '1125'
+      - '1115'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 09:54:03 GMT
+      - Wed, 26 Jun 2024 08:32:19 GMT
       server:
       - uvicorn
     status:
@@ -91,7 +90,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 09:54:03 GMT
+      - Wed, 26 Jun 2024 08:32:19 GMT
       server:
       - uvicorn
     status:
@@ -105,7 +104,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/20
+    uri: http://localhost:8000/v1/functions/278d869d-fb2f-47c2-bc88-cc19dba8632e
   response:
     body:
       string: ''
@@ -113,7 +112,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 09:54:22 GMT
+      - Wed, 26 Jun 2024 08:32:26 GMT
       server:
       - uvicorn
     status:

@@ -18,14 +18,14 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:51 GMT
+      - Wed, 26 Jun 2024 08:46:25 GMT
       server:
       - uvicorn
     status:
       code: 404
       message: Not Found
 - request:
-    body: '{"id": null, "path": "test/sdk/test_failed_structured_generation", "description":
+    body: '{"uuid": null, "path": "test/sdk/test_failed_structured_generation", "description":
       "test structured generation exception", "input_schema": null, "out_schema":
       {"type": "object", "properties": {"universityName": {"type": "string"}, "location":
       {"type": "string"}, "departments": {"type": "array", "items": {"type": "object",
@@ -43,23 +43,23 @@ interactions:
       connection:
       - keep-alive
       content-length:
-      - '985'
+      - '987'
       content-type:
       - application/json
     method: POST
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"path":"test/sdk/test_failed_structured_generation","instructions":"You
-        translate the incoming text to french","id":50,"description":"test structured
-        generation exception","input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"b90e7886-2ed7-4a24-8798-e0d494f8b891","use_semantic_search":false,"model":"mistral/mistral-tiny-eu","language_model_id":4,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
+      string: '{"id":147,"uuid":"c07f5572-f9e3-481e-94b1-f91856dd4342","dataset_uuid":"e27875a4-0ee7-4676-bbf4-a22ee75f80bb","description":"test
+        structured generation exception","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"You
+        translate the incoming text to french","language_model_id":null,"model":"mistral/mistral-tiny-eu","out_schema":{"type":"object","properties":{"universityName":{"type":"string"},"location":{"type":"string"},"departments":{"type":"array","items":{"type":"object","properties":{"departmentName":{"type":"string"},"head":{"type":"string"},"courses":{"type":"array","items":{"type":"object","properties":{"courseId":{"type":"string"},"courseName":{"type":"string"},"credits":{"type":"integer","minimum":1,"maximum":10}},"required":["courseId","courseName","credits"]}}},"required":["departmentName","head","courses"]}}},"required":["universityName","location","departments"]},"path":"test/sdk/test_failed_structured_generation","project":{"uuid":"f4747904-782d-41ce-988b-592950a70c0f","name":"test"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '467'
+      - '1090'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:51 GMT
+      - Wed, 26 Jun 2024 08:46:25 GMT
       server:
       - uvicorn
     status:
@@ -80,41 +80,18 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_failed_structured_generation
   response:
     body:
-      string: '{"errors":[{"type":"StructuredGenerationError","message":"Structured
-        generation failed, could not generate response matching the schema.","detail":"Structured
-        generation failed, could not generate response matching the schema."}]}'
+      string: '{"span_id":"23c7ce35-d406-4250-9917-61e9902c4ced","message":null,"json_payload":{"universityName":"N/A","location":"N/A","departments":[{"departmentName":"Translation","head":"Assistant","courses":[{"courseId":"fr-001","courseName":"French
+        Language","credits":3}]}]},"context":null,"cached":false}'
     headers:
       content-length:
-      - '230'
+      - '297'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:51 GMT
+      - Wed, 26 Jun 2024 08:46:25 GMT
       server:
       - uvicorn
     status:
-      code: 400
-      message: Bad Request
-- request:
-    body: ''
-    headers:
-      accept:
-      - '*/*'
-      connection:
-      - keep-alive
-    method: DELETE
-    uri: http://localhost:8000/v1/functions/50
-  response:
-    body:
-      string: ''
-    headers:
-      content-type:
-      - application/json
-      date:
-      - Tue, 21 May 2024 10:10:57 GMT
-      server:
-      - uvicorn
-    status:
-      code: 204
-      message: No Content
+      code: 200
+      message: OK
 version: 1

@@ -9,7 +9,7 @@ from pydantic import BaseModel, ConfigDict, Field, FilePath, computed_field
 
 from .indexes import Document, Filter, RetrievalResponse
 from .spans import SpanMetric
-from .validators import validate_id_xor_path
+from .validators import validate_uuid_xor_path
 
 
 class TextMessageContent(BaseModel):
@@ -118,7 +118,7 @@ class CacheConfiguration(BaseModel):
 
 
 class Function(BaseModel):
-    id: Optional[int] = None
+    uuid: Optional[str] = None
     path: str = Field(
         ...,
         pattern=r"^[a-zA-Z0-9_]+(\/[a-zA-Z0-9_-]+)*$",

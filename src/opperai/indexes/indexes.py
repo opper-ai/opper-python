@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import List, Optional
 
 from opperai._client import Client
-from opperai.types.indexes import Document, Filter, RetrievalResponse
+from opperai.types.indexes import Document, DocumentIn, Filter, RetrievalResponse
 from opperai.types.indexes import Index as IndexModel
 
 
@@ -14,12 +14,12 @@ class Index:
     def upload_file(self, file_path: str, **kwargs):
         """Upload a file to the index."""
         return self._client.indexes.upload_file(
-            id=self._index.id, file_path=file_path, **kwargs
+            uuid=self._index.uuid, file_path=file_path, **kwargs
         )
 
-    def add(self, doc: Document) -> Document:
+    def add(self, doc: DocumentIn) -> Document:
         """Index a document."""
-        return self._client.indexes.index(id=self._index.id, doc=doc)
+        return self._client.indexes.index(uuid=self._index.uuid, doc=doc)
 
     def query(
         self,
@@ -31,12 +31,12 @@ class Index:
         """Retrieve documents from the index."""
 
         return self._client.indexes.retrieve(
-            id=self._index.id, query=query, k=k, filters=filters, **kwargs
+            uuid=self._index.uuid, query=query, k=k, filters=filters, **kwargs
         )
 
     def delete(self) -> bool:
         """Delete the index."""
-        return self._client.indexes.delete(id=self._index.id)
+        return self._client.indexes.delete(uuid=self._index.uuid)
 
 
 class Indexes:

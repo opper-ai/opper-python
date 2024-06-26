@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import List, Optional
 
 from opperai._client import AsyncClient
-from opperai.types.indexes import Document, Filter, RetrievalResponse
+from opperai.types.indexes import Document, DocumentIn, Filter, RetrievalResponse
 from opperai.types.indexes import Index as IndexModel
 
 
@@ -14,12 +14,12 @@ class AsyncIndex:
     async def upload_file(self, file_path: str, **kwargs):
         """Upload a file to the index."""
         return await self._client.indexes.upload_file(
-            id=self._index.id, file_path=file_path, **kwargs
+            id=self._index.uuid, file_path=file_path, **kwargs
         )
 
-    async def add(self, doc: Document) -> Document:
+    async def add(self, doc: DocumentIn) -> Document:
         """Index a document."""
-        return await self._client.indexes.index(id=self._index.id, doc=doc)
+        return await self._client.indexes.index(uuid=self._index.uuid, doc=doc)
 
     async def query(
         self,
@@ -31,12 +31,12 @@ class AsyncIndex:
         """Retrieve documents from the index."""
 
         return await self._client.indexes.retrieve(
-            id=self._index.id, query=query, k=k, filters=filters, **kwargs
+            uuid=self._index.uuid, query=query, k=k, filters=filters, **kwargs
         )
 
     async def delete(self) -> bool:
         """Delete the index."""
-        return await self._client.indexes.delete(id=self._index.id)
+        return await self._client.indexes.delete(uuid=self._index.uuid)
 
 
 class AsyncIndexes:

@@ -1,10 +1,13 @@
 from contextlib import asynccontextmanager
 
 import pytest
+from httpx import Response
 from opperai import AsyncClient
 from opperai.types import (
     CacheConfiguration,
     ChatPayload,
+    Error,
+    Errors,
     Function,
     Message,
     MessageContent,
@@ -16,7 +19,7 @@ from opperai.types.exceptions import StructuredGenerationError
 async def _function(desc: Function, c: AsyncClient):
     function = await c.functions.create(desc)
     yield function
-    await c.functions.delete(id=function.id)
+    await c.functions.delete(uuid=function.uuid)
 
 
 @pytest.mark.asyncio(scope="module")
@@ -43,7 +46,7 @@ async def test_get_by_id(aclient: AsyncClient, vcr_cassette):
         ),
         aclient,
     ) as function:
-        f_by_id = await aclient.functions.get(id=function.id)
+        f_by_id = await aclient.functions.get(uuid=function.uuid)
         assert f_by_id.path == "test/sdk/test_get_by_id"
 
 
@@ -71,7 +74,7 @@ async def test_get(aclient: AsyncClient, vcr_cassette):
         ),
         aclient,
     ) as function:
-        f_by_id = await aclient.functions.get(id=function.id)
+        f_by_id = await aclient.functions.get(uuid=function.uuid)
         assert f_by_id.path == "test/sdk/test_get"
 
         f_by_path = await aclient.functions.get(path="test/sdk/test_get")
@@ -102,8 +105,8 @@ async def test_delete_function(aclient: AsyncClient, vcr_cassette):
             instructions="Do something",
         )
     )
-    await aclient.functions.delete(id=function.id)
-    f = await aclient.functions.get(id=function.id)
+    await aclient.functions.delete(uuid=function.uuid)
+    f = await aclient.functions.get(uuid=function.uuid)
     assert f is None
 
 
@@ -117,7 +120,7 @@ async def test_image_url(aclient: AsyncClient, vcr_cassette):
         ),
         aclient,
     ) as function:
-        f = await aclient.functions.get(id=function.id)
+        f = await aclient.functions.get(uuid=function.uuid)
         resp = await aclient.functions.chat(
             f.path,
             ChatPayload(
@@ -147,7 +150,7 @@ async def test_image_file(aclient: AsyncClient, vcr_cassette):
         ),
         aclient,
     ) as function:
-        f = await aclient.functions.get(id=function.id)
+        f = await aclient.functions.get(uuid=function.uuid)
         resp = await aclient.functions.chat(
             f.path,
             ChatPayload(
@@ -252,7 +255,7 @@ async def test_create_function_with_cache_flush(aclient: AsyncClient, vcr_casset
         print(res)
         assert res.cached
 
-        await aclient.functions.flush_cache(id=function.id)
+        await aclient.functions.flush_cache(uuid=function.uuid)
         res = await aclient.functions.chat(
             function.path, ChatPayload(messages=[Message(role="user", content="hello")])
         )
@@ -261,57 +264,28 @@ async def test_create_function_with_cache_flush(aclient: AsyncClient, vcr_casset
 
 
 @pytest.mark.asyncio(scope="module")
-async def test_failed_structured_generation(aclient: AsyncClient, vcr_cassette):
-    async with _function(
-        Function(
-            model="mistral/mistral-tiny-eu",
-            path="test/sdk/test_failed_structured_generation",
-            description="test structured generation exception",
-            instructions="You translate the incoming text to french returned as markdown ```",
-            out_schema={
-                "type": "object",
-                "properties": {
-                    "universityName": {"type": "string"},
-                    "location": {"type": "string"},
-                    "departments": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "departmentName": {"type": "string"},
-                                "head": {"type": "string"},
-                                "courses": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "courseId": {"type": "string"},
-                                            "courseName": {"type": "string"},
-                                            "credits": {
-                                                "type": "integer",
-                                                "minimum": 1,
-                                                "maximum": 10,
-                                            },
-                                        },
-                                        "required": [
-                                            "courseId",
-                                            "courseName",
-                                            "credits",
-                                        ],
-                                    },
-                                },
-                            },
-                            "required": ["departmentName", "head", "courses"],
-                        },
-                    },
-                },
-                "required": ["universityName", "location", "departments"],
-            },
-        ),
-        aclient,
-    ) as function:
-        with pytest.raises(StructuredGenerationError):
-            await aclient.functions.chat(
-                function.path,
-                ChatPayload(messages=[Message(role="user", content="hello")]),
-            )
+async def test_failed_structured_generation():
+    client = AsyncClient()
+
+    async def mock_request(method, url, **kwargs):
+        error = Errors(
+            errors=[
+                Error(
+                    type="StructuredGenerationError",
+                    message="test structured generation exception",
+                    detail="test structured generation exception",
+                )
+            ]
+        )
+
+        return Response(
+            status_code=400,
+            json=error.model_dump(),
+        )
+
+    client.http_client.session.request = mock_request
+    with pytest.raises(StructuredGenerationError):
+        await client.functions.chat(
+            "fake-path",
+            ChatPayload(messages=[Message(role="user", content="hello")]),
+        )

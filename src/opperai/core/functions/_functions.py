@@ -8,7 +8,7 @@ from opperai.types import (
     Function,
     FunctionResponse,
     StreamingChunk,
-    validate_id_xor_path,
+    validate_uuid_xor_path,
 )
 from opperai.types.exceptions import APIError
 
@@ -65,7 +65,7 @@ class Functions:
         if fn is None:
             return self._create(function, **kwargs)
         elif update:
-            function.id = fn.id
+            function.uuid = fn.uuid
             return self.update(function, **kwargs)
         else:
             return fn
@@ -117,7 +117,7 @@ class Functions:
         """
         response = self.http_client.do_request(
             "PATCH",
-            f"/v1/functions/{function.id}",
+            f"/v1/functions/{function.uuid}",
             json={**function.model_dump(), **kwargs},
         )
         if response.status_code != HTTPStatus.OK:
@@ -127,28 +127,28 @@ class Functions:
 
         return Function.model_validate(response.json())
 
-    @validate_id_xor_path
-    def get(self, id: str = None, path: str = None) -> Optional[Function]:
+    @validate_uuid_xor_path
+    def get(self, uuid: str = None, path: str = None) -> Optional[Function]:
         """Get a function
 
         This method allows fetching the details of a specific Opper function, either by specifying its unique ID or its path. If the function is found, it returns an instance of the Function class representing the function's configuration and details. If no function matches the given ID or path, or if both parameters are omitted, None is returned.
 
         Args:
-            id (str, optional): The unique identifier of the function to retrieve. Defaults to None.
+            uuid (str, optional): The unique identifier of the function to retrieve. Defaults to None.
             path (str, optional): The path of the function to retrieve. Defaults to None.
 
         Returns:
             Optional[Function]: An instance of the Function class if the function is found, otherwise None.
 
         Raises:
-            ValueError: If both `id` and `path` are provided, indicating ambiguous parameters.
+            ValueError: If both `uuid` and `path` are provided, indicating ambiguous parameters.
 
         Examples:
             >>> from opperai import Client
             >>> client = Client(api_key="your_api_key_here")
-            >>> function_by_id = client.functions.get(id="123")
-            >>> print(function_by_id)
-            Function(id='123', path='example/function', ...)
+            >>> function_by_uuid = client.functions.get(uuid="123")
+            >>> print(function_by_uuid)
+            Function(uuid='123', path='example/function', ...)
 
             >>> function_by_path = client.functions.get(path="example/function")
             >>> print(function_by_path)
@@ -158,11 +158,11 @@ class Functions:
             It is recommended to provide either `id` or `path`, but not both, to avoid ambiguity. If neither is provided, the method will return None.
         """
         if path is not None:
-            if id is not None:
-                raise ValueError("Only one of id or path should be provided")
+            if uuid is not None:
+                raise ValueError("Only one of uuid or path should be provided")
             return self._get_by_path(path)
-        elif id is not None:
-            return self._get_by_id(id)
+        elif uuid is not None:
+            return self._get_by_uuid(uuid)
         else:
             return None
 
@@ -180,22 +180,22 @@ class Functions:
 
         return Function.model_validate(response.json())
 
-    def _get_by_id(self, function_id: str) -> Optional[Function]:
+    def _get_by_uuid(self, uuid: str) -> Optional[Function]:
         response = self.http_client.do_request(
             "GET",
-            f"/v1/functions/{function_id}",
+            f"/v1/functions/{uuid}",
         )
         if response.status_code == HTTPStatus.NOT_FOUND:
             return None
         if response.status_code != HTTPStatus.OK:
             raise APIError(
-                f"Failed to get function {function_id} with status {response.status_code}"
+                f"Failed to get function {uuid} with status {response.status_code}"
             )
 
         return Function.model_validate(response.json())
 
-    @validate_id_xor_path
-    def delete(self, id: str = None, path: str = None) -> bool:
+    @validate_uuid_xor_path
+    def delete(self, uuid: str = None, path: str = None) -> bool:
         """Delete a function
 
         This method allows for the deletion of a function either by specifying its unique ID or its path.
@@ -203,14 +203,14 @@ class Functions:
         fails, the method returns False.
 
         Args:
-            id (str, optional): The unique identifier of the function to delete. Defaults to None.
+            uuid (str, optional): The unique identifier of the function to delete. Defaults to None.
             path (str, optional): The path of the function to delete. Defaults to None.
 
         Returns:
             bool: True if the function was successfully deleted, False otherwise.
 
         Raises:
-            ValueError: If both `id` and `path` are provided, or if neither is provided.
+            ValueError: If both `uuid` and `path` are provided, or if neither is provided.
 
         Examples:
             >>> from opperai import Client
@@ -220,7 +220,7 @@ class Functions:
             True
 
         Note:
-            It's important to provide either `id` or `path`, but not both. If neither is provided, the method
+            It's important to provide either `uuid` or `path`, but not both. If neither is provided, the method
             will raise a ValueError to indicate the issue.
         """
         if path is not None:
@@ -228,33 +228,33 @@ class Functions:
                 return self._delete_by_path(path)
             except APIError:
                 pass
-        elif id is not None:
+        elif uuid is not None:
             try:
-                return self._delete_by_id(id)
+                return self._delete_by_uuid(uuid)
             except APIError:
                 pass
 
         return True
 
-    def _delete_by_id(self, id: str) -> bool:
+    def _delete_by_uuid(self, uuid: str) -> bool:
         response = self.http_client.do_request(
             "DELETE",
-            f"/v1/functions/{id}",
+            f"/v1/functions/{uuid}",
         )
         if response.status_code != HTTPStatus.NO_CONTENT:
             raise APIError(
-                f"Failed to delete function {id} with status {response.status_code}"
+                f"Failed to delete function {uuid} with status {response.status_code}"
             )
         return True
 
-    def _delete_by_path(self, function_path: str) -> bool:
+    def _delete_by_path(self, path: str) -> bool:
         response = self.http_client.do_request(
             "DELETE",
-            f"/v1/functions/by_path/{function_path}",
+            f"/v1/functions/by_path/{path}",
         )
         if response.status_code != HTTPStatus.NO_CONTENT:
             raise APIError(
-                f"Failed to delete function {function_path} with status {response.status_code}"
+                f"Failed to delete function {path} with status {response.status_code}"
             )
         return True
 
@@ -346,14 +346,14 @@ class Functions:
         for item in gen:
             yield StreamingChunk(**item)
 
-    def flush_cache(self, id: int) -> bool:
+    def flush_cache(self, uuid: str) -> bool:
         response = self.http_client.do_request(
             "DELETE",
-            f"/v1/functions/{id}/cache",
+            f"/v1/functions/{uuid}/cache",
         )
         if response.status_code != HTTPStatus.NO_CONTENT:
             raise APIError(
-                f"Failed to flush cache for function with id={id} with status {response.status_code}"
+                f"Failed to flush cache for function with uuid={uuid} with status {response.status_code}"
             )
 
         return True

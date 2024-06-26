@@ -9,16 +9,18 @@ class RetrievalResponse(BaseModel):
     metadata: Dict[str, Any]
 
 
-class Document(BaseModel):
-    id: Optional[int] = None
-    uuid: Optional[UUID4] = None
+class DocumentIn(BaseModel):
     key: Optional[str] = None
     content: Optional[str] = Field(None, min_length=1)
     metadata: Optional[Dict[str, Any]] = None
 
 
+class Document(DocumentIn):
+    uuid: UUID4
+
+
 class Index(BaseModel):
-    id: int
+    uuid: UUID4
     name: str
     created_at: datetime.datetime
 

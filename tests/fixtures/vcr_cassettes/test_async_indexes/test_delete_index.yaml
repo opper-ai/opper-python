@@ -14,14 +14,14 @@ interactions:
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '{"id":2,"name":"test_delete_index","files":[],"created_at":"2024-05-21T09:54:22.872090Z"}'
+      string: '{"id":41,"uuid":"f3cbd920-08a5-44d0-b7e7-6fe36ee1a830","name":"test_delete_index","project":{"uuid":"f4747904-782d-41ce-988b-592950a70c0f","name":"test"},"files":[],"created_at":"2024-06-26T08:19:44.875901Z"}'
     headers:
       content-length:
-      - '89'
+      - '208'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 09:54:22 GMT
+      - Wed, 26 Jun 2024 08:19:44 GMT
       server:
       - uvicorn
     status:
@@ -35,7 +35,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/indexes/2
+    uri: http://localhost:8000/v1/indexes/f3cbd920-08a5-44d0-b7e7-6fe36ee1a830
   response:
     body:
       string: 'true'
@@ -45,7 +45,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 09:54:22 GMT
+      - Wed, 26 Jun 2024 08:19:44 GMT
       server:
       - uvicorn
     status:
@@ -59,7 +59,7 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/indexes/2
+    uri: http://localhost:8000/v1/indexes/f3cbd920-08a5-44d0-b7e7-6fe36ee1a830
   response:
     body:
       string: '{"errors":[{"type":"HTTPException","message":"Index not found","detail":"Index
@@ -70,7 +70,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 09:54:22 GMT
+      - Wed, 26 Jun 2024 08:19:44 GMT
       server:
       - uvicorn
     status:
@@ -84,7 +84,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/indexes/2
+    uri: http://localhost:8000/v1/indexes/f3cbd920-08a5-44d0-b7e7-6fe36ee1a830
   response:
     body:
       string: '{"errors":[{"type":"HTTPException","message":"Index not found","detail":"Index
@@ -95,7 +95,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 09:54:22 GMT
+      - Wed, 26 Jun 2024 08:19:44 GMT
       server:
       - uvicorn
     status:

@@ -18,7 +18,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 09:54:24 GMT
+      - Wed, 26 Jun 2024 08:42:27 GMT
       server:
       - uvicorn
     status:
@@ -43,14 +43,14 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 09:54:24 GMT
+      - Wed, 26 Jun 2024 08:42:27 GMT
       server:
       - uvicorn
     status:
       code: 404
       message: Not Found
 - request:
-    body: '{"id": null, "path": "test_client_raises_timeout_error", "description":
+    body: '{"uuid": null, "path": "test_client_raises_timeout_error", "description":
       null, "input_schema": null, "out_schema": null, "instructions": "test", "model":
       null, "index_ids": [], "use_semantic_search": null, "few_shot": null, "few_shot_count":
       null, "cache_configuration": null}'
@@ -60,21 +60,21 @@ interactions:
       connection:
       - keep-alive
       content-length:
-      - '275'
+      - '277'
       content-type:
       - application/json
     method: POST
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"path":"test_client_raises_timeout_error","instructions":"test","id":22,"description":null,"input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"f69ad070-aed2-478e-b690-d409923b4953","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
+      string: '{"id":130,"uuid":"277d4250-9bc4-41a2-9b59-26cae63ddcfa","dataset_uuid":"3eac1adb-6810-4d5a-ade7-d41e77736f10","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"test","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test_client_raises_timeout_error","project":{"uuid":"f4747904-782d-41ce-988b-592950a70c0f","name":"test"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '376'
+      - '444'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 09:54:24 GMT
+      - Wed, 26 Jun 2024 08:42:27 GMT
       server:
       - uvicorn
     status:

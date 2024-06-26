@@ -18,14 +18,14 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:30 GMT
+      - Wed, 26 Jun 2024 08:46:05 GMT
       server:
       - uvicorn
     status:
       code: 404
       message: Not Found
 - request:
-    body: '{"id": null, "path": "test/sdk/test_image", "description": null, "input_schema":
+    body: '{"uuid": null, "path": "test/sdk/test_image", "description": null, "input_schema":
       null, "out_schema": null, "instructions": "describe the image", "model": "openai/gpt4-turbo",
       "index_ids": [], "use_semantic_search": null, "few_shot": null, "few_shot_count":
       null, "cache_configuration": null}'
@@ -35,21 +35,22 @@ interactions:
       connection:
       - keep-alive
       content-length:
-      - '291'
+      - '293'
       content-type:
       - application/json
     method: POST
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"path":"test/sdk/test_image","instructions":"describe the image","id":45,"description":null,"input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"3213d9ff-ddce-44e5-81f9-2998c96eb452","use_semantic_search":false,"model":"openai/gpt4-turbo","language_model_id":1,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
+      string: '{"id":142,"uuid":"8d859996-5070-458a-b4c7-b38429f782f1","dataset_uuid":"4fe78da9-b37a-4f48-aae5-1d850e2882c5","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"f4747904-782d-41ce-988b-592950a70c0f","name":"test"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '381'
+      - '449'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:30 GMT
+      - Wed, 26 Jun 2024 08:46:05 GMT
       server:
       - uvicorn
     status:
@@ -63,17 +64,18 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/45
+    uri: http://localhost:8000/v1/functions/8d859996-5070-458a-b4c7-b38429f782f1
   response:
     body:
-      string: '{"path":"test/sdk/test_image","instructions":"describe the image","id":45,"description":null,"input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"3213d9ff-ddce-44e5-81f9-2998c96eb452","use_semantic_search":false,"model":"openai/gpt4-turbo","language_model_id":1,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+      string: '{"id":142,"uuid":"8d859996-5070-458a-b4c7-b38429f782f1","dataset_uuid":"4fe78da9-b37a-4f48-aae5-1d850e2882c5","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"f4747904-782d-41ce-988b-592950a70c0f","name":"test"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '459'
+      - '449'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:30 GMT
+      - Wed, 26 Jun 2024 08:46:05 GMT
       server:
       - uvicorn
     status:
@@ -95,24 +97,22 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_image
   response:
     body:
-      string: '{"span_id":"f833633e-dc92-485e-9a6f-7dc9da3e0320","message":"This image
-        shows a fossilized skeleton displayed on a rocky matrix. The skeleton appears
-        to belong to a reptilian or amphibious creature, judging by the structure
-        of its skull, spine, and limb configuration. The skull is large with visible
-        eye sockets, and the body follows with a clearly defined rib cage and vertebrae
-        leading to a slender tail. The limbs are positioned closely to the body, with
-        bones of legs and possible digits discernible near the edges. The overall
-        presentation and preservation suggest that this fossil is well-maintained
-        and possibly displayed in a museum or educational setting. The lighting highlights
-        the details of the fossil, enhancing its three-dimensional appearance against
-        the contrasting dark background.","json_payload":null,"context":null,"cached":false}'
+      string: '{"span_id":"b233bce4-315f-496a-9e3a-da0b7855f5fa","message":"This image
+        shows the fossil of a reptilian creature embedded in a rock. The fossil is
+        remarkably well-preserved, illustrating the animal''s full skeletal structure,
+        including its spine, ribcage, limbs, and skull. The texture and color variations
+        in the stone suggest it''s some kind of sedimentary rock, which is typical
+        for fossil encasements. The fossil''s size and shape hint that it might be
+        some type of small dinosaur or similar prehistoric reptile, displayed on a
+        black background presumably for exhibition purposes, which highlights its
+        features.","json_payload":null,"context":null,"cached":false}'
     headers:
       content-length:
-      - '852'
+      - '664'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:30 GMT
+      - Wed, 26 Jun 2024 08:46:05 GMT
       server:
       - uvicorn
     status:
@@ -126,7 +126,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/45
+    uri: http://localhost:8000/v1/functions/8d859996-5070-458a-b4c7-b38429f782f1
   response:
     body:
       string: ''
@@ -134,7 +134,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:39 GMT
+      - Wed, 26 Jun 2024 08:46:15 GMT
       server:
       - uvicorn
     status:

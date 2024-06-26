@@ -8,7 +8,7 @@ from opperai.types import (
     Function,
     FunctionResponse,
     StreamingChunk,
-    validate_id_xor_path,
+    validate_uuid_xor_path,
 )
 from opperai.types.exceptions import APIError
 
@@ -65,7 +65,7 @@ class AsyncFunctions:
         if fn is None:
             return await self._create(function, **kwargs)
         elif update:
-            function.id = fn.id
+            function.uuid = fn.uuid
             return await self.update(function, **kwargs)
         return fn
 
@@ -87,7 +87,7 @@ class AsyncFunctions:
     async def update(self, function: Function, **kwargs) -> Function:
         response = await self.http_client.do_request(
             "PATCH",
-            f"/v1/functions/{function.id}",
+            f"/v1/functions/{function.uuid}",
             json={**function.model_dump(), **kwargs},
         )
         if response.status_code != HTTPStatus.OK:
@@ -97,14 +97,14 @@ class AsyncFunctions:
 
         return Function.model_validate(response.json())
 
-    @validate_id_xor_path
-    async def get(self, id: str = None, path: str = None) -> Optional[Function]:
+    @validate_uuid_xor_path
+    async def get(self, uuid: str = None, path: str = None) -> Optional[Function]:
         """Get a function
 
         This method allows fetching the details of a specific Opper function, either by specifying its unique ID or its path. If the function is found, it returns an instance of the Function class representing the function's configuration and details. If no function matches the given ID or path, or if both parameters are omitted, None is returned.
 
         Args:
-            id (str, optional): The unique identifier of the function to retrieve. Defaults to None.
+            uuid (str, optional): The unique identifier of the function to retrieve. Defaults to None.
             path (str, optional): The path of the function to retrieve. Defaults to None.
 
         Returns:
@@ -128,44 +128,44 @@ class AsyncFunctions:
             It is recommended to provide either `id` or `path`, but not both, to avoid ambiguity. If neither is provided, the method will return None.
         """
         if path is not None:
-            if id is not None:
-                raise ValueError("Only one of id or path should be provided")
+            if uuid is not None:
+                raise ValueError("Only one of uuid or path should be provided")
             return await self._get_by_path(path)
-        elif id is not None:
-            return await self._get_by_id(id)
+        elif uuid is not None:
+            return await self._get_by_uuid(uuid)
         else:
             return None
 
-    async def _get_by_path(self, function_path: str) -> Optional[Function]:
+    async def _get_by_path(self, path: str) -> Optional[Function]:
         response = await self.http_client.do_request(
             "GET",
-            f"/v1/functions/by_path/{function_path}",
+            f"/v1/functions/by_path/{path}",
         )
         if response.status_code == HTTPStatus.NOT_FOUND:
             return None
         if response.status_code != HTTPStatus.OK:
             raise APIError(
-                f"Failed to get function {function_path} with status {response.status_code}"
+                f"Failed to get function {path} with status {response.status_code}"
             )
 
         return Function.model_validate(response.json())
 
-    async def _get_by_id(self, function_id: str) -> Optional[Function]:
+    async def _get_by_uuid(self, uuid: str) -> Optional[Function]:
         response = await self.http_client.do_request(
             "GET",
-            f"/v1/functions/{function_id}",
+            f"/v1/functions/{uuid}",
         )
         if response.status_code == HTTPStatus.NOT_FOUND:
             return None
         if response.status_code != HTTPStatus.OK:
             raise APIError(
-                f"Failed to get function {function_id} with status {response.status_code}"
+                f"Failed to get function {uuid} with status {response.status_code}"
             )
 
         return Function.model_validate(response.json())
 
-    @validate_id_xor_path
-    async def delete(self, id: str = None, path: str = None):
+    @validate_uuid_xor_path
+    async def delete(self, uuid: str = None, path: str = None):
         """Delete a function
 
         This method allows for the deletion of a function either by specifying its unique ID or its path.
@@ -173,14 +173,14 @@ class AsyncFunctions:
         fails, the method returns False.
 
         Args:
-            id (str, optional): The unique identifier of the function to delete. Defaults to None.
+            uuid (str, optional): The unique identifier of the function to delete. Defaults to None.
             path (str, optional): The path of the function to delete. Defaults to None.
 
         Returns:
             bool: True if the function was successfully deleted, False otherwise.
 
         Raises:
-            ValueError: If both `id` and `path` are provided, or if neither is provided.
+            ValueError: If both `uuid` and `path` are provided, or if neither is provided.
 
         Examples:
             >>> from opperai import AsyncClient
@@ -191,7 +191,7 @@ class AsyncFunctions:
             True
 
         Note:
-            It's important to provide either `id` or `path`, but not both. If neither is provided, the method
+            It's important to provide either `uuid` or `path`, but not both. If neither is provided, the method
             will raise a ValueError to indicate the issue.
         """
         if path is not None:
@@ -199,22 +199,22 @@ class AsyncFunctions:
                 await self._delete_by_path(path)
             except APIError:
                 pass
-        elif id is not None:
+        elif uuid is not None:
             try:
-                await self._delete_by_id(id)
+                await self._delete_by_uuid(uuid)
             except APIError:
                 pass
 
         return True
 
-    async def _delete_by_id(self, id: str):
+    async def _delete_by_uuid(self, uuid: str):
         response = await self.http_client.do_request(
             "DELETE",
-            f"/v1/functions/{id}",
+            f"/v1/functions/{uuid}",
         )
         if response.status_code != HTTPStatus.NO_CONTENT:
             raise APIError(
-                f"Failed to delete function {id} with status {response.status_code}"
+                f"Failed to delete function {uuid} with status {response.status_code}"
             )
         return True
 
@@ -316,14 +316,14 @@ class AsyncFunctions:
         async for item in gen:
             yield StreamingChunk(**item)
 
-    async def flush_cache(self, id: int) -> None:
+    async def flush_cache(self, uuid: str) -> None:
         response = await self.http_client.do_request(
             "DELETE",
-            f"/v1/functions/{id}/cache",
+            f"/v1/functions/{uuid}/cache",
         )
         if response.status_code != HTTPStatus.NO_CONTENT:
             raise APIError(
-                f"Failed to flush cache for function with id={id} with status {response.status_code}"
+                f"Failed to flush cache for function with uuid={uuid} with status {response.status_code}"
             )
 
         return True

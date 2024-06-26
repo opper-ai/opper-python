@@ -100,10 +100,10 @@ class AsyncFunction:
         return AsyncFunctionResponse(client=self._client, **response.model_dump())
 
     async def delete(self) -> bool:
-        return await self._client.functions.delete(id=self._function.id)
+        return await self._client.functions.delete(id=self._function.uuid)
 
     async def flush_cache(self) -> bool:
-        return await self._client.functions.flush_cache(id=self._function.id)
+        return await self._client.functions.flush_cache(uuid=self._function.uuid)
 
     async def update(self, **kwargs) -> "AsyncFunction":
         updated = self._function.model_dump(exclude_none=True)
@@ -119,7 +119,7 @@ class AsyncFunction:
 
         updated_model = FunctionModel.model_validate(updated)
         updated_function = await self._client.functions.update(
-            id=self._function.id, function=updated_model
+            uuid=self._function.uuid, function=updated_model
         )
         self._function = updated_function
 

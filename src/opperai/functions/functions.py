@@ -90,16 +90,19 @@ class Function:
         return FunctionResponse(client=self._client, **response.model_dump())
 
     def delete(self) -> bool:
-        return self._client.functions.delete(id=self._function.id)
+        return self._client.functions.delete(uuid=self._function.uuid)
 
     def flush_cache(self) -> bool:
-        return self._client.functions.flush_cache(id=self._function.id)
+        return self._client.functions.flush_cache(uuid=self._function.uuid)
 
     def update(self, **kwargs) -> "Function":
         updated = self._function.model_dump(exclude_none=True)
+        kwargs["input_schema"] = None
+        kwargs["out_schema"] = None
         if "input_type" in kwargs and kwargs["input_type"] is not None:
             kwargs["input_schema"] = type_to_json_schema(kwargs["input_type"])
             del kwargs["input_type"]
+
         if "output_type" in kwargs and kwargs["output_type"] is not None:
             kwargs["out_schema"] = type_to_json_schema(kwargs["output_type"])
             del kwargs["output_type"]
@@ -109,7 +112,7 @@ class Function:
 
         updated_model = FunctionModel.model_validate(updated)
         updated_function = self._client.functions.update(
-            id=self._function.id, function=updated_model
+            uuid=self._function.uuid, function=updated_model
         )
         self._function = updated_function
 
