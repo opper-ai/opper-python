@@ -14,14 +14,14 @@ interactions:
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '{"id":58,"uuid":"a699ceff-3ac4-4ff3-b7e4-acf7e8bc439d","name":"test_retrieve_filters","project":{"uuid":"f4747904-782d-41ce-988b-592950a70c0f","name":"test"},"files":[],"created_at":"2024-06-26T09:50:00.590458Z"}'
+      string: '{"id":80,"uuid":"5074b6b5-b18d-4f41-bb17-4ee1028e8268","name":"test_retrieve_filters","project":{"uuid":"95a24c52-c137-42c6-be98-f751625712dc","name":"tt"},"files":[],"created_at":"2024-06-27T08:32:17.230965Z"}'
     headers:
       content-length:
-      - '212'
+      - '210'
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 09:49:59 GMT
+      - Thu, 27 Jun 2024 08:32:16 GMT
       server:
       - uvicorn
     status:
@@ -39,17 +39,17 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/indexes/a699ceff-3ac4-4ff3-b7e4-acf7e8bc439d/index
+    uri: http://localhost:8000/v1/indexes/5074b6b5-b18d-4f41-bb17-4ee1028e8268/index
   response:
     body:
-      string: '{"id":123,"uuid":"a75fb71c-f4fc-4583-aab8-b765f91acc01","key":"a75fb71c-f4fc-4583-aab8-b765f91acc01"}'
+      string: '{"id":173,"uuid":"2edac8ff-4c39-4fba-be3c-fab4f76166d6","key":"2edac8ff-4c39-4fba-be3c-fab4f76166d6"}'
     headers:
       content-length:
       - '101'
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 09:49:59 GMT
+      - Thu, 27 Jun 2024 08:32:16 GMT
       server:
       - uvicorn
     status:
@@ -68,17 +68,17 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/indexes/a699ceff-3ac4-4ff3-b7e4-acf7e8bc439d/query
+    uri: http://localhost:8000/v1/indexes/5074b6b5-b18d-4f41-bb17-4ee1028e8268/query
   response:
     body:
-      string: '[{"uuid":"c3b814ae-9d38-432e-be50-7d917e23ecac","content":"Bonjour","metadata":{"source":"test"},"document_id":null,"score":4.736573219299316,"source_uuids":["c3b814ae-9d38-432e-be50-7d917e23ecac"]}]'
+      string: '[{"uuid":"aa616732-0466-4a84-a784-0a66c122ba6b","content":"Bonjour","metadata":{"source":"test"},"document_id":null,"score":4.736573219299316,"source_uuids":["aa616732-0466-4a84-a784-0a66c122ba6b"]}]'
     headers:
       content-length:
       - '199'
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 09:50:00 GMT
+      - Thu, 27 Jun 2024 08:32:16 GMT
       server:
       - uvicorn
     status:
@@ -92,7 +92,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/indexes/a699ceff-3ac4-4ff3-b7e4-acf7e8bc439d
+    uri: http://localhost:8000/v1/indexes/5074b6b5-b18d-4f41-bb17-4ee1028e8268
   response:
     body:
       string: 'true'
@@ -102,7 +102,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 09:50:00 GMT
+      - Thu, 27 Jun 2024 08:32:16 GMT
       server:
       - uvicorn
     status:

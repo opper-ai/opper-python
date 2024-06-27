@@ -18,7 +18,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 08:42:33 GMT
+      - Thu, 27 Jun 2024 08:31:33 GMT
       server:
       - uvicorn
     status:
@@ -45,16 +45,16 @@ interactions:
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":132,"uuid":"7d947141-7d03-41cd-8299-c29b29d2c80c","dataset_uuid":"8e9a861a-763d-494a-bc18-4f36fbb2c96b","description":"given
+      string: '{"id":169,"uuid":"845903aa-f5f6-4ed3-81b8-048ea469567d","dataset_uuid":"2b8bf8bd-2117-454e-995b-1bcdbf2412a4","description":"given
         an image describe what it is","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
-        describe_image\n\nOperation description: given an image describe what it is","language_model_id":null,"model":"openai/gpt-4o","out_schema":{"properties":{"description":{"title":"Description","type":"string"}},"required":["description"],"title":"ImageDescription","type":"object","$defs":{}},"path":"describe_image","project":{"uuid":"f4747904-782d-41ce-988b-592950a70c0f","name":"test"},"revision":1,"use_semantic_search":false}'
+        describe_image\n\nOperation description: given an image describe what it is","language_model_id":null,"model":"openai/gpt-4o","out_schema":{"properties":{"description":{"title":"Description","type":"string"}},"required":["description"],"title":"ImageDescription","type":"object","$defs":{}},"path":"describe_image","project":{"uuid":"95a24c52-c137-42c6-be98-f751625712dc","name":"tt"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '687'
+      - '685'
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 08:42:33 GMT
+      - Thu, 27 Jun 2024 08:31:33 GMT
       server:
       - uvicorn
     status:
@@ -76,17 +76,17 @@ interactions:
     uri: http://localhost:8000/v1/chat/describe_image
   response:
     body:
-      string: '{"span_id":"fd42ca64-2cde-4214-b923-cc7ebad01134","message":null,"json_payload":{"description":"The
-        image shows a fossil of a prehistoric creature embedded in a slab of rock.
-        The fossil displays a well-preserved skeleton with distinct bones, including
-        the skull, spine, ribs, limbs, and tail."},"context":null,"cached":false}'
+      string: '{"span_id":"de856772-027b-4e80-a3fe-a531a7e871ad","message":null,"json_payload":{"description":"The
+        image shows a fossilized skeleton of a small reptile or amphibian embedded
+        in a rock. The fossil appears to be well-preserved and showcases the skeletal
+        structure, including the spine, limbs, and tail."},"context":null,"cached":false}'
     headers:
       content-length:
-      - '325'
+      - '334'
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 08:42:33 GMT
+      - Thu, 27 Jun 2024 08:31:34 GMT
       server:
       - uvicorn
     status:

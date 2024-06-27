@@ -18,7 +18,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 08:46:16 GMT
+      - Thu, 27 Jun 2024 08:32:07 GMT
       server:
       - uvicorn
     status:
@@ -42,16 +42,16 @@ interactions:
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":144,"uuid":"8041a1db-4cfb-4275-af2a-21d9539908da","dataset_uuid":"beaf13ab-3c4a-419d-b957-723358af0246","description":"Translate
+      string: '{"id":180,"uuid":"aeb827aa-905f-4121-8e69-27cc74d05ca7","dataset_uuid":"b5e61f08-6bab-4fb1-b441-5ef2fd01a1d7","description":"Translate
         to French","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Translate
-        to French","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_sync_chat_stream","project":{"uuid":"f4747904-782d-41ce-988b-592950a70c0f","name":"test"},"revision":1,"use_semantic_search":false}'
+        to French","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_sync_chat_stream","project":{"uuid":"95a24c52-c137-42c6-be98-f751625712dc","name":"tt"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '474'
+      - '472'
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 08:46:16 GMT
+      - Thu, 27 Jun 2024 08:32:07 GMT
       server:
       - uvicorn
     status:
@@ -65,19 +65,19 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/8041a1db-4cfb-4275-af2a-21d9539908da
+    uri: http://localhost:8000/v1/functions/aeb827aa-905f-4121-8e69-27cc74d05ca7
   response:
     body:
-      string: '{"id":144,"uuid":"8041a1db-4cfb-4275-af2a-21d9539908da","dataset_uuid":"beaf13ab-3c4a-419d-b957-723358af0246","description":"Translate
+      string: '{"id":180,"uuid":"aeb827aa-905f-4121-8e69-27cc74d05ca7","dataset_uuid":"b5e61f08-6bab-4fb1-b441-5ef2fd01a1d7","description":"Translate
         to French","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Translate
-        to French","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_sync_chat_stream","project":{"uuid":"f4747904-782d-41ce-988b-592950a70c0f","name":"test"},"revision":1,"use_semantic_search":false}'
+        to French","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_sync_chat_stream","project":{"uuid":"95a24c52-c137-42c6-be98-f751625712dc","name":"tt"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '474'
+      - '472'
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 08:46:16 GMT
+      - Thu, 27 Jun 2024 08:32:07 GMT
       server:
       - uvicorn
     status:
@@ -100,8 +100,8 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_sync_chat_stream?stream=True
   response:
     body:
-      string: "data: {\"span_id\": \"7bef44c7-dd82-4cfa-8b18-efa938e2da56\"}\r\n\r\ndata:
-        {\"delta\": \"Bonjour\"}\r\n\r\n"
+      string: "data: {\"span_id\": \"9e853f69-ace7-4ce7-a3a9-1e94d13755e1\"}\r\n\r\ndata:
+        {\"delta\": \"bon\"}\r\n\r\ndata: {\"delta\": \"jour\"}\r\n\r\n"
     headers:
       cache-control:
       - no-cache
@@ -110,7 +110,7 @@ interactions:
       content-type:
       - text/event-stream; charset=utf-8
       date:
-      - Wed, 26 Jun 2024 08:46:16 GMT
+      - Thu, 27 Jun 2024 08:32:07 GMT
       server:
       - uvicorn
       transfer-encoding:
@@ -128,7 +128,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/8041a1db-4cfb-4275-af2a-21d9539908da
+    uri: http://localhost:8000/v1/functions/aeb827aa-905f-4121-8e69-27cc74d05ca7
   response:
     body:
       string: ''
@@ -136,7 +136,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 08:46:17 GMT
+      - Thu, 27 Jun 2024 08:32:08 GMT
       server:
       - uvicorn
     status:

@@ -18,7 +18,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 08:45:52 GMT
+      - Thu, 27 Jun 2024 08:31:43 GMT
       server:
       - uvicorn
     status:
@@ -42,15 +42,15 @@ interactions:
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":141,"uuid":"eb031918-2200-4ee2-bfdc-edc675457337","dataset_uuid":"24dd8542-5d96-4105-a3c5-1640770361d6","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
-        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"f4747904-782d-41ce-988b-592950a70c0f","name":"test"},"revision":1,"use_semantic_search":false}'
+      string: '{"id":177,"uuid":"37c9446e-43a3-438e-8131-8a434f535dcd","dataset_uuid":"34b2b1a1-d7cb-4293-903c-c08428ee4a0f","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"95a24c52-c137-42c6-be98-f751625712dc","name":"tt"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '449'
+      - '447'
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 08:45:52 GMT
+      - Thu, 27 Jun 2024 08:31:43 GMT
       server:
       - uvicorn
     status:
@@ -64,18 +64,18 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/eb031918-2200-4ee2-bfdc-edc675457337
+    uri: http://localhost:8000/v1/functions/37c9446e-43a3-438e-8131-8a434f535dcd
   response:
     body:
-      string: '{"id":141,"uuid":"eb031918-2200-4ee2-bfdc-edc675457337","dataset_uuid":"24dd8542-5d96-4105-a3c5-1640770361d6","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
-        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"f4747904-782d-41ce-988b-592950a70c0f","name":"test"},"revision":1,"use_semantic_search":false}'
+      string: '{"id":177,"uuid":"37c9446e-43a3-438e-8131-8a434f535dcd","dataset_uuid":"34b2b1a1-d7cb-4293-903c-c08428ee4a0f","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"95a24c52-c137-42c6-be98-f751625712dc","name":"tt"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '449'
+      - '447'
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 08:45:52 GMT
+      - Thu, 27 Jun 2024 08:31:43 GMT
       server:
       - uvicorn
     status:
@@ -97,25 +97,24 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_image
   response:
     body:
-      string: '{"span_id":"2d8be701-5c61-4d60-8851-c5f5994ac483","message":"This image
-        shows a fossil of a small dinosaur or reptile preserved within a large, flat
-        rock. The skeletal remains are well-articulated, suggesting the creature was
-        rapidly buried in sediment that preserved its bodily form. Notable features
-        include a relatively large, distinct skull with visible eye sockets, a long
-        series of vertebrae from the neck through the tail, and numerous, closely-spaced
-        ribs. The limbs, both the forelimbs and hindlimbs, are splayed out to the
-        sides, and individual bones within the limbs, including what seems to be claws
-        or toes, are clearly visible. The fossil is presented on a dark background,
-        enhancing the contrast and details of the fossilized bones. This specimen
-        likely belongs to a museum or scientific collection, given its display setting
-        and the professional manner in which it is mounted and lit.","json_payload":null,"context":null,"cached":false}'
+      string: '{"span_id":"8aaacb92-b491-4127-a246-fb345c6ad496","message":"This image
+        shows a fossil of a vertebrate animal, likely a reptile, embedded in a sedimentary
+        rock. The fossil is well-preserved, displaying details of the skeleton including
+        the skull, vertebrae, ribs, and limbs. The rock is relatively flat and the
+        fossil appears prominently due to the contrast between its dark coloration
+        and the lighter color of the rock matrix. The way the bones are arranged and
+        preserved suggests that it might have been an aquatic or semi-aquatic creature,
+        potentially a prehistoric fish or a small dinosaur. The overall presentation,
+        with the specimen being well-lit against a dark background, enhances the visibility
+        of the anatomical details, making it a significant piece for study and display
+        purposes.","json_payload":null,"context":null,"cached":false}'
     headers:
       content-length:
-      - '952'
+      - '845'
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 08:45:52 GMT
+      - Thu, 27 Jun 2024 08:31:43 GMT
       server:
       - uvicorn
     status:
@@ -129,7 +128,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/eb031918-2200-4ee2-bfdc-edc675457337
+    uri: http://localhost:8000/v1/functions/37c9446e-43a3-438e-8131-8a434f535dcd
   response:
     body:
       string: ''
@@ -137,7 +136,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 08:46:05 GMT
+      - Thu, 27 Jun 2024 08:31:56 GMT
       server:
       - uvicorn
     status:

@@ -18,7 +18,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 08:42:27 GMT
+      - Thu, 27 Jun 2024 08:31:27 GMT
       server:
       - uvicorn
     status:
@@ -43,7 +43,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 08:42:27 GMT
+      - Thu, 27 Jun 2024 08:31:27 GMT
       server:
       - uvicorn
     status:
@@ -67,14 +67,14 @@ interactions:
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":129,"uuid":"516db1a3-a681-4e3b-9bd8-1f66b9e0353e","dataset_uuid":"f6c7e433-0338-412e-82a4-19310f14310b","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"test","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test_async_client_raises_timeout_error","project":{"uuid":"f4747904-782d-41ce-988b-592950a70c0f","name":"test"},"revision":1,"use_semantic_search":false}'
+      string: '{"id":166,"uuid":"0c24c36a-143e-41bc-a067-212ada84c1d2","dataset_uuid":"2baa72bc-a347-44f4-b83f-cd6e787c3718","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"test","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test_async_client_raises_timeout_error","project":{"uuid":"95a24c52-c137-42c6-be98-f751625712dc","name":"tt"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '450'
+      - '448'
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 08:42:27 GMT
+      - Thu, 27 Jun 2024 08:31:27 GMT
       server:
       - uvicorn
     status:

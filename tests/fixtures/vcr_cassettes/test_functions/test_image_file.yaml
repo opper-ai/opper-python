@@ -18,7 +18,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 08:46:05 GMT
+      - Thu, 27 Jun 2024 08:31:56 GMT
       server:
       - uvicorn
     status:
@@ -42,15 +42,15 @@ interactions:
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":142,"uuid":"8d859996-5070-458a-b4c7-b38429f782f1","dataset_uuid":"4fe78da9-b37a-4f48-aae5-1d850e2882c5","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
-        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"f4747904-782d-41ce-988b-592950a70c0f","name":"test"},"revision":1,"use_semantic_search":false}'
+      string: '{"id":178,"uuid":"d3f7b47c-44a6-46c6-ba71-46cd8e95defc","dataset_uuid":"6c335686-df55-4bb8-aed6-1648b0b23da1","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"95a24c52-c137-42c6-be98-f751625712dc","name":"tt"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '449'
+      - '447'
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 08:46:05 GMT
+      - Thu, 27 Jun 2024 08:31:56 GMT
       server:
       - uvicorn
     status:
@@ -64,18 +64,18 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/8d859996-5070-458a-b4c7-b38429f782f1
+    uri: http://localhost:8000/v1/functions/d3f7b47c-44a6-46c6-ba71-46cd8e95defc
   response:
     body:
-      string: '{"id":142,"uuid":"8d859996-5070-458a-b4c7-b38429f782f1","dataset_uuid":"4fe78da9-b37a-4f48-aae5-1d850e2882c5","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
-        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"f4747904-782d-41ce-988b-592950a70c0f","name":"test"},"revision":1,"use_semantic_search":false}'
+      string: '{"id":178,"uuid":"d3f7b47c-44a6-46c6-ba71-46cd8e95defc","dataset_uuid":"6c335686-df55-4bb8-aed6-1648b0b23da1","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"95a24c52-c137-42c6-be98-f751625712dc","name":"tt"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '449'
+      - '447'
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 08:46:05 GMT
+      - Thu, 27 Jun 2024 08:31:56 GMT
       server:
       - uvicorn
     status:
@@ -97,22 +97,22 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_image
   response:
     body:
-      string: '{"span_id":"b233bce4-315f-496a-9e3a-da0b7855f5fa","message":"This image
-        shows the fossil of a reptilian creature embedded in a rock. The fossil is
-        remarkably well-preserved, illustrating the animal''s full skeletal structure,
-        including its spine, ribcage, limbs, and skull. The texture and color variations
-        in the stone suggest it''s some kind of sedimentary rock, which is typical
-        for fossil encasements. The fossil''s size and shape hint that it might be
-        some type of small dinosaur or similar prehistoric reptile, displayed on a
-        black background presumably for exhibition purposes, which highlights its
-        features.","json_payload":null,"context":null,"cached":false}'
+      string: '{"span_id":"f668fee7-fb44-4169-bc6c-f570a9f46aa4","message":"This image
+        shows a fossil of an ancient turtle embedded in a rock. The fossil prominently
+        displays the turtle''s skeleton, including its well-preserved shell, spine,
+        and limb bones. The specimen lies sideways with the head turned slightly toward
+        the viewer, giving a clear view of its skull and the body outline. The rock
+        matrix around the fossil is irregularly shaped, with natural textures indicating
+        it was likely excavated directly from a sedimentary deposit. This type of
+        fossil is valuable for studying the anatomical details of ancient turtles
+        and understanding their evolution and ecological roles in their environments.","json_payload":null,"context":null,"cached":false}'
     headers:
       content-length:
-      - '664'
+      - '740'
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 08:46:05 GMT
+      - Thu, 27 Jun 2024 08:31:56 GMT
       server:
       - uvicorn
     status:
@@ -126,7 +126,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/8d859996-5070-458a-b4c7-b38429f782f1
+    uri: http://localhost:8000/v1/functions/d3f7b47c-44a6-46c6-ba71-46cd8e95defc
   response:
     body:
       string: ''
@@ -134,7 +134,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 08:46:15 GMT
+      - Thu, 27 Jun 2024 08:32:06 GMT
       server:
       - uvicorn
     status:

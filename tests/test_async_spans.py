@@ -17,13 +17,13 @@ async def span(desc: Span, _client: AsyncClient):
 
 @pytest.mark.asyncio(scope="module")
 async def test_async_crud(aclient: AsyncClient, vcr_cassette):
-    root_uuid = "bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4112"
+    root_uuid = "bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4115"
     root_start_time = datetime(2021, 1, 1, 0, 0, 0, 0)
-    root_end_time = datetime(2022, 1, 1, 0, 0, 0, 0)
+    root_end_time = datetime(2021, 1, 3, 0, 0, 0, 0)
 
-    child_uuid = "cfc1c3c4-0c3c-4c3c-8c3c-0c3c4c31cc12"
+    child_uuid = "cfc1c3c4-0c3c-4c3c-8c3c-0c3c4c31cc15"
     child_start_time = datetime(2021, 1, 1, 0, 0, 0, 0)
-    child_end_time = datetime(2021, 12, 1, 0, 0, 0, 0)
+    child_end_time = datetime(2021, 1, 2, 0, 0, 0, 0)
 
     root_span = Span(
         uuid=root_uuid,
@@ -64,7 +64,7 @@ async def test_async_crud(aclient: AsyncClient, vcr_cassette):
 async def test_save_metric(aclient: AsyncClient, vcr_cassette):
     async with span(
         Span(
-            uuid="bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4133",
+            uuid="bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4134",
             name="name",
             input="input",
             start_time=datetime(2021, 1, 1, 0, 0, 0, 0),

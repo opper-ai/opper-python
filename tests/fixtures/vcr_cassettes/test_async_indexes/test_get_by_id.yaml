@@ -14,14 +14,14 @@ interactions:
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '{"id":42,"uuid":"9a7c7a4c-e7de-4846-9a09-2638a4825afa","name":"test_get_by_id","project":{"uuid":"f4747904-782d-41ce-988b-592950a70c0f","name":"test"},"files":[],"created_at":"2024-06-26T08:19:44.931814Z"}'
+      string: '{"id":65,"uuid":"e5ea033a-58a0-45b8-bd84-fc55e9ab8d03","name":"test_get_by_id","project":{"uuid":"95a24c52-c137-42c6-be98-f751625712dc","name":"tt"},"files":[],"created_at":"2024-06-27T08:31:26.069919Z"}'
     headers:
       content-length:
-      - '205'
+      - '203'
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 08:19:44 GMT
+      - Thu, 27 Jun 2024 08:31:25 GMT
       server:
       - uvicorn
     status:
@@ -35,17 +35,17 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/indexes/9a7c7a4c-e7de-4846-9a09-2638a4825afa
+    uri: http://localhost:8000/v1/indexes/e5ea033a-58a0-45b8-bd84-fc55e9ab8d03
   response:
     body:
-      string: '{"id":42,"uuid":"9a7c7a4c-e7de-4846-9a09-2638a4825afa","name":"test_get_by_id","project":{"uuid":"f4747904-782d-41ce-988b-592950a70c0f","name":"test"},"files":[],"created_at":"2024-06-26T08:19:44.931814Z"}'
+      string: '{"id":65,"uuid":"e5ea033a-58a0-45b8-bd84-fc55e9ab8d03","name":"test_get_by_id","project":{"uuid":"95a24c52-c137-42c6-be98-f751625712dc","name":"tt"},"files":[],"created_at":"2024-06-27T08:31:26.069919Z"}'
     headers:
       content-length:
-      - '205'
+      - '203'
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 08:19:44 GMT
+      - Thu, 27 Jun 2024 08:31:25 GMT
       server:
       - uvicorn
     status:
@@ -59,7 +59,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/indexes/9a7c7a4c-e7de-4846-9a09-2638a4825afa
+    uri: http://localhost:8000/v1/indexes/e5ea033a-58a0-45b8-bd84-fc55e9ab8d03
   response:
     body:
       string: 'true'
@@ -69,7 +69,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Wed, 26 Jun 2024 08:19:44 GMT
+      - Thu, 27 Jun 2024 08:31:25 GMT
       server:
       - uvicorn
     status:
