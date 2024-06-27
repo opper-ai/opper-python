@@ -100,7 +100,7 @@ def test_fn_decorator(client: Client, vcr_cassette):
     response.span.save_metric("metric", 1)
 
 
-@pytest.mark.asyncio(scope="module")
+@pytest.mark.asyncio
 async def test_fn_decorator_async(aclient: AsyncClient, vcr_cassette):
     @fn(client=aclient)
     async def translate(text: str, target_language: str) -> str:

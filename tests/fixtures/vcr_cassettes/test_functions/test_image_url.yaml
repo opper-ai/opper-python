@@ -18,14 +18,14 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:21 GMT
+      - Thu, 27 Jun 2024 08:31:43 GMT
       server:
       - uvicorn
     status:
       code: 404
       message: Not Found
 - request:
-    body: '{"id": null, "path": "test/sdk/test_image", "description": null, "input_schema":
+    body: '{"uuid": null, "path": "test/sdk/test_image", "description": null, "input_schema":
       null, "out_schema": null, "instructions": "describe the image", "model": "openai/gpt4-turbo",
       "index_ids": [], "use_semantic_search": null, "few_shot": null, "few_shot_count":
       null, "cache_configuration": null}'
@@ -35,21 +35,22 @@ interactions:
       connection:
       - keep-alive
       content-length:
-      - '291'
+      - '293'
       content-type:
       - application/json
     method: POST
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"path":"test/sdk/test_image","instructions":"describe the image","id":44,"description":null,"input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"6db40da6-c469-4c3b-bb65-fcd752a431fb","use_semantic_search":false,"model":"openai/gpt4-turbo","language_model_id":1,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
+      string: '{"id":177,"uuid":"37c9446e-43a3-438e-8131-8a434f535dcd","dataset_uuid":"34b2b1a1-d7cb-4293-903c-c08428ee4a0f","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"95a24c52-c137-42c6-be98-f751625712dc","name":"tt"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '381'
+      - '447'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:21 GMT
+      - Thu, 27 Jun 2024 08:31:43 GMT
       server:
       - uvicorn
     status:
@@ -63,17 +64,18 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/44
+    uri: http://localhost:8000/v1/functions/37c9446e-43a3-438e-8131-8a434f535dcd
   response:
     body:
-      string: '{"path":"test/sdk/test_image","instructions":"describe the image","id":44,"description":null,"input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"6db40da6-c469-4c3b-bb65-fcd752a431fb","use_semantic_search":false,"model":"openai/gpt4-turbo","language_model_id":1,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":{"exact_match_cache_ttl":0,"semantic_cache_threshold":0.95,"semantic_cache_ttl":0}}'
+      string: '{"id":177,"uuid":"37c9446e-43a3-438e-8131-8a434f535dcd","dataset_uuid":"34b2b1a1-d7cb-4293-903c-c08428ee4a0f","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"95a24c52-c137-42c6-be98-f751625712dc","name":"tt"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '459'
+      - '447'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:21 GMT
+      - Thu, 27 Jun 2024 08:31:43 GMT
       server:
       - uvicorn
     status:
@@ -95,23 +97,24 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_image
   response:
     body:
-      string: '{"span_id":"9b17ef15-368e-446d-b9ea-a338423bc54f","message":"The image
-        displays a fossil of a prehistoric reptile, possibly a dinosaur or similar
-        creature, embedded in a stone slab. The fossil is remarkably well-preserved,
-        showing intricate details. The skeleton is largely intact with a clearly recognizable
-        skull, spine, ribs, and limbs. The texture of the stone contrasts with the
-        darker coloration of the fossilized remains, emphasizing the form and structure
-        of the creature. The backdrop is a simple black, which highlights the fossil
-        and the subtleties of its preservation on the slab. This type of specimen
-        is essential for paleontological studies, offering insights into the anatomy
-        and possible lifestyle of extinct species.","json_payload":null,"context":null,"cached":false}'
+      string: '{"span_id":"8aaacb92-b491-4127-a246-fb345c6ad496","message":"This image
+        shows a fossil of a vertebrate animal, likely a reptile, embedded in a sedimentary
+        rock. The fossil is well-preserved, displaying details of the skeleton including
+        the skull, vertebrae, ribs, and limbs. The rock is relatively flat and the
+        fossil appears prominently due to the contrast between its dark coloration
+        and the lighter color of the rock matrix. The way the bones are arranged and
+        preserved suggests that it might have been an aquatic or semi-aquatic creature,
+        potentially a prehistoric fish or a small dinosaur. The overall presentation,
+        with the specimen being well-lit against a dark background, enhances the visibility
+        of the anatomical details, making it a significant piece for study and display
+        purposes.","json_payload":null,"context":null,"cached":false}'
     headers:
       content-length:
-      - '786'
+      - '845'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:21 GMT
+      - Thu, 27 Jun 2024 08:31:43 GMT
       server:
       - uvicorn
     status:
@@ -125,7 +128,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/44
+    uri: http://localhost:8000/v1/functions/37c9446e-43a3-438e-8131-8a434f535dcd
   response:
     body:
       string: ''
@@ -133,7 +136,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:30 GMT
+      - Thu, 27 Jun 2024 08:31:56 GMT
       server:
       - uvicorn
     status:

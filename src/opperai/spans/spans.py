@@ -45,7 +45,6 @@ class Spans:
     @contextmanager
     def start(
         self,
-        project: str,
         name: str,
         input: str = None,
         meta: dict = None,
@@ -53,7 +52,6 @@ class Spans:
     ) -> Span:
         span_uuid = self._client.spans.create(
             SpanModel(
-                project=project,
                 name=name,
                 input=input,
                 start_time=datetime.now(),

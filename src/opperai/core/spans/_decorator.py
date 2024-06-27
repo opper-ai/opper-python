@@ -49,7 +49,6 @@ def start_span(
     """
 
     c = client if client is not None else Client()
-    project = os.environ.get("OPPER_PROJECT", "missing_project")
     parent_span_id = _current_span_id.get()
     span_id = str(uuid4())
     span = Span(
@@ -57,7 +56,6 @@ def start_span(
         meta=metadata,
         input=input,
         parent_uuid=parent_span_id if parent_span_id is not None else None,
-        project=project,
         name=name,
         start_time=utcnow(),
     )
@@ -91,7 +89,6 @@ def trace(
         async def async_wrapper(*args, **kwargs):
             c = client if client is not None else Client()
 
-            project = os.environ.get("OPPER_PROJECT", "missing_project")
             parent_span_id = _current_span_id.get()
             span_id = str(uuid4())
             span_name = name if name is not None else func.__name__
@@ -103,7 +100,6 @@ def trace(
             span = Span(
                 uuid=span_id,
                 parent_uuid=parent_span_id if parent_span_id is not None else None,
-                project=project,
                 name=span_name,
                 input=inputs,
                 start_time=utcnow(),
@@ -129,7 +125,6 @@ def trace(
         @wraps(func)
         def sync_wrapper(*args, **kwargs):
             c = client if client is not None else Client()
-            project = os.environ.get("OPPER_PROJECT", "missing_project")
             parent_span_id = _current_span_id.get()
             span_id = str(uuid4())
             span_name = name if name is not None else func.__name__
@@ -141,7 +136,6 @@ def trace(
             span = Span(
                 uuid=span_id,
                 parent_uuid=parent_span_id if parent_span_id is not None else None,
-                project=project,
                 name=span_name,
                 input=inputs,
                 start_time=utcnow(),

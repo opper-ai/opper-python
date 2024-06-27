@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import List, Optional
 
 from opperai._client import Client
-from opperai.types.indexes import Document, Filter, RetrievalResponse
+from opperai.types.indexes import Document, DocumentIn, Filter, RetrievalResponse
 from opperai.types.indexes import Index as IndexModel
 
 
@@ -14,12 +14,12 @@ class Index:
     def upload_file(self, file_path: str, **kwargs):
         """Upload a file to the index."""
         return self._client.indexes.upload_file(
-            id=self._index.id, file_path=file_path, **kwargs
+            uuid=self._index.uuid, file_path=file_path, **kwargs
         )
 
-    def add(self, doc: Document) -> Document:
+    def add(self, doc: DocumentIn) -> Document:
         """Index a document."""
-        return self._client.indexes.index(id=self._index.id, doc=doc)
+        return self._client.indexes.index(uuid=self._index.uuid, doc=doc)
 
     def query(
         self,
@@ -31,12 +31,12 @@ class Index:
         """Retrieve documents from the index."""
 
         return self._client.indexes.retrieve(
-            id=self._index.id, query=query, k=k, filters=filters, **kwargs
+            uuid=self._index.uuid, query=query, k=k, filters=filters, **kwargs
         )
 
     def delete(self) -> bool:
         """Delete the index."""
-        return self._client.indexes.delete(id=self._index.id)
+        return self._client.indexes.delete(uuid=self._index.uuid)
 
 
 class Indexes:
@@ -63,23 +63,23 @@ class Indexes:
         index = self._client.indexes.create(name=name)
         return Index(self._client, index)
 
-    def get(self, id: int = None, name: str = None) -> Optional[Index]:
+    def get(self, uuid: str = None, name: str = None) -> Optional[Index]:
         """Get an index by id or name."""
-        if id is not None:
-            index = self._client.indexes.get(id=id)
+        if uuid is not None:
+            index = self._client.indexes.get(uuid=uuid)
         elif name is not None:
             index = self._client.indexes.get(name=name)
         else:
-            raise ValueError("Either id or name must be provided")
+            raise ValueError("Either uuid or name must be provided")
 
         if not index:
             return None
 
         return Index(self._client, index)
 
-    def delete(self, id: int) -> bool:
+    def delete(self, uuid: str) -> bool:
         """Delete an index by id."""
-        return self._client.indexes.delete(id=id)
+        return self._client.indexes.delete(uuid=uuid)
 
     def list(self) -> List[Index]:
         """List all indexes for the organization owning the API key."""

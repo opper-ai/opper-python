@@ -100,13 +100,15 @@ class AsyncFunction:
         return AsyncFunctionResponse(client=self._client, **response.model_dump())
 
     async def delete(self) -> bool:
-        return await self._client.functions.delete(id=self._function.id)
+        return await self._client.functions.delete(uuid=self._function.uuid)
 
     async def flush_cache(self) -> bool:
-        return await self._client.functions.flush_cache(id=self._function.id)
+        return await self._client.functions.flush_cache(uuid=self._function.uuid)
 
     async def update(self, **kwargs) -> "AsyncFunction":
         updated = self._function.model_dump(exclude_none=True)
+        kwargs["input_schema"] = None
+        kwargs["out_schema"] = None
         if "input_type" in kwargs and kwargs["input_type"] is not None:
             kwargs["input_schema"] = type_to_json_schema(kwargs["input_type"])
             del kwargs["input_type"]
@@ -119,7 +121,7 @@ class AsyncFunction:
 
         updated_model = FunctionModel.model_validate(updated)
         updated_function = await self._client.functions.update(
-            id=self._function.id, function=updated_model
+            uuid=self._function.uuid, function=updated_model
         )
         self._function = updated_function
 
@@ -176,9 +178,9 @@ class AsyncFunctions:
 
         return AsyncFunction(self._client, function)
 
-    async def get(self, id: int = None, path: str = None) -> Optional[AsyncFunction]:
-        if id is not None:
-            function = await self._client.functions.get(id=id)
+    async def get(self, uuid: str = None, path: str = None) -> Optional[AsyncFunction]:
+        if uuid is not None:
+            function = await self._client.functions.get(uuid=uuid)
         elif path is not None:
             function = await self._client.functions.get(path=path)
         else:
@@ -189,9 +191,9 @@ class AsyncFunctions:
 
         return AsyncFunction(self._client, function)
 
-    async def delete(self, id: int = None, path: str = None) -> bool:
-        if id is not None:
-            return await self._client.functions.delete(id=id)
+    async def delete(self, uuid: str = None, path: str = None) -> bool:
+        if uuid is not None:
+            return await self._client.functions.delete(uuid=uuid)
         elif path is not None:
             return await self._client.functions.delete(path=path)
         else:

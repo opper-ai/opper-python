@@ -51,7 +51,6 @@ class AsyncSpans:
     @asynccontextmanager
     async def start(
         self,
-        project: str,
         name: str,
         input: str = None,
         meta: dict = None,
@@ -59,7 +58,6 @@ class AsyncSpans:
     ) -> AsyncSpan:
         uuid = self._client.spans.create(
             SpanModel(
-                project=project,
                 name=name,
                 input=input,
                 start_time=datetime.now(),

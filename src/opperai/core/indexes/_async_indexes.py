@@ -48,7 +48,7 @@ class AsyncIndexes:
             raise APIError(f"Failed to create index with status {response.status_code}")
         return Index.model_validate(response.json())
 
-    async def delete(self, id: int) -> bool:
+    async def delete(self, uuid: str) -> bool:
         """Delete an index
 
         This method sends a DELETE request to the OpperAI service to remove an index specified by
@@ -56,7 +56,7 @@ class AsyncIndexes:
         successful, it returns True. If there's an issue with the request, it raises an APIError.
 
         Args:
-            id (int): The unique identifier of the index to be deleted.
+            uuid (str): The unique identifier of the index to be deleted.
 
         Returns:
             bool: True if the index was successfully deleted, False if the index does not exist.
@@ -73,7 +73,7 @@ class AsyncIndexes:
         """
         response = await self.http_client.do_request(
             "DELETE",
-            f"/v1/indexes/{id}",
+            f"/v1/indexes/{uuid}",
         )
         if response.status_code == 404:
             return False
@@ -81,13 +81,13 @@ class AsyncIndexes:
             raise APIError(f"Failed to delete index with status {response.status_code}")
         return True
 
-    async def get(self, id: int = None, name: str = None) -> Index:
+    async def get(self, uuid: str = None, name: str = None) -> Index:
         """Retrieve an index.
 
         This method fetches the details of an index from the Opper service. It can retrieve the index information either by its unique identifier (ID) or by its name. At least one of the parameters, `id` or `name`, must be provided. If both are provided, a ValueError is raised.
 
         Args:
-            id (int, optional): The unique identifier of the index to be retrieved. Defaults to None.
+            uuid (str, optional): The unique identifier of the index to be retrieved. Defaults to None.
             name (str, optional): The name of the index to be retrieved. Defaults to None.
 
         Returns:
@@ -104,26 +104,26 @@ class AsyncIndexes:
             >>> print(index_by_name)
             Index(id='123', name='my_index', ...)
         """
-        if id is None and name is None:
-            raise ValueError("Either id or name must be provided")
-        if id is not None and name is not None:
+        if uuid is None and name is None:
+            raise ValueError("Either uuid or name must be provided")
+        if uuid is not None and name is not None:
             raise ValueError("Only one of id or name should be provided")
 
-        if id is not None:
-            return await self._get_by_id(id)
+        if uuid is not None:
+            return await self._get_by_uuid(uuid)
         if name is not None:
             return await self._get_by_name(name)
 
-    async def _get_by_id(self, id: int) -> Index:
+    async def _get_by_uuid(self, uuid: str) -> Index:
         response = await self.http_client.do_request(
             "GET",
-            f"/v1/indexes/{id}",
+            f"/v1/indexes/{uuid}",
         )
         if response.status_code == 404:
             return None
         if response.status_code != 200:
             raise APIError(
-                f"Failed to get index {id} with status {response.status_code}"
+                f"Failed to get index {uuid} with status {response.status_code}"
             )
         return Index.model_validate(response.json())
 
@@ -160,13 +160,13 @@ class AsyncIndexes:
             raise APIError(f"Failed to list indexes with status {response.status_code}")
         return [Index.model_validate(item) for item in response.json()]
 
-    async def upload_file(self, id: int, file_path: str, **kwargs):
+    async def upload_file(self, uuid: str, file_path: str, **kwargs):
         """Upload a file to a specific index
 
         This method handles the uploading of a file to a specified index by first obtaining an upload URL, then uploading the file to that URL, and finally registering the file with the index.
 
         Args:
-            id (int): The unique identifier of the index to which the file will be uploaded.
+            uuid (str): The unique identifier of the index to which the file will be uploaded.
             file_path (str): The path to the file that needs to be uploaded.
             **kwargs: Additional parameters that can be passed to the register file API call.
 
@@ -185,7 +185,7 @@ class AsyncIndexes:
         # Get upload URL
         upload_url_response = await self.http_client.do_request(
             "GET",
-            f"/v1/indexes/{id}/upload_url",
+            f"/v1/indexes/{uuid}/upload_url",
             params={"filename": file_path.split("/")[-1]},
         )
         if upload_url_response.status_code != 200:
@@ -211,7 +211,7 @@ class AsyncIndexes:
         # Register file
         register_file_response = await self.http_client.do_request(
             "POST",
-            f"/v1/indexes/{id}/register_file",
+            f"/v1/indexes/{uuid}/register_file",
             json={"uuid": upload_url_data["uuid"], **kwargs},
         )
         if register_file_response.status_code != 200:
@@ -221,7 +221,7 @@ class AsyncIndexes:
 
         return register_file_response.json()
 
-    async def index(self, id: int, doc: Document) -> Document:
+    async def index(self, uuid: str, doc: Document) -> Document:
         """Index a document.
 
         This method sends a POST request to the OpperAI service to add a document to the specified index by its unique identifier. If the operation is successful, it returns the added document as an instance of the Document class.
@@ -247,7 +247,7 @@ class AsyncIndexes:
         """
         response = await self.http_client.do_request(
             "POST",
-            f"/v1/indexes/{id}/index",
+            f"/v1/indexes/{uuid}/index",
             json=doc.model_dump(),
         )
         if response.status_code != 200:
@@ -256,7 +256,7 @@ class AsyncIndexes:
 
     async def retrieve(
         self,
-        id: int,
+        uuid: str,
         query: str,
         k: int,
         filters: Optional[List[Filter]] = None,
@@ -289,7 +289,7 @@ class AsyncIndexes:
         """
         response = await self.http_client.do_request(
             "POST",
-            f"/v1/indexes/{id}/query",
+            f"/v1/indexes/{uuid}/query",
             json={
                 **RetrieveQuery(q=query, k=k, filters=filters).model_dump(),
                 **kwargs,
@@ -297,6 +297,6 @@ class AsyncIndexes:
         )
         if response.status_code != 200:
             raise APIError(
-                f"Failed to retrieve index {id} with status {response.status_code}"
+                f"Failed to retrieve index {uuid} with status {response.status_code}"
             )
         return [RetrievalResponse.model_validate(item) for item in response.json()]

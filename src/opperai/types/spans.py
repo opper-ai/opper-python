@@ -7,7 +7,6 @@ from pydantic import BaseModel
 
 class Span(BaseModel):
     uuid: Optional[UUID] = None
-    project: Optional[str] = None
     name: Optional[str] = None
     input: Optional[str] = None
     output: Optional[str] = None

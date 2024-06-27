@@ -18,14 +18,14 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:03 GMT
+      - Thu, 27 Jun 2024 08:31:18 GMT
       server:
       - uvicorn
     status:
       code: 404
       message: Not Found
 - request:
-    body: '{"id": null, "path": "test/sdk/test_async_chat_stream", "description":
+    body: '{"uuid": null, "path": "test/sdk/test_async_chat_stream", "description":
       "Translate to French", "input_schema": null, "out_schema": null, "instructions":
       "Translate to French", "model": null, "index_ids": [], "use_semantic_search":
       null, "few_shot": null, "few_shot_count": null, "cache_configuration": null}'
@@ -35,22 +35,23 @@ interactions:
       connection:
       - keep-alive
       content-length:
-      - '306'
+      - '308'
       content-type:
       - application/json
     method: POST
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"path":"test/sdk/test_async_chat_stream","instructions":"Translate
-        to French","id":34,"description":"Translate to French","input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"39480448-fe2c-4f18-a2f7-ce71c686467e","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
+      string: '{"id":163,"uuid":"0ccd0608-0dd8-40e3-b089-29bfd41cbc8f","dataset_uuid":"a037df53-28e9-460c-b9a7-7cdebda23f89","description":"Translate
+        to French","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Translate
+        to French","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_async_chat_stream","project":{"uuid":"95a24c52-c137-42c6-be98-f751625712dc","name":"tt"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '407'
+      - '473'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:03 GMT
+      - Thu, 27 Jun 2024 08:31:18 GMT
       server:
       - uvicorn
     status:
@@ -73,11 +74,9 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_async_chat_stream?stream=True
   response:
     body:
-      string: "data: {\"span_id\": \"47f354e1-263d-4e37-9639-f5db39190653\"}\r\n\r\ndata:
+      string: "data: {\"span_id\": \"f63c44c1-db6b-4146-b5c2-6a0b0513321d\"}\r\n\r\ndata:
         {\"delta\": \"Bonjour\"}\r\n\r\n"
     headers:
-      Transfer-Encoding:
-      - chunked
       cache-control:
       - no-cache
       connection:
@@ -85,9 +84,11 @@ interactions:
       content-type:
       - text/event-stream; charset=utf-8
       date:
-      - Tue, 21 May 2024 10:10:03 GMT
+      - Thu, 27 Jun 2024 08:31:18 GMT
       server:
       - uvicorn
+      transfer-encoding:
+      - chunked
       x-accel-buffering:
       - 'no'
     status:
@@ -101,7 +102,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/34
+    uri: http://localhost:8000/v1/functions/0ccd0608-0dd8-40e3-b089-29bfd41cbc8f
   response:
     body:
       string: ''
@@ -109,7 +110,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:03 GMT
+      - Thu, 27 Jun 2024 08:31:18 GMT
       server:
       - uvicorn
     status:

@@ -18,14 +18,14 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:41 GMT
+      - Thu, 27 Jun 2024 08:32:08 GMT
       server:
       - uvicorn
     status:
       code: 404
       message: Not Found
 - request:
-    body: '{"id": null, "path": "test/sdk/test_create_function_with_cache", "description":
+    body: '{"uuid": null, "path": "test/sdk/test_create_function_with_cache", "description":
       "Test function", "input_schema": null, "out_schema": null, "instructions": "Do
       something", "model": null, "index_ids": [], "use_semantic_search": null, "few_shot":
       null, "few_shot_count": null, "cache_configuration": {"exact_match_cache_ttl":
@@ -36,22 +36,23 @@ interactions:
       connection:
       - keep-alive
       content-length:
-      - '389'
+      - '391'
       content-type:
       - application/json
     method: POST
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"path":"test/sdk/test_create_function_with_cache","instructions":"Do
-        something","id":48,"description":"Test function","input_schema":null,"out_schema":null,"few_shot":false,"few_shot_count":2,"dataset_uuid":"0b2e6263-47e2-4069-9fb6-0af1f3b40491","use_semantic_search":false,"model":"azure/gpt4-eu","language_model_id":8,"index_ids":[],"linked_function_ids":null,"revision":1,"cache_configuration":null}'
+      string: '{"id":181,"uuid":"1f80104b-3800-4314-825c-af1030e2a68e","dataset_uuid":"4eba87e6-f2a7-402d-a164-877445d815e9","description":"Test
+        function","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Do
+        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_create_function_with_cache","project":{"uuid":"95a24c52-c137-42c6-be98-f751625712dc","name":"tt"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '403'
+      - '469'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:41 GMT
+      - Thu, 27 Jun 2024 08:32:08 GMT
       server:
       - uvicorn
     status:
@@ -72,15 +73,16 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_create_function_with_cache
   response:
     body:
-      string: '{"span_id":"9684c8ab-54db-4a35-919c-edcc6bd7f835","message":"Hello
-        there! How can I assist you today?","json_payload":null,"context":null,"cached":false}'
+      string: '{"span_id":"49d4526e-e0d8-42c6-8750-213ae9af9966","message":"Hello!
+        How can I assist you today? If you have any questions or need information,
+        feel free to ask.","json_payload":null,"context":null,"cached":false}'
     headers:
       content-length:
-      - '153'
+      - '212'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:41 GMT
+      - Thu, 27 Jun 2024 08:32:08 GMT
       server:
       - uvicorn
     status:
@@ -101,15 +103,16 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_create_function_with_cache
   response:
     body:
-      string: '{"span_id":"58b6730f-7b06-465e-8448-ca30f8ab8cbd","message":"Hello
-        there! How can I assist you today?","json_payload":null,"context":null,"cached":true}'
+      string: '{"span_id":"8458a5d8-24c1-42f2-891e-ac3d1deb65c5","message":"Hello!
+        How can I assist you today? If you have any questions or need information,
+        feel free to ask.","json_payload":null,"context":null,"cached":true}'
     headers:
       content-length:
-      - '152'
+      - '211'
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:42 GMT
+      - Thu, 27 Jun 2024 08:32:11 GMT
       server:
       - uvicorn
     status:
@@ -123,7 +126,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/48
+    uri: http://localhost:8000/v1/functions/1f80104b-3800-4314-825c-af1030e2a68e
   response:
     body:
       string: ''
@@ -131,7 +134,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 21 May 2024 10:10:42 GMT
+      - Thu, 27 Jun 2024 08:32:11 GMT
       server:
       - uvicorn
     status:

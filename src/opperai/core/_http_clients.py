@@ -3,6 +3,7 @@ from http import HTTPStatus
 
 import httpx
 from httpx_sse import aconnect_sse, connect_sse
+from opperai import __version__
 from opperai.types import Errors
 from opperai.types.exceptions import (
     ContentPolicyViolationError,
@@ -35,7 +36,10 @@ class _async_http_client:
     def __init__(self, api_key: str, api_url: str, timeout: float):
         self.session = httpx.AsyncClient(
             base_url=api_url,
-            headers={"X-OPPER-API-KEY": f"{api_key}"},
+            headers={
+                "X-OPPER-API-KEY": f"{api_key}",
+                "User-Agent": f"opper-python/{__version__}",
+            },
             timeout=httpx.Timeout(timeout),
         )
 
@@ -72,7 +76,10 @@ class _http_client:
     def __init__(self, api_key: str, api_url: str, timeout):
         self.session = httpx.Client(
             base_url=api_url,
-            headers={"X-OPPER-API-KEY": f"{api_key}"},
+            headers={
+                "X-OPPER-API-KEY": f"{api_key}",
+                "User-Agent": f"opper-python/{__version__}",
+            },
             timeout=httpx.Timeout(timeout),
         )
 
