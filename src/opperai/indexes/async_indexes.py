@@ -63,23 +63,23 @@ class AsyncIndexes:
         index = await self._client.indexes.create(name=name)
         return AsyncIndex(self._client, index)
 
-    async def get(self, id: int = None, name: str = None) -> Optional[AsyncIndex]:
-        """Get an index by id or name."""
-        if id is not None:
-            index = await self._client.indexes.get(id=id)
+    async def get(self, uuid: str = None, name: str = None) -> Optional[AsyncIndex]:
+        """Get an index by uuid or name."""
+        if uuid is not None:
+            index = await self._client.indexes.get(uuid=uuid)
         elif name is not None:
             index = await self._client.indexes.get(name=name)
         else:
-            raise ValueError("Either id or name must be provided")
+            raise ValueError("Either uuid or name must be provided")
 
         if not index:
             return None
 
         return AsyncIndex(self._client, index)
 
-    async def delete(self, id: int) -> bool:
-        """Delete an index by id."""
-        return await self._client.indexes.delete(id=id)
+    async def delete(self, uuid: str) -> bool:
+        """Delete an index by uuid."""
+        return await self._client.indexes.delete(uuid=uuid)
 
     async def list(self) -> List[AsyncIndex]:
         """List all indexes for the organization owning the API key."""

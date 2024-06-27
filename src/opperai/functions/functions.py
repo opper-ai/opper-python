@@ -169,23 +169,23 @@ class Functions:
 
         return Function(self._client, function)
 
-    def get(self, id: int = None, path: str = None) -> Optional[Function]:
-        if id is not None:
-            function = self._client.functions.get(id=id)
+    def get(self, uuid: str = None, path: str = None) -> Optional[Function]:
+        if uuid is not None:
+            function = self._client.functions.get(uuid=uuid)
         elif path is not None:
             function = self._client.functions.get(path=path)
         else:
-            raise ValueError("Either id or name must be provided")
+            raise ValueError("Either uuid or path must be provided")
 
         if not function:
             return None
 
         return Function(self._client, function)
 
-    def delete(self, id: int = None, path: str = None) -> bool:
-        if id is not None:
-            return self._client.functions.delete(id=id)
+    def delete(self, uuid: str = None, path: str = None) -> bool:
+        if uuid is not None:
+            return self._client.functions.delete(uuid=uuid)
         elif path is not None:
             return self._client.functions.delete(path=path)
         else:
-            raise ValueError("Either id or name must be provided")
+            raise ValueError("Either uuid or path must be provided")

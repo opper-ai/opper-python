@@ -7,7 +7,7 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field, FilePath, computed_field
 
-from .indexes import Document, Filter, RetrievalResponse
+from .indexes import Document, DocumentIn, Filter, RetrievalResponse
 from .spans import SpanMetric
 from .validators import validate_uuid_xor_path
 

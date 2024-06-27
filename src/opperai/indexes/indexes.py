@@ -63,23 +63,23 @@ class Indexes:
         index = self._client.indexes.create(name=name)
         return Index(self._client, index)
 
-    def get(self, id: int = None, name: str = None) -> Optional[Index]:
+    def get(self, uuid: str = None, name: str = None) -> Optional[Index]:
         """Get an index by id or name."""
-        if id is not None:
-            index = self._client.indexes.get(id=id)
+        if uuid is not None:
+            index = self._client.indexes.get(uuid=uuid)
         elif name is not None:
             index = self._client.indexes.get(name=name)
         else:
-            raise ValueError("Either id or name must be provided")
+            raise ValueError("Either uuid or name must be provided")
 
         if not index:
             return None
 
         return Index(self._client, index)
 
-    def delete(self, id: int) -> bool:
+    def delete(self, uuid: str) -> bool:
         """Delete an index by id."""
-        return self._client.indexes.delete(id=id)
+        return self._client.indexes.delete(uuid=uuid)
 
     def list(self) -> List[Index]:
         """List all indexes for the organization owning the API key."""
