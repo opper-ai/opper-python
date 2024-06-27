@@ -27,7 +27,6 @@ async def test_async_crud(aclient: AsyncClient, vcr_cassette):
 
     root_span = Span(
         uuid=root_uuid,
-        project="project",
         name="name",
         input="input",
         start_time=root_start_time,
@@ -38,7 +37,6 @@ async def test_async_crud(aclient: AsyncClient, vcr_cassette):
     child_span = Span(
         uuid=child_uuid,
         parent_uuid=root_span.uuid,
-        project="project",
         name="name",
         input="input",
         start_time=child_start_time,
@@ -67,7 +65,6 @@ async def test_save_metric(aclient: AsyncClient, vcr_cassette):
     async with span(
         Span(
             uuid="bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4133",
-            project="project",
             name="name",
             input="input",
             start_time=datetime(2021, 1, 1, 0, 0, 0, 0),

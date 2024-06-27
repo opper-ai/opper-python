@@ -13,7 +13,6 @@ pip install opperai
 ### Environment variable
 
 - `OPPER_API_KEY` environment variable is read by the SDK if no `api_key` is provided to the `Client` object. 
-- `OPPER_PROJECT` is attached to traces and can be used for filtering in the Opper UI.
 - `OPPER_DEFAULT_MODEL` will define the model used by functions created with the `fn` decorator
 
 When using the `fn` decorator the SDK client is automatically initialized with the `OPPER_API_KEY` environment variable.
