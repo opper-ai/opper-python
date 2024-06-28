@@ -26,12 +26,18 @@ class Index:
         query: str,
         k: int = 10,
         filters: List[Filter] = None,
+        parent_span_uuid: str | None = None,
         **kwargs,
     ) -> List[RetrievalResponse]:
         """Retrieve documents from the index."""
 
         return self._client.indexes.retrieve(
-            uuid=self._index.uuid, query=query, k=k, filters=filters, **kwargs
+            uuid=self._index.uuid,
+            query=query,
+            k=k,
+            filters=filters,
+            parent_span_uuid=parent_span_uuid,
+            **kwargs,
         )
 
     def delete(self) -> bool:

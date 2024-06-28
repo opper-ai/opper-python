@@ -1,6 +1,7 @@
 from typing import List, Optional
 
 from opperai.core._http_clients import _http_client
+from opperai.core.spans import get_current_span_id
 from opperai.types.exceptions import APIError
 from opperai.types.indexes import (
     Document,
@@ -17,6 +18,7 @@ class RetrieveQuery(BaseModel):
     filters: Optional[List[Filter]] = Field(
         default=None, description="Filters to apply"
     )
+    parent_span_uuid: str | None = None
 
 
 class Indexes:
@@ -277,6 +279,7 @@ class Indexes:
         query: str,
         k: int,
         filters: Optional[List[Filter]] = None,
+        parent_span_uuid: str | None = None,
         **kwargs,
     ) -> List[RetrievalResponse]:
         """Retrieve documents from an index
@@ -310,7 +313,12 @@ class Indexes:
             "POST",
             f"/v1/indexes/{uuid}/query",
             json={
-                **RetrieveQuery(q=query, k=k, filters=filters).model_dump(),
+                **RetrieveQuery(
+                    q=query,
+                    k=k,
+                    filters=filters,
+                    parent_span_uuid=parent_span_uuid or get_current_span_id(),
+                ).model_dump(),
                 **kwargs,
             },
         )

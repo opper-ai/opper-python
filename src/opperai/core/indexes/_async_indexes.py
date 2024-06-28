@@ -1,6 +1,7 @@
 from typing import List, Optional
 
 from opperai.core._http_clients import _async_http_client
+from opperai.core.spans import get_current_span_id
 from opperai.types.exceptions import APIError
 from opperai.types.indexes import (
     Document,
@@ -260,9 +261,10 @@ class AsyncIndexes:
         query: str,
         k: int,
         filters: Optional[List[Filter]] = None,
+        parent_span_uuid: str | None = None,
         **kwargs,
     ) -> List[RetrievalResponse]:
-        """Retrive documents
+        """Retrieve documents
 
         This method sends a POST request to the OpperAI service to retrieve documents from the specified index. The documents are returned based on their relevance to the provided query string. The number of documents to return is specified by the `k` parameter. Optional filters can be applied to further refine the search results.
 
@@ -291,7 +293,12 @@ class AsyncIndexes:
             "POST",
             f"/v1/indexes/{uuid}/query",
             json={
-                **RetrieveQuery(q=query, k=k, filters=filters).model_dump(),
+                **RetrieveQuery(
+                    q=query,
+                    k=k,
+                    filters=filters,
+                    parent_span_uuid=parent_span_uuid or get_current_span_id(),
+                ).model_dump(),
                 **kwargs,
             },
         )
