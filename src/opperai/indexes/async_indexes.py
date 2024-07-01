@@ -26,13 +26,18 @@ class AsyncIndex:
         query: str,
         k: int = 10,
         filters: List[Filter] = None,
-        parent_span_uuid: str | None = None,
+        parent_span_uuid: Optional[str] = None,
         **kwargs,
     ) -> List[RetrievalResponse]:
         """Retrieve documents from the index."""
 
         return await self._client.indexes.retrieve(
-            uuid=self._index.uuid, query=query, k=k, filters=filters, **kwargs
+            uuid=self._index.uuid,
+            query=query,
+            k=k,
+            filters=filters,
+            parent_span_uuid=parent_span_uuid,
+            **kwargs,
         )
 
     async def delete(self) -> bool:
