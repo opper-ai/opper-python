@@ -26,7 +26,7 @@ class Index:
         query: str,
         k: int = 10,
         filters: List[Filter] = None,
-        parent_span_uuid: str | None = None,
+        parent_span_uuid: Optional[str] = None,
         **kwargs,
     ) -> List[RetrievalResponse]:
         """Retrieve documents from the index."""
