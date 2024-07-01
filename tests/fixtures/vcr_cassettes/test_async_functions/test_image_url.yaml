@@ -18,7 +18,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 27 Jun 2024 08:30:58 GMT
+      - Mon, 01 Jul 2024 09:02:11 GMT
       server:
       - uvicorn
     status:
@@ -42,15 +42,15 @@ interactions:
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":160,"uuid":"38751aee-c520-4aec-9557-d360201eef9b","dataset_uuid":"b654a58e-d908-47bd-8880-1c758b32ce0d","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
-        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"95a24c52-c137-42c6-be98-f751625712dc","name":"tt"},"revision":1,"use_semantic_search":false}'
+      string: '{"id":317,"uuid":"125e31eb-1773-47bf-86ff-83e10d4e3f1a","dataset_uuid":"f2800f01-4cc7-4cf4-89be-f828d24f6804","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '447'
+      - '448'
       content-type:
       - application/json
       date:
-      - Thu, 27 Jun 2024 08:30:58 GMT
+      - Mon, 01 Jul 2024 09:02:11 GMT
       server:
       - uvicorn
     status:
@@ -64,18 +64,18 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/38751aee-c520-4aec-9557-d360201eef9b
+    uri: http://localhost:8000/v1/functions/125e31eb-1773-47bf-86ff-83e10d4e3f1a
   response:
     body:
-      string: '{"id":160,"uuid":"38751aee-c520-4aec-9557-d360201eef9b","dataset_uuid":"b654a58e-d908-47bd-8880-1c758b32ce0d","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
-        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"95a24c52-c137-42c6-be98-f751625712dc","name":"tt"},"revision":1,"use_semantic_search":false}'
+      string: '{"id":317,"uuid":"125e31eb-1773-47bf-86ff-83e10d4e3f1a","dataset_uuid":"f2800f01-4cc7-4cf4-89be-f828d24f6804","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '447'
+      - '448'
       content-type:
       - application/json
       date:
-      - Thu, 27 Jun 2024 08:30:58 GMT
+      - Mon, 01 Jul 2024 09:02:11 GMT
       server:
       - uvicorn
     status:
@@ -97,22 +97,22 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_image
   response:
     body:
-      string: '{"span_id":"e4128c45-54a2-4d52-96e3-c5900e2a6978","message":"The image
-        shows a fossilized skeleton of a small animal, possibly a prehistoric reptile,
-        embedded in a large, flat rock. The fossil is well-preserved and detailed,
-        showcasing the entire structure of the animal, including its spine, ribcage,
-        limbs, and skull. The rock itself appears to be sedimentary, typical of those
-        which preserve such fossils. The display is illuminated under directed lighting,
-        enhancing its details and textures. This is a characteristic setup for exhibiting
-        fossils in a museum or educational setting for scientific study and public
-        viewing.","json_payload":null,"context":null,"cached":false}'
+      string: '{"span_id":"a66c2e20-9b49-4149-9884-561252235fae","message":"The image
+        shows a fossil of a creature resembling a dinosaur, embedded in a large, flat
+        rock. The fossil is complete, displaying the skeletal structure very clearly.
+        You can see the skull, vertebral column, ribs, limbs, and tailbones. The bones
+        are well-preserved and stand out against the lighter color of the surrounding
+        matrix. The setting suggests this may be in a museum or a similar location
+        where such paleontological findings are exhibited for educational or scientific
+        purposes. The lighting accentuates the details of the fossil, enhancing the
+        texture and the three-dimensional appearance of the skeleton.","json_payload":null,"context":null,"cached":false}'
     headers:
       content-length:
-      - '678'
+      - '728'
       content-type:
       - application/json
       date:
-      - Thu, 27 Jun 2024 08:30:58 GMT
+      - Mon, 01 Jul 2024 09:02:11 GMT
       server:
       - uvicorn
     status:
@@ -126,7 +126,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/38751aee-c520-4aec-9557-d360201eef9b
+    uri: http://localhost:8000/v1/functions/125e31eb-1773-47bf-86ff-83e10d4e3f1a
   response:
     body:
       string: ''
@@ -134,7 +134,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 27 Jun 2024 08:31:06 GMT
+      - Mon, 01 Jul 2024 09:02:21 GMT
       server:
       - uvicorn
     status:

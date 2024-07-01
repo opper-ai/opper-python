@@ -18,7 +18,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 27 Jun 2024 08:31:17 GMT
+      - Mon, 01 Jul 2024 09:02:28 GMT
       server:
       - uvicorn
     status:
@@ -42,16 +42,16 @@ interactions:
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":162,"uuid":"636214eb-9818-49d7-9037-2d32cac3ac73","dataset_uuid":"5782050c-7ed7-49f4-98a7-7771233904a3","description":"Translate
+      string: '{"id":319,"uuid":"edfe2907-5f99-4bdf-9514-035a76ddb495","dataset_uuid":"acb487f1-fda5-48af-b204-eeb3ba8ae99d","description":"Translate
         to French","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Translate
-        to French","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_async_chat","project":{"uuid":"95a24c52-c137-42c6-be98-f751625712dc","name":"tt"},"revision":1,"use_semantic_search":false}'
+        to French","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_async_chat","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '466'
+      - '467'
       content-type:
       - application/json
       date:
-      - Thu, 27 Jun 2024 08:31:17 GMT
+      - Mon, 01 Jul 2024 09:02:28 GMT
       server:
       - uvicorn
     status:
@@ -72,14 +72,14 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_async_chat
   response:
     body:
-      string: '{"span_id":"f93153ed-66de-4d7f-9e33-d99e145e3e11","message":"Bonjour","json_payload":null,"context":null,"cached":false}'
+      string: '{"span_id":"d8bd5f6e-d8b7-4dd9-accc-b041ef97b2dd","message":"bonjour","json_payload":null,"context":null,"cached":false}'
     headers:
       content-length:
       - '120'
       content-type:
       - application/json
       date:
-      - Thu, 27 Jun 2024 08:31:17 GMT
+      - Mon, 01 Jul 2024 09:02:28 GMT
       server:
       - uvicorn
     status:
@@ -93,7 +93,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/636214eb-9818-49d7-9037-2d32cac3ac73
+    uri: http://localhost:8000/v1/functions/edfe2907-5f99-4bdf-9514-035a76ddb495
   response:
     body:
       string: ''
@@ -101,7 +101,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 27 Jun 2024 08:31:18 GMT
+      - Mon, 01 Jul 2024 09:02:29 GMT
       server:
       - uvicorn
     status:

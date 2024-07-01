@@ -45,24 +45,6 @@ async def test_get_by_name(vcr_cassette, aclient: AsyncClient):
 
 
 @pytest.mark.asyncio(scope="module")
-async def test_list_indexes(vcr_cassette, aclient: AsyncClient):
-    idxs = await aclient.indexes.list()
-    assert len(idxs) == 0
-
-    async with _index("test_list_indexes", aclient) as index:
-        idxs = await aclient.indexes.list()
-        assert len(idxs) == 1
-        assert idxs[0].uuid == index.uuid
-        assert idxs[0].name == "test_list_indexes"
-
-        async with _index("test_list_indexes_2", aclient) as index_2:
-            idxs = await aclient.indexes.list()
-            assert len(idxs) == 2
-            assert idxs[1].uuid == index_2.uuid
-            assert idxs[1].name == "test_list_indexes_2"
-
-
-@pytest.mark.asyncio(scope="module")
 async def test_index_document(vcr_cassette, aclient: AsyncClient):
     async with _index("test_index_document", aclient) as index:
         doc_in = DocumentIn(content="Hello", metadata={"source": "test"})

@@ -18,7 +18,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 27 Jun 2024 08:31:43 GMT
+      - Mon, 01 Jul 2024 09:02:51 GMT
       server:
       - uvicorn
     status:
@@ -42,16 +42,16 @@ interactions:
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":175,"uuid":"47893706-15b1-4e33-8b90-c587c9978b10","dataset_uuid":"50dacae5-7188-4078-b082-96afc475f299","description":"Test
+      string: '{"id":326,"uuid":"db8baa37-75e2-494f-90c1-fb4669d6e555","dataset_uuid":"3509c556-af18-4426-b4ba-225e7c0c8e7f","description":"Test
         function","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Do
-        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_delete_function_by_id","project":{"uuid":"95a24c52-c137-42c6-be98-f751625712dc","name":"tt"},"revision":1,"use_semantic_search":false}'
+        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_delete_function_by_id","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '464'
+      - '465'
       content-type:
       - application/json
       date:
-      - Thu, 27 Jun 2024 08:31:43 GMT
+      - Mon, 01 Jul 2024 09:02:51 GMT
       server:
       - uvicorn
     status:
@@ -65,7 +65,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/47893706-15b1-4e33-8b90-c587c9978b10
+    uri: http://localhost:8000/v1/functions/db8baa37-75e2-494f-90c1-fb4669d6e555
   response:
     body:
       string: ''
@@ -73,7 +73,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 27 Jun 2024 08:31:43 GMT
+      - Mon, 01 Jul 2024 09:02:51 GMT
       server:
       - uvicorn
     status:
@@ -87,7 +87,7 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/47893706-15b1-4e33-8b90-c587c9978b10
+    uri: http://localhost:8000/v1/functions/db8baa37-75e2-494f-90c1-fb4669d6e555
   response:
     body:
       string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
@@ -98,7 +98,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 27 Jun 2024 08:31:43 GMT
+      - Mon, 01 Jul 2024 09:02:51 GMT
       server:
       - uvicorn
     status:

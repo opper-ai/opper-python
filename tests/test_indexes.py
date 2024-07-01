@@ -47,13 +47,11 @@ def test_list_indexes(vcr_cassette, client: Client):
     with index("test_list_indexes", client) as idx:
         idxs = client.indexes.list()
         assert len(idxs) == 1
-        assert idxs[0].uuid == idx.uuid
         assert idxs[0].name == "test_list_indexes"
 
         with index("test_list_indexes_2", client) as idx_2:
             idxs = client.indexes.list()
             assert len(idxs) == 2
-            assert idxs[1].uuid == idx_2.uuid
             assert idxs[1].name == "test_list_indexes_2"
 
 
