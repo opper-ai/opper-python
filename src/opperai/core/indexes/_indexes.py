@@ -18,7 +18,7 @@ class RetrieveQuery(BaseModel):
     filters: Optional[List[Filter]] = Field(
         default=None, description="Filters to apply"
     )
-    parent_span_uuid: str | None = None
+    parent_span_uuid: Optional[str] = None
 
 
 class Indexes:
