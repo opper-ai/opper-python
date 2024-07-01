@@ -261,7 +261,7 @@ class AsyncIndexes:
         query: str,
         k: int,
         filters: Optional[List[Filter]] = None,
-        parent_span_uuid: str | None = None,
+        parent_span_uuid: Optional[str] = None,
         **kwargs,
     ) -> List[RetrievalResponse]:
         """Retrieve documents
