@@ -7,6 +7,7 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field, FilePath, computed_field
 
+from .datasets import DatasetEntry
 from .indexes import Document, DocumentIn, Filter, RetrievalResponse
 from .spans import SpanMetric
 from .validators import validate_uuid_xor_path
@@ -134,6 +135,7 @@ class Function(BaseModel):
     few_shot: Optional[bool] = None
     few_shot_count: Optional[int] = None
     cache_configuration: Optional[CacheConfiguration] = None
+    dataset_uuid: Optional[str] = None
 
 
 class Error(BaseModel):
