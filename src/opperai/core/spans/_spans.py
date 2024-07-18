@@ -6,14 +6,14 @@ from uuid import UUID
 from opperai.core._http_clients import _http_client
 from opperai.core.utils import DateTimeEncoder
 from opperai.types.exceptions import APIError
-from opperai.types.spans import Span, SpanMetric
+from opperai.types.spans import GenerationIn, GenerationOut, Span, SpanMetric
 
 
 class Spans:
     def __init__(self, http_client: _http_client):
         self.http_client = http_client
 
-    def create(self, span: Span, **kwargs) -> str:
+    def create(self, span: Span, **kwargs) -> Span:
         """Create a new span in the system.
 
         This method sends a POST request to the server to create a new span with the provided details. The span's data is serialized into JSON format, excluding any unset attributes, before being sent as the request payload.
@@ -53,9 +53,9 @@ class Spans:
             raise APIError(
                 f"Failed to create span {span.name} with status {response.status_code}"
             )
-        return response.json()["uuid"]
+        return Span.model_validate(response.json())
 
-    def update(self, span_uuid: UUID, **kwargs) -> str:
+    def update(self, span_uuid: UUID, **kwargs) -> Span:
         """Update an existing span in the system
 
         This method sends a PUT request to the server to update an existing span identified by its UUID with the provided details. The span's data is serialized into JSON format, excluding any unset attributes, before being sent as the request payload.
@@ -99,7 +99,7 @@ class Spans:
                 f"Failed to update span `{span.name}` with status {response.status_code}"
             )
 
-        return response.json()["uuid"]
+        return Span.model_validate(response.json())
 
     def delete(self, span_uuid: UUID) -> bool:
         """Delete an existing span from the system
@@ -204,3 +204,23 @@ class Spans:
             )
 
         return response.json()
+
+    def save_generation(
+        self,
+        uuid: str,
+        generation: GenerationIn,
+    ) -> GenerationOut:
+        response = self.http_client.do_request(
+            "POST",
+            f"/v1/spans/{uuid}/generation",
+            content=json.dumps(
+                generation.model_dump(exclude_none=True), cls=DateTimeEncoder
+            ),
+        )
+
+        if response.status_code != 200:
+            raise APIError(
+                f"Failed to save generation for span {uuid} with status {response.status_code}"
+            )
+
+        return GenerationOut.model_validate(response.json())
