@@ -10,45 +10,71 @@ interactions:
     uri: http://localhost:8000/v1/functions/by_path/test_async_client_raises_timeout_error
   response:
     body:
-      string: '{"id":293,"uuid":"2f0c9458-2c09-48bf-b241-aae5c97dd3ba","dataset_uuid":"6e070023-9df0-472d-9d4d-ec479233a01d","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"test","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test_async_client_raises_timeout_error","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"revision":1,"use_semantic_search":false}'
+      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
+        not found"}]}'
     headers:
       content-length:
-      - '449'
+      - '98'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:40 GMT
+      - Thu, 18 Jul 2024 12:28:58 GMT
       server:
       - uvicorn
     status:
-      code: 200
-      message: OK
+      code: 404
+      message: Not Found
 - request:
-    body: '{"uuid": "2f0c9458-2c09-48bf-b241-aae5c97dd3ba", "path": "test_async_client_raises_timeout_error",
-      "description": null, "input_schema": null, "out_schema": null, "instructions":
-      "test", "model": null, "index_ids": [], "use_semantic_search": false, "few_shot":
-      false, "few_shot_count": 2, "cache_configuration": null}'
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+    method: GET
+    uri: http://localhost:8000/v1/functions/by_path/test_async_client_raises_timeout_error
+  response:
+    body:
+      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
+        not found"}]}'
+    headers:
+      content-length:
+      - '98'
+      content-type:
+      - application/json
+      date:
+      - Thu, 18 Jul 2024 12:28:58 GMT
+      server:
+      - uvicorn
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: '{"uuid": null, "path": "test_async_client_raises_timeout_error", "description":
+      null, "input_schema": null, "out_schema": null, "instructions": "test", "model":
+      null, "index_ids": [], "use_semantic_search": null, "few_shot": null, "few_shot_count":
+      null, "cache_configuration": null, "dataset_uuid": null}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '316'
+      - '305'
       content-type:
       - application/json
-    method: PATCH
-    uri: http://localhost:8000/v1/functions/2f0c9458-2c09-48bf-b241-aae5c97dd3ba
+    method: POST
+    uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":293,"uuid":"2f0c9458-2c09-48bf-b241-aae5c97dd3ba","dataset_uuid":"6e070023-9df0-472d-9d4d-ec479233a01d","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"test","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test_async_client_raises_timeout_error","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"revision":1,"use_semantic_search":false}'
+      string: '{"id":24,"uuid":"c932a20a-f2b9-4418-8fc4-c4756df7971e","dataset_uuid":"c06034ca-b42b-4c32-9925-83ccd48bc50a","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"test","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test_async_client_raises_timeout_error","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '449'
+      - '447'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:40 GMT
+      - Thu, 18 Jul 2024 12:28:58 GMT
       server:
       - uvicorn
     status:

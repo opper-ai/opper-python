@@ -1,5 +1,7 @@
 import os
 
+from opperai.core.datasets._async_datasets import AsyncDatasets
+from opperai.core.datasets._datasets import Datasets
 from opperai.core.functions._async_functions import AsyncFunctions
 from opperai.core.functions._functions import Functions
 from opperai.core.indexes._async_indexes import AsyncIndexes
@@ -17,6 +19,7 @@ class AsyncClient:
     functions: AsyncFunctions = None
     indexes: AsyncIndexes = None
     spans: AsyncSpans = None
+    datasets: AsyncDatasets = None
 
     def __init__(
         self,
@@ -44,12 +47,14 @@ class AsyncClient:
         self.functions = AsyncFunctions(self.http_client, default_model=default_model)
         self.indexes = AsyncIndexes(self.http_client)
         self.spans = AsyncSpans(self.http_client)
+        self.datasets = AsyncDatasets(self.http_client)
 
 
 class Client:
     functions: Functions
     indexes: Indexes
     spans: Spans
+    datasets: Datasets
 
     def __init__(
         self,
@@ -77,3 +82,4 @@ class Client:
         self.functions = Functions(self.http_client, default_model=default_model)
         self.indexes = Indexes(self.http_client)
         self.spans = Spans(self.http_client)
+        self.datasets = Datasets(self.http_client)

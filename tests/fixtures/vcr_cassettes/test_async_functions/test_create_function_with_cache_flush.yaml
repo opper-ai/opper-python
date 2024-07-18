@@ -18,7 +18,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:32 GMT
+      - Thu, 18 Jul 2024 12:28:53 GMT
       server:
       - uvicorn
     status:
@@ -29,30 +29,31 @@ interactions:
       "description": "Test function", "input_schema": null, "out_schema": null, "instructions":
       "Do something", "model": null, "index_ids": [], "use_semantic_search": null,
       "few_shot": null, "few_shot_count": null, "cache_configuration": {"exact_match_cache_ttl":
-      10, "semantic_cache_threshold": null, "semantic_cache_ttl": null}}'
+      10, "semantic_cache_threshold": null, "semantic_cache_ttl": null}, "dataset_uuid":
+      null}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '403'
+      - '425'
       content-type:
       - application/json
     method: POST
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":321,"uuid":"b4e24866-94bc-4f78-976c-1a99deb296f0","dataset_uuid":"a4c52ce3-76c3-4352-8421-8e68bf83aa85","description":"Test
+      string: '{"id":23,"uuid":"b307e1ee-e9cd-4272-97bb-6725e5028200","dataset_uuid":"2290131d-a022-44a1-b866-115e09005f80","description":"Test
         function","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Do
-        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_create_function_with_cache_async_flush","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"revision":1,"use_semantic_search":false}'
+        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_create_function_with_cache_async_flush","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '482'
+      - '480'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:32 GMT
+      - Thu, 18 Jul 2024 12:28:53 GMT
       server:
       - uvicorn
     status:
@@ -73,16 +74,16 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_create_function_with_cache_async_flush
   response:
     body:
-      string: '{"span_id":"4daba6aa-68e6-4244-83e2-dc9cad14640e","message":"Hello!
-        How can I assist you today? If you have any questions or need information,
-        feel free to ask.","json_payload":null,"context":null,"cached":false}'
+      string: '{"span_id":"98704d40-a53a-4470-a1d9-269f46c5dea4","message":"Hello!
+        How can I assist you today? If you have any questions or need information
+        on a topic, feel free to ask.","json_payload":null,"context":null,"cached":false}'
     headers:
       content-length:
-      - '212'
+      - '223'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:32 GMT
+      - Thu, 18 Jul 2024 12:28:53 GMT
       server:
       - uvicorn
     status:
@@ -103,16 +104,16 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_create_function_with_cache_async_flush
   response:
     body:
-      string: '{"span_id":"60ebe19a-3bfc-42a2-9f92-f4a1b91187d6","message":"Hello!
-        How can I assist you today? If you have any questions or need information,
-        feel free to ask.","json_payload":null,"context":null,"cached":true}'
+      string: '{"span_id":"1c7fcdce-ef35-4a0e-95c4-fdc34a7fe68c","message":"Hello!
+        How can I assist you today? If you have any questions or need information
+        on a topic, feel free to ask.","json_payload":null,"context":null,"cached":true}'
     headers:
       content-length:
-      - '211'
+      - '222'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:34 GMT
+      - Thu, 18 Jul 2024 12:28:54 GMT
       server:
       - uvicorn
     status:
@@ -126,7 +127,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/b4e24866-94bc-4f78-976c-1a99deb296f0/cache
+    uri: http://localhost:8000/v1/functions/b307e1ee-e9cd-4272-97bb-6725e5028200/cache
   response:
     body:
       string: ''
@@ -134,7 +135,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:34 GMT
+      - Thu, 18 Jul 2024 12:28:54 GMT
       server:
       - uvicorn
     status:
@@ -155,16 +156,16 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_create_function_with_cache_async_flush
   response:
     body:
-      string: '{"span_id":"5654ccc5-b851-4e9f-9cca-61e03fb7840e","message":"Hello!
-        How can I assist you today? If you have any questions or need information,
-        feel free to ask.","json_payload":null,"context":null,"cached":false}'
+      string: '{"span_id":"25c624a3-c778-4225-9d93-60265cec7343","message":"Hello!
+        How can I assist you today? If you have any questions or need information
+        on a specific topic, feel free to ask!","json_payload":null,"context":null,"cached":false}'
     headers:
       content-length:
-      - '212'
+      - '232'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:34 GMT
+      - Thu, 18 Jul 2024 12:28:54 GMT
       server:
       - uvicorn
     status:
@@ -178,7 +179,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/b4e24866-94bc-4f78-976c-1a99deb296f0
+    uri: http://localhost:8000/v1/functions/b307e1ee-e9cd-4272-97bb-6725e5028200
   response:
     body:
       string: ''
@@ -186,7 +187,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:38 GMT
+      - Thu, 18 Jul 2024 12:28:56 GMT
       server:
       - uvicorn
     status:

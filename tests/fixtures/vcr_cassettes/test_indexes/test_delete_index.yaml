@@ -14,14 +14,14 @@ interactions:
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '{"id":309,"uuid":"24fe007d-b230-4b14-8718-6ae9cf180ada","name":"test_delete_index","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"files":[],"created_at":"2024-07-01T09:03:17.918337Z"}'
+      string: '{"id":9,"uuid":"5cbb0570-522e-4576-8e1f-436b3965897d","name":"test_delete_index","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"files":[],"created_at":"2024-07-18T12:29:24.072418Z"}'
     headers:
       content-length:
-      - '208'
+      - '205'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:03:17 GMT
+      - Thu, 18 Jul 2024 12:29:23 GMT
       server:
       - uvicorn
     status:
@@ -35,7 +35,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/indexes/24fe007d-b230-4b14-8718-6ae9cf180ada
+    uri: http://localhost:8000/v1/indexes/5cbb0570-522e-4576-8e1f-436b3965897d
   response:
     body:
       string: 'true'
@@ -45,7 +45,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:03:17 GMT
+      - Thu, 18 Jul 2024 12:29:23 GMT
       server:
       - uvicorn
     status:
@@ -59,7 +59,7 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/indexes/24fe007d-b230-4b14-8718-6ae9cf180ada
+    uri: http://localhost:8000/v1/indexes/5cbb0570-522e-4576-8e1f-436b3965897d
   response:
     body:
       string: '{"errors":[{"type":"HTTPException","message":"Index not found","detail":"Index
@@ -70,7 +70,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:03:17 GMT
+      - Thu, 18 Jul 2024 12:29:23 GMT
       server:
       - uvicorn
     status:

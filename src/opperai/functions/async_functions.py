@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from typing import Any, Dict, Iterator, List, Optional, Union
 
 from opperai._client import AsyncClient
+from opperai.datasets.async_datasets import AsyncDataset
 from opperai.functions.decorator._schemas import type_to_json_schema
 from opperai.types import ChatPayload, Message, StreamingChunk
 from opperai.types import Function as FunctionModel
@@ -126,6 +127,9 @@ class AsyncFunction:
         self._function = updated_function
 
         return self
+
+    def dataset(self) -> AsyncDataset:
+        return AsyncDataset(self._client, self._function.dataset_uuid)
 
 
 @dataclass

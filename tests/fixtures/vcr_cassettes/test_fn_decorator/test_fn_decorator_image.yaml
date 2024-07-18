@@ -10,53 +10,52 @@ interactions:
     uri: http://localhost:8000/v1/functions/by_path/describe_image
   response:
     body:
-      string: '{"id":296,"uuid":"032072be-66af-47f0-aeb1-35e41831c740","dataset_uuid":"1f1347ab-3a77-4780-bad3-13d2a4701d96","description":"given
-        an image describe what it is","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
-        describe_image\n\nOperation description: given an image describe what it is","language_model_id":null,"model":"openai/gpt-4o","out_schema":{"properties":{"description":{"title":"Description","type":"string"}},"required":["description"],"title":"ImageDescription","type":"object","$defs":{}},"path":"describe_image","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"revision":1,"use_semantic_search":false}'
+      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
+        not found"}]}'
     headers:
       content-length:
-      - '686'
+      - '98'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:46 GMT
+      - Thu, 18 Jul 2024 12:29:54 GMT
       server:
       - uvicorn
     status:
-      code: 200
-      message: OK
+      code: 404
+      message: Not Found
 - request:
-    body: '{"uuid": "032072be-66af-47f0-aeb1-35e41831c740", "path": "describe_image",
-      "description": "given an image describe what it is", "input_schema": null, "out_schema":
-      {"properties": {"description": {"title": "Description", "type": "string"}},
-      "required": ["description"], "title": "ImageDescription", "type": "object",
-      "$defs": {}}, "instructions": "Operation: describe_image\n\nOperation description:
-      given an image describe what it is", "model": "openai/gpt-4o", "index_ids":
-      [], "use_semantic_search": null, "few_shot": false, "few_shot_count": null,
-      "cache_configuration": null}'
+    body: '{"uuid": null, "path": "describe_image", "description": "given an image
+      describe what it is", "input_schema": null, "out_schema": {"properties": {"description":
+      {"title": "Description", "type": "string"}}, "required": ["description"], "title":
+      "ImageDescription", "type": "object", "$defs": {}}, "instructions": "Operation:
+      describe_image\n\nOperation description: given an image describe what it is",
+      "model": "openai/gpt-4o", "index_ids": [], "use_semantic_search": null, "few_shot":
+      false, "few_shot_count": null, "cache_configuration": null, "dataset_uuid":
+      null}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '579'
+      - '567'
       content-type:
       - application/json
-    method: PATCH
-    uri: http://localhost:8000/v1/functions/032072be-66af-47f0-aeb1-35e41831c740
+    method: POST
+    uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":296,"uuid":"032072be-66af-47f0-aeb1-35e41831c740","dataset_uuid":"1f1347ab-3a77-4780-bad3-13d2a4701d96","description":"given
+      string: '{"id":39,"uuid":"fb7a1508-45da-4a93-8e6e-e5fe01a485a7","dataset_uuid":"219dac04-0c8e-4f83-a918-2d34e7196c30","description":"given
         an image describe what it is","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
-        describe_image\n\nOperation description: given an image describe what it is","language_model_id":null,"model":"openai/gpt-4o","out_schema":{"properties":{"description":{"title":"Description","type":"string"}},"required":["description"],"title":"ImageDescription","type":"object","$defs":{}},"path":"describe_image","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"revision":1,"use_semantic_search":false}'
+        describe_image\n\nOperation description: given an image describe what it is","language_model_id":null,"model":"openai/gpt-4o","out_schema":{"properties":{"description":{"title":"Description","type":"string"}},"required":["description"],"title":"ImageDescription","type":"object","$defs":{}},"path":"describe_image","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '686'
+      - '684'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:46 GMT
+      - Thu, 18 Jul 2024 12:29:54 GMT
       server:
       - uvicorn
     status:
@@ -78,17 +77,18 @@ interactions:
     uri: http://localhost:8000/v1/chat/describe_image
   response:
     body:
-      string: '{"span_id":"811daa79-bb70-4032-977c-116f1bc16f8c","message":null,"json_payload":{"description":"The
-        image is of a fossilized skeleton of a small reptile-like creature embedded
-        in a slab of rock. The skeleton is well-preserved, showing details of the
-        skull, ribcage, spine, limbs, and tail."},"context":null,"cached":false}'
+      string: '{"span_id":"279044a9-8ed2-4b70-8f50-19510251f339","message":null,"json_payload":{"description":"The
+        image shows a fossil embedded in a rock. The fossil appears to be of a small
+        reptile or amphibian, with a clearly visible skeleton including the skull,
+        spine, ribcage, limbs, and tail. The rock matrix surrounding the fossil is
+        light in color."},"context":null,"cached":false}'
     headers:
       content-length:
-      - '322'
+      - '375'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:46 GMT
+      - Thu, 18 Jul 2024 12:29:54 GMT
       server:
       - uvicorn
     status:

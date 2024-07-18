@@ -20,7 +20,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:40 GMT
+      - Thu, 18 Jul 2024 12:28:58 GMT
       server:
       - uvicorn
     status:
@@ -41,14 +41,14 @@ interactions:
     uri: http://localhost:8000/v1/spans/bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4134/metrics
   response:
     body:
-      string: '{"id":"e579b865-ffb5-46f2-b0af-d99b89d36415","span_id":"bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4134","dimension":"dim","value":0.5,"comment":"comment","updated_at":null,"created_at":"2024-07-01T09:02:41.193624Z"}'
+      string: '{"id":"b7545aca-5765-43f7-9af8-33d89eaae5ae","span_id":"bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4134","dimension":"dim","value":0.5,"comment":"comment","updated_at":null,"created_at":"2024-07-18T12:28:59.102247Z"}'
     headers:
       content-length:
       - '205'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:40 GMT
+      - Thu, 18 Jul 2024 12:28:58 GMT
       server:
       - uvicorn
     status:
@@ -70,7 +70,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:40 GMT
+      - Thu, 18 Jul 2024 12:28:58 GMT
       server:
       - uvicorn
     status:

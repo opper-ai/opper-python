@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from typing import Any, Dict, Iterator, List, Optional, Union
 
 from opperai._client import Client
+from opperai.datasets.datasets import Dataset
 from opperai.functions.decorator._schemas import type_to_json_schema
 from opperai.types import ChatPayload, Message, StreamingChunk
 from opperai.types import Function as FunctionModel
@@ -88,6 +89,9 @@ class Function:
         )
 
         return FunctionResponse(client=self._client, **response.model_dump())
+
+    def dataset(self) -> Dataset:
+        return Dataset(self._client, self._function.dataset_uuid)
 
     def delete(self) -> bool:
         return self._client.functions.delete(uuid=self._function.uuid)

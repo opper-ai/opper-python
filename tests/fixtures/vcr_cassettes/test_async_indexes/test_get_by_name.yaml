@@ -14,14 +14,14 @@ interactions:
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '{"id":302,"uuid":"5374a408-a007-44ac-851e-bafce4b01e5b","name":"test_get_by_name","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"files":[],"created_at":"2024-07-01T09:02:38.965805Z"}'
+      string: '{"id":4,"uuid":"579ce4d6-e579-4e9d-8fb9-ff56e149b5a5","name":"test_get_by_name","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"files":[],"created_at":"2024-07-18T12:28:57.186836Z"}'
     headers:
       content-length:
-      - '207'
+      - '204'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:38 GMT
+      - Thu, 18 Jul 2024 12:28:56 GMT
       server:
       - uvicorn
     status:
@@ -38,15 +38,15 @@ interactions:
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '[{"id":302,"uuid":"5374a408-a007-44ac-851e-bafce4b01e5b","org_id":1,"org_name":null,"name":"test_get_by_name","created_by":"Alexandre
-        Pesant","created_at":"2024-07-01T09:02:38.965805Z","updated_at":"2024-07-01T09:02:38.965805Z","count":0,"project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"}}]'
+      string: '[{"id":4,"uuid":"579ce4d6-e579-4e9d-8fb9-ff56e149b5a5","org_id":1,"org_name":null,"name":"test_get_by_name","created_by":"Mattias
+        Lundell","created_at":"2024-07-18T12:28:57.186836Z","updated_at":"2024-07-18T12:28:57.186836Z","count":0,"project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"}}]'
     headers:
       content-length:
-      - '310'
+      - '306'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:38 GMT
+      - Thu, 18 Jul 2024 12:28:56 GMT
       server:
       - uvicorn
     status:
@@ -60,7 +60,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/indexes/5374a408-a007-44ac-851e-bafce4b01e5b
+    uri: http://localhost:8000/v1/indexes/579ce4d6-e579-4e9d-8fb9-ff56e149b5a5
   response:
     body:
       string: 'true'
@@ -70,7 +70,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:38 GMT
+      - Thu, 18 Jul 2024 12:28:56 GMT
       server:
       - uvicorn
     status:

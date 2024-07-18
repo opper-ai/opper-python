@@ -18,7 +18,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:03:10 GMT
+      - Thu, 18 Jul 2024 12:29:14 GMT
       server:
       - uvicorn
     status:
@@ -28,30 +28,30 @@ interactions:
     body: '{"uuid": null, "path": "test/sdk/test_chat", "description": "Translate
       to French", "input_schema": null, "out_schema": null, "instructions": "Translate
       to French", "model": null, "index_ids": [], "use_semantic_search": null, "few_shot":
-      null, "few_shot_count": null, "cache_configuration": null}'
+      null, "few_shot_count": null, "cache_configuration": null, "dataset_uuid": null}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '295'
+      - '317'
       content-type:
       - application/json
     method: POST
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":330,"uuid":"0ea2b62b-7648-4173-8769-4de75345830a","dataset_uuid":"e5652509-50b1-4058-9c43-7361db030825","description":"Translate
+      string: '{"id":35,"uuid":"aede15b6-8d7b-4a90-9a17-16559959b3f2","dataset_uuid":"aa31b3f8-d6fa-4b0b-b3f4-1695c4ecb766","description":"Translate
         to French","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Translate
-        to French","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_chat","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"revision":1,"use_semantic_search":false}'
+        to French","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_chat","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '461'
+      - '459'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:03:10 GMT
+      - Thu, 18 Jul 2024 12:29:14 GMT
       server:
       - uvicorn
     status:
@@ -65,19 +65,19 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/0ea2b62b-7648-4173-8769-4de75345830a
+    uri: http://localhost:8000/v1/functions/aede15b6-8d7b-4a90-9a17-16559959b3f2
   response:
     body:
-      string: '{"id":330,"uuid":"0ea2b62b-7648-4173-8769-4de75345830a","dataset_uuid":"e5652509-50b1-4058-9c43-7361db030825","description":"Translate
+      string: '{"id":35,"uuid":"aede15b6-8d7b-4a90-9a17-16559959b3f2","dataset_uuid":"aa31b3f8-d6fa-4b0b-b3f4-1695c4ecb766","description":"Translate
         to French","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Translate
-        to French","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_chat","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"revision":1,"use_semantic_search":false}'
+        to French","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_chat","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '461'
+      - '459'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:03:10 GMT
+      - Thu, 18 Jul 2024 12:29:14 GMT
       server:
       - uvicorn
     status:
@@ -98,14 +98,14 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_chat
   response:
     body:
-      string: '{"span_id":"aa2d0c99-1dbc-455e-bd68-704436b3aa5a","message":"Bonjour","json_payload":null,"context":null,"cached":false}'
+      string: '{"span_id":"d40593c3-ab7c-408b-b736-b68401ad552d","message":"bonjour","json_payload":null,"context":null,"cached":false}'
     headers:
       content-length:
       - '120'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:03:10 GMT
+      - Thu, 18 Jul 2024 12:29:14 GMT
       server:
       - uvicorn
     status:
@@ -119,7 +119,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/0ea2b62b-7648-4173-8769-4de75345830a
+    uri: http://localhost:8000/v1/functions/aede15b6-8d7b-4a90-9a17-16559959b3f2
   response:
     body:
       string: ''
@@ -127,7 +127,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:03:11 GMT
+      - Thu, 18 Jul 2024 12:29:15 GMT
       server:
       - uvicorn
     status:
