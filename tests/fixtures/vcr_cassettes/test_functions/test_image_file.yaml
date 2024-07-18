@@ -18,7 +18,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:59 GMT
+      - Thu, 18 Jul 2024 12:30:32 GMT
       server:
       - uvicorn
     status:
@@ -28,29 +28,29 @@ interactions:
     body: '{"uuid": null, "path": "test/sdk/test_image", "description": null, "input_schema":
       null, "out_schema": null, "instructions": "describe the image", "model": "openai/gpt4-turbo",
       "index_ids": [], "use_semantic_search": null, "few_shot": null, "few_shot_count":
-      null, "cache_configuration": null}'
+      null, "cache_configuration": null, "dataset_uuid": null}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '293'
+      - '315'
       content-type:
       - application/json
     method: POST
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":329,"uuid":"cf06a6fb-ac88-4f01-a25f-d1303529d2e3","dataset_uuid":"9a928ac5-7640-4d34-8792-7ba14ea442c0","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
-        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"revision":1,"use_semantic_search":false}'
+      string: '{"id":41,"uuid":"fe9a170e-6123-4fad-a92b-0dcdd3e2294a","dataset_uuid":"d0121ab2-afea-4213-bb22-a7ec4f0a4916","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '448'
+      - '446'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:59 GMT
+      - Thu, 18 Jul 2024 12:30:32 GMT
       server:
       - uvicorn
     status:
@@ -64,18 +64,18 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/cf06a6fb-ac88-4f01-a25f-d1303529d2e3
+    uri: http://localhost:8000/v1/functions/fe9a170e-6123-4fad-a92b-0dcdd3e2294a
   response:
     body:
-      string: '{"id":329,"uuid":"cf06a6fb-ac88-4f01-a25f-d1303529d2e3","dataset_uuid":"9a928ac5-7640-4d34-8792-7ba14ea442c0","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
-        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"revision":1,"use_semantic_search":false}'
+      string: '{"id":41,"uuid":"fe9a170e-6123-4fad-a92b-0dcdd3e2294a","dataset_uuid":"d0121ab2-afea-4213-bb22-a7ec4f0a4916","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '448'
+      - '446'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:59 GMT
+      - Thu, 18 Jul 2024 12:30:32 GMT
       server:
       - uvicorn
     status:
@@ -97,23 +97,24 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_image
   response:
     body:
-      string: '{"span_id":"33154bb4-2ddc-4c67-85cc-bd7691a08ef7","message":"This is
-        an image of a fossil embedded in a rock matrix. The fossil appears to be that
-        of a small dinosaur or similar prehistoric animal. It shows the creature''s
-        skeletal remains almost completely intact, with a clearly visible spine, ribcage,
-        and skull. The skull includes eye sockets and jaw bones, and there are discernible
-        limbs and tail. The specimen is well-preserved, highlighted against a pale,
-        contrasting stone. Such fossils are crucial for studying the anatomy and evolutionary
-        history of ancient life forms. The image is taken in a controlled environment,
-        possibly a museum or a scientific institution, as indicated by the even lighting
-        and the display setting.","json_payload":null,"context":null,"cached":false}'
+      string: '{"span_id":"91a30183-3d4d-4dcd-99f7-60ad24963cd5","message":"The image
+        shows a well-preserved fossil of a reptile-like creature embedded in a large,
+        irregular-shaped rock. The specimen, likely from the Paleozoic or Mesozoic
+        era, appears relatively intact with a discernible head, vertebral column,
+        ribs, and limb bones. The texture of the rock and the distinct contrast between
+        the fossil and the surrounding matrix suggest that the fossil is highlighted
+        for easy visibility, possibly for educational or display purposes. The lighting
+        and dark background enhance the features of the fossil, making it stand out
+        prominently. This could be displayed in a museum or a scientific institution
+        where such paleontological specimens are exhibited to demonstrate historical
+        life forms and their preservation.","json_payload":null,"context":null,"cached":false}'
     headers:
       content-length:
-      - '785'
+      - '851'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:59 GMT
+      - Thu, 18 Jul 2024 12:30:32 GMT
       server:
       - uvicorn
     status:
@@ -127,7 +128,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/cf06a6fb-ac88-4f01-a25f-d1303529d2e3
+    uri: http://localhost:8000/v1/functions/fe9a170e-6123-4fad-a92b-0dcdd3e2294a
   response:
     body:
       string: ''
@@ -135,7 +136,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:03:10 GMT
+      - Thu, 18 Jul 2024 12:30:44 GMT
       server:
       - uvicorn
     status:

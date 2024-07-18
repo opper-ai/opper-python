@@ -10,49 +10,49 @@ interactions:
     uri: http://localhost:8000/v1/functions/by_path/test/sdk/test_async_chat_stream
   response:
     body:
-      string: '{"id":290,"uuid":"8218be1f-f26c-4663-b3f1-36162e4f4f3b","dataset_uuid":"86b56220-1ded-4f5c-a0f6-bd90f4b2b3e3","description":"Translate
-        to French","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Translate
-        to French","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_async_chat_stream","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"revision":1,"use_semantic_search":false}'
+      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
+        not found"}]}'
     headers:
       content-length:
-      - '474'
+      - '98'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:29 GMT
+      - Thu, 18 Jul 2024 12:28:49 GMT
       server:
       - uvicorn
     status:
-      code: 200
-      message: OK
+      code: 404
+      message: Not Found
 - request:
-    body: '{"uuid": "8218be1f-f26c-4663-b3f1-36162e4f4f3b", "path": "test/sdk/test_async_chat_stream",
-      "description": "Translate to French", "input_schema": null, "out_schema": null,
-      "instructions": "Translate to French", "model": null, "index_ids": [], "use_semantic_search":
-      null, "few_shot": null, "few_shot_count": null, "cache_configuration": null}'
+    body: '{"uuid": null, "path": "test/sdk/test_async_chat_stream", "description":
+      "Translate to French", "input_schema": null, "out_schema": null, "instructions":
+      "Translate to French", "model": null, "index_ids": [], "use_semantic_search":
+      null, "few_shot": null, "few_shot_count": null, "cache_configuration": null,
+      "dataset_uuid": null}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '342'
+      - '330'
       content-type:
       - application/json
-    method: PATCH
-    uri: http://localhost:8000/v1/functions/8218be1f-f26c-4663-b3f1-36162e4f4f3b
+    method: POST
+    uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":290,"uuid":"8218be1f-f26c-4663-b3f1-36162e4f4f3b","dataset_uuid":"86b56220-1ded-4f5c-a0f6-bd90f4b2b3e3","description":"Translate
+      string: '{"id":21,"uuid":"60c27e65-87bc-467c-b9d1-96a4445f0bae","dataset_uuid":"a9b10598-54a1-4c6a-ac06-317e9349e429","description":"Translate
         to French","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Translate
-        to French","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_async_chat_stream","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"revision":1,"use_semantic_search":false}'
+        to French","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_async_chat_stream","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '474'
+      - '472'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:29 GMT
+      - Thu, 18 Jul 2024 12:28:49 GMT
       server:
       - uvicorn
     status:
@@ -75,7 +75,7 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_async_chat_stream?stream=True
   response:
     body:
-      string: "data: {\"span_id\": \"288d392b-c32b-439f-9358-afa678339660\"}\r\n\r\ndata:
+      string: "data: {\"span_id\": \"b9645d51-5fa3-4de0-adf2-73bbbfebd394\"}\r\n\r\ndata:
         {\"delta\": \"Bonjour\"}\r\n\r\n"
     headers:
       cache-control:
@@ -85,7 +85,7 @@ interactions:
       content-type:
       - text/event-stream; charset=utf-8
       date:
-      - Mon, 01 Jul 2024 09:02:29 GMT
+      - Thu, 18 Jul 2024 12:28:49 GMT
       server:
       - uvicorn
       transfer-encoding:
@@ -103,7 +103,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/8218be1f-f26c-4663-b3f1-36162e4f4f3b
+    uri: http://localhost:8000/v1/functions/60c27e65-87bc-467c-b9d1-96a4445f0bae
   response:
     body:
       string: ''
@@ -111,7 +111,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:31 GMT
+      - Thu, 18 Jul 2024 12:28:50 GMT
       server:
       - uvicorn
     status:

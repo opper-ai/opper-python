@@ -18,7 +18,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:51 GMT
+      - Thu, 18 Jul 2024 12:29:05 GMT
       server:
       - uvicorn
     status:
@@ -28,30 +28,30 @@ interactions:
     body: '{"uuid": null, "path": "test/sdk/test_update_function", "description":
       "Test function", "input_schema": null, "out_schema": null, "instructions": "Do
       something", "model": null, "index_ids": [], "use_semantic_search": null, "few_shot":
-      null, "few_shot_count": null, "cache_configuration": null}'
+      null, "few_shot_count": null, "cache_configuration": null, "dataset_uuid": null}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '293'
+      - '315'
       content-type:
       - application/json
     method: POST
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":325,"uuid":"1f9742a1-a40e-4b17-9863-75d60adb2d0c","dataset_uuid":"d3eff8f2-0b2b-4a6e-856a-d154ef3da789","description":"Test
+      string: '{"id":31,"uuid":"8c2a82f0-64af-455a-be39-36d58a15fa40","dataset_uuid":"4a6da221-4c6c-4f37-bad0-6884692f2c57","description":"Test
         function","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Do
-        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_update_function","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"revision":1,"use_semantic_search":false}'
+        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_update_function","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '459'
+      - '457'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:51 GMT
+      - Thu, 18 Jul 2024 12:29:05 GMT
       server:
       - uvicorn
     status:
@@ -65,52 +65,53 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/1f9742a1-a40e-4b17-9863-75d60adb2d0c
+    uri: http://localhost:8000/v1/functions/8c2a82f0-64af-455a-be39-36d58a15fa40
   response:
     body:
-      string: '{"id":325,"uuid":"1f9742a1-a40e-4b17-9863-75d60adb2d0c","dataset_uuid":"d3eff8f2-0b2b-4a6e-856a-d154ef3da789","description":"Test
+      string: '{"id":31,"uuid":"8c2a82f0-64af-455a-be39-36d58a15fa40","dataset_uuid":"4a6da221-4c6c-4f37-bad0-6884692f2c57","description":"Test
         function","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Do
-        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_update_function","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"revision":1,"use_semantic_search":false}'
+        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_update_function","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '459'
+      - '457'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:51 GMT
+      - Thu, 18 Jul 2024 12:29:05 GMT
       server:
       - uvicorn
     status:
       code: 200
       message: OK
 - request:
-    body: '{"uuid": "1f9742a1-a40e-4b17-9863-75d60adb2d0c", "path": "test/sdk/test_update_function",
+    body: '{"uuid": "8c2a82f0-64af-455a-be39-36d58a15fa40", "path": "test/sdk/test_update_function",
       "description": "Test function", "input_schema": null, "out_schema": null, "instructions":
       "Do something else", "model": "azure/gpt4-eu", "index_ids": [], "use_semantic_search":
-      false, "few_shot": false, "few_shot_count": 2, "cache_configuration": null}'
+      false, "few_shot": false, "few_shot_count": 2, "cache_configuration": null,
+      "dataset_uuid": "4a6da221-4c6c-4f37-bad0-6884692f2c57"}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '342'
+      - '398'
       content-type:
       - application/json
     method: PATCH
-    uri: http://localhost:8000/v1/functions/1f9742a1-a40e-4b17-9863-75d60adb2d0c
+    uri: http://localhost:8000/v1/functions/8c2a82f0-64af-455a-be39-36d58a15fa40
   response:
     body:
-      string: '{"id":325,"uuid":"1f9742a1-a40e-4b17-9863-75d60adb2d0c","dataset_uuid":"d3eff8f2-0b2b-4a6e-856a-d154ef3da789","description":"Test
+      string: '{"id":31,"uuid":"8c2a82f0-64af-455a-be39-36d58a15fa40","dataset_uuid":"4a6da221-4c6c-4f37-bad0-6884692f2c57","description":"Test
         function","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Do
-        something else","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_update_function","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"revision":2,"use_semantic_search":false}'
+        something else","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_update_function","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":2,"use_semantic_search":false}'
     headers:
       content-length:
-      - '464'
+      - '462'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:51 GMT
+      - Thu, 18 Jul 2024 12:29:05 GMT
       server:
       - uvicorn
     status:
@@ -124,19 +125,19 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/1f9742a1-a40e-4b17-9863-75d60adb2d0c
+    uri: http://localhost:8000/v1/functions/8c2a82f0-64af-455a-be39-36d58a15fa40
   response:
     body:
-      string: '{"id":325,"uuid":"1f9742a1-a40e-4b17-9863-75d60adb2d0c","dataset_uuid":"d3eff8f2-0b2b-4a6e-856a-d154ef3da789","description":"Test
+      string: '{"id":31,"uuid":"8c2a82f0-64af-455a-be39-36d58a15fa40","dataset_uuid":"4a6da221-4c6c-4f37-bad0-6884692f2c57","description":"Test
         function","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Do
-        something else","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_update_function","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"revision":2,"use_semantic_search":false}'
+        something else","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_update_function","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":2,"use_semantic_search":false}'
     headers:
       content-length:
-      - '464'
+      - '462'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:51 GMT
+      - Thu, 18 Jul 2024 12:29:05 GMT
       server:
       - uvicorn
     status:
@@ -150,7 +151,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/1f9742a1-a40e-4b17-9863-75d60adb2d0c
+    uri: http://localhost:8000/v1/functions/8c2a82f0-64af-455a-be39-36d58a15fa40
   response:
     body:
       string: ''
@@ -158,7 +159,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:51 GMT
+      - Thu, 18 Jul 2024 12:29:05 GMT
       server:
       - uvicorn
     status:

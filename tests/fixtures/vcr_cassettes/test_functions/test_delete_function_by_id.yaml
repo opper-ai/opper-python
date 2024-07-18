@@ -18,7 +18,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:51 GMT
+      - Thu, 18 Jul 2024 12:29:05 GMT
       server:
       - uvicorn
     status:
@@ -28,30 +28,30 @@ interactions:
     body: '{"uuid": null, "path": "test/sdk/test_delete_function_by_id", "description":
       "Test function", "input_schema": null, "out_schema": null, "instructions": "Do
       something", "model": null, "index_ids": [], "use_semantic_search": null, "few_shot":
-      null, "few_shot_count": null, "cache_configuration": null}'
+      null, "few_shot_count": null, "cache_configuration": null, "dataset_uuid": null}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '299'
+      - '321'
       content-type:
       - application/json
     method: POST
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":326,"uuid":"db8baa37-75e2-494f-90c1-fb4669d6e555","dataset_uuid":"3509c556-af18-4426-b4ba-225e7c0c8e7f","description":"Test
+      string: '{"id":32,"uuid":"d1ce46d2-f151-4621-803e-e558b7d557e8","dataset_uuid":"0eb089c0-d4c0-48c8-9c36-d1774ee83893","description":"Test
         function","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Do
-        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_delete_function_by_id","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"revision":1,"use_semantic_search":false}'
+        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_delete_function_by_id","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '465'
+      - '463'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:51 GMT
+      - Thu, 18 Jul 2024 12:29:05 GMT
       server:
       - uvicorn
     status:
@@ -65,7 +65,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/db8baa37-75e2-494f-90c1-fb4669d6e555
+    uri: http://localhost:8000/v1/functions/d1ce46d2-f151-4621-803e-e558b7d557e8
   response:
     body:
       string: ''
@@ -73,7 +73,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:51 GMT
+      - Thu, 18 Jul 2024 12:29:05 GMT
       server:
       - uvicorn
     status:
@@ -87,7 +87,7 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/db8baa37-75e2-494f-90c1-fb4669d6e555
+    uri: http://localhost:8000/v1/functions/d1ce46d2-f151-4621-803e-e558b7d557e8
   response:
     body:
       string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
@@ -98,7 +98,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:51 GMT
+      - Thu, 18 Jul 2024 12:29:05 GMT
       server:
       - uvicorn
     status:

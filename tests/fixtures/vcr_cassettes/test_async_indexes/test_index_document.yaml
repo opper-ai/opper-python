@@ -14,14 +14,14 @@ interactions:
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '{"id":305,"uuid":"fe3f7dff-b854-4857-bd20-774b5b69cd95","name":"test_index_document","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"files":[],"created_at":"2024-07-01T09:02:39.110673Z"}'
+      string: '{"id":5,"uuid":"1ea7ff92-8000-401f-9044-c78d3b8242e6","name":"test_index_document","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"files":[],"created_at":"2024-07-18T12:28:57.252423Z"}'
     headers:
       content-length:
-      - '210'
+      - '207'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:39 GMT
+      - Thu, 18 Jul 2024 12:28:56 GMT
       server:
       - uvicorn
     status:
@@ -39,17 +39,17 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/indexes/fe3f7dff-b854-4857-bd20-774b5b69cd95/index
+    uri: http://localhost:8000/v1/indexes/1ea7ff92-8000-401f-9044-c78d3b8242e6/index
   response:
     body:
-      string: '{"id":2029,"uuid":"29f3e699-98c3-4ce7-8f90-b9180fd128ea","key":"29f3e699-98c3-4ce7-8f90-b9180fd128ea"}'
+      string: '{"id":1,"uuid":"e9f4e5a4-bd8c-4b67-a308-4acdb911cbae","key":"e9f4e5a4-bd8c-4b67-a308-4acdb911cbae"}'
     headers:
       content-length:
-      - '102'
+      - '99'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:39 GMT
+      - Thu, 18 Jul 2024 12:28:56 GMT
       server:
       - uvicorn
     status:
@@ -63,7 +63,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/indexes/fe3f7dff-b854-4857-bd20-774b5b69cd95
+    uri: http://localhost:8000/v1/indexes/1ea7ff92-8000-401f-9044-c78d3b8242e6
   response:
     body:
       string: 'true'
@@ -73,7 +73,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:39 GMT
+      - Thu, 18 Jul 2024 12:28:57 GMT
       server:
       - uvicorn
     status:

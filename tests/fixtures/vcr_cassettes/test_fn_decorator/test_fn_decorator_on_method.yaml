@@ -10,50 +10,49 @@ interactions:
     uri: http://localhost:8000/v1/functions/by_path/test_method
   response:
     body:
-      string: '{"id":295,"uuid":"b44cea4b-0a7a-45f8-a5b1-7ea341ea396f","dataset_uuid":"601f17d7-6440-427c-b25b-2b72017385d4","description":"say
-        hello","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
-        test_method\n\nOperation description: say hello","language_model_id":null,"model":"azure/gpt4-eu","out_schema":{"type":"string","$defs":{}},"path":"test_method","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"revision":1,"use_semantic_search":false}'
+      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
+        not found"}]}'
     headers:
       content-length:
-      - '507'
+      - '98'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:40 GMT
+      - Thu, 18 Jul 2024 12:28:58 GMT
       server:
       - uvicorn
     status:
-      code: 200
-      message: OK
+      code: 404
+      message: Not Found
 - request:
-    body: '{"uuid": "b44cea4b-0a7a-45f8-a5b1-7ea341ea396f", "path": "test_method",
-      "description": "say hello", "input_schema": null, "out_schema": {"type": "string",
-      "$defs": {}}, "instructions": "Operation: test_method\n\nOperation description:
-      say hello", "model": null, "index_ids": [], "use_semantic_search": null, "few_shot":
-      false, "few_shot_count": null, "cache_configuration": null}'
+    body: '{"uuid": null, "path": "test_method", "description": "say hello", "input_schema":
+      null, "out_schema": {"type": "string", "$defs": {}}, "instructions": "Operation:
+      test_method\n\nOperation description: say hello", "model": null, "index_ids":
+      [], "use_semantic_search": null, "few_shot": false, "few_shot_count": null,
+      "cache_configuration": null, "dataset_uuid": null}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '379'
+      - '367'
       content-type:
       - application/json
-    method: PATCH
-    uri: http://localhost:8000/v1/functions/b44cea4b-0a7a-45f8-a5b1-7ea341ea396f
+    method: POST
+    uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":295,"uuid":"b44cea4b-0a7a-45f8-a5b1-7ea341ea396f","dataset_uuid":"601f17d7-6440-427c-b25b-2b72017385d4","description":"say
+      string: '{"id":26,"uuid":"35cc05ad-18e8-465a-9264-478226b7f6fc","dataset_uuid":"550e2998-4f36-4697-a4bd-356c4eb654ce","description":"say
         hello","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
-        test_method\n\nOperation description: say hello","language_model_id":null,"model":"azure/gpt4-eu","out_schema":{"type":"string","$defs":{}},"path":"test_method","project":{"uuid":"87974e8e-8f5f-4a50-8443-19c6e230d8b0","name":"vcr"},"revision":1,"use_semantic_search":false}'
+        test_method\n\nOperation description: say hello","language_model_id":null,"model":"azure/gpt4-eu","out_schema":{"type":"string","$defs":{}},"path":"test_method","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '507'
+      - '505'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:40 GMT
+      - Thu, 18 Jul 2024 12:28:58 GMT
       server:
       - uvicorn
     status:
@@ -75,14 +74,14 @@ interactions:
     uri: http://localhost:8000/v1/chat/test_method
   response:
     body:
-      string: '{"span_id":"95e138d9-5857-4748-a259-d31ff14d4e76","message":null,"json_payload":"Hello","context":null,"cached":false}'
+      string: '{"span_id":"bf4310e2-bed7-4aea-bcc8-56ae65beee73","message":null,"json_payload":"Hello","context":null,"cached":false}'
     headers:
       content-length:
       - '118'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:40 GMT
+      - Thu, 18 Jul 2024 12:28:58 GMT
       server:
       - uvicorn
     status:
@@ -104,14 +103,14 @@ interactions:
     uri: http://localhost:8000/v1/chat/test_method
   response:
     body:
-      string: '{"span_id":"42839c7b-789c-4197-b38e-dc52cf00940d","message":null,"json_payload":"Hello","context":null,"cached":false}'
+      string: '{"span_id":"242c2f8a-baea-451a-8344-1f0fbfb0f97e","message":null,"json_payload":"Hello","context":null,"cached":false}'
     headers:
       content-length:
       - '118'
       content-type:
       - application/json
       date:
-      - Mon, 01 Jul 2024 09:02:41 GMT
+      - Thu, 18 Jul 2024 12:28:59 GMT
       server:
       - uvicorn
     status:
