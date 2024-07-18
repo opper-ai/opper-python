@@ -1,8 +1,7 @@
 import asyncio
-import datetime
 import json
-import os
 from contextlib import contextmanager
+from datetime import datetime, timezone
 from functools import wraps
 from typing import Callable, Optional
 from uuid import uuid4
@@ -21,7 +20,7 @@ class SpanContext:
 
 
 def utcnow():
-    return datetime.datetime.now(datetime.timezone.utc)
+    return datetime.now(timezone.utc)
 
 
 @contextmanager

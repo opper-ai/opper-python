@@ -1,6 +1,6 @@
 from contextlib import asynccontextmanager
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timezone
 
 from opperai._client import AsyncClient
 from opperai.types.spans import Span as SpanModel
@@ -60,11 +60,11 @@ class AsyncSpans:
             SpanModel(
                 name=name,
                 input=input,
-                start_time=datetime.now(),
+                start_time=datetime.now(timezone.utc),
                 parent_uuid=parent_span_id,
                 meta=meta,
             )
         )
         span = AsyncSpan(self._client, uuid)
         yield span
-        await span.update(end_time=datetime.now())
+        await span.update(end_time=datetime.now(timezone.utc))

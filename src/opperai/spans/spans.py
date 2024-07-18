@@ -1,6 +1,6 @@
 from contextlib import contextmanager
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 
 from opperai._client import Client
 from opperai.types.spans import Span as SpanModel
@@ -54,11 +54,11 @@ class Spans:
             SpanModel(
                 name=name,
                 input=input,
-                start_time=datetime.now(),
+                start_time=datetime.now(timezone.utc),
                 parent_uuid=parent_span_id,
                 meta=meta,
             )
         )
         span = Span(self._client, span_uuid)
         yield span
-        span.update(end_time=datetime.now())
+        span.update(end_time=datetime.now(timezone.utc))
