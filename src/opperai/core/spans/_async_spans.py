@@ -5,7 +5,7 @@ from uuid import UUID
 from opperai.core._http_clients import _async_http_client
 from opperai.core.utils import DateTimeEncoder
 from opperai.types.exceptions import APIError
-from opperai.types.spans import Span, SpanMetric
+from opperai.types.spans import GenerationIn, GenerationOut, Span, SpanMetric
 
 
 class AsyncSpans:
@@ -214,3 +214,23 @@ class AsyncSpans:
             )
 
         return response.json()
+
+    async def save_generation(
+        self,
+        uuid: str,
+        generation: GenerationIn,
+    ) -> GenerationOut:
+        response = await self.http_client.do_request(
+            "POST",
+            f"/v1/spans/{uuid}/generation",
+            content=json.dumps(
+                generation.model_dump(exclude_none=True), cls=DateTimeEncoder
+            ),
+        )
+
+        if response.status_code != 200:
+            raise APIError(
+                f"Failed to save generation for span {uuid} with status {response.status_code}"
+            )
+
+        return GenerationOut.model_validate(response.json())

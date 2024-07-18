@@ -1,10 +1,13 @@
+from __future__ import annotations
+
 from contextlib import contextmanager
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
+from typing import Any, Dict, List
 
 from opperai._client import Client
+from opperai.types.spans import GenerationIn, GenerationOut, SpanMetric
 from opperai.types.spans import Span as SpanModel
-from opperai.types.spans import SpanMetric
 
 
 @dataclass
@@ -12,7 +15,7 @@ class Span:
     _client: Client
     uuid: str
 
-    def update(self, **kwargs) -> "Span":
+    def update(self, **kwargs) -> Span:
         self._client.spans.update(span_uuid=self.uuid, **kwargs)
         return self
 
@@ -29,6 +32,42 @@ class Span:
                 dimension=dimension,
                 value=value,
                 comment=comment,
+            ),
+        )
+
+    def save_generation(
+        self,
+        duration_ms: int,
+        called_at: datetime = None,
+        input: str = None,
+        response: str = None,
+        model: str = None,
+        messages: List[Dict[str, Any]] = None,
+        prompt_tokens: int = None,
+        completion_tokens: int = None,
+        total_tokens: int = None,
+        error: str = None,
+        cost: float = None,
+    ) -> GenerationOut:
+        # if called_at is None, use the current time minus the duration_ms
+        if called_at is None:
+            now = datetime.now(timezone.utc)
+            called_at = now - timedelta(milliseconds=duration_ms)
+
+        return self._client.spans.save_generation(
+            uuid=self.uuid,
+            generation=GenerationIn(
+                called_at=called_at,
+                duration_ms=duration_ms,
+                input=input,
+                response=response,
+                model=model,
+                messages=messages,
+                prompt_tokens=prompt_tokens,
+                completion_tokens=completion_tokens,
+                total_tokens=total_tokens,
+                error=error,
+                cost=cost,
             ),
         )
 
@@ -50,7 +89,7 @@ class Spans:
         meta: dict = None,
         parent_span_id: str = None,
     ) -> Span:
-        span_uuid = self._client.spans.create(
+        span = self._client.spans.create(
             SpanModel(
                 name=name,
                 input=input,
@@ -59,6 +98,6 @@ class Spans:
                 meta=meta,
             )
         )
-        span = Span(self._client, span_uuid)
+        span = Span(self._client, span.uuid)
         yield span
         span.update(end_time=datetime.now(timezone.utc))

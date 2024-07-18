@@ -1,8 +1,26 @@
 from datetime import datetime
-from typing import Optional
+from typing import Any, Dict, List, Optional
 from uuid import UUID
 
 from pydantic import BaseModel
+
+
+class GenerationIn(BaseModel):
+    called_at: datetime
+    duration_ms: int
+    model: Optional[str] = None
+    input: Optional[str] = None
+    response: Optional[str] = None
+    prompt_tokens: Optional[int] = None
+    completion_tokens: Optional[int] = None
+    total_tokens: Optional[int] = None
+    error: Optional[str] = None
+    messages: Optional[List[Dict[str, Any]]] = None
+    cost: Optional[float] = None
+
+
+class GenerationOut(GenerationIn):
+    uuid: UUID
 
 
 class Span(BaseModel):
@@ -17,6 +35,7 @@ class Span(BaseModel):
     meta: Optional[dict] = None
     evaluations: Optional[dict] = None
     score: Optional[int] = None
+    generation: Optional[GenerationIn] = None
 
 
 class SpanMetric(BaseModel):

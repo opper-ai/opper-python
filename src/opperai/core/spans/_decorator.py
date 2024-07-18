@@ -58,10 +58,10 @@ def start_span(
         name=name,
         start_time=utcnow(),
     )
-    span_uuid = c.spans.create(span)
+    span = c.spans.create(span)
 
     span_token = _current_span_id.set(span_id)
-    span_context = SpanContext(c, span_uuid)
+    span_context = SpanContext(c, span.uuid)
     try:
         yield span_context  # This allows the block inside the 'with' statement to execute and interact with the span_context
     finally:
@@ -72,7 +72,7 @@ def start_span(
         if span_context.output is not None:
             update_kwargs["output"] = span_context.output
 
-        c.spans.update(span_uuid, **update_kwargs)
+        c.spans.update(span.uuid, **update_kwargs)
         _current_span_id.reset(span_token)
 
 
@@ -103,7 +103,7 @@ def trace(
                 input=inputs,
                 start_time=utcnow(),
             )
-            span_uuid = c.spans.create(span)
+            span = c.spans.create(span)
 
             span_token = _current_span_id.set(span_id)
             try:
@@ -112,7 +112,7 @@ def trace(
                 else:
                     result = func(*args, **kwargs)
                 c.spans.update(
-                    span_uuid,
+                    span.uuid,
                     end_time=utcnow(),
                     output=json.dumps(result) if trace_io else None,
                 )
@@ -139,13 +139,13 @@ def trace(
                 input=inputs,
                 start_time=utcnow(),
             )
-            span_uuid = c.spans.create(span)
+            span = c.spans.create(span)
 
             span_token = _current_span_id.set(span_id)
             try:
                 result = func(*args, **kwargs)
                 c.spans.update(
-                    span_uuid,
+                    span.uuid,
                     end_time=utcnow(),
                     output=json.dumps(result) if trace_io else None,
                 )
