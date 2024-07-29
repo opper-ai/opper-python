@@ -6,6 +6,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, List
 
 from opperai._client import Client
+from opperai.core.spans import _current_span_id
 from opperai.types.spans import GenerationIn, GenerationOut, SpanMetric
 from opperai.types.spans import Span as SpanModel
 
@@ -89,6 +90,7 @@ class Spans:
         meta: dict = None,
         parent_span_id: str = None,
     ) -> Span:
+        parent_span_id = parent_span_id if parent_span_id else _current_span_id.get()
         span = self._client.spans.create(
             SpanModel(
                 name=name,
@@ -99,5 +101,9 @@ class Spans:
             )
         )
         span = Span(self._client, span.uuid)
-        yield span
-        span.update(end_time=datetime.now(timezone.utc))
+        span_token = _current_span_id.set(str(span.uuid))
+        try:
+            yield span
+        finally:
+            span.update(end_time=datetime.now(timezone.utc))
+            _current_span_id.reset(span_token)
