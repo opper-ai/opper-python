@@ -6,6 +6,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, List
 
 from opperai._client import AsyncClient
+from opperai.core.spans import _current_span_id
 from opperai.types.spans import GenerationIn, GenerationOut, SpanMetric
 from opperai.types.spans import Span as SpanModel
 
@@ -95,6 +96,7 @@ class AsyncSpans:
         meta: dict = None,
         parent_span_id: str = None,
     ) -> AsyncSpan:
+        parent_span_id = parent_span_id if parent_span_id else _current_span_id.get()
         span = await self._client.spans.create(
             SpanModel(
                 name=name,
@@ -105,5 +107,9 @@ class AsyncSpans:
             )
         )
         span = AsyncSpan(self._client, span.uuid)
-        yield span
-        await span.update(end_time=datetime.now(timezone.utc))
+        span_token = _current_span_id.set(str(span.uuid))
+        try:
+            yield span
+        finally:
+            await span.update(end_time=datetime.now(timezone.utc))
+            _current_span_id.reset(span_token)
