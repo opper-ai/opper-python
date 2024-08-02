@@ -90,8 +90,34 @@ class Spans:
         meta: dict = None,
         parent_span_id: str = None,
     ) -> Span:
+        span = self.start_span(name, input, meta, parent_span_id)
+        try:
+            yield span
+        finally:
+            span.end()
+
+    def start_span(
+        self,
+        name: str,
+        input: str = None,
+        meta: dict = None,
+        parent_span_id: str = None,
+    ) -> Span:
+        span, token = self._create_span(name, input, meta, parent_span_id)
+
+        def end_span():
+            if not hasattr(span, "_ended"):
+                span.update(end_time=datetime.now(timezone.utc))
+                _current_span_id.reset(token)
+                span._ended = True
+
+        span.end = end_span
+
+        return span
+
+    def _create_span(self, name, input, meta, parent_span_id):
         parent_span_id = parent_span_id if parent_span_id else _current_span_id.get()
-        span = self._client.spans.create(
+        span_model = self._client.spans.create(
             SpanModel(
                 name=name,
                 input=input,
@@ -100,10 +126,14 @@ class Spans:
                 meta=meta,
             )
         )
-        span = Span(self._client, span.uuid)
-        span_token = _current_span_id.set(str(span.uuid))
-        try:
-            yield span
-        finally:
-            span.update(end_time=datetime.now(timezone.utc))
-            _current_span_id.reset(span_token)
+        span = Span(self._client, span_model.uuid)
+        token = _current_span_id.set(str(span.uuid))
+
+        return span, token
+
+    @property
+    def current_span(self) -> Span:
+        return Span(self._client, _current_span_id.get())
+
+    def get_span(self, span_id: str) -> Span:
+        return Span(self._client, span_id)

@@ -96,8 +96,34 @@ class AsyncSpans:
         meta: dict = None,
         parent_span_id: str = None,
     ) -> AsyncSpan:
+        span = await self.start_span(name, input, meta, parent_span_id)
+        try:
+            yield span
+        finally:
+            await span.end()
+
+    async def start_span(
+        self,
+        name: str,
+        input: str = None,
+        meta: dict = None,
+        parent_span_id: str = None,
+    ) -> AsyncSpan:
+        span, token = await self._create_span(name, input, meta, parent_span_id)
+
+        async def end_span():
+            if not hasattr(span, "_ended"):
+                await span.update(end_time=datetime.now(timezone.utc))
+                _current_span_id.reset(token)
+                span._ended = True
+
+        span.end = end_span
+
+        return span
+
+    async def _create_span(self, name, input, meta, parent_span_id):
         parent_span_id = parent_span_id if parent_span_id else _current_span_id.get()
-        span = await self._client.spans.create(
+        span_model = await self._client.spans.create(
             SpanModel(
                 name=name,
                 input=input,
@@ -106,10 +132,14 @@ class AsyncSpans:
                 meta=meta,
             )
         )
-        span = AsyncSpan(self._client, span.uuid)
-        span_token = _current_span_id.set(str(span.uuid))
-        try:
-            yield span
-        finally:
-            await span.update(end_time=datetime.now(timezone.utc))
-            _current_span_id.reset(span_token)
+        span = AsyncSpan(self._client, span_model.uuid)
+        token = _current_span_id.set(str(span.uuid))
+
+        return span, token
+
+    @property
+    def current_span(self) -> AsyncSpan:
+        return AsyncSpan(self._client, _current_span_id.get())
+
+    def get_span(self, span_id: str) -> AsyncSpan:
+        return AsyncSpan(self._client, span_id)

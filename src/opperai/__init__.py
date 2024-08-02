@@ -15,10 +15,6 @@ from ._client import AsyncClient, Client
 class Opper:
     client: Client = None
 
-    functions: Functions = None
-    indexes: Indexes = None
-    spans: Spans = None
-
     def __init__(self, client: Client = None):
         if client is not None:
             if not isinstance(client, Client):
@@ -26,18 +22,15 @@ class Opper:
         if client is None:
             client = Client()
 
-        self.client = client
-        self.functions = Functions(client)
-        self.indexes = Indexes(client)
-        self.spans = Spans(client)
+        self.client: Client = client
+        self.functions: Functions = Functions(client)
+        self.indexes: Indexes = Indexes(client)
+        self.spans: Spans = Spans(client)  # deprecated
+        self.trace: Spans = self.spans
 
 
 class AsyncOpper(Opper):
     client: AsyncClient = None
-
-    functions: AsyncFunctions = None
-    indexes: AsyncIndexes = None
-    spans: AsyncSpans = None
 
     def __init__(self, client: AsyncClient = None):
         if client is not None:
@@ -46,7 +39,8 @@ class AsyncOpper(Opper):
         if client is None:
             client = AsyncClient()
 
-        self.client = client
-        self.functions = AsyncFunctions(client)
-        self.indexes = AsyncIndexes(client)
-        self.spans = AsyncSpans(client)
+        self.client: AsyncClient = client
+        self.functions: AsyncFunctions = AsyncFunctions(client)
+        self.indexes: AsyncIndexes = AsyncIndexes(client)
+        self.spans: AsyncSpans = AsyncSpans(client)  # deprecated
+        self.trace: AsyncSpans = self.spans
