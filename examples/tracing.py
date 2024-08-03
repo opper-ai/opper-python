@@ -1,68 +1,79 @@
 import asyncio
 
-from opperai import fn, trace
-from pydantic import BaseModel
+from opperai import AsyncOpper, Opper, trace
+
+opper = Opper()
 
 
-class TranslationInput(BaseModel):
-    text: str
-    language: str
+def trace_with_context_manager():
+    """trace using context manager"""
+
+    with opper.trace.start(name="context manager") as span:
+        span.save_metric("score", 100.0, "context manager")
 
 
-class TranslationResult(BaseModel):
-    translation: str
-    sentiment: str
+def trace_manually():
+    """trace manually using `start_span`"""
 
-
-class HappyTranslationResult(BaseModel):
-    text: str
-
-
-@trace
-@fn(model="anthropic/claude-3-haiku")
-def translate(input: TranslationInput) -> TranslationResult:
-    """Translate the input text to the specified language"""
+    span = opper.trace.start_span("manually created span")
+    span.save_metric("score", 100.0, "manually created span")
+    span.end()
 
 
 @trace
-@fn(model="anthropic/claude-3-haiku")
-async def translate_async(input: TranslationInput) -> TranslationResult:
-    """Translate the input text to the specified language"""
+def trace_with_decorator():
+    """trace function using the `@trace` decorator"""
+
+    opper.trace.current_span.save_metric("score", 100.0, "decorator")
 
 
 @trace
-@fn
-def happify(input: TranslationResult) -> HappyTranslationResult:
-    """Make the input text happier!"""
+def traced_chain():
+    print("synchronous tracing")
+
+    trace_with_context_manager()
+    trace_manually()
+    trace_with_decorator()
+
+    opper.trace.current_span.save_metric("total_score", 100.0, "chain")
+
+
+traced_chain()
+
+aopper = AsyncOpper()
+
+
+async def async_trace_with_context_manager():
+    """trace using context manager"""
+
+    async with aopper.trace.start(name="async context manager") as span:
+        await span.save_metric("score", 100.0, "async context manager")
+
+
+async def async_trace_manually():
+    """trace manually using `start_span`"""
+
+    span = await aopper.trace.start_span("manually created span")
+    await span.save_metric("score", 100.0, "manually created span")
+    await span.end()
 
 
 @trace
-@fn
-async def happify_async(input: TranslationResult) -> HappyTranslationResult:
-    """Make the input text happier!"""
+async def async_trace_with_decorator():
+    """trace function using the `@trace` decorator"""
+
+    await aopper.trace.current_span.save_metric("score", 100.0, "decorator")
 
 
 @trace
-def transform():
-    print("Transforming sync")
-    result = translate(TranslationInput(text="Hello, world!", language="French"))
-    happified, response = happify.call(result)
-    print(happified)
+async def async_traced_chain():
+    print("asynchronous tracing")
 
-    response.span.save_metric("happiness", len(happified.text))
+    await async_trace_with_context_manager()
+    await async_trace_manually()
+    await async_trace_with_decorator()
 
-
-@trace
-async def transform_async():
-    print("Transforming async")
-    result = await translate_async(
-        TranslationInput(text="Hello, world!", language="French")
-    )
-    happified, response = await happify_async.call(result)
-    print(happified)
-
-    await response.span.save_metric("happiness", len(happified.text))
+    await aopper.trace.current_span.save_metric("total_score", 100.0, "chain")
 
 
-transform()
-asyncio.run(transform_async())
+asyncio.run(async_traced_chain())
