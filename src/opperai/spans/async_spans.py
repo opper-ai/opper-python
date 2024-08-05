@@ -3,7 +3,7 @@ from __future__ import annotations
 from contextlib import asynccontextmanager
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
-from typing import Any, Dict, List
+from typing import Any, AsyncIterator, Dict, List
 
 from opperai._client import AsyncClient
 from opperai.core.spans import _current_span_id
@@ -95,7 +95,7 @@ class AsyncSpans:
         input: str = None,
         meta: dict = None,
         parent_span_id: str = None,
-    ) -> AsyncSpan:
+    ) -> AsyncIterator[AsyncSpan]:
         span = await self.start_span(name, input, meta, parent_span_id)
         try:
             yield span

@@ -3,7 +3,7 @@ from __future__ import annotations
 from contextlib import contextmanager
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict, Iterator, List
 
 from opperai._client import Client
 from opperai.core.spans import _current_span_id
@@ -89,7 +89,7 @@ class Spans:
         input: str = None,
         meta: dict = None,
         parent_span_id: str = None,
-    ) -> Span:
+    ) -> Iterator[Span]:
         span = self.start_span(name, input, meta, parent_span_id)
         try:
             yield span
