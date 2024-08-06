@@ -4,7 +4,7 @@ from opperai.functions.async_functions import AsyncFunctions
 from opperai.functions.decorator._decorator import fn, get_last_span_id
 from opperai.functions.functions import Functions
 from opperai.indexes.async_indexes import AsyncIndexes
-from opperai.indexes.indexes import Indexes
+from opperai.indexes.indexes import Index, Indexes
 from opperai.spans.async_spans import AsyncSpans
 from opperai.spans.spans import Spans
 

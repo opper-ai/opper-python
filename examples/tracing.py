@@ -59,6 +59,14 @@ def manual_generation():
 
 
 @trace
+def trace_with_call():
+    result, response = opper.call(name="python/sdk/bare-minimum", input="Hello, world!")
+    response.span.save_metric("score", 100.0, "call")
+
+    return result
+
+
+@trace
 def synchronous_tracing():
     print("running synchronous tracing")
 
@@ -66,6 +74,7 @@ def synchronous_tracing():
     trace_manually()
     trace_with_decorator()
     manual_generation()
+    trace_with_call()
 
     opper.traces.current_span.save_metric(
         "total_score", 100.0, "metric on the root span"
@@ -121,13 +130,26 @@ async def async_manual_generation():
 
 
 @trace
+async def async_trace_with_call():
+    result, response = await aopper.call(
+        name="python/sdk/bare-minimum", input="Hello, world!"
+    )
+    await response.span.save_metric("score", 100.0, "call")
+
+    return result
+
+
+@trace
 async def asynchronous_tracing():
     print("running asynchronous tracing")
 
-    await async_trace_with_context_manager()
-    await async_trace_manually()
-    await async_trace_with_decorator()
-    await async_manual_generation()
+    await asyncio.gather(
+        async_trace_with_context_manager(),
+        async_trace_manually(),
+        async_trace_with_decorator(),
+        async_manual_generation(),
+        async_trace_with_call(),
+    )
 
     await aopper.traces.current_span.save_metric("total_score", 100.0, "chain")
 
