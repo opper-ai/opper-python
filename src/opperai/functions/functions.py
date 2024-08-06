@@ -235,14 +235,16 @@ class Functions:
         if images:
             messages.append(Message(role="user", content=images))
 
-        res = self._client.functions.chat(
+        res: FunctionResponseModel = self._client.functions.chat(
             function_path=name, data=ChatPayload(messages=messages)
         )
 
         if output_type is not None and issubclass(output_type, BaseModel):
-            return output_type.model_validate(res.json_payload), res
+            return output_type.model_validate(res.json_payload), FunctionResponse(
+                client=self._client, **res.model_dump()
+            )
 
-        return res.message, res
+        return res.message, FunctionResponse(client=self._client, **res.model_dump())
 
 
 def prepare_input(input: Any) -> Tuple[List[str], List[ImageMessageContent]]:
