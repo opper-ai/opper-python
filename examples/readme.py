@@ -1,22 +1,3 @@
-# Opper Python SDK
-
-This is the Opper Python SDK. See below for getting started, and the [docs](https://docs.opper.ai) for more information. The SDK has builtin documentation and examples in function docstrings, which should be visible in your code editor as you are using the functions.
-
-## Install
-
-```bash
-pip install opperai
-```
-
-## Configuration
-
-### Environment variable
-
-- `OPPER_API_KEY` environment variable is read by the SDK if no `api_key` is provided to the `Client` object. 
-
-## Using opper
-
-```python
 from typing import List
 
 from opperai import Index, Opper, trace
@@ -109,9 +90,3 @@ def run():
 
 
 run()
-```
-
-# More examples
-
-See examples in our [documentation](https://docs.opper.ai)
-and [examples](https://github.com/opper-ai/opper-python/tree/main/examples) folder.
