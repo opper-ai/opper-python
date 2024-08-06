@@ -1,14 +1,15 @@
 import itertools
+import json
 from dataclasses import dataclass
-from typing import Any, Dict, Iterator, List, Optional, Union
+from typing import Any, Dict, Iterator, List, Optional, Tuple, Union
 
 from opperai._client import Client
 from opperai.datasets.datasets import Dataset
 from opperai.functions.decorator._schemas import type_to_json_schema
-from opperai.types import ChatPayload, Message, StreamingChunk
+from opperai.types import ChatPayload, ImageMessageContent, Message, StreamingChunk
 from opperai.types import Function as FunctionModel
 from opperai.types import FunctionResponse as FunctionResponseModel
-from pydantic import PrivateAttr
+from pydantic import BaseModel, PrivateAttr
 
 from ..spans.spans import Span
 
@@ -193,3 +194,92 @@ class Functions:
             return self._client.functions.delete(path=path)
         else:
             raise ValueError("Either uuid or path must be provided")
+
+    def call(
+        self,
+        name: str = None,
+        instructions: str = "you are a helpful assistant",
+        input: Any = str,
+        output_type: Optional[Any] = None,
+        model: Optional[str] = None,
+    ) -> Tuple[Any, FunctionResponse]:
+        """Calls a function
+        Arguments:
+            name: str: the name of the function, if not provided, it will be generated from the instructions
+            instructions: str: the instructions for the function
+            input: Any: the input to the function
+            output_type: Any: the output type for the function
+            model: str: the model to use for the function
+
+        Returns:
+            tuple[Any, FunctionResponse]: the output of the function and the response object. The type of the output is determined by the output_type. If the output_type is a `Pydantic` model, the output will be validated against the schema.
+        """
+        if not name:
+            name = djb2(instructions)
+
+        input_type = type_to_json_schema(input)
+        output_schema = type_to_json_schema(output_type)
+
+        function = FunctionModel(
+            path=name,
+            instructions=instructions,
+            input_schema=input_type,
+            out_schema=output_schema,
+            model=model,
+        )
+        self._client.functions.create(function)
+
+        input, images = prepare_input(input)
+
+        messages = [Message(role="user", content=json.dumps(input))]
+        if images:
+            messages.append(Message(role="user", content=images))
+
+        res = self._client.functions.chat(
+            function_path=name, data=ChatPayload(messages=messages)
+        )
+
+        if output_type is not None and issubclass(output_type, BaseModel):
+            return output_type.model_validate(res.json_payload), res
+
+        return res.message, res
+
+
+def prepare_input(input: Any) -> Tuple[List[str], List[ImageMessageContent]]:
+    def _prepare_input(
+        input: Any, _input: List[str] = [], images: List[ImageMessageContent] = []
+    ):
+        if isinstance(input, ImageMessageContent):
+            return None, input
+        if isinstance(input, BaseModel):
+            return input.model_dump(), None
+        if isinstance(input, list):
+            inputs = []
+            images = []
+            for item in input:
+                _input, _image = _prepare_input(item)
+                if _input:
+                    inputs.append(_input)
+                if _image:
+                    images.append(_image)
+            return inputs, images
+        if isinstance(input, dict):
+            inputs = {}
+            for k, v in input.items():
+                _input, _image = _prepare_input(v)
+                if _input:
+                    inputs[k] = _input
+                if _image:
+                    images.append(_image)
+            return inputs, images
+        return input, None
+
+    return _prepare_input(input)
+
+
+def djb2(s: str):
+    bytes = s.encode("utf-8")
+    hash = 5381
+    for x in bytes:
+        hash = ((hash << 5) + hash) + x
+    return str(abs(hash))

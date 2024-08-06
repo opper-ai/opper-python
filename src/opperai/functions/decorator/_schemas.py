@@ -5,6 +5,9 @@ from pydantic import BaseModel
 
 
 def type_to_json_schema(type_hint):
+    if type_hint is None:
+        return None
+
     schema = _type_to_json_schema(type_hint)
     schema, defs = _lift_defs(schema, {})
     schema["$defs"] = defs

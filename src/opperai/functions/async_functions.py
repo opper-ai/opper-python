@@ -1,5 +1,6 @@
+import json
 from dataclasses import dataclass
-from typing import Any, Dict, Iterator, List, Optional, Union
+from typing import Any, Dict, Iterator, List, Optional, Tuple, Union
 
 from opperai._client import AsyncClient
 from opperai.datasets.async_datasets import AsyncDataset
@@ -7,9 +8,10 @@ from opperai.functions.decorator._schemas import type_to_json_schema
 from opperai.types import ChatPayload, Message, StreamingChunk
 from opperai.types import Function as FunctionModel
 from opperai.types import FunctionResponse as FunctionResponseModel
-from pydantic import PrivateAttr
+from pydantic import BaseModel, PrivateAttr
 
 from ..spans.async_spans import AsyncSpan
+from .functions import djb2, prepare_input
 
 
 class AsyncFunctionResponse(FunctionResponseModel):
@@ -202,3 +204,52 @@ class AsyncFunctions:
             return await self._client.functions.delete(path=path)
         else:
             raise ValueError("Either id or name must be provided")
+
+    async def call(
+        self,
+        name: str = None,
+        instructions: str = "you are a helpful assistant",
+        input: Any = str,
+        output_type: Optional[Any] = None,
+        model: Optional[str] = None,
+    ) -> Tuple[Any, AsyncFunctionResponse]:
+        """Calls a function
+        Arguments:
+            name: str: the name of the function, if not provided, it will be generated from the instructions
+            instructions: str: the instructions for the function
+            input: Any: the input to the function
+            output_type: Any: the output type for the function
+            model: str: the model to use for the function
+
+        Returns:
+            tuple[Any, FunctionResponse]: the output of the function and the response object. The type of the output is determined by the output_type. If the output_type is a `Pydantic` model, the output will be validated against the schema.
+        """
+        if not name:
+            name = djb2(instructions)
+
+        input_type = type_to_json_schema(input)
+        output_schema = type_to_json_schema(output_type)
+
+        function = FunctionModel(
+            path=name,
+            instructions=instructions,
+            input_schema=input_type,
+            out_schema=output_schema,
+            model=model,
+        )
+        await self._client.functions.create(function)
+
+        input, images = prepare_input(input)
+
+        messages = [Message(role="user", content=json.dumps(input))]
+        if images:
+            messages.append(Message(role="user", content=images))
+
+        res = await self._client.functions.chat(
+            function_path=name, data=ChatPayload(messages=messages)
+        )
+
+        if output_type is not None and issubclass(output_type, BaseModel):
+            return output_type.model_validate(res.json_payload), res
+
+        return res.message, res
