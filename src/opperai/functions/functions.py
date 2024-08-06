@@ -239,10 +239,15 @@ class Functions:
             function_path=name, data=ChatPayload(messages=messages)
         )
 
-        if output_type is not None and issubclass(output_type, BaseModel):
-            return output_type.model_validate(res.json_payload), FunctionResponse(
-                client=self._client, **res.model_dump()
-            )
+        if output_type is not None:
+            if issubclass(output_type, BaseModel):
+                return output_type.model_validate(res.json_payload), FunctionResponse(
+                    client=self._client, **res.model_dump()
+                )
+            else:
+                return res.json_payload, FunctionResponse(
+                    client=self._client, **res.model_dump()
+                )
 
         return res.message, FunctionResponse(client=self._client, **res.model_dump())
 

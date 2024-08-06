@@ -249,10 +249,15 @@ class AsyncFunctions:
             function_path=name, data=ChatPayload(messages=messages)
         )
 
-        if output_type is not None and issubclass(output_type, BaseModel):
-            return output_type.model_validate(res.json_payload), AsyncFunctionResponse(
-                client=self._client, **res.model_dump()
-            )
+        if output_type is not None:
+            if issubclass(output_type, BaseModel):
+                return output_type.model_validate(
+                    res.json_payload
+                ), AsyncFunctionResponse(client=self._client, **res.model_dump())
+            else:
+                return res.json_payload, AsyncFunctionResponse(
+                    client=self._client, **res.model_dump()
+                )
 
         return res.message, AsyncFunctionResponse(
             client=self._client, **res.model_dump()
