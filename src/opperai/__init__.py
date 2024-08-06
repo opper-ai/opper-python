@@ -27,6 +27,7 @@ class Opper:
         self.indexes: Indexes = Indexes(client)
         self.spans: Spans = Spans(client)  # deprecated
         self.traces: Spans = self.spans
+        self.call = self.functions.call
 
 
 class AsyncOpper(Opper):
@@ -44,3 +45,4 @@ class AsyncOpper(Opper):
         self.indexes: AsyncIndexes = AsyncIndexes(client)
         self.spans: AsyncSpans = AsyncSpans(client)  # deprecated
         self.traces: AsyncSpans = self.spans
+        self.call = self.functions.call
