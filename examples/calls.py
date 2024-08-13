@@ -61,7 +61,7 @@ def call_with_structured_examples():
         x: int = Field(..., ge=0, description="value of the number")
 
     output, _ = opper.call(
-        name="python/sdk/call-with-structured-pklexamples",
+        name="python/sdk/call-with-structured-examples",
         instructions="given a list of numbers return the largest",
         input_type=List[Number],
         input=[Number(x=1), Number(x=12)],
