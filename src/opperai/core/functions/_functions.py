@@ -1,10 +1,11 @@
 from http import HTTPStatus
-from typing import Iterator, Optional, Union
+from typing import Iterator, List, Optional, Union
 
 from opperai.core._http_clients import _http_client
 from opperai.core.spans import get_current_span_id
 from opperai.types import (
     ChatPayload,
+    Example,
     Function,
     FunctionResponse,
     StreamingChunk,
@@ -259,7 +260,12 @@ class Functions:
         return True
 
     def chat(
-        self, function_path, data: ChatPayload, stream=False, **kwargs
+        self,
+        function_path,
+        data: ChatPayload,
+        examples: List[Example] = None,
+        stream=False,
+        **kwargs,
     ) -> Union[FunctionResponse, Iterator[StreamingChunk]]:
         """Send a message to a function
 
@@ -274,6 +280,7 @@ class Functions:
                 obtained through the app interface or API.
             data (ChatPayload): An object of type ChatPayload, representing the content to be processed
                 during the interaction. It encapsulates the messages to be sent to the function.
+            examples (List[Example], optional): A list of examples to help guide the function's behavior.
             stream (bool, optional): When set to True, initializes a generator that yields incremental
                 results as StreamingChunk objects. Defaults to False for single message exchanges.
             **kwargs: Additional keyword arguments that will be passed to the underlying HTTP request.
@@ -318,13 +325,17 @@ class Functions:
             data.parent_span_uuid = get_current_span_id()
 
         if stream:
-            return self._chat_stream(function_path, data, **kwargs)
+            return self._chat_stream(function_path, data, examples, **kwargs)
 
         serialized_data = data.model_dump()
+        payload = {**serialized_data, **kwargs}
+        if examples:
+            payload["examples"] = [e.model_dump() for e in examples]
+
         response = self.http_client.do_request(
             "POST",
             f"/v1/chat/{function_path}",
-            json={**serialized_data, **kwargs},
+            json=payload,
         )
 
         if response.status_code == HTTPStatus.OK:
@@ -335,12 +346,16 @@ class Functions:
         )
 
     def _chat_stream(
-        self, function_path, data: ChatPayload, **kwargs
+        self, function_path, data: ChatPayload, examples: List[Example] = None, **kwargs
     ) -> Iterator[StreamingChunk]:
+        payload = {**data.model_dump(), **kwargs}
+        if examples:
+            payload["examples"] = [e.model_dump() for e in examples]
+
         gen = self.http_client.stream(
             "POST",
             f"/v1/chat/{function_path}",
-            json={**data.model_dump(), **kwargs},
+            json=payload,
             params={"stream": "True"},
         )
         for item in gen:

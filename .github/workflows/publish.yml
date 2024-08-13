@@ -123,18 +123,19 @@ jobs:
   tag:
     name: Tag
     runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs:
       - build
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 2
       - uses: salsify/action-detect-and-tag-new-version@v2
         with:
-          create-tag: false
+          create-tag: true
           version-command: |
             grep '^version = ' pyproject.toml | sed 's/^version = "\(.*\)"$/\1/'
+
 
   publish-test:
     name: Publish SDK to TestPyPI
@@ -161,12 +162,12 @@ jobs:
           password: ${{ secrets.TEST_PYPI_API_TOKEN }}
           skip-existing: true
 
+
   publish-to-pypi:
     name: >-
       Publish Python SDK to PyPI
-    if: startsWith(github.ref, 'refs/tags/')  
     needs:
-    - build
+      - tag
     runs-on: ubuntu-latest
     environment:
       name: pypi
@@ -184,13 +185,12 @@ jobs:
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
         verbose: true
-      
 
   github-release:
     name: >-
       GitHub Release
     needs:
-    - publish-to-pypi
+      - publish-to-pypi
     runs-on: ubuntu-latest
 
     permissions:
