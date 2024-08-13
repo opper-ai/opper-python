@@ -119,7 +119,23 @@ jobs:
         with:
           name: python-package-distributions
           path: dist/
-    
+  
+  tag:
+    name: Tag
+    runs-on: ubuntu-latest
+    needs:
+      - build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+      - uses: salsify/action-detect-and-tag-new-version@v2
+        with:
+          create-tag: false
+          version-command: |
+            grep '^version = ' pyproject.toml | sed 's/^version = "\(.*\)"$/\1/'
+
   publish-test:
     name: Publish SDK to TestPyPI
     if: github.event_name != 'pull_request' || github.ref == 'refs/heads/main'
