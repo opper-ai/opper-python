@@ -138,6 +138,11 @@ class Function(BaseModel):
     dataset_uuid: Optional[str] = None
 
 
+class Example(BaseModel):
+    input: Any
+    output: Any
+
+
 class Error(BaseModel):
     type: str
     message: str

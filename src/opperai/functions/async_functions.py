@@ -5,7 +5,7 @@ from typing import Any, Dict, Iterator, List, Optional, Tuple, Union
 from opperai._client import AsyncClient
 from opperai.datasets.async_datasets import AsyncDataset
 from opperai.functions.decorator._schemas import type_to_json_schema
-from opperai.types import ChatPayload, Message, StreamingChunk
+from opperai.types import ChatPayload, Example, Message, StreamingChunk
 from opperai.types import Function as FunctionModel
 from opperai.types import FunctionResponse as FunctionResponseModel
 from pydantic import BaseModel, PrivateAttr
@@ -209,17 +209,21 @@ class AsyncFunctions:
         self,
         name: str = None,
         instructions: str = "you are a helpful assistant",
+        input_type: Optional[Any] = None,
         input: Any = str,
         output_type: Optional[Any] = None,
         model: Optional[str] = None,
+        examples: Optional[List[Example]] = None,
     ) -> Tuple[Any, AsyncFunctionResponse]:
         """Calls a function
         Arguments:
             name: str: the name of the function, if not provided, it will be generated from the instructions
             instructions: str: the instructions for the function
+            input_type: Any: the input type for the function
             input: Any: the input to the function
             output_type: Any: the output type for the function
             model: str: the model to use for the function
+            examples: List[Example]: A list of examples to help guide the function's response
 
         Returns:
             tuple[Any, FunctionResponse]: the output of the function and the response object. The type of the output is determined by the output_type. If the output_type is a `Pydantic` model, the output will be validated against the schema.
@@ -227,13 +231,13 @@ class AsyncFunctions:
         if not name:
             name = djb2(instructions)
 
-        input_type = type_to_json_schema(input)
+        input_schema = type_to_json_schema(input_type)
         output_schema = type_to_json_schema(output_type)
 
         function = FunctionModel(
             path=name,
             instructions=instructions,
-            input_schema=input_type,
+            input_schema=input_schema,
             out_schema=output_schema,
             model=model,
         )
@@ -245,8 +249,15 @@ class AsyncFunctions:
         if images:
             messages.append(Message(role="user", content=images))
 
+        _examples = []
+        if examples:
+            for example in examples:
+                input, _ = prepare_input(example.input)
+                output, _ = prepare_input(example.output)
+                _examples.append(Example(input=str(input), output=str(output)))
+
         res: FunctionResponseModel = await self._client.functions.chat(
-            function_path=name, data=ChatPayload(messages=messages)
+            function_path=name, data=ChatPayload(messages=messages), examples=_examples
         )
 
         if output_type is not None:

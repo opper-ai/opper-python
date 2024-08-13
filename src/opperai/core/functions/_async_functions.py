@@ -1,10 +1,11 @@
 from http import HTTPStatus
-from typing import Generator, Optional
+from typing import Generator, List, Optional
 
 from opperai.core._http_clients import _async_http_client
 from opperai.core.spans import get_current_span_id
 from opperai.types import (
     ChatPayload,
+    Example,
     Function,
     FunctionResponse,
     StreamingChunk,
@@ -230,7 +231,12 @@ class AsyncFunctions:
         return True
 
     async def chat(
-        self, function_path, data: ChatPayload, stream=False, **kwargs
+        self,
+        function_path,
+        data: ChatPayload,
+        examples: List[Example] = None,
+        stream=False,
+        **kwargs,
     ) -> FunctionResponse:
         """Send a message to a function
 
@@ -245,6 +251,7 @@ class AsyncFunctions:
                 obtained through the app interface or API.
             data (ChatPayload): An object of type ChatPayload, representing the content to be processed
                 during the interaction. It encapsulates the messages to be sent to the function.
+            examples (List[Example], optional): A list of examples to help guide the function's behavior.
             stream (bool, optional): When set to True, initializes a generator that yields incremental
                 results as StreamingChunk objects. Defaults to False for single message exchanges.
             **kwargs: Additional keyword arguments that will be passed to the underlying HTTP request.
@@ -288,13 +295,19 @@ class AsyncFunctions:
         """
         if data.parent_span_uuid is None:
             data.parent_span_uuid = get_current_span_id()
+
         if stream:
-            return self._chat_stream(function_path, data, **kwargs)
+            return self._chat_stream(function_path, data, examples, **kwargs)
+
         serialized_data = data.model_dump()
+        payload = {**serialized_data, **kwargs}
+        if examples:
+            payload["examples"] = [e.model_dump() for e in examples]
+
         response = await self.http_client.do_request(
             "POST",
             f"/v1/chat/{function_path}",
-            json={**serialized_data, **kwargs},
+            json=payload,
         )
 
         if response.status_code == HTTPStatus.OK:
@@ -305,12 +318,16 @@ class AsyncFunctions:
         )
 
     async def _chat_stream(
-        self, function_path, data: ChatPayload, **kwargs
+        self, function_path, data: ChatPayload, examples: List[Example], **kwargs
     ) -> Generator[StreamingChunk, None, None]:
+        payload = {**data.model_dump(), **kwargs}
+        if examples:
+            payload["examples"] = [e.model_dump() for e in examples]
+
         gen = self.http_client.stream(
             "POST",
             f"/v1/chat/{function_path}",
-            json={**data.model_dump(), **kwargs},
+            json=payload,
             params={"stream": "True"},
         )
         async for item in gen:
