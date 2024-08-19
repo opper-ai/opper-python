@@ -1,7 +1,7 @@
 import itertools
 import json
 from dataclasses import dataclass
-from typing import Any, Dict, Iterator, List, Optional, Tuple, Union
+from typing import Any, Dict, Iterator, List, Optional, Tuple, TypeVar, Union
 
 from opperai._client import Client
 from opperai.datasets.datasets import Dataset
@@ -18,6 +18,8 @@ from opperai.types import FunctionResponse as FunctionResponseModel
 from pydantic import BaseModel, PrivateAttr
 
 from ..spans.spans import Span
+
+T = TypeVar("T", bound=Any)
 
 
 class FunctionResponse(FunctionResponseModel):
@@ -207,10 +209,10 @@ class Functions:
         instructions: str = "you are a helpful assistant",
         input_type: Optional[Any] = None,
         input: Any = str,
-        output_type: Optional[Any] = None,
+        output_type: Optional[type[T]] = None,
         model: Optional[str] = None,
         examples: Optional[List[Example]] = None,
-    ) -> Tuple[Any, FunctionResponse]:
+    ) -> Tuple[T, FunctionResponse]:
         """Calls a function
         Arguments:
             name: str: the name of the function, if not provided, it will be generated from the instructions
