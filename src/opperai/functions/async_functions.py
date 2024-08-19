@@ -11,7 +11,7 @@ from opperai.types import FunctionResponse as FunctionResponseModel
 from pydantic import BaseModel, PrivateAttr
 
 from ..spans.async_spans import AsyncSpan
-from .functions import djb2, prepare_input
+from .functions import T, djb2, prepare_input
 
 
 class AsyncFunctionResponse(FunctionResponseModel):
@@ -211,10 +211,10 @@ class AsyncFunctions:
         instructions: str = "you are a helpful assistant",
         input_type: Optional[Any] = None,
         input: Any = str,
-        output_type: Optional[Any] = None,
+        output_type: Optional[type[T]] = None,
         model: Optional[str] = None,
         examples: Optional[List[Example]] = None,
-    ) -> Tuple[Any, AsyncFunctionResponse]:
+    ) -> Tuple[T, AsyncFunctionResponse]:
         """Calls a function
         Arguments:
             name: str: the name of the function, if not provided, it will be generated from the instructions
