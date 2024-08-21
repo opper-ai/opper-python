@@ -54,7 +54,9 @@ class AsyncIndexes:
 
         self._client = client
 
-    async def create(self, name: str) -> AsyncIndex:
+    async def create(
+        self, name: str, embedding_model: str = "text-embedding-ada-002"
+    ) -> AsyncIndex:
         """Create an index with the given name.
 
         If an index with the given name already exists, return it.
@@ -66,7 +68,9 @@ class AsyncIndexes:
         except Exception:
             pass
 
-        index = await self._client.indexes.create(name=name)
+        index = await self._client.indexes.create(
+            name=name, embedding_model=embedding_model
+        )
         return AsyncIndex(self._client, index)
 
     async def get(self, uuid: str = None, name: str = None) -> Optional[AsyncIndex]:

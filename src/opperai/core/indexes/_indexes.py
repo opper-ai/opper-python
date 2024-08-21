@@ -25,14 +25,16 @@ class Indexes:
     def __init__(self, http_client: _http_client):
         self.http_client = http_client
 
-    def create(self, name: str) -> Index:
+    def create(
+        self, name: str, embedding_model: str = "text-embedding-ada-002"
+    ) -> Index:
         """Create an index
 
         This method allows for the creation of an index with the specified name. If the creation is successful, it returns an instance of the Index class, representing the newly created index.
 
         Args:
             name (str): The name of the index to be created.
-
+            embedding_model (str, optional): The embedding model to use for indexing. Defaults to "text-embedding-ada-002".
         Returns:
             Index: An instance of the Index class, representing the newly created index.
 
@@ -50,7 +52,10 @@ class Indexes:
         response = self.http_client.do_request(
             "POST",
             "/v1/indexes",
-            json={"name": name},
+            json={
+                "name": name,
+                "embedding_model": embedding_model,
+            },
         )
         if response.status_code != 200:
             raise APIError(f"Failed to create index with status {response.status_code}")
