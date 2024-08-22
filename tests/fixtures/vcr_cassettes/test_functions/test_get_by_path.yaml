@@ -7,18 +7,20 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/by_path/test/sdk/test_get_by_path
+    uri: https://api.opper.ai/v1/functions/by_path/test/sdk/test_get_by_path
   response:
     body:
       string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
         not found"}]}'
     headers:
-      content-length:
+      Connection:
+      - keep-alive
+      Content-Length:
       - '98'
-      content-type:
+      Content-Type:
       - application/json
-      date:
-      - Thu, 18 Jul 2024 12:29:04 GMT
+      Date:
+      - Thu, 22 Aug 2024 09:57:37 GMT
       server:
       - uvicorn
     status:
@@ -39,19 +41,21 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/functions
+    uri: https://api.opper.ai/v1/functions
   response:
     body:
-      string: '{"id":30,"uuid":"b7ef1744-81ee-4956-a83c-abc1cd57cb82","dataset_uuid":"b6d5ca83-8b8d-492b-8fb5-a1bbff96dc10","description":"Test
+      string: '{"id":7107,"uuid":"6649cbe6-91de-4b22-b2fa-5f670923f7c4","dataset_uuid":"e2b5deaf-1ec6-4e13-abeb-50c4af35d960","description":"Test
         function","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Do
-        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_get_by_path","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
+        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_get_by_path","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
     headers:
-      content-length:
-      - '453'
-      content-type:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '462'
+      Content-Type:
       - application/json
-      date:
-      - Thu, 18 Jul 2024 12:29:04 GMT
+      Date:
+      - Thu, 22 Aug 2024 09:57:37 GMT
       server:
       - uvicorn
     status:
@@ -65,19 +69,21 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/by_path/test/sdk/test_get_by_path
+    uri: https://api.opper.ai/v1/functions/by_path/test/sdk/test_get_by_path
   response:
     body:
-      string: '{"id":30,"uuid":"b7ef1744-81ee-4956-a83c-abc1cd57cb82","dataset_uuid":"b6d5ca83-8b8d-492b-8fb5-a1bbff96dc10","description":"Test
+      string: '{"id":7107,"uuid":"6649cbe6-91de-4b22-b2fa-5f670923f7c4","dataset_uuid":"e2b5deaf-1ec6-4e13-abeb-50c4af35d960","description":"Test
         function","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Do
-        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_get_by_path","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
+        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_get_by_path","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
     headers:
-      content-length:
-      - '453'
-      content-type:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '462'
+      Content-Type:
       - application/json
-      date:
-      - Thu, 18 Jul 2024 12:29:05 GMT
+      Date:
+      - Thu, 22 Aug 2024 09:57:37 GMT
       server:
       - uvicorn
     status:
@@ -91,15 +97,17 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/b7ef1744-81ee-4956-a83c-abc1cd57cb82
+    uri: https://api.opper.ai/v1/functions/6649cbe6-91de-4b22-b2fa-5f670923f7c4
   response:
     body:
       string: ''
     headers:
-      content-type:
+      Connection:
+      - keep-alive
+      Content-Type:
       - application/json
-      date:
-      - Thu, 18 Jul 2024 12:29:05 GMT
+      Date:
+      - Thu, 22 Aug 2024 09:57:38 GMT
       server:
       - uvicorn
     status:

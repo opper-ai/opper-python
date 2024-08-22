@@ -11,17 +11,19 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/indexes
+    uri: https://api.opper.ai/v1/indexes
   response:
     body:
-      string: '{"id":11,"uuid":"959d921b-87d8-4935-8a69-ddb1b3cb69dc","name":"test_get_by_name","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"files":[],"created_at":"2024-07-18T12:29:24.216920Z"}'
+      string: '{"id":2832,"uuid":"7050702c-22c7-4238-8b05-517f54bbc366","name":"test_get_by_name","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"files":[],"created_at":"2024-08-22T09:58:08.448419Z"}'
     headers:
-      content-length:
-      - '205'
-      content-type:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '214'
+      Content-Type:
       - application/json
-      date:
-      - Thu, 18 Jul 2024 12:29:23 GMT
+      Date:
+      - Thu, 22 Aug 2024 09:58:08 GMT
       server:
       - uvicorn
     status:
@@ -35,18 +37,20 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/indexes
+    uri: https://api.opper.ai/v1/indexes
   response:
     body:
-      string: '[{"id":11,"uuid":"959d921b-87d8-4935-8a69-ddb1b3cb69dc","org_id":1,"org_name":null,"name":"test_get_by_name","created_by":"Mattias
-        Lundell","created_at":"2024-07-18T12:29:24.216920Z","updated_at":"2024-07-18T12:29:24.216920Z","count":0,"project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"}}]'
+      string: '[{"id":2832,"uuid":"7050702c-22c7-4238-8b05-517f54bbc366","org_id":1,"org_name":null,"name":"test_get_by_name","created_by":"Johnny
+        Chadda","created_at":"2024-08-22T09:58:08.448419Z","updated_at":"2024-08-22T09:58:08.448419Z","count":0,"project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"}}]'
     headers:
-      content-length:
-      - '307'
-      content-type:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '314'
+      Content-Type:
       - application/json
-      date:
-      - Thu, 18 Jul 2024 12:29:23 GMT
+      Date:
+      - Thu, 22 Aug 2024 09:58:08 GMT
       server:
       - uvicorn
     status:
@@ -60,17 +64,19 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/indexes/959d921b-87d8-4935-8a69-ddb1b3cb69dc
+    uri: https://api.opper.ai/v1/indexes/7050702c-22c7-4238-8b05-517f54bbc366
   response:
     body:
       string: 'true'
     headers:
-      content-length:
+      Connection:
+      - keep-alive
+      Content-Length:
       - '4'
-      content-type:
+      Content-Type:
       - application/json
-      date:
-      - Thu, 18 Jul 2024 12:29:23 GMT
+      Date:
+      - Thu, 22 Aug 2024 09:58:08 GMT
       server:
       - uvicorn
     status:

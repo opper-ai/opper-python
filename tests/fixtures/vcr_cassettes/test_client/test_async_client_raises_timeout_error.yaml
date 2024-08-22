@@ -7,74 +7,52 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/by_path/test_async_client_raises_timeout_error
+    uri: https://api.opper.ai/v1/functions/by_path/test_async_client_raises_timeout_error
   response:
     body:
-      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
-        not found"}]}'
+      string: '{"id":7075,"uuid":"5a66fd73-c497-4bba-8369-9481c1c55809","dataset_uuid":"3e2000c9-8978-432f-a3c8-d19a0fed9eea","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"test","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test_async_client_raises_timeout_error","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
     headers:
-      content-length:
-      - '98'
-      content-type:
-      - application/json
-      date:
-      - Thu, 18 Jul 2024 12:28:58 GMT
-      server:
-      - uvicorn
-    status:
-      code: 404
-      message: Not Found
-- request:
-    body: ''
-    headers:
-      accept:
-      - '*/*'
-      connection:
+      Connection:
       - keep-alive
-    method: GET
-    uri: http://localhost:8000/v1/functions/by_path/test_async_client_raises_timeout_error
-  response:
-    body:
-      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
-        not found"}]}'
-    headers:
-      content-length:
-      - '98'
-      content-type:
+      Content-Length:
+      - '456'
+      Content-Type:
       - application/json
-      date:
-      - Thu, 18 Jul 2024 12:28:58 GMT
+      Date:
+      - Thu, 22 Aug 2024 09:57:21 GMT
       server:
       - uvicorn
     status:
-      code: 404
-      message: Not Found
+      code: 200
+      message: OK
 - request:
-    body: '{"uuid": null, "path": "test_async_client_raises_timeout_error", "description":
-      null, "input_schema": null, "out_schema": null, "instructions": "test", "model":
-      null, "index_ids": [], "use_semantic_search": null, "few_shot": null, "few_shot_count":
-      null, "cache_configuration": null, "dataset_uuid": null}'
+    body: '{"uuid": "5a66fd73-c497-4bba-8369-9481c1c55809", "path": "test_async_client_raises_timeout_error",
+      "description": null, "input_schema": null, "out_schema": null, "instructions":
+      "test", "model": null, "index_ids": [], "use_semantic_search": false, "few_shot":
+      false, "few_shot_count": 2, "cache_configuration": null, "dataset_uuid": "3e2000c9-8978-432f-a3c8-d19a0fed9eea"}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '305'
+      - '372'
       content-type:
       - application/json
-    method: POST
-    uri: http://localhost:8000/v1/functions
+    method: PATCH
+    uri: https://api.opper.ai/v1/functions/5a66fd73-c497-4bba-8369-9481c1c55809
   response:
     body:
-      string: '{"id":24,"uuid":"c932a20a-f2b9-4418-8fc4-c4756df7971e","dataset_uuid":"c06034ca-b42b-4c32-9925-83ccd48bc50a","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"test","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test_async_client_raises_timeout_error","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
+      string: '{"id":7075,"uuid":"5a66fd73-c497-4bba-8369-9481c1c55809","dataset_uuid":"3e2000c9-8978-432f-a3c8-d19a0fed9eea","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"test","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test_async_client_raises_timeout_error","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
     headers:
-      content-length:
-      - '447'
-      content-type:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '456'
+      Content-Type:
       - application/json
-      date:
-      - Thu, 18 Jul 2024 12:28:58 GMT
+      Date:
+      - Thu, 22 Aug 2024 09:57:21 GMT
       server:
       - uvicorn
     status:
