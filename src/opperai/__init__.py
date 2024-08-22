@@ -15,10 +15,12 @@ from ._client import AsyncClient, Client
 class Opper:
     client: Client = None
 
-    def __init__(self, client: Client = None):
+    def __init__(self, client: Client = None, api_key: str = None):
         if client is not None:
             if not isinstance(client, Client):
                 raise ValueError("Client must be an instance of Client")
+        if api_key is not None:
+            client = Client(api_key=api_key)
         if client is None:
             client = Client()
 
@@ -33,10 +35,12 @@ class Opper:
 class AsyncOpper(Opper):
     client: AsyncClient = None
 
-    def __init__(self, client: AsyncClient = None):
+    def __init__(self, client: AsyncClient = None, api_key: str = None):
         if client is not None:
             if not isinstance(client, AsyncClient):
                 raise ValueError("Client must be an instance of AsyncClient")
+        if api_key is not None:
+            client = AsyncClient(api_key=api_key)
         if client is None:
             client = AsyncClient()
 
