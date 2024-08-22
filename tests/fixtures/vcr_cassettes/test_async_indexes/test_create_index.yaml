@@ -11,17 +11,19 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/indexes
+    uri: https://api.opper.ai/v1/indexes
   response:
     body:
-      string: '{"id":1,"uuid":"cbe9ca20-d721-4f42-882d-446c385366d7","name":"test_create_index","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"files":[],"created_at":"2024-07-18T12:28:56.980493Z"}'
+      string: '{"id":2822,"uuid":"030d37c8-ac48-4019-bd50-a0017bc9db20","name":"test_create_index","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"files":[],"created_at":"2024-08-22T09:57:16.464490Z"}'
     headers:
-      content-length:
-      - '205'
-      content-type:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '215'
+      Content-Type:
       - application/json
-      date:
-      - Thu, 18 Jul 2024 12:28:56 GMT
+      Date:
+      - Thu, 22 Aug 2024 09:57:16 GMT
       server:
       - uvicorn
     status:
@@ -35,17 +37,19 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/indexes/cbe9ca20-d721-4f42-882d-446c385366d7
+    uri: https://api.opper.ai/v1/indexes/030d37c8-ac48-4019-bd50-a0017bc9db20
   response:
     body:
       string: 'true'
     headers:
-      content-length:
+      Connection:
+      - keep-alive
+      Content-Length:
       - '4'
-      content-type:
+      Content-Type:
       - application/json
-      date:
-      - Thu, 18 Jul 2024 12:28:56 GMT
+      Date:
+      - Thu, 22 Aug 2024 09:57:16 GMT
       server:
       - uvicorn
     status:

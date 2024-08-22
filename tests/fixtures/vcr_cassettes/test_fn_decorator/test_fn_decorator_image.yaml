@@ -7,55 +7,60 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/by_path/describe_image
+    uri: https://api.opper.ai/v1/functions/by_path/describe_image
   response:
     body:
-      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
-        not found"}]}'
+      string: '{"id":7078,"uuid":"c70788f3-bece-4347-b1e6-daf7b77c12a4","dataset_uuid":"4a0acf69-ff70-493a-acdb-4ea4607a9ce4","description":"given
+        an image describe what it is","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
+        describe_image\n\nOperation description: given an image describe what it is","language_model_id":null,"model":"openai/gpt-4o","out_schema":{"properties":{"description":{"title":"Description","type":"string"}},"required":["description"],"title":"ImageDescription","type":"object","$defs":{}},"path":"describe_image","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
     headers:
-      content-length:
-      - '98'
-      content-type:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '693'
+      Content-Type:
       - application/json
-      date:
-      - Thu, 18 Jul 2024 12:29:54 GMT
+      Date:
+      - Thu, 22 Aug 2024 09:57:28 GMT
       server:
       - uvicorn
     status:
-      code: 404
-      message: Not Found
+      code: 200
+      message: OK
 - request:
-    body: '{"uuid": null, "path": "describe_image", "description": "given an image
-      describe what it is", "input_schema": null, "out_schema": {"properties": {"description":
-      {"title": "Description", "type": "string"}}, "required": ["description"], "title":
-      "ImageDescription", "type": "object", "$defs": {}}, "instructions": "Operation:
-      describe_image\n\nOperation description: given an image describe what it is",
-      "model": "openai/gpt-4o", "index_ids": [], "use_semantic_search": null, "few_shot":
-      false, "few_shot_count": null, "cache_configuration": null, "dataset_uuid":
-      null}'
+    body: '{"uuid": "c70788f3-bece-4347-b1e6-daf7b77c12a4", "path": "describe_image",
+      "description": "given an image describe what it is", "input_schema": null, "out_schema":
+      {"properties": {"description": {"title": "Description", "type": "string"}},
+      "required": ["description"], "title": "ImageDescription", "type": "object",
+      "$defs": {}}, "instructions": "Operation: describe_image\n\nOperation description:
+      given an image describe what it is", "model": "openai/gpt-4o", "index_ids":
+      [], "use_semantic_search": null, "few_shot": false, "few_shot_count": null,
+      "cache_configuration": null, "dataset_uuid": null}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '567'
+      - '601'
       content-type:
       - application/json
-    method: POST
-    uri: http://localhost:8000/v1/functions
+    method: PATCH
+    uri: https://api.opper.ai/v1/functions/c70788f3-bece-4347-b1e6-daf7b77c12a4
   response:
     body:
-      string: '{"id":39,"uuid":"fb7a1508-45da-4a93-8e6e-e5fe01a485a7","dataset_uuid":"219dac04-0c8e-4f83-a918-2d34e7196c30","description":"given
+      string: '{"id":7078,"uuid":"c70788f3-bece-4347-b1e6-daf7b77c12a4","dataset_uuid":"4a0acf69-ff70-493a-acdb-4ea4607a9ce4","description":"given
         an image describe what it is","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
-        describe_image\n\nOperation description: given an image describe what it is","language_model_id":null,"model":"openai/gpt-4o","out_schema":{"properties":{"description":{"title":"Description","type":"string"}},"required":["description"],"title":"ImageDescription","type":"object","$defs":{}},"path":"describe_image","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
+        describe_image\n\nOperation description: given an image describe what it is","language_model_id":null,"model":"openai/gpt-4o","out_schema":{"properties":{"description":{"title":"Description","type":"string"}},"required":["description"],"title":"ImageDescription","type":"object","$defs":{}},"path":"describe_image","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
     headers:
-      content-length:
-      - '684'
-      content-type:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '693'
+      Content-Type:
       - application/json
-      date:
-      - Thu, 18 Jul 2024 12:29:54 GMT
+      Date:
+      - Thu, 22 Aug 2024 09:57:28 GMT
       server:
       - uvicorn
     status:
@@ -74,21 +79,21 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/chat/describe_image
+    uri: https://api.opper.ai/v1/chat/describe_image
   response:
     body:
-      string: '{"span_id":"279044a9-8ed2-4b70-8f50-19510251f339","message":null,"json_payload":{"description":"The
-        image shows a fossil embedded in a rock. The fossil appears to be of a small
-        reptile or amphibian, with a clearly visible skeleton including the skull,
-        spine, ribcage, limbs, and tail. The rock matrix surrounding the fossil is
-        light in color."},"context":null,"cached":false}'
+      string: '{"span_id":"64b47f71-93b1-48c5-9683-d1bbb48e2f5f","message":null,"json_payload":{"description":"The
+        image shows a fossilized skeleton of a prehistoric reptile embedded in a stone
+        or rock."},"context":null,"cached":false}'
     headers:
-      content-length:
-      - '375'
-      content-type:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '220'
+      Content-Type:
       - application/json
-      date:
-      - Thu, 18 Jul 2024 12:29:54 GMT
+      Date:
+      - Thu, 22 Aug 2024 09:57:31 GMT
       server:
       - uvicorn
     status:
