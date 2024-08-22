@@ -27,7 +27,7 @@ jobs:
           curl -sSL https://install.python-poetry.org | python3 -
       - name: Install dependencies
         run: |
-          poetry install -e . --with test
+          poetry install --with test
       - name: Run lint
         run: |
           poetry run ruff format --check .
@@ -51,7 +51,7 @@ jobs:
           curl -sSL https://install.python-poetry.org | python3 -
       - name: Install dependencies
         run: |
-          poetry install -e . --with test
+          poetry install --with test
       - name: Run tests
         env:
           OPPER_API_KEY: ${{ secrets.OPPER_API_KEY }}
@@ -74,7 +74,7 @@ jobs:
           curl -sSL https://install.python-poetry.org | python3 -
       - name: Install dependencies
         run: |
-          poetry install -e . --with test
+          poetry install --with test
       - name: Run tests
         env:
           OPPER_API_KEY: ${{ secrets.OPPER_API_KEY }}
@@ -104,7 +104,7 @@ jobs:
           curl -sSL https://install.python-poetry.org | python3 -
       - name: Install dependencies
         run: |
-          poetry install -e .
+          poetry install
       - name: Build package
         run: poetry build
       - name: Store the distribution packages
