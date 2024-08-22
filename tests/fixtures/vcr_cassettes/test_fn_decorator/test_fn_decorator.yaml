@@ -7,53 +7,58 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/by_path/translate
+    uri: https://api.opper.ai/v1/functions/by_path/translate
   response:
     body:
-      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
-        not found"}]}'
-    headers:
-      content-length:
-      - '98'
-      content-type:
-      - application/json
-      date:
-      - Thu, 18 Jul 2024 12:29:02 GMT
-      server:
-      - uvicorn
-    status:
-      code: 404
-      message: Not Found
-- request:
-    body: '{"uuid": null, "path": "translate", "description": "Translate text to a
-      target language.", "input_schema": null, "out_schema": {"type": "string", "$defs":
-      {}}, "instructions": "Operation: translate\n\nOperation description: Translate
-      text to a target language.", "model": null, "index_ids": [], "use_semantic_search":
-      null, "few_shot": false, "few_shot_count": null, "cache_configuration": null,
-      "dataset_uuid": null}'
-    headers:
-      accept:
-      - '*/*'
-      connection:
-      - keep-alive
-      content-length:
-      - '417'
-      content-type:
-      - application/json
-    method: POST
-    uri: http://localhost:8000/v1/functions
-  response:
-    body:
-      string: '{"id":27,"uuid":"a40ac806-fc2d-4c8d-b7f2-bf624e2285fc","dataset_uuid":"35ddaa3c-d91f-4c90-bfd9-f2619b2daabb","description":"Translate
+      string: '{"id":7079,"uuid":"ca3b5b95-6974-49ff-ae8d-f06266be63ae","dataset_uuid":"9a97982a-068e-4cf0-8df7-53f8538a3a78","description":"Translate
         text to a target language.","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
-        translate\n\nOperation description: Translate text to a target language.","language_model_id":null,"model":"azure/gpt4-eu","out_schema":{"type":"string","$defs":{}},"path":"translate","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
+        translate\n\nOperation description: Translate text to a target language.","language_model_id":null,"model":"azure/gpt4-eu","out_schema":{"type":"string","$defs":{}},"path":"translate","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
     headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '564'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 22 Aug 2024 09:57:31 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"uuid": "ca3b5b95-6974-49ff-ae8d-f06266be63ae", "path": "translate", "description":
+      "Translate text to a target language.", "input_schema": null, "out_schema":
+      {"type": "string", "$defs": {}}, "instructions": "Operation: translate\n\nOperation
+      description: Translate text to a target language.", "model": null, "index_ids":
+      [], "use_semantic_search": null, "few_shot": false, "few_shot_count": null,
+      "cache_configuration": null, "dataset_uuid": null}'
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
       content-length:
-      - '555'
+      - '451'
       content-type:
       - application/json
-      date:
-      - Thu, 18 Jul 2024 12:29:02 GMT
+    method: PATCH
+    uri: https://api.opper.ai/v1/functions/ca3b5b95-6974-49ff-ae8d-f06266be63ae
+  response:
+    body:
+      string: '{"id":7079,"uuid":"ca3b5b95-6974-49ff-ae8d-f06266be63ae","dataset_uuid":"9a97982a-068e-4cf0-8df7-53f8538a3a78","description":"Translate
+        text to a target language.","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
+        translate\n\nOperation description: Translate text to a target language.","language_model_id":null,"model":"azure/gpt4-eu","out_schema":{"type":"string","$defs":{}},"path":"translate","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '564'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 22 Aug 2024 09:57:31 GMT
       server:
       - uvicorn
     status:
@@ -72,17 +77,19 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/chat/translate
+    uri: https://api.opper.ai/v1/chat/translate
   response:
     body:
-      string: '{"span_id":"385512f3-8b40-4f36-beaa-e93371da8e7c","message":null,"json_payload":"Hola","context":null,"cached":false}'
+      string: '{"span_id":"b66f5042-d4c7-4b2d-aa1b-548e9cf0ef6e","message":null,"json_payload":"Hola","context":null,"cached":false}'
     headers:
-      content-length:
+      Connection:
+      - keep-alive
+      Content-Length:
       - '117'
-      content-type:
+      Content-Type:
       - application/json
-      date:
-      - Thu, 18 Jul 2024 12:29:02 GMT
+      Date:
+      - Thu, 22 Aug 2024 09:57:32 GMT
       server:
       - uvicorn
     status:
@@ -101,17 +108,19 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/chat/translate
+    uri: https://api.opper.ai/v1/chat/translate
   response:
     body:
-      string: '{"span_id":"a277ac28-f76d-4bad-b400-93a2cc1b84bd","message":null,"json_payload":"Hola","context":null,"cached":false}'
+      string: '{"span_id":"a436ca92-3ddb-4f48-aa3f-17e0127ffde9","message":null,"json_payload":"Hola","context":null,"cached":false}'
     headers:
-      content-length:
+      Connection:
+      - keep-alive
+      Content-Length:
       - '117'
-      content-type:
+      Content-Type:
       - application/json
-      date:
-      - Thu, 18 Jul 2024 12:29:03 GMT
+      Date:
+      - Thu, 22 Aug 2024 09:57:33 GMT
       server:
       - uvicorn
     status:
@@ -129,17 +138,19 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/spans/a277ac28-f76d-4bad-b400-93a2cc1b84bd/metrics
+    uri: https://api.opper.ai/v1/spans/a436ca92-3ddb-4f48-aa3f-17e0127ffde9/metrics
   response:
     body:
-      string: '{"id":"50ce181f-d488-4590-a65e-0216449088e6","span_id":"a277ac28-f76d-4bad-b400-93a2cc1b84bd","dimension":"metric","value":1.0,"comment":null,"updated_at":null,"created_at":"2024-07-18T12:29:05.633394Z"}'
+      string: '{"id":"745ec19f-8e71-49f1-8c73-98972e483661","span_id":"a436ca92-3ddb-4f48-aa3f-17e0127ffde9","dimension":"metric","value":1.0,"comment":null,"updated_at":null,"created_at":"2024-08-22T09:57:33.616742Z"}'
     headers:
-      content-length:
+      Connection:
+      - keep-alive
+      Content-Length:
       - '203'
-      content-type:
+      Content-Type:
       - application/json
-      date:
-      - Thu, 18 Jul 2024 12:29:04 GMT
+      Date:
+      - Thu, 22 Aug 2024 09:57:33 GMT
       server:
       - uvicorn
     status:

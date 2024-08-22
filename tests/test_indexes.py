@@ -52,7 +52,9 @@ def test_list_indexes(vcr_cassette, client: Client):
         with index("test_list_indexes_2", client) as idx_2:
             idxs = client.indexes.list()
             assert len(idxs) == 2
-            assert idxs[1].name == "test_list_indexes_2"
+            index_names = {idx.name for idx in idxs}
+            assert "test_list_indexes" in index_names
+            assert "test_list_indexes_2" in index_names
 
 
 def test_index_document(vcr_cassette, client: Client):

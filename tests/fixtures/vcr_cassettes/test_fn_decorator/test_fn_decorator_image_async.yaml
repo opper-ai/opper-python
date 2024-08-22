@@ -7,56 +7,62 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/by_path/extract_letters
+    uri: https://api.opper.ai/v1/functions/by_path/extract_letters
   response:
     body:
-      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
-        not found"}]}'
+      string: '{"id":7092,"uuid":"8c65877f-0760-45ff-ba05-64cded77b0bb","dataset_uuid":"ab9cb5d8-78aa-45f5-9134-fe34851f7d6b","description":"given
+        an image extract the word it represents","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
+        extract_letters\n\nOperation description: given an image extract the word
+        it represents","language_model_id":null,"model":"openai/gpt-4o","out_schema":{"properties":{"letters":{"items":{"type":"string"},"title":"Letters","type":"array"}},"required":["letters"],"title":"Word","type":"object","$defs":{}},"path":"extract_letters","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
     headers:
-      content-length:
-      - '98'
-      content-type:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '718'
+      Content-Type:
       - application/json
-      date:
-      - Thu, 18 Jul 2024 12:30:30 GMT
+      Date:
+      - Thu, 22 Aug 2024 10:00:48 GMT
       server:
       - uvicorn
     status:
-      code: 404
-      message: Not Found
+      code: 200
+      message: OK
 - request:
-    body: '{"uuid": null, "path": "extract_letters", "description": "given an image
-      extract the word it represents", "input_schema": null, "out_schema": {"properties":
-      {"letters": {"items": {"type": "string"}, "title": "Letters", "type": "array"}},
-      "required": ["letters"], "title": "Word", "type": "object", "$defs": {}}, "instructions":
-      "Operation: extract_letters\n\nOperation description: given an image extract
-      the word it represents", "model": "openai/gpt-4o", "index_ids": [], "use_semantic_search":
-      null, "few_shot": false, "few_shot_count": null, "cache_configuration": null,
-      "dataset_uuid": null}'
+    body: '{"uuid": "8c65877f-0760-45ff-ba05-64cded77b0bb", "path": "extract_letters",
+      "description": "given an image extract the word it represents", "input_schema":
+      null, "out_schema": {"properties": {"letters": {"items": {"type": "string"},
+      "title": "Letters", "type": "array"}}, "required": ["letters"], "title": "Word",
+      "type": "object", "$defs": {}}, "instructions": "Operation: extract_letters\n\nOperation
+      description: given an image extract the word it represents", "model": "openai/gpt-4o",
+      "index_ids": [], "use_semantic_search": null, "few_shot": false, "few_shot_count":
+      null, "cache_configuration": null, "dataset_uuid": null}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '595'
+      - '629'
       content-type:
       - application/json
-    method: POST
-    uri: http://localhost:8000/v1/functions
+    method: PATCH
+    uri: https://api.opper.ai/v1/functions/8c65877f-0760-45ff-ba05-64cded77b0bb
   response:
     body:
-      string: '{"id":40,"uuid":"8ff8939f-a416-4597-9ac7-f4102f48ee1a","dataset_uuid":"2cfd908d-dba7-4728-9eef-7a0c2bc4f40c","description":"given
+      string: '{"id":7092,"uuid":"8c65877f-0760-45ff-ba05-64cded77b0bb","dataset_uuid":"ab9cb5d8-78aa-45f5-9134-fe34851f7d6b","description":"given
         an image extract the word it represents","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
         extract_letters\n\nOperation description: given an image extract the word
-        it represents","language_model_id":null,"model":"openai/gpt-4o","out_schema":{"properties":{"letters":{"items":{"type":"string"},"title":"Letters","type":"array"}},"required":["letters"],"title":"Word","type":"object","$defs":{}},"path":"extract_letters","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
+        it represents","language_model_id":null,"model":"openai/gpt-4o","out_schema":{"properties":{"letters":{"items":{"type":"string"},"title":"Letters","type":"array"}},"required":["letters"],"title":"Word","type":"object","$defs":{}},"path":"extract_letters","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
     headers:
-      content-length:
-      - '709'
-      content-type:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '718'
+      Content-Type:
       - application/json
-      date:
-      - Thu, 18 Jul 2024 12:30:30 GMT
+      Date:
+      - Thu, 22 Aug 2024 10:00:48 GMT
       server:
       - uvicorn
     status:
@@ -75,17 +81,19 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/chat/extract_letters
+    uri: https://api.opper.ai/v1/chat/extract_letters
   response:
     body:
-      string: '{"span_id":"e882002e-b5e6-48d1-ac58-e7a6722e19fc","message":null,"json_payload":{"letters":["L","E","T","T","E","R"]},"context":null,"cached":false}'
+      string: '{"span_id":"d2476a24-2663-449a-953f-7bf30c2d7f93","message":null,"json_payload":{"letters":["L","E","T","T","E","R"]},"context":null,"cached":false}'
     headers:
-      content-length:
+      Connection:
+      - keep-alive
+      Content-Length:
       - '148'
-      content-type:
+      Content-Type:
       - application/json
-      date:
-      - Thu, 18 Jul 2024 12:30:30 GMT
+      Date:
+      - Thu, 22 Aug 2024 10:00:52 GMT
       server:
       - uvicorn
     status:

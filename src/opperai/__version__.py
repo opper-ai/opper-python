@@ -1,3 +1,6 @@
-from importlib.metadata import version
+from importlib.metadata import version, PackageNotFoundError
 
-__version__ = version("opperai")
+try:
+    __version__ = version("opperai")
+except PackageNotFoundError:
+    __version__ = "unknown"

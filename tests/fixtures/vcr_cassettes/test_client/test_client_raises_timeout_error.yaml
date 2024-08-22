@@ -7,74 +7,52 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/by_path/test_client_raises_timeout_error
+    uri: https://api.opper.ai/v1/functions/by_path/test_client_raises_timeout_error
   response:
     body:
-      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
-        not found"}]}'
+      string: '{"id":7076,"uuid":"abc39742-da8a-42b1-a91c-32f8a6b75085","dataset_uuid":"8bfd5744-6b2f-4db8-b25d-40763d26e59b","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"test","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test_client_raises_timeout_error","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
     headers:
-      content-length:
-      - '98'
-      content-type:
-      - application/json
-      date:
-      - Thu, 18 Jul 2024 12:28:58 GMT
-      server:
-      - uvicorn
-    status:
-      code: 404
-      message: Not Found
-- request:
-    body: ''
-    headers:
-      accept:
-      - '*/*'
-      connection:
+      Connection:
       - keep-alive
-    method: GET
-    uri: http://localhost:8000/v1/functions/by_path/test_client_raises_timeout_error
-  response:
-    body:
-      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
-        not found"}]}'
-    headers:
-      content-length:
-      - '98'
-      content-type:
+      Content-Length:
+      - '450'
+      Content-Type:
       - application/json
-      date:
-      - Thu, 18 Jul 2024 12:28:58 GMT
+      Date:
+      - Thu, 22 Aug 2024 09:57:22 GMT
       server:
       - uvicorn
     status:
-      code: 404
-      message: Not Found
+      code: 200
+      message: OK
 - request:
-    body: '{"uuid": null, "path": "test_client_raises_timeout_error", "description":
-      null, "input_schema": null, "out_schema": null, "instructions": "test", "model":
-      null, "index_ids": [], "use_semantic_search": null, "few_shot": null, "few_shot_count":
-      null, "cache_configuration": null, "dataset_uuid": null}'
+    body: '{"uuid": "abc39742-da8a-42b1-a91c-32f8a6b75085", "path": "test_client_raises_timeout_error",
+      "description": null, "input_schema": null, "out_schema": null, "instructions":
+      "test", "model": null, "index_ids": [], "use_semantic_search": false, "few_shot":
+      false, "few_shot_count": 2, "cache_configuration": null, "dataset_uuid": "8bfd5744-6b2f-4db8-b25d-40763d26e59b"}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '299'
+      - '366'
       content-type:
       - application/json
-    method: POST
-    uri: http://localhost:8000/v1/functions
+    method: PATCH
+    uri: https://api.opper.ai/v1/functions/abc39742-da8a-42b1-a91c-32f8a6b75085
   response:
     body:
-      string: '{"id":25,"uuid":"e76cea8e-e28f-45c2-9cf3-efaa470829d7","dataset_uuid":"61fe3672-c3f7-490a-b81c-10d14e94a9f0","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"test","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test_client_raises_timeout_error","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
+      string: '{"id":7076,"uuid":"abc39742-da8a-42b1-a91c-32f8a6b75085","dataset_uuid":"8bfd5744-6b2f-4db8-b25d-40763d26e59b","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"test","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test_client_raises_timeout_error","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
     headers:
-      content-length:
-      - '441'
-      content-type:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '450'
+      Content-Type:
       - application/json
-      date:
-      - Thu, 18 Jul 2024 12:28:58 GMT
+      Date:
+      - Thu, 22 Aug 2024 09:57:22 GMT
       server:
       - uvicorn
     status:
