@@ -21,7 +21,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:28 GMT
+      - Thu, 22 Aug 2024 14:02:45 GMT
       server:
       - uvicorn
     status:
@@ -60,7 +60,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:28 GMT
+      - Thu, 22 Aug 2024 14:02:45 GMT
       server:
       - uvicorn
     status:
@@ -82,18 +82,19 @@ interactions:
     uri: https://api.opper.ai/v1/chat/describe_image
   response:
     body:
-      string: '{"span_id":"64b47f71-93b1-48c5-9683-d1bbb48e2f5f","message":null,"json_payload":{"description":"The
-        image shows a fossilized skeleton of a prehistoric reptile embedded in a stone
-        or rock."},"context":null,"cached":false}'
+      string: '{"span_id":"6c980b53-a8a4-48f9-ad88-f07e7d454dca","message":null,"json_payload":{"description":"The
+        image shows a fossil of an ancient creature preserved in a rock. The fossil
+        includes a detailed skeleton with visible ribs, spine, limbs, and skull. It
+        appears to be well-preserved and is likely displayed for study or exhibition."},"context":null,"cached":false}'
     headers:
       Connection:
       - keep-alive
       Content-Length:
-      - '220'
+      - '362'
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:31 GMT
+      - Thu, 22 Aug 2024 14:02:52 GMT
       server:
       - uvicorn
     status:

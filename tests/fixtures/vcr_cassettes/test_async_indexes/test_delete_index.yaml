@@ -1,20 +1,20 @@
 interactions:
 - request:
-    body: '{"name": "test_delete_index"}'
+    body: '{"name": "test_delete_index", "embedding_model": "text-embedding-ada-002"}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '29'
+      - '74'
       content-type:
       - application/json
     method: POST
     uri: https://api.opper.ai/v1/indexes
   response:
     body:
-      string: '{"id":2823,"uuid":"bfc11220-d58d-485d-b3a9-e9866f28a91d","name":"test_delete_index","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"files":[],"created_at":"2024-08-22T09:57:16.704830Z"}'
+      string: '{"id":2840,"uuid":"1ec9526b-44c0-4dbb-8b9d-db74c8f03840","name":"test_delete_index","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"files":[],"created_at":"2024-08-22T14:02:31.791081Z"}'
     headers:
       Connection:
       - keep-alive
@@ -23,7 +23,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:16 GMT
+      - Thu, 22 Aug 2024 14:02:31 GMT
       server:
       - uvicorn
     status:
@@ -37,7 +37,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: https://api.opper.ai/v1/indexes/bfc11220-d58d-485d-b3a9-e9866f28a91d
+    uri: https://api.opper.ai/v1/indexes/1ec9526b-44c0-4dbb-8b9d-db74c8f03840
   response:
     body:
       string: 'true'
@@ -49,7 +49,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:16 GMT
+      - Thu, 22 Aug 2024 14:02:32 GMT
       server:
       - uvicorn
     status:
@@ -63,7 +63,7 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: https://api.opper.ai/v1/indexes/bfc11220-d58d-485d-b3a9-e9866f28a91d
+    uri: https://api.opper.ai/v1/indexes/1ec9526b-44c0-4dbb-8b9d-db74c8f03840
   response:
     body:
       string: '{"errors":[{"type":"HTTPException","message":"Index not found","detail":"Index
@@ -76,7 +76,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:17 GMT
+      - Thu, 22 Aug 2024 14:02:32 GMT
       server:
       - uvicorn
     status:
@@ -90,7 +90,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: https://api.opper.ai/v1/indexes/bfc11220-d58d-485d-b3a9-e9866f28a91d
+    uri: https://api.opper.ai/v1/indexes/1ec9526b-44c0-4dbb-8b9d-db74c8f03840
   response:
     body:
       string: '{"errors":[{"type":"HTTPException","message":"Index not found","detail":"Index
@@ -103,7 +103,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:17 GMT
+      - Thu, 22 Aug 2024 14:02:32 GMT
       server:
       - uvicorn
     status:

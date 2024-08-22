@@ -1,20 +1,20 @@
 interactions:
 - request:
-    body: '{"name": "test_index_document"}'
+    body: '{"name": "test_index_document", "embedding_model": "text-embedding-ada-002"}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '31'
+      - '76'
       content-type:
       - application/json
     method: POST
     uri: https://api.opper.ai/v1/indexes
   response:
     body:
-      string: '{"id":2835,"uuid":"3391502b-fdcc-40bd-a9dc-198380fe8917","name":"test_index_document","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"files":[],"created_at":"2024-08-22T09:58:09.364241Z"}'
+      string: '{"id":2852,"uuid":"1d3b1884-0c66-4448-b566-4ee0d804a6bf","name":"test_index_document","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"files":[],"created_at":"2024-08-22T14:03:34.720589Z"}'
     headers:
       Connection:
       - keep-alive
@@ -23,7 +23,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:58:09 GMT
+      - Thu, 22 Aug 2024 14:03:34 GMT
       server:
       - uvicorn
     status:
@@ -41,10 +41,10 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: https://api.opper.ai/v1/indexes/3391502b-fdcc-40bd-a9dc-198380fe8917/index
+    uri: https://api.opper.ai/v1/indexes/1d3b1884-0c66-4448-b566-4ee0d804a6bf/index
   response:
     body:
-      string: '{"id":41238,"uuid":"5225fe50-1f50-4a50-ad23-aed3a7c886b9","key":"5225fe50-1f50-4a50-ad23-aed3a7c886b9"}'
+      string: '{"id":41265,"uuid":"ae41e8aa-19cd-4237-bfca-6dc8f7ee32b4","key":"ae41e8aa-19cd-4237-bfca-6dc8f7ee32b4"}'
     headers:
       Connection:
       - keep-alive
@@ -53,7 +53,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:58:09 GMT
+      - Thu, 22 Aug 2024 14:03:35 GMT
       server:
       - uvicorn
     status:
@@ -67,7 +67,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: https://api.opper.ai/v1/indexes/3391502b-fdcc-40bd-a9dc-198380fe8917
+    uri: https://api.opper.ai/v1/indexes/1d3b1884-0c66-4448-b566-4ee0d804a6bf
   response:
     body:
       string: 'true'
@@ -79,7 +79,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:58:09 GMT
+      - Thu, 22 Aug 2024 14:03:35 GMT
       server:
       - uvicorn
     status:

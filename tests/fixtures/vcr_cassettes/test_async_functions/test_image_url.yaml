@@ -20,7 +20,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:56:48 GMT
+      - Thu, 22 Aug 2024 14:01:58 GMT
       server:
       - uvicorn
     status:
@@ -44,7 +44,7 @@ interactions:
     uri: https://api.opper.ai/v1/functions
   response:
     body:
-      string: '{"id":7099,"uuid":"485433fa-ce51-498c-97ad-a4c418e68449","dataset_uuid":"365ef93d-77e7-44ae-8a7f-7906d544398c","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+      string: '{"id":7135,"uuid":"d9bf3f6e-8d7c-4821-9da1-5e2ba06dbf0c","dataset_uuid":"cea401e5-5a4d-4f24-b7bc-d3967bde0ed4","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
         the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
     headers:
       Connection:
@@ -54,7 +54,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:56:48 GMT
+      - Thu, 22 Aug 2024 14:01:59 GMT
       server:
       - uvicorn
     status:
@@ -68,10 +68,10 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: https://api.opper.ai/v1/functions/485433fa-ce51-498c-97ad-a4c418e68449
+    uri: https://api.opper.ai/v1/functions/d9bf3f6e-8d7c-4821-9da1-5e2ba06dbf0c
   response:
     body:
-      string: '{"id":7099,"uuid":"485433fa-ce51-498c-97ad-a4c418e68449","dataset_uuid":"365ef93d-77e7-44ae-8a7f-7906d544398c","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+      string: '{"id":7135,"uuid":"d9bf3f6e-8d7c-4821-9da1-5e2ba06dbf0c","dataset_uuid":"cea401e5-5a4d-4f24-b7bc-d3967bde0ed4","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
         the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
     headers:
       Connection:
@@ -81,7 +81,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:56:48 GMT
+      - Thu, 22 Aug 2024 14:01:59 GMT
       server:
       - uvicorn
     status:
@@ -103,24 +103,23 @@ interactions:
     uri: https://api.opper.ai/v1/chat/test/sdk/test_image
   response:
     body:
-      string: '{"span_id":"d4671bb4-c154-4766-940f-aec5ac0dd4e0","message":"The image
-        shows a fossil embedded in a rock matrix, displayed on a dark background,
-        possibly within a museum setting. The specimen appears to be the fossilized
-        remains of a small dinosaur or another prehistoric reptilian creature, featuring
-        a well-preserved skull, vertebral column, ribs, limbs, and tail. The bones
-        are dark and distinct against the lighter color of the surrounding rock. The
-        fossil is exceptionally detailed, providing a clear view of the skeletal structure
-        and arrangement. This type of preservation is often invaluable to paleontologists
-        for studying the anatomy and evolutionary history of ancient species.","json_payload":null,"context":null,"cached":false}'
+      string: '{"span_id":"77634b45-d40d-4c3c-b544-1c4f086f81cc","message":"This image
+        shows a fossil embedded in a rock slab, displayed under lit conditions possibly
+        in a museum or similar setting. The fossil appears to be that of a small reptile,
+        possibly a type of dinosaur or other prehistoric creature, given its skeletal
+        structure and size. The bones are well-preserved and clearly visible, including
+        the skull, spine, ribs, and limbs. The rock matrix surrounding the fossil
+        is relatively smooth, suggesting it may have been prepared to enhance the
+        visibility of the skeleton for educational or display purposes.","json_payload":null,"context":null,"cached":false}'
     headers:
       Connection:
       - keep-alive
       Content-Length:
-      - '740'
+      - '655'
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:56:55 GMT
+      - Thu, 22 Aug 2024 14:02:08 GMT
       server:
       - uvicorn
     status:
@@ -134,7 +133,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: https://api.opper.ai/v1/functions/485433fa-ce51-498c-97ad-a4c418e68449
+    uri: https://api.opper.ai/v1/functions/d9bf3f6e-8d7c-4821-9da1-5e2ba06dbf0c
   response:
     body:
       string: ''
@@ -144,7 +143,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:56:56 GMT
+      - Thu, 22 Aug 2024 14:02:08 GMT
       server:
       - uvicorn
     status:

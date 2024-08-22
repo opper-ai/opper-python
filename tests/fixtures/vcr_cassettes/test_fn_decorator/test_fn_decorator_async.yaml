@@ -21,7 +21,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:33 GMT
+      - Thu, 22 Aug 2024 14:02:55 GMT
       server:
       - uvicorn
     status:
@@ -58,7 +58,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:33 GMT
+      - Thu, 22 Aug 2024 14:02:55 GMT
       server:
       - uvicorn
     status:
@@ -80,7 +80,7 @@ interactions:
     uri: https://api.opper.ai/v1/chat/translate
   response:
     body:
-      string: '{"span_id":"2f5aef3e-92bf-4dbc-a2a9-d2272c79df17","message":null,"json_payload":"Hola","context":null,"cached":false}'
+      string: '{"span_id":"3bf85b29-d87e-4145-8732-fcacc19cf28a","message":null,"json_payload":"Hola","context":null,"cached":false}'
     headers:
       Connection:
       - keep-alive
@@ -89,7 +89,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:34 GMT
+      - Thu, 22 Aug 2024 14:02:56 GMT
       server:
       - uvicorn
     status:
@@ -111,7 +111,7 @@ interactions:
     uri: https://api.opper.ai/v1/chat/translate
   response:
     body:
-      string: '{"span_id":"7ef77d5d-265f-4ca2-b963-2fb267ea99b8","message":null,"json_payload":"Hola","context":null,"cached":false}'
+      string: '{"span_id":"19a9dcc2-4e23-472a-beed-93846521a85b","message":null,"json_payload":"Hola","context":null,"cached":false}'
     headers:
       Connection:
       - keep-alive
@@ -120,7 +120,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:36 GMT
+      - Thu, 22 Aug 2024 14:02:59 GMT
       server:
       - uvicorn
     status:
@@ -138,10 +138,10 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: https://api.opper.ai/v1/spans/7ef77d5d-265f-4ca2-b963-2fb267ea99b8/metrics
+    uri: https://api.opper.ai/v1/spans/19a9dcc2-4e23-472a-beed-93846521a85b/metrics
   response:
     body:
-      string: '{"id":"5a1e8e34-54f0-4d78-b0f5-2cde077dc33f","span_id":"7ef77d5d-265f-4ca2-b963-2fb267ea99b8","dimension":"metric","value":1.0,"comment":null,"updated_at":null,"created_at":"2024-08-22T09:57:36.431603Z"}'
+      string: '{"id":"ec1439b7-03d9-45b4-9c5e-b664b3ee20e9","span_id":"19a9dcc2-4e23-472a-beed-93846521a85b","dimension":"metric","value":1.0,"comment":null,"updated_at":null,"created_at":"2024-08-22T14:02:59.352651Z"}'
     headers:
       Connection:
       - keep-alive
@@ -150,7 +150,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:36 GMT
+      - Thu, 22 Aug 2024 14:02:59 GMT
       server:
       - uvicorn
     status:

@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:21 GMT
+      - Thu, 22 Aug 2024 14:02:37 GMT
       server:
       - uvicorn
     status:
@@ -43,7 +43,7 @@ interactions:
     uri: https://api.opper.ai/v1/spans/bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4134/metrics
   response:
     body:
-      string: '{"id":"f2a719d6-6d41-42b3-a0e9-8786949bc8f6","span_id":"bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4134","dimension":"dim","value":0.5,"comment":"comment","updated_at":null,"created_at":"2024-08-22T09:57:21.353002Z"}'
+      string: '{"id":"08052245-468b-4951-8863-b8b4970c817c","span_id":"bcf1b3b4-0b3b-4b3b-8b3b-0b3b4b3b4134","dimension":"dim","value":0.5,"comment":"comment","updated_at":null,"created_at":"2024-08-22T14:02:37.271363Z"}'
     headers:
       Connection:
       - keep-alive
@@ -52,7 +52,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:21 GMT
+      - Thu, 22 Aug 2024 14:02:37 GMT
       server:
       - uvicorn
     status:
@@ -76,7 +76,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:21 GMT
+      - Thu, 22 Aug 2024 14:02:37 GMT
       server:
       - uvicorn
     status:

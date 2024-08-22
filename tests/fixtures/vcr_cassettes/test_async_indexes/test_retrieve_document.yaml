@@ -1,20 +1,20 @@
 interactions:
 - request:
-    body: '{"name": "test_retrieve_document"}'
+    body: '{"name": "test_retrieve_document", "embedding_model": "text-embedding-ada-002"}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '34'
+      - '79'
       content-type:
       - application/json
     method: POST
     uri: https://api.opper.ai/v1/indexes
   response:
     body:
-      string: '{"id":2827,"uuid":"19d98421-4146-4a17-bcd6-de004179498f","name":"test_retrieve_document","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"files":[],"created_at":"2024-08-22T09:57:18.361228Z"}'
+      string: '{"id":2844,"uuid":"22fec3f9-9706-4518-9fcf-8f6726416232","name":"test_retrieve_document","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"files":[],"created_at":"2024-08-22T14:02:34.036951Z"}'
     headers:
       Connection:
       - keep-alive
@@ -23,7 +23,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:18 GMT
+      - Thu, 22 Aug 2024 14:02:34 GMT
       server:
       - uvicorn
     status:
@@ -41,10 +41,10 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: https://api.opper.ai/v1/indexes/19d98421-4146-4a17-bcd6-de004179498f/index
+    uri: https://api.opper.ai/v1/indexes/22fec3f9-9706-4518-9fcf-8f6726416232/index
   response:
     body:
-      string: '{"id":41236,"uuid":"2d53fa0f-82b6-41e5-bf33-de60c0bfdcfd","key":"2d53fa0f-82b6-41e5-bf33-de60c0bfdcfd"}'
+      string: '{"id":41263,"uuid":"cf5d8ad0-6e4e-45c4-98da-f8dbb35f4aac","key":"cf5d8ad0-6e4e-45c4-98da-f8dbb35f4aac"}'
     headers:
       Connection:
       - keep-alive
@@ -53,7 +53,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:18 GMT
+      - Thu, 22 Aug 2024 14:02:34 GMT
       server:
       - uvicorn
     status:
@@ -71,10 +71,10 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: https://api.opper.ai/v1/indexes/19d98421-4146-4a17-bcd6-de004179498f/query
+    uri: https://api.opper.ai/v1/indexes/22fec3f9-9706-4518-9fcf-8f6726416232/query
   response:
     body:
-      string: '[{"uuid":"a0c15fed-6d2d-4a8e-a6e9-20f00f8f4250","content":"Hello","metadata":{"source":"test"},"document_id":null,"score":29.453125,"source_uuids":["a0c15fed-6d2d-4a8e-a6e9-20f00f8f4250"]}]'
+      string: '[{"uuid":"0890cdd8-1021-41f4-a610-cb7a00e53ca3","content":"Hello","metadata":{"source":"test"},"document_id":null,"score":29.453125,"source_uuids":["0890cdd8-1021-41f4-a610-cb7a00e53ca3"]}]'
     headers:
       Connection:
       - keep-alive
@@ -83,7 +83,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:19 GMT
+      - Thu, 22 Aug 2024 14:02:34 GMT
       server:
       - uvicorn
     status:
@@ -97,7 +97,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: https://api.opper.ai/v1/indexes/19d98421-4146-4a17-bcd6-de004179498f
+    uri: https://api.opper.ai/v1/indexes/22fec3f9-9706-4518-9fcf-8f6726416232
   response:
     body:
       string: 'true'
@@ -109,7 +109,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:19 GMT
+      - Thu, 22 Aug 2024 14:02:35 GMT
       server:
       - uvicorn
     status:
