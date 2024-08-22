@@ -3,6 +3,7 @@ import re
 
 import asyncio
 import pytest
+import sys
 import vcr
 from opperai import AsyncClient, Client
 
@@ -46,8 +47,9 @@ def vcr_cassette(request):
 
 
 @pytest.fixture(scope="session")
-def event_loop():
-    policy = asyncio.get_event_loop_policy()
-    loop = policy.new_event_loop()
-    yield loop
-    loop.close()
+def event_loop_policy():
+    return (
+        asyncio.WindowsSelectorEventLoopPolicy()
+        if sys.platform == "win32"
+        else asyncio.DefaultEventLoopPolicy()
+    )
