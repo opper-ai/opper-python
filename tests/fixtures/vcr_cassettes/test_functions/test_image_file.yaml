@@ -20,7 +20,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:47 GMT
+      - Thu, 22 Aug 2024 14:03:10 GMT
       server:
       - uvicorn
     status:
@@ -44,7 +44,7 @@ interactions:
     uri: https://api.opper.ai/v1/functions
   response:
     body:
-      string: '{"id":7112,"uuid":"96cd74d1-33ef-4af6-b962-68d49099f440","dataset_uuid":"878fc1dc-b971-4fdb-bcaa-9891565d6b68","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+      string: '{"id":7148,"uuid":"f181d6ea-e4f6-47f4-a64c-5bc76aa0c301","dataset_uuid":"dcb4a85c-e4ed-4f98-b990-dd8d66f5d379","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
         the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
     headers:
       Connection:
@@ -54,7 +54,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:47 GMT
+      - Thu, 22 Aug 2024 14:03:10 GMT
       server:
       - uvicorn
     status:
@@ -68,10 +68,10 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: https://api.opper.ai/v1/functions/96cd74d1-33ef-4af6-b962-68d49099f440
+    uri: https://api.opper.ai/v1/functions/f181d6ea-e4f6-47f4-a64c-5bc76aa0c301
   response:
     body:
-      string: '{"id":7112,"uuid":"96cd74d1-33ef-4af6-b962-68d49099f440","dataset_uuid":"878fc1dc-b971-4fdb-bcaa-9891565d6b68","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+      string: '{"id":7148,"uuid":"f181d6ea-e4f6-47f4-a64c-5bc76aa0c301","dataset_uuid":"dcb4a85c-e4ed-4f98-b990-dd8d66f5d379","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
         the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
     headers:
       Connection:
@@ -81,7 +81,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:47 GMT
+      - Thu, 22 Aug 2024 14:03:10 GMT
       server:
       - uvicorn
     status:
@@ -103,25 +103,24 @@ interactions:
     uri: https://api.opper.ai/v1/chat/test/sdk/test_image
   response:
     body:
-      string: '{"span_id":"62af98f5-4220-473b-9acb-c6553db4080f","message":"The image
-        displays a fossilized skeleton of a prehistoric creature preserved within
-        a rock matrix. The skeleton appears to be relatively complete, featuring a
-        distinct skull with a visible eye socket, a spine with well-defined vertebral
-        bones, ribs, and limb bones. The rock surface around the skeleton has a rough
-        texture, suggesting that the fossil might have been excavated from sedimentary
-        rock. The lighting in the photo highlights the details of the fossil, enhancing
-        its three-dimensional appearance against the dark background. This fossil
-        could be an invaluable piece for studying the anatomy and evolutionary history
-        of the creature it belonged to.","json_payload":null,"context":null,"cached":false}'
+      string: '{"span_id":"7eea4728-0ef8-4a18-863a-38d196723eaf","message":"This image
+        shows a well-preserved fossil of a small animal, likely a reptile or amphibian,
+        embedded in a slab of rock. The fossil is relatively complete, displaying
+        the skull, vertebral column, ribs, limbs, and tail distinctly. The rock around
+        the fossil is lightly colored, creating contrast that highlights the fossil''s
+        darker hues and detailed bone structure. The specimen is displayed on a dark
+        background under bright lighting, which enhances its visibility and emphasizes
+        its archaeological significance. Such fossils are invaluable for scientific
+        research, offering insights into ancient life forms and their environments.","json_payload":null,"context":null,"cached":false}'
     headers:
       Connection:
       - keep-alive
       Content-Length:
-      - '771'
+      - '742'
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:54 GMT
+      - Thu, 22 Aug 2024 14:03:19 GMT
       server:
       - uvicorn
     status:
@@ -135,7 +134,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: https://api.opper.ai/v1/functions/96cd74d1-33ef-4af6-b962-68d49099f440
+    uri: https://api.opper.ai/v1/functions/f181d6ea-e4f6-47f4-a64c-5bc76aa0c301
   response:
     body:
       string: ''
@@ -145,7 +144,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:55 GMT
+      - Thu, 22 Aug 2024 14:03:20 GMT
       server:
       - uvicorn
     status:

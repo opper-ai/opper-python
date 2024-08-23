@@ -20,7 +20,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:56:48 GMT
+      - Thu, 22 Aug 2024 14:01:58 GMT
       server:
       - uvicorn
     status:
@@ -44,7 +44,7 @@ interactions:
     uri: https://api.opper.ai/v1/functions
   response:
     body:
-      string: '{"id":7098,"uuid":"51d80d6b-e408-47e9-834b-f03b88405b36","dataset_uuid":"90ec3b33-6190-41c9-9d8f-c33ca3623d21","description":"Test
+      string: '{"id":7134,"uuid":"973e0526-f765-4db5-a2c3-88dc8c81ba8f","dataset_uuid":"6c995bf3-5e6b-4993-b5bb-472d85e6640b","description":"Test
         function","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Do
         something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_delete_function","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
     headers:
@@ -55,7 +55,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:56:48 GMT
+      - Thu, 22 Aug 2024 14:01:58 GMT
       server:
       - uvicorn
     status:
@@ -69,7 +69,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: https://api.opper.ai/v1/functions/51d80d6b-e408-47e9-834b-f03b88405b36
+    uri: https://api.opper.ai/v1/functions/973e0526-f765-4db5-a2c3-88dc8c81ba8f
   response:
     body:
       string: ''
@@ -79,7 +79,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:56:48 GMT
+      - Thu, 22 Aug 2024 14:01:58 GMT
       server:
       - uvicorn
     status:
@@ -93,7 +93,7 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: https://api.opper.ai/v1/functions/51d80d6b-e408-47e9-834b-f03b88405b36
+    uri: https://api.opper.ai/v1/functions/973e0526-f765-4db5-a2c3-88dc8c81ba8f
   response:
     body:
       string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
@@ -106,7 +106,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:56:48 GMT
+      - Thu, 22 Aug 2024 14:01:58 GMT
       server:
       - uvicorn
     status:

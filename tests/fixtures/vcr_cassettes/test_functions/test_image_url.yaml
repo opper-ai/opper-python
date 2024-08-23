@@ -20,7 +20,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:39 GMT
+      - Thu, 22 Aug 2024 14:03:03 GMT
       server:
       - uvicorn
     status:
@@ -44,7 +44,7 @@ interactions:
     uri: https://api.opper.ai/v1/functions
   response:
     body:
-      string: '{"id":7111,"uuid":"a459835d-623f-4d03-989f-a16f79b170b8","dataset_uuid":"eef88f6f-281f-409e-b70d-7a1770e7a43a","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+      string: '{"id":7147,"uuid":"e890e95e-f738-4e73-abff-91f69515ebdb","dataset_uuid":"430a58fc-a7b5-4b17-82b0-809456369b3e","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
         the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
     headers:
       Connection:
@@ -54,7 +54,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:39 GMT
+      - Thu, 22 Aug 2024 14:03:03 GMT
       server:
       - uvicorn
     status:
@@ -68,10 +68,10 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: https://api.opper.ai/v1/functions/a459835d-623f-4d03-989f-a16f79b170b8
+    uri: https://api.opper.ai/v1/functions/e890e95e-f738-4e73-abff-91f69515ebdb
   response:
     body:
-      string: '{"id":7111,"uuid":"a459835d-623f-4d03-989f-a16f79b170b8","dataset_uuid":"eef88f6f-281f-409e-b70d-7a1770e7a43a","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+      string: '{"id":7147,"uuid":"e890e95e-f738-4e73-abff-91f69515ebdb","dataset_uuid":"430a58fc-a7b5-4b17-82b0-809456369b3e","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
         the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
     headers:
       Connection:
@@ -81,7 +81,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:39 GMT
+      - Thu, 22 Aug 2024 14:03:03 GMT
       server:
       - uvicorn
     status:
@@ -103,24 +103,24 @@ interactions:
     uri: https://api.opper.ai/v1/chat/test/sdk/test_image
   response:
     body:
-      string: '{"span_id":"c6c991df-b442-4790-b29d-6db8a71719e4","message":"This image
-        shows a fossilized skeleton of a prehistoric animal preserved in stone. The
-        fossil is laid out on an elliptical slab that appears to be displayed under
-        a light, possibly in a museum setting. The skeleton includes a complete spinal
-        column, ribs, limbs, a tail, and a distinct skull with visible cranial and
-        facial features. The posture of the skeleton suggests it was fossilized in
-        a dormant or resting position, with the head turned towards the viewer. The
-        detail of the bones and their state of preservation provide valuable insights
-        into the anatomy and possible lifestyle of this creature when it was alive.","json_payload":null,"context":null,"cached":false}'
+      string: '{"span_id":"5c6a7cf8-9983-4591-a6e2-e8f7669c6dee","message":"This image
+        shows a fossil of a prehistoric creature encased in stone. The fossil is highly
+        detailed, displaying the skeletal structure of the animal, which appears similar
+        to that of a small dinosaur or a lizard. The skull is clearly visible with
+        distinct eye sockets, and the ribs and spine are well preserved alongside
+        the limb bones. The rock around the fossil has a textured, uneven surface,
+        highlighting the fossilized remains prominently. The specimen is displayed
+        on a black background under direct lighting, enhancing its visibility and
+        details.","json_payload":null,"context":null,"cached":false}'
     headers:
       Connection:
       - keep-alive
       Content-Length:
-      - '734'
+      - '666'
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:46 GMT
+      - Thu, 22 Aug 2024 14:03:10 GMT
       server:
       - uvicorn
     status:
@@ -134,7 +134,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: https://api.opper.ai/v1/functions/a459835d-623f-4d03-989f-a16f79b170b8
+    uri: https://api.opper.ai/v1/functions/e890e95e-f738-4e73-abff-91f69515ebdb
   response:
     body:
       string: ''
@@ -144,7 +144,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:47 GMT
+      - Thu, 22 Aug 2024 14:03:10 GMT
       server:
       - uvicorn
     status:

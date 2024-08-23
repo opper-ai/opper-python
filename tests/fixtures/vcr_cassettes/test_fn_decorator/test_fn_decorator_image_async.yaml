@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 10:00:48 GMT
+      - Thu, 22 Aug 2024 14:05:04 GMT
       server:
       - uvicorn
     status:
@@ -62,7 +62,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 10:00:48 GMT
+      - Thu, 22 Aug 2024 14:05:04 GMT
       server:
       - uvicorn
     status:
@@ -84,7 +84,7 @@ interactions:
     uri: https://api.opper.ai/v1/chat/extract_letters
   response:
     body:
-      string: '{"span_id":"d2476a24-2663-449a-953f-7bf30c2d7f93","message":null,"json_payload":{"letters":["L","E","T","T","E","R"]},"context":null,"cached":false}'
+      string: '{"span_id":"25e2186a-1013-4dbc-a936-3fb8a069b10c","message":null,"json_payload":{"letters":["L","E","T","T","E","R"]},"context":null,"cached":false}'
     headers:
       Connection:
       - keep-alive
@@ -93,7 +93,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 10:00:52 GMT
+      - Thu, 22 Aug 2024 14:05:07 GMT
       server:
       - uvicorn
     status:

@@ -20,7 +20,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:39 GMT
+      - Thu, 22 Aug 2024 14:03:02 GMT
       server:
       - uvicorn
     status:
@@ -44,7 +44,7 @@ interactions:
     uri: https://api.opper.ai/v1/functions
   response:
     body:
-      string: '{"id":7110,"uuid":"b8baa07f-f905-4cc5-9a90-71481e447dd5","dataset_uuid":"51dda4f4-f41d-4078-8fd4-478136742a28","description":"Test
+      string: '{"id":7146,"uuid":"4d196d3e-3f02-4150-8358-82f195ecfe9c","dataset_uuid":"0fde5a5e-2798-4ae5-9ed2-9a62bf141211","description":"Test
         function","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Do
         something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_delete_function_by_path","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
     headers:
@@ -55,7 +55,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:39 GMT
+      - Thu, 22 Aug 2024 14:03:02 GMT
       server:
       - uvicorn
     status:
@@ -79,7 +79,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:39 GMT
+      - Thu, 22 Aug 2024 14:03:02 GMT
       server:
       - uvicorn
     status:
@@ -106,7 +106,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:39 GMT
+      - Thu, 22 Aug 2024 14:03:02 GMT
       server:
       - uvicorn
     status:

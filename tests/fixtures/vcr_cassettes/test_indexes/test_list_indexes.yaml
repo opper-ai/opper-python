@@ -19,28 +19,28 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:58:08 GMT
+      - Thu, 22 Aug 2024 14:03:34 GMT
       server:
       - uvicorn
     status:
       code: 200
       message: OK
 - request:
-    body: '{"name": "test_list_indexes"}'
+    body: '{"name": "test_list_indexes", "embedding_model": "text-embedding-ada-002"}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '29'
+      - '74'
       content-type:
       - application/json
     method: POST
     uri: https://api.opper.ai/v1/indexes
   response:
     body:
-      string: '{"id":2833,"uuid":"b36ca2a4-dce8-4f33-a3e6-53926505a57f","name":"test_list_indexes","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"files":[],"created_at":"2024-08-22T09:58:08.740828Z"}'
+      string: '{"id":2850,"uuid":"679832bb-797e-48c6-a509-05bcbace4990","name":"test_list_indexes","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"files":[],"created_at":"2024-08-22T14:03:34.163676Z"}'
     headers:
       Connection:
       - keep-alive
@@ -49,7 +49,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:58:08 GMT
+      - Thu, 22 Aug 2024 14:03:34 GMT
       server:
       - uvicorn
     status:
@@ -66,8 +66,8 @@ interactions:
     uri: https://api.opper.ai/v1/indexes
   response:
     body:
-      string: '[{"id":2833,"uuid":"b36ca2a4-dce8-4f33-a3e6-53926505a57f","org_id":1,"org_name":null,"name":"test_list_indexes","created_by":"Johnny
-        Chadda","created_at":"2024-08-22T09:58:08.740828Z","updated_at":"2024-08-22T09:58:08.740828Z","count":0,"project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"}}]'
+      string: '[{"id":2850,"uuid":"679832bb-797e-48c6-a509-05bcbace4990","org_id":1,"org_name":null,"name":"test_list_indexes","created_by":"Johnny
+        Chadda","created_at":"2024-08-22T14:03:34.163676Z","updated_at":"2024-08-22T14:03:34.163676Z","count":0,"project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"}}]'
     headers:
       Connection:
       - keep-alive
@@ -76,28 +76,28 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:58:08 GMT
+      - Thu, 22 Aug 2024 14:03:34 GMT
       server:
       - uvicorn
     status:
       code: 200
       message: OK
 - request:
-    body: '{"name": "test_list_indexes_2"}'
+    body: '{"name": "test_list_indexes_2", "embedding_model": "text-embedding-ada-002"}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '31'
+      - '76'
       content-type:
       - application/json
     method: POST
     uri: https://api.opper.ai/v1/indexes
   response:
     body:
-      string: '{"id":2834,"uuid":"e331e067-30ed-4d39-a0dd-89ce4bed6759","name":"test_list_indexes_2","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"files":[],"created_at":"2024-08-22T09:58:08.927016Z"}'
+      string: '{"id":2851,"uuid":"3601c708-33a7-4855-b0d5-3d9ccf264463","name":"test_list_indexes_2","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"files":[],"created_at":"2024-08-22T14:03:34.332942Z"}'
     headers:
       Connection:
       - keep-alive
@@ -106,7 +106,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:58:09 GMT
+      - Thu, 22 Aug 2024 14:03:34 GMT
       server:
       - uvicorn
     status:
@@ -123,9 +123,9 @@ interactions:
     uri: https://api.opper.ai/v1/indexes
   response:
     body:
-      string: '[{"id":2834,"uuid":"e331e067-30ed-4d39-a0dd-89ce4bed6759","org_id":1,"org_name":null,"name":"test_list_indexes_2","created_by":"Johnny
-        Chadda","created_at":"2024-08-22T09:58:08.927016Z","updated_at":"2024-08-22T09:58:08.927016Z","count":0,"project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"}},{"id":2833,"uuid":"b36ca2a4-dce8-4f33-a3e6-53926505a57f","org_id":1,"org_name":null,"name":"test_list_indexes","created_by":"Johnny
-        Chadda","created_at":"2024-08-22T09:58:08.740828Z","updated_at":"2024-08-22T09:58:08.740828Z","count":0,"project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"}}]'
+      string: '[{"id":2851,"uuid":"3601c708-33a7-4855-b0d5-3d9ccf264463","org_id":1,"org_name":null,"name":"test_list_indexes_2","created_by":"Johnny
+        Chadda","created_at":"2024-08-22T14:03:34.332942Z","updated_at":"2024-08-22T14:03:34.332942Z","count":0,"project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"}},{"id":2850,"uuid":"679832bb-797e-48c6-a509-05bcbace4990","org_id":1,"org_name":null,"name":"test_list_indexes","created_by":"Johnny
+        Chadda","created_at":"2024-08-22T14:03:34.163676Z","updated_at":"2024-08-22T14:03:34.163676Z","count":0,"project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"}}]'
     headers:
       Connection:
       - keep-alive
@@ -134,7 +134,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:58:09 GMT
+      - Thu, 22 Aug 2024 14:03:34 GMT
       server:
       - uvicorn
     status:
@@ -148,7 +148,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: https://api.opper.ai/v1/indexes/e331e067-30ed-4d39-a0dd-89ce4bed6759
+    uri: https://api.opper.ai/v1/indexes/3601c708-33a7-4855-b0d5-3d9ccf264463
   response:
     body:
       string: 'true'
@@ -160,7 +160,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:58:09 GMT
+      - Thu, 22 Aug 2024 14:03:34 GMT
       server:
       - uvicorn
     status:
@@ -174,7 +174,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: https://api.opper.ai/v1/indexes/b36ca2a4-dce8-4f33-a3e6-53926505a57f
+    uri: https://api.opper.ai/v1/indexes/679832bb-797e-48c6-a509-05bcbace4990
   response:
     body:
       string: 'true'
@@ -186,7 +186,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:58:09 GMT
+      - Thu, 22 Aug 2024 14:03:34 GMT
       server:
       - uvicorn
     status:

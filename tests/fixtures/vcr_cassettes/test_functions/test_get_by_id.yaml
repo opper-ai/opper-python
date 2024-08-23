@@ -20,7 +20,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:37 GMT
+      - Thu, 22 Aug 2024 14:03:00 GMT
       server:
       - uvicorn
     status:
@@ -44,7 +44,7 @@ interactions:
     uri: https://api.opper.ai/v1/functions
   response:
     body:
-      string: '{"id":7106,"uuid":"51844d66-fe45-419e-8a36-6d1f797493ce","dataset_uuid":"c563f582-463e-4a57-9a35-58e114e3fc15","description":"Test
+      string: '{"id":7142,"uuid":"a7de5e2a-568f-4dcd-bceb-fcb49d0098bc","dataset_uuid":"576c4556-0b0f-4cbb-917e-9b184948a328","description":"Test
         function","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Do
         something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_get_by_id","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
     headers:
@@ -55,7 +55,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:37 GMT
+      - Thu, 22 Aug 2024 14:03:00 GMT
       server:
       - uvicorn
     status:
@@ -69,10 +69,10 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: https://api.opper.ai/v1/functions/51844d66-fe45-419e-8a36-6d1f797493ce
+    uri: https://api.opper.ai/v1/functions/a7de5e2a-568f-4dcd-bceb-fcb49d0098bc
   response:
     body:
-      string: '{"id":7106,"uuid":"51844d66-fe45-419e-8a36-6d1f797493ce","dataset_uuid":"c563f582-463e-4a57-9a35-58e114e3fc15","description":"Test
+      string: '{"id":7142,"uuid":"a7de5e2a-568f-4dcd-bceb-fcb49d0098bc","dataset_uuid":"576c4556-0b0f-4cbb-917e-9b184948a328","description":"Test
         function","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Do
         something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_get_by_id","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
     headers:
@@ -83,7 +83,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:37 GMT
+      - Thu, 22 Aug 2024 14:03:00 GMT
       server:
       - uvicorn
     status:
@@ -97,7 +97,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: https://api.opper.ai/v1/functions/51844d66-fe45-419e-8a36-6d1f797493ce
+    uri: https://api.opper.ai/v1/functions/a7de5e2a-568f-4dcd-bceb-fcb49d0098bc
   response:
     body:
       string: ''
@@ -107,7 +107,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:37 GMT
+      - Thu, 22 Aug 2024 14:03:00 GMT
       server:
       - uvicorn
     status:

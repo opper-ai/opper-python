@@ -21,7 +21,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:25 GMT
+      - Thu, 22 Aug 2024 14:02:42 GMT
       server:
       - uvicorn
     status:
@@ -58,7 +58,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:25 GMT
+      - Thu, 22 Aug 2024 14:02:42 GMT
       server:
       - uvicorn
     status:
@@ -80,16 +80,17 @@ interactions:
     uri: https://api.opper.ai/v1/chat/test_method
   response:
     body:
-      string: '{"span_id":"64ca0a87-41fb-4371-a3e2-cf716637e41b","message":null,"json_payload":"Hello","context":null,"cached":false}'
+      string: '{"span_id":"85ca91c0-3d8e-4e19-86e7-058b5fcf2824","message":null,"json_payload":"Operation
+        executed: say hello","context":null,"cached":false}'
     headers:
       Connection:
       - keep-alive
       Content-Length:
-      - '118'
+      - '142'
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:26 GMT
+      - Thu, 22 Aug 2024 14:02:44 GMT
       server:
       - uvicorn
     status:
@@ -111,7 +112,7 @@ interactions:
     uri: https://api.opper.ai/v1/chat/test_method
   response:
     body:
-      string: '{"span_id":"adecec02-6c7f-4041-a48a-2e271a6e5f5c","message":null,"json_payload":"Hello","context":null,"cached":false}'
+      string: '{"span_id":"da2e7610-8c22-43a1-97d1-bdcd8783af59","message":null,"json_payload":"Hello","context":null,"cached":false}'
     headers:
       Connection:
       - keep-alive
@@ -120,7 +121,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 22 Aug 2024 09:57:28 GMT
+      - Thu, 22 Aug 2024 14:02:45 GMT
       server:
       - uvicorn
     status:

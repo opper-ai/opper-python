@@ -54,7 +54,9 @@ class Indexes:
 
         self._client = client
 
-    def create(self, name: str) -> Index:
+    def create(
+        self, name: str, embedding_model: str = "text-embedding-ada-002"
+    ) -> Index:
         """Create an index with the given name.
 
         If an index with the given name already exists, return it.
@@ -66,7 +68,7 @@ class Indexes:
         except Exception:
             pass
 
-        index = self._client.indexes.create(name=name)
+        index = self._client.indexes.create(name=name, embedding_model=embedding_model)
         return Index(self._client, index)
 
     def get(self, uuid: str = None, name: str = None) -> Optional[Index]:
