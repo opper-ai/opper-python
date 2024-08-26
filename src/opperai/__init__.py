@@ -13,8 +13,6 @@ from ._client import AsyncClient, Client
 
 
 class Opper:
-    client: Client = None
-
     def __init__(self, client: Client = None, api_key: str = None):
         if client is not None:
             if not isinstance(client, Client):
@@ -33,8 +31,6 @@ class Opper:
 
 
 class AsyncOpper(Opper):
-    client: AsyncClient = None
-
     def __init__(self, client: AsyncClient = None, api_key: str = None):
         if client is not None:
             if not isinstance(client, AsyncClient):

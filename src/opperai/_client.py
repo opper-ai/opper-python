@@ -1,4 +1,6 @@
+import base64
 import os
+from typing import Tuple
 
 from opperai.core.datasets._async_datasets import AsyncDatasets
 from opperai.core.datasets._datasets import Datasets
@@ -8,6 +10,7 @@ from opperai.core.indexes._async_indexes import AsyncIndexes
 from opperai.core.indexes._indexes import Indexes
 from opperai.core.spans._async_spans import AsyncSpans
 from opperai.core.spans._spans import Spans
+from opperai.types import ImageOutput
 
 from .core._http_clients import _async_http_client, _http_client
 
@@ -49,6 +52,21 @@ class AsyncClient:
         self.spans = AsyncSpans(self.http_client)
         self.datasets = AsyncDatasets(self.http_client)
 
+    async def generate_image(self, prompt: str) -> Tuple[ImageOutput, None]:
+        """Generate an image from a prompt.
+        Note: only Azure dall-e-3 is supported.
+        """
+        response = await self.http_client.do_request(
+            "POST",
+            "/v1/generate-image",
+            json={"model": "azure/dall-e-3-eu", "prompt": prompt, "format": "b64_json"},
+        )
+
+        base64_image = response.json()["result"]["base64_image"]
+        image_bytes = base64.b64decode(base64_image)
+
+        return ImageOutput(image_bytes), None
+
 
 class Client:
     functions: Functions
@@ -83,3 +101,18 @@ class Client:
         self.indexes = Indexes(self.http_client)
         self.spans = Spans(self.http_client)
         self.datasets = Datasets(self.http_client)
+
+    def generate_image(self, prompt: str) -> Tuple[ImageOutput, None]:
+        """Generate an image from a prompt.
+        Note: only Azure dall-e-3 is supported.
+        """
+        response = self.http_client.do_request(
+            "POST",
+            "/v1/generate-image",
+            json={"model": "azure/dall-e-3-eu", "prompt": prompt, "format": "b64_json"},
+        )
+
+        base64_image = response.json()["result"]["base64_image"]
+        image_bytes = base64.b64decode(base64_image)
+
+        return ImageOutput(image_bytes), None
