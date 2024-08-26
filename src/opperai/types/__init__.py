@@ -1,6 +1,7 @@
 # ruff: noqa: F401
 
 import base64
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
 from uuid import UUID
@@ -11,6 +12,11 @@ from .datasets import DatasetEntry
 from .indexes import Document, DocumentIn, Filter, RetrievalResponse
 from .spans import SpanMetric
 from .validators import validate_uuid_xor_path
+
+
+@dataclass
+class ImageOutput:
+    bytes: bytes
 
 
 class TextMessageContent(BaseModel):

@@ -5,7 +5,7 @@ from typing import Any, Dict, Iterator, List, Optional, Tuple, Union
 from opperai._client import AsyncClient
 from opperai.datasets.async_datasets import AsyncDataset
 from opperai.functions.decorator._schemas import type_to_json_schema
-from opperai.types import ChatPayload, Example, Message, StreamingChunk
+from opperai.types import ChatPayload, Example, ImageOutput, Message, StreamingChunk
 from opperai.types import Function as FunctionModel
 from opperai.types import FunctionResponse as FunctionResponseModel
 from pydantic import BaseModel, PrivateAttr
@@ -222,12 +222,18 @@ class AsyncFunctions:
             input_type: Any: the input type for the function
             input: Any: the input to the function
             output_type: Any: the output type for the function
+                There is one special output type:
+                    - `ImageOutput`: the output will be an image
             model: str: the model to use for the function
             examples: List[Example]: A list of examples to help guide the function's response
 
         Returns:
             tuple[Any, FunctionResponse]: the output of the function and the response object. The type of the output is determined by the output_type. If the output_type is a `Pydantic` model, the output will be validated against the schema.
         """
+        if output_type and issubclass(output_type, ImageOutput):
+            res = await self._client.generate_image(prompt=input)
+            return res
+
         if not name:
             name = djb2(instructions)
 

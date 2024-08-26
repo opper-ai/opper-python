@@ -10,6 +10,7 @@ from opperai.types import (
     ChatPayload,
     Example,
     ImageMessageContent,
+    ImageOutput,
     Message,
     StreamingChunk,
 )
@@ -220,12 +221,18 @@ class Functions:
             input_type: Any: the input type for the function
             input: Any: the input to the function
             output_type: Any: the output type for the function
+                There is one special output type:
+                    - `ImageOutput`: the output will be an image
             model: str: the model to use for the function
             examples: List[Example]: A list of examples to help guide the function's response.
 
         Returns:
             tuple[Any, FunctionResponse]: the output of the function and the response object. The type of the output is determined by the output_type. If the output_type is a `Pydantic` model, the output will be validated against the schema.
         """
+        if output_type and issubclass(output_type, ImageOutput):
+            res = self._client.generate_image(prompt=input)
+            return res
+
         if not name:
             name = djb2(instructions)
 
