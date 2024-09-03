@@ -1,6 +1,7 @@
 import base64
 import os
-from typing import Tuple
+from http import HTTPStatus
+from typing import Any, Tuple
 
 from opperai.core.datasets._async_datasets import AsyncDatasets
 from opperai.core.datasets._datasets import Datasets
@@ -10,7 +11,8 @@ from opperai.core.indexes._async_indexes import AsyncIndexes
 from opperai.core.indexes._indexes import Indexes
 from opperai.core.spans._async_spans import AsyncSpans
 from opperai.core.spans._spans import Spans
-from opperai.types import ImageOutput
+from opperai.types import CallPayload, FunctionResponse, ImageOutput
+from opperai.types.exceptions import APIError
 
 from .core._http_clients import _async_http_client, _http_client
 
@@ -67,6 +69,20 @@ class AsyncClient:
 
         return ImageOutput(image_bytes), None
 
+    async def call(self, payload: CallPayload) -> Any:
+        response = await self.http_client.do_request(
+            "POST",
+            "/v1/call",
+            json=payload.model_dump(),
+        )
+
+        if response.status_code == HTTPStatus.OK:
+            return FunctionResponse.model_validate(response.json())
+
+        raise APIError(
+            f"Failed to run function {payload.name} with status {response.status_code}: {response.text}"
+        )
+
 
 class Client:
     functions: Functions
@@ -116,3 +132,17 @@ class Client:
         image_bytes = base64.b64decode(base64_image)
 
         return ImageOutput(image_bytes), None
+
+    def call(self, payload: CallPayload) -> Any:
+        response = self.http_client.do_request(
+            "POST",
+            "/v1/call",
+            json=payload.model_dump(),
+        )
+
+        if response.status_code == HTTPStatus.OK:
+            return FunctionResponse.model_validate(response.json())
+
+        raise APIError(
+            f"Failed to run function {payload.name} with status {response.status_code}: {response.text}"
+        )

@@ -1,11 +1,29 @@
-import json
+import inspect
 from dataclasses import dataclass
-from typing import Any, Dict, Iterator, List, Optional, Tuple, Union
+from typing import (
+    Any,
+    Dict,
+    Iterator,
+    List,
+    Optional,
+    Tuple,
+    Union,
+    get_args,
+    get_origin,
+)
 
 from opperai._client import AsyncClient
 from opperai.datasets.async_datasets import AsyncDataset
 from opperai.functions.decorator._schemas import type_to_json_schema
-from opperai.types import ChatPayload, Example, ImageOutput, Message, StreamingChunk
+from opperai.types import (
+    CallConfiguration,
+    CallPayload,
+    ChatPayload,
+    Example,
+    ImageOutput,
+    Message,
+    StreamingChunk,
+)
 from opperai.types import Function as FunctionModel
 from opperai.types import FunctionResponse as FunctionResponseModel
 from pydantic import BaseModel, PrivateAttr
@@ -214,6 +232,7 @@ class AsyncFunctions:
         output_type: Optional[type[T]] = None,
         model: Optional[str] = None,
         examples: Optional[List[Example]] = None,
+        configuration: Optional[CallConfiguration] = None,
     ) -> Tuple[T, AsyncFunctionResponse]:
         """Calls a function
         Arguments:
@@ -230,7 +249,11 @@ class AsyncFunctions:
         Returns:
             tuple[Any, FunctionResponse]: the output of the function and the response object. The type of the output is determined by the output_type. If the output_type is a `Pydantic` model, the output will be validated against the schema.
         """
-        if output_type and issubclass(output_type, ImageOutput):
+        if (
+            output_type
+            and isinstance(output_type, type)
+            and issubclass(output_type, ImageOutput)
+        ):
             res = await self._client.generate_image(prompt=input)
             return res
 
@@ -240,37 +263,41 @@ class AsyncFunctions:
         input_schema = type_to_json_schema(input_type)
         output_schema = type_to_json_schema(output_type)
 
-        function = FunctionModel(
-            path=name,
-            instructions=instructions,
-            input_schema=input_schema,
-            out_schema=output_schema,
-            model=model,
-        )
-        await self._client.functions.create(function)
-
-        input, images = prepare_input(input)
-
-        messages = [Message(role="user", content=json.dumps(input))]
-        if images:
-            messages.append(Message(role="user", content=images))
+        input = prepare_input(input)
 
         _examples = []
         if examples:
             for example in examples:
-                input, _ = prepare_input(example.input)
-                output, _ = prepare_input(example.output)
+                input = prepare_input(example.input)
+                output = prepare_input(example.output)
                 _examples.append(Example(input=str(input), output=str(output)))
 
-        res: FunctionResponseModel = await self._client.functions.chat(
-            function_path=name, data=ChatPayload(messages=messages), examples=_examples
+        call_payload = CallPayload(
+            name=name,
+            instructions=instructions,
+            input_type=input_schema,
+            input=input,
+            output_type=output_schema,
+            model=model,
+            examples=_examples,
         )
 
+        res: FunctionResponseModel = await self._client.call(call_payload)
+
         if output_type is not None:
-            if issubclass(output_type, BaseModel):
+            if inspect.isclass(output_type) and issubclass(output_type, BaseModel):
                 return output_type.model_validate(
                     res.json_payload
                 ), AsyncFunctionResponse(client=self._client, **res.model_dump())
+            elif (
+                (get_origin(output_type) == list or get_origin(output_type) is List)
+                and inspect.isclass(get_args(output_type)[0])
+                and issubclass(get_args(output_type)[0], BaseModel)
+            ):
+                return [
+                    get_args(output_type)[0].model_validate(item)
+                    for item in res.json_payload
+                ], AsyncFunctionResponse(client=self._client, **res.model_dump())
             else:
                 return res.json_payload, AsyncFunctionResponse(
                     client=self._client, **res.model_dump()

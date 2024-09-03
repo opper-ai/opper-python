@@ -3,7 +3,6 @@ from datetime import datetime
 from inspect import signature
 from uuid import UUID
 
-from opperai.types import ImageMessageContent
 from pydantic import BaseModel
 
 
@@ -14,9 +13,7 @@ def convert_function_call_to_json(func, *args, **kwargs):
 
     input = {}
     for key, value in input_data.items():
-        if isinstance(value, ImageMessageContent):
-            media.append(value)
-        elif isinstance(value, BaseModel):
+        if isinstance(value, BaseModel):
             input[key] = value.model_dump()
         elif isinstance(value, list) and all(isinstance(v, BaseModel) for v in value):
             input[key] = [v.model_dump() for v in value]

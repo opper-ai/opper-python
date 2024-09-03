@@ -1,4 +1,5 @@
 # ruff: noqa: F401
+from __future__ import annotations
 
 import base64
 from dataclasses import dataclass
@@ -16,75 +17,117 @@ from .validators import validate_uuid_xor_path
 
 @dataclass
 class ImageOutput:
+    """NOTE: Magic type used to indicate that the output is an image"""
+
     bytes: bytes
 
 
-class TextMessageContent(BaseModel):
-    type: str = "text"
-    text: str
+class AudioInput(BaseModel):
+    """NOTE: AudioInput is a magic type used to indicate that the input is an audio file
 
+    There is a known limitation that when used as part of structured input one
+    cannot pass in a list of images, nor can it be used in a nested fashion.
 
-class ImageMessageUrl(BaseModel):
-    url: str
+    This is due to limitations when it comes to deduce the relationship between
+    the input fields and the images
+    """
 
+    path: FilePath = Field(exclude=True, default=None)
 
-class ImageMessageFile(BaseModel):
-    path: FilePath = Field(exclude=True)
-
-    @computed_field
+    @computed_field(alias="__opper_audio_input")
     @property
-    def url(self) -> str:
-        path = self.path.as_posix()
-        if path.endswith(".png"):
-            with open(path, "rb") as image_file:
-                base64_image = base64.b64encode(image_file.read()).decode("utf-8")
-            return f"data:image/png;base64,{base64_image}"
-        elif path.endswith(".jpg"):
-            with open(path, "rb") as image_file:
-                base64_image = base64.b64encode(image_file.read()).decode("utf-8")
-            return f"data:image/jpeg;base64,{base64_image}"
-        elif path.endswith(".jpeg"):
-            with open(path, "rb") as image_file:
-                base64_image = base64.b64encode(image_file.read()).decode("utf-8")
-            return f"data:image/jpeg;base64,{base64_image}"
-        else:
-            raise ValueError(
-                "File type not supported. Supported types: .png, .jpg, .jpeg"
-            )
+    def _opper_audio_input(self) -> str:
+        data = None
+        if self.path:
+            suffix = self.path.suffix
+            if suffix == ".mp3":
+                with open(self.path, "rb") as mp3_file:
+                    base64_mp3 = base64.b64encode(mp3_file.read()).decode("utf-8")
+                data = f"data:audio/mp3;base64,{base64_mp3}"
 
+        if not data:
+            raise ValueError("File type not supported. Supported types: .mp3")
 
-class ImageMessageContent(BaseModel):
-    type: str = "image_url"
-    image_url: Union[ImageMessageUrl, ImageMessageFile]
-
-
-class MessageContent(BaseModel):
-    @classmethod
-    def text(cls, text: str) -> TextMessageContent:
-        return TextMessageContent(text=text)
+        return data
 
     @classmethod
-    def image(cls, path: str) -> ImageMessageContent:
-        return ImageMessageContent(image_url=ImageMessageFile(path=path))
+    def from_path(cls, path: FilePath):
+        return AudioInput(path=path)
+
+
+class ImageInput(BaseModel):
+    """NOTE: ImageInput is a magic type used to indicate that the input is an image
+
+    There is a known limitation that when used as part of structured input one
+    cannot pass in a list of images, nor can it be used in a nested fashion.
+
+    This is due to limitations when it comes to deduce the relationship between
+    the input fields and the images
+    """
+
+    path: Optional[FilePath] = Field(exclude=True, default=None)
+
+    @computed_field(alias="__opper_image_input")
+    @property
+    def _opper_image_input(self) -> str:
+        if self.path:
+            suffix = self.path.suffix
+            if suffix == ".png":
+                with open(self.path, "rb") as image_file:
+                    base64_image = base64.b64encode(image_file.read()).decode("utf-8")
+                data = f"data:image/png;base64,{base64_image}"
+            elif suffix in (".jpg", ".jpeg"):
+                with open(self.path, "rb") as image_file:
+                    base64_image = base64.b64encode(image_file.read()).decode("utf-8")
+                data = f"data:image/jpeg;base64,{base64_image}"
+            else:
+                raise ValueError(
+                    "File type not supported. Supported types: .png, .jpg, .jpeg"
+                )
+
+        if not data:
+            raise ValueError("no path or url provided")
+
+        return data
 
     @classmethod
-    def image_url(cls, url: str) -> ImageMessageContent:
-        return ImageMessageContent(image_url=ImageMessageUrl(url=url))
+    def from_path(cls, path: FilePath):
+        return ImageInput(path=path)
 
 
-class ImageContent:
-    @classmethod
-    def from_path(cls, path: str) -> ImageMessageContent:
-        return ImageMessageContent(image_url=ImageMessageFile(path=path))
-
-    @classmethod
-    def from_url(cls, url: str) -> ImageMessageContent:
-        return ImageMessageContent(image_url=ImageMessageUrl(url=url))
+MediaInput = Union[ImageInput, AudioInput]
 
 
 class Message(BaseModel):
     role: str
-    content: Union[str, List[Union[TextMessageContent, ImageMessageContent]]]
+    content: Union[str, List[Dict[str, Any]], List[MediaInput]]
+
+
+class CallConfiguration(BaseModel):
+    class Invocation(BaseModel):
+        class FewShot(BaseModel):
+            count: int = 0
+
+        few_shot: FewShot = Field(
+            FewShot(),
+        )
+
+    invocation: Invocation = Field(
+        Invocation(),
+    )
+
+
+class CallPayload(BaseModel):
+    name: Optional[str] = None
+    instructions: Optional[str] = "you are a helpful assistant"
+    input_type: Optional[Dict[str, Any]] = None
+    input: Optional[Any] = None
+    output_type: Optional[Dict[str, Any]] = None
+    model: Optional[str] = None
+    examples: Optional[List[Example]] = None
+    stream: bool = False
+    parent_span_uuid: Optional[str] = None
+    configuration: Optional[CallConfiguration] = None
 
 
 class ChatPayload(BaseModel):

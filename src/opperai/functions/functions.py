@@ -1,15 +1,27 @@
+import inspect
 import itertools
-import json
 from dataclasses import dataclass
-from typing import Any, Dict, Iterator, List, Optional, Tuple, TypeVar, Union
+from typing import (
+    Any,
+    Dict,
+    Iterator,
+    List,
+    Optional,
+    Tuple,
+    TypeVar,
+    Union,
+    get_args,
+    get_origin,
+)
 
 from opperai._client import Client
 from opperai.datasets.datasets import Dataset
 from opperai.functions.decorator._schemas import type_to_json_schema
 from opperai.types import (
+    CallConfiguration,
+    CallPayload,
     ChatPayload,
     Example,
-    ImageMessageContent,
     ImageOutput,
     Message,
     StreamingChunk,
@@ -209,10 +221,11 @@ class Functions:
         name: str = None,
         instructions: str = "you are a helpful assistant",
         input_type: Optional[Any] = None,
-        input: Any = str,
+        input: Any = None,
         output_type: Optional[type[T]] = None,
         model: Optional[str] = None,
         examples: Optional[List[Example]] = None,
+        configuration: Optional[CallConfiguration] = None,
     ) -> Tuple[T, FunctionResponse]:
         """Calls a function
         Arguments:
@@ -229,7 +242,11 @@ class Functions:
         Returns:
             tuple[Any, FunctionResponse]: the output of the function and the response object. The type of the output is determined by the output_type. If the output_type is a `Pydantic` model, the output will be validated against the schema.
         """
-        if output_type and issubclass(output_type, ImageOutput):
+        if (
+            output_type
+            and isinstance(output_type, type)
+            and issubclass(output_type, ImageOutput)
+        ):
             res = self._client.generate_image(prompt=input)
             return res
 
@@ -239,37 +256,43 @@ class Functions:
         input_schema = type_to_json_schema(input_type)
         output_schema = type_to_json_schema(output_type)
 
-        function = FunctionModel(
-            path=name,
-            instructions=instructions,
-            input_schema=input_schema,
-            out_schema=output_schema,
-            model=model,
-        )
-        self._client.functions.create(function)
-
-        input, images = prepare_input(input)
-
-        messages = [Message(role="user", content=json.dumps(input))]
-        if images:
-            messages.append(Message(role="user", content=images))
+        input = prepare_input(input)
 
         _examples = []
         if examples:
             for example in examples:
-                input, _ = prepare_input(example.input)
-                output, _ = prepare_input(example.output)
+                input = prepare_input(example.input)
+                output = prepare_input(example.output)
                 _examples.append(Example(input=str(input), output=str(output)))
 
-        res: FunctionResponseModel = self._client.functions.chat(
-            function_path=name, data=ChatPayload(messages=messages), examples=_examples
+        call_payload = CallPayload(
+            name=name,
+            instructions=instructions,
+            input_type=input_schema,
+            input=input,
+            output_type=output_schema,
+            model=model,
+            examples=_examples,
         )
+        if configuration:
+            call_payload.configuration = configuration
+
+        res = self._client.call(call_payload)
 
         if output_type is not None:
-            if issubclass(output_type, BaseModel):
+            if inspect.isclass(output_type) and issubclass(output_type, BaseModel):
                 return output_type.model_validate(res.json_payload), FunctionResponse(
                     client=self._client, **res.model_dump()
                 )
+            elif (
+                (get_origin(output_type) == list or get_origin(output_type) is List)
+                and inspect.isclass(get_args(output_type)[0])
+                and issubclass(get_args(output_type)[0], BaseModel)
+            ):
+                return [
+                    get_args(output_type)[0].model_validate(item)
+                    for item in res.json_payload
+                ], FunctionResponse(client=self._client, **res.model_dump())
             else:
                 return res.json_payload, FunctionResponse(
                     client=self._client, **res.model_dump()
@@ -278,36 +301,19 @@ class Functions:
         return res.message, FunctionResponse(client=self._client, **res.model_dump())
 
 
-def prepare_input(input: Any) -> Tuple[List[str], List[ImageMessageContent]]:
-    def _prepare_input(
-        input: Any, _input: List[str] = [], images: List[ImageMessageContent] = []
-    ):
-        if isinstance(input, ImageMessageContent):
-            return None, input
-        if isinstance(input, BaseModel):
-            return input.model_dump(), None
-        if isinstance(input, list):
-            inputs = []
-            images = []
-            for item in input:
-                _input, _image = _prepare_input(item)
-                if _input:
-                    inputs.append(_input)
-                if _image:
-                    images.append(_image)
-            return inputs, images
-        if isinstance(input, dict):
-            inputs = {}
-            for k, v in input.items():
-                _input, _image = _prepare_input(v)
-                if _input:
-                    inputs[k] = _input
-                if _image:
-                    images.append(_image)
-            return inputs, images
-        return input, None
-
-    return _prepare_input(input)
+def prepare_input(input: Any) -> Any:
+    if isinstance(input, str):
+        return input
+    elif isinstance(input, BaseModel):
+        return input.model_dump(exclude_none=True, by_alias=True)
+    elif isinstance(input, list):
+        _input = [prepare_input(item) for item in input]
+        return _input
+    elif isinstance(input, dict):
+        _input = {key: prepare_input(value) for key, value in input.items()}
+        return _input
+    else:
+        return input
 
 
 def djb2(s: str):
