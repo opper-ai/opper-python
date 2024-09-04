@@ -34,7 +34,7 @@ class AudioInput(BaseModel):
 
     path: FilePath = Field(exclude=True, default=None)
 
-    @computed_field(alias="__opper_audio_input")
+    @computed_field
     @property
     def _opper_audio_input(self) -> str:
         data = None
@@ -67,7 +67,7 @@ class ImageInput(BaseModel):
 
     path: Optional[FilePath] = Field(exclude=True, default=None)
 
-    @computed_field(alias="__opper_image_input")
+    @computed_field
     @property
     def _opper_image_input(self) -> str:
         if self.path:

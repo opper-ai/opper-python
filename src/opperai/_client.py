@@ -3,14 +3,14 @@ import os
 from http import HTTPStatus
 from typing import Any, Tuple
 
-from opperai.core.datasets._async_datasets import AsyncDatasets
-from opperai.core.datasets._datasets import Datasets
-from opperai.core.functions._async_functions import AsyncFunctions
-from opperai.core.functions._functions import Functions
-from opperai.core.indexes._async_indexes import AsyncIndexes
-from opperai.core.indexes._indexes import Indexes
-from opperai.core.spans._async_spans import AsyncSpans
-from opperai.core.spans._spans import Spans
+from opperai.core.datasets._async_datasets import AsyncDatasets as CoreAsyncDatasets
+from opperai.core.datasets._datasets import Datasets as CoreDatasets
+from opperai.core.functions._async_functions import AsyncFunctions as CoreAsyncFunctions
+from opperai.core.functions._functions import Functions as CoreFunctions
+from opperai.core.indexes._async_indexes import AsyncIndexes as CoreAsyncIndexes
+from opperai.core.indexes._indexes import Indexes as CoreIndexes
+from opperai.core.spans._async_spans import AsyncSpans as CoreAsyncSpans
+from opperai.core.spans._spans import Spans as CoreSpans
 from opperai.types import CallPayload, FunctionResponse, ImageOutput
 from opperai.types.exceptions import APIError
 
@@ -21,10 +21,10 @@ DEFAULT_TIMEOUT = 120
 
 
 class AsyncClient:
-    functions: AsyncFunctions = None
-    indexes: AsyncIndexes = None
-    spans: AsyncSpans = None
-    datasets: AsyncDatasets = None
+    functions: CoreAsyncFunctions = None
+    indexes: CoreAsyncIndexes = None
+    spans: CoreAsyncSpans = None
+    datasets: CoreAsyncDatasets = None
 
     def __init__(
         self,
@@ -49,10 +49,12 @@ class AsyncClient:
         self.default_model = default_model
 
         self.http_client = _async_http_client(api_key, api_url, timeout)
-        self.functions = AsyncFunctions(self.http_client, default_model=default_model)
-        self.indexes = AsyncIndexes(self.http_client)
-        self.spans = AsyncSpans(self.http_client)
-        self.datasets = AsyncDatasets(self.http_client)
+        self.functions = CoreAsyncFunctions(
+            self.http_client, default_model=default_model
+        )
+        self.indexes = CoreAsyncIndexes(self.http_client)
+        self.spans = CoreAsyncSpans(self.http_client)
+        self.datasets = CoreAsyncDatasets(self.http_client)
 
     async def generate_image(self, prompt: str) -> Tuple[ImageOutput, None]:
         """Generate an image from a prompt.
@@ -85,10 +87,10 @@ class AsyncClient:
 
 
 class Client:
-    functions: Functions
-    indexes: Indexes
-    spans: Spans
-    datasets: Datasets
+    functions: CoreFunctions
+    indexes: CoreIndexes
+    spans: CoreSpans
+    datasets: CoreDatasets
 
     def __init__(
         self,
@@ -113,10 +115,10 @@ class Client:
         self.default_model = default_model
 
         self.http_client = _http_client(api_key, api_url, timeout)
-        self.functions = Functions(self.http_client, default_model=default_model)
-        self.indexes = Indexes(self.http_client)
-        self.spans = Spans(self.http_client)
-        self.datasets = Datasets(self.http_client)
+        self.functions = CoreFunctions(self.http_client, default_model=default_model)
+        self.indexes = CoreIndexes(self.http_client)
+        self.spans = CoreSpans(self.http_client)
+        self.datasets = CoreDatasets(self.http_client)
 
     def generate_image(self, prompt: str) -> Tuple[ImageOutput, None]:
         """Generate an image from a prompt.
@@ -146,3 +148,47 @@ class Client:
         raise APIError(
             f"Failed to run function {payload.name} with status {response.status_code}: {response.text}"
         )
+
+
+from opperai.functions.async_functions import AsyncFunctions
+from opperai.functions.functions import Functions
+from opperai.indexes.async_indexes import AsyncIndexes
+from opperai.indexes.indexes import Indexes
+from opperai.spans.async_spans import AsyncSpans
+from opperai.spans.spans import Spans
+
+
+class Opper:
+    def __init__(self, client: Client = None, api_key: str = None):
+        if client is not None:
+            if not isinstance(client, Client):
+                raise ValueError("Client must be an instance of Client")
+        if api_key is not None:
+            client = Client(api_key=api_key)
+        if client is None:
+            client = Client()
+
+        self.client: Client = client
+        self.functions: Functions = Functions(client)
+        self.indexes: Indexes = Indexes(client)
+        self.spans: Spans = Spans(client)  # deprecated
+        self.traces: Spans = self.spans
+        self.call = self.functions.call
+
+
+class AsyncOpper(Opper):
+    def __init__(self, client: AsyncClient = None, api_key: str = None):
+        if client is not None:
+            if not isinstance(client, AsyncClient):
+                raise ValueError("Client must be an instance of AsyncClient")
+        if api_key is not None:
+            client = AsyncClient(api_key=api_key)
+        if client is None:
+            client = AsyncClient()
+
+        self.client: AsyncClient = client
+        self.functions: AsyncFunctions = AsyncFunctions(client)
+        self.indexes: AsyncIndexes = AsyncIndexes(client)
+        self.spans: AsyncSpans = AsyncSpans(client)  # deprecated
+        self.traces: AsyncSpans = self.spans
+        self.call = self.functions.call

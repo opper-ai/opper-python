@@ -120,6 +120,24 @@ class AsyncFunction:
 
         return AsyncFunctionResponse(client=self._client, **response.model_dump())
 
+    async def call(
+        self,
+        input: Any = None,
+        examples: Optional[List[Example]] = None,
+        configuration: Optional[CallConfiguration] = None,
+    ) -> Tuple[T, AsyncFunctionResponse]:
+        payload = CallPayload(
+            input=input,
+            examples=examples,
+        )
+        if configuration:
+            payload.configuration = configuration
+
+        return await self._client.functions.call(
+            uuid=self._function.uuid,
+            payload=payload,
+        )
+
     async def delete(self) -> bool:
         return await self._client.functions.delete(uuid=self._function.uuid)
 

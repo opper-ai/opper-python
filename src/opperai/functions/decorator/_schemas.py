@@ -8,6 +8,10 @@ def type_to_json_schema(type_hint):
     if type_hint is None:
         return None
 
+    # in case the type is a dict we assume it's a json schema
+    if isinstance(type_hint, dict):
+        return type_hint
+
     schema = _type_to_json_schema(type_hint)
     schema, defs = _lift_defs(schema, {})
     schema["$defs"] = defs
