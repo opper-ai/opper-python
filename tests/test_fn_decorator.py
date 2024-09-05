@@ -99,12 +99,6 @@ def test_fn_decorator(client: Client, vcr_cassette):
     response.span.save_metric("metric", 1)
 
 
-import os
-
-os.environ["OPPER_API_KEY"] = "op-FNHF7LJGR12KE00BBQH0"
-os.environ["OPPER_API_URL"] = "http://localhost:8000"
-
-
 @pytest.mark.asyncio
 async def test_fn_decorator_async(aclient: AsyncClient, vcr_cassette):
     @fn(client=aclient)
