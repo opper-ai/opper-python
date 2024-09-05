@@ -106,7 +106,7 @@ os.environ["OPPER_API_URL"] = "http://localhost:8000"
 
 
 @pytest.mark.asyncio
-async def test_fn_decorator_async(aclient: AsyncClient):
+async def test_fn_decorator_async(aclient: AsyncClient, vcr_cassette):
     @fn(client=aclient)
     async def translate(text: str, target_language: str) -> str:
         """Translate text to a target language."""
