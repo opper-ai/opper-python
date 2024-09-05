@@ -100,7 +100,7 @@ MediaInput = Union[ImageInput, AudioInput]
 
 class Message(BaseModel):
     role: str
-    content: Union[str, List[Dict[str, Any]], List[MediaInput]]
+    content: Union[str, List[Dict[str, Any]], List[MediaInput], MediaInput]
 
 
 class CallConfiguration(BaseModel):

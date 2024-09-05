@@ -7,150 +7,116 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: https://api.opper.ai/v1/functions/by_path/translate
+    uri: http://localhost:8000/v1/functions/by_path/translate
   response:
     body:
-      string: '{"id":7079,"uuid":"ca3b5b95-6974-49ff-ae8d-f06266be63ae","dataset_uuid":"9a97982a-068e-4cf0-8df7-53f8538a3a78","description":"Translate
+      string: '{"id":27,"uuid":"a40ac806-fc2d-4c8d-b7f2-bf624e2285fc","dataset_uuid":"35ddaa3c-d91f-4c90-bfd9-f2619b2daabb","description":"Translate
         text to a target language.","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
-        translate\n\nOperation description: Translate text to a target language.","language_model_id":null,"model":"azure/gpt4-eu","out_schema":{"type":"string","$defs":{}},"path":"translate","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
+        translate\n\nOperation description: Translate text to a target language.","language_model_id":null,"model":"anthropic/claude-3-haiku","out_schema":{"type":"string","$defs":{}},"path":"translate","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":3,"use_semantic_search":false}'
     headers:
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '564'
-      Content-Type:
+      content-length:
+      - '566'
+      content-type:
       - application/json
-      Date:
-      - Thu, 22 Aug 2024 14:02:55 GMT
+      date:
+      - Wed, 04 Sep 2024 13:59:51 GMT
       server:
       - uvicorn
     status:
       code: 200
       message: OK
 - request:
-    body: '{"uuid": "ca3b5b95-6974-49ff-ae8d-f06266be63ae", "path": "translate", "description":
+    body: '{"uuid": "a40ac806-fc2d-4c8d-b7f2-bf624e2285fc", "path": "translate", "description":
       "Translate text to a target language.", "input_schema": null, "out_schema":
       {"type": "string", "$defs": {}}, "instructions": "Operation: translate\n\nOperation
       description: Translate text to a target language.", "model": null, "index_ids":
-      [], "use_semantic_search": null, "few_shot": false, "few_shot_count": null,
-      "cache_configuration": null, "dataset_uuid": null}'
+      [], "use_semantic_search": false, "few_shot": false, "few_shot_count": 2, "cache_configuration":
+      null, "dataset_uuid": "35ddaa3c-d91f-4c90-bfd9-f2619b2daabb"}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '451'
+      - '483'
       content-type:
       - application/json
     method: PATCH
-    uri: https://api.opper.ai/v1/functions/ca3b5b95-6974-49ff-ae8d-f06266be63ae
+    uri: http://localhost:8000/v1/functions/a40ac806-fc2d-4c8d-b7f2-bf624e2285fc
   response:
     body:
-      string: '{"id":7079,"uuid":"ca3b5b95-6974-49ff-ae8d-f06266be63ae","dataset_uuid":"9a97982a-068e-4cf0-8df7-53f8538a3a78","description":"Translate
+      string: '{"id":27,"uuid":"a40ac806-fc2d-4c8d-b7f2-bf624e2285fc","dataset_uuid":"35ddaa3c-d91f-4c90-bfd9-f2619b2daabb","description":"Translate
         text to a target language.","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
-        translate\n\nOperation description: Translate text to a target language.","language_model_id":null,"model":"azure/gpt4-eu","out_schema":{"type":"string","$defs":{}},"path":"translate","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
+        translate\n\nOperation description: Translate text to a target language.","language_model_id":null,"model":"anthropic/claude-3-haiku","out_schema":{"type":"string","$defs":{}},"path":"translate","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":3,"use_semantic_search":false}'
     headers:
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '564'
-      Content-Type:
+      content-length:
+      - '566'
+      content-type:
       - application/json
-      Date:
-      - Thu, 22 Aug 2024 14:02:55 GMT
+      date:
+      - Wed, 04 Sep 2024 13:59:51 GMT
       server:
       - uvicorn
     status:
       code: 200
       message: OK
 - request:
-    body: '{"parent_span_uuid": null, "messages": [{"role": "user", "content": "{\"text\":
-      \"Hello\", \"target_language\": \"es\"}"}]}'
+    body: '{"name": null, "instructions": "you are a helpful assistant", "input_type":
+      null, "input": {"text": "Hello", "target_language": "es"}, "output_type": null,
+      "model": null, "examples": null, "stream": false, "parent_span_uuid": null,
+      "configuration": null}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '123'
+      - '254'
       content-type:
       - application/json
     method: POST
-    uri: https://api.opper.ai/v1/chat/translate
+    uri: http://localhost:8000/v1/functions/a40ac806-fc2d-4c8d-b7f2-bf624e2285fc/call
   response:
     body:
-      string: '{"span_id":"3bf85b29-d87e-4145-8732-fcacc19cf28a","message":null,"json_payload":"Hola","context":null,"cached":false}'
+      string: '{"span_id":"849dc33a-6ebd-4fe1-ae9b-c667721f5d35","message":null,"json_payload":"Hola","context":null,"cached":false}'
     headers:
-      Connection:
-      - keep-alive
-      Content-Length:
+      content-length:
       - '117'
-      Content-Type:
+      content-type:
       - application/json
-      Date:
-      - Thu, 22 Aug 2024 14:02:56 GMT
+      date:
+      - Wed, 04 Sep 2024 13:59:52 GMT
       server:
       - uvicorn
     status:
       code: 200
       message: OK
 - request:
-    body: '{"parent_span_uuid": null, "messages": [{"role": "user", "content": "{\"text\":
-      \"Hello\", \"target_language\": \"es\"}"}]}'
+    body: '{"name": null, "instructions": "you are a helpful assistant", "input_type":
+      null, "input": {"text": "Hello", "target_language": "es"}, "output_type": null,
+      "model": null, "examples": null, "stream": false, "parent_span_uuid": null,
+      "configuration": null}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '123'
+      - '254'
       content-type:
       - application/json
     method: POST
-    uri: https://api.opper.ai/v1/chat/translate
+    uri: http://localhost:8000/v1/functions/a40ac806-fc2d-4c8d-b7f2-bf624e2285fc/call
   response:
     body:
-      string: '{"span_id":"19a9dcc2-4e23-472a-beed-93846521a85b","message":null,"json_payload":"Hola","context":null,"cached":false}'
+      string: '{"span_id":"13b64f34-6ef8-4a14-a7ff-f75100b257de","message":null,"json_payload":"Hola","context":null,"cached":false}'
     headers:
-      Connection:
-      - keep-alive
-      Content-Length:
+      content-length:
       - '117'
-      Content-Type:
-      - application/json
-      Date:
-      - Thu, 22 Aug 2024 14:02:59 GMT
-      server:
-      - uvicorn
-    status:
-      code: 200
-      message: OK
-- request:
-    body: '{"dimension": "metric", "value": 1.0, "comment": null}'
-    headers:
-      accept:
-      - '*/*'
-      connection:
-      - keep-alive
-      content-length:
-      - '54'
       content-type:
       - application/json
-    method: POST
-    uri: https://api.opper.ai/v1/spans/19a9dcc2-4e23-472a-beed-93846521a85b/metrics
-  response:
-    body:
-      string: '{"id":"ec1439b7-03d9-45b4-9c5e-b664b3ee20e9","span_id":"19a9dcc2-4e23-472a-beed-93846521a85b","dimension":"metric","value":1.0,"comment":null,"updated_at":null,"created_at":"2024-08-22T14:02:59.352651Z"}'
-    headers:
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '203'
-      Content-Type:
-      - application/json
-      Date:
-      - Thu, 22 Aug 2024 14:02:59 GMT
+      date:
+      - Wed, 04 Sep 2024 13:59:52 GMT
       server:
       - uvicorn
     status:

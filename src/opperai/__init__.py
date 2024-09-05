@@ -9,4 +9,5 @@ from opperai.spans.async_spans import AsyncSpans
 from opperai.spans.spans import Spans
 
 from .__version__ import __version__
-from ._client import AsyncClient, AsyncOpper, Client, Opper
+from ._client import AsyncClient, Client
+from ._opper import AsyncOpper, Opper

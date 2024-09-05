@@ -5,9 +5,10 @@ import json
 import os
 import threading
 from functools import wraps
-from typing import List, get_args, get_origin, get_type_hints
+from typing import List, Union, get_args, get_origin, get_type_hints
 
-from opperai._client import AsyncClient, AsyncOpper, Client, Opper
+from opperai._client import AsyncClient, Client
+from opperai._opper import AsyncOpper, Opper
 from opperai.core.spans import get_current_span_id
 from opperai.core.utils import convert_function_call_to_json
 from opperai.functions.async_functions import AsyncFunctionResponse
@@ -42,7 +43,7 @@ def fn(
     _func=None,
     *,
     path=None,
-    client=None,
+    client: Union[Client, AsyncClient] = None,
     json_encoder=None,
     model=None,
     few_shot=None,
@@ -87,9 +88,8 @@ def fn(
     def decorator(func):
         func_path = path or func.__name__
         setup_done = False
-        client = None
-        opper = None
-        c = None
+        client: Union[Client, AsyncClient] = None
+        opper: Union[Opper, AsyncOpper] = None
         function: Function = None
 
         def _create_function(opper: Opper):
@@ -111,45 +111,44 @@ def fn(
             )
 
         def setup():
-            nonlocal setup_done, client, c, function, opper
+            nonlocal setup_done, client, function, opper
             if setup_done:
                 return
 
-            if isinstance(client, AsyncOpper):
-                opper = Opper(
-                    client=Client(api_key=client.api_key, api_url=client.api_url)
-                )
-            elif isinstance(client, Opper):
-                opper = client
+            if isinstance(client, AsyncClient):
+                client = Client(api_key=client.api_key, api_url=client.api_url)
+                opper = Opper(client)
+            elif isinstance(client, Client):
+                opper = Opper(client)
             else:
-                opper = Opper()
+                client = Client()
+                opper = Opper(client)
 
             function = _create_function(opper)
 
             if asyncio.iscoroutinefunction(func):
-                c = AsyncOpper() or client
+                client = AsyncClient(api_key=client.api_key, api_url=client.api_url)
+                opper = AsyncOpper(client)
             else:
-                c = client
+                client = client
 
             setup_done = True
 
         async def async_setup():
-            nonlocal setup_done, client, c, function, opper
+            nonlocal setup_done, client, function, opper
             if setup_done:
                 return
 
-            if isinstance(client, AsyncOpper):
-                opper = client
-            elif isinstance(client, Opper):
-                opper = AsyncOpper(
-                    client=AsyncClient(api_key=client.api_key, api_url=client.api_url)
-                )
+            if isinstance(client, AsyncClient):
+                opper = AsyncOpper(client)
+            elif isinstance(client, Client):
+                client = AsyncClient(api_key=client.api_key, api_url=client.api_url)
+                opper = AsyncOpper(client)
             else:
-                opper = AsyncOpper()
+                client = AsyncClient()
+                opper = AsyncOpper(client)
 
             function = await _create_function_async(opper)
-
-            c = opper
 
             setup_done = True
 
@@ -195,7 +194,7 @@ def fn(
             return_type = get_type_hints(func).get("return")
             answer = _unmarshal_response(_response.json_payload, return_type)
 
-            response = AsyncFunctionResponse(client=c, **_response.model_dump())
+            response = AsyncFunctionResponse(client=client, **_response.model_dump())
 
             return answer, response
 
@@ -218,7 +217,7 @@ def fn(
             return_type = get_type_hints(func).get("return")
             answer = _unmarshal_response(_response.json_payload, return_type)
 
-            response = FunctionResponse(client=c, **_response.model_dump())
+            response = FunctionResponse(client=client, **_response.model_dump())
 
             return answer, response
 
