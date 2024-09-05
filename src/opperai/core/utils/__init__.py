@@ -1,29 +1,32 @@
 import json
 from datetime import datetime
 from inspect import signature
+from typing import Any
 from uuid import UUID
 
-from opperai.types import ImageMessageContent
 from pydantic import BaseModel
 
 
 def convert_function_call_to_json(func, *args, **kwargs):
-    media = []
     input_data = dict(zip(signature(func).parameters, args))
     input_data.update(kwargs)
 
-    input = {}
-    for key, value in input_data.items():
-        if isinstance(value, ImageMessageContent):
-            media.append(value)
-        elif isinstance(value, BaseModel):
-            input[key] = value.model_dump()
-        elif isinstance(value, list) and all(isinstance(v, BaseModel) for v in value):
-            input[key] = [v.model_dump() for v in value]
-        else:
-            input[key] = value
+    return prepare_input(input_data)
 
-    return input, media
+
+def prepare_input(input: Any) -> Any:
+    if isinstance(input, str):
+        return input
+    elif isinstance(input, BaseModel):
+        return input.model_dump(exclude_none=True)
+    elif isinstance(input, list):
+        _input = [prepare_input(item) for item in input]
+        return _input
+    elif isinstance(input, dict):
+        _input = {key: prepare_input(value) for key, value in input.items()}
+        return _input
+    else:
+        return input
 
 
 class DateTimeEncoder(json.JSONEncoder):

@@ -9,8 +9,8 @@ from opperai.types import (
     Error,
     Errors,
     Function,
+    ImageInput,
     Message,
-    MessageContent,
 )
 from opperai.types.exceptions import StructuredGenerationError
 
@@ -105,35 +105,6 @@ def test_delete_function_by_path(client: Client, vcr_cassette):
     assert f is None
 
 
-def test_image_url(client: Client, vcr_cassette):
-    with _function(
-        Function(
-            path="test/sdk/test_image",
-            instructions="describe the image",
-            model="openai/gpt4-turbo",
-        ),
-        client,
-    ) as function:
-        f = client.functions.get(uuid=function.uuid)
-        resp = client.functions.chat(
-            f.path,
-            ChatPayload(
-                messages=[
-                    Message(
-                        role="user",
-                        content=[
-                            MessageContent.image_url(
-                                url="https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/e1/d3/e1d3fee9-9aaa-4599-ba67-1c71a6d0ed03/1200px-seymouria_fossil.jpg"
-                            )
-                        ],
-                    )
-                ]
-            ),
-        )
-
-        assert "fossil" in resp.message.lower()
-
-
 def test_image_file(client: Client, vcr_cassette):
     with _function(
         Function(
@@ -151,9 +122,7 @@ def test_image_file(client: Client, vcr_cassette):
                     Message(
                         role="user",
                         content=[
-                            MessageContent.image(
-                                path="tests/fixtures/images/fossil.jpg"
-                            )
+                            ImageInput.from_path("tests/fixtures/images/fossil.jpg")
                         ],
                     )
                 ]

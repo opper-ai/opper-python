@@ -1,9 +1,10 @@
 from http import HTTPStatus
-from typing import Iterator, List, Optional, Union
+from typing import Any, Iterator, List, Optional, Union
 
 from opperai.core._http_clients import _http_client
 from opperai.core.spans import get_current_span_id
 from opperai.types import (
+    CallPayload,
     ChatPayload,
     Example,
     Function,
@@ -372,3 +373,17 @@ class Functions:
             )
 
         return True
+
+    def call(self, uuid: str, payload: CallPayload) -> Any:
+        response = self.http_client.do_request(
+            "POST",
+            f"/v1/functions/{uuid}/call",
+            json=payload.model_dump(),
+        )
+
+        if response.status_code == HTTPStatus.OK:
+            return FunctionResponse.model_validate(response.json())
+
+        raise APIError(
+            f"Failed to run function {payload.name} with status {response.status_code}: {response.text}"
+        )

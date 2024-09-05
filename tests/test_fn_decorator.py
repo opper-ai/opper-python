@@ -1,12 +1,11 @@
 from typing import Dict, List, Optional, Union
-from unittest.mock import MagicMock, patch
 
 import pytest
 from jsonschema import validate
 from opperai import AsyncClient, Client, fn
 from opperai.core.utils import convert_function_call_to_json
 from opperai.functions.decorator._schemas import type_to_json_schema
-from opperai.types import ImageContent
+from opperai.types import ImageInput
 from pydantic import BaseModel
 
 
@@ -51,12 +50,12 @@ def test_fn_decorator_image(client: Client, vcr_cassette):
 
     @fn(client=client, model="openai/gpt-4o")
     def describe_image(
-        image: ImageContent,
+        image: ImageInput,
     ) -> ImageDescription:
         """given an image describe what it is"""
 
     description = describe_image(
-        ImageContent.from_path("tests/fixtures/images/fossil.png"),
+        ImageInput.from_path("tests/fixtures/images/fossil.png"),
     )
     print(description)
 
@@ -70,12 +69,12 @@ async def test_fn_decorator_image_async(aclient: AsyncClient, vcr_cassette):
 
     @fn(client=aclient, model="openai/gpt-4o")
     async def extract_letters(
-        image: ImageContent,
+        image: ImageInput,
     ) -> Word:
         """given an image extract the word it represents"""
 
     word = await extract_letters(
-        ImageContent.from_path("tests/fixtures/images/letters.png"),
+        ImageInput.from_path("tests/fixtures/images/letters.png"),
     )
     print(word)
 
@@ -100,6 +99,12 @@ def test_fn_decorator(client: Client, vcr_cassette):
     response.span.save_metric("metric", 1)
 
 
+import os
+
+os.environ["OPPER_API_KEY"] = "op-FNHF7LJGR12KE00BBQH0"
+os.environ["OPPER_API_URL"] = "http://localhost:8000"
+
+
 @pytest.mark.asyncio
 async def test_fn_decorator_async(aclient: AsyncClient, vcr_cassette):
     @fn(client=aclient)
@@ -115,38 +120,12 @@ async def test_fn_decorator_async(aclient: AsyncClient, vcr_cassette):
     await response.span.save_metric("metric", 1)
 
 
-@patch("opperai.core._http_clients._http_client.do_request")
-def test_decorator(mock_do_request):
-    mock_do_request.side_effect = [
-        MagicMock(status_code=404),
-        MagicMock(
-            status_code=200,
-            json=lambda: {
-                "id": 1,
-                "path": "path",
-                "description": "description",
-                "instructions": "instructions",
-            },
-        ),
-        MagicMock(status_code=200, json=lambda: {"json_payload": "Hola"}),
-        MagicMock(status_code=404),
-        MagicMock(
-            status_code=200,
-            json=lambda: {
-                "id": 2,
-                "path": "path",
-                "description": "description",
-                "instructions": "instructions",
-            },
-        ),
-        MagicMock(status_code=200, json=lambda: {"json_payload": ["Hola", "Bonjour"]}),
-    ]
-
-    @fn()
+def test_decorator(client: Client, vcr_cassette):
+    @fn(client=client)
     def translate(text: str, target_language: str) -> str:
         """Translate text to a target language."""
 
-    @fn()
+    @fn(client=client)
     def translate_list(text: str, target_languages: List[str]) -> List[str]:
         """Translate text to a list of target languages."""
 
@@ -154,43 +133,18 @@ def test_decorator(mock_do_request):
     assert translate_list("Hello", ["es", "fr"]) == ["Hola", "Bonjour"]
 
 
-@patch("opperai.core._http_clients._http_client.do_request")
-def test_decorator_supply_model(mock_do_request):
-    mock_do_request.side_effect = [
-        MagicMock(status_code=404),
-        MagicMock(
-            status_code=200,
-            json=lambda: {
-                "id": 1,
-                "path": "path",
-                "description": "description",
-                "instructions": "instructions",
-            },
-        ),
-        MagicMock(status_code=200, json=lambda: {"json_payload": "Hola"}),
-        MagicMock(status_code=404),
-        MagicMock(
-            status_code=200,
-            json=lambda: {
-                "id": 2,
-                "path": "path",
-                "description": "description",
-                "instructions": "instructions",
-            },
-        ),
-        MagicMock(status_code=200, json=lambda: {"json_payload": ["Hola", "Bonjour"]}),
-    ]
-
-    @fn(model="gpt-4-0125-preview")
-    def translate(text: str, target_language: str) -> str:
+@pytest.mark.asyncio
+async def test_decorator_supply_model(aclient: AsyncClient, vcr_cassette):
+    @fn(client=aclient, model="openai/gpt-4o")
+    async def translate(text: str, target_language: str) -> str:
         """Translate text to a target language."""
 
-    @fn()
-    def translate_list(text: str, target_languages: List[str]) -> List[str]:
+    @fn(client=aclient, model="openai/gpt-4o")
+    async def translate_list(text: str, target_languages: List[str]) -> List[str]:
         """Translate text to a list of target languages."""
 
-    assert translate("Hello", "es") == "Hola"
-    assert translate_list("Hello", ["es", "fr"]) == ["Hola", "Bonjour"]
+    assert await translate("Hello", "es") == "Hola"
+    assert await translate_list("Hello", ["es", "fr"]) == ["Hola", "Bonjour"]
 
 
 class NestedModel(BaseModel):
@@ -215,9 +169,8 @@ def test_convert_func_to_json():
     def something(text: str, target_language: str) -> str:
         """Translate text to a target language."""
 
-    input, media = convert_function_call_to_json(something, "Hello", "es")
+    input = convert_function_call_to_json(something, "Hello", "es")
     assert input == {"text": "Hello", "target_language": "es"}
-    assert media == []
 
     model = ExampleModel(
         integer_field=1,
@@ -238,24 +191,27 @@ def test_convert_func_to_json():
     def advanced(text: str, target_language: str, model: ExampleModel) -> str:
         pass
 
-    input, media = convert_function_call_to_json(advanced, "Hello", "es", model)
+    input = convert_function_call_to_json(advanced, "Hello", "es", model)
     assert input == {
         "text": "Hello",
         "target_language": "es",
         "model": model.model_dump(),
     }
-    assert media == []
 
 
 def test_convert_func_to_json_with_image():
-    def f(image: ImageContent, text: str) -> str:
+    def f(image: ImageInput, text: str) -> str:
         pass
 
-    input, media = convert_function_call_to_json(
-        f, ImageContent.from_path("tests/fixtures/images/fossil.png"), "Hello"
+    input = convert_function_call_to_json(
+        f, ImageInput.from_path("tests/fixtures/images/minimal.png"), "Hello"
     )
-    assert input == {"text": "Hello"}
-    assert media == [ImageContent.from_path("tests/fixtures/images/fossil.png")]
+    assert input == {
+        "image": {
+            "_opper_image_input": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQAAAAA3bvkkAAAACklEQVR4AWNgAAAAAgABc3UBGAAAAABJRU5ErkJggg=="
+        },
+        "text": "Hello",
+    }
 
 
 class ToyModel(BaseModel):

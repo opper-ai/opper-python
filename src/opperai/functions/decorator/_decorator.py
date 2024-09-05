@@ -1,22 +1,18 @@
 import asyncio
 import contextlib
 import inspect
-import json
 import os
 import threading
 from functools import wraps
-from typing import List, get_args, get_origin, get_type_hints
+from typing import List, Union, get_args, get_origin, get_type_hints
 
 from opperai._client import AsyncClient, Client
-from opperai.core.spans import get_current_span_id
+from opperai._opper import AsyncOpper, Opper
 from opperai.core.utils import convert_function_call_to_json
 from opperai.functions.async_functions import AsyncFunctionResponse
-from opperai.functions.functions import FunctionResponse
+from opperai.functions.functions import Function, FunctionResponse
 from opperai.types import (
     CacheConfiguration,
-    ChatPayload,
-    Function,
-    Message,
 )
 from pydantic import BaseModel
 
@@ -43,7 +39,7 @@ def fn(
     _func=None,
     *,
     path=None,
-    client=None,
+    client: Union[Client, AsyncClient] = None,
     json_encoder=None,
     model=None,
     few_shot=None,
@@ -88,68 +84,67 @@ def fn(
     def decorator(func):
         func_path = path or func.__name__
         setup_done = False
-        sync_client = None
-        c = None
+        client: Union[Client, AsyncClient] = None
+        opper: Union[Opper, AsyncOpper] = None
+        function: Function = None
 
-        def _prepare_function():
-            use_few_shot = few_shot or os.environ.get("OPPER_USE_FEW_SHOT", False)
-            function = Function(
+        def _create_function(opper: Opper):
+            return opper.functions.create(
                 path=func_path,
-                description=func.__doc__,
                 instructions=f"Operation: {func.__name__}\n\nOperation description: {func.__doc__}",
-                out_schema=get_output_schema(func),
-                few_shot=use_few_shot,
-            )
-            if use_few_shot:
-                function.use_semantic_search = True
-                function.few_shot_count = few_shot_count or 2
-            if cache_config:
-                function.cache_configuration = cache_config
-
-            function.model = (
-                model if model else os.environ.get("OPPER_DEFAULT_MODEL", None)
+                description=func.__doc__,
+                output_type=get_output_schema(func),
+                model=model if model else os.environ.get("OPPER_DEFAULT_MODEL", None),
             )
 
-            return function
+        async def _create_function_async(opper: AsyncOpper):
+            return await opper.functions.create(
+                path=func_path,
+                instructions=f"Operation: {func.__name__}\n\nOperation description: {func.__doc__}",
+                description=func.__doc__,
+                output_type=get_output_schema(func),
+                model=model if model else os.environ.get("OPPER_DEFAULT_MODEL", None),
+            )
 
         def setup():
-            nonlocal setup_done, sync_client, c
+            nonlocal setup_done, client, function, opper
             if setup_done:
                 return
 
             if isinstance(client, AsyncClient):
-                sync_client = Client(api_key=client.api_key, api_url=client.api_url)
+                client = Client(api_key=client.api_key, api_url=client.api_url)
+                opper = Opper(client)
             elif isinstance(client, Client):
-                sync_client = client
+                opper = Opper(client)
             else:
-                sync_client = Client()
+                client = Client()
+                opper = Opper(client)
 
-            sync_client.functions.create(_prepare_function())
+            function = _create_function(opper)
 
             if asyncio.iscoroutinefunction(func):
-                c = AsyncClient() or client
+                client = AsyncClient(api_key=client.api_key, api_url=client.api_url)
+                opper = AsyncOpper(client)
             else:
-                c = sync_client or client
+                client = client
 
             setup_done = True
 
         async def async_setup():
-            nonlocal setup_done, sync_client, c
+            nonlocal setup_done, client, function, opper
             if setup_done:
                 return
 
             if isinstance(client, AsyncClient):
-                sync_client = client
+                opper = AsyncOpper(client)
             elif isinstance(client, Client):
-                sync_client = AsyncClient(
-                    api_key=client.api_key, api_url=client.api_url
-                )
+                client = AsyncClient(api_key=client.api_key, api_url=client.api_url)
+                opper = AsyncOpper(client)
             else:
-                sync_client = AsyncClient()
+                client = AsyncClient()
+                opper = AsyncOpper(client)
 
-            await sync_client.functions.create(_prepare_function())
-
-            c = client or sync_client
+            function = await _create_function_async(opper)
 
             setup_done = True
 
@@ -165,18 +160,6 @@ def fn(
                     response = [get_args(return_type)[0](**item) for item in response]
             return response
 
-        def _prepare_payload(input, images):
-            messages = [
-                Message(role="user", content=json.dumps(input, cls=json_encoder))
-            ]
-            if images:
-                messages.append(Message(role="user", content=images))
-
-            return ChatPayload(
-                parent_span_uuid=get_current_span_id(),
-                messages=messages,
-            )
-
         @wraps(func)
         async def async_wrapper(*args, **kwargs):
             answer, _ = await async_call(*args, **kwargs)
@@ -185,9 +168,9 @@ def fn(
         async def async_call(*args, **kwargs):
             await async_setup()
 
-            input, media = convert_function_call_to_json(func, *args, **kwargs)
-            _response = await c.functions.chat(
-                func_path, _prepare_payload(input, media)
+            input = convert_function_call_to_json(func, *args, **kwargs)
+            _response = await function.call(
+                input=input,
             )
 
             _thread_local.span_id = _response.span_id
@@ -195,7 +178,7 @@ def fn(
             return_type = get_type_hints(func).get("return")
             answer = _unmarshal_response(_response.json_payload, return_type)
 
-            response = AsyncFunctionResponse(client=c, **_response.model_dump())
+            response = AsyncFunctionResponse(client=client, **_response.model_dump())
 
             return answer, response
 
@@ -206,16 +189,19 @@ def fn(
 
         def sync_call(*args, **kwargs):
             setup()
+            nonlocal function
 
-            input, media = convert_function_call_to_json(func, *args, **kwargs)
-            _response = c.functions.chat(func_path, _prepare_payload(input, media))
+            input = convert_function_call_to_json(func, *args, **kwargs)
+            _response = function.call(
+                input=input,
+            )
 
             _thread_local.span_id = _response.span_id
 
             return_type = get_type_hints(func).get("return")
             answer = _unmarshal_response(_response.json_payload, return_type)
 
-            response = FunctionResponse(client=c, **_response.model_dump())
+            response = FunctionResponse(client=client, **_response.model_dump())
 
             return answer, response
 
