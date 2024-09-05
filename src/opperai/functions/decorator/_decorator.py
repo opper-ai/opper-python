@@ -1,7 +1,6 @@
 import asyncio
 import contextlib
 import inspect
-import json
 import os
 import threading
 from functools import wraps
@@ -9,14 +8,11 @@ from typing import List, Union, get_args, get_origin, get_type_hints
 
 from opperai._client import AsyncClient, Client
 from opperai._opper import AsyncOpper, Opper
-from opperai.core.spans import get_current_span_id
 from opperai.core.utils import convert_function_call_to_json
 from opperai.functions.async_functions import AsyncFunctionResponse
 from opperai.functions.functions import Function, FunctionResponse
 from opperai.types import (
     CacheConfiguration,
-    ChatPayload,
-    Message,
 )
 from pydantic import BaseModel
 
@@ -163,18 +159,6 @@ def fn(
                 ):
                     response = [get_args(return_type)[0](**item) for item in response]
             return response
-
-        def _prepare_payload(input, images):
-            messages = [
-                Message(role="user", content=json.dumps(input, cls=json_encoder))
-            ]
-            if images:
-                messages.append(Message(role="user", content=images))
-
-            return ChatPayload(
-                parent_span_uuid=get_current_span_id(),
-                messages=messages,
-            )
 
         @wraps(func)
         async def async_wrapper(*args, **kwargs):
