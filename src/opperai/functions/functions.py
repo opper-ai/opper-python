@@ -299,7 +299,7 @@ def _call(
         and isinstance(output_type, type)
         and issubclass(output_type, ImageOutput)
     ):
-        res = client.generate_image(prompt=input)
+        res = client.generate_image(prompt=input, configuration=configuration)
         return res
 
     if not name:
