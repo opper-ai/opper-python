@@ -14,6 +14,8 @@ from typing import (
     get_origin,
 )
 
+from pydantic import BaseModel, PrivateAttr
+
 from opperai._client import Client
 from opperai.core.utils import prepare_input
 from opperai.datasets.datasets import Dataset
@@ -29,7 +31,6 @@ from opperai.types import (
 )
 from opperai.types import Function as FunctionModel
 from opperai.types import FunctionResponse as FunctionResponseModel
-from pydantic import BaseModel, PrivateAttr
 
 from ..spans.spans import Span
 
