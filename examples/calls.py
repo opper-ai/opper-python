@@ -1,32 +1,46 @@
 import asyncio
 from typing import List
 
-from opperai import AsyncOpper, Opper, trace
-from opperai.types import Example
 from pydantic import BaseModel, Field
+
+from opperai import AsyncOpper, Opper, trace
+from opperai.types import CallConfiguration, Example
 
 opper = Opper()
 
 
+@trace
 def bare_minimum():
     output, _ = opper.call(
         name="python/sdk/bare-minimum",
         instructions="answer the following question",
         input="what are some uses of 42",
+        configuration=CallConfiguration(
+            model_parameters={
+                "max_tokens": 10,
+            }
+        ),
     )
     print(output)
 
 
+@trace
 def bare_minimum_with_model():
     output, _ = opper.call(
         name="python/sdk/bare-minimum-with-model",
         instructions="answer the following question",
         input="what are some uses of 42",
         model="mistral/mistral-tiny-eu",
+        configuration=CallConfiguration(
+            model_parameters={
+                "max_tokens": 10,
+            }
+        ),
     )
     print(output)
 
 
+@trace
 def structured_input_output():
     class Number(BaseModel):
         x: int
@@ -40,6 +54,7 @@ def structured_input_output():
     print(output)
 
 
+@trace
 def call_with_examples():
     output, _ = opper.call(
         name="python/sdk/call-with-examples",
@@ -56,6 +71,7 @@ def call_with_examples():
     print(output)
 
 
+@trace
 def call_with_structured_examples():
     class Number(BaseModel):
         x: int = Field(..., ge=0, description="value of the number")
@@ -89,25 +105,38 @@ synchronous_call()
 aopper = AsyncOpper()
 
 
+@trace
 async def async_bare_minimum():
     output, _ = await aopper.call(
         name="python/sdk/async-bare-minimum",
         instructions="answer the following question",
         input="what are some uses of 42",
+        configuration=CallConfiguration(
+            model_parameters={
+                "max_tokens": 10,
+            }
+        ),
     )
     print(output)
 
 
+@trace
 async def async_bare_minimum_with_model():
     output, _ = await aopper.call(
         name="python/sdk/async-bare-minimum-with-model",
         instructions="answer the following question",
         input="what are some uses of 42",
         model="mistral/mistral-tiny-eu",
+        configuration=CallConfiguration(
+            model_parameters={
+                "max_tokens": 10,
+            }
+        ),
     )
     print(output)
 
 
+@trace
 async def async_structured_input_output():
     class Number(BaseModel):
         x: int
@@ -121,8 +150,9 @@ async def async_structured_input_output():
     print(output)
 
 
+@trace
 async def async_call_with_examples():
-    output, response = await aopper.call(
+    output, _ = await aopper.call(
         name="python/sdk/async-call-with-examples",
         instructions="extract the weekday from a text",
         examples=[
@@ -133,10 +163,16 @@ async def async_call_with_examples():
             ),
         ],
         input="Wonder what day it is on Sunday",
+        configuration=CallConfiguration(
+            model_parameters={
+                "max_tokens": 10,
+            }
+        ),
     )
     print(output)
 
 
+@trace
 async def async_call_with_structured_examples():
     class Number(BaseModel):
         x: int = Field(..., ge=0, description="value of the number")

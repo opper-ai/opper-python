@@ -2,9 +2,10 @@ import asyncio
 from tempfile import NamedTemporaryFile
 from typing import List
 
-from opperai import AsyncOpper, Opper
-from opperai.types import AudioInput, ImageInput, ImageOutput
 from pydantic import BaseModel, Field
+
+from opperai import AsyncOpper, Opper
+from opperai.types import AudioInput, CallConfiguration, ImageInput, ImageOutput
 
 opper = Opper()
 
@@ -26,8 +27,19 @@ def generate_image(description: str) -> ImageOutput:
         name="generate_image",
         output_type=ImageOutput,
         input=description,
+        configuration=CallConfiguration(
+            model_parameters={
+                "size": "1792x1024",
+                "quality": "hd",
+            }
+        ),
     )
     return image
+
+
+description = "a cat with a hat and a hat on the cat and a hat on the cat"
+path = save_file(generate_image(description).bytes)
+print(f"generated image based on description: {description} -> {path}")
 
 
 class Description(BaseModel):

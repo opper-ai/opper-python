@@ -104,26 +104,20 @@ class Message(BaseModel):
 
 
 class CallConfiguration(BaseModel):
+    model_config: ConfigDict = ConfigDict(protected_namespaces=())
+
     class Invocation(BaseModel):
         class FewShot(BaseModel):
             count: int = 0
 
-        class Cache(BaseModel):
-            exact_match_ttl: int = 0
-            semantic_cache_threshold: float = 0.95
-            semantic_cache_ttl: int = 0
-
         few_shot: FewShot = Field(
             FewShot(),
-        )
-        cache: Cache = Field(
-            Cache(),
         )
 
     invocation: Invocation = Field(
         Invocation(),
     )
-    model_parameters: Optional[Dict[str, Any]] = None
+    model_parameters: Optional[Dict[str, Any]] = Field(default_factory=dict)
 
 
 class CallPayload(BaseModel):
