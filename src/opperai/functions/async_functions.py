@@ -12,7 +12,10 @@ from typing import (
     get_origin,
 )
 
+from pydantic import BaseModel, PrivateAttr
+
 from opperai._client import AsyncClient
+from opperai.core.spans import get_current_span_id
 from opperai.datasets.async_datasets import AsyncDataset
 from opperai.functions.decorator._schemas import type_to_json_schema
 from opperai.types import (
@@ -26,10 +29,9 @@ from opperai.types import (
 )
 from opperai.types import Function as FunctionModel
 from opperai.types import FunctionResponse as FunctionResponseModel
-from pydantic import BaseModel, PrivateAttr
 
 from ..spans.async_spans import AsyncSpan
-from .functions import T, djb2, prepare_input
+from .functions import T, prepare_input
 
 
 class AsyncFunctionResponse(FunctionResponseModel):
@@ -251,6 +253,7 @@ class AsyncFunctions:
         model: Optional[str] = None,
         examples: Optional[List[Example]] = None,
         configuration: Optional[CallConfiguration] = None,
+        parent_span_id: Optional[str] = None,
     ) -> Tuple[T, AsyncFunctionResponse]:
         """Calls a function
         Arguments:
@@ -275,9 +278,6 @@ class AsyncFunctions:
             res = await self._client.generate_image(prompt=input)
             return res
 
-        if not name:
-            name = djb2(instructions)
-
         input_schema = type_to_json_schema(input_type)
         output_schema = type_to_json_schema(output_type)
 
@@ -298,7 +298,12 @@ class AsyncFunctions:
             output_type=output_schema,
             model=model,
             examples=_examples,
+            parent_span_uuid=parent_span_id
+            if parent_span_id
+            else get_current_span_id(),
         )
+        if configuration:
+            call_payload.configuration = configuration
 
         res: FunctionResponseModel = await self._client.call(call_payload)
 
