@@ -11,7 +11,7 @@ from opperai.core.indexes._async_indexes import AsyncIndexes
 from opperai.core.indexes._indexes import Indexes
 from opperai.core.spans._async_spans import AsyncSpans
 from opperai.core.spans._spans import Spans
-from opperai.types import CallPayload, FunctionResponse, ImageOutput
+from opperai.types import CallConfiguration, CallPayload, FunctionResponse, ImageOutput
 from opperai.types.exceptions import APIError
 
 from .core._http_clients import _async_http_client, _http_client
@@ -118,14 +118,22 @@ class Client:
         self.spans = Spans(self.http_client)
         self.datasets = Datasets(self.http_client)
 
-    def generate_image(self, prompt: str) -> Tuple[ImageOutput, None]:
+    def generate_image(
+        self, prompt: str, configuration: CallConfiguration
+    ) -> Tuple[ImageOutput, None]:
         """Generate an image from a prompt.
         Note: only Azure dall-e-3 is supported.
         """
+        payload = {
+            "model": "azure/dall-e-3-eu",
+            "prompt": prompt,
+            "format": "b64_json",
+            **configuration.model_parameters,
+        }
         response = self.http_client.do_request(
             "POST",
             "/v1/generate-image",
-            json={"model": "azure/dall-e-3-eu", "prompt": prompt, "format": "b64_json"},
+            json=payload,
         )
 
         base64_image = response.json()["result"]["base64_image"]

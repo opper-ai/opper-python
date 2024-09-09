@@ -104,6 +104,8 @@ class Message(BaseModel):
 
 
 class CallConfiguration(BaseModel):
+    model_config: ConfigDict = ConfigDict(protected_namespaces=())
+
     class Invocation(BaseModel):
         class FewShot(BaseModel):
             count: int = 0
@@ -115,6 +117,7 @@ class CallConfiguration(BaseModel):
     invocation: Invocation = Field(
         Invocation(),
     )
+    model_parameters: Optional[Dict[str, Any]] = Field(default_factory=dict)
 
 
 class CallPayload(BaseModel):
