@@ -274,7 +274,6 @@ class Functions:
 
         input_schema = type_to_json_schema(input_type)
         output_schema = type_to_json_schema(output_type)
-
         input = prepare_input(input)
 
         _examples = []
@@ -287,9 +286,9 @@ class Functions:
         call_payload = CallPayload(
             name=name,
             instructions=instructions,
-            input_type=input_schema,
+            input_schema=input_schema,
             input=input,
-            output_type=output_schema,
+            output_schema=output_schema,
             model=model,
             examples=_examples,
             parent_span_uuid=parent_span_id

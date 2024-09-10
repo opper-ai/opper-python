@@ -123,9 +123,9 @@ class CallConfiguration(BaseModel):
 class CallPayload(BaseModel):
     name: Optional[str] = None
     instructions: Optional[str] = "you are a helpful assistant"
-    input_type: Optional[Dict[str, Any]] = None
+    input_schema: Optional[Dict[str, Any]] = None
     input: Optional[Any] = None
-    output_type: Optional[Dict[str, Any]] = None
+    output_schema: Optional[Dict[str, Any]] = None
     model: Optional[str] = None
     examples: Optional[List[Example]] = None
     stream: bool = False

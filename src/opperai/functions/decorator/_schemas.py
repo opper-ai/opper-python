@@ -14,7 +14,9 @@ def type_to_json_schema(type_hint):
 
     schema = _type_to_json_schema(type_hint)
     schema, defs = _lift_defs(schema, {})
-    schema["$defs"] = defs
+    if defs:
+        schema["$defs"] = defs
+
     return schema
 
 

@@ -20,7 +20,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Wed, 04 Sep 2024 13:59:46 GMT
+      - Wed, 11 Sep 2024 07:15:43 GMT
       server:
       - uvicorn
     status:
@@ -31,7 +31,7 @@ interactions:
       "description": "given an image extract the word it represents", "input_schema":
       null, "out_schema": {"properties": {"letters": {"items": {"type": "string"},
       "title": "Letters", "type": "array"}}, "required": ["letters"], "title": "Word",
-      "type": "object", "$defs": {}}, "instructions": "Operation: extract_letters\n\nOperation
+      "type": "object"}, "instructions": "Operation: extract_letters\n\nOperation
       description: given an image extract the word it represents", "model": "openai/gpt-4o",
       "index_ids": [], "use_semantic_search": false, "few_shot": false, "few_shot_count":
       2, "cache_configuration": null, "dataset_uuid": "2cfd908d-dba7-4728-9eef-7a0c2bc4f40c"}'
@@ -41,7 +41,7 @@ interactions:
       connection:
       - keep-alive
       content-length:
-      - '661'
+      - '648'
       content-type:
       - application/json
     method: PATCH
@@ -51,23 +51,23 @@ interactions:
       string: '{"id":40,"uuid":"8ff8939f-a416-4597-9ac7-f4102f48ee1a","dataset_uuid":"2cfd908d-dba7-4728-9eef-7a0c2bc4f40c","description":"given
         an image extract the word it represents","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
         extract_letters\n\nOperation description: given an image extract the word
-        it represents","language_model_id":null,"model":"openai/gpt-4o","out_schema":{"properties":{"letters":{"items":{"type":"string"},"title":"Letters","type":"array"}},"required":["letters"],"title":"Word","type":"object","$defs":{}},"path":"extract_letters","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
+        it represents","language_model_id":null,"model":"openai/gpt-4o","out_schema":{"properties":{"letters":{"items":{"type":"string"},"title":"Letters","type":"array"}},"required":["letters"],"title":"Word","type":"object"},"path":"extract_letters","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '709'
+      - '698'
       content-type:
       - application/json
       date:
-      - Wed, 04 Sep 2024 13:59:46 GMT
+      - Wed, 11 Sep 2024 07:15:43 GMT
       server:
       - uvicorn
     status:
       code: 200
       message: OK
 - request:
-    body: '{"name": null, "instructions": "you are a helpful assistant", "input_type":
+    body: '{"name": null, "instructions": "you are a helpful assistant", "input_schema":
       null, "input": {"image": {"_opper_image_input": "data:image/png;base64,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"}},
-      "output_type": null, "model": null, "examples": null, "stream": false, "parent_span_uuid":
+      "output_schema": null, "model": null, "examples": null, "stream": false, "parent_span_uuid":
       null, "configuration": null}'
     headers:
       accept:
@@ -75,21 +75,21 @@ interactions:
       connection:
       - keep-alive
       content-length:
-      - '7835'
+      - '7839'
       content-type:
       - application/json
     method: POST
     uri: http://localhost:8000/v1/functions/8ff8939f-a416-4597-9ac7-f4102f48ee1a/call
   response:
     body:
-      string: '{"span_id":"8a5c9627-f480-418c-b5c7-9c259348076c","message":null,"json_payload":{"letters":["L","E","T","T","E","R"]},"context":null,"cached":false}'
+      string: '{"span_id":"bdfaf0d3-e26b-4185-9774-e526f3398cc4","message":null,"json_payload":{"letters":["L","E","T","T","E","R"]},"context":null,"cached":false}'
     headers:
       content-length:
       - '148'
       content-type:
       - application/json
       date:
-      - Wed, 04 Sep 2024 13:59:46 GMT
+      - Wed, 11 Sep 2024 07:15:43 GMT
       server:
       - uvicorn
     status:
