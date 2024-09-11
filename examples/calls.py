@@ -41,6 +41,20 @@ def bare_minimum_with_model():
 
 
 @trace
+def structured_string_input_output():
+    class Number(BaseModel):
+        x: int
+
+    output, _ = opper.call(
+        name="python/sdk/structured-input-output",
+        instructions="given a word, translate it to spanish",
+        input="hello",
+        output_type=str,
+    )
+    print(output)
+
+
+@trace
 def structured_input_output():
     class Number(BaseModel):
         x: int
@@ -98,6 +112,7 @@ def synchronous_call():
     structured_input_output()
     call_with_structured_examples()
     call_with_examples()
+    structured_string_input_output()
 
 
 synchronous_call()
@@ -132,6 +147,17 @@ async def async_bare_minimum_with_model():
                 "max_tokens": 10,
             }
         ),
+    )
+    print(output)
+
+
+@trace
+async def async_structured_string_input_output():
+    output, _ = await aopper.call(
+        name="python/sdk/async-structured-string-input-output",
+        instructions="given a word, translate it to spanish",
+        input="hello",
+        output_type=str,
     )
     print(output)
 
@@ -200,6 +226,7 @@ async def async_call():
         async_structured_input_output(),
         async_call_with_examples(),
         async_call_with_structured_examples(),
+        async_structured_string_input_output(),
     )
 
 

@@ -19,7 +19,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Wed, 04 Sep 2024 13:59:26 GMT
+      - Wed, 11 Sep 2024 07:15:22 GMT
       server:
       - uvicorn
     status:
@@ -27,17 +27,17 @@ interactions:
       message: OK
 - request:
     body: '{"uuid": "35cc05ad-18e8-465a-9264-478226b7f6fc", "path": "test_method",
-      "description": "say hello", "input_schema": null, "out_schema": {"type": "string",
-      "$defs": {}}, "instructions": "Operation: test_method\n\nOperation description:
-      say hello", "model": null, "index_ids": [], "use_semantic_search": false, "few_shot":
-      false, "few_shot_count": 2, "cache_configuration": null, "dataset_uuid": "550e2998-4f36-4697-a4bd-356c4eb654ce"}'
+      "description": "say hello", "input_schema": null, "out_schema": {"type": "string"},
+      "instructions": "Operation: test_method\n\nOperation description: say hello",
+      "model": null, "index_ids": [], "use_semantic_search": false, "few_shot": false,
+      "few_shot_count": 2, "cache_configuration": null, "dataset_uuid": "550e2998-4f36-4697-a4bd-356c4eb654ce"}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '433'
+      - '420'
       content-type:
       - application/json
     method: PATCH
@@ -46,23 +46,23 @@ interactions:
     body:
       string: '{"id":26,"uuid":"35cc05ad-18e8-465a-9264-478226b7f6fc","dataset_uuid":"550e2998-4f36-4697-a4bd-356c4eb654ce","description":"say
         hello","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
-        test_method\n\nOperation description: say hello","language_model_id":null,"model":"azure/gpt4-eu","out_schema":{"type":"string","$defs":{}},"path":"test_method","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
+        test_method\n\nOperation description: say hello","language_model_id":null,"model":"azure/gpt4-eu","out_schema":{"type":"string"},"path":"test_method","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '505'
+      - '494'
       content-type:
       - application/json
       date:
-      - Wed, 04 Sep 2024 13:59:26 GMT
+      - Wed, 11 Sep 2024 07:15:22 GMT
       server:
       - uvicorn
     status:
       code: 200
       message: OK
 - request:
-    body: '{"name": null, "instructions": "you are a helpful assistant", "input_type":
-      null, "input": {"self": {"data": "Hello"}}, "output_type": null, "model": null,
-      "examples": null, "stream": false, "parent_span_uuid": null, "configuration":
+    body: '{"name": null, "instructions": "you are a helpful assistant", "input_schema":
+      null, "input": {"self": {"data": "Hello"}}, "output_schema": null, "model":
+      null, "examples": null, "stream": false, "parent_span_uuid": null, "configuration":
       null}'
     headers:
       accept:
@@ -70,29 +70,29 @@ interactions:
       connection:
       - keep-alive
       content-length:
-      - '239'
+      - '243'
       content-type:
       - application/json
     method: POST
     uri: http://localhost:8000/v1/functions/35cc05ad-18e8-465a-9264-478226b7f6fc/call
   response:
     body:
-      string: '{"span_id":"ce0f153c-edc1-4411-a974-2c86450166e8","message":null,"json_payload":"Hello","context":null,"cached":false}'
+      string: '{"span_id":"25ec59e8-fac6-4ba9-90e5-e9f5deb25587","message":null,"json_payload":"Hello","context":null,"cached":false}'
     headers:
       content-length:
       - '118'
       content-type:
       - application/json
       date:
-      - Wed, 04 Sep 2024 13:59:27 GMT
+      - Wed, 11 Sep 2024 07:15:22 GMT
       server:
       - uvicorn
     status:
       code: 200
       message: OK
 - request:
-    body: '{"name": null, "instructions": "you are a helpful assistant", "input_type":
-      null, "input": {"self": "Hello"}, "output_type": null, "model": null, "examples":
+    body: '{"name": null, "instructions": "you are a helpful assistant", "input_schema":
+      null, "input": {"self": "Hello"}, "output_schema": null, "model": null, "examples":
       null, "stream": false, "parent_span_uuid": null, "configuration": null}'
     headers:
       accept:
@@ -100,21 +100,21 @@ interactions:
       connection:
       - keep-alive
       content-length:
-      - '229'
+      - '233'
       content-type:
       - application/json
     method: POST
     uri: http://localhost:8000/v1/functions/35cc05ad-18e8-465a-9264-478226b7f6fc/call
   response:
     body:
-      string: '{"span_id":"b6e5816a-c321-4c00-ad78-7cc0799b03e8","message":null,"json_payload":"Hello","context":null,"cached":false}'
+      string: '{"span_id":"1647235e-7089-45e0-aa40-d3b2a47510dc","message":null,"json_payload":"Hello","context":null,"cached":false}'
     headers:
       content-length:
       - '118'
       content-type:
       - application/json
       date:
-      - Wed, 04 Sep 2024 13:59:28 GMT
+      - Wed, 11 Sep 2024 07:15:23 GMT
       server:
       - uvicorn
     status:

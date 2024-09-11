@@ -293,9 +293,9 @@ class AsyncFunctions:
         call_payload = CallPayload(
             name=name,
             instructions=instructions,
-            input_type=input_schema,
+            input_schema=input_schema,
             input=input,
-            output_type=output_schema,
+            output_schema=output_schema,
             model=model,
             examples=_examples,
             parent_span_uuid=parent_span_id
