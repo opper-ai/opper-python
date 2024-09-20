@@ -18,7 +18,7 @@ from pydantic import BaseModel, PrivateAttr
 
 from opperai._client import Client
 from opperai.core.spans import get_current_span_id
-from opperai.core.utils import prepare_input
+from opperai.core.utils import prepare_examples, prepare_input
 from opperai.datasets.datasets import Dataset
 from opperai.functions.decorator._schemas import type_to_json_schema
 from opperai.types import (
@@ -274,20 +274,15 @@ class Functions:
 
         input_schema = type_to_json_schema(input_type)
         output_schema = type_to_json_schema(output_type)
-        input = prepare_input(input)
 
-        _examples = []
-        if examples:
-            for example in examples:
-                input = prepare_input(example.input)
-                output = prepare_input(example.output)
-                _examples.append(Example(input=str(input), output=str(output)))
+        _input = prepare_input(input)
+        _examples = prepare_examples(examples)
 
         call_payload = CallPayload(
             name=name,
             instructions=instructions,
             input_schema=input_schema,
-            input=input,
+            input=_input,
             output_schema=output_schema,
             model=model,
             examples=_examples,

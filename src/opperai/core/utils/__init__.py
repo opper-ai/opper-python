@@ -1,10 +1,12 @@
 import json
 from datetime import datetime
 from inspect import signature
-from typing import Any
+from typing import Any, List, Optional
 from uuid import UUID
 
 from pydantic import BaseModel
+
+from opperai.types import Example
 
 
 def convert_function_call_to_json(func, *args, **kwargs):
@@ -27,6 +29,16 @@ def prepare_input(input: Any) -> Any:
         return _input
     else:
         return input
+
+
+def prepare_examples(examples: Optional[List[Example]]) -> List[Example]:
+    _examples = []
+    if examples:
+        for example in examples:
+            _input = prepare_input(example.input)
+            _output = prepare_input(example.output)
+            _examples.append(Example(input=str(_input), output=str(_output)))
+    return _examples
 
 
 class DateTimeEncoder(json.JSONEncoder):
