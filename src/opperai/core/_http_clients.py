@@ -3,7 +3,7 @@ from http import HTTPStatus
 
 import httpx
 from httpx_sse import aconnect_sse, connect_sse
-from opperai import __version__
+from opperai._version import __version__
 from opperai.types import Errors
 from opperai.types.exceptions import (
     ContentPolicyViolationError,
