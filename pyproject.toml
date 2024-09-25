@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "opperai"
-version = "0.15.3"
+version = "0.15.4"
 description = "Opper Python client"
 authors = ["Opper <support@opper.ai>"]
 readme = "README.md"
