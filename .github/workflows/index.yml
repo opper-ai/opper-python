@@ -2,6 +2,8 @@ name: Index Docs in Opper
 on:
   push:
     branches: [main]
+  workflow_dispatch:
+
 jobs:
   index-docs:
     runs-on: ubuntu-latest
