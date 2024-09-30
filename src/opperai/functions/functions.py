@@ -269,7 +269,9 @@ class Functions:
             and isinstance(output_type, type)
             and issubclass(output_type, ImageOutput)
         ):
-            res = self._client.generate_image(prompt=input, configuration=configuration)
+            res = self._client.generate_image(
+                prompt=input, model=model, configuration=configuration
+            )
             return res
 
         input_schema = type_to_json_schema(input_type)
