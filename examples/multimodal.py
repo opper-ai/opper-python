@@ -22,11 +22,12 @@ def save_file(bytes: bytes, path: str = None) -> str:
     return path
 
 
-def generate_image(description: str) -> ImageOutput:
+def generate_image(description: str, model: str = "azure/dall-e-3-eu") -> ImageOutput:
     image, _ = opper.call(
         name="generate_image",
         output_type=ImageOutput,
         input=description,
+        model=model,
         configuration=CallConfiguration(
             model_parameters={
                 "size": "1792x1024",
@@ -102,11 +103,20 @@ def run_sync():
 aopper = AsyncOpper()
 
 
-async def async_generate_image(description: str) -> ImageOutput:
+async def async_generate_image(
+    description: str, model: str = "azure/dall-e-3-eu"
+) -> ImageOutput:
     image, _ = await aopper.call(
         name="async_generate_image",
         output_type=ImageOutput,
         input=description,
+        model=model,
+        configuration=CallConfiguration(
+            model_parameters={
+                "size": "1792x1024",
+                "quality": "hd",
+            }
+        ),
     )
     return image
 
