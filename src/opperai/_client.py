@@ -54,19 +54,29 @@ class AsyncClient:
         self.spans = AsyncSpans(self.http_client)
         self.datasets = AsyncDatasets(self.http_client)
 
-    async def generate_image(self, prompt: str) -> Tuple[ImageOutput, None]:
-        """Generate an image from a prompt.
-        Note: only Azure dall-e-3 is supported.
-        """
+    async def generate_image(
+        self,
+        prompt: str,
+        model: str = "azure/dall-e-3-eu",
+        configuration: CallConfiguration = None,
+    ) -> Tuple[ImageOutput, None]:
+        """Generate an image from a prompt."""
+        payload = {
+            "model": model,
+            "prompt": prompt,
+            "parameters": {
+                "format": "b64_json",
+            },
+        }
+        if configuration:
+            payload.update(configuration.model_parameters)
         response = await self.http_client.do_request(
             "POST",
             "/v1/generate-image",
-            json={"model": "azure/dall-e-3-eu", "prompt": prompt, "format": "b64_json"},
+            json=payload,
         )
-
         base64_image = response.json()["result"]["base64_image"]
         image_bytes = base64.b64decode(base64_image)
-
         return ImageOutput(image_bytes), None
 
     async def call(self, payload: CallPayload) -> Any:
@@ -119,26 +129,26 @@ class Client:
         self.datasets = Datasets(self.http_client)
 
     def generate_image(
-        self, prompt: str, configuration: CallConfiguration
+        self,
+        prompt: str,
+        model: str = "azure/dall-e-3-eu",
+        configuration: CallConfiguration = None,
     ) -> Tuple[ImageOutput, None]:
-        """Generate an image from a prompt.
-        Note: only Azure dall-e-3 is supported.
-        """
+        """Generate an image from a prompt."""
         payload = {
-            "model": "azure/dall-e-3-eu",
+            "model": model,
             "prompt": prompt,
-            "format": "b64_json",
-            **configuration.model_parameters,
+            "parameters": {"format": "b64_json"},
         }
+        if configuration:
+            payload.update(configuration.model_parameters)
         response = self.http_client.do_request(
             "POST",
             "/v1/generate-image",
             json=payload,
         )
-
         base64_image = response.json()["result"]["base64_image"]
         image_bytes = base64.b64decode(base64_image)
-
         return ImageOutput(image_bytes), None
 
     def call(self, payload: CallPayload) -> Any:
