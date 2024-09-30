@@ -69,7 +69,8 @@ class AsyncClient:
             },
         }
         if configuration:
-            payload.update(configuration.model_parameters)
+            payload["parameters"].update(configuration.model_parameters)
+
         response = await self.http_client.do_request(
             "POST",
             "/v1/generate-image",
@@ -141,7 +142,8 @@ class Client:
             "parameters": {"format": "b64_json"},
         }
         if configuration:
-            payload.update(configuration.model_parameters)
+            payload["parameters"].update(configuration.model_parameters)
+
         response = self.http_client.do_request(
             "POST",
             "/v1/generate-image",
