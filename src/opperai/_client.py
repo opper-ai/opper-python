@@ -1,7 +1,7 @@
 import base64
 import os
 from http import HTTPStatus
-from typing import Any, Tuple
+from typing import Any, Tuple, Optional
 
 from opperai.core.datasets._async_datasets import AsyncDatasets
 from opperai.core.datasets._datasets import Datasets
@@ -64,9 +64,7 @@ class AsyncClient:
         payload = {
             "model": model,
             "prompt": prompt,
-            "parameters": {
-                "format": "b64_json",
-            },
+            "parameters": {"format": "b64_json"},
         }
         if configuration:
             payload["parameters"].update(configuration.model_parameters)
@@ -76,6 +74,12 @@ class AsyncClient:
             "/v1/generate-image",
             json=payload,
         )
+
+        if response.status_code == 400:
+            raise APIError(
+                f"Failed to generate image with status {response.status_code}: {response.text}"
+            )
+
         base64_image = response.json()["result"]["base64_image"]
         image_bytes = base64.b64decode(base64_image)
         return ImageOutput(image_bytes), None
@@ -149,6 +153,12 @@ class Client:
             "/v1/generate-image",
             json=payload,
         )
+
+        if response.status_code == 400:
+            raise APIError(
+                f"Failed to generate image with status {response.status_code}: {response.text}"
+            )
+
         base64_image = response.json()["result"]["base64_image"]
         image_bytes = base64.b64decode(base64_image)
         return ImageOutput(image_bytes), None
