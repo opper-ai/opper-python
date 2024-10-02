@@ -6,6 +6,8 @@ import threading
 from functools import wraps
 from typing import List, Union, get_args, get_origin, get_type_hints
 
+from pydantic import BaseModel
+
 from opperai._client import AsyncClient, Client
 from opperai._opper import AsyncOpper, Opper
 from opperai.core.utils import convert_function_call_to_json
@@ -14,7 +16,6 @@ from opperai.functions.functions import Function, FunctionResponse
 from opperai.types import (
     CacheConfiguration,
 )
-from pydantic import BaseModel
 
 from ._schemas import get_output_schema
 
@@ -169,14 +170,14 @@ def fn(
             await async_setup()
 
             input = convert_function_call_to_json(func, *args, **kwargs)
-            _response = await function.call(
+            _result, _response = await function.call(
                 input=input,
             )
 
             _thread_local.span_id = _response.span_id
 
             return_type = get_type_hints(func).get("return")
-            answer = _unmarshal_response(_response.json_payload, return_type)
+            answer = _unmarshal_response(_result, return_type)
 
             response = AsyncFunctionResponse(client=client, **_response.model_dump())
 
@@ -192,14 +193,14 @@ def fn(
             nonlocal function
 
             input = convert_function_call_to_json(func, *args, **kwargs)
-            _response = function.call(
+            _result, _response = function.call(
                 input=input,
             )
 
             _thread_local.span_id = _response.span_id
 
             return_type = get_type_hints(func).get("return")
-            answer = _unmarshal_response(_response.json_payload, return_type)
+            answer = _unmarshal_response(_result, return_type)
 
             response = FunctionResponse(client=client, **_response.model_dump())
 
