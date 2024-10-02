@@ -126,8 +126,7 @@ class Function:
 
     def update(self, **kwargs) -> "Function":
         updated = self._function.model_dump(exclude_none=True)
-        kwargs["input_schema"] = None
-        kwargs["out_schema"] = None
+
         if "input_type" in kwargs and kwargs["input_type"] is not None:
             kwargs["input_schema"] = type_to_json_schema(kwargs["input_type"])
             del kwargs["input_type"]

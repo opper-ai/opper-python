@@ -3,7 +3,7 @@ import asyncio
 from pydantic import BaseModel
 
 from opperai import AsyncOpper, Opper
-from opperai.types import Example
+from opperai.types import Example, Message
 
 
 async def async_crud_function():
@@ -22,7 +22,6 @@ async def async_crud_function():
         input_type=MyInput,
         output_type=MyResponse,
     )
-    print(function)
 
     res, _ = await function.call(
         MyInput(name="world"),
@@ -46,7 +45,14 @@ async def async_crud_function():
     res, _ = await function.call(MyInput(name="world"))
     print(res)
 
-    print(await function.delete())
+    res = await function.chat(
+        messages=[
+            Message(role="user", content=MyInput(name="world").model_dump_json())
+        ],
+    )
+    print(res)
+
+    print(f"Deleted: {await function.delete()}")
 
 
 def sync_crud_function():
@@ -65,7 +71,6 @@ def sync_crud_function():
         input_type=MyInput,
         output_type=MyResponse,
     )
-    print(function)
 
     res, _ = function.call(
         MyInput(name="world"),
@@ -81,7 +86,14 @@ def sync_crud_function():
     res, _ = function.call(MyInput(name="world"))
     print(res)
 
-    print(function.delete())
+    res = function.chat(
+        messages=[
+            Message(role="user", content=MyInput(name="world").model_dump_json())
+        ],
+    )
+    print(res)
+
+    print(f"Deleted: {function.delete()}")
 
 
 if __name__ == "__main__":
