@@ -28,6 +28,8 @@ class Index(BaseModel):
 class Filter(BaseModel):
     key: str
     operation: str = Field(
-        ..., description="The operation to perform on the key", pattern=r"^=|!=|>|<|in$"
+        ...,
+        description="The operation to perform on the key",
+        pattern=r"^(=|!=|>|<|in)$",
     )
     value: Union[str, int, float, List[Union[str, int, float]]]
