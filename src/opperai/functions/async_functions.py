@@ -19,10 +19,12 @@ from opperai.core.spans import get_current_span_id
 from opperai.datasets.async_datasets import AsyncDataset
 from opperai.functions.decorator._schemas import type_to_json_schema
 from opperai.types import (
+    CacheConfiguration,
     CallConfiguration,
     CallPayload,
     ChatPayload,
     Example,
+    FunctionConfiguration,
     ImageOutput,
     Message,
     StreamingChunk,
@@ -188,6 +190,15 @@ class AsyncFunction:
             kwargs["out_schema"] = type_to_json_schema(kwargs["output_type"])
             del kwargs["output_type"]
 
+        if "configuration" in kwargs and kwargs["configuration"] is not None:
+            cfg: FunctionConfiguration = kwargs["configuration"]
+            kwargs["cache_configuration"] = CacheConfiguration(
+                exact_match_cache_ttl=cfg.cache.exact_match_cache_ttl,
+                semantic_cache_threshold=cfg.cache.semantic_cache_threshold,
+                semantic_cache_ttl=cfg.cache.semantic_cache_ttl,
+            )
+            del kwargs["configuration"]
+
         for key, value in kwargs.items():
             updated[key] = value
 
@@ -221,6 +232,7 @@ class AsyncFunctions:
         input_type: Optional[Any] = None,
         output_type: Optional[Any] = None,
         model: Optional[str] = None,
+        configuration: Optional[FunctionConfiguration] = None,
     ) -> AsyncFunction:
         try:
             function = await self.get(path=path)
@@ -231,6 +243,7 @@ class AsyncFunctions:
                     input_type=input_type,
                     output_type=output_type,
                     model=model,
+                    configuration=configuration,
                 )
         except Exception:
             pass
@@ -248,6 +261,7 @@ class AsyncFunctions:
                 input_schema=input_schema if input_type else None,
                 out_schema=output_schema if output_type else None,
                 model=model,
+                cache_configuration=configuration.cache if configuration else None,
             )
         )
 

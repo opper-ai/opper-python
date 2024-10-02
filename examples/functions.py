@@ -3,7 +3,7 @@ import asyncio
 from pydantic import BaseModel
 
 from opperai import AsyncOpper, Opper, fn
-from opperai.types import Example, Message
+from opperai.types import Example, FunctionConfiguration, Message
 
 
 async def async_crud_function():
@@ -23,6 +23,11 @@ async def async_crud_function():
         output_type=MyResponse,
     )
 
+    # call
+    res, _ = await function.call(MyInput(name="world"))
+    print(res)
+
+    # call with examples
     res, _ = await function.call(
         MyInput(name="world"),
         output_type=MyResponse,
@@ -37,20 +42,32 @@ async def async_crud_function():
     )
     print(res)
 
-    res, _ = await function.call(MyInput(name="world"))
-    print(res)
-
-    await function.update(instructions="greet the user in german")
-
-    res, _ = await function.call(MyInput(name="world"))
-    print(res)
-
+    # chat
     res = await function.chat(
         messages=[
             Message(role="user", content=MyInput(name="world").model_dump_json())
         ],
     )
     print(res)
+
+    await function.update(
+        instructions="greet the user in german",
+        configuration=FunctionConfiguration(
+            cache=FunctionConfiguration.Cache(
+                exact_match_cache_ttl=10,
+            ),
+        ),
+    )
+
+    # call with cache - not cached
+    res, response = await function.call(MyInput(name="world"))
+    assert not response.cached
+    print(f"Not cached: {res}")
+
+    # call with cache - cached
+    res, response = await function.call(MyInput(name="world"))
+    assert response.cached
+    print(f"Cached: {res}")
 
     print(f"Deleted: {await function.delete()}")
 
@@ -89,26 +106,51 @@ def sync_crud_function():
         output_type=MyResponse,
     )
 
+    # call
+    res, _ = function.call(MyInput(name="world"))
+    print(res)
+
+    # call with examples
     res, _ = function.call(
         MyInput(name="world"),
         output_type=MyResponse,
+        examples=[
+            Example(
+                input=MyInput(name="world"), output=MyResponse(greeting="Hello, world!")
+            ),
+            Example(
+                input=MyInput(name="nick"), output=MyResponse(greeting="Hello, nick!")
+            ),
+        ],
     )
     print(res)
 
-    res, _ = function.call(MyInput(name="world"))
-    print(res)
-
-    function.update(instructions="greet the user in german")
-
-    res, _ = function.call(MyInput(name="world"))
-    print(res)
-
+    # chat
     res = function.chat(
         messages=[
             Message(role="user", content=MyInput(name="world").model_dump_json())
         ],
     )
     print(res)
+
+    function.update(
+        instructions="greet the user in german",
+        configuration=FunctionConfiguration(
+            cache=FunctionConfiguration.Cache(
+                exact_match_cache_ttl=10,
+            ),
+        ),
+    )
+
+    # call with cache - not cached
+    res, response = function.call(MyInput(name="world"))
+    assert not response.cached
+    print(f"Not cached: {res}")
+
+    # call with cache - cached
+    res, response = function.call(MyInput(name="world"))
+    assert response.cached
+    print(f"Cached: {res}")
 
     print(f"Deleted: {function.delete()}")
 
