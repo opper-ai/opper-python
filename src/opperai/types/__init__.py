@@ -190,6 +190,15 @@ class Function(BaseModel):
     dataset_uuid: Optional[str] = None
 
 
+class FunctionConfiguration(BaseModel):
+    class Cache(BaseModel):
+        exact_match_cache_ttl: Optional[int] = None
+        semantic_cache_threshold: Optional[float] = None
+        semantic_cache_ttl: Optional[int] = None
+
+    cache: Optional[Cache] = Field(default=Cache())
+
+
 class Example(BaseModel):
     input: Any
     output: Any
