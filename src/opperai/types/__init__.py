@@ -127,7 +127,7 @@ class CallPayload(BaseModel):
     input: Optional[Any] = None
     output_schema: Optional[Dict[str, Any]] = None
     model: Optional[str] = None
-    examples: Optional[List[Example]] = None
+    examples: Optional[List[Example]] = Field(default=None, max_length=10)
     stream: bool = False
     parent_span_uuid: Optional[str] = None
     configuration: Optional[CallConfiguration] = None
