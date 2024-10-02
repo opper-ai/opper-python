@@ -11,7 +11,7 @@ class RetrievalResponse(BaseModel):
 
 class DocumentIn(BaseModel):
     key: Optional[str] = None
-    content: Optional[str] = Field(None, min_length=1)
+    content: Optional[str] = Field(min_length=1, default_factory=dict)
     metadata: Optional[Dict[str, Any]] = None
 
 

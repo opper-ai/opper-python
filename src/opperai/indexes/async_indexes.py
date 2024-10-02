@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 from opperai._client import AsyncClient
 from opperai.types.indexes import Document, DocumentIn, Filter, RetrievalResponse
@@ -14,12 +14,20 @@ class AsyncIndex:
     async def upload_file(self, file_path: str, **kwargs):
         """Upload a file to the index."""
         return await self._client.indexes.upload_file(
-            id=self._index.uuid, file_path=file_path, **kwargs
+            uuid=self._index.uuid, file_path=file_path, **kwargs
         )
 
-    async def add(self, doc: DocumentIn) -> Document:
+    async def add(
+        self,
+        content: str,
+        metadata: Optional[Dict[str, Any]] = None,
+        key: Optional[str] = None,
+    ) -> Document:
         """Index a document."""
-        return await self._client.indexes.index(uuid=self._index.uuid, doc=doc)
+        return await self._client.indexes.index(
+            uuid=self._index.uuid,
+            doc=DocumentIn(content=content, metadata=metadata or {}, key=key),
+        )
 
     async def query(
         self,

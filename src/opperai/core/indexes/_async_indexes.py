@@ -5,6 +5,7 @@ from opperai.core.spans import get_current_span_id
 from opperai.types.exceptions import APIError
 from opperai.types.indexes import (
     Document,
+    DocumentIn,
     Filter,
     Index,
     RetrievalResponse,
@@ -228,7 +229,7 @@ class AsyncIndexes:
 
         return register_file_response.json()
 
-    async def index(self, uuid: str, doc: Document) -> Document:
+    async def index(self, uuid: str, doc: DocumentIn) -> Document:
         """Index a document.
 
         This method sends a POST request to the OpperAI service to add a document to the specified index by its unique identifier. If the operation is successful, it returns the added document as an instance of the Document class.

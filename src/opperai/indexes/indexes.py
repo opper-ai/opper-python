@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 from opperai._client import Client
 from opperai.types.indexes import Document, DocumentIn, Filter, RetrievalResponse
@@ -17,9 +17,17 @@ class Index:
             uuid=self._index.uuid, file_path=file_path, **kwargs
         )
 
-    def add(self, doc: DocumentIn) -> Document:
+    def add(
+        self,
+        content: str,
+        metadata: Optional[Dict[str, Any]] = None,
+        key: Optional[str] = None,
+    ) -> Document:
         """Index a document."""
-        return self._client.indexes.index(uuid=self._index.uuid, doc=doc)
+        return self._client.indexes.index(
+            uuid=self._index.uuid,
+            doc=DocumentIn(content=content, metadata=metadata or {}, key=key),
+        )
 
     def query(
         self,

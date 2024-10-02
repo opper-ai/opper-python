@@ -125,9 +125,16 @@ class AsyncFunction:
     async def call(
         self,
         input: Any = None,
+        output_type: Optional[Any] = None,
         examples: Optional[List[Example]] = None,
         configuration: Optional[CallConfiguration] = None,
     ) -> Tuple[T, AsyncFunctionResponse]:
+        """
+        Calls a function with the given input and optional output type.
+
+        If the output type is provided, the response will be cast to the output type.
+        If the output type is not provided, the response will be returned as json.
+        """
         payload = CallPayload(
             input=input,
             examples=examples,
@@ -135,10 +142,34 @@ class AsyncFunction:
         if configuration:
             payload.configuration = configuration
 
-        return await self._client.functions.call(
+        res: FunctionResponseModel = await self._client.functions.call(
             uuid=self._function.uuid,
             payload=payload,
         )
+
+        # if output_type is provided attempt to cast the response to the output type
+        if output_type is not None:
+            if inspect.isclass(output_type) and issubclass(output_type, BaseModel):
+                return output_type.model_validate(
+                    res.json_payload
+                ), AsyncFunctionResponse(client=self._client, **res.model_dump())
+            elif (
+                (get_origin(output_type) == list or get_origin(output_type) is List)
+                and inspect.isclass(get_args(output_type)[0])
+                and issubclass(get_args(output_type)[0], BaseModel)
+            ):
+                return [
+                    get_args(output_type)[0].model_validate(item)
+                    for item in res.json_payload
+                ], AsyncFunctionResponse(client=self._client, **res.model_dump())
+            else:
+                return res.json_payload, AsyncFunctionResponse(
+                    client=self._client, **res.model_dump()
+                )
+
+        result = res.json_payload if res.json_payload is not None else res.message
+
+        return result, AsyncFunctionResponse(client=self._client, **res.model_dump())
 
     async def delete(self) -> bool:
         return await self._client.functions.delete(uuid=self._function.uuid)
