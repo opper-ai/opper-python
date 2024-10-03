@@ -64,7 +64,7 @@ class AsyncClient:
         payload = {
             "model": model,
             "prompt": prompt,
-            "parameters": {"format": "b64_json"},
+            "parameters": {},
         }
         if configuration:
             payload["parameters"].update(configuration.model_parameters)
@@ -143,7 +143,7 @@ class Client:
         payload = {
             "model": model,
             "prompt": prompt,
-            "parameters": {"format": "b64_json"},
+            "parameters": {},
         }
         if configuration:
             payload["parameters"].update(configuration.model_parameters)
