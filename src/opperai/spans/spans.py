@@ -36,6 +36,9 @@ class Span:
             ),
         )
 
+    def end(self, end_time: datetime = None):
+        raise NotImplementedError("Not implemented")
+
     def save_generation(
         self,
         duration_ms: int,
@@ -90,7 +93,12 @@ class Spans:
         meta: dict = None,
         parent_span_id: str = None,
     ) -> Iterator[Span]:
-        span = self.start_span(name, input, meta, parent_span_id)
+        span = self.start_span(
+            name=name,
+            input=input,
+            meta=meta,
+            parent_span_id=parent_span_id,
+        )
         try:
             yield span
         finally:
@@ -101,13 +109,22 @@ class Spans:
         name: str,
         input: str = None,
         meta: dict = None,
+        start_time: datetime = None,
         parent_span_id: str = None,
     ) -> Span:
-        span, token = self._create_span(name, input, meta, parent_span_id)
+        span, token = self._create_span(
+            name=name,
+            input=input,
+            meta=meta,
+            start_time=start_time,
+            parent_span_id=parent_span_id,
+        )
 
-        def end_span():
+        def end_span(end_time: datetime = None):
             if not hasattr(span, "_ended"):
-                span.update(end_time=datetime.now(timezone.utc))
+                span.update(
+                    end_time=end_time if end_time else datetime.now(timezone.utc)
+                )
                 _current_span_id.reset(token)
                 span._ended = True
 
@@ -115,13 +132,20 @@ class Spans:
 
         return span
 
-    def _create_span(self, name, input, meta, parent_span_id):
+    def _create_span(
+        self,
+        name: str,
+        input: str = None,
+        meta: dict = None,
+        parent_span_id: str = None,
+        start_time: datetime = None,
+    ):
         parent_span_id = parent_span_id if parent_span_id else _current_span_id.get()
         span_model = self._client.spans.create(
             SpanModel(
                 name=name,
                 input=input,
-                start_time=datetime.now(timezone.utc),
+                start_time=start_time if start_time else datetime.now(timezone.utc),
                 parent_uuid=parent_span_id,
                 meta=meta,
             )

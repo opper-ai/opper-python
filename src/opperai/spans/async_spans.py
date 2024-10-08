@@ -42,6 +42,9 @@ class AsyncSpan:
             ),
         )
 
+    async def end(self, end_time: datetime = None):
+        raise NotImplementedError("Not implemented")
+
     async def save_generation(
         self,
         duration_ms: int,
@@ -96,7 +99,12 @@ class AsyncSpans:
         meta: dict = None,
         parent_span_id: str = None,
     ) -> AsyncIterator[AsyncSpan]:
-        span = await self.start_span(name, input, meta, parent_span_id)
+        span = await self.start_span(
+            name=name,
+            input=input,
+            meta=meta,
+            parent_span_id=parent_span_id,
+        )
         try:
             yield span
         finally:
@@ -107,13 +115,22 @@ class AsyncSpans:
         name: str,
         input: str = None,
         meta: dict = None,
+        start_time: datetime = None,
         parent_span_id: str = None,
     ) -> AsyncSpan:
-        span, token = await self._create_span(name, input, meta, parent_span_id)
+        span, token = await self._create_span(
+            name=name,
+            input=input,
+            meta=meta,
+            parent_span_id=parent_span_id,
+            start_time=start_time,
+        )
 
-        async def end_span():
+        async def end_span(end_time: datetime = None):
             if not hasattr(span, "_ended"):
-                await span.update(end_time=datetime.now(timezone.utc))
+                await span.update(
+                    end_time=end_time if end_time else datetime.now(timezone.utc)
+                )
                 _current_span_id.reset(token)
                 span._ended = True
 
@@ -121,13 +138,20 @@ class AsyncSpans:
 
         return span
 
-    async def _create_span(self, name, input, meta, parent_span_id):
+    async def _create_span(
+        self,
+        name: str,
+        input: str,
+        meta: dict,
+        parent_span_id: str,
+        start_time: datetime,
+    ):
         parent_span_id = parent_span_id if parent_span_id else _current_span_id.get()
         span_model = await self._client.spans.create(
             SpanModel(
                 name=name,
                 input=input,
-                start_time=datetime.now(timezone.utc),
+                start_time=start_time if start_time else datetime.now(timezone.utc),
                 parent_uuid=parent_span_id,
                 meta=meta,
             )
