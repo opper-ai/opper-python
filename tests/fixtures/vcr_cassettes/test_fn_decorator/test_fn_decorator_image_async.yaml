@@ -10,55 +10,78 @@ interactions:
     uri: http://localhost:8000/v1/functions/by_path/extract_letters
   response:
     body:
-      string: '{"id":40,"uuid":"8ff8939f-a416-4597-9ac7-f4102f48ee1a","dataset_uuid":"2cfd908d-dba7-4728-9eef-7a0c2bc4f40c","description":"given
-        an image extract the word it represents","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
-        extract_letters\n\nOperation description: given an image extract the word
-        it represents","language_model_id":null,"model":"openai/gpt-4o","out_schema":{"properties":{"letters":{"items":{"type":"string"},"title":"Letters","type":"array"}},"required":["letters"],"title":"Word","type":"object","$defs":{}},"path":"extract_letters","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
+      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
+        not found"}]}'
     headers:
       content-length:
-      - '709'
+      - '98'
       content-type:
       - application/json
       date:
-      - Wed, 11 Sep 2024 07:15:43 GMT
+      - Tue, 15 Oct 2024 14:18:07 GMT
       server:
       - uvicorn
     status:
-      code: 200
-      message: OK
+      code: 404
+      message: Not Found
 - request:
-    body: '{"uuid": "8ff8939f-a416-4597-9ac7-f4102f48ee1a", "path": "extract_letters",
-      "description": "given an image extract the word it represents", "input_schema":
-      null, "out_schema": {"properties": {"letters": {"items": {"type": "string"},
-      "title": "Letters", "type": "array"}}, "required": ["letters"], "title": "Word",
-      "type": "object"}, "instructions": "Operation: extract_letters\n\nOperation
-      description: given an image extract the word it represents", "model": "openai/gpt-4o",
-      "index_ids": [], "use_semantic_search": false, "few_shot": false, "few_shot_count":
-      2, "cache_configuration": null, "dataset_uuid": "2cfd908d-dba7-4728-9eef-7a0c2bc4f40c"}'
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+    method: GET
+    uri: http://localhost:8000/v1/functions/by_path/extract_letters
+  response:
+    body:
+      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
+        not found"}]}'
+    headers:
+      content-length:
+      - '98'
+      content-type:
+      - application/json
+      date:
+      - Tue, 15 Oct 2024 14:18:07 GMT
+      server:
+      - uvicorn
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: '{"uuid": null, "path": "extract_letters", "description": "given an image
+      extract the word it represents", "input_schema": null, "out_schema": {"properties":
+      {"letters": {"items": {"type": "string"}, "title": "Letters", "type": "array"}},
+      "required": ["letters"], "title": "Word", "type": "object"}, "instructions":
+      "Operation: extract_letters\n\nOperation description: given an image extract
+      the word it represents", "model": "openai/gpt-4o", "index_ids": [], "use_semantic_search":
+      null, "few_shot": null, "few_shot_count": null, "cache_configuration": null,
+      "dataset_uuid": null}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '648'
+      - '581'
       content-type:
       - application/json
-    method: PATCH
-    uri: http://localhost:8000/v1/functions/8ff8939f-a416-4597-9ac7-f4102f48ee1a
+    method: POST
+    uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":40,"uuid":"8ff8939f-a416-4597-9ac7-f4102f48ee1a","dataset_uuid":"2cfd908d-dba7-4728-9eef-7a0c2bc4f40c","description":"given
+      string: '{"id":48,"uuid":"fbbf4c8e-fdbb-4ccd-97d1-4cff9445892f","dataset_uuid":"afbe6953-92ba-4111-a76e-fc2013a3178a","description":"given
         an image extract the word it represents","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
         extract_letters\n\nOperation description: given an image extract the word
-        it represents","language_model_id":null,"model":"openai/gpt-4o","out_schema":{"properties":{"letters":{"items":{"type":"string"},"title":"Letters","type":"array"}},"required":["letters"],"title":"Word","type":"object"},"path":"extract_letters","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
+        it represents","language_model_id":null,"model":"openai/gpt-4o","out_schema":{"properties":{"letters":{"items":{"type":"string"},"title":"Letters","type":"array"}},"required":["letters"],"title":"Word","type":"object"},"path":"extract_letters","project":{"uuid":"e64848ae-df03-4c0b-9a6f-4c498bf3dc8b","name":"asdfasdf"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '698'
+      - '704'
       content-type:
       - application/json
       date:
-      - Wed, 11 Sep 2024 07:15:43 GMT
+      - Tue, 15 Oct 2024 14:18:07 GMT
       server:
       - uvicorn
     status:
@@ -79,17 +102,17 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/functions/8ff8939f-a416-4597-9ac7-f4102f48ee1a/call
+    uri: http://localhost:8000/v1/functions/fbbf4c8e-fdbb-4ccd-97d1-4cff9445892f/call
   response:
     body:
-      string: '{"span_id":"bdfaf0d3-e26b-4185-9774-e526f3398cc4","message":null,"json_payload":{"letters":["L","E","T","T","E","R"]},"context":null,"cached":false}'
+      string: '{"span_id":"519bbfd4-ca42-4648-96fa-788a4d1d3b36","message":null,"json_payload":{"letters":["L","E","T","T","E","R"]},"context":null,"cached":false}'
     headers:
       content-length:
       - '148'
       content-type:
       - application/json
       date:
-      - Wed, 11 Sep 2024 07:15:43 GMT
+      - Tue, 15 Oct 2024 14:18:08 GMT
       server:
       - uvicorn
     status:

@@ -40,6 +40,12 @@ class RateLimitError(OpperBaseException):
     type: str = "RateLimitError"
 
 
+class ContextWindowExceededError(OpperBaseException):
+    """Raised when the context window is exceeded."""
+
+    type: str = "ContextWindowExceededError"
+
+
 class StructuredGenerationError(OpperBaseException):
     """Raised when the structured generation fails."""
 

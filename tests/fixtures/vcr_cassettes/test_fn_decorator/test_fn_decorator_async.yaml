@@ -10,28 +10,28 @@ interactions:
     uri: http://localhost:8000/v1/functions/by_path/translate
   response:
     body:
-      string: '{"id":27,"uuid":"a40ac806-fc2d-4c8d-b7f2-bf624e2285fc","dataset_uuid":"35ddaa3c-d91f-4c90-bfd9-f2619b2daabb","description":"Translate
+      string: '{"id":49,"uuid":"8cb73d91-d845-41f2-b9c6-24e1eae960af","dataset_uuid":"4e75f8b7-47b1-47c5-bc6b-1399fb603aff","description":"Translate
         text to a target language.","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
-        translate\n\nOperation description: Translate text to a target language.","language_model_id":null,"model":"openai/gpt-4o","out_schema":{"type":"string"},"path":"translate","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":3,"use_semantic_search":false}'
+        translate\n\nOperation description: Translate text to a target language.","language_model_id":null,"model":"azure/gpt4-eu","out_schema":{"type":"string"},"path":"translate","project":{"uuid":"e64848ae-df03-4c0b-9a6f-4c498bf3dc8b","name":"asdfasdf"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '544'
+      - '550'
       content-type:
       - application/json
       date:
-      - Wed, 11 Sep 2024 07:15:31 GMT
+      - Tue, 15 Oct 2024 14:18:14 GMT
       server:
       - uvicorn
     status:
       code: 200
       message: OK
 - request:
-    body: '{"uuid": "a40ac806-fc2d-4c8d-b7f2-bf624e2285fc", "path": "translate", "description":
+    body: '{"uuid": "8cb73d91-d845-41f2-b9c6-24e1eae960af", "path": "translate", "description":
       "Translate text to a target language.", "input_schema": null, "out_schema":
       {"type": "string"}, "instructions": "Operation: translate\n\nOperation description:
       Translate text to a target language.", "model": null, "index_ids": [], "use_semantic_search":
       false, "few_shot": false, "few_shot_count": 2, "cache_configuration": null,
-      "dataset_uuid": "35ddaa3c-d91f-4c90-bfd9-f2619b2daabb"}'
+      "dataset_uuid": "4e75f8b7-47b1-47c5-bc6b-1399fb603aff"}'
     headers:
       accept:
       - '*/*'
@@ -42,19 +42,19 @@ interactions:
       content-type:
       - application/json
     method: PATCH
-    uri: http://localhost:8000/v1/functions/a40ac806-fc2d-4c8d-b7f2-bf624e2285fc
+    uri: http://localhost:8000/v1/functions/8cb73d91-d845-41f2-b9c6-24e1eae960af
   response:
     body:
-      string: '{"id":27,"uuid":"a40ac806-fc2d-4c8d-b7f2-bf624e2285fc","dataset_uuid":"35ddaa3c-d91f-4c90-bfd9-f2619b2daabb","description":"Translate
+      string: '{"id":49,"uuid":"8cb73d91-d845-41f2-b9c6-24e1eae960af","dataset_uuid":"4e75f8b7-47b1-47c5-bc6b-1399fb603aff","description":"Translate
         text to a target language.","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
-        translate\n\nOperation description: Translate text to a target language.","language_model_id":null,"model":"openai/gpt-4o","out_schema":{"type":"string"},"path":"translate","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":3,"use_semantic_search":false}'
+        translate\n\nOperation description: Translate text to a target language.","language_model_id":null,"model":"azure/gpt4-eu","out_schema":{"type":"string"},"path":"translate","project":{"uuid":"e64848ae-df03-4c0b-9a6f-4c498bf3dc8b","name":"asdfasdf"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '544'
+      - '550'
       content-type:
       - application/json
       date:
-      - Wed, 11 Sep 2024 07:15:31 GMT
+      - Tue, 15 Oct 2024 14:18:14 GMT
       server:
       - uvicorn
     status:
@@ -75,17 +75,17 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/functions/a40ac806-fc2d-4c8d-b7f2-bf624e2285fc/call
+    uri: http://localhost:8000/v1/functions/8cb73d91-d845-41f2-b9c6-24e1eae960af/call
   response:
     body:
-      string: '{"span_id":"6cc8a0c5-a0cf-4759-9e27-c103164d217a","message":null,"json_payload":"Hola","context":null,"cached":false}'
+      string: '{"span_id":"18b7e94d-5c21-4fa1-973a-0e1a6f532a9e","message":null,"json_payload":"Hola","context":null,"cached":false}'
     headers:
       content-length:
       - '117'
       content-type:
       - application/json
       date:
-      - Wed, 11 Sep 2024 07:15:31 GMT
+      - Tue, 15 Oct 2024 14:18:14 GMT
       server:
       - uvicorn
     status:
@@ -106,17 +106,17 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/functions/a40ac806-fc2d-4c8d-b7f2-bf624e2285fc/call
+    uri: http://localhost:8000/v1/functions/8cb73d91-d845-41f2-b9c6-24e1eae960af/call
   response:
     body:
-      string: '{"span_id":"53fda3c6-2e8f-4358-b20f-2b04f8015c1e","message":null,"json_payload":"Hola","context":null,"cached":false}'
+      string: '{"span_id":"819f38c7-cbf6-4775-a2be-a4a4c5a6e0cc","message":null,"json_payload":"Hola","context":null,"cached":false}'
     headers:
       content-length:
       - '117'
       content-type:
       - application/json
       date:
-      - Wed, 11 Sep 2024 07:15:32 GMT
+      - Tue, 15 Oct 2024 14:18:16 GMT
       server:
       - uvicorn
     status:
@@ -134,17 +134,17 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/spans/53fda3c6-2e8f-4358-b20f-2b04f8015c1e/metrics
+    uri: http://localhost:8000/v1/spans/819f38c7-cbf6-4775-a2be-a4a4c5a6e0cc/metrics
   response:
     body:
-      string: '{"id":"129168fe-3e8c-426f-84a2-c21c755629c9","span_id":"53fda3c6-2e8f-4358-b20f-2b04f8015c1e","dimension":"metric","value":1.0,"comment":null,"updated_at":null,"created_at":"2024-09-11T07:15:34.261898Z"}'
+      string: '{"id":"40e59d36-b9f9-467e-a52e-338e413a481c","span_id":"819f38c7-cbf6-4775-a2be-a4a4c5a6e0cc","dimension":"metric","value":1.0,"comment":null,"updated_at":null,"created_at":"2024-10-15T14:18:17.594487Z"}'
     headers:
       content-length:
       - '203'
       content-type:
       - application/json
       date:
-      - Wed, 11 Sep 2024 07:15:33 GMT
+      - Tue, 15 Oct 2024 14:18:17 GMT
       server:
       - uvicorn
     status:

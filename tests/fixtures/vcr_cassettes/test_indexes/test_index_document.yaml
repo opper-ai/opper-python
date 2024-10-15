@@ -11,19 +11,17 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: https://api.opper.ai/v1/indexes
+    uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '{"id":2852,"uuid":"1d3b1884-0c66-4448-b566-4ee0d804a6bf","name":"test_index_document","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"files":[],"created_at":"2024-08-22T14:03:34.720589Z"}'
+      string: '{"id":16,"uuid":"573e77f6-2117-47d4-ac04-8342b38e01c1","name":"test_index_document","project":{"uuid":"e64848ae-df03-4c0b-9a6f-4c498bf3dc8b","name":"asdfasdf"},"files":[],"created_at":"2024-10-15T14:18:47.397638Z"}'
     headers:
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '217'
-      Content-Type:
+      content-length:
+      - '214'
+      content-type:
       - application/json
-      Date:
-      - Thu, 22 Aug 2024 14:03:34 GMT
+      date:
+      - Tue, 15 Oct 2024 14:18:46 GMT
       server:
       - uvicorn
     status:
@@ -41,19 +39,17 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: https://api.opper.ai/v1/indexes/1d3b1884-0c66-4448-b566-4ee0d804a6bf/index
+    uri: http://localhost:8000/v1/indexes/573e77f6-2117-47d4-ac04-8342b38e01c1/index
   response:
     body:
-      string: '{"id":41265,"uuid":"ae41e8aa-19cd-4237-bfca-6dc8f7ee32b4","key":"ae41e8aa-19cd-4237-bfca-6dc8f7ee32b4"}'
+      string: '{"id":4,"uuid":"d79d2296-be87-4721-9c4f-85d27ac2f177","key":"d79d2296-be87-4721-9c4f-85d27ac2f177"}'
     headers:
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '103'
-      Content-Type:
+      content-length:
+      - '99'
+      content-type:
       - application/json
-      Date:
-      - Thu, 22 Aug 2024 14:03:35 GMT
+      date:
+      - Tue, 15 Oct 2024 14:18:46 GMT
       server:
       - uvicorn
     status:
@@ -67,19 +63,17 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: https://api.opper.ai/v1/indexes/1d3b1884-0c66-4448-b566-4ee0d804a6bf
+    uri: http://localhost:8000/v1/indexes/573e77f6-2117-47d4-ac04-8342b38e01c1
   response:
     body:
       string: 'true'
     headers:
-      Connection:
-      - keep-alive
-      Content-Length:
+      content-length:
       - '4'
-      Content-Type:
+      content-type:
       - application/json
-      Date:
-      - Thu, 22 Aug 2024 14:03:35 GMT
+      date:
+      - Tue, 15 Oct 2024 14:18:46 GMT
       server:
       - uvicorn
     status:

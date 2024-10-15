@@ -7,20 +7,18 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: https://api.opper.ai/v1/functions/by_path/test/sdk/test_create_function_with_cache
+    uri: http://localhost:8000/v1/functions/by_path/test/sdk/test_create_function_with_cache
   response:
     body:
       string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
         not found"}]}'
     headers:
-      Connection:
-      - keep-alive
-      Content-Length:
+      content-length:
       - '98'
-      Content-Type:
+      content-type:
       - application/json
-      Date:
-      - Thu, 22 Aug 2024 14:03:23 GMT
+      date:
+      - Tue, 15 Oct 2024 14:18:40 GMT
       server:
       - uvicorn
     status:
@@ -43,21 +41,19 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: https://api.opper.ai/v1/functions
+    uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":7151,"uuid":"67e9e1a1-8d3b-4852-a63b-5262bb3f5166","dataset_uuid":"e8a504a9-00b5-427f-8568-ad863dc356df","description":"Test
+      string: '{"id":60,"uuid":"fd9de2dd-8ce6-46be-9522-f5308bf20e25","dataset_uuid":"8fdbe9aa-2220-4d6b-a854-9b3d61ee7a5b","description":"Test
         function","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Do
-        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_create_function_with_cache","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
+        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_create_function_with_cache","project":{"uuid":"e64848ae-df03-4c0b-9a6f-4c498bf3dc8b","name":"asdfasdf"},"revision":1,"use_semantic_search":false}'
     headers:
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '477'
-      Content-Type:
+      content-length:
+      - '474'
+      content-type:
       - application/json
-      Date:
-      - Thu, 22 Aug 2024 14:03:23 GMT
+      date:
+      - Tue, 15 Oct 2024 14:18:40 GMT
       server:
       - uvicorn
     status:
@@ -75,21 +71,19 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: https://api.opper.ai/v1/chat/test/sdk/test_create_function_with_cache
+    uri: http://localhost:8000/v1/chat/test/sdk/test_create_function_with_cache
   response:
     body:
-      string: '{"span_id":"ab41891e-2ca8-4e47-8e0e-7eeea3c8858d","message":"Hello!
-        How can I assist you today? If you have questions or need support, just let
-        me know!","json_payload":null,"context":null,"cached":false}'
+      string: '{"span_id":"59504376-a8cf-4844-bb30-1c46a9bf1e35","message":"Hello!
+        How can I assist you today? If you have any questions or need information
+        on a topic, feel free to ask.","json_payload":null,"context":null,"cached":false}'
     headers:
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '204'
-      Content-Type:
+      content-length:
+      - '223'
+      content-type:
       - application/json
-      Date:
-      - Thu, 22 Aug 2024 14:03:26 GMT
+      date:
+      - Tue, 15 Oct 2024 14:18:40 GMT
       server:
       - uvicorn
     status:
@@ -107,21 +101,19 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: https://api.opper.ai/v1/chat/test/sdk/test_create_function_with_cache
+    uri: http://localhost:8000/v1/chat/test/sdk/test_create_function_with_cache
   response:
     body:
-      string: '{"span_id":"4e3e9d1a-1b8f-4ac3-8bea-00a9e8598188","message":"Hello!
-        How can I assist you today? If you have questions or need support, just let
-        me know!","json_payload":null,"context":null,"cached":true}'
+      string: '{"span_id":"119b52ee-096b-4121-ad19-a54e0009156f","message":"Hello!
+        How can I assist you today? If you have any questions or need information
+        on a topic, feel free to ask.","json_payload":null,"context":null,"cached":true}'
     headers:
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '203'
-      Content-Type:
+      content-length:
+      - '222'
+      content-type:
       - application/json
-      Date:
-      - Thu, 22 Aug 2024 14:03:26 GMT
+      date:
+      - Tue, 15 Oct 2024 14:18:42 GMT
       server:
       - uvicorn
     status:
@@ -135,17 +127,15 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: https://api.opper.ai/v1/functions/67e9e1a1-8d3b-4852-a63b-5262bb3f5166
+    uri: http://localhost:8000/v1/functions/fd9de2dd-8ce6-46be-9522-f5308bf20e25
   response:
     body:
       string: ''
     headers:
-      Connection:
-      - keep-alive
-      Content-Type:
+      content-type:
       - application/json
-      Date:
-      - Thu, 22 Aug 2024 14:03:27 GMT
+      date:
+      - Tue, 15 Oct 2024 14:18:42 GMT
       server:
       - uvicorn
     status:

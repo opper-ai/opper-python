@@ -3,10 +3,12 @@ from http import HTTPStatus
 
 import httpx
 from httpx_sse import aconnect_sse, connect_sse
+
 from opperai.__version__ import __version__
 from opperai.types import Errors
 from opperai.types.exceptions import (
     ContentPolicyViolationError,
+    ContextWindowExceededError,
     OpperTimeoutError,
     RateLimitError,
     RequestValidationError,
@@ -24,6 +26,8 @@ def _prepare_error(response):
             raise StructuredGenerationError(error.message, error.detail)
         if error.type == "ContentPolicyViolationError":
             raise ContentPolicyViolationError(error.message, error.detail)
+        if error.type == "ContextWindowExceededError":
+            raise ContextWindowExceededError(error.message, error.detail)
     if status_code == HTTPStatus.UNPROCESSABLE_ENTITY:
         if error.type == "RequestValidationError":
             raise RequestValidationError(error.message, error.detail)

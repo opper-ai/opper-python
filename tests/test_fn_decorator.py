@@ -2,11 +2,12 @@ from typing import Dict, List, Optional, Union
 
 import pytest
 from jsonschema import validate
+from pydantic import BaseModel
+
 from opperai import AsyncClient, Client, fn
 from opperai.core.utils import convert_function_call_to_json
 from opperai.functions.decorator._schemas import type_to_json_schema
 from opperai.types import ImageInput
-from pydantic import BaseModel
 
 
 def test_fn_decorator_on_method(client: Client, vcr_cassette):
@@ -44,7 +45,7 @@ async def test_fn_decorator_on_method_async(aclient: AsyncClient, vcr_cassette):
     assert "hello" in res.lower()
 
 
-def test_fn_decorator_image(client: Client, vcr_cassette):
+def test_fn_decorator_image_describe(client: Client, vcr_cassette):
     class ImageDescription(BaseModel):
         description: str
 

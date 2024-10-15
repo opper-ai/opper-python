@@ -7,20 +7,18 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: https://api.opper.ai/v1/functions/by_path/test/sdk/test_create_function_async
+    uri: http://localhost:8000/v1/functions/by_path/test/sdk/test_create_function_async
   response:
     body:
       string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
         not found"}]}'
     headers:
-      Connection:
-      - keep-alive
-      Content-Length:
+      content-length:
       - '98'
-      Content-Type:
+      content-type:
       - application/json
-      Date:
-      - Thu, 22 Aug 2024 14:01:54 GMT
+      date:
+      - Tue, 15 Oct 2024 14:17:41 GMT
       server:
       - uvicorn
     status:
@@ -41,21 +39,19 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: https://api.opper.ai/v1/functions
+    uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":7129,"uuid":"cf49e2ab-7896-41cb-8052-80c829006f16","dataset_uuid":"a118aaf3-8c72-4f1f-aabc-769da84966c1","description":"Test
+      string: '{"id":34,"uuid":"a100d8fb-c3c9-43eb-a23d-7a727e15207d","dataset_uuid":"c5e7c7d8-9f5e-4718-adf3-56e267504fee","description":"Test
         function","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Do
-        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_create_function_async","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
+        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_create_function_async","project":{"uuid":"e64848ae-df03-4c0b-9a6f-4c498bf3dc8b","name":"asdfasdf"},"revision":1,"use_semantic_search":false}'
     headers:
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '472'
-      Content-Type:
+      content-length:
+      - '469'
+      content-type:
       - application/json
-      Date:
-      - Thu, 22 Aug 2024 14:01:55 GMT
+      date:
+      - Tue, 15 Oct 2024 14:17:41 GMT
       server:
       - uvicorn
     status:
@@ -69,17 +65,15 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: https://api.opper.ai/v1/functions/cf49e2ab-7896-41cb-8052-80c829006f16
+    uri: http://localhost:8000/v1/functions/a100d8fb-c3c9-43eb-a23d-7a727e15207d
   response:
     body:
       string: ''
     headers:
-      Connection:
-      - keep-alive
-      Content-Type:
+      content-type:
       - application/json
-      Date:
-      - Thu, 22 Aug 2024 14:01:55 GMT
+      date:
+      - Tue, 15 Oct 2024 14:17:41 GMT
       server:
       - uvicorn
     status:
