@@ -10,48 +10,47 @@ interactions:
     uri: http://localhost:8000/v1/functions/by_path/test/sdk/test_image
   response:
     body:
-      string: '{"id":145,"uuid":"49b6b129-5ac7-47a3-b30a-f50fe218dc67","dataset_uuid":"e5cc55df-6e5e-4add-bd33-cdff5343987b","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
-        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
+      string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
+        not found"}]}'
     headers:
       content-length:
-      - '447'
+      - '98'
       content-type:
       - application/json
       date:
-      - Wed, 04 Sep 2024 13:59:20 GMT
+      - Tue, 15 Oct 2024 14:17:42 GMT
       server:
       - uvicorn
     status:
-      code: 200
-      message: OK
+      code: 404
+      message: Not Found
 - request:
-    body: '{"uuid": "49b6b129-5ac7-47a3-b30a-f50fe218dc67", "path": "test/sdk/test_image",
-      "description": null, "input_schema": null, "out_schema": null, "instructions":
-      "describe the image", "model": "openai/gpt-4o", "index_ids": [], "use_semantic_search":
-      null, "few_shot": null, "few_shot_count": null, "cache_configuration": null,
-      "dataset_uuid": null}'
+    body: '{"uuid": null, "path": "test/sdk/test_image", "description": null, "input_schema":
+      null, "out_schema": null, "instructions": "describe the image", "model": "openai/gpt-4o",
+      "index_ids": [], "use_semantic_search": null, "few_shot": null, "few_shot_count":
+      null, "cache_configuration": null, "dataset_uuid": null}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '345'
+      - '311'
       content-type:
       - application/json
-    method: PATCH
-    uri: http://localhost:8000/v1/functions/49b6b129-5ac7-47a3-b30a-f50fe218dc67
+    method: POST
+    uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":145,"uuid":"49b6b129-5ac7-47a3-b30a-f50fe218dc67","dataset_uuid":"e5cc55df-6e5e-4add-bd33-cdff5343987b","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
-        the image","language_model_id":null,"model":"openai/gpt-4o","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
+      string: '{"id":40,"uuid":"6999dd4a-dd9d-4edc-a60c-e3f87fecc4a2","dataset_uuid":"16b1ee2d-9e10-4359-b524-f8221a190660","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+        the image","language_model_id":null,"model":"openai/gpt-4o","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"e64848ae-df03-4c0b-9a6f-4c498bf3dc8b","name":"asdfasdf"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '443'
+      - '448'
       content-type:
       - application/json
       date:
-      - Wed, 04 Sep 2024 13:59:20 GMT
+      - Tue, 15 Oct 2024 14:17:42 GMT
       server:
       - uvicorn
     status:
@@ -65,18 +64,18 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/49b6b129-5ac7-47a3-b30a-f50fe218dc67
+    uri: http://localhost:8000/v1/functions/6999dd4a-dd9d-4edc-a60c-e3f87fecc4a2
   response:
     body:
-      string: '{"id":145,"uuid":"49b6b129-5ac7-47a3-b30a-f50fe218dc67","dataset_uuid":"e5cc55df-6e5e-4add-bd33-cdff5343987b","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
-        the image","language_model_id":null,"model":"openai/gpt-4o","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
+      string: '{"id":40,"uuid":"6999dd4a-dd9d-4edc-a60c-e3f87fecc4a2","dataset_uuid":"16b1ee2d-9e10-4359-b524-f8221a190660","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+        the image","language_model_id":null,"model":"openai/gpt-4o","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"e64848ae-df03-4c0b-9a6f-4c498bf3dc8b","name":"asdfasdf"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '443'
+      - '448'
       content-type:
       - application/json
       date:
-      - Wed, 04 Sep 2024 13:59:20 GMT
+      - Tue, 15 Oct 2024 14:17:42 GMT
       server:
       - uvicorn
     status:
@@ -98,22 +97,19 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_image
   response:
     body:
-      string: '{"span_id":"eda6d1d3-3efb-4cf2-8239-75c659281acb","message":"The image
-        depicts a fossilized skeleton of a prehistoric animal embedded in a flat slab
-        of rock. The fossil appears to be well-preserved, showcasing detailed impressions
-        of the bones. The creature has a reptilian-like appearance with a long tail,
-        four limbs, and a broad, triangular-shaped skull. The rock surrounding the
-        fossil is light beige in color and has a rough texture, contrasting with the
-        darker hue of the fossilized bones. The entire specimen is laid out on a black
-        surface, likely for display purposes. The presentation suggests that it is
-        part of a museum or educational exhibit.","json_payload":null,"context":null,"cached":false}'
+      string: '{"span_id":"201b265d-7766-456c-919f-d721eb1d6283","message":"This image
+        shows a well-preserved fossil embedded in a slab of stone. The fossil appears
+        to be of a prehistoric reptile-like creature, with a distinct skull, spine,
+        ribcage, and limbs visible. The details of the skeletal structure suggest
+        it may be an ancient species, possibly from the Permian period. The slab is
+        displayed against a black background, highlighting the fossil''s intricacies.","json_payload":null,"context":null,"cached":false}'
     headers:
       content-length:
-      - '706'
+      - '504'
       content-type:
       - application/json
       date:
-      - Wed, 04 Sep 2024 13:59:20 GMT
+      - Tue, 15 Oct 2024 14:17:42 GMT
       server:
       - uvicorn
     status:
@@ -127,7 +123,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/49b6b129-5ac7-47a3-b30a-f50fe218dc67
+    uri: http://localhost:8000/v1/functions/6999dd4a-dd9d-4edc-a60c-e3f87fecc4a2
   response:
     body:
       string: ''
@@ -135,7 +131,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Wed, 04 Sep 2024 13:59:26 GMT
+      - Tue, 15 Oct 2024 14:17:47 GMT
       server:
       - uvicorn
     status:

@@ -2,6 +2,7 @@ import time
 from contextlib import contextmanager
 
 import pytest
+
 from opperai import Client
 from opperai.types.indexes import DocumentIn, Filter
 
@@ -42,16 +43,16 @@ def test_get_by_name(vcr_cassette, client: Client):
 
 def test_list_indexes(vcr_cassette, client: Client):
     idxs = client.indexes.list()
-    assert len(idxs) == 0
+    cnt = len(idxs)
 
     with index("test_list_indexes", client) as idx:
         idxs = client.indexes.list()
-        assert len(idxs) == 1
-        assert idxs[0].name == "test_list_indexes"
+        assert len(idxs) == cnt + 1
+        assert "test_list_indexes" in {idx.name for idx in idxs}
 
         with index("test_list_indexes_2", client) as idx_2:
             idxs = client.indexes.list()
-            assert len(idxs) == 2
+            assert len(idxs) == cnt + 2
             index_names = {idx.name for idx in idxs}
             assert "test_list_indexes" in index_names
             assert "test_list_indexes_2" in index_names

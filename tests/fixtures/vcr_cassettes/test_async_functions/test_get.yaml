@@ -7,20 +7,18 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: https://api.opper.ai/v1/functions/by_path/test/sdk/test_get
+    uri: http://localhost:8000/v1/functions/by_path/test/sdk/test_get
   response:
     body:
       string: '{"errors":[{"type":"HTTPException","message":"Function not found","detail":"Function
         not found"}]}'
     headers:
-      Connection:
-      - keep-alive
-      Content-Length:
+      content-length:
       - '98'
-      Content-Type:
+      content-type:
       - application/json
-      Date:
-      - Thu, 22 Aug 2024 14:01:56 GMT
+      date:
+      - Tue, 15 Oct 2024 14:17:42 GMT
       server:
       - uvicorn
     status:
@@ -41,21 +39,19 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: https://api.opper.ai/v1/functions
+    uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":7132,"uuid":"3fce3173-7e4a-46da-b2e1-c4ac4c9f8c3a","dataset_uuid":"f96de5aa-3c96-407a-ac8a-2341117e5d3e","description":"Test
+      string: '{"id":37,"uuid":"80d53fa3-1bb4-4746-81fd-130cc6a486c7","dataset_uuid":"939db66a-b467-4cab-8710-6b3f26543fa1","description":"Test
         function","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Do
-        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_get","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
+        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_get","project":{"uuid":"e64848ae-df03-4c0b-9a6f-4c498bf3dc8b","name":"asdfasdf"},"revision":1,"use_semantic_search":false}'
     headers:
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '454'
-      Content-Type:
+      content-length:
+      - '451'
+      content-type:
       - application/json
-      Date:
-      - Thu, 22 Aug 2024 14:01:57 GMT
+      date:
+      - Tue, 15 Oct 2024 14:17:42 GMT
       server:
       - uvicorn
     status:
@@ -69,21 +65,19 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: https://api.opper.ai/v1/functions/3fce3173-7e4a-46da-b2e1-c4ac4c9f8c3a
+    uri: http://localhost:8000/v1/functions/80d53fa3-1bb4-4746-81fd-130cc6a486c7
   response:
     body:
-      string: '{"id":7132,"uuid":"3fce3173-7e4a-46da-b2e1-c4ac4c9f8c3a","dataset_uuid":"f96de5aa-3c96-407a-ac8a-2341117e5d3e","description":"Test
+      string: '{"id":37,"uuid":"80d53fa3-1bb4-4746-81fd-130cc6a486c7","dataset_uuid":"939db66a-b467-4cab-8710-6b3f26543fa1","description":"Test
         function","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Do
-        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_get","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
+        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_get","project":{"uuid":"e64848ae-df03-4c0b-9a6f-4c498bf3dc8b","name":"asdfasdf"},"revision":1,"use_semantic_search":false}'
     headers:
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '454'
-      Content-Type:
+      content-length:
+      - '451'
+      content-type:
       - application/json
-      Date:
-      - Thu, 22 Aug 2024 14:01:57 GMT
+      date:
+      - Tue, 15 Oct 2024 14:17:42 GMT
       server:
       - uvicorn
     status:
@@ -97,21 +91,19 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: https://api.opper.ai/v1/functions/by_path/test/sdk/test_get
+    uri: http://localhost:8000/v1/functions/by_path/test/sdk/test_get
   response:
     body:
-      string: '{"id":7132,"uuid":"3fce3173-7e4a-46da-b2e1-c4ac4c9f8c3a","dataset_uuid":"f96de5aa-3c96-407a-ac8a-2341117e5d3e","description":"Test
+      string: '{"id":37,"uuid":"80d53fa3-1bb4-4746-81fd-130cc6a486c7","dataset_uuid":"939db66a-b467-4cab-8710-6b3f26543fa1","description":"Test
         function","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Do
-        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_get","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"revision":1,"use_semantic_search":false}'
+        something","language_model_id":null,"model":"azure/gpt4-eu","out_schema":null,"path":"test/sdk/test_get","project":{"uuid":"e64848ae-df03-4c0b-9a6f-4c498bf3dc8b","name":"asdfasdf"},"revision":1,"use_semantic_search":false}'
     headers:
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '454'
-      Content-Type:
+      content-length:
+      - '451'
+      content-type:
       - application/json
-      Date:
-      - Thu, 22 Aug 2024 14:01:57 GMT
+      date:
+      - Tue, 15 Oct 2024 14:17:42 GMT
       server:
       - uvicorn
     status:
@@ -125,17 +117,15 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: https://api.opper.ai/v1/functions/3fce3173-7e4a-46da-b2e1-c4ac4c9f8c3a
+    uri: http://localhost:8000/v1/functions/80d53fa3-1bb4-4746-81fd-130cc6a486c7
   response:
     body:
       string: ''
     headers:
-      Connection:
-      - keep-alive
-      Content-Type:
+      content-type:
       - application/json
-      Date:
-      - Thu, 22 Aug 2024 14:01:57 GMT
+      date:
+      - Tue, 15 Oct 2024 14:17:42 GMT
       server:
       - uvicorn
     status:

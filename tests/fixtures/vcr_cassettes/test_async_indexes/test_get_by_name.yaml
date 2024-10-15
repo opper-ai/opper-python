@@ -11,19 +11,17 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: https://api.opper.ai/v1/indexes
+    uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '{"id":2842,"uuid":"246e02f3-d2cc-4c0f-9140-32977e294acf","name":"test_get_by_name","project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"},"files":[],"created_at":"2024-08-22T14:02:32.741718Z"}'
+      string: '{"id":8,"uuid":"f88e597e-aa75-454d-a699-b1cfb32b5ba2","name":"test_get_by_name","project":{"uuid":"e64848ae-df03-4c0b-9a6f-4c498bf3dc8b","name":"asdfasdf"},"files":[],"created_at":"2024-10-15T14:17:58.487830Z"}'
     headers:
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '214'
-      Content-Type:
+      content-length:
+      - '210'
+      content-type:
       - application/json
-      Date:
-      - Thu, 22 Aug 2024 14:02:32 GMT
+      date:
+      - Tue, 15 Oct 2024 14:17:58 GMT
       server:
       - uvicorn
     status:
@@ -37,20 +35,19 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: https://api.opper.ai/v1/indexes
+    uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '[{"id":2842,"uuid":"246e02f3-d2cc-4c0f-9140-32977e294acf","org_id":1,"org_name":null,"name":"test_get_by_name","created_by":"Johnny
-        Chadda","created_at":"2024-08-22T14:02:32.741718Z","updated_at":"2024-08-22T14:02:32.741718Z","count":0,"project":{"uuid":"1e29233e-9569-4fa3-a40c-edfd42d65e8d","name":"jctestsql"}}]'
+      string: '[{"id":3,"uuid":"9db24b6f-0fbe-4a10-86d8-1c6a17abb2d8","org_id":1,"org_name":null,"name":"asdfasdfasdfasdf","created_by":"Mattias
+        Lundell","created_at":"2024-10-14T14:08:01.440240Z","updated_at":"2024-10-14T14:08:01.440240Z","count":0,"project":{"uuid":"e64848ae-df03-4c0b-9a6f-4c498bf3dc8b","name":"asdfasdf"}},{"id":8,"uuid":"f88e597e-aa75-454d-a699-b1cfb32b5ba2","org_id":1,"org_name":null,"name":"test_get_by_name","created_by":"Mattias
+        Lundell","created_at":"2024-10-15T14:17:58.487830Z","updated_at":"2024-10-15T14:17:58.487830Z","count":0,"project":{"uuid":"e64848ae-df03-4c0b-9a6f-4c498bf3dc8b","name":"asdfasdf"}}]'
     headers:
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '314'
-      Content-Type:
+      content-length:
+      - '623'
+      content-type:
       - application/json
-      Date:
-      - Thu, 22 Aug 2024 14:02:33 GMT
+      date:
+      - Tue, 15 Oct 2024 14:17:58 GMT
       server:
       - uvicorn
     status:
@@ -64,19 +61,17 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: https://api.opper.ai/v1/indexes/246e02f3-d2cc-4c0f-9140-32977e294acf
+    uri: http://localhost:8000/v1/indexes/f88e597e-aa75-454d-a699-b1cfb32b5ba2
   response:
     body:
       string: 'true'
     headers:
-      Connection:
-      - keep-alive
-      Content-Length:
+      content-length:
       - '4'
-      Content-Type:
+      content-type:
       - application/json
-      Date:
-      - Thu, 22 Aug 2024 14:02:33 GMT
+      date:
+      - Tue, 15 Oct 2024 14:17:58 GMT
       server:
       - uvicorn
     status:

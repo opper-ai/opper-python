@@ -18,7 +18,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 05 Sep 2024 12:11:39 GMT
+      - Tue, 15 Oct 2024 14:18:25 GMT
       server:
       - uvicorn
     status:
@@ -42,15 +42,15 @@ interactions:
     uri: http://localhost:8000/v1/functions
   response:
     body:
-      string: '{"id":163,"uuid":"28f5c869-ed4c-48bc-8cb8-6a91868253f4","dataset_uuid":"ce746cab-393c-4fd7-abfc-529ce8d97011","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
-        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
+      string: '{"id":57,"uuid":"91a90088-bf1b-4db9-959f-534206a21270","dataset_uuid":"52355ca6-9d65-4253-8446-fa7c41c3a7bf","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"e64848ae-df03-4c0b-9a6f-4c498bf3dc8b","name":"asdfasdf"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '447'
+      - '452'
       content-type:
       - application/json
       date:
-      - Thu, 05 Sep 2024 12:11:39 GMT
+      - Tue, 15 Oct 2024 14:18:25 GMT
       server:
       - uvicorn
     status:
@@ -64,18 +64,18 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/functions/28f5c869-ed4c-48bc-8cb8-6a91868253f4
+    uri: http://localhost:8000/v1/functions/91a90088-bf1b-4db9-959f-534206a21270
   response:
     body:
-      string: '{"id":163,"uuid":"28f5c869-ed4c-48bc-8cb8-6a91868253f4","dataset_uuid":"ce746cab-393c-4fd7-abfc-529ce8d97011","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
-        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"2910e8e2-f040-49ba-aafe-85e4352b2baf","name":"aa"},"revision":1,"use_semantic_search":false}'
+      string: '{"id":57,"uuid":"91a90088-bf1b-4db9-959f-534206a21270","dataset_uuid":"52355ca6-9d65-4253-8446-fa7c41c3a7bf","description":null,"few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"describe
+        the image","language_model_id":null,"model":"openai/gpt4-turbo","out_schema":null,"path":"test/sdk/test_image","project":{"uuid":"e64848ae-df03-4c0b-9a6f-4c498bf3dc8b","name":"asdfasdf"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '447'
+      - '452'
       content-type:
       - application/json
       date:
-      - Thu, 05 Sep 2024 12:11:39 GMT
+      - Tue, 15 Oct 2024 14:18:25 GMT
       server:
       - uvicorn
     status:
@@ -97,22 +97,21 @@ interactions:
     uri: http://localhost:8000/v1/chat/test/sdk/test_image
   response:
     body:
-      string: '{"span_id":"4b552f1b-2b30-48d0-89fa-7bb5501a6a75","message":"The image
-        shows a fossil of a small reptilian or amphibian creature embedded in a stone
-        matrix. The fossil is relatively well-preserved, displaying clear details
-        of the skeletal structure, including the skull, vertebrae, ribs, and limbs.
-        The stone appears to be sedimentary rock, which is common for fossil discoveries.
-        The setting suggests that the fossil is on display, possibly in a museum,
-        as it is well-lit and presented on a plain surface to highlight its details.
-        This specimen provides valuable scientific insight into the anatomy of ancient
-        life forms and their evolutionary history.","json_payload":null,"context":null,"cached":false}'
+      string: '{"span_id":"006af2d5-b6d5-4825-a405-ba26a2ea0d1d","message":"This image
+        features a fossil of a small mammal-like reptile, likely from a group called
+        synapsids, which includes ancestors of mammals. The specimen is well-preserved
+        with the full skeleton visible, including distinct vertebral column, ribs,
+        limb bones, and skull embedded in rock matrix. The fossil is on display, possibly
+        within a museum or educational setting, highlighting the details of its skeletal
+        structure. This kind of fossil is significant as it provides insights into
+        the evolution of mammals from reptilian ancestors.","json_payload":null,"context":null,"cached":false}'
     headers:
       content-length:
-      - '705'
+      - '643'
       content-type:
       - application/json
       date:
-      - Thu, 05 Sep 2024 12:11:39 GMT
+      - Tue, 15 Oct 2024 14:18:25 GMT
       server:
       - uvicorn
     status:
@@ -126,7 +125,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/functions/28f5c869-ed4c-48bc-8cb8-6a91868253f4
+    uri: http://localhost:8000/v1/functions/91a90088-bf1b-4db9-959f-534206a21270
   response:
     body:
       string: ''
@@ -134,7 +133,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 05 Sep 2024 12:11:52 GMT
+      - Tue, 15 Oct 2024 14:18:39 GMT
       server:
       - uvicorn
     status:
