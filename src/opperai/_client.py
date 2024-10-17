@@ -1,7 +1,7 @@
 import base64
 import os
 from http import HTTPStatus
-from typing import Any, Tuple, Optional
+from typing import Any, Tuple
 
 from opperai.core.datasets._async_datasets import AsyncDatasets
 from opperai.core.datasets._datasets import Datasets
@@ -17,7 +17,7 @@ from opperai.types.exceptions import APIError
 from .core._http_clients import _async_http_client, _http_client
 
 DEFAULT_API_URL = "https://api.opper.ai"
-DEFAULT_TIMEOUT = 120
+DEFAULT_TIMEOUT = 300
 
 
 class AsyncClient:
