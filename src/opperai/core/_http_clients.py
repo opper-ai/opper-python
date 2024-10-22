@@ -3,12 +3,13 @@ from http import HTTPStatus
 
 import httpx
 from httpx_sse import aconnect_sse, connect_sse
-
 from opperai.__version__ import __version__
 from opperai.types import Errors
 from opperai.types.exceptions import (
     ContentPolicyViolationError,
     ContextWindowExceededError,
+    NotFoundError,
+    OpperAPIError,
     OpperTimeoutError,
     RateLimitError,
     RequestValidationError,
@@ -16,7 +17,7 @@ from opperai.types.exceptions import (
 )
 
 
-def _prepare_error(response):
+def _raise_error(response: httpx.Response):
     error = Errors.model_validate(response.json())
     error = error.errors[0]
     status_code = response.status_code
@@ -34,6 +35,10 @@ def _prepare_error(response):
     if status_code == HTTPStatus.TOO_MANY_REQUESTS:
         if error.type == "RateLimitError":
             raise RateLimitError(error.message, error.detail)
+    if status_code == HTTPStatus.NOT_FOUND:
+        raise NotFoundError(error.message, error.detail)
+    else:
+        raise OpperAPIError(error.message, error.detail)
 
 
 class _async_http_client:
@@ -51,7 +56,7 @@ class _async_http_client:
         try:
             response = await self.session.request(method, path, **kwargs)
             if response.status_code >= 400:
-                _prepare_error(response)
+                _raise_error(response)
             return response
         except httpx.TimeoutException as e:
             raise OpperTimeoutError(
@@ -67,6 +72,11 @@ class _async_http_client:
                 path,
                 **kwargs,
             ) as event_source:
+                response = event_source.response
+                if response.status_code >= 400:
+                    await response.aread()
+                    _raise_error(response)
+
                 async for sse in event_source.aiter_sse():
                     yield json.loads(sse.data)
         except httpx.TimeoutException as e:
@@ -91,7 +101,7 @@ class _http_client:
         try:
             response = self.session.request(method, path, **kwargs)
             if response.status_code >= 400:
-                _prepare_error(response)
+                _raise_error(response)
             return response
         except httpx.TimeoutException as e:
             raise OpperTimeoutError(
@@ -107,10 +117,15 @@ class _http_client:
                 path,
                 **kwargs,
             ) as event_source:
+                response = event_source.response
+                if response.status_code >= 400:
+                    response.read()
+                    _raise_error(response)
+
                 for sse in event_source.iter_sse():
                     yield json.loads(sse.data)
         except httpx.TimeoutException as e:
             raise OpperTimeoutError(
                 "request timed out",
-                "The request to the opper api timed out.",
+                "the request to the opper api timed out.",
             ) from e

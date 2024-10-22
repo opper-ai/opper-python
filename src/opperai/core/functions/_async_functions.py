@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Generator, List, Optional
+from typing import Any, AsyncGenerator, List, Optional
 
 from opperai.core._http_clients import _async_http_client
 from opperai.core.spans import get_current_span_id
@@ -12,7 +12,7 @@ from opperai.types import (
     StreamingChunk,
     validate_uuid_xor_path,
 )
-from opperai.types.exceptions import APIError
+from opperai.types.exceptions import APIError, NotFoundError
 
 
 class AsyncFunctions:
@@ -100,7 +100,9 @@ class AsyncFunctions:
         return Function.model_validate(response.json())
 
     @validate_uuid_xor_path
-    async def get(self, uuid: str = None, path: str = None) -> Optional[Function]:
+    async def get(
+        self, uuid: Optional[str] = None, path: Optional[str] = None
+    ) -> Optional[Function]:
         """Get a function
 
         This method allows fetching the details of a specific Opper function, either by specifying its unique ID or its path. If the function is found, it returns an instance of the Function class representing the function's configuration and details. If no function matches the given ID or path, or if both parameters are omitted, None is returned.
@@ -139,35 +141,29 @@ class AsyncFunctions:
             return None
 
     async def _get_by_path(self, path: str) -> Optional[Function]:
-        response = await self.http_client.do_request(
-            "GET",
-            f"/v1/functions/by_path/{path}",
-        )
-        if response.status_code == HTTPStatus.NOT_FOUND:
-            return None
-        if response.status_code != HTTPStatus.OK:
-            raise APIError(
-                f"Failed to get function {path} with status {response.status_code}"
+        try:
+            response = await self.http_client.do_request(
+                "GET",
+                f"/v1/functions/by_path/{path}",
             )
+        except NotFoundError:
+            return None
 
         return Function.model_validate(response.json())
 
     async def _get_by_uuid(self, uuid: str) -> Optional[Function]:
-        response = await self.http_client.do_request(
-            "GET",
-            f"/v1/functions/{uuid}",
-        )
-        if response.status_code == HTTPStatus.NOT_FOUND:
-            return None
-        if response.status_code != HTTPStatus.OK:
-            raise APIError(
-                f"Failed to get function {uuid} with status {response.status_code}"
+        try:
+            response = await self.http_client.do_request(
+                "GET",
+                f"/v1/functions/{uuid}",
             )
+        except NotFoundError:
+            return None
 
         return Function.model_validate(response.json())
 
     @validate_uuid_xor_path
-    async def delete(self, uuid: str = None, path: str = None):
+    async def delete(self, uuid: Optional[str] = None, path: Optional[str] = None):
         """Delete a function
 
         This method allows for the deletion of a function either by specifying its unique ID or its path.
@@ -320,7 +316,7 @@ class AsyncFunctions:
 
     async def _chat_stream(
         self, function_path, data: ChatPayload, examples: List[Example], **kwargs
-    ) -> Generator[StreamingChunk, None, None]:
+    ) -> AsyncGenerator[StreamingChunk, None]:
         payload = {**data.model_dump(), **kwargs}
         if examples:
             payload["examples"] = [e.model_dump() for e in examples]
@@ -347,6 +343,9 @@ class AsyncFunctions:
         return True
 
     async def call(self, uuid: str, payload: CallPayload) -> Any:
+        if payload.stream:
+            return self._call_stream(uuid, payload)
+
         response = await self.http_client.do_request(
             "POST",
             f"/v1/functions/{uuid}/call",
@@ -359,3 +358,14 @@ class AsyncFunctions:
         raise APIError(
             f"Failed to run function {payload.name} with status {response.status_code}: {response.text}"
         )
+
+    async def _call_stream(
+        self, uuid: str, payload: CallPayload
+    ) -> AsyncGenerator[StreamingChunk, None]:
+        gen = self.http_client.stream(
+            "POST",
+            f"/v1/functions/{uuid}/call",
+            json=payload.model_dump(),
+        )
+        async for item in gen:
+            yield StreamingChunk(**item)

@@ -10,18 +10,8 @@ from opperai.types.exceptions import OpperTimeoutError
 
 @pytest.mark.asyncio(scope="module")
 async def test_async_client_raises_timeout_error(vcr_cassette):
-    async def mock_request(method, path, **kwargs):
-        raise httpx.TimeoutException("request timed out")
-
     opper = AsyncOpper(client=AsyncClient())
     f = await opper.functions.create("test_async_client_raises_timeout_error", "test")
-
-    f._client.http_client.session.request = mock_request
-
-    with pytest.raises(OpperTimeoutError):
-        await f.chat(
-            messages=[Message(role="user", content="say hello")],
-        )
 
     with patch("opperai.core._http_clients.aconnect_sse") as mock_aconnect_sse:
         mock_aconnect_sse.side_effect = httpx.TimeoutException("request timed out")

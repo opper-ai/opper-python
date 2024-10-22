@@ -2,7 +2,7 @@ from typing import List, Optional
 
 from opperai.core._http_clients import _async_http_client
 from opperai.core.spans import get_current_span_id
-from opperai.types.exceptions import APIError
+from opperai.types.exceptions import APIError, NotFoundError
 from opperai.types.indexes import (
     Document,
     DocumentIn,
@@ -52,8 +52,7 @@ class AsyncIndexes:
                 "embedding_model": embedding_model,
             },
         )
-        if response.status_code != 200:
-            raise APIError(f"Failed to create index with status {response.status_code}")
+
         return Index.model_validate(response.json())
 
     async def delete(self, uuid: str) -> bool:
@@ -79,17 +78,18 @@ class AsyncIndexes:
             >>> print(result)
             True
         """
-        response = await self.http_client.do_request(
-            "DELETE",
-            f"/v1/indexes/{uuid}",
-        )
-        if response.status_code == 404:
+        try:
+            await self.http_client.do_request(
+                "DELETE",
+                f"/v1/indexes/{uuid}",
+            )
+        except NotFoundError:
             return False
-        if response.status_code != 200:
-            raise APIError(f"Failed to delete index with status {response.status_code}")
         return True
 
-    async def get(self, uuid: str = None, name: str = None) -> Index:
+    async def get(
+        self, uuid: Optional[str] = None, name: Optional[str] = None
+    ) -> Optional[Index]:
         """Retrieve an index.
 
         This method fetches the details of an index from the Opper service. It can retrieve the index information either by its unique identifier (ID) or by its name. At least one of the parameters, `id` or `name`, must be provided. If both are provided, a ValueError is raised.
@@ -122,17 +122,14 @@ class AsyncIndexes:
         if name is not None:
             return await self._get_by_name(name)
 
-    async def _get_by_uuid(self, uuid: str) -> Index:
-        response = await self.http_client.do_request(
-            "GET",
-            f"/v1/indexes/{uuid}",
-        )
-        if response.status_code == 404:
-            return None
-        if response.status_code != 200:
-            raise APIError(
-                f"Failed to get index {uuid} with status {response.status_code}"
+    async def _get_by_uuid(self, uuid: str) -> Optional[Index]:
+        try:
+            response = await self.http_client.do_request(
+                "GET",
+                f"/v1/indexes/{uuid}",
             )
+        except NotFoundError:
+            return None
         return Index.model_validate(response.json())
 
     async def _get_by_name(self, name: str) -> Index:

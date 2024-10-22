@@ -1,7 +1,7 @@
 import base64
 import os
 from http import HTTPStatus
-from typing import Any, Tuple
+from typing import Any, AsyncGenerator, Iterator, Optional, Tuple
 
 from opperai.core.datasets._async_datasets import AsyncDatasets
 from opperai.core.datasets._datasets import Datasets
@@ -11,7 +11,13 @@ from opperai.core.indexes._async_indexes import AsyncIndexes
 from opperai.core.indexes._indexes import Indexes
 from opperai.core.spans._async_spans import AsyncSpans
 from opperai.core.spans._spans import Spans
-from opperai.types import CallConfiguration, CallPayload, FunctionResponse, ImageOutput
+from opperai.types import (
+    CallConfiguration,
+    CallPayload,
+    FunctionResponse,
+    ImageOutput,
+    StreamingChunk,
+)
 from opperai.types.exceptions import APIError
 
 from .core._http_clients import _async_http_client, _http_client
@@ -28,9 +34,9 @@ class AsyncClient:
 
     def __init__(
         self,
-        api_key: str = None,
-        api_url: str = None,
-        default_model: str = None,
+        api_key: Optional[str] = None,
+        api_url: Optional[str] = None,
+        default_model: Optional[str] = None,
         timeout: float = DEFAULT_TIMEOUT,
     ):
         if api_key is None:
@@ -85,6 +91,9 @@ class AsyncClient:
         return ImageOutput(image_bytes), None
 
     async def call(self, payload: CallPayload) -> Any:
+        if payload.stream:
+            return self._call_stream(payload)
+
         response = await self.http_client.do_request(
             "POST",
             "/v1/call",
@@ -98,6 +107,17 @@ class AsyncClient:
             f"Failed to run function {payload.name} with status {response.status_code}: {response.text}"
         )
 
+    async def _call_stream(
+        self, payload: CallPayload
+    ) -> AsyncGenerator[StreamingChunk, None]:
+        gen = self.http_client.stream(
+            "POST",
+            "/v1/call",
+            json=payload.model_dump(),
+        )
+        async for item in gen:
+            yield StreamingChunk(**item)
+
 
 class Client:
     functions: Functions
@@ -107,9 +127,9 @@ class Client:
 
     def __init__(
         self,
-        api_key: str = None,
-        api_url: str = None,
-        default_model: str = None,
+        api_key: Optional[str] = None,
+        api_url: Optional[str] = None,
+        default_model: Optional[str] = None,
         timeout: float = DEFAULT_TIMEOUT,
     ):
         if api_key is None:
@@ -164,6 +184,9 @@ class Client:
         return ImageOutput(image_bytes), None
 
     def call(self, payload: CallPayload) -> Any:
+        if payload.stream:
+            return self._call_stream(payload)
+
         response = self.http_client.do_request(
             "POST",
             "/v1/call",
@@ -176,3 +199,13 @@ class Client:
         raise APIError(
             f"Failed to run function {payload.name} with status {response.status_code}: {response.text}"
         )
+
+    def _call_stream(self, payload: CallPayload) -> Iterator[StreamingChunk]:
+        gen = self.http_client.stream(
+            "POST",
+            "/v1/call",
+            json=payload.model_dump(),
+        )
+
+        for item in gen:
+            yield StreamingChunk(**item)

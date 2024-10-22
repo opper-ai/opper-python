@@ -1,12 +1,27 @@
 import asyncio
 from typing import List
 
-from pydantic import BaseModel, Field
-
 from opperai import AsyncOpper, Opper, trace
 from opperai.types import CallConfiguration, Example
+from pydantic import BaseModel, Field
 
 opper = Opper()
+
+
+def stream_call():
+    res = opper.call(
+        name="python/sdk/stream_call",
+        instructions="answer the following question",
+        input="what are some uses of 42",
+        stream=True,
+        configuration=CallConfiguration(
+            model_parameters={
+                "max_tokens": 100,
+            }
+        ),
+    )
+    for chunk in res.deltas:
+        print(chunk)
 
 
 @trace
@@ -113,9 +128,8 @@ def synchronous_call():
     call_with_structured_examples()
     call_with_examples()
     structured_string_input_output()
+    stream_call()
 
-
-synchronous_call()
 
 aopper = AsyncOpper()
 
@@ -218,6 +232,19 @@ async def async_call_with_structured_examples():
 
 
 @trace
+async def async_stream_call():
+    aopper = AsyncOpper()
+    res = await aopper.call(
+        name="python/sdk/async-stream-call",
+        instructions="answer the following question",
+        input="what are some uses of 42",
+        stream=True,
+    )
+    async for chunk in res.deltas:
+        print(chunk)
+
+
+@trace
 async def async_call():
     print("running asynchronous calls")
     await asyncio.gather(
@@ -227,7 +254,18 @@ async def async_call():
         async_call_with_examples(),
         async_call_with_structured_examples(),
         async_structured_string_input_output(),
+        async_stream_call(),
     )
 
 
-asyncio.run(async_call())
+if __name__ == "__main__":
+    import sys
+
+    arg = sys.argv[1] if len(sys.argv) > 1 else None
+    if arg == "sync":
+        synchronous_call()
+    elif arg == "async":
+        asyncio.run(async_call())
+    else:
+        synchronous_call()
+        asyncio.run(async_call())

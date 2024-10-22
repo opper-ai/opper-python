@@ -12,7 +12,7 @@ from opperai.types import (
     StreamingChunk,
     validate_uuid_xor_path,
 )
-from opperai.types.exceptions import APIError
+from opperai.types.exceptions import APIError, NotFoundError
 
 
 class Functions:
@@ -130,7 +130,9 @@ class Functions:
         return Function.model_validate(response.json())
 
     @validate_uuid_xor_path
-    def get(self, uuid: str = None, path: str = None) -> Optional[Function]:
+    def get(
+        self, uuid: Optional[str] = None, path: Optional[str] = None
+    ) -> Optional[Function]:
         """Get a function
 
         This method allows fetching the details of a specific Opper function, either by specifying its unique ID or its path. If the function is found, it returns an instance of the Function class representing the function's configuration and details. If no function matches the given ID or path, or if both parameters are omitted, None is returned.
@@ -169,30 +171,24 @@ class Functions:
             return None
 
     def _get_by_path(self, function_path: str) -> Optional[Function]:
-        response = self.http_client.do_request(
-            "GET",
-            f"/v1/functions/by_path/{function_path}",
-        )
-        if response.status_code == HTTPStatus.NOT_FOUND:
-            return None
-        if response.status_code != HTTPStatus.OK:
-            raise APIError(
-                f"Failed to get function {function_path} with status {response.status_code}"
+        try:
+            response = self.http_client.do_request(
+                "GET",
+                f"/v1/functions/by_path/{function_path}",
             )
+        except NotFoundError:
+            return None
 
         return Function.model_validate(response.json())
 
     def _get_by_uuid(self, uuid: str) -> Optional[Function]:
-        response = self.http_client.do_request(
-            "GET",
-            f"/v1/functions/{uuid}",
-        )
-        if response.status_code == HTTPStatus.NOT_FOUND:
-            return None
-        if response.status_code != HTTPStatus.OK:
-            raise APIError(
-                f"Failed to get function {uuid} with status {response.status_code}"
+        try:
+            response = self.http_client.do_request(
+                "GET",
+                f"/v1/functions/{uuid}",
             )
+        except NotFoundError:
+            return None
 
         return Function.model_validate(response.json())
 
@@ -375,6 +371,12 @@ class Functions:
         return True
 
     def call(self, uuid: str, payload: CallPayload) -> Any:
+        if payload.parent_span_uuid is None:
+            payload.parent_span_uuid = get_current_span_id()
+
+        if payload.stream:
+            return self._call_stream(uuid, payload)
+
         response = self.http_client.do_request(
             "POST",
             f"/v1/functions/{uuid}/call",
@@ -387,3 +389,12 @@ class Functions:
         raise APIError(
             f"Failed to run function {payload.name} with status {response.status_code}: {response.text}"
         )
+
+    def _call_stream(self, uuid: str, payload: CallPayload) -> Iterator[StreamingChunk]:
+        gen = self.http_client.stream(
+            "POST",
+            f"/v1/functions/{uuid}/call",
+            json=payload.model_dump(),
+        )
+        for item in gen:
+            yield StreamingChunk(**item)

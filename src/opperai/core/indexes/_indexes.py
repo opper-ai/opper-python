@@ -2,7 +2,7 @@ from typing import List, Optional
 
 from opperai.core._http_clients import _http_client
 from opperai.core.spans import get_current_span_id
-from opperai.types.exceptions import APIError
+from opperai.types.exceptions import APIError, NotFoundError
 from opperai.types.indexes import (
     Document,
     Filter,
@@ -57,8 +57,7 @@ class Indexes:
                 "embedding_model": embedding_model,
             },
         )
-        if response.status_code != 200:
-            raise APIError(f"Failed to create index with status {response.status_code}")
+
         return Index.model_validate(response.json())
 
     def delete(self, uuid: str) -> bool:
@@ -83,17 +82,18 @@ class Indexes:
             True
 
         """
-        response = self.http_client.do_request(
-            "DELETE",
-            f"/v1/indexes/{uuid}",
-        )
-        if response.status_code == 404:
+        try:
+            self.http_client.do_request(
+                "DELETE",
+                f"/v1/indexes/{uuid}",
+            )
+        except NotFoundError:
             return False
-        if response.status_code != 200:
-            raise APIError(f"Failed to delete index with status {response.status_code}")
         return True
 
-    def get(self, uuid: str = None, name: str = None) -> Optional[Index]:
+    def get(
+        self, uuid: Optional[str] = None, name: Optional[str] = None
+    ) -> Optional[Index]:
         """Retrieve an index
 
         This method fetches an index either by its unique identifier or by its name. If the index is found, it returns an instance of the Index class representing the index's details. If no index matches the given ID or name, or if both parameters are omitted, None is returned.
@@ -134,14 +134,13 @@ class Indexes:
             return self._get_by_name(name)
 
     def _get_by_uuid(self, uuid: str) -> Optional[Index]:
-        response = self.http_client.do_request(
-            "GET",
-            f"/v1/indexes/{uuid}",
-        )
-        if response.status_code == 404:
+        try:
+            response = self.http_client.do_request(
+                "GET",
+                f"/v1/indexes/{uuid}",
+            )
+        except NotFoundError:
             return None
-        if response.status_code != 200:
-            raise APIError(f"Failed to get index with status {response.status_code}")
 
         return Index.model_validate(response.json())
 

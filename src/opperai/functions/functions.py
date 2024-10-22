@@ -6,15 +6,15 @@ from typing import (
     Dict,
     Iterator,
     List,
+    Literal,
     Optional,
     Tuple,
     TypeVar,
     Union,
     get_args,
     get_origin,
+    overload,
 )
-
-from pydantic import BaseModel, PrivateAttr
 
 from opperai._client import Client
 from opperai.core.spans import get_current_span_id
@@ -34,6 +34,7 @@ from opperai.types import (
 )
 from opperai.types import Function as FunctionModel
 from opperai.types import FunctionResponse as FunctionResponseModel
+from pydantic import BaseModel, PrivateAttr
 
 from ..spans.spans import Span
 
@@ -59,12 +60,11 @@ class StreamingResponse:
     _head: StreamingChunk = None
     _stream: Iterator[StreamingChunk] = None
     context: List[Dict[str, Any]] = []
-    span: Span = None
 
     def __init__(
         self,
-        client: Client = None,
-        stream: Iterator[StreamingChunk] = None,
+        client: Optional[Client] = None,
+        stream: Optional[Iterator[StreamingChunk]] = None,
     ):
         if not client:
             client = Client()
@@ -74,7 +74,6 @@ class StreamingResponse:
         self._stream = _stream
 
         head = next(_head)
-        self.span = Span(self._client, head.span_id)
         self.context = head.context if head.context else []
 
     @property
@@ -82,6 +81,10 @@ class StreamingResponse:
         for chunk in self._stream:
             if chunk.delta is not None:
                 yield chunk.delta
+
+    @property
+    def span(self) -> Span:
+        return Span(self._client, self._head.span_id)
 
 
 @dataclass
@@ -129,11 +132,11 @@ class Function:
     def update(self, **kwargs) -> "Function":
         updated = self._function.model_dump(exclude_none=True)
 
-        if "input_type" in kwargs and kwargs["input_type"] is not None:
+        if "input_type" in kwargs:
             kwargs["input_schema"] = type_to_json_schema(kwargs["input_type"])
             del kwargs["input_type"]
 
-        if "output_type" in kwargs and kwargs["output_type"] is not None:
+        if "output_type" in kwargs:
             kwargs["out_schema"] = type_to_json_schema(kwargs["output_type"])
             del kwargs["output_type"]
 
@@ -157,13 +160,34 @@ class Function:
 
         return self
 
+    @overload
     def call(
         self,
         input: Any = None,
         output_type: Optional[Any] = None,
         examples: Optional[List[Example]] = None,
         configuration: Optional[CallConfiguration] = None,
-    ) -> Tuple[T, FunctionResponse]:
+        stream: Literal[True] = True,
+    ) -> StreamingResponse: ...
+
+    @overload
+    def call(
+        self,
+        input: Any = None,
+        output_type: Optional[Any] = None,
+        examples: Optional[List[Example]] = None,
+        configuration: Optional[CallConfiguration] = None,
+        stream: Literal[False] = False,
+    ) -> Tuple[T, FunctionResponse]: ...
+
+    def call(
+        self,
+        input: Any = None,
+        output_type: Optional[Any] = None,
+        examples: Optional[List[Example]] = None,
+        configuration: Optional[CallConfiguration] = None,
+        stream: Optional[bool] = False,
+    ) -> Union[T, StreamingResponse]:
         """
         Calls a function with the given input and optional output type.
 
@@ -173,14 +197,17 @@ class Function:
         payload = CallPayload(
             input=input,
             examples=examples,
+            stream=stream,
         )
         if configuration:
             payload.configuration = configuration
 
-        res: FunctionResponseModel = self._client.functions.call(
+        res = self._client.functions.call(
             uuid=self._function.uuid,
             payload=payload,
         )
+        if stream:
+            return StreamingResponse(client=self._client, stream=res)
 
         # if output_type is provided attempt to cast the response to the output type
         if output_type is not None:
@@ -281,6 +308,7 @@ class Functions:
         else:
             raise ValueError("Either uuid or path must be provided")
 
+    @overload
     def call(
         self,
         name: str = None,
@@ -292,7 +320,37 @@ class Functions:
         examples: Optional[List[Example]] = None,
         configuration: Optional[CallConfiguration] = None,
         parent_span_id: Optional[str] = None,
-    ) -> Tuple[T, FunctionResponse]:
+        stream: Literal[False] = False,
+    ) -> Tuple[T, FunctionResponse]: ...
+
+    @overload
+    def call(
+        self,
+        name: str = None,
+        instructions: str = "you are a helpful assistant",
+        input_type: Optional[Any] = None,
+        input: Any = None,
+        output_type: Optional[type[T]] = None,
+        model: Optional[str] = None,
+        examples: Optional[List[Example]] = None,
+        configuration: Optional[CallConfiguration] = None,
+        parent_span_id: Optional[str] = None,
+        stream: Literal[True] = True,
+    ) -> StreamingResponse: ...
+
+    def call(
+        self,
+        name: str = None,
+        instructions: str = "you are a helpful assistant",
+        input_type: Optional[Any] = None,
+        input: Any = None,
+        output_type: Optional[type[T]] = None,
+        model: Optional[str] = None,
+        examples: Optional[List[Example]] = None,
+        configuration: Optional[CallConfiguration] = None,
+        parent_span_id: Optional[str] = None,
+        stream: Optional[bool] = False,
+    ) -> Union[Tuple[T, FunctionResponse], StreamingResponse]:
         """Calls a function
         Arguments:
             name: str: the name of the function, if not provided, it will be generated from the instructions
@@ -304,6 +362,7 @@ class Functions:
                     - `ImageOutput`: the output will be an image
             model: str: the model to use for the function
             examples: List[Example]: A list of examples to help guide the function's response
+            stream: bool: whether to stream the response
 
         Returns:
             tuple[Any, FunctionResponse]: the output of the function and the response object. The type of the output is determined by the output_type. If the output_type is a `Pydantic` model, the output will be validated against the schema.
@@ -335,11 +394,14 @@ class Functions:
             parent_span_uuid=parent_span_id
             if parent_span_id
             else get_current_span_id(),
+            stream=stream,
         )
         if configuration:
             call_payload.configuration = configuration
 
-        res: FunctionResponseModel = self._client.call(call_payload)
+        res = self._client.call(call_payload)
+        if stream:
+            return StreamingResponse(client=self._client, stream=res)
 
         if output_type is not None:
             if inspect.isclass(output_type) and issubclass(output_type, BaseModel):
