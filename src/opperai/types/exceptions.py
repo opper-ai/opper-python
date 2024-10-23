@@ -28,6 +28,18 @@ class OpperBaseException(Exception):
         self.detail = detail if detail else self.detail
 
 
+class NotFoundError(OpperBaseException):
+    """Raised when the opper api returns a 404."""
+
+    type: str = "NotFoundError"
+
+
+class OpperAPIError(OpperBaseException):
+    """Raised when the opper api returns an error."""
+
+    type: str = "OpperAPIError"
+
+
 class OpperTimeoutError(OpperBaseException):
     """Raised when the request to the opper api times out."""
 

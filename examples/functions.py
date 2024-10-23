@@ -1,9 +1,10 @@
 import asyncio
 
-from pydantic import BaseModel
-
 from opperai import AsyncOpper, Opper, fn
+from opperai.functions.async_functions import AsyncStreamingResponse
+from opperai.functions.functions import StreamingResponse
 from opperai.types import Example, FunctionConfiguration, Message
+from pydantic import BaseModel
 
 
 async def async_crud_function():
@@ -12,16 +13,34 @@ async def async_crud_function():
     class MyInput(BaseModel):
         name: str
 
-    class MyResponse(BaseModel):
-        greeting: str
-
     function = await opper.functions.create(
         path="python/sdk/async-crud-function",
         instructions="greet the user",
         model="openai/gpt-4o",
         input_type=MyInput,
-        output_type=MyResponse,
+        output_type=None,
     )
+
+    # call stream
+    res = await function.call(MyInput(name="world"), stream=True)
+    async for chunk in res.deltas:
+        print(chunk)
+
+    # chat stream
+    res: AsyncStreamingResponse = await function.chat(
+        messages=[
+            Message(role="user", content=MyInput(name="world").model_dump_json())
+        ],
+        stream=True,
+    )
+    async for chunk in res.deltas:
+        print(chunk)
+
+    class MyResponse(BaseModel):
+        greeting: str
+
+    # update function to have output type
+    await function.update(output_type=MyResponse)
 
     # call
     res, _ = await function.call(MyInput(name="world"))
@@ -42,14 +61,7 @@ async def async_crud_function():
     )
     print(res)
 
-    # chat
-    res = await function.chat(
-        messages=[
-            Message(role="user", content=MyInput(name="world").model_dump_json())
-        ],
-    )
-    print(res)
-
+    # enable exact match cache
     await function.update(
         instructions="greet the user in german",
         configuration=FunctionConfiguration(
@@ -95,16 +107,34 @@ def sync_crud_function():
     class MyInput(BaseModel):
         name: str
 
-    class MyResponse(BaseModel):
-        greeting: str
-
     function = opper.functions.create(
         path="python/sdk/sync-crud-function",
         instructions="greet the user",
         model="openai/gpt-4o",
         input_type=MyInput,
-        output_type=MyResponse,
+        output_type=None,
     )
+
+    # call stream
+    res = function.call(MyInput(name="world"), stream=True)
+    for chunk in res.deltas:
+        print(chunk)
+
+    # chat stream
+    res: StreamingResponse = function.chat(
+        messages=[
+            Message(role="user", content=MyInput(name="world").model_dump_json())
+        ],
+        stream=True,
+    )
+    for chunk in res.deltas:
+        print(chunk)
+
+    class MyResponse(BaseModel):
+        greeting: str
+
+    # update function to have output type
+    function.update(output_type=MyResponse)
 
     # call
     res, _ = function.call(MyInput(name="world"))
@@ -125,14 +155,7 @@ def sync_crud_function():
     )
     print(res)
 
-    # chat
-    res = function.chat(
-        messages=[
-            Message(role="user", content=MyInput(name="world").model_dump_json())
-        ],
-    )
-    print(res)
-
+    # enable exact match cache
     function.update(
         instructions="greet the user in german",
         configuration=FunctionConfiguration(

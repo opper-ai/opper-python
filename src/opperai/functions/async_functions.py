@@ -1,18 +1,19 @@
 import inspect
+import sys
 from dataclasses import dataclass
 from typing import (
     Any,
     Dict,
     Iterator,
     List,
+    Literal,
     Optional,
     Tuple,
     Union,
     get_args,
     get_origin,
+    overload,
 )
-
-from pydantic import BaseModel, PrivateAttr
 
 from opperai._client import AsyncClient
 from opperai.core.spans import get_current_span_id
@@ -31,9 +32,18 @@ from opperai.types import (
 )
 from opperai.types import Function as FunctionModel
 from opperai.types import FunctionResponse as FunctionResponseModel
+from pydantic import BaseModel, PrivateAttr
 
 from ..spans.async_spans import AsyncSpan
 from .functions import T, prepare_examples, prepare_input
+
+if sys.version_info < (3, 10):
+
+    async def anext(iterator):
+        try:
+            return await iterator.__anext__()
+        except StopAsyncIteration:
+            raise StopAsyncIteration
 
 
 class AsyncFunctionResponse(FunctionResponseModel):
@@ -52,12 +62,14 @@ class AsyncFunctionResponse(FunctionResponseModel):
 
 class AsyncStreamingResponse:
     _client: AsyncClient = None
-    stream: Iterator[StreamingChunk] = None
+    stream: Optional[Iterator[StreamingChunk]] = None
     _context: Optional[List[Dict[str, Any]]] = None
     _span_id: Optional[str] = None
 
     def __init__(
-        self, client: AsyncClient = None, stream: Iterator[StreamingChunk] = None
+        self,
+        client: Optional[AsyncClient] = None,
+        stream: Optional[Iterator[StreamingChunk]] = None,
     ):
         if not client:
             client = AsyncClient()
@@ -65,9 +77,8 @@ class AsyncStreamingResponse:
         self.stream = stream
 
     async def initialize(self):
-        self.stream = await self.stream
         try:
-            first_chunk = await self.stream.__anext__()
+            first_chunk = await anext(self.stream)
             self._span_id = (
                 first_chunk.span_id if first_chunk.span_id is not None else None
             )
@@ -106,7 +117,7 @@ class AsyncFunction:
                     "Cannot stream output for functions structured response"
                 )
 
-            response = self._client.functions.chat(
+            response = await self._client.functions.chat(
                 function_path=self._function.path,
                 data=ChatPayload(messages=messages, parent_span_uuid=parent_span_id),
                 stream=stream,
@@ -124,12 +135,33 @@ class AsyncFunction:
 
         return AsyncFunctionResponse(client=self._client, **response.model_dump())
 
+    @overload
     async def call(
         self,
         input: Any = None,
         output_type: Optional[Any] = None,
         examples: Optional[List[Example]] = None,
         configuration: Optional[CallConfiguration] = None,
+        stream: Literal[True] = True,
+    ) -> AsyncStreamingResponse: ...
+
+    @overload
+    async def call(
+        self,
+        input: Any = None,
+        output_type: Optional[Any] = None,
+        examples: Optional[List[Example]] = None,
+        configuration: Optional[CallConfiguration] = None,
+        stream: Literal[False] = False,
+    ) -> Tuple[T, AsyncFunctionResponse]: ...
+
+    async def call(
+        self,
+        input: Any = None,
+        output_type: Optional[Any] = None,
+        examples: Optional[List[Example]] = None,
+        configuration: Optional[CallConfiguration] = None,
+        stream: Optional[bool] = False,
     ) -> Tuple[T, AsyncFunctionResponse]:
         """
         Calls a function with the given input and optional output type.
@@ -140,14 +172,19 @@ class AsyncFunction:
         payload = CallPayload(
             input=input,
             examples=examples,
+            stream=stream,
         )
         if configuration:
             payload.configuration = configuration
 
-        res: FunctionResponseModel = await self._client.functions.call(
+        res = await self._client.functions.call(
             uuid=self._function.uuid,
             payload=payload,
         )
+        if stream:
+            res = AsyncStreamingResponse(client=self._client, stream=res)
+            await res.initialize()
+            return res
 
         # if output_type is provided attempt to cast the response to the output type
         if output_type is not None:
@@ -182,11 +219,11 @@ class AsyncFunction:
     async def update(self, **kwargs) -> "AsyncFunction":
         updated = self._function.model_dump(exclude_none=True)
 
-        if "input_type" in kwargs and kwargs["input_type"] is not None:
+        if "input_type" in kwargs:
             kwargs["input_schema"] = type_to_json_schema(kwargs["input_type"])
             del kwargs["input_type"]
 
-        if "output_type" in kwargs and kwargs["output_type"] is not None:
+        if "output_type" in kwargs:
             kwargs["out_schema"] = type_to_json_schema(kwargs["output_type"])
             del kwargs["output_type"]
 
@@ -288,6 +325,7 @@ class AsyncFunctions:
         else:
             raise ValueError("Either id or name must be provided")
 
+    @overload
     async def call(
         self,
         name: str = None,
@@ -299,6 +337,36 @@ class AsyncFunctions:
         examples: Optional[List[Example]] = None,
         configuration: Optional[CallConfiguration] = None,
         parent_span_id: Optional[str] = None,
+        stream: Literal[True] = True,
+    ) -> AsyncStreamingResponse: ...
+
+    @overload
+    async def call(
+        self,
+        name: str = None,
+        instructions: str = "you are a helpful assistant",
+        input_type: Optional[Any] = None,
+        input: Any = str,
+        output_type: Optional[type[T]] = None,
+        model: Optional[str] = None,
+        examples: Optional[List[Example]] = None,
+        configuration: Optional[CallConfiguration] = None,
+        parent_span_id: Optional[str] = None,
+        stream: Literal[False] = False,
+    ) -> Tuple[T, AsyncFunctionResponse]: ...
+
+    async def call(
+        self,
+        name: str = None,
+        instructions: str = "you are a helpful assistant",
+        input_type: Optional[Any] = None,
+        input: Any = str,
+        output_type: Optional[type[T]] = None,
+        model: Optional[str] = None,
+        examples: Optional[List[Example]] = None,
+        configuration: Optional[CallConfiguration] = None,
+        parent_span_id: Optional[str] = None,
+        stream: Optional[bool] = False,
     ) -> Tuple[T, AsyncFunctionResponse]:
         """Calls a function
         Arguments:
@@ -311,6 +379,7 @@ class AsyncFunctions:
                     - `ImageOutput`: the output will be an image
             model: str: the model to use for the function
             examples: List[Example]: A list of examples to help guide the function's response
+            stream: bool: whether to stream the response
 
         Returns:
             tuple[Any, FunctionResponse]: the output of the function and the response object. The type of the output is determined by the output_type. If the output_type is a `Pydantic` model, the output will be validated against the schema.
@@ -342,11 +411,16 @@ class AsyncFunctions:
             parent_span_uuid=parent_span_id
             if parent_span_id
             else get_current_span_id(),
+            stream=stream,
         )
         if configuration:
             call_payload.configuration = configuration
 
-        res: FunctionResponseModel = await self._client.call(call_payload)
+        res = await self._client.call(call_payload)
+        if stream:
+            res = AsyncStreamingResponse(client=self._client, stream=res)
+            await res.initialize()
+            return res
 
         if output_type is not None:
             if inspect.isclass(output_type) and issubclass(output_type, BaseModel):
