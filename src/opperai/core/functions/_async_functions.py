@@ -343,6 +343,9 @@ class AsyncFunctions:
         return True
 
     async def call(self, uuid: str, payload: CallPayload) -> Any:
+        if payload.parent_span_uuid is None:
+            payload.parent_span_uuid = get_current_span_id()
+
         if payload.stream:
             return self._call_stream(uuid, payload)
 

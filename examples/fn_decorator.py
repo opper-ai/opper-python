@@ -1,7 +1,7 @@
 import asyncio
 from typing import List
 
-from opperai import fn
+from opperai import fn, trace
 from opperai.types import ImageInput
 from pydantic import BaseModel
 
@@ -49,6 +49,14 @@ class ImagePair(BaseModel):
     image1: ImageInput
     image2: ImageInput
 
+    @fn(model="openai/gpt-4o")
+    async def async_difference(self) -> str:
+        """given two images, find the difference between them"""
+
+    @fn(model="openai/gpt-4o")
+    def difference(self) -> str:
+        """given two images, find the difference between them"""
+
 
 class ThingsInCommon(BaseModel):
     things: List[str]
@@ -80,6 +88,27 @@ async def _wrap(desc: str, f):
     return res
 
 
+def compare_with_method():
+    p = ImagePair(
+        image1=ImageInput(path="tests/fixtures/images/cat1.png"),
+        image2=ImageInput(path="tests/fixtures/images/cat2.png"),
+    )
+    diff = p.difference()
+    print(diff)
+    return diff
+
+
+async def compare_with_method_async():
+    p = ImagePair(
+        image1=ImageInput(path="tests/fixtures/images/cat1.png"),
+        image2=ImageInput(path="tests/fixtures/images/cat2.png"),
+    )
+    diff = await p.async_difference()
+    print(diff)
+    return diff
+
+
+@trace
 async def run_async():
     await asyncio.gather(
         _wrap("fn_bare_minimum_async:", lambda: fn_bare_minimum_async("what is 2+2")),
@@ -110,9 +139,11 @@ async def run_async():
                 ]
             ),
         ),
+        _wrap("compare_with_method_async:", compare_with_method_async),
     )
 
 
+@trace
 async def run_sync():
     res = fn_bare_minimum("what is 2+2")
     print(f"fn_bare_minimum: {res}")
@@ -134,6 +165,8 @@ async def run_sync():
         ]
     )
     print(f"fn_image_list: {res}")
+    res = compare_with_method()
+    print(f"compare_with_method: {res}")
 
 
 async def main(run_type: str = "both"):
