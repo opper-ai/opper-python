@@ -104,7 +104,7 @@ class Message(BaseModel):
 
 
 class CallConfiguration(BaseModel):
-    model_config: ConfigDict = ConfigDict(protected_namespaces=())
+    model_config: ConfigDict = ConfigDict(protected_namespaces=(), extra="allow")
 
     class Invocation(BaseModel):
         class FewShot(BaseModel):
