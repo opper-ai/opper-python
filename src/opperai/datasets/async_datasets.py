@@ -1,7 +1,7 @@
 from dataclasses import dataclass
-from typing import List
+from typing import List, Optional
 
-from opperai._client import Client
+from opperai._client import AsyncClient
 from opperai.types.datasets import (
     DatasetEntry,
     DatasetEntryResponse,
@@ -11,7 +11,7 @@ from opperai.types.datasets import (
 
 @dataclass
 class AsyncDataset:
-    _client: Client
+    _client: AsyncClient
     _dataset_uuid: str
 
     async def add(self, entry: DatasetEntry) -> str:
@@ -50,11 +50,9 @@ class AsyncDataset:
 
 
 class AsyncDatasets:
-    _client: Client = None
-
-    def __init__(self, client: Client = None):
+    def __init__(self, client: Optional[AsyncClient] = None):
         if client is None:
-            client = Client()
+            client = AsyncClient()
 
         self._client = client
 
