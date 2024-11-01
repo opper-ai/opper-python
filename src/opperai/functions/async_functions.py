@@ -255,7 +255,7 @@ class AsyncFunction:
 class AsyncFunctions:
     _client: AsyncClient = None
 
-    def __init__(self, client: AsyncClient = None):
+    def __init__(self, client: Optional[AsyncClient] = None):
         if client is None:
             client = AsyncClient()
 
@@ -263,7 +263,7 @@ class AsyncFunctions:
 
     async def create(
         self,
-        path: str,
+        name: str,
         instructions: str,
         description: Optional[str] = None,
         input_type: Optional[Any] = None,
@@ -272,7 +272,7 @@ class AsyncFunctions:
         configuration: Optional[FunctionConfiguration] = None,
     ) -> AsyncFunction:
         try:
-            function = await self.get(path=path)
+            function = await self.get(name=name)
             if function:
                 return await function.update(
                     instructions=instructions,
@@ -292,7 +292,7 @@ class AsyncFunctions:
 
         function = await self._client.functions.create(
             FunctionModel(
-                path=path,
+                path=name,
                 instructions=instructions,
                 description=description,
                 input_schema=input_schema if input_type else None,
@@ -304,11 +304,18 @@ class AsyncFunctions:
 
         return AsyncFunction(self._client, function)
 
-    async def get(self, uuid: str = None, path: str = None) -> Optional[AsyncFunction]:
+    async def get(
+        self,
+        uuid: Optional[str] = None,
+        path: Optional[str] = None,
+        name: Optional[str] = None,
+    ) -> Optional[AsyncFunction]:
         if uuid is not None:
             function = await self._client.functions.get(uuid=uuid)
         elif path is not None:
             function = await self._client.functions.get(path=path)
+        elif name is not None:
+            function = await self._client.functions.get(path=name)
         else:
             raise ValueError("Either id or name must be provided")
 
@@ -317,11 +324,18 @@ class AsyncFunctions:
 
         return AsyncFunction(self._client, function)
 
-    async def delete(self, uuid: str = None, path: str = None) -> bool:
+    async def delete(
+        self,
+        uuid: Optional[str] = None,
+        path: Optional[str] = None,
+        name: Optional[str] = None,
+    ) -> bool:
         if uuid is not None:
             return await self._client.functions.delete(uuid=uuid)
         elif path is not None:
             return await self._client.functions.delete(path=path)
+        elif name is not None:
+            return await self._client.functions.delete(path=name)
         else:
             raise ValueError("Either id or name must be provided")
 

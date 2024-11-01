@@ -1,8 +1,7 @@
 from typing import List
 
 from opperai import Index, Opper, trace
-from opperai.types import DocumentIn
-from opperai.types.indexes import DocumentIn, RetrievalResponse
+from opperai.types.indexes import RetrievalResponse
 from pydantic import BaseModel
 
 
@@ -67,19 +66,17 @@ def index_qna(qnas: list[dict]):
 
     for qna in qnas:
         index.add(
-            DocumentIn(
-                key=qna["id"],
-                content=f"question: {qna['question']}\nanswer: {qna['answer']}",
-                metadata={
-                    "id": qna["id"],
-                },
-            )
+            key=qna["id"],
+            content=f"question: {qna['question']}\nanswer: {qna['answer']}",
+            metadata={
+                "id": qna["id"],
+            },
         )
 
     return index
 
 
-def run():
+def run_sync():
     index = index_qna(qna)
 
     question = "How can I see my invoices?"
@@ -89,4 +86,4 @@ def run():
         print(answer)
 
 
-run()
+run_sync()

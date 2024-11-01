@@ -4,9 +4,7 @@ import inspect
 import os
 import threading
 from functools import wraps
-from typing import List, Union, get_args, get_origin, get_type_hints
-
-from pydantic import BaseModel
+from typing import List, Optional, Union, get_args, get_origin, get_type_hints
 
 from opperai._client import AsyncClient, Client
 from opperai._opper import AsyncOpper, Opper
@@ -16,6 +14,7 @@ from opperai.functions.functions import Function, FunctionResponse
 from opperai.types import (
     CacheConfiguration,
 )
+from pydantic import BaseModel
 
 from ._schemas import get_output_schema
 
@@ -31,21 +30,24 @@ def span_id_context():
         del _thread_local.span_id
 
 
-def get_last_span_id() -> str:
+def get_last_span_id() -> Optional[str]:
     """Retrieve the last span ID from thread-local storage."""
-    return getattr(_thread_local, "span_id", None)
+    span_id = getattr(_thread_local, "span_id", None)
+    if span_id is None:
+        return None
+    return str(span_id)
 
 
 def fn(
     _func=None,
     *,
     path=None,
-    client: Union[Client, AsyncClient] = None,
+    client: Union[Client, AsyncClient, None] = None,
     json_encoder=None,
     model=None,
     few_shot=None,
     few_shot_count=None,
-    cache_config: CacheConfiguration = None,
+    cache_config: Optional[CacheConfiguration] = None,
 ):
     """Decorator to to create a function in OpperAI's API
 
@@ -85,13 +87,13 @@ def fn(
     def decorator(func):
         func_path = path or func.__name__
         setup_done = False
-        client: Union[Client, AsyncClient] = None
-        opper: Union[Opper, AsyncOpper] = None
+        client: Union[Client, AsyncClient, None] = None
+        opper: Union[Opper, AsyncOpper, None] = None
         function: Function = None
 
         def _create_function(opper: Opper):
             return opper.functions.create(
-                path=func_path,
+                name=func_path,
                 instructions=f"Operation: {func.__name__}\n\nOperation description: {func.__doc__}",
                 description=func.__doc__,
                 output_type=get_output_schema(func),
@@ -100,7 +102,7 @@ def fn(
 
         async def _create_function_async(opper: AsyncOpper):
             return await opper.functions.create(
-                path=func_path,
+                name=func_path,
                 instructions=f"Operation: {func.__name__}\n\nOperation description: {func.__doc__}",
                 description=func.__doc__,
                 output_type=get_output_schema(func),

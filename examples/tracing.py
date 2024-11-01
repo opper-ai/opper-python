@@ -67,7 +67,7 @@ def trace_with_call():
 
 
 @trace
-def synchronous_tracing():
+def run_sync():
     print("running synchronous tracing")
 
     trace_with_context_manager()
@@ -80,8 +80,6 @@ def synchronous_tracing():
         "total_score", 100.0, "metric on the root span"
     )
 
-
-synchronous_tracing()
 
 aopper = AsyncOpper()
 
@@ -140,7 +138,7 @@ async def async_trace_with_call():
 
 
 @trace
-async def asynchronous_tracing():
+async def run_async():
     print("running asynchronous tracing")
 
     await asyncio.gather(
@@ -154,4 +152,14 @@ async def asynchronous_tracing():
     await aopper.traces.current_span.save_metric("total_score", 100.0, "chain")
 
 
-asyncio.run(asynchronous_tracing())
+if __name__ == "__main__":
+    import sys
+
+    if len(sys.argv) == 2:
+        if sys.argv[1] == "async":
+            asyncio.run(run_async())
+        elif sys.argv[1] == "sync":
+            run_sync()
+    else:
+        run_sync()
+        asyncio.run(run_async())
