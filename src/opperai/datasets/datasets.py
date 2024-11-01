@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List
+from typing import List, Optional
 
 from opperai._client import Client
 from opperai.types.datasets import (
@@ -48,9 +48,7 @@ class Dataset:
 
 
 class Datasets:
-    _client: Client = None
-
-    def __init__(self, client: Client = None):
+    def __init__(self, client: Optional[Client] = None):
         if client is None:
             client = Client()
 

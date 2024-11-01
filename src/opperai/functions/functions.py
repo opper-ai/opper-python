@@ -44,7 +44,7 @@ T = TypeVar("T", bound=Any)
 class FunctionResponse(FunctionResponseModel):
     _client: Client = PrivateAttr()
 
-    def __init__(self, client: Client = None, **kwargs):
+    def __init__(self, client: Optional[Client] = None, **kwargs):
         super().__init__(**kwargs)
         if not client:
             client = Client()
@@ -238,7 +238,7 @@ class Function:
 class Functions:
     _client: Client = None
 
-    def __init__(self, client: Client = None):
+    def __init__(self, client: Optional[Client] = None):
         if client is None:
             client = Client()
 
@@ -246,7 +246,7 @@ class Functions:
 
     def create(
         self,
-        path: str,
+        name: str,
         instructions: str,
         description: Optional[str] = None,
         input_type: Optional[Any] = None,
@@ -255,7 +255,7 @@ class Functions:
         configuration: Optional[FunctionConfiguration] = None,
     ) -> Function:
         try:
-            function = self.get(path=path)
+            function = self.get(name=name)
             if function:
                 return function.update(
                     instructions=instructions,
@@ -275,7 +275,7 @@ class Functions:
 
         function = self._client.functions.create(
             FunctionModel(
-                path=path,
+                path=name,
                 instructions=instructions,
                 description=description,
                 input_schema=input_schema if input_type else None,
@@ -287,11 +287,18 @@ class Functions:
 
         return Function(self._client, function)
 
-    def get(self, uuid: str = None, path: str = None) -> Optional[Function]:
+    def get(
+        self,
+        uuid: Optional[str] = None,
+        path: Optional[str] = None,
+        name: Optional[str] = None,
+    ) -> Optional[Function]:
         if uuid is not None:
             function = self._client.functions.get(uuid=uuid)
         elif path is not None:
             function = self._client.functions.get(path=path)
+        elif name is not None:
+            function = self._client.functions.get(path=name)
         else:
             raise ValueError("Either uuid or path must be provided")
 
@@ -300,11 +307,18 @@ class Functions:
 
         return Function(self._client, function)
 
-    def delete(self, uuid: str = None, path: str = None) -> bool:
+    def delete(
+        self,
+        uuid: Optional[str] = None,
+        path: Optional[str] = None,
+        name: Optional[str] = None,
+    ) -> bool:
         if uuid is not None:
             return self._client.functions.delete(uuid=uuid)
         elif path is not None:
             return self._client.functions.delete(path=path)
+        elif name is not None:
+            return self._client.functions.delete(path=name)
         else:
             raise ValueError("Either uuid or path must be provided")
 

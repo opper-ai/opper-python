@@ -14,7 +14,7 @@ async def async_crud_function():
         name: str
 
     function = await opper.functions.create(
-        path="python/sdk/async-crud-function",
+        name="python/sdk/async-crud-function",
         instructions="greet the user",
         model="openai/gpt-4o",
         input_type=MyInput,
@@ -108,7 +108,7 @@ def sync_crud_function():
         name: str
 
     function = opper.functions.create(
-        path="python/sdk/sync-crud-function",
+        name="python/sdk/sync-crud-function",
         instructions="greet the user",
         model="openai/gpt-4o",
         input_type=MyInput,
