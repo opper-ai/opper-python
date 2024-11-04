@@ -66,6 +66,17 @@ def trace_with_call():
     return result
 
 
+def get_span_and_save_metric():
+    # Create span during runtime
+    span = opper.traces.start_span("async_get_span_and_save_metric")
+    span.end()
+    span_id = span.uuid
+
+    # Later fetch the span using its uuid and save a metric
+    metric_span = opper.spans.get_span(span_id=span_id)
+    metric_span.save_metric("my_metric", 1, "my metric comment")
+
+
 @trace
 def run_sync():
     print("running synchronous tracing")
@@ -75,6 +86,7 @@ def run_sync():
     trace_with_decorator()
     manual_generation()
     trace_with_call()
+    get_span_and_save_metric()
 
     opper.traces.current_span.save_metric(
         "total_score", 100.0, "metric on the root span"
@@ -137,6 +149,17 @@ async def async_trace_with_call():
     return result
 
 
+async def async_get_span_and_save_metric():
+    # Create span during runtime
+    span = await aopper.traces.start_span("async_get_span_and_save_metric")
+    await span.end()
+    span_id = span.uuid
+
+    # Later fetch the span using its uuid and save a metric
+    metric_span = aopper.spans.get_span(span_id=span_id)
+    await metric_span.save_metric("my_metric", 1, "my metric comment")
+
+
 @trace
 async def run_async():
     print("running asynchronous tracing")
@@ -147,6 +170,7 @@ async def run_async():
         async_trace_with_decorator(),
         async_manual_generation(),
         async_trace_with_call(),
+        async_get_span_and_save_metric(),
     )
 
     await aopper.traces.current_span.save_metric("total_score", 100.0, "chain")
