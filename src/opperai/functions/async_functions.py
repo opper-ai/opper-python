@@ -352,6 +352,7 @@ class AsyncFunctions:
         configuration: Optional[CallConfiguration] = None,
         parent_span_id: Optional[str] = None,
         stream: Literal[True] = True,
+        fallback_models: Optional[List[str]] = None,
     ) -> AsyncStreamingResponse: ...
 
     @overload
@@ -367,6 +368,7 @@ class AsyncFunctions:
         configuration: Optional[CallConfiguration] = None,
         parent_span_id: Optional[str] = None,
         stream: Literal[False] = False,
+        fallback_models: Optional[List[str]] = None,
     ) -> Tuple[T, AsyncFunctionResponse]: ...
 
     async def call(
@@ -381,6 +383,7 @@ class AsyncFunctions:
         configuration: Optional[CallConfiguration] = None,
         parent_span_id: Optional[str] = None,
         stream: Optional[bool] = False,
+        fallback_models: Optional[List[str]] = None,
     ) -> Tuple[T, AsyncFunctionResponse]:
         """Calls a function
         Arguments:
@@ -426,6 +429,7 @@ class AsyncFunctions:
             if parent_span_id
             else get_current_span_id(),
             stream=stream,
+            fallback_models=fallback_models,
         )
         if configuration:
             call_payload.configuration = configuration
