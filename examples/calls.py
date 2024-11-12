@@ -174,6 +174,10 @@ async def async_bare_minimum_with_model():
         instructions="answer the following question",
         input="what are some uses of 42",
         model="mistral/mistral-tiny-eu",
+    )
+    print(output)
+
+
 @trace
 async def async_bare_minimum_with_fallbacks():
     output, _ = await aopper.call(
