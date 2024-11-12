@@ -120,6 +120,23 @@ def call_with_structured_examples():
 
 
 @trace
+def bare_minimum_with_fallbacks():
+    output, _ = opper.call(
+        name="python/sdk/bare-minimum-with-fallbacks",
+        instructions="answer the following question",
+        input="what are some uses of 42",
+        model="azure/gpt4-eu",
+        fallback_models=["openai/gpt-4o", "openai/gpt-3.5-turbo"],
+        configuration=CallConfiguration(
+            model_parameters={
+                "max_tokens": 10,
+            }
+        ),
+    )
+    print(output)
+
+
+@trace
 def synchronous_call():
     print("running synchronous calls")
     bare_minimum()
@@ -129,6 +146,7 @@ def synchronous_call():
     call_with_examples()
     structured_string_input_output()
     stream_call()
+    bare_minimum_with_fallbacks()
 
 
 aopper = AsyncOpper()
@@ -156,6 +174,18 @@ async def async_bare_minimum_with_model():
         instructions="answer the following question",
         input="what are some uses of 42",
         model="mistral/mistral-tiny-eu",
+    )
+    print(output)
+
+
+@trace
+async def async_bare_minimum_with_fallbacks():
+    output, _ = await aopper.call(
+        name="python/sdk/async-bare-minimum-with-fallbacks",
+        instructions="answer the following question",
+        input="what are some uses of 42",
+        model="azure/gpt4-eu",
+        fallback_models=["openai/gpt-4", "openai/gpt-3.5-turbo"],
         configuration=CallConfiguration(
             model_parameters={
                 "max_tokens": 10,
@@ -250,6 +280,7 @@ async def async_call():
     await asyncio.gather(
         async_bare_minimum(),
         async_bare_minimum_with_model(),
+        async_bare_minimum_with_fallbacks(),
         async_structured_input_output(),
         async_call_with_examples(),
         async_call_with_structured_examples(),

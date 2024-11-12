@@ -335,6 +335,7 @@ class Functions:
         configuration: Optional[CallConfiguration] = None,
         parent_span_id: Optional[str] = None,
         stream: Literal[False] = False,
+        fallback_models: Optional[List[str]] = None,
     ) -> Tuple[T, FunctionResponse]: ...
 
     @overload
@@ -350,6 +351,7 @@ class Functions:
         configuration: Optional[CallConfiguration] = None,
         parent_span_id: Optional[str] = None,
         stream: Literal[True] = True,
+        fallback_models: Optional[List[str]] = None,
     ) -> StreamingResponse: ...
 
     def call(
@@ -364,6 +366,7 @@ class Functions:
         configuration: Optional[CallConfiguration] = None,
         parent_span_id: Optional[str] = None,
         stream: Optional[bool] = False,
+        fallback_models: Optional[List[str]] = None,
     ) -> Union[Tuple[T, FunctionResponse], StreamingResponse]:
         """Calls a function
         Arguments:
@@ -409,6 +412,7 @@ class Functions:
             if parent_span_id
             else get_current_span_id(),
             stream=stream,
+            fallback_models=fallback_models,
         )
         if configuration:
             call_payload.configuration = configuration

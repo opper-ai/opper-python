@@ -10,28 +10,28 @@ interactions:
     uri: http://localhost:8000/v1/functions/by_path/translate
   response:
     body:
-      string: '{"id":49,"uuid":"8cb73d91-d845-41f2-b9c6-24e1eae960af","dataset_uuid":"4e75f8b7-47b1-47c5-bc6b-1399fb603aff","description":"Translate
+      string: '{"id":44,"uuid":"bbaff35a-0807-4da3-8e38-c9ef1b193bdd","dataset_uuid":"8b25fd4b-11c7-42e9-a3fe-4e9533c6947a","dataset":{"uuid":"8b25fd4b-11c7-42e9-a3fe-4e9533c6947a","entry_count":0},"description":"Translate
         text to a target language.","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
-        translate\n\nOperation description: Translate text to a target language.","language_model_id":null,"model":"azure/gpt4-eu","out_schema":{"type":"string"},"path":"translate","project":{"uuid":"e64848ae-df03-4c0b-9a6f-4c498bf3dc8b","name":"asdfasdf"},"revision":1,"use_semantic_search":false}'
+        translate\n\nOperation description: Translate text to a target language.","language_model_id":null,"model":"openai/gpt-4o","out_schema":{"type":"string"},"path":"translate","project":{"uuid":"2a31ac04-b7d1-46c5-8df3-b09c63b5e4d8","name":"default"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '550'
+      - '623'
       content-type:
       - application/json
       date:
-      - Tue, 15 Oct 2024 14:18:14 GMT
+      - Tue, 12 Nov 2024 14:58:25 GMT
       server:
       - uvicorn
     status:
       code: 200
       message: OK
 - request:
-    body: '{"uuid": "8cb73d91-d845-41f2-b9c6-24e1eae960af", "path": "translate", "description":
+    body: '{"uuid": "bbaff35a-0807-4da3-8e38-c9ef1b193bdd", "path": "translate", "description":
       "Translate text to a target language.", "input_schema": null, "out_schema":
       {"type": "string"}, "instructions": "Operation: translate\n\nOperation description:
       Translate text to a target language.", "model": null, "index_ids": [], "use_semantic_search":
       false, "few_shot": false, "few_shot_count": 2, "cache_configuration": null,
-      "dataset_uuid": "4e75f8b7-47b1-47c5-bc6b-1399fb603aff"}'
+      "dataset_uuid": "8b25fd4b-11c7-42e9-a3fe-4e9533c6947a"}'
     headers:
       accept:
       - '*/*'
@@ -42,19 +42,19 @@ interactions:
       content-type:
       - application/json
     method: PATCH
-    uri: http://localhost:8000/v1/functions/8cb73d91-d845-41f2-b9c6-24e1eae960af
+    uri: http://localhost:8000/v1/functions/bbaff35a-0807-4da3-8e38-c9ef1b193bdd
   response:
     body:
-      string: '{"id":49,"uuid":"8cb73d91-d845-41f2-b9c6-24e1eae960af","dataset_uuid":"4e75f8b7-47b1-47c5-bc6b-1399fb603aff","description":"Translate
+      string: '{"id":44,"uuid":"bbaff35a-0807-4da3-8e38-c9ef1b193bdd","dataset_uuid":"8b25fd4b-11c7-42e9-a3fe-4e9533c6947a","dataset":{"uuid":"8b25fd4b-11c7-42e9-a3fe-4e9533c6947a","entry_count":0},"description":"Translate
         text to a target language.","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
-        translate\n\nOperation description: Translate text to a target language.","language_model_id":null,"model":"azure/gpt4-eu","out_schema":{"type":"string"},"path":"translate","project":{"uuid":"e64848ae-df03-4c0b-9a6f-4c498bf3dc8b","name":"asdfasdf"},"revision":1,"use_semantic_search":false}'
+        translate\n\nOperation description: Translate text to a target language.","language_model_id":null,"model":"openai/gpt-4o","out_schema":{"type":"string"},"path":"translate","project":{"uuid":"2a31ac04-b7d1-46c5-8df3-b09c63b5e4d8","name":"default"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
-      - '550'
+      - '623'
       content-type:
       - application/json
       date:
-      - Tue, 15 Oct 2024 14:18:14 GMT
+      - Tue, 12 Nov 2024 14:58:25 GMT
       server:
       - uvicorn
     status:
@@ -64,28 +64,28 @@ interactions:
     body: '{"name": null, "instructions": "you are a helpful assistant", "input_schema":
       null, "input": {"text": "Hello", "target_language": "es"}, "output_schema":
       null, "model": null, "examples": null, "stream": false, "parent_span_uuid":
-      null, "configuration": null}'
+      null, "fallback_models": null, "configuration": null}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '258'
+      - '283'
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/functions/8cb73d91-d845-41f2-b9c6-24e1eae960af/call
+    uri: http://localhost:8000/v1/functions/bbaff35a-0807-4da3-8e38-c9ef1b193bdd/call
   response:
     body:
-      string: '{"span_id":"18b7e94d-5c21-4fa1-973a-0e1a6f532a9e","message":null,"json_payload":"Hola","context":null,"cached":false}'
+      string: '{"span_id":"4fe6ac66-e29c-4c4e-9213-aee63de5be0a","message":null,"json_payload":"Hola","context":null,"cached":false}'
     headers:
       content-length:
       - '117'
       content-type:
       - application/json
       date:
-      - Tue, 15 Oct 2024 14:18:14 GMT
+      - Tue, 12 Nov 2024 14:58:25 GMT
       server:
       - uvicorn
     status:
@@ -95,28 +95,28 @@ interactions:
     body: '{"name": null, "instructions": "you are a helpful assistant", "input_schema":
       null, "input": {"text": "Hello", "target_language": "es"}, "output_schema":
       null, "model": null, "examples": null, "stream": false, "parent_span_uuid":
-      null, "configuration": null}'
+      null, "fallback_models": null, "configuration": null}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '258'
+      - '283'
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/functions/8cb73d91-d845-41f2-b9c6-24e1eae960af/call
+    uri: http://localhost:8000/v1/functions/bbaff35a-0807-4da3-8e38-c9ef1b193bdd/call
   response:
     body:
-      string: '{"span_id":"819f38c7-cbf6-4775-a2be-a4a4c5a6e0cc","message":null,"json_payload":"Hola","context":null,"cached":false}'
+      string: '{"span_id":"b712ef0a-5a7d-497b-ac0e-394d20a1e978","message":null,"json_payload":"Hola","context":null,"cached":false}'
     headers:
       content-length:
       - '117'
       content-type:
       - application/json
       date:
-      - Tue, 15 Oct 2024 14:18:16 GMT
+      - Tue, 12 Nov 2024 14:58:25 GMT
       server:
       - uvicorn
     status:
@@ -134,17 +134,17 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/spans/819f38c7-cbf6-4775-a2be-a4a4c5a6e0cc/metrics
+    uri: http://localhost:8000/v1/spans/b712ef0a-5a7d-497b-ac0e-394d20a1e978/metrics
   response:
     body:
-      string: '{"id":"40e59d36-b9f9-467e-a52e-338e413a481c","span_id":"819f38c7-cbf6-4775-a2be-a4a4c5a6e0cc","dimension":"metric","value":1.0,"comment":null,"updated_at":null,"created_at":"2024-10-15T14:18:17.594487Z"}'
+      string: '{"id":"25ecafae-0131-41eb-acd9-5381ca4cd68d","span_id":"b712ef0a-5a7d-497b-ac0e-394d20a1e978","dimension":"metric","value":1.0,"comment":null,"updated_at":null,"created_at":"2024-11-12T14:58:27.001047Z"}'
     headers:
       content-length:
       - '203'
       content-type:
       - application/json
       date:
-      - Tue, 15 Oct 2024 14:18:17 GMT
+      - Tue, 12 Nov 2024 14:58:26 GMT
       server:
       - uvicorn
     status:

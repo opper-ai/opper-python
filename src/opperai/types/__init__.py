@@ -130,6 +130,7 @@ class CallPayload(BaseModel):
     examples: Optional[List[Example]] = Field(default=None, max_length=10)
     stream: bool = False
     parent_span_uuid: Optional[str] = None
+    fallback_models: Optional[List[str]] = None
     configuration: Optional[CallConfiguration] = None
 
 
