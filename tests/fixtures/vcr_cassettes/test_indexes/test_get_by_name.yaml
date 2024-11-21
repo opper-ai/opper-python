@@ -14,14 +14,14 @@ interactions:
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '{"id":15,"uuid":"a14ffb9d-ebf4-4768-9df5-104d1144b6be","name":"test_get_by_name","project":{"uuid":"e64848ae-df03-4c0b-9a6f-4c498bf3dc8b","name":"asdfasdf"},"files":[],"created_at":"2024-10-15T14:18:47.173186Z"}'
+      string: '{"id":87,"uuid":"ceb7fe50-ef3b-4bfc-9e25-dccfab2efc68","name":"test_get_by_name","project":{"uuid":"cee5d1ea-10de-4c6a-a022-fa455d65e07b","name":"default"},"files":[],"created_at":"2024-11-21T11:53:05.479007Z"}'
     headers:
       content-length:
-      - '211'
+      - '210'
       content-type:
       - application/json
       date:
-      - Tue, 15 Oct 2024 14:18:46 GMT
+      - Thu, 21 Nov 2024 11:53:05 GMT
       server:
       - uvicorn
     status:
@@ -35,19 +35,17 @@ interactions:
       connection:
       - keep-alive
     method: GET
-    uri: http://localhost:8000/v1/indexes
+    uri: http://localhost:8000/v1/indexes/by-name/test_get_by_name
   response:
     body:
-      string: '[{"id":3,"uuid":"9db24b6f-0fbe-4a10-86d8-1c6a17abb2d8","org_id":1,"org_name":null,"name":"asdfasdfasdfasdf","created_by":"Mattias
-        Lundell","created_at":"2024-10-14T14:08:01.440240Z","updated_at":"2024-10-14T14:08:01.440240Z","count":0,"project":{"uuid":"e64848ae-df03-4c0b-9a6f-4c498bf3dc8b","name":"asdfasdf"}},{"id":15,"uuid":"a14ffb9d-ebf4-4768-9df5-104d1144b6be","org_id":1,"org_name":null,"name":"test_get_by_name","created_by":"Mattias
-        Lundell","created_at":"2024-10-15T14:18:47.173186Z","updated_at":"2024-10-15T14:18:47.173186Z","count":0,"project":{"uuid":"e64848ae-df03-4c0b-9a6f-4c498bf3dc8b","name":"asdfasdf"}}]'
+      string: '{"id":87,"uuid":"ceb7fe50-ef3b-4bfc-9e25-dccfab2efc68","name":"test_get_by_name","project":{"uuid":"cee5d1ea-10de-4c6a-a022-fa455d65e07b","name":"default"},"files":[],"created_at":"2024-11-21T11:53:05.479007Z"}'
     headers:
       content-length:
-      - '624'
+      - '210'
       content-type:
       - application/json
       date:
-      - Tue, 15 Oct 2024 14:18:46 GMT
+      - Thu, 21 Nov 2024 11:53:05 GMT
       server:
       - uvicorn
     status:
@@ -61,7 +59,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/indexes/a14ffb9d-ebf4-4768-9df5-104d1144b6be
+    uri: http://localhost:8000/v1/indexes/ceb7fe50-ef3b-4bfc-9e25-dccfab2efc68
   response:
     body:
       string: 'true'
@@ -71,7 +69,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 15 Oct 2024 14:18:46 GMT
+      - Thu, 21 Nov 2024 11:53:05 GMT
       server:
       - uvicorn
     status:
