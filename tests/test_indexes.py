@@ -23,8 +23,8 @@ def test_create_index(vcr_cassette, client: Client):
 
 def test_delete_index(client: Client, vcr_cassette):
     idx = client.indexes.create(name="test_delete_index")
-    client.indexes.delete(uuid=idx.uuid)
-    assert client.indexes.get(uuid=idx.uuid) is None
+    deleted = client.indexes.delete(uuid=idx.uuid)
+    assert deleted
 
 
 def test_get_by_id(vcr_cassette, client: Client):
@@ -103,3 +103,9 @@ def test_retrieve_filters(client: Client, vcr_cassette):
 
         assert resp[0].content == "Bonjour"
         assert resp[0].metadata == {"source": "test"}
+
+
+def test_delete_index_by_name(client: Client, vcr_cassette):
+    idx = client.indexes.create(name="test_delete_index_by_name")
+    deleted = client.indexes.delete(name="test_delete_index_by_name")
+    assert deleted

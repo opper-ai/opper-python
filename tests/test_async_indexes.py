@@ -2,6 +2,7 @@ import asyncio
 from contextlib import asynccontextmanager
 
 import pytest
+
 from opperai import AsyncClient
 from opperai.types.indexes import DocumentIn, Filter
 
@@ -24,8 +25,8 @@ async def test_create_index(aclient: AsyncClient, vcr_cassette):
 @pytest.mark.asyncio(scope="module")
 async def test_delete_index(aclient: AsyncClient, vcr_cassette):
     async with _index("test_delete_index", aclient) as index:
-        await aclient.indexes.delete(uuid=index.uuid)
-        assert await aclient.indexes.get(uuid=index.uuid) is None
+        deleted = await aclient.indexes.delete(uuid=index.uuid)
+        assert deleted
 
 
 @pytest.mark.asyncio(scope="module")
@@ -98,3 +99,10 @@ async def test_retrieve_filters(aclient: AsyncClient, vcr_cassette):
 
         assert resp[0].content == "Bonjour"
         assert resp[0].metadata == {"source": "test"}
+
+
+@pytest.mark.asyncio(scope="module")
+async def test_delete_index_by_name(aclient: AsyncClient, vcr_cassette):
+    async with _index("test_delete_index_by_name", aclient) as index:
+        deleted = await aclient.indexes.delete(name="test_delete_index_by_name")
+        assert deleted

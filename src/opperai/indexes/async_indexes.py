@@ -48,9 +48,24 @@ class AsyncIndex:
             **kwargs,
         )
 
-    async def delete(self) -> bool:
-        """Delete the index."""
-        return await self._client.indexes.delete(uuid=self._index.uuid)
+    async def delete(
+        self, uuid: Optional[str] = None, name: Optional[str] = None
+    ) -> bool:
+        """Delete an index by uuid or name.
+
+        Args:
+            uuid (Optional[str], optional): The UUID of the index. Defaults to None.
+            name (Optional[str], optional): The name of the index. Defaults to None.
+
+        Returns:
+            bool: True if the index was deleted, False otherwise.
+        """
+        if uuid is None and name is None:
+            raise ValueError("Either uuid or name must be provided")
+        if uuid is not None and name is not None:
+            raise ValueError("Only one of uuid or name should be provided")
+
+        return await self._client.indexes.delete(uuid=uuid, name=name)
 
 
 class AsyncIndexes:
@@ -63,11 +78,18 @@ class AsyncIndexes:
         self._client = client
 
     async def create(
-        self, name: str, embedding_model: str = "text-embedding-ada-002"
+        self, name: str, embedding_model: Optional[str] = None
     ) -> AsyncIndex:
         """Create an index with the given name.
 
         If an index with the given name already exists, return it.
+
+        Args:
+            name (str): The name of the index to create
+            embedding_model (Optional[str], optional): The embedding model to use. If not provided, uses the server default.
+
+        Returns:
+            AsyncIndex: The created or existing index
         """
         try:
             index = await self.get(name=name)
@@ -95,9 +117,24 @@ class AsyncIndexes:
 
         return AsyncIndex(self._client, index)
 
-    async def delete(self, uuid: str) -> bool:
-        """Delete an index by uuid."""
-        return await self._client.indexes.delete(uuid=uuid)
+    async def delete(
+        self, uuid: Optional[str] = None, name: Optional[str] = None
+    ) -> bool:
+        """Delete an index by uuid or name.
+
+        Args:
+            uuid (Optional[str], optional): The UUID of the index. Defaults to None.
+            name (Optional[str], optional): The name of the index. Defaults to None.
+
+        Returns:
+            bool: True if the index was deleted, False otherwise.
+        """
+        if uuid is None and name is None:
+            raise ValueError("Either uuid or name must be provided")
+        if uuid is not None and name is not None:
+            raise ValueError("Only one of uuid or name should be provided")
+
+        return await self._client.indexes.delete(uuid=uuid, name=name)
 
     async def list(self) -> List[AsyncIndex]:
         """List all indexes for the organization owning the API key."""

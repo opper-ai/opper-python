@@ -1,51 +1,27 @@
 interactions:
 - request:
-    body: '{"name": "test_get_by_id"}'
+    body: '{"name": "test_delete_index_by_name"}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '26'
+      - '37'
       content-type:
       - application/json
     method: POST
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '{"id":314,"uuid":"6290d634-bfd5-4c55-a73c-639aa4f8c93c","name":"test_get_by_id","project":{"uuid":"90013af4-1e41-4557-b41f-f9b4a2343923","name":"default"},"files":[],"created_at":"2024-11-25T12:36:25.930803Z"}'
+      string: '{"id":311,"uuid":"78b5e801-8671-4c60-aeb3-45efcf0631e6","name":"test_delete_index_by_name","project":{"uuid":"90013af4-1e41-4557-b41f-f9b4a2343923","name":"default"},"files":[],"created_at":"2024-11-25T12:36:25.504484Z"}'
     headers:
       content-length:
-      - '209'
+      - '220'
       content-type:
       - application/json
       date:
-      - Mon, 25 Nov 2024 12:36:25 GMT
-      server:
-      - uvicorn
-    status:
-      code: 200
-      message: OK
-- request:
-    body: ''
-    headers:
-      accept:
-      - '*/*'
-      connection:
-      - keep-alive
-    method: GET
-    uri: http://localhost:8000/v1/indexes/6290d634-bfd5-4c55-a73c-639aa4f8c93c
-  response:
-    body:
-      string: '{"id":314,"uuid":"6290d634-bfd5-4c55-a73c-639aa4f8c93c","name":"test_get_by_id","project":{"uuid":"90013af4-1e41-4557-b41f-f9b4a2343923","name":"default"},"files":[],"created_at":"2024-11-25T12:36:25.930803Z"}'
-    headers:
-      content-length:
-      - '209'
-      content-type:
-      - application/json
-      date:
-      - Mon, 25 Nov 2024 12:36:25 GMT
+      - Mon, 25 Nov 2024 12:36:24 GMT
       server:
       - uvicorn
     status:
@@ -59,7 +35,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/indexes/6290d634-bfd5-4c55-a73c-639aa4f8c93c
+    uri: http://localhost:8000/v1/indexes/by-name/test_delete_index_by_name
   response:
     body:
       string: 'true'
@@ -69,10 +45,35 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 25 Nov 2024 12:36:25 GMT
+      - Mon, 25 Nov 2024 12:36:24 GMT
       server:
       - uvicorn
     status:
       code: 200
       message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+    method: DELETE
+    uri: http://localhost:8000/v1/indexes/78b5e801-8671-4c60-aeb3-45efcf0631e6
+  response:
+    body:
+      string: '{"errors":[{"type":"HTTPException","message":"Index not found","detail":"Index
+        not found"}]}'
+    headers:
+      content-length:
+      - '92'
+      content-type:
+      - application/json
+      date:
+      - Mon, 25 Nov 2024 12:36:25 GMT
+      server:
+      - uvicorn
+    status:
+      code: 404
+      message: Not Found
 version: 1

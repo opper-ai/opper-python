@@ -1,27 +1,27 @@
 interactions:
 - request:
-    body: '{"name": "test_get_by_name", "embedding_model": "text-embedding-ada-002"}'
+    body: '{"name": "test_get_by_name"}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '73'
+      - '28'
       content-type:
       - application/json
     method: POST
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '{"id":87,"uuid":"ceb7fe50-ef3b-4bfc-9e25-dccfab2efc68","name":"test_get_by_name","project":{"uuid":"cee5d1ea-10de-4c6a-a022-fa455d65e07b","name":"default"},"files":[],"created_at":"2024-11-21T11:53:05.479007Z"}'
+      string: '{"id":315,"uuid":"b7be44c7-6f38-45e6-81f4-0baddeb0c73b","name":"test_get_by_name","project":{"uuid":"90013af4-1e41-4557-b41f-f9b4a2343923","name":"default"},"files":[],"created_at":"2024-11-25T12:36:26.011488Z"}'
     headers:
       content-length:
-      - '210'
+      - '211'
       content-type:
       - application/json
       date:
-      - Thu, 21 Nov 2024 11:53:05 GMT
+      - Mon, 25 Nov 2024 12:36:25 GMT
       server:
       - uvicorn
     status:
@@ -38,14 +38,14 @@ interactions:
     uri: http://localhost:8000/v1/indexes/by-name/test_get_by_name
   response:
     body:
-      string: '{"id":87,"uuid":"ceb7fe50-ef3b-4bfc-9e25-dccfab2efc68","name":"test_get_by_name","project":{"uuid":"cee5d1ea-10de-4c6a-a022-fa455d65e07b","name":"default"},"files":[],"created_at":"2024-11-21T11:53:05.479007Z"}'
+      string: '{"id":315,"uuid":"b7be44c7-6f38-45e6-81f4-0baddeb0c73b","name":"test_get_by_name","project":{"uuid":"90013af4-1e41-4557-b41f-f9b4a2343923","name":"default"},"files":[],"created_at":"2024-11-25T12:36:26.011488Z"}'
     headers:
       content-length:
-      - '210'
+      - '211'
       content-type:
       - application/json
       date:
-      - Thu, 21 Nov 2024 11:53:05 GMT
+      - Mon, 25 Nov 2024 12:36:25 GMT
       server:
       - uvicorn
     status:
@@ -59,7 +59,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/indexes/ceb7fe50-ef3b-4bfc-9e25-dccfab2efc68
+    uri: http://localhost:8000/v1/indexes/b7be44c7-6f38-45e6-81f4-0baddeb0c73b
   response:
     body:
       string: 'true'
@@ -69,7 +69,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 21 Nov 2024 11:53:05 GMT
+      - Mon, 25 Nov 2024 12:36:25 GMT
       server:
       - uvicorn
     status:

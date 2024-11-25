@@ -26,16 +26,14 @@ class Indexes:
     def __init__(self, http_client: _http_client):
         self.http_client = http_client
 
-    def create(
-        self, name: str, embedding_model: str = "text-embedding-ada-002"
-    ) -> Index:
+    def create(self, name: str, embedding_model: Optional[str] = None) -> Index:
         """Create an index
 
         This method allows for the creation of an index with the specified name. If the creation is successful, it returns an instance of the Index class, representing the newly created index.
 
         Args:
             name (str): The name of the index to be created.
-            embedding_model (str, optional): The embedding model to use for indexing. Defaults to "text-embedding-ada-002".
+            embedding_model (Optional[str], optional): The embedding model to use for indexing. If not provided, uses the server default.
         Returns:
             Index: An instance of the Index class, representing the newly created index.
 
@@ -50,13 +48,14 @@ class Indexes:
             Index(id='123', name='my_new_index')
 
         """
+        request_body = {"name": name}
+        if embedding_model is not None:
+            request_body["embedding_model"] = embedding_model
+
         response = self.http_client.do_request(
             "POST",
             "/v1/indexes",
-            json={
-                "name": name,
-                "embedding_model": embedding_model,
-            },
+            json=request_body,
         )
 
         return Index.model_validate(response.json())

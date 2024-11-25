@@ -62,12 +62,17 @@ class Indexes:
 
         self._client = client
 
-    def create(
-        self, name: str, embedding_model: str = "text-embedding-ada-002"
-    ) -> Index:
+    def create(self, name: str, embedding_model: Optional[str] = None) -> Index:
         """Create an index with the given name.
 
         If an index with the given name already exists, return it.
+
+        Args:
+            name (str): The name of the index to create
+            embedding_model (Optional[str], optional): The embedding model to use. If not provided, uses the server default.
+
+        Returns:
+            Index: The created or existing index
         """
         try:
             index = self.get(name=name)
@@ -93,9 +98,22 @@ class Indexes:
 
         return Index(self._client, index)
 
-    def delete(self, uuid: str) -> bool:
-        """Delete an index by id."""
-        return self._client.indexes.delete(uuid=uuid)
+    def delete(self, uuid: Optional[str] = None, name: Optional[str] = None) -> bool:
+        """Delete an index by uuid or name.
+
+        Args:
+            uuid (Optional[str], optional): The UUID of the index. Defaults to None.
+            name (Optional[str], optional): The name of the index. Defaults to None.
+
+        Returns:
+            bool: True if the index was deleted, False otherwise.
+        """
+        if uuid is None and name is None:
+            raise ValueError("Either uuid or name must be provided")
+        if uuid is not None and name is not None:
+            raise ValueError("Only one of uuid or name should be provided")
+
+        return self._client.indexes.delete(uuid=uuid, name=name)
 
     def list(self) -> List[Index]:
         """List all indexes for the organization owning the API key."""
