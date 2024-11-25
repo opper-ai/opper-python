@@ -62,12 +62,17 @@ class Indexes:
 
         self._client = client
 
-    def create(
-        self, name: str, embedding_model: str = "text-embedding-ada-002"
-    ) -> Index:
+    def create(self, name: str, embedding_model: Optional[str] = None) -> Index:
         """Create an index with the given name.
 
         If an index with the given name already exists, return it.
+
+        Args:
+            name (str): The name of the index to create
+            embedding_model (Optional[str], optional): The embedding model to use. If not provided, uses the server default.
+
+        Returns:
+            Index: The created or existing index
         """
         try:
             index = self.get(name=name)
