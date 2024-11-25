@@ -1,27 +1,27 @@
 interactions:
 - request:
-    body: '{"name": "test_retrieve_filters", "embedding_model": "text-embedding-ada-002"}'
+    body: '{"name": "test_retrieve_filters"}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '78'
+      - '33'
       content-type:
       - application/json
     method: POST
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '{"id":18,"uuid":"04c6b4a3-ff5a-4461-8097-ca1d32b19ea6","name":"test_retrieve_filters","project":{"uuid":"e64848ae-df03-4c0b-9a6f-4c498bf3dc8b","name":"asdfasdf"},"files":[],"created_at":"2024-10-15T14:18:48.851506Z"}'
+      string: '{"id":153,"uuid":"701ac144-8e93-400f-8a76-cf83ef473280","name":"test_retrieve_filters","project":{"uuid":"90013af4-1e41-4557-b41f-f9b4a2343923","name":"default"},"files":[],"created_at":"2024-11-25T12:12:18.821733Z"}'
     headers:
       content-length:
       - '216'
       content-type:
       - application/json
       date:
-      - Tue, 15 Oct 2024 14:18:47 GMT
+      - Mon, 25 Nov 2024 12:12:18 GMT
       server:
       - uvicorn
     status:
@@ -39,17 +39,17 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/indexes/04c6b4a3-ff5a-4461-8097-ca1d32b19ea6/index
+    uri: http://localhost:8000/v1/indexes/701ac144-8e93-400f-8a76-cf83ef473280/index
   response:
     body:
-      string: '{"id":6,"uuid":"3da21d90-6a30-48ec-a019-584da8d24d68","key":"3da21d90-6a30-48ec-a019-584da8d24d68"}'
+      string: '{"id":48,"uuid":"eed4883b-f480-4722-9da2-ab720fc190c6","key":"eed4883b-f480-4722-9da2-ab720fc190c6"}'
     headers:
       content-length:
-      - '99'
+      - '100'
       content-type:
       - application/json
       date:
-      - Tue, 15 Oct 2024 14:18:48 GMT
+      - Mon, 25 Nov 2024 12:12:18 GMT
       server:
       - uvicorn
     status:
@@ -68,17 +68,17 @@ interactions:
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/indexes/04c6b4a3-ff5a-4461-8097-ca1d32b19ea6/query
+    uri: http://localhost:8000/v1/indexes/701ac144-8e93-400f-8a76-cf83ef473280/query
   response:
     body:
-      string: '[{"uuid":"b4d1dd79-86b9-4363-b6e3-95ef2524238c","content":"Bonjour","metadata":{"source":"test"},"document_id":null,"created_at":null,"updated_at":null,"score":4.736573219299316,"source_uuids":["b4d1dd79-86b9-4363-b6e3-95ef2524238c"]}]'
+      string: '[{"uuid":"254445d5-aee1-4438-8eb5-11d0fd592e97","content":"Bonjour","metadata":{"source":"test"},"document_id":48,"created_at":null,"updated_at":null,"score":0.7754225076755893,"source_uuids":["254445d5-aee1-4438-8eb5-11d0fd592e97"]}]'
     headers:
       content-length:
-      - '235'
+      - '234'
       content-type:
       - application/json
       date:
-      - Tue, 15 Oct 2024 14:18:48 GMT
+      - Mon, 25 Nov 2024 12:12:18 GMT
       server:
       - uvicorn
     status:
@@ -92,7 +92,7 @@ interactions:
       connection:
       - keep-alive
     method: DELETE
-    uri: http://localhost:8000/v1/indexes/04c6b4a3-ff5a-4461-8097-ca1d32b19ea6
+    uri: http://localhost:8000/v1/indexes/701ac144-8e93-400f-8a76-cf83ef473280
   response:
     body:
       string: 'true'
@@ -102,7 +102,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Tue, 15 Oct 2024 14:18:48 GMT
+      - Mon, 25 Nov 2024 12:12:18 GMT
       server:
       - uvicorn
     status:

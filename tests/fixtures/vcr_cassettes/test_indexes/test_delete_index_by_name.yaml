@@ -1,0 +1,54 @@
+interactions:
+- request:
+    body: '{"name": "test_delete_index_by_name"}'
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+      content-length:
+      - '37'
+      content-type:
+      - application/json
+    method: POST
+    uri: http://localhost:8000/v1/indexes
+  response:
+    body:
+      string: '{"id":154,"uuid":"d95b9dec-4393-4ed5-982a-c7950b573d56","name":"test_delete_index_by_name","project":{"uuid":"90013af4-1e41-4557-b41f-f9b4a2343923","name":"default"},"files":[],"created_at":"2024-11-25T12:12:19.175865Z"}'
+    headers:
+      content-length:
+      - '220'
+      content-type:
+      - application/json
+      date:
+      - Mon, 25 Nov 2024 12:12:18 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      connection:
+      - keep-alive
+    method: DELETE
+    uri: http://localhost:8000/v1/indexes/by-name/test_delete_index_by_name
+  response:
+    body:
+      string: 'true'
+    headers:
+      content-length:
+      - '4'
+      content-type:
+      - application/json
+      date:
+      - Mon, 25 Nov 2024 12:12:18 GMT
+      server:
+      - uvicorn
+    status:
+      code: 200
+      message: OK
+version: 1

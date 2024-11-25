@@ -103,3 +103,9 @@ def test_retrieve_filters(client: Client, vcr_cassette):
 
         assert resp[0].content == "Bonjour"
         assert resp[0].metadata == {"source": "test"}
+
+
+def test_delete_index_by_name(client: Client, vcr_cassette):
+    idx = client.indexes.create(name="test_delete_index_by_name")
+    client.indexes.delete(name="test_delete_index_by_name")
+    assert client.indexes.get(name="test_delete_index_by_name") is None
