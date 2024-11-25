@@ -14,14 +14,14 @@ interactions:
     uri: http://localhost:8000/v1/indexes
   response:
     body:
-      string: '{"id":154,"uuid":"d95b9dec-4393-4ed5-982a-c7950b573d56","name":"test_delete_index_by_name","project":{"uuid":"90013af4-1e41-4557-b41f-f9b4a2343923","name":"default"},"files":[],"created_at":"2024-11-25T12:12:19.175865Z"}'
+      string: '{"id":321,"uuid":"d5038013-cdcc-42f0-9d3b-eb0bebd365f4","name":"test_delete_index_by_name","project":{"uuid":"90013af4-1e41-4557-b41f-f9b4a2343923","name":"default"},"files":[],"created_at":"2024-11-25T12:36:27.741526Z"}'
     headers:
       content-length:
       - '220'
       content-type:
       - application/json
       date:
-      - Mon, 25 Nov 2024 12:12:18 GMT
+      - Mon, 25 Nov 2024 12:36:26 GMT
       server:
       - uvicorn
     status:
@@ -45,7 +45,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Mon, 25 Nov 2024 12:12:18 GMT
+      - Mon, 25 Nov 2024 12:36:26 GMT
       server:
       - uvicorn
     status:
