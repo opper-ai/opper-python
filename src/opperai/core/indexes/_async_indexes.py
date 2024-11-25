@@ -18,16 +18,14 @@ class AsyncIndexes:
     def __init__(self, http_client: _async_http_client):
         self.http_client = http_client
 
-    async def create(
-        self, name: str, embedding_model: str = "text-embedding-ada-002"
-    ) -> Index:
+    async def create(self, name: str, embedding_model: Optional[str] = None) -> Index:
         """Create an index
 
         This method sends a request to create a new index in the OpperAI service. If the index is successfully created, it returns an instance of the Index class representing the newly created index's configuration and details.
 
         Args:
             name (str): The name of the index to create.
-            embedding_model (str, optional): The embedding model to use for indexing. Defaults to "text-embedding-ada-002".
+            embedding_model (Optional[str], optional): The embedding model to use for indexing. If not provided, uses the server default.
 
         Returns:
             Index: An instance of the Index class representing the newly created index.
@@ -38,19 +36,20 @@ class AsyncIndexes:
         Examples:
             >>> from opperai import AsyncClient
             >>> from opperai.exceptions import APIError
-            >>> opper = AsyncClient(api_key="your-api-key")
+            >>> opper = AsyncClient(api_key="your_api_key_here")
             >>> index = asyncio.run(opper.indexes.create("my_index"))
             >>> print(index)
             Index(id='123', name='my_index', ...)
 
         """
+        request_body = {"name": name}
+        if embedding_model is not None:
+            request_body["embedding_model"] = embedding_model
+
         response = await self.http_client.do_request(
             "POST",
             "/v1/indexes",
-            json={
-                "name": name,
-                "embedding_model": embedding_model,
-            },
+            json=request_body,
         )
 
         return Index.model_validate(response.json())

@@ -48,9 +48,24 @@ class AsyncIndex:
             **kwargs,
         )
 
-    async def delete(self) -> bool:
-        """Delete the index."""
-        return await self._client.indexes.delete(uuid=self._index.uuid)
+    async def delete(
+        self, uuid: Optional[str] = None, name: Optional[str] = None
+    ) -> bool:
+        """Delete an index by uuid or name.
+
+        Args:
+            uuid (Optional[str], optional): The UUID of the index. Defaults to None.
+            name (Optional[str], optional): The name of the index. Defaults to None.
+
+        Returns:
+            bool: True if the index was deleted, False otherwise.
+        """
+        if uuid is None and name is None:
+            raise ValueError("Either uuid or name must be provided")
+        if uuid is not None and name is not None:
+            raise ValueError("Only one of uuid or name should be provided")
+
+        return await self._client.indexes.delete(uuid=uuid, name=name)
 
 
 class AsyncIndexes:
@@ -95,9 +110,24 @@ class AsyncIndexes:
 
         return AsyncIndex(self._client, index)
 
-    async def delete(self, uuid: str) -> bool:
-        """Delete an index by uuid."""
-        return await self._client.indexes.delete(uuid=uuid)
+    async def delete(
+        self, uuid: Optional[str] = None, name: Optional[str] = None
+    ) -> bool:
+        """Delete an index by uuid or name.
+
+        Args:
+            uuid (Optional[str], optional): The UUID of the index. Defaults to None.
+            name (Optional[str], optional): The name of the index. Defaults to None.
+
+        Returns:
+            bool: True if the index was deleted, False otherwise.
+        """
+        if uuid is None and name is None:
+            raise ValueError("Either uuid or name must be provided")
+        if uuid is not None and name is not None:
+            raise ValueError("Only one of uuid or name should be provided")
+
+        return await self._client.indexes.delete(uuid=uuid, name=name)
 
     async def list(self) -> List[AsyncIndex]:
         """List all indexes for the organization owning the API key."""
