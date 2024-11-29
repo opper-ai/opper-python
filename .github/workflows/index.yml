@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Index docs in Opper
-        uses: opper-ai/opper-index-action@v1.2.0
+        uses: opper-ai/opper-index-action@v1.2.1
         with:
           folder: '.'
           apikey: ${{ secrets.OPPER_API_KEY_CHATBOT }}
@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Index docs in Opper
-        uses: opper-ai/opper-index-action@v1.2.0
+        uses: opper-ai/opper-index-action@v1.2.1
         with:
           folder: './examples'
           apikey: ${{ secrets.OPPER_API_KEY_CHATBOT }}
