@@ -1,3 +1,5 @@
+from typing import Any, Optional, Tuple
+
 from opperai.functions.async_functions import AsyncFunctions
 from opperai.functions.functions import Functions
 from opperai.indexes.async_indexes import AsyncIndexes
@@ -12,7 +14,11 @@ DEFAULT_TIMEOUT = 120
 
 
 class Opper:
-    def __init__(self, client: Client = None, api_key: str = None):
+    def __init__(
+        self,
+        client: Optional[Tuple[Client, Any]] = None,
+        api_key: Optional[str] = None,
+    ):
         if client is not None:
             if not isinstance(client, Client):
                 raise ValueError("Client must be an instance of Client")
@@ -30,7 +36,11 @@ class Opper:
 
 
 class AsyncOpper(Opper):
-    def __init__(self, client: AsyncClient = None, api_key: str = None):
+    def __init__(
+        self,
+        client: Optional[Tuple[AsyncClient, Any]] = None,
+        api_key: Optional[str] = None,
+    ):
         if client is not None:
             if not isinstance(client, AsyncClient):
                 raise ValueError("Client must be an instance of AsyncClient")
