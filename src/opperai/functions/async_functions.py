@@ -15,6 +15,8 @@ from typing import (
     overload,
 )
 
+from pydantic import BaseModel, PrivateAttr
+
 from opperai._client import AsyncClient
 from opperai.core.spans import get_current_span_id
 from opperai.datasets.async_datasets import AsyncDataset
@@ -32,7 +34,6 @@ from opperai.types import (
 )
 from opperai.types import Function as FunctionModel
 from opperai.types import FunctionResponse as FunctionResponseModel
-from pydantic import BaseModel, PrivateAttr
 
 from ..spans.async_spans import AsyncSpan
 from .functions import T, prepare_examples, prepare_input
@@ -353,6 +354,7 @@ class AsyncFunctions:
         parent_span_id: Optional[str] = None,
         stream: Literal[True] = True,
         fallback_models: Optional[List[str]] = None,
+        tags: Optional[Dict[str, str]] = None,
     ) -> AsyncStreamingResponse: ...
 
     @overload
@@ -369,6 +371,7 @@ class AsyncFunctions:
         parent_span_id: Optional[str] = None,
         stream: Literal[False] = False,
         fallback_models: Optional[List[str]] = None,
+        tags: Optional[Dict[str, str]] = None,
     ) -> Tuple[T, AsyncFunctionResponse]: ...
 
     async def call(
@@ -384,6 +387,7 @@ class AsyncFunctions:
         parent_span_id: Optional[str] = None,
         stream: Optional[bool] = False,
         fallback_models: Optional[List[str]] = None,
+        tags: Optional[Dict[str, str]] = None,
     ) -> Tuple[T, AsyncFunctionResponse]:
         """Calls a function
         Arguments:
@@ -430,6 +434,7 @@ class AsyncFunctions:
             else get_current_span_id(),
             stream=stream,
             fallback_models=fallback_models,
+            tags=tags,
         )
         if configuration:
             call_payload.configuration = configuration

@@ -10,27 +10,27 @@ interactions:
     uri: http://localhost:8000/v1/functions/by_path/test_method
   response:
     body:
-      string: '{"id":43,"uuid":"b9c8904f-98ff-4061-8b5c-8510b2dc909f","dataset_uuid":"92883ea6-32fa-4495-85fb-c3fa999d615a","dataset":{"uuid":"92883ea6-32fa-4495-85fb-c3fa999d615a","entry_count":0},"description":"say
+      string: '{"id":21,"uuid":"57aa16ac-17cf-4d35-8b3e-4d893c0441bc","dataset_uuid":"8d0f1214-cbf7-4b4d-a17c-ce4d0aeb2826","dataset":{"uuid":"8d0f1214-cbf7-4b4d-a17c-ce4d0aeb2826","entry_count":0},"description":"say
         hello","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
-        test_method\n\nOperation description: say hello","language_model_id":null,"model":"azure/gpt-4o-eu","out_schema":{"type":"string"},"path":"test_method","project":{"uuid":"2a31ac04-b7d1-46c5-8df3-b09c63b5e4d8","name":"default"},"revision":1,"use_semantic_search":false}'
+        test_method\n\nOperation description: say hello","language_model_id":null,"model":"azure/gpt-4o-eu","out_schema":{"type":"string"},"path":"test_method","project":{"uuid":"2659ef20-8a4a-45db-8803-5eb7efdccead","name":"default"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
       - '575'
       content-type:
       - application/json
       date:
-      - Tue, 12 Nov 2024 14:58:16 GMT
+      - Wed, 04 Dec 2024 11:59:20 GMT
       server:
       - uvicorn
     status:
       code: 200
       message: OK
 - request:
-    body: '{"uuid": "b9c8904f-98ff-4061-8b5c-8510b2dc909f", "path": "test_method",
+    body: '{"uuid": "57aa16ac-17cf-4d35-8b3e-4d893c0441bc", "path": "test_method",
       "description": "say hello", "input_schema": null, "out_schema": {"type": "string"},
       "instructions": "Operation: test_method\n\nOperation description: say hello",
       "model": null, "index_ids": [], "use_semantic_search": false, "few_shot": false,
-      "few_shot_count": 2, "cache_configuration": null, "dataset_uuid": "92883ea6-32fa-4495-85fb-c3fa999d615a"}'
+      "few_shot_count": 2, "cache_configuration": null, "dataset_uuid": "8d0f1214-cbf7-4b4d-a17c-ce4d0aeb2826"}'
     headers:
       accept:
       - '*/*'
@@ -41,19 +41,19 @@ interactions:
       content-type:
       - application/json
     method: PATCH
-    uri: http://localhost:8000/v1/functions/b9c8904f-98ff-4061-8b5c-8510b2dc909f
+    uri: http://localhost:8000/v1/functions/57aa16ac-17cf-4d35-8b3e-4d893c0441bc
   response:
     body:
-      string: '{"id":43,"uuid":"b9c8904f-98ff-4061-8b5c-8510b2dc909f","dataset_uuid":"92883ea6-32fa-4495-85fb-c3fa999d615a","dataset":{"uuid":"92883ea6-32fa-4495-85fb-c3fa999d615a","entry_count":0},"description":"say
+      string: '{"id":21,"uuid":"57aa16ac-17cf-4d35-8b3e-4d893c0441bc","dataset_uuid":"8d0f1214-cbf7-4b4d-a17c-ce4d0aeb2826","dataset":{"uuid":"8d0f1214-cbf7-4b4d-a17c-ce4d0aeb2826","entry_count":0},"description":"say
         hello","few_shot_count":2,"few_shot":false,"index_ids":[],"input_schema":null,"instructions":"Operation:
-        test_method\n\nOperation description: say hello","language_model_id":null,"model":"azure/gpt-4o-eu","out_schema":{"type":"string"},"path":"test_method","project":{"uuid":"2a31ac04-b7d1-46c5-8df3-b09c63b5e4d8","name":"default"},"revision":1,"use_semantic_search":false}'
+        test_method\n\nOperation description: say hello","language_model_id":null,"model":"azure/gpt-4o-eu","out_schema":{"type":"string"},"path":"test_method","project":{"uuid":"2659ef20-8a4a-45db-8803-5eb7efdccead","name":"default"},"revision":1,"use_semantic_search":false}'
     headers:
       content-length:
       - '575'
       content-type:
       - application/json
       date:
-      - Tue, 12 Nov 2024 14:58:16 GMT
+      - Wed, 04 Dec 2024 11:59:20 GMT
       server:
       - uvicorn
     status:
@@ -63,28 +63,28 @@ interactions:
     body: '{"name": null, "instructions": "you are a helpful assistant", "input_schema":
       null, "input": {"self": {"data": "Hello"}}, "output_schema": null, "model":
       null, "examples": null, "stream": false, "parent_span_uuid": null, "fallback_models":
-      null, "configuration": null}'
+      null, "configuration": null, "tags": null}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '268'
+      - '282'
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/functions/b9c8904f-98ff-4061-8b5c-8510b2dc909f/call
+    uri: http://localhost:8000/v1/functions/57aa16ac-17cf-4d35-8b3e-4d893c0441bc/call
   response:
     body:
-      string: '{"span_id":"e3986d44-6084-4b75-81ca-056948d0b8db","message":null,"json_payload":"Hello","context":null,"cached":false}'
+      string: '{"span_id":"79fa09d2-8b7e-47a0-ad1a-68176e72b5e6","message":null,"json_payload":"Hello","context":null,"cached":false}'
     headers:
       content-length:
       - '118'
       content-type:
       - application/json
       date:
-      - Tue, 12 Nov 2024 14:58:16 GMT
+      - Wed, 04 Dec 2024 11:59:20 GMT
       server:
       - uvicorn
     status:
@@ -94,28 +94,28 @@ interactions:
     body: '{"name": null, "instructions": "you are a helpful assistant", "input_schema":
       null, "input": {"self": "Hello"}, "output_schema": null, "model": null, "examples":
       null, "stream": false, "parent_span_uuid": null, "fallback_models": null, "configuration":
-      null}'
+      null, "tags": null}'
     headers:
       accept:
       - '*/*'
       connection:
       - keep-alive
       content-length:
-      - '258'
+      - '272'
       content-type:
       - application/json
     method: POST
-    uri: http://localhost:8000/v1/functions/b9c8904f-98ff-4061-8b5c-8510b2dc909f/call
+    uri: http://localhost:8000/v1/functions/57aa16ac-17cf-4d35-8b3e-4d893c0441bc/call
   response:
     body:
-      string: '{"span_id":"dc8fcce8-e882-407a-ae71-6d839ac2a117","message":null,"json_payload":"Hello","context":null,"cached":false}'
+      string: '{"span_id":"a66b7c57-7186-4ee2-acaa-a9f9419217fa","message":null,"json_payload":"Hello","context":null,"cached":false}'
     headers:
       content-length:
       - '118'
       content-type:
       - application/json
       date:
-      - Tue, 12 Nov 2024 14:58:16 GMT
+      - Wed, 04 Dec 2024 11:59:21 GMT
       server:
       - uvicorn
     status:
