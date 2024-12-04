@@ -1,9 +1,10 @@
 import asyncio
 from typing import List
 
+from pydantic import BaseModel, Field
+
 from opperai import AsyncOpper, Opper, trace
 from opperai.types import CallConfiguration, Example
-from pydantic import BaseModel, Field
 
 opper = Opper()
 
@@ -137,6 +138,17 @@ def bare_minimum_with_fallbacks():
 
 
 @trace
+def call_with_tags():
+    output, _ = opper.call(
+        name="python/sdk/call-with-tags",
+        instructions="answer the following question",
+        input="what are some uses of 42",
+        tags={"customer": "x"},
+    )
+    print(output)
+
+
+@trace
 def synchronous_call():
     print("running synchronous calls")
     bare_minimum()
@@ -147,6 +159,7 @@ def synchronous_call():
     structured_string_input_output()
     stream_call()
     bare_minimum_with_fallbacks()
+    call_with_tags()
 
 
 aopper = AsyncOpper()
@@ -275,6 +288,17 @@ async def async_stream_call():
 
 
 @trace
+async def async_call_with_tags():
+    output, _ = await aopper.call(
+        name="python/sdk/async-call-with-tags",
+        instructions="answer the following question",
+        input="what are some uses of 42",
+        tags={"customer": "x"},
+    )
+    print(output)
+
+
+@trace
 async def async_call():
     print("running asynchronous calls")
     await asyncio.gather(
@@ -286,6 +310,7 @@ async def async_call():
         async_call_with_structured_examples(),
         async_structured_string_input_output(),
         async_stream_call(),
+        async_call_with_tags(),
     )
 
 

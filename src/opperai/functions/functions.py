@@ -16,6 +16,8 @@ from typing import (
     overload,
 )
 
+from pydantic import BaseModel, PrivateAttr
+
 from opperai._client import Client
 from opperai.core.spans import get_current_span_id
 from opperai.core.utils import prepare_examples, prepare_input
@@ -34,7 +36,6 @@ from opperai.types import (
 )
 from opperai.types import Function as FunctionModel
 from opperai.types import FunctionResponse as FunctionResponseModel
-from pydantic import BaseModel, PrivateAttr
 
 from ..spans.spans import Span
 
@@ -336,6 +337,7 @@ class Functions:
         parent_span_id: Optional[str] = None,
         stream: Literal[False] = False,
         fallback_models: Optional[List[str]] = None,
+        tags: Optional[Dict[str, str]] = None,
     ) -> Tuple[T, FunctionResponse]: ...
 
     @overload
@@ -352,6 +354,7 @@ class Functions:
         parent_span_id: Optional[str] = None,
         stream: Literal[True] = True,
         fallback_models: Optional[List[str]] = None,
+        tags: Optional[Dict[str, str]] = None,
     ) -> StreamingResponse: ...
 
     def call(
@@ -367,6 +370,7 @@ class Functions:
         parent_span_id: Optional[str] = None,
         stream: Optional[bool] = False,
         fallback_models: Optional[List[str]] = None,
+        tags: Optional[Dict[str, str]] = None,
     ) -> Union[Tuple[T, FunctionResponse], StreamingResponse]:
         """Calls a function
         Arguments:
@@ -413,6 +417,7 @@ class Functions:
             else get_current_span_id(),
             stream=stream,
             fallback_models=fallback_models,
+            tags=tags,
         )
         if configuration:
             call_payload.configuration = configuration

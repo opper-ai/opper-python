@@ -132,6 +132,7 @@ class CallPayload(BaseModel):
     parent_span_uuid: Optional[str] = None
     fallback_models: Optional[List[str]] = None
     configuration: Optional[CallConfiguration] = None
+    tags: Optional[Dict[str, str]] = None
 
 
 class ChatPayload(BaseModel):
