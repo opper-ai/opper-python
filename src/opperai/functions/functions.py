@@ -1,3 +1,4 @@
+import base64
 import inspect
 import itertools
 from dataclasses import dataclass
@@ -24,6 +25,7 @@ from opperai.core.utils import prepare_examples, prepare_input
 from opperai.datasets.datasets import Dataset
 from opperai.functions.decorator._schemas import type_to_json_schema
 from opperai.types import (
+    BetaAudioOutput,
     CacheConfiguration,
     CallConfiguration,
     CallPayload,
@@ -326,7 +328,7 @@ class Functions:
     @overload
     def call(
         self,
-        name: str = None,
+        name: str,
         instructions: str = "you are a helpful assistant",
         input_type: Optional[Any] = None,
         input: Any = None,
@@ -343,7 +345,7 @@ class Functions:
     @overload
     def call(
         self,
-        name: str = None,
+        name: str,
         instructions: str = "you are a helpful assistant",
         input_type: Optional[Any] = None,
         input: Any = None,
@@ -359,7 +361,7 @@ class Functions:
 
     def call(
         self,
-        name: str = None,
+        name: str,
         instructions: str = "you are a helpful assistant",
         input_type: Optional[Any] = None,
         input: Any = None,
@@ -422,11 +424,23 @@ class Functions:
         if configuration:
             call_payload.configuration = configuration
 
+        if (
+            output_type
+            and isinstance(output_type, type)
+            and issubclass(output_type, BetaAudioOutput)
+        ):
+            call_payload.output_schema = None
+
         res = self._client.call(call_payload)
         if stream:
             return StreamingResponse(client=self._client, stream=res)
 
         if output_type is not None:
+            if output_type is BetaAudioOutput:
+                return BetaAudioOutput(
+                    bytes=base64.b64decode(res.audio["data"]),
+                    transcript=res.audio.get("transcript", ""),
+                ), FunctionResponse(client=self._client, **res.model_dump())
             if inspect.isclass(output_type) and issubclass(output_type, BaseModel):
                 return output_type.model_validate(res.json_payload), FunctionResponse(
                     client=self._client, **res.model_dump()

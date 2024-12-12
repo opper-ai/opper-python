@@ -22,6 +22,14 @@ class ImageOutput:
     bytes: bytes
 
 
+@dataclass
+class BetaAudioOutput:
+    """NOTE: Magic type used to indicate that the output is an audio file"""
+
+    bytes: bytes
+    transcript: Optional[str] = None
+
+
 class AudioInput(BaseModel):
     """NOTE: AudioInput is a magic type used to indicate that the input is an audio file
 
@@ -53,6 +61,55 @@ class AudioInput(BaseModel):
     @classmethod
     def from_path(cls, path: FilePath):
         return AudioInput(path=path)
+
+
+class BetaAudioInput(BaseModel):
+    """NOTE: AudioInput is a magic type used to indicate that the input is an audio file
+
+    There is a known limitation that when used as part of structured input one
+    cannot pass in a list of images, nor can it be used in a nested fashion.
+
+    This is due to limitations when it comes to deduce the relationship between
+    the input fields and the images
+    """
+
+    path: FilePath = Field(exclude=True, default=None)
+
+    @computed_field
+    @property
+    def _opper_beta_audio_input(self) -> Dict[str, Any]:
+        data = None
+        if self.path:
+            suffix = self.path.suffix
+            if suffix == ".wav":
+                with open(self.path, "rb") as wav_file:
+                    base64_wav = base64.b64encode(wav_file.read()).decode("utf-8")
+                return {
+                    "type": "input_audio",
+                    "input_audio": {
+                        "data": base64_wav,
+                        "format": "wav",
+                    },
+                }
+            elif suffix == ".mp3":
+                with open(self.path, "rb") as mp3_file:
+                    base64_mp3 = base64.b64encode(mp3_file.read()).decode("utf-8")
+                return {
+                    "type": "input_audio",
+                    "input_audio": {
+                        "data": base64_mp3,
+                        "format": "mp3",
+                    },
+                }
+
+        if not data:
+            raise ValueError("File type not supported. Supported types: .wav")
+
+        return data
+
+    @classmethod
+    def from_path(cls, path: FilePath):
+        return BetaAudioInput(path=path)
 
 
 class ImageInput(BaseModel):
@@ -95,7 +152,7 @@ class ImageInput(BaseModel):
         return ImageInput(path=path)
 
 
-MediaInput = Union[ImageInput, AudioInput]
+MediaInput = Union[ImageInput, AudioInput, BetaAudioInput]
 
 
 class Message(BaseModel):
@@ -161,7 +218,8 @@ class StreamingChunk(BaseModel):
 class FunctionResponse(BaseModel):
     span_id: Optional[str] = None
     message: Optional[str] = None
-    json_payload: Optional[Union[dict, List, Any]] = None
+    json_payload: Optional[Union[Dict[str, Any], List[Any], Any]] = None
+    audio: Optional[Dict[str, Any]] = None
     context: Optional[List[ContextData]] = None
     cached: Optional[bool] = None
 
