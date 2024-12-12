@@ -1,3 +1,4 @@
+import base64
 import inspect
 import sys
 from dataclasses import dataclass
@@ -22,6 +23,7 @@ from opperai.core.spans import get_current_span_id
 from opperai.datasets.async_datasets import AsyncDataset
 from opperai.functions.decorator._schemas import type_to_json_schema
 from opperai.types import (
+    BetaAudioOutput,
     CacheConfiguration,
     CallConfiguration,
     CallPayload,
@@ -343,7 +345,7 @@ class AsyncFunctions:
     @overload
     async def call(
         self,
-        name: str = None,
+        name: str,
         instructions: str = "you are a helpful assistant",
         input_type: Optional[Any] = None,
         input: Any = str,
@@ -360,7 +362,7 @@ class AsyncFunctions:
     @overload
     async def call(
         self,
-        name: str = None,
+        name: str,
         instructions: str = "you are a helpful assistant",
         input_type: Optional[Any] = None,
         input: Any = str,
@@ -376,7 +378,7 @@ class AsyncFunctions:
 
     async def call(
         self,
-        name: str = None,
+        name: str,
         instructions: str = "you are a helpful assistant",
         input_type: Optional[Any] = None,
         input: Any = str,
@@ -388,7 +390,7 @@ class AsyncFunctions:
         stream: Optional[bool] = False,
         fallback_models: Optional[List[str]] = None,
         tags: Optional[Dict[str, str]] = None,
-    ) -> Tuple[T, AsyncFunctionResponse]:
+    ) -> Union[Tuple[T, AsyncFunctionResponse], AsyncStreamingResponse]:
         """Calls a function
         Arguments:
             name: str: the name of the function, if not provided, it will be generated from the instructions
@@ -439,6 +441,13 @@ class AsyncFunctions:
         if configuration:
             call_payload.configuration = configuration
 
+        if (
+            output_type
+            and isinstance(output_type, type)
+            and issubclass(output_type, BetaAudioOutput)
+        ):
+            call_payload.output_schema = None
+
         res = await self._client.call(call_payload)
         if stream:
             res = AsyncStreamingResponse(client=self._client, stream=res)
@@ -446,6 +455,11 @@ class AsyncFunctions:
             return res
 
         if output_type is not None:
+            if output_type is BetaAudioOutput:
+                return BetaAudioOutput(
+                    bytes=base64.b64decode(res.audio["data"]),
+                    transcript=res.audio.get("transcript", ""),
+                ), AsyncFunctionResponse(client=self._client, **res.model_dump())
             if inspect.isclass(output_type) and issubclass(output_type, BaseModel):
                 return output_type.model_validate(
                     res.json_payload
