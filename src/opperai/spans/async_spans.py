@@ -156,7 +156,7 @@ class AsyncSpans:
                 meta=meta,
             )
         )
-        span = AsyncSpan(self._client, span_model.uuid)
+        span = AsyncSpan(self._client, str(span_model.uuid))
         token = _current_span_id.set(str(span.uuid))
 
         return span, token
