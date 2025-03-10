@@ -112,6 +112,37 @@ class BetaAudioInput(BaseModel):
         return BetaAudioInput(path=path)
 
 
+class FileInput(BaseModel):
+    """NOTE: FileInput is a magic type used to indicate that the input is a file
+
+    There is a known limitation that when used as part of structured input one
+    cannot pass in a list of files, nor can it be used in a nested fashion.
+
+    This is due to limitations when it comes to deduce the relationship between
+    the input fields and the files
+    """
+
+    path: Optional[FilePath] = Field(exclude=True, default=None)
+
+    @computed_field
+    @property
+    def _opper_file_input(self) -> str:
+        if self.path:
+            suffix = self.path.suffix
+            if suffix == ".pdf":
+                with open(self.path, "rb") as pdf_file:
+                    base64_pdf = base64.b64encode(pdf_file.read()).decode("utf-8")
+                return f"data:application/pdf;base64,{base64_pdf}"
+            else:
+                raise ValueError("File type not supported. Supported types: .pdf")
+
+        raise ValueError("no path or url provided")
+
+    @classmethod
+    def from_path(cls, path: FilePath):
+        return FileInput(path=path)
+
+
 class ImageInput(BaseModel):
     """NOTE: ImageInput is a magic type used to indicate that the input is an image
 
@@ -152,7 +183,7 @@ class ImageInput(BaseModel):
         return ImageInput(path=path)
 
 
-MediaInput = Union[ImageInput, AudioInput, BetaAudioInput]
+MediaInput = Union[ImageInput, AudioInput, BetaAudioInput, FileInput]
 
 
 class Message(BaseModel):
