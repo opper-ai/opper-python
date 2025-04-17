@@ -1,5 +1,6 @@
-from typing import Any, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
+from opperai.evaluations._base import BaseEvaluator, Evaluation
 from opperai.functions.async_functions import AsyncFunctions
 from opperai.functions.functions import Functions
 from opperai.indexes.async_indexes import AsyncIndexes
@@ -55,3 +56,18 @@ class AsyncOpper(Opper):
         self.spans: AsyncSpans = AsyncSpans(client)  # deprecated
         self.traces: AsyncSpans = self.spans
         self.call = self.functions.call
+        self.evaluate = _evaluate
+
+
+async def _evaluate(
+    span_id: str,
+    context: Dict[str, Any],
+    evaluator: Optional[BaseEvaluator] = None,
+    evaluators: Optional[List[BaseEvaluator]] = None,
+) -> Evaluation:
+    from opperai.evaluations._evaluation import Evaluator
+
+    if evaluator is not None:
+        return await Evaluator([evaluator]).evaluate(span_id, context)
+    else:
+        return await Evaluator(evaluators).evaluate(span_id, context)
