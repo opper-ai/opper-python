@@ -33,7 +33,7 @@ class SentimentEvaluator(BaseEvaluator):
         # Call LLM for sentiment analysis
         response = await opper.call(  # type: ignore
             name="sentiment_analysis",
-            instructions="Analyze the sentiment of the text as positive, negative, or neutral. Return score as 0.0-1.0 where 0.0 is very negative, 0.5 is neutral, and 1.0 is very positive.",
+            instructions="Analyze the sentiment of the text.",
             input=result_text,
             output_type=SentimentAnalysis,
             parent_span_id=parent_span_id,
