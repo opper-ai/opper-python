@@ -111,7 +111,7 @@ async def run_evaluations(text_to_evaluate: str, span_id: str) -> None:
     """Run evaluations on the provided text."""
 
     # Create a context dictionary with the result
-    context = {"result": text_to_evaluate}
+    context = {"result": text_to_evaluate, "span_id": span_id}
 
     # Create a list of evaluators
     evaluators = [
