@@ -107,15 +107,27 @@ class LineCountEvaluator(BaseEvaluator):
         return Evaluation(success=success, score=score, metrics={self.name: metrics})
 
 
-async def run_evaluations(text_to_evaluate: str, span_id: str) -> None:
-    """Run evaluations on the provided text."""
+async def main():
+    """Simple example showing how to use evaluations with Opper."""
 
-    # Create a context dictionary with the result
-    context = {"result": text_to_evaluate, "span_id": span_id}
+    # Generate content to evaluate
+    instructions = "Write a rhyming poem about the input. Make it at least 12 lines with a positive tone."
+    input = "VR Headset"
 
-    # Run the evaluation
+    result, response = await opper.call(  # type: ignore
+        name="poem_generation",
+        instructions=instructions,
+        input=input,
+    )
+
+    print(f"\n--- Generated Poem ---\n{result}\n")
+
+    # Create context for evaluation
+    context = {"result": result, "span_id": response.span_id}
+
+    # Run evaluation
     evaluation = await opper.evaluate(
-        span_id=span_id,  # type: ignore
+        span_id=response.span_id,  # type: ignore
         context=context,
         evaluators=[
             SentimentEvaluator(target="positive"),
@@ -134,24 +146,6 @@ async def run_evaluations(text_to_evaluate: str, span_id: str) -> None:
             print(f"\n{name}:")
             print(f"  Success: {result['success']}")
             print(f"  Score: {result['score']:.2f}")
-
-
-async def main():
-    """Simple example showing how to use evaluations with Opper."""
-
-    instructions = "Write a rhyming poem about the input. Make it at least 12 lines with a positive tone."
-    input = "VR Headset"
-
-    result, response = await opper.call(  # type: ignore
-        name="poem_generation",
-        instructions=instructions,
-        input=input,
-    )
-
-    print(f"\n--- Generated Poem ---\n{result}\n")
-
-    # Run evaluations on the text
-    await run_evaluations(result, response.span_id)
 
 
 if __name__ == "__main__":
