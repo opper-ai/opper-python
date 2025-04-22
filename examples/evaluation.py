@@ -3,8 +3,8 @@ from typing import Any, Dict, Literal
 
 from pydantic import BaseModel, Field
 
-from opperai import AsyncOpper, BaseEvaluator
-from opperai.evaluations._base import Evaluation
+from opperai import AsyncOpper
+from opperai.evaluations import BaseEvaluator, Evaluation
 from opperai.types.spans import SpanMetric
 
 opper = AsyncOpper()
