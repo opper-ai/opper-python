@@ -113,17 +113,14 @@ async def run_evaluations(text_to_evaluate: str, span_id: str) -> None:
     # Create a context dictionary with the result
     context = {"result": text_to_evaluate, "span_id": span_id}
 
-    # Create a list of evaluators
-    evaluators = [
-        SentimentEvaluator(target="positive"),
-        LineCountEvaluator(min_lines=10, max_lines=20),
-    ]
-
     # Run the evaluation
     evaluation = await opper.evaluate(
         span_id=span_id,  # type: ignore
-        evaluators=evaluators,
         context=context,
+        evaluators=[
+            SentimentEvaluator(target="positive"),
+            LineCountEvaluator(min_lines=10, max_lines=20),
+        ],
     )
 
     # Display results
