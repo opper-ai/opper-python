@@ -1,110 +1,80 @@
 import asyncio
-from typing import Any, Dict, Literal
+from typing import Literal
 
 from pydantic import BaseModel, Field
 
-from opperai import AsyncOpper
-from opperai.evaluations import BaseEvaluator, Evaluation
-from opperai.types.spans import SpanMetric
+from opperai import AsyncOpper, evaluator
+from opperai.types import Metric
 
 opper = AsyncOpper()
 
 
-class SentimentEvaluator(BaseEvaluator):
-    """Evaluator that checks sentiment of text."""
-
-    def __init__(self, target: Literal["positive", "negative", "neutral"] = "positive"):
-        super().__init__("sentiment")
-        self.target = target
-
-    async def evaluate(self, context: Dict[str, Any], **kwargs) -> Evaluation:
-        result_text = str(context.get("result", ""))
-        parent_span_id = context.get("span_id")
-
-        class SentimentAnalysis(BaseModel):
-            sentiment: Literal["positive", "negative", "neutral"] = Field(
-                description="The sentiment of the text"
-            )
-            score: float = Field(description="Sentiment score", ge=0.0, le=1.0)
-            explanation: str = Field(
-                description="Brief explanation of the sentiment analysis"
-            )
-
-        # Call LLM for sentiment analysis
-        response = await opper.call(  # type: ignore
-            name="sentiment_analysis",
-            instructions="Analyze the sentiment of the text.",
-            input=result_text,
-            output_type=SentimentAnalysis,
-            parent_span_id=parent_span_id,
-        )
-
-        # Get sentiment result from the response
-        sentiment_result = response[0]  # type: ignore
-
-        # Check for target sentiment
-        success = sentiment_result.sentiment == self.target
-
-        metrics = [
-            SpanMetric(
-                dimension=f"eval.{self.name}.score",
-                value=sentiment_result.score,
-                comment="Sentiment score (0.0-1.0)",
-            ),
-            SpanMetric(
-                dimension=f"eval.{self.name}.success",
-                value=1.0 if success else 0.0,
-                comment=f"Target sentiment: {self.target}",
-            ),
-        ]
-
-        return Evaluation(
-            success=success, score=sentiment_result.score, metrics={self.name: metrics}
-        )
-
-
-class LineCountEvaluator(BaseEvaluator):
+@evaluator
+def linecount_evaluator(result, min_lines=10, max_lines=20):
     """Evaluator that checks if the text has enough lines."""
+    # Count non-empty lines
+    lines = [line for line in str(result).strip().split("\n") if line.strip()]
+    line_count = len(lines)
 
-    def __init__(self, min_lines: int = 10, max_lines: int = 30):
-        super().__init__("line_count")
-        self.min_lines = min_lines
-        self.max_lines = max_lines
+    # Calculate score
+    if line_count < min_lines:
+        score = line_count / min_lines
+    elif line_count > max_lines:
+        excess = line_count - max_lines
+        max_excess = max_lines
+        score = max(0, 1 - (excess / max_excess))
+    else:
+        score = 1.0
 
-    async def evaluate(self, context: Dict[str, Any], **kwargs) -> Evaluation:
-        result_text = str(context.get("result", ""))
+    return [
+        Metric(dimension="line_count.score", value=score, comment="Line count score"),
+        Metric(
+            dimension="line_count.count",
+            value=min(1.0, line_count / max_lines),
+            comment=f"Found {line_count} lines",
+        ),
+    ]
 
-        # Count non-empty lines
-        lines = [line for line in result_text.strip().split("\n") if line.strip()]
-        line_count = len(lines)
 
-        # Check if count is within acceptable range
-        success = self.min_lines <= line_count <= self.max_lines
+@evaluator
+async def sentiment_evaluator(result, target="positive", span_id=None):
+    """Evaluator that checks sentiment of text using an LLM call."""
 
-        # Calculate score
-        if line_count < self.min_lines:
-            score = line_count / self.min_lines
-        elif line_count > self.max_lines:
-            excess = line_count - self.max_lines
-            max_excess = self.max_lines
-            score = max(0, 1 - (excess / max_excess))
-        else:
-            score = 1.0
+    # Define output schema for sentiment analysis
+    class SentimentAnalysis(BaseModel):
+        sentiment: Literal["positive", "negative", "neutral"] = Field(
+            description="The sentiment of the text"
+        )
+        score: float = Field(description="Sentiment score", ge=0.0, le=1.0)
+        explanation: str = Field(
+            description="Brief explanation of the sentiment analysis"
+        )
 
-        metrics = [
-            SpanMetric(
-                dimension=f"eval.{self.name}.score",
-                value=score,
-                comment="Line count score",
-            ),
-            SpanMetric(
-                dimension=f"eval.{self.name}.line_count",
-                value=float(line_count),
-                comment=f"Found {line_count} lines",
-            ),
-        ]
+    # Call LLM for sentiment analysis
+    response, _ = await opper.call(  # type: ignore
+        name="sentiment_analysis",
+        instructions="Analyze the sentiment of the text.",
+        input=result,
+        output_type=SentimentAnalysis,
+        parent_span_id=span_id,
+    )
 
-        return Evaluation(success=success, score=score, metrics={self.name: metrics})
+    # Check for target sentiment
+    success = response.sentiment == target
+
+    # Return metrics
+    return [
+        Metric(
+            dimension="sentiment.score",
+            value=response.score,
+            comment="Sentiment score (0.0-1.0)",
+        ),
+        Metric(
+            dimension="sentiment.match",
+            value=1.0 if success else 0.0,
+            comment=f"Target sentiment: {target}",
+        ),
+    ]
 
 
 async def main():
@@ -122,30 +92,30 @@ async def main():
 
     print(f"\n--- Generated Poem ---\n{result}\n")
 
-    # Create context for evaluation
-    context = {"result": result, "span_id": response.span_id}
-
-    # Run evaluation
+    # Run evaluation using decorated evaluators
     evaluation = await opper.evaluate(
         span_id=response.span_id,  # type: ignore
-        context=context,
         evaluators=[
-            SentimentEvaluator(target="positive"),
-            LineCountEvaluator(min_lines=10, max_lines=20),
+            linecount_evaluator(result=result, min_lines=4, max_lines=10),
+            sentiment_evaluator(
+                result=result, target="positive", span_id=response.span_id
+            ),
         ],
     )
 
     # Display results
     print("\n--- Evaluation Results ---")
-    print(f"Overall success: {evaluation.success}")
-    print(f"Overall score: {evaluation.score:.2f}")
 
-    # Show individual evaluator results
-    for name, result in evaluation.results.items():
-        if name != "overall":
-            print(f"\n{name}:")
-            print(f"  Success: {result['success']}")
-            print(f"  Score: {result['score']:.2f}")
+    # Show metrics for each evaluator group
+    for group_name, metrics_list in evaluation.metrics.items():
+        print(f"\n{group_name}:")
+        # Calculate average score safely
+        values = [m.value for m in metrics_list if m.value is not None]
+        avg_score = sum(values) / len(values) if values else 0
+        print(f"  Average Score: {avg_score:.2f}")
+        print("  Metrics:")
+        for metric in metrics_list:
+            print(f"    - {metric.dimension}: {metric.value:.2f} ({metric.comment})")
 
 
 if __name__ == "__main__":

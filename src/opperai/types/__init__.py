@@ -15,6 +15,14 @@ from .spans import SpanMetric
 from .validators import validate_uuid_xor_path
 
 
+class Metric(BaseModel):
+    """Metric for evaluations"""
+
+    dimension: Optional[str] = None
+    value: float = 1.0
+    comment: Optional[str] = None
+
+
 @dataclass
 class ImageOutput:
     """NOTE: Magic type used to indicate that the output is an image"""

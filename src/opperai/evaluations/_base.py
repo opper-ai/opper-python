@@ -2,14 +2,14 @@ from typing import Any, Dict, List
 
 from pydantic import BaseModel, Field
 
-from opperai.types.spans import SpanMetric
+from opperai.types import Metric
 
 
 class Evaluation(BaseModel):
-    results: Dict[str, Dict[str, Any]] = Field(default_factory=dict)
-    metrics: Dict[str, List[SpanMetric]] = Field(default_factory=dict)
-    success: bool
-    score: float
+    """Results of an evaluation."""
+
+    # Map of evaluator name to metrics
+    metrics: Dict[str, List[Metric]] = Field(default_factory=dict)
 
 
 class BaseEvaluator:
