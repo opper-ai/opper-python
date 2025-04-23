@@ -1,10 +1,10 @@
 import inspect
 from typing import Any, Dict, List, Optional
 
-from opperai.evaluations._base import Evaluation
-from opperai.evaluations.decorator import process_metrics
 from opperai.embeddings.async_embeddings import AsyncEmbeddings
 from opperai.embeddings.embeddings import Embeddings
+from opperai.evaluations._base import Evaluation
+from opperai.evaluations.decorator import process_metrics
 from opperai.functions.async_functions import AsyncFunctions
 from opperai.functions.functions import Functions
 from opperai.indexes.async_indexes import AsyncIndexes
@@ -94,6 +94,9 @@ async def _evaluate(
     # Store all metrics
     all_metrics = {}
 
+    # Get span for saving metrics
+    span = AsyncOpper().spans.get_span(span_id=span_id)
+
     # Run each evaluator and process the metrics
     for i, evaluator_result in enumerate(evaluators):
         # Check if result is a coroutine and await it if needed
@@ -129,6 +132,24 @@ async def _evaluate(
 
         # Update all metrics
         all_metrics.update(eval_result.metrics)
+
+        # Save metrics to span
+        for group_name, group_metrics in eval_result.metrics.items():
+            for metric in group_metrics:
+                # Create a dimension with the group name prefix if not already present
+                dimension = metric.dimension
+                if dimension and not dimension.startswith(f"eval.{group_name}"):
+                    dimension = f"eval.{group_name}.{dimension}"
+                else:
+                    # If no dimension, create one with the group name
+                    dimension = f"eval.{group_name}" if not dimension else dimension
+
+                # Save the metric to the span
+                await span.save_metric(
+                    dimension=dimension or "",
+                    value=metric.value or 0.0,
+                    comment=metric.comment or "",
+                )
 
     # Create the final evaluation
     return Evaluation(metrics=all_metrics)
