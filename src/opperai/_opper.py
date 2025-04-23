@@ -3,6 +3,8 @@ from typing import Any, Dict, List, Optional
 
 from opperai.evaluations._base import Evaluation
 from opperai.evaluations.decorator import process_metrics
+from opperai.embeddings.async_embeddings import AsyncEmbeddings
+from opperai.embeddings.embeddings import Embeddings
 from opperai.functions.async_functions import AsyncFunctions
 from opperai.functions.functions import Functions
 from opperai.indexes.async_indexes import AsyncIndexes
@@ -35,6 +37,7 @@ class Opper:
         self.indexes: Indexes = Indexes(client)
         self.spans: Spans = Spans(client)  # deprecated
         self.traces: Spans = self.spans
+        self.embeddings: Embeddings = Embeddings(client)
         self.call = self.functions.call
 
 
@@ -57,6 +60,7 @@ class AsyncOpper(Opper):
         self.indexes: AsyncIndexes = AsyncIndexes(client)
         self.spans: AsyncSpans = AsyncSpans(client)  # deprecated
         self.traces: AsyncSpans = self.spans
+        self.embeddings: AsyncEmbeddings = AsyncEmbeddings(client)
         self.call = self.functions.call
         self.evaluate = _evaluate
 

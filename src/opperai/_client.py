@@ -5,6 +5,8 @@ from typing import Any, AsyncGenerator, Iterator, Optional, Tuple
 
 from opperai.core.datasets._async_datasets import AsyncDatasets
 from opperai.core.datasets._datasets import Datasets
+from opperai.core.embeddings._async_embeddings import AsyncEmbeddings
+from opperai.core.embeddings._embeddings import Embeddings
 from opperai.core.functions._async_functions import AsyncFunctions
 from opperai.core.functions._functions import Functions
 from opperai.core.indexes._async_indexes import AsyncIndexes
@@ -31,6 +33,7 @@ class AsyncClient:
     indexes: AsyncIndexes = None
     spans: AsyncSpans = None
     datasets: AsyncDatasets = None
+    embeddings: AsyncEmbeddings = None
 
     def __init__(
         self,
@@ -59,6 +62,7 @@ class AsyncClient:
         self.indexes = AsyncIndexes(self.http_client)
         self.spans = AsyncSpans(self.http_client)
         self.datasets = AsyncDatasets(self.http_client)
+        self.embeddings = AsyncEmbeddings(self.http_client)
 
     async def generate_image(
         self,
@@ -124,6 +128,7 @@ class Client:
     indexes: Indexes
     spans: Spans
     datasets: Datasets
+    embeddings: Embeddings
 
     def __init__(
         self,
@@ -152,6 +157,7 @@ class Client:
         self.indexes = Indexes(self.http_client)
         self.spans = Spans(self.http_client)
         self.datasets = Datasets(self.http_client)
+        self.embeddings = Embeddings(self.http_client)
 
     def generate_image(
         self,
