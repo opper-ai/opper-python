@@ -12,7 +12,7 @@ def synchronous_embeddings():
     # Example 1: Generate embeddings for a single string
     print("Example 1: Single text input")
     response = opper.embeddings.create(
-        model="text-embedding-ada-002", input_text="Hello, world!"
+        model="openai/text-embedding-3-large", input_text="Hello, world!"
     )
 
     # Print the embedding vector for the input
@@ -24,7 +24,7 @@ def synchronous_embeddings():
     # Example 2: Generate embeddings for multiple strings (batch processing)
     print("\nExample 2: List of texts input")
     batch_response = opper.embeddings.create(
-        model="text-embedding-ada-002",
+        model="openai/text-embedding-3-large",
         input_text=[
             "Hello, world!",
             "How are you?",
@@ -49,7 +49,7 @@ async def async_embeddings():
     # Example 1: Generate embeddings for a single string
     print("\nAsync Example 1: Single text input")
     response = await opper.embeddings.create(
-        model="text-embedding-ada-002", input_text="Hello, world!"
+        model="openai/text-embedding-3-large", input_text="Hello, world!"
     )
 
     # Print the embedding vector for the input
@@ -61,7 +61,7 @@ async def async_embeddings():
     # Example 2: Generate embeddings for multiple strings (batch processing)
     print("\nAsync Example 2: List of texts input")
     batch_response = await opper.embeddings.create(
-        model="text-embedding-ada-002",
+        model="openai/text-embedding-3-large",
         input_text=[
             "Hello, world!",
             "How are you?",
