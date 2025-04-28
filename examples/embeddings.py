@@ -35,7 +35,7 @@ def synchronous_embeddings():
     # Print the embedding vectors information
     print(f"Number of embeddings: {len(batch_response.data)}")
     for i, embedding_data in enumerate(batch_response.data):
-        print(f"Embedding {i+1} dimension: {len(embedding_data['embedding'])}")
+        print(f"Embedding {i + 1} dimension: {len(embedding_data['embedding'])}")
 
     # Print total token usage
     print(f"Total token usage: {batch_response.usage}")
@@ -72,7 +72,7 @@ async def async_embeddings():
     # Print the embedding vectors information
     print(f"Number of embeddings: {len(batch_response.data)}")
     for i, embedding_data in enumerate(batch_response.data):
-        print(f"Embedding {i+1} dimension: {len(embedding_data['embedding'])}")
+        print(f"Embedding {i + 1} dimension: {len(embedding_data['embedding'])}")
 
     # Print total token usage
     print(f"Total token usage: {batch_response.usage}")
