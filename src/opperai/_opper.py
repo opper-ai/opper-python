@@ -4,7 +4,6 @@ from typing import Any, Dict, List, Optional
 from opperai.embeddings.async_embeddings import AsyncEmbeddings
 from opperai.embeddings.embeddings import Embeddings
 from opperai.evaluations._base import Evaluation
-from opperai.evaluations.decorator import process_metrics
 from opperai.functions.async_functions import AsyncFunctions
 from opperai.functions.functions import Functions
 from opperai.indexes.async_indexes import AsyncIndexes
@@ -98,7 +97,7 @@ async def _evaluate(
     span = AsyncOpper().spans.get_span(span_id=span_id)
 
     # Run each evaluator and process the metrics
-    for i, evaluator_result in enumerate(evaluators):
+    for evaluator_result in evaluators:
         # Check if result is a coroutine and await it if needed
         if inspect.iscoroutine(evaluator_result):
             metrics = await evaluator_result
@@ -110,46 +109,27 @@ async def _evaluate(
         else:
             metrics = evaluator_result
 
-        # Get a name for this evaluator result
-        metric_group = None
-        if (
-            metrics
-            and len(metrics) > 0
-            and hasattr(metrics[0], "dimension")
-            and metrics[0].dimension
-        ):
-            metric_group = (
-                metrics[0].dimension.split(".")[0]
-                if "." in metrics[0].dimension
-                else metrics[0].dimension
+        # Ensure we have a list of metrics
+        if not isinstance(metrics, list):
+            metrics = [metrics]
+
+        # Validate that each metric has a dimension
+        for i, metric in enumerate(metrics):
+            if not metric.dimension:
+                raise ValueError(f"Metric at index {i} must have a dimension")
+
+        # Save metrics directly to span
+        for metric in metrics:
+            await span.save_metric(
+                dimension=metric.dimension,
+                value=metric.value or 0.0,
+                comment=metric.comment or "",
             )
-        else:
-            # Fallback if no dimension is available
-            metric_group = f"evaluator_{i}"
 
-        # Process the metrics
-        eval_result = await process_metrics(metric_group, metrics)
-
-        # Update all metrics
-        all_metrics.update(eval_result.metrics)
-
-        # Save metrics to span
-        for group_name, group_metrics in eval_result.metrics.items():
-            for metric in group_metrics:
-                # Create a dimension with the group name prefix if not already present
-                dimension = metric.dimension
-                if dimension and not dimension.startswith(f"eval.{group_name}"):
-                    dimension = f"eval.{group_name}.{dimension}"
-                else:
-                    # If no dimension, create one with the group name
-                    dimension = f"eval.{group_name}" if not dimension else dimension
-
-                # Save the metric to the span
-                await span.save_metric(
-                    dimension=dimension or "",
-                    value=metric.value or 0.0,
-                    comment=metric.comment or "",
-                )
+        # Add metrics to flat list
+        if "metrics" not in all_metrics:
+            all_metrics["metrics"] = []
+        all_metrics["metrics"].extend(metrics)
 
     # Create the final evaluation
     return Evaluation(metrics=all_metrics)
