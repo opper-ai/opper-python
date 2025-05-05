@@ -36,6 +36,7 @@ class Span(BaseModel):
     evaluations: Optional[dict] = None
     score: Optional[int] = None
     generation: Optional[GenerationIn] = None
+    type: Optional[str] = None
 
 
 class SpanMetric(BaseModel):
