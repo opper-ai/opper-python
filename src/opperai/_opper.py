@@ -1,4 +1,5 @@
 import inspect
+import json
 from typing import Any, Dict, List, Optional
 
 from opperai.embeddings.async_embeddings import AsyncEmbeddings
@@ -12,6 +13,7 @@ from opperai.spans.async_spans import AsyncSpans
 from opperai.spans.spans import Spans
 
 from ._client import AsyncClient, Client
+from .core.utils import prepare_input
 
 DEFAULT_API_URL = "https://api.opper.ai"
 DEFAULT_TIMEOUT = 120
@@ -93,43 +95,63 @@ async def _evaluate(
     # Store all metrics
     all_metrics = {}
 
+    opper = AsyncOpper()
     # Get span for saving metrics
-    span = AsyncOpper().spans.get_span(span_id=span_id)
+    span = opper.spans.get_span(span_id=span_id)
 
     # Run each evaluator and process the metrics
-    for evaluator_result in evaluators:
-        # Check if result is a coroutine and await it if needed
-        if inspect.iscoroutine(evaluator_result):
-            metrics = await evaluator_result
-        elif callable(evaluator_result):
-            metrics = evaluator_result()
-            # Check if the callable returned a coroutine
-            if inspect.iscoroutine(metrics):
-                metrics = await metrics
-        else:
-            metrics = evaluator_result
+    for evaluator_result, kwargs in evaluators:
+        async with opper.spans.start(
+            name=evaluator_result.__name__,
+            parent_span_id=span.uuid,
+            type="evaluation",
+        ) as evaluation_span:
+            # Check if result is a coroutine and await it if needed
+            if inspect.iscoroutine(evaluator_result):
+                print("evaluator_result is a coroutine")
+                metrics = await evaluator_result
+            elif callable(evaluator_result):
+                print("evaluator_result is a callable")
+                metrics = evaluator_result()
+                # Check if the callable returned a coroutine
+                if inspect.iscoroutine(metrics):
+                    print("metrics is a coroutine")
+                    metrics = await metrics
+            else:
+                print("evaluator_result is not a coroutine or callable")
+                metrics = evaluator_result
 
-        # Ensure we have a list of metrics
-        if not isinstance(metrics, list):
-            metrics = [metrics]
+            # Ensure we have a list of metrics
+            if not isinstance(metrics, list):
+                metrics = [metrics]
 
-        # Validate that each metric has a dimension
-        for i, metric in enumerate(metrics):
-            if not metric.dimension:
-                raise ValueError(f"Metric at index {i} must have a dimension")
+            # Validate that each metric has a dimension
+            for i, metric in enumerate(metrics):
+                if not metric.dimension:
+                    raise ValueError(f"Metric at index {i} must have a dimension")
 
-        # Save metrics directly to span
-        for metric in metrics:
-            await span.save_metric(
-                dimension=metric.dimension,
-                value=metric.value or 0.0,
-                comment=metric.comment or "",
-            )
+            # Save metrics directly to span
+            for metric in metrics:
+                await span.save_metric(
+                    dimension=metric.dimension,
+                    value=metric.value or 0.0,
+                    comment=metric.comment or "",
+                )
 
-        # Add metrics to flat list
-        if "metrics" not in all_metrics:
-            all_metrics["metrics"] = []
-        all_metrics["metrics"].extend(metrics)
+            # Add metrics to flat list
+            if "metrics" not in all_metrics:
+                all_metrics["metrics"] = []
+            all_metrics["metrics"].extend(metrics)
+
+            if isinstance(kwargs, str):
+                await evaluation_span.update(
+                    input=kwargs, output=json.dumps(prepare_input(metrics))
+                )
+            else:
+                await evaluation_span.update(
+                    input=json.dumps(prepare_input(kwargs)),
+                    output=json.dumps(prepare_input(metrics)),
+                )
 
     # Create the final evaluation
     return Evaluation(metrics=all_metrics)

@@ -22,7 +22,7 @@ def evaluator(func=None, **decorator_kwargs):
             def evaluator_func(**kwargs):
                 # Merge default kwargs with provided kwargs
                 combined_kwargs = {**decorator_kwargs, **kwargs}
-                return f(**combined_kwargs)
+                return f(**combined_kwargs), kwargs
 
             # Copy the original function name and docstring
             evaluator_func.__name__ = f.__name__
@@ -33,7 +33,7 @@ def evaluator(func=None, **decorator_kwargs):
 
     # Called without parameters: @evaluator
     def evaluator_func(**kwargs):
-        return func(**kwargs)
+        return func(**kwargs), kwargs
 
     # Copy the original function name and docstring
     evaluator_func.__name__ = func.__name__
