@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import base64
+import mimetypes
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
@@ -167,25 +168,41 @@ class ImageInput(BaseModel):
     @computed_field
     @property
     def _opper_image_input(self) -> str:
-        if self.path:
-            suffix = self.path.suffix
-            if suffix == ".png":
-                with open(self.path, "rb") as image_file:
-                    base64_image = base64.b64encode(image_file.read()).decode("utf-8")
-                data = f"data:image/png;base64,{base64_image}"
-            elif suffix in (".jpg", ".jpeg"):
-                with open(self.path, "rb") as image_file:
-                    base64_image = base64.b64encode(image_file.read()).decode("utf-8")
-                data = f"data:image/jpeg;base64,{base64_image}"
+        if not self.path:
+            raise ValueError("no path provided")
+
+        # Initialize MIME types database if not already done
+        if not mimetypes.inited:
+            mimetypes.init()
+
+        # Read the image file
+        with open(self.path, "rb") as image_file:
+            image_data = image_file.read()
+
+        # Get MIME type based on file extension
+        mime_type, _ = mimetypes.guess_type(str(self.path))
+
+        # Verify it's a supported image type
+        if mime_type == "image/png":
+            data_uri_mime = "image/png"
+        elif mime_type in ("image/jpeg", "image/jpg"):
+            data_uri_mime = "image/jpeg"
+        else:
+            # Fallback to checking file headers if mime_type is None or not an image
+            if image_data.startswith(b"\x89PNG\r\n\x1a\n"):
+                # PNG signature
+                data_uri_mime = "image/png"
+            elif image_data.startswith(b"\xff\xd8\xff"):
+                # JPEG signature
+                data_uri_mime = "image/jpeg"
             else:
                 raise ValueError(
-                    "File type not supported. Supported types: .png, .jpg, .jpeg"
+                    "File type not supported. Supported types: png, jpg, jpeg"
                 )
 
-        if not data:
-            raise ValueError("no path or url provided")
-
-        return data
+        # Encode image data
+        base64_image = base64.b64encode(image_data).decode("utf-8")
+        return f"data:{data_uri_mime};base64,{base64_image}"
 
     @classmethod
     def from_path(cls, path: FilePath):
