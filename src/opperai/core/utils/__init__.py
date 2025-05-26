@@ -19,8 +19,10 @@ def convert_function_call_to_json(func, *args, **kwargs):
 def prepare_input(input: Any) -> Any:
     if isinstance(input, str):
         return input
+    elif isinstance(input, datetime):
+        return input.isoformat()
     elif isinstance(input, BaseModel):
-        return input.model_dump(exclude_none=True)
+        return input.model_dump(exclude_none=True, mode="json")
     elif isinstance(input, list):
         _input = [prepare_input(item) for item in input]
         return _input
