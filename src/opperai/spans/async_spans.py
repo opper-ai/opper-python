@@ -98,12 +98,14 @@ class AsyncSpans:
         input: str = None,
         meta: dict = None,
         parent_span_id: str = None,
+        type: str = None,
     ) -> AsyncIterator[AsyncSpan]:
         span = await self.start_span(
             name=name,
             input=input,
             meta=meta,
             parent_span_id=parent_span_id,
+            type=type,
         )
         try:
             yield span
@@ -117,6 +119,7 @@ class AsyncSpans:
         meta: dict = None,
         start_time: datetime = None,
         parent_span_id: str = None,
+        type: str = None,
     ) -> AsyncSpan:
         span, token = await self._create_span(
             name=name,
@@ -124,6 +127,7 @@ class AsyncSpans:
             meta=meta,
             parent_span_id=parent_span_id,
             start_time=start_time,
+            type=type,
         )
 
         async def end_span(end_time: datetime = None):
@@ -145,6 +149,7 @@ class AsyncSpans:
         meta: dict,
         parent_span_id: str,
         start_time: datetime,
+        type: str,
     ):
         parent_span_id = parent_span_id if parent_span_id else _current_span_id.get()
         span_model = await self._client.spans.create(
@@ -154,6 +159,7 @@ class AsyncSpans:
                 start_time=start_time if start_time else datetime.now(timezone.utc),
                 parent_uuid=parent_span_id,
                 meta=meta,
+                type=type,
             )
         )
         span = AsyncSpan(self._client, str(span_model.uuid))
