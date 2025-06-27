@@ -9,7 +9,7 @@ from typing import Any, Dict, List, Mapping, Optional, Union
 
 
 class Knowledge(BaseSDK):
-    def creat(
+    def create(
         self,
         *,
         name: str,
@@ -132,7 +132,7 @@ class Knowledge(BaseSDK):
             http_res,
         )
 
-    async def creat_async(
+    async def create_async(
         self,
         *,
         name: str,
