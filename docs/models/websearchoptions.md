@@ -1,0 +1,9 @@
+# WebSearchOptions
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `search_context_size`                                                                              | [Optional[models.SearchContextSize]](../models/searchcontextsize.md)                               | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `user_location`                                                                                    | [OptionalNullable[models.WebSearchOptionsUserLocation]](../models/websearchoptionsuserlocation.md) | :heavy_minus_sign:                                                                                 | N/A                                                                                                |

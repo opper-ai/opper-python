@@ -1,0 +1,716 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: Speakeasy Modifications
+  version: 0.0.28
+  x-speakeasy-metadata:
+    after: ""
+    before: ""
+    type: speakeasy-modifications
+actions:
+  - target: $["paths"]["/knowledge"]["get"]
+    update:
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      after: sdk.knowledge.list()
+      before: sdk.knowledge.list_knowledge_bases_knowledge_get()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/functions"]["post"]
+    update:
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      after: sdk.functions.create()
+      before: sdk.functions.create_function_functions_post()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/spans/{span_id}/metrics"]["get"]
+    update:
+      x-speakeasy-group: spanMetrics
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      after: sdk.spanMetrics.list()
+      before: sdk.span metrics.list_metrics_spans__span_id__metrics_get()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/datasets/{dataset_id}/entries/{entry_id}"]["delete"]
+    update:
+      x-speakeasy-name-override: deleteEntry
+    x-speakeasy-metadata:
+      after: sdk.datasets.deleteEntry()
+      before: sdk.datasets.delete_dataset_entry_datasets__dataset_id__entries__entry_id__delete()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/functions/{function_id}/call"]["post"]
+    update:
+      x-speakeasy-name-override: call
+    x-speakeasy-metadata:
+      after: sdk.functions.call()
+      before: sdk.functions.call_function_functions__function_id__call_post()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/traces/{trace_id}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.traces.get()
+      before: sdk.traces.get_trace_with_spans_traces__trace_id__get()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/knowledge/{index_id}/files/{file_id}"]["delete"]
+    update:
+      x-speakeasy-name-override: deleteFile
+    x-speakeasy-metadata:
+      after: sdk.knowledge.deleteFile()
+      before: sdk.knowledge.delete_file_from_knowledge_base_knowledge__index_id__files__file_id__delete()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/knowledge/{index_id}"]["delete"]
+    update:
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      after: sdk.knowledge.delete()
+      before: sdk.knowledge.delete_knowledge_base_knowledge__index_id__delete()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/datasets/{dataset_id}/entries"]["get"]
+    update:
+      x-speakeasy-name-override: listEntries
+    x-speakeasy-metadata:
+      after: sdk.datasets.listEntries()
+      before: sdk.datasets.list_dataset_entries_datasets__dataset_id__entries_get()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/spans/{span_id}/save_examples"]["post"]
+    update:
+      x-speakeasy-name-override: saveExamples
+    x-speakeasy-metadata:
+      after: sdk.spans.saveExamples()
+      before: sdk.spans.save_to_dataset_spans__span_id__save_examples_post()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/spans/{span_id}/metrics/{metric_id}"]["get"]
+    update:
+      x-speakeasy-group: spanMetrics
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.spanMetrics.get()
+      before: sdk.span metrics.get_metric_spans__span_id__metrics__metric_id__get()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/functions/{function_id}/revisions"]["get"]
+    update:
+      x-speakeasy-group: functions.revisions
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      after: sdk.functions.revisions.list()
+      before: sdk.functions.list_function_revisions_functions__function_id__revisions_get()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/knowledge/{index_id}/index"]["post"]
+    update:
+      x-speakeasy-name-override: addData
+    x-speakeasy-metadata:
+      after: sdk.knowledge.addData()
+      before: sdk.knowledge.add_knowledge__index_id__index_post()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/call/stream"]["post"]
+    update:
+      x-speakeasy-name-override: stream
+    x-speakeasy-metadata:
+      after: sdk.calls.stream()
+      before: sdk.calls.function_stream_call_stream_post()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/datasets/{dataset_id}/entries/{entry_id}"]["get"]
+    update:
+      x-speakeasy-name-override: getEntry
+    x-speakeasy-metadata:
+      after: sdk.datasets.getEntry()
+      before: sdk.datasets.get_dataset_entry_datasets__dataset_id__entries__entry_id__get()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/spans/{span_id}"]["patch"]
+    update:
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      after: sdk.spans.update()
+      before: sdk.spans.update_span_spans__span_id__patch()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/spans"]["post"]
+    update:
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      after: sdk.spans.create()
+      before: sdk.spans.create_span_spans_post()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/generations/{generation_id}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.generations.get()
+      before: sdk.generations.get_generation_generations__generation_id__get()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/call"]["post"]
+    update:
+      x-speakeasy-name-override: call
+    x-speakeasy-metadata:
+      after: sdk.calls.call()
+      before: sdk.calls.function_call_call_post()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/functions/{function_id}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.functions.get()
+      before: sdk.functions.get_function_functions__function_id__get()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/functions/{function_id}/call/stream/{revision_id}"]["post"]
+    update:
+      x-speakeasy-name-override: streamRevision
+    x-speakeasy-metadata:
+      after: sdk.functions.streamRevision()
+      before: sdk.functions.stream_function_revision_functions__function_id__call_stream__revision_id__post()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/spans/{span_id}/metrics"]["post"]
+    update:
+      x-speakeasy-group: spanMetrics
+      x-speakeasy-name-override: createMetric
+    x-speakeasy-metadata:
+      after: sdk.spanMetrics.createMetric()
+      before: sdk.span metrics.create_metric_spans__span_id__metrics_post()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/knowledge/{index_id}/register_file"]["post"]
+    update:
+      x-speakeasy-name-override: registerFile
+    x-speakeasy-metadata:
+      after: sdk.knowledge.registerFile()
+      before: sdk.knowledge.register_file_upload_knowledge__index_id__register_file_post()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/functions/{function_id}"]["delete"]
+    update:
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      after: sdk.functions.delete()
+      before: sdk.functions.delete_function_functions__function_id__delete()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/functions"]["get"]
+    update:
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      after: sdk.functions.list()
+      before: sdk.functions.list_functions_functions_get()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/generate-image"]["post"]
+    update:
+      x-speakeasy-name-override: generate
+    x-speakeasy-metadata:
+      after: sdk.images.generate()
+      before: sdk.images.generate_image_generate_image_post()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/generations"]["post"]
+    update:
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      after: sdk.generations.create()
+      before: sdk.generations.create_generation_generations_post()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/spans/{span_id}/metrics/{metric_id}"]["delete"]
+    update:
+      x-speakeasy-group: spanMetrics
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      after: sdk.spanMetrics.delete()
+      before: sdk.span metrics.delete_metric_spans__span_id__metrics__metric_id__delete()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/embeddings"]["post"]
+    update:
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      after: sdk.embeddings.create()
+      before: sdk.embeddings.create_embedding_embeddings_post()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/knowledge"]["post"]
+    update:
+      x-speakeasy-name-override: createBase
+    x-speakeasy-metadata:
+      after: sdk.knowledge.createBase()
+      before: sdk.knowledge.create_knowledge_base_knowledge_post()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/datasets/{dataset_id}/entries/{entry_id}"]["patch"]
+    update:
+      x-speakeasy-group: datasets.entries
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      after: sdk.datasets.entries.update()
+      before: sdk.datasets.update_dataset_entry_datasets__dataset_id__entries__entry_id__patch()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/spans/{span_id}"]["delete"]
+    update:
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      after: sdk.spans.delete()
+      before: sdk.spans.delete_span_spans__span_id__delete()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/models"]["get"]
+    update:
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      after: sdk.models.list()
+      before: sdk.models.list_models_models_get()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/knowledge/{index_id}/query"]["post"]
+    update:
+      x-speakeasy-name-override: query
+    x-speakeasy-metadata:
+      after: sdk.knowledge.query()
+      before: sdk.knowledge.query_knowledge_base_knowledge__index_id__query_post()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/functions/{function_id}"]["patch"]
+    update:
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      after: sdk.functions.update()
+      before: sdk.functions.update_function_functions__function_id__patch()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/spans/{span_id}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.spans.get()
+      before: sdk.spans.get_span_spans__span_id__get()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/functions/{function_id}/call/stream"]["post"]
+    update:
+      x-speakeasy-name-override: stream
+    x-speakeasy-metadata:
+      after: sdk.functions.stream()
+      before: sdk.functions.stream_function_functions__function_id__call_stream_post()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/functions/{function_id}/call/{revision_id}"]["post"]
+    update:
+      x-speakeasy-name-override: callRevision
+    x-speakeasy-metadata:
+      after: sdk.functions.callRevision()
+      before: sdk.functions.call_function_revision_functions__function_id__call__revision_id__post()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/generations/by-span/{span_id}"]["get"]
+    update:
+      x-speakeasy-name-override: getBySpan
+    x-speakeasy-metadata:
+      after: sdk.generations.getBySpan()
+      before: sdk.generations.get_generations_by_span_generations_by_span__span_id__get()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/knowledge/{index_id}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.knowledge.get()
+      before: sdk.knowledge.get_knowledge_base_knowledge__index_id__get()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/datasets/{dataset_id}"]["post"]
+    update:
+      x-speakeasy-name-override: createEntry
+    x-speakeasy-metadata:
+      after: sdk.datasets.createEntry()
+      before: sdk.datasets.create_dataset_entry_datasets__dataset_id__post()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/knowledge/{index_id}/upload_url"]["get"]
+    update:
+      x-speakeasy-name-override: getUploadUrl
+    x-speakeasy-metadata:
+      after: sdk.knowledge.getUploadUrl()
+      before: sdk.knowledge.get_upload_url_knowledge__index_id__upload_url_get()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/traces"]["get"]
+    update:
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      after: sdk.traces.list()
+      before: sdk.traces.list_traces_traces_get()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/knowledge/by-name/{index_name}"]["get"]
+    update:
+      x-speakeasy-name-override: getByName
+    x-speakeasy-metadata:
+      after: sdk.knowledge.getByName()
+      before: sdk.knowledge.get_knowledge_base_by_name_knowledge_by_name__index_name__get()
+      created_at: 1748331885171
+      reviewed_at: 1748331916695
+      type: method-name
+  - target: $["paths"]["/functions/{function_id}/revisions/{revision_id}"]["get"]
+    update:
+      x-speakeasy-name-override: getByRevision
+    x-speakeasy-metadata:
+      after: sdk.functions.getByRevision()
+      before: sdk.functions.get_function_by_revision_functions__function_id__revisions__revision_id__get()
+      created_at: 1748963179450
+      reviewed_at: 1748963187572
+      type: method-name
+  - target: $["paths"]["/openai/chat/completions"]["post"]
+    update:
+      x-speakeasy-name-override: createChatCompletion
+    x-speakeasy-metadata:
+      after: sdk.openai.createChatCompletion()
+      before: sdk.openai.chat_completions_openai_chat_completions_post()
+      created_at: 1748963179450
+      reviewed_at: 1748963187572
+      type: method-name
+  - target: $["paths"]["/call"]["post"]
+    update:
+      x-speakeasy-group: ''
+    x-speakeasy-metadata:
+      created_at: 1748963226099
+      type: user-edit
+  - target: $["paths"]["/call/stream"]["post"]
+    update:
+      x-speakeasy-group: ''
+    x-speakeasy-metadata:
+      created_at: 1748963226099
+      type: user-edit
+  - target: $["paths"]["/spans/{span_id}/generation"]["get"]
+    update:
+      x-speakeasy-name-override: getGeneration
+    x-speakeasy-metadata:
+      after: sdk.spans.getGeneration()
+      before: sdk.spans.get_generation_for_span_spans__span_id__generation_get()
+      created_at: 1749028645735
+      reviewed_at: 1749028649013
+      type: method-name
+  - target: $["paths"]["/models"]
+    update:
+      x-speakeasy-name-override: language_models
+    x-speakeasy-metadata:
+      created_at: 1749042270501
+      type: user-edit
+  - target: $["paths"]["/models"]["x-speakeasy-name-override"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1749042319094
+      type: user-edit
+  - target: $["paths"]["/models"]["get"]
+    update:
+      x-speakeasy-group: language_models
+    x-speakeasy-metadata:
+      created_at: 1749042561660
+      type: user-edit
+  - target: $["paths"]["/models"]["x-speakeasy-group"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1749042561660
+      type: user-edit
+  - target: $["components"]["schemas"]["app__api__public__v2__function_call__CallFunctionRequest"]["properties"]["input"]
+    update:
+      x-speakeasy-name-override: input
+    x-speakeasy-metadata:
+      created_at: 1749111087725
+      type: user-edit
+  - target: $["components"]["schemas"]["app__api__public__v2__function_call__CallFunctionRequest"]["properties"]["input"]["x-speakeasy-name-override"]
+    update: input
+    x-speakeasy-metadata:
+      created_at: 1749111641614
+      type: user-edit
+  - target: $
+    update:
+      patches:
+        - target: $['paths']['/call']['post']['parameters'][?(@.name=='input')]
+          update:
+            x-speakeasy-name-override: input
+    x-speakeasy-metadata:
+      created_at: 1749112245505
+      type: user-edit
+  - target: $["patches"]
+    remove: true
+    x-speakeasy-metadata:
+      created_at: 1749112331762
+      type: user-edit
+  - target: $["paths"]["/models/custom"]["get"]
+    update:
+      x-speakeasy-name-override: listCustom
+    x-speakeasy-metadata:
+      after: sdk.models.listCustom()
+      before: sdk.models.list_custom_models_models_custom_get()
+      created_at: 1749460858257
+      reviewed_at: 1749460861475
+      type: method-name
+  - target: $["paths"]["/models/custom/{model_id}"]["get"]
+    update:
+      x-speakeasy-name-override: getCustom
+    x-speakeasy-metadata:
+      after: sdk.models.getCustom()
+      before: sdk.models.get_custom_model_models_custom__model_id__get()
+      created_at: 1749460858257
+      reviewed_at: 1749460861475
+      type: method-name
+  - target: $["paths"]["/models/custom/{model_id}"]["patch"]
+    update:
+      x-speakeasy-name-override: updateCustom
+    x-speakeasy-metadata:
+      after: sdk.models.updateCustom()
+      before: sdk.models.update_custom_model_models_custom__model_id__patch()
+      created_at: 1749460858257
+      reviewed_at: 1749460861475
+      type: method-name
+  - target: $["paths"]["/models/custom/{model_id}"]["delete"]
+    update:
+      x-speakeasy-name-override: deleteCustom
+    x-speakeasy-metadata:
+      after: sdk.models.deleteCustom()
+      before: sdk.models.delete_custom_model_models_custom__model_id__delete()
+      created_at: 1749460858257
+      reviewed_at: 1749460861475
+      type: method-name
+  - target: $["paths"]["/models/custom/by-name/{name}"]["get"]
+    update:
+      x-speakeasy-name-override: getCustomByName
+    x-speakeasy-metadata:
+      after: sdk.models.getCustomByName()
+      before: sdk.models.get_custom_model_by_name_models_custom_by_name__name__get()
+      created_at: 1749460858257
+      reviewed_at: 1749460861475
+      type: method-name
+  - target: $["paths"]["/models/custom"]["post"]
+    update:
+      x-speakeasy-name-override: registerCustom
+    x-speakeasy-metadata:
+      after: sdk.models.registerCustom()
+      before: sdk.models.register_custom_model_models_custom_post()
+      created_at: 1749460858257
+      reviewed_at: 1749460861475
+      type: method-name
+  - target: $["paths"]["/models/custom"]["post"]
+    update:
+      x-speakeasy-group: language_models
+    x-speakeasy-metadata:
+      created_at: 1749461102450
+      type: user-edit
+  - target: $["paths"]["/models/custom"]["get"]
+    update:
+      x-speakeasy-group: language_models
+    x-speakeasy-metadata:
+      created_at: 1749461102450
+      type: user-edit
+  - target: $["paths"]["/models/custom/{model_id}"]["get"]
+    update:
+      x-speakeasy-group: language_models
+    x-speakeasy-metadata:
+      created_at: 1749461102450
+      type: user-edit
+  - target: $["paths"]["/models/custom/{model_id}"]["patch"]
+    update:
+      x-speakeasy-group: language_models
+    x-speakeasy-metadata:
+      created_at: 1749461102450
+      type: user-edit
+  - target: $["paths"]["/models/custom/{model_id}"]["delete"]
+    update:
+      x-speakeasy-group: language_models
+    x-speakeasy-metadata:
+      created_at: 1749461102450
+      type: user-edit
+  - target: $["paths"]["/models/custom/by-name/{name}"]["get"]
+    update:
+      x-speakeasy-group: language_models
+    x-speakeasy-metadata:
+      created_at: 1749461102450
+      type: user-edit
+  - target: $["paths"]["/analytics/usage"]["get"]
+    update:
+      x-speakeasy-name-override: getUsage
+    x-speakeasy-metadata:
+      after: sdk.analytics.getUsage()
+      before: sdk.analytics.usage_analytics_usage_get()
+      created_at: 1749725738239
+      reviewed_at: 1749725741861
+      type: method-name
+  - target: $["paths"]["/call/_schema/streaming-chunk"]["get"]
+    update:
+      x-speakeasy-name-override: getStreamingChunkSchema
+    x-speakeasy-metadata:
+      after: sdk.calls.getStreamingChunkSchema()
+      before: sdk.calls._get_streaming_chunk_schema_call__schema_streaming_chunk_get()
+      created_at: 1749725738239
+      reviewed_at: 1749725741861
+      type: method-name
+  - target: $["paths"]["/datasets/{dataset_id}/entries/query"]["post"]
+    update:
+      x-speakeasy-name-override: queryEntries
+    x-speakeasy-metadata:
+      after: sdk.datasets.queryEntries()
+      before: sdk.datasets.query_dataset_entries_datasets__dataset_id__entries_query_post()
+      created_at: 1749725738239
+      reviewed_at: 1749725741861
+      type: method-name
+  - target: $["paths"]["/knowledge/{knowledge_base_id}/files/{file_id}"]["delete"]
+    update:
+      x-speakeasy-name-override: deleteFile
+    x-speakeasy-metadata:
+      after: sdk.knowledge.deleteFile()
+      before: sdk.knowledge.delete_file_from_knowledge_base_knowledge__knowledge_base_id__files__file_id__delete()
+      created_at: 1750924712051
+      reviewed_at: 1750924722998
+      type: method-name
+  - target: $["paths"]["/functions/by-name/{name}"]["get"]
+    update:
+      x-speakeasy-name-override: getByName
+    x-speakeasy-metadata:
+      after: sdk.functions.getByName()
+      before: sdk.functions.get_function_by_name_functions_by_name__name__get()
+      created_at: 1750924712051
+      reviewed_at: 1750924722998
+      type: method-name
+  - target: $["paths"]["/knowledge/by-name/{knowledge_base_name}"]["get"]
+    update:
+      x-speakeasy-name-override: getByName
+    x-speakeasy-metadata:
+      after: sdk.knowledge.getByName()
+      before: sdk.knowledge.get_knowledge_base_by_name_knowledge_by_name__knowledge_base_name__get()
+      created_at: 1750924712051
+      reviewed_at: 1750924722998
+      type: method-name
+  - target: $["paths"]["/knowledge/{knowledge_base_id}/index"]["post"]
+    update:
+      x-speakeasy-name-override: add
+    x-speakeasy-metadata:
+      after: sdk.knowledge.add()
+      before: sdk.knowledge.add_knowledge__knowledge_base_id__index_post()
+      created_at: 1750924712051
+      reviewed_at: 1750924722998
+      type: method-name
+  - target: $["paths"]["/knowledge/{knowledge_base_id}/query"]["post"]
+    update:
+      x-speakeasy-name-override: query
+    x-speakeasy-metadata:
+      after: sdk.knowledge.query()
+      before: sdk.knowledge.query_knowledge_base_knowledge__knowledge_base_id__query_post()
+      created_at: 1750924712051
+      reviewed_at: 1750924722998
+      type: method-name
+  - target: $["paths"]["/knowledge/{knowledge_base_id}/register_file"]["post"]
+    update:
+      x-speakeasy-name-override: registerFileUpload
+    x-speakeasy-metadata:
+      after: sdk.knowledge.registerFileUpload()
+      before: sdk.knowledge.register_file_upload_knowledge__knowledge_base_id__register_file_post()
+      created_at: 1750924712051
+      reviewed_at: 1750924722998
+      type: method-name
+  - target: $["paths"]["/knowledge/{knowledge_base_id}/upload_url"]["get"]
+    update:
+      x-speakeasy-name-override: getUploadUrl
+    x-speakeasy-metadata:
+      after: sdk.knowledge.getUploadUrl()
+      before: sdk.knowledge.get_upload_url_knowledge__knowledge_base_id__upload_url_get()
+      created_at: 1750924712051
+      reviewed_at: 1750924722998
+      type: method-name
+  - target: $["paths"]["/knowledge/{knowledge_base_id}"]["delete"]
+    update:
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      after: sdk.knowledge.delete()
+      before: sdk.knowledge.delete_knowledge_base_knowledge__knowledge_base_id__delete()
+      created_at: 1750924712051
+      reviewed_at: 1750924722998
+      type: method-name
+  - target: $["paths"]["/knowledge/{knowledge_base_id}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.knowledge.get()
+      before: sdk.knowledge.get_knowledge_base_knowledge__knowledge_base_id__get()
+      created_at: 1750924712051
+      reviewed_at: 1750924722998
+      type: method-name
+  - target: $["paths"]["/spans/{span_id}/metrics/{metric_id}"]["patch"]
+    update:
+      x-speakeasy-group: spanMetrics
+      x-speakeasy-name-override: updateMetric
+    x-speakeasy-metadata:
+      after: sdk.spanMetrics.updateMetric()
+      before: sdk.span metrics.update_metric_spans__span_id__metrics__metric_id__patch()
+      created_at: 1750924712051
+      reviewed_at: 1750924722998
+      type: method-name
+  - target: $["paths"]["/knowledge"]["post"]["x-speakeasy-name-override"]
+    update: creat
+    x-speakeasy-metadata:
+      created_at: 1750925230100
+      type: user-edit
+  - target: $["paths"]["/knowledge"]["post"]["x-speakeasy-name-override"]
+    update: create
+    x-speakeasy-metadata:
+      created_at: 1750925236399
+      type: user-edit

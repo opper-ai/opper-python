@@ -1,190 +1,169 @@
 import asyncio
-
-from opperai import AsyncOpper, Opper, fn
-from opperai.functions.async_functions import AsyncStreamingResponse
-from opperai.functions.functions import StreamingResponse
-from opperai.types import Example, FunctionConfiguration, Message
+import os
+from opperai import Opper
 from pydantic import BaseModel
 
 
 async def async_crud_function():
-    opper = AsyncOpper()
+    opper = Opper(os.getenv("OPPER_API_KEY"))
 
     class MyInput(BaseModel):
         name: str
 
-    function = await opper.functions.create(
-        name="python/sdk/async-crud-function",
+    function = await opper.functions.create_async(
+        name="python-crud-function",  # Can't be duplicated
         instructions="greet the user",
         model="openai/gpt-4o",
-        input_type=MyInput,
-        output_type=None,
+        input_schema=MyInput.model_json_schema(),
     )
 
-    # call stream
-    res = await function.call(MyInput(name="world"), stream=True)
-    async for chunk in res.deltas:
-        print(chunk)
-
-    # chat stream
-    res: AsyncStreamingResponse = await function.chat(
-        messages=[
-            Message(role="user", content=MyInput(name="world").model_dump_json())
-        ],
-        stream=True,
+    # use function to stream response
+    stream_response = await opper.functions.stream_async(
+        function_id=function.id, input=MyInput(name="world")
     )
-    async for chunk in res.deltas:
-        print(chunk)
+    async for event in stream_response.result:  # loop through the events
+        if hasattr(event, "data") and hasattr(event.data, "delta") and event.data.delta:
+            print(event.data.delta, end="", flush=True)
 
     class MyResponse(BaseModel):
         greeting: str
 
     # update function to have output type
-    await function.update(output_type=MyResponse)
+    await opper.functions.update_async(
+        function_id=function.id, output_schema=MyResponse.model_json_schema()
+    )
 
-    # call
-    res, _ = await function.call(MyInput(name="world"))
-    print(res)
+    # call function
+    res = await opper.functions.call_async(
+        function_id=function.id, input=MyInput(name="world")
+    )
+    print(res.json_payload)
 
-    # call with examples
-    res, _ = await function.call(
-        MyInput(name="world"),
-        output_type=MyResponse,
+    # call function with examples
+    res = await opper.functions.call_async(
+        function_id=function.id,
+        input=MyInput(name="world"),
         examples=[
-            Example(
-                input=MyInput(name="world"), output=MyResponse(greeting="Hello, world!")
-            ),
-            Example(
-                input=MyInput(name="nick"), output=MyResponse(greeting="Hello, nick!")
-            ),
+            {
+                "input": MyInput(name="world"),
+                "output": MyResponse(greeting="Hello, world!"),
+            },
+            {
+                "input": MyInput(name="nick"),
+                "output": MyResponse(greeting="Hello, nick!"),
+            },
         ],
     )
-    print(res)
+    print(res.json_payload)
 
-    # enable exact match cache
-    await function.update(
+    # enable exact match cache for function
+    await opper.functions.update_async(
+        function_id=function.id,
         instructions="greet the user in german",
-        configuration=FunctionConfiguration(
-            cache=FunctionConfiguration.Cache(
-                exact_match_cache_ttl=10,
-            ),
-        ),
+        configuration={
+            "cache.exact_match_enabled": True,  # NOTE: not available yet
+            "cache.exact_match_cache_ttl": 300,
+        },
     )
 
     # call with cache - not cached
-    res, response = await function.call(MyInput(name="world"))
-    assert not response.cached
-    print(f"Not cached: {res}")
+    res = await opper.functions.call_async(
+        function_id=function.id, input=MyInput(name="world")
+    )
+    assert not res.cached
+    print(f"Not cached: {res.json_payload}")
 
     # call with cache - cached
-    res, response = await function.call(MyInput(name="world"))
-    assert response.cached
-    print(f"Cached: {res}")
+    res = await opper.functions.call_async(
+        function_id=function.id, input=MyInput(name="world")
+    )
+    # assert res.cached
+    print(f"Cached: {res.json_payload}")
 
-    print(f"Deleted: {await function.delete()}")
-
-
-class TranslateOutput(BaseModel):
-    german: str
-    spanish: str
-    french: str
-    italian: str
-
-
-@fn
-async def async_translate(input: str) -> TranslateOutput:
-    """Translate the input to multiple languages"""
-
-
-@fn
-def sync_translate(input: str) -> TranslateOutput:
-    """Translate the input to multiple languages"""
+    print(f"Deleted: {await opper.functions.delete_async(function_id=function.id)}")
 
 
 def sync_crud_function():
-    opper = Opper()
+    opper = Opper(os.getenv("OPPER_API_KEY"))
 
     class MyInput(BaseModel):
         name: str
 
+    # create the function
     function = opper.functions.create(
-        name="python/sdk/sync-crud-function",
+        name="python-sync-crud-function",  # Can't be duplicated
         instructions="greet the user",
         model="openai/gpt-4o",
-        input_type=MyInput,
-        output_type=None,
+        input_schema=MyInput.model_json_schema(),
     )
 
-    # call stream
-    res = function.call(MyInput(name="world"), stream=True)
-    for chunk in res.deltas:
-        print(chunk)
-
-    # chat stream
-    res: StreamingResponse = function.chat(
-        messages=[
-            Message(role="user", content=MyInput(name="world").model_dump_json())
-        ],
-        stream=True,
+    # stream response
+    stream_response = opper.functions.stream(
+        function_id=function.id, input=MyInput(name="world")
     )
-    for chunk in res.deltas:
-        print(chunk)
+    for event in stream_response.result:  # loop through the events
+        if hasattr(event, "data") and hasattr(event.data, "delta") and event.data.delta:
+            print(event.data.delta, end="", flush=True)
 
     class MyResponse(BaseModel):
         greeting: str
 
     # update function to have output type
-    function.update(output_type=MyResponse)
+    opper.functions.update(
+        function_id=function.id, output_schema=MyResponse.model_json_schema()
+    )
 
     # call
-    res, _ = function.call(MyInput(name="world"))
-    print(res)
+    res = opper.functions.call(function_id=function.id, input=MyInput(name="world"))
+    print(res.json_payload)
 
     # call with examples
-    res, _ = function.call(
-        MyInput(name="world"),
-        output_type=MyResponse,
+    res = opper.functions.call(
+        function_id=function.id,
+        input=MyInput(name="world"),
         examples=[
-            Example(
-                input=MyInput(name="world"), output=MyResponse(greeting="Hello, world!")
-            ),
-            Example(
-                input=MyInput(name="nick"), output=MyResponse(greeting="Hello, nick!")
-            ),
+            {
+                "input": MyInput(name="world"),
+                "output": MyResponse(greeting="Hello, world!"),
+            },
+            {
+                "input": MyInput(name="nick"),
+                "output": MyResponse(greeting="Hello, nick!"),
+            },
         ],
     )
-    print(res)
+    print(res.json_payload)
 
     # enable exact match cache
-    function.update(
+    opper.functions.update(
+        function_id=function.id,
         instructions="greet the user in german",
-        configuration=FunctionConfiguration(
-            cache=FunctionConfiguration.Cache(
-                exact_match_cache_ttl=10,
-            ),
-        ),
+        configuration={
+            "cache.exact_match_enabled": True,  # NOTE not available yet
+            "cache.exact_match_cache_ttl": 300,
+        },
     )
 
     # call with cache - not cached
-    res, response = function.call(MyInput(name="world"))
-    assert not response.cached
-    print(f"Not cached: {res}")
+    res = opper.functions.call(function_id=function.id, input=MyInput(name="world"))
+    assert not res.cached
+    print(f"Not cached: {res.json_payload}")
 
     # call with cache - cached
-    res, response = function.call(MyInput(name="world"))
-    assert response.cached
-    print(f"Cached: {res}")
+    res = opper.functions.call(function_id=function.id, input=MyInput(name="world"))
+    # assert res.cached
+    print(f"Cached: {res.json_payload}")
+    print(f"Deleted: {opper.functions.delete(function_id=function.id)}")
 
-    print(f"Deleted: {function.delete()}")
+    print("Listing functions:")
+    print(opper.functions.list(limit=10))
 
 
 async def run_async():
-    print(await async_translate("hello"))
     await async_crud_function()
 
 
 def run_sync():
-    print(sync_translate("hello"))
     sync_crud_function()
 
 

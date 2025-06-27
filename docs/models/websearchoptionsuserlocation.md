@@ -1,0 +1,9 @@
+# WebSearchOptionsUserLocation
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `approximate`                                                                                          | [models.WebSearchOptionsUserLocationApproximate](../models/websearchoptionsuserlocationapproximate.md) | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `type`                                                                                                 | *Literal["approximate"]*                                                                               | :heavy_check_mark:                                                                                     | N/A                                                                                                    |

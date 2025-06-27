@@ -1,22 +1,17 @@
-import asyncio
-from typing import Literal
-
+from opperai import Opper
 from pydantic import BaseModel, Field
+from typing import Literal
+import asyncio
+import os
 
-from opperai import AsyncOpper, evaluator
-from opperai.types import Metric
-
-opper = AsyncOpper()
+opper = Opper(http_bearer=os.getenv("OPPER_API_KEY"))
 
 
-@evaluator
-def linecount_evaluator(result, min_lines=10, max_lines=20):
+def linecount_evaluator(text, min_lines=10, max_lines=20):
     """Evaluator that checks if the text has enough lines."""
-    # Count non-empty lines
-    lines = [line for line in str(result).strip().split("\n") if line.strip()]
+    lines = [line for line in str(text).strip().split("\n") if line.strip()]
     line_count = len(lines)
 
-    # Calculate score
     if line_count < min_lines:
         score = line_count / min_lines
     elif line_count > max_lines:
@@ -27,17 +22,20 @@ def linecount_evaluator(result, min_lines=10, max_lines=20):
         score = 1.0
 
     return [
-        Metric(dimension="line_count.score", value=score, comment="Line count score"),
-        Metric(
-            dimension="line_count.count",
-            value=min(1.0, line_count / max_lines),
-            comment=f"Found {line_count} lines",
-        ),
+        {
+            "dimension": "line_count-score",
+            "value": score,
+            "comment": "Line count score",
+        },
+        {
+            "dimension": "line_count-count",
+            "value": min(1.0, line_count / max_lines),
+            "comment": f"Found {line_count} lines",
+        },
     ]
 
 
-@evaluator
-async def sentiment_evaluator(result, target="positive", span_id=None):
+async def sentiment_evaluator(text, target="positive", span_id=None):
     """Evaluator that checks sentiment of text using an LLM call."""
 
     # Define output schema for sentiment analysis
@@ -51,40 +49,40 @@ async def sentiment_evaluator(result, target="positive", span_id=None):
         )
 
     # Call LLM for sentiment analysis
-    response, _ = await opper.call(  # type: ignore
+    response = await opper.call_async(  # type: ignore
         name="sentiment_analysis",
         instructions="Analyze the sentiment of the text.",
-        input=result,
-        output_type=SentimentAnalysis,
+        input=text,
+        output_schema=SentimentAnalysis,
         parent_span_id=span_id,
     )
 
     # Check for target sentiment
-    success = response.sentiment == target
+    success = response.json_payload["sentiment"] == target
 
     # Return metrics
     return [
-        Metric(
-            dimension="sentiment.score",
-            value=response.score,
-            comment="Sentiment score (0.0-1.0)",
-        ),
-        Metric(
-            dimension="sentiment.match",
-            value=1.0 if success else 0.0,
-            comment=f"Target sentiment: {target}",
-        ),
+        {
+            "dimension": "sentiment-score",
+            "value": response.json_payload["score"],
+            "comment": "Sentiment score (0.0-1.0)",
+        },
+        {
+            "dimension": "sentiment-match",
+            "value": 1.0 if success else 0.0,
+            "comment": f"Target sentiment: {target}",
+        },
     ]
 
 
 async def main():
-    """Simple example showing how to use evaluations with Opper."""
+    """Simple example showing how to build your own evaluators and use them with Opper."""
 
     # Generate content to evaluate
     instructions = "Write a rhyming poem about the input. Make it at least 12 lines with a positive tone."
     input = "VR Headset"
 
-    result, response = await opper.call(  # type: ignore
+    result = await opper.call_async(  # type: ignore
         name="poem_generation",
         instructions=instructions,
         input=input,
@@ -92,30 +90,29 @@ async def main():
 
     print(f"\n--- Generated Poem ---\n{result}\n")
 
-    # Run evaluation using decorated evaluators
-    evaluation = await opper.evaluate(
-        span_id=response.span_id,  # type: ignore
-        evaluators=[
-            linecount_evaluator(result=result, min_lines=4, max_lines=10),
-            sentiment_evaluator(
-                result=result, target="positive", span_id=response.span_id
-            ),
-        ],
-    )
+    # Add metrics to Opper
+    linecount_metrics = linecount_evaluator(text=result, min_lines=4, max_lines=10)
+    sentiment_metrics = await sentiment_evaluator(text=result, target="positive")
+    metrics = linecount_metrics + sentiment_metrics
 
-    # Display results
+    for metric in metrics:
+        opper.span_metrics.create_metric(
+            dimension=metric["dimension"],
+            value=metric["value"],
+            comment=metric["comment"],
+            span_id=result.span_id,
+        )
+
+    # Retrieve metrics from Opper and display
     print("\n--- Evaluation Results ---")
 
     # Show metrics for each evaluator group
-    for group_name, metrics_list in evaluation.metrics.items():
-        print(f"\n{group_name}:")
-        # Calculate average score safely
-        values = [m.value for m in metrics_list if m.value is not None]
-        avg_score = sum(values) / len(values) if values else 0
-        print(f"  Average Score: {avg_score:.2f}")
-        print("  Metrics:")
-        for metric in metrics_list:
-            print(f"    - {metric.dimension}: {metric.value:.2f} ({metric.comment})")
+    retrieved_metrics = opper.span_metrics.list(span_id=result.span_id).data
+    for metric in retrieved_metrics:
+        print(f"\n{metric.dimension}:")
+        print(f"  Value: {metric.value}")
+        print(f"  Comment: {metric.comment}")
+        print("-" * 80)
 
 
 if __name__ == "__main__":

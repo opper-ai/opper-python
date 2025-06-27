@@ -1,0 +1,199 @@
+name: Release to PyPI
+
+on:
+  push:
+    branches: [main]
+    paths: ['pyproject.toml']
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g., 2.0.0, 2.1.0)'
+        required: true
+        type: string
+      create_release:
+        description: 'Create GitHub release'
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  id-token: write  # For trusted publishing to PyPI
+
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      should_release: ${{ steps.check.outputs.should_release }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2  # Need previous commit for comparison
+
+      - name: Get version from pyproject.toml
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            VERSION="${{ github.event.inputs.version }}"
+          else
+            VERSION=$(grep '^version = ' pyproject.toml | sed 's/version = "\(.*\)"/\1/')
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Current version: $VERSION"
+
+      - name: Check if version changed
+        id: check
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "should_release=true" >> $GITHUB_OUTPUT
+            echo "Manual release triggered"
+          else
+            # Check if version changed in the last commit
+            PREV_VERSION=$(git show HEAD~1:pyproject.toml | grep '^version = ' | sed 's/version = "\(.*\)"/\1/' || echo "")
+            CURR_VERSION="${{ steps.version.outputs.version }}"
+            
+            if [ "$PREV_VERSION" != "$CURR_VERSION" ]; then
+              echo "should_release=true" >> $GITHUB_OUTPUT
+              echo "Version changed: $PREV_VERSION → $CURR_VERSION"
+            else
+              echo "should_release=false" >> $GITHUB_OUTPUT
+              echo "Version unchanged: $CURR_VERSION"
+            fi
+          fi
+
+  release:
+    needs: check-version
+    if: needs.check-version.outputs.should_release == 'true'
+    runs-on: ubuntu-latest
+    environment: release
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install UV
+        uses: astral-sh/setup-uv@v3
+
+      - name: Install dependencies
+        run: |
+          uv sync --dev
+
+      - name: Update version (if manual)
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          # Update version in pyproject.toml
+          sed -i 's/^version = ".*"/version = "${{ needs.check-version.outputs.version }}"/' pyproject.toml
+          
+          # Commit the version update
+          git config --global user.name "opper-bot"
+          git config --global user.email "bot@opper.ai"
+          git add pyproject.toml
+          git commit -m "chore: bump version to ${{ needs.check-version.outputs.version }}"
+          git push
+
+      - name: Verify tests pass
+        run: |
+          # Run linting
+          uv run pylint src/ || echo "⚠️ Linting issues found"
+          
+          # Run type checking
+          uv run mypy src/ || echo "⚠️ Type checking issues found"
+          
+          # Run tests if they exist
+          if [ -f test.py ]; then
+            uv run python test.py
+          else
+            echo "No test.py found, skipping tests"
+          fi
+
+      - name: Build package
+        run: |
+          # Clean any previous builds
+          rm -rf dist/
+          
+          # Build with UV
+          uv build
+          
+          # Verify the build
+          ls -la dist/
+          
+          # Check package metadata
+          uv run python -c "
+          import tomllib
+          with open('pyproject.toml', 'rb') as f:
+              data = tomllib.load(f)
+          print(f\"Package: {data['project']['name']}\")
+          print(f\"Version: {data['project']['version']}\")
+          print(f\"Description: {data['project']['description']}\")
+          "
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
+          print-hash: true
+
+      - name: Create GitHub Release
+        if: github.event.inputs.create_release != 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${{ needs.check-version.outputs.version }}"
+          TAG_NAME="v$VERSION"
+          
+          # Create the tag
+          git tag "$TAG_NAME"
+          git push origin "$TAG_NAME"
+          
+          # Generate release notes
+          RELEASE_NOTES="$(cat <<EOF
+          ## 🚀 Opper AI Python SDK v$VERSION
+          
+          This release contains the latest updates to the Opper AI Python SDK.
+          
+          ### 📦 Installation
+          \`\`\`bash
+          pip install opperai==$VERSION
+          # or
+          uv add opperai==$VERSION
+          \`\`\`
+          
+          ### 🔗 Links
+          - [PyPI Package](https://pypi.org/project/opperai/$VERSION/)
+          - [Documentation](https://docs.opper.ai)
+          - [Examples](https://github.com/opper-ai/opper-python-speakeasy/tree/main/examples)
+          
+          ### 🤖 Generated SDK
+          This SDK is automatically generated from OpenAPI specifications using Speakeasy, with custom patches for enhanced Python integration.
+          
+          ---
+          
+          **Full Changelog**: https://github.com/opper-ai/opper-python-speakeasy/compare/v$(git describe --tags --abbrev=0 HEAD~1 2>/dev/null || echo "0.0.0")...v$VERSION
+          EOF
+          )"
+          
+          # Create the release
+          gh release create "$TAG_NAME" \
+            --title "🚀 Opper AI Python SDK v$VERSION" \
+            --notes "$RELEASE_NOTES" \
+            --latest \
+            dist/*
+
+      - name: Post-release summary
+        run: |
+          VERSION="${{ needs.check-version.outputs.version }}"
+          echo "🎉 Successfully released Opper AI Python SDK v$VERSION"
+          echo "📦 PyPI: https://pypi.org/project/opperai/$VERSION/"
+          echo "🏷️ GitHub: https://github.com/opper-ai/opper-python-speakeasy/releases/tag/v$VERSION"
+          
+          # Post to PR if this was triggered by a merge
+          if [ "${{ github.event_name }}" == "push" ]; then
+            echo "✅ Automatic release completed from main branch push"
+          else
+            echo "✅ Manual release completed"
+          fi

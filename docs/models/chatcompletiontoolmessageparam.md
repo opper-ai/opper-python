@@ -1,0 +1,10 @@
+# ChatCompletionToolMessageParam
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `content`                                                                                          | [models.ChatCompletionToolMessageParamContent](../models/chatcompletiontoolmessageparamcontent.md) | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `role`                                                                                             | *Literal["tool"]*                                                                                  | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `tool_call_id`                                                                                     | *str*                                                                                              | :heavy_check_mark:                                                                                 | N/A                                                                                                |

@@ -1,0 +1,9 @@
+# ChatCompletionPredictionContentParam
+
+
+## Fields
+
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `content`                                                                                                      | [models.ChatCompletionPredictionContentParamContent](../models/chatcompletionpredictioncontentparamcontent.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `type`                                                                                                         | *Literal["content"]*                                                                                           | :heavy_check_mark:                                                                                             | N/A                                                                                                            |

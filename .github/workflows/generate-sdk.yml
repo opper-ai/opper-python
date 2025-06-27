@@ -1,0 +1,148 @@
+name: Generate SDK
+
+on:
+  workflow_dispatch:
+    inputs:
+      create_pr:
+        description: 'Create PR if changes are detected'
+        type: boolean
+        default: true
+      target_branch:
+        description: 'Target branch for PR (default: main)'
+        type: string
+        default: 'main'
+  schedule:
+    # Run weekly on Mondays at 9 AM UTC
+    - cron: '0 9 * * 1'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install UV
+        uses: astral-sh/setup-uv@v3
+
+      - name: Install Python dependencies
+        run: |
+          uv sync --dev
+
+      - name: Install Speakeasy CLI
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/speakeasy-api/speakeasy/main/install.sh | sh
+          echo "$HOME/.speakeasy/bin" >> $GITHUB_PATH
+
+      - name: Verify Speakeasy installation
+        run: speakeasy --version
+
+      - name: Generate SDK
+        env:
+          SPEAKEASY_API_KEY: ${{ secrets.SPEAKEASY_API_KEY }}
+        run: |
+          # Run the full generation process
+          make generate
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "Changes detected:"
+            git status --porcelain
+          else
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "No changes detected"
+          fi
+
+      - name: Create Pull Request
+        if: steps.changes.outputs.changes == 'true' && (github.event.inputs.create_pr == 'true' || github.event_name == 'schedule')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Configure git
+          git config --global user.name "opper-bot"
+          git config --global user.email "bot@opper.ai"
+          
+          # Create a new branch with timestamp
+          BRANCH_NAME="sdk-update-$(date +%Y%m%d-%H%M%S)"
+          git checkout -b "$BRANCH_NAME"
+          
+          # Stage and commit changes
+          git add .
+          git commit -m "chore: update SDK via automated generation
+
+          - Run speakeasy generation
+          - Apply parameter name fixes
+          - Apply schema conversion patches
+          
+          Generated on: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          
+          🤖 This PR was created automatically by the SDK generation workflow."
+          
+          # Push the branch
+          git push origin "$BRANCH_NAME"
+          
+          # Create PR
+          TARGET_BRANCH="${{ github.event.inputs.target_branch || 'main' }}"
+          gh pr create \
+            --title "🔄 Automated SDK Update - $(date +%Y-%m-%d)" \
+            --body "$(cat <<'EOF'
+          ## 🤖 Automated SDK Generation
+          
+          This PR contains updates from the latest SDK generation run.
+          
+          ### Changes Made
+          - ✅ Speakeasy SDK generation
+          - ✅ Parameter name fixes (input_ → input)  
+          - ✅ Schema conversion patches applied
+          
+          ### Generated Files
+          The following files were automatically generated/updated:
+          - `src/opperai/`
+          - `docs/`
+          - `README.md`
+          - `USAGE.md`
+          
+          ### Review Checklist
+          - [ ] Generated code looks correct
+          - [ ] Examples still work
+          - [ ] No breaking changes in public API
+          - [ ] Version bump needed? (if so, update pyproject.toml)
+          
+          ---
+          
+          Generated on: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          
+          🤖 Created by automated workflow
+          EOF
+          )" \
+            --base "$TARGET_BRANCH" \
+            --head "$BRANCH_NAME" \
+            --label "automated" \
+            --label "sdk-update"
+
+      - name: Summary
+        run: |
+          if [ "${{ steps.changes.outputs.changes }}" == "true" ]; then
+            echo "✅ SDK generation completed with changes"
+            if [ "${{ github.event.inputs.create_pr }}" == "true" ] || [ "${{ github.event_name }}" == "schedule" ]; then
+              echo "📝 Pull request created"
+            else
+              echo "⚠️  Changes detected but PR creation skipped"
+            fi
+          else
+            echo "✅ SDK generation completed - no changes needed"
+          fi

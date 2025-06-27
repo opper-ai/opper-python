@@ -1,0 +1,10 @@
+# ChatCompletionSystemMessageParam
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `content`                                                                                              | [models.ChatCompletionSystemMessageParamContent](../models/chatcompletionsystemmessageparamcontent.md) | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `role`                                                                                                 | *Literal["system"]*                                                                                    | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `name`                                                                                                 | *Optional[str]*                                                                                        | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |

@@ -1,0 +1,10 @@
+# ListTracesTracesGetRequest
+
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `name`                                                                                            | *OptionalNullable[str]*                                                                           | :heavy_minus_sign:                                                                                | The name of the trace to filter by, the name of a trace is the name of the root span of the trace |
+| `offset`                                                                                          | *Optional[int]*                                                                                   | :heavy_minus_sign:                                                                                | The offset to start the list from                                                                 |
+| `limit`                                                                                           | *Optional[int]*                                                                                   | :heavy_minus_sign:                                                                                | The number of traces to return                                                                    |

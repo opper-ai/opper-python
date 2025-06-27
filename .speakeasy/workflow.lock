@@ -1,0 +1,38 @@
+speakeasyVersion: 1.570.2
+sources:
+    FastAPI:
+        sourceNamespace: fast-api
+        sourceRevisionDigest: sha256:66206b6c88c3c61ce2ba62b8badc9b6d792a1f3b2bb3b53ffe56ebb6e33c0e6f
+        sourceBlobDigest: sha256:c589aa220d2edd1ec19274af5a82e4f42afba6ee13c29b7b94ea86c6c6750669
+        tags:
+            - latest
+            - 2.0.0
+targets:
+    opper:
+        source: FastAPI
+        sourceNamespace: fast-api
+        sourceRevisionDigest: sha256:66206b6c88c3c61ce2ba62b8badc9b6d792a1f3b2bb3b53ffe56ebb6e33c0e6f
+        sourceBlobDigest: sha256:c589aa220d2edd1ec19274af5a82e4f42afba6ee13c29b7b94ea86c6c6750669
+        codeSamplesNamespace: fast-api-python-code-samples
+        codeSamplesRevisionDigest: sha256:222418eb8b09f35c79d23b886cb48984f58f7d5f3c9cbc4f8064c707cee1783a
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        FastAPI:
+            inputs:
+                - location: https://api.opper.ai/v2/openapi.json
+            overlays:
+                - location: .speakeasy/speakeasy-modifications-overlay.yaml
+            registry:
+                location: registry.speakeasyapi.dev/opper/opper/fast-api
+    targets:
+        opper:
+            target: python
+            source: FastAPI
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/opper/opper/fast-api-python-code-samples
+                labelOverride:
+                    fixedValue: Python (SDK)
+                blocking: false

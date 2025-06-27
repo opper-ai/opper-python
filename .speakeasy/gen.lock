@@ -1,0 +1,1836 @@
+lockVersion: 2.0.0
+id: c75567cf-9def-4617-8ae7-65af6f367b68
+management:
+  docChecksum: b257fe397b830f66ca9655441beb6bbb
+  docVersion: 2.0.0
+  speakeasyVersion: 1.570.2
+  generationVersion: 2.638.5
+  releaseVersion: 1.0.0
+  configChecksum: 5c696518717cf88e97b25602d10ac86a
+features:
+  python:
+    additionalDependencies: 1.0.0
+    additionalProperties: 1.0.1
+    constsAndDefaults: 1.0.5
+    core: 5.19.3
+    customCodeRegions: 0.1.1
+    defaultEnabledRetries: 0.2.0
+    devContainers: 3.0.0
+    enumUnions: 0.1.0
+    envVarSecurityUsage: 0.3.2
+    flatRequests: 1.0.1
+    flattening: 3.1.1
+    globalSecurity: 3.0.3
+    globalSecurityCallbacks: 1.0.0
+    globalSecurityFlattening: 1.0.0
+    globalServerURLs: 3.1.1
+    groups: 3.0.0
+    methodArguments: 1.0.2
+    mockServer: 0.1.0
+    nameOverrides: 3.0.1
+    nullables: 1.0.1
+    responseFormat: 1.0.1
+    retries: 3.0.2
+    sdkHooks: 1.1.0
+    serverEvents: 1.0.7
+    unions: 3.0.4
+generatedFiles:
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
+  - .gitattributes
+  - .python-version
+  - .vscode/settings.json
+  - USAGE.md
+  - docs/errors/badrequesterror.md
+  - docs/errors/conflicterror.md
+  - docs/errors/error.md
+  - docs/errors/notfounderror.md
+  - docs/errors/requestvalidationerror.md
+  - docs/errors/unauthorizederror.md
+  - docs/models/addknowledgeknowledgebaseidindexpostrequest.md
+  - docs/models/addrequest.md
+  - docs/models/annotation.md
+  - docs/models/annotationurlcitation.md
+  - docs/models/appapipublicv2functioncallcallfunctionrequest.md
+  - docs/models/appapipublicv2functioncallcallfunctionresponse.md
+  - docs/models/appapipublicv2functionscallfunctionrequest.md
+  - docs/models/appapipublicv2functionscallfunctionresponse.md
+  - docs/models/audio.md
+  - docs/models/callfunctionfunctionsfunctionidcallpostrequest.md
+  - docs/models/callfunctionrevisionfunctionsfunctionidcallrevisionidpostrequest.md
+  - docs/models/chatcompletion.md
+  - docs/models/chatcompletionassistantmessageparam.md
+  - docs/models/chatcompletionassistantmessageparamcontent1.md
+  - docs/models/chatcompletionassistantmessageparamcontent2.md
+  - docs/models/chatcompletionaudio.md
+  - docs/models/chatcompletionaudioparam.md
+  - docs/models/chatcompletionaudioparamformat.md
+  - docs/models/chatcompletioncontentpartimageparam.md
+  - docs/models/chatcompletioncontentpartinputaudioparam.md
+  - docs/models/chatcompletioncontentpartrefusalparam.md
+  - docs/models/chatcompletioncontentparttextparam.md
+  - docs/models/chatcompletiondevelopermessageparam.md
+  - docs/models/chatcompletiondevelopermessageparamcontent.md
+  - docs/models/chatcompletionfunctioncalloptionparam.md
+  - docs/models/chatcompletionfunctionmessageparam.md
+  - docs/models/chatcompletionmessage.md
+  - docs/models/chatcompletionmessagetoolcall.md
+  - docs/models/chatcompletionmessagetoolcallparam.md
+  - docs/models/chatcompletionnamedtoolchoiceparam.md
+  - docs/models/chatcompletionnonstreaming.md
+  - docs/models/chatcompletionnonstreamingfunctioncallenum.md
+  - docs/models/chatcompletionnonstreamingfunctioncallunion.md
+  - docs/models/chatcompletionnonstreamingmessage.md
+  - docs/models/chatcompletionnonstreamingmodality.md
+  - docs/models/chatcompletionnonstreamingreasoningeffort.md
+  - docs/models/chatcompletionnonstreamingresponseformat.md
+  - docs/models/chatcompletionnonstreamingservicetier.md
+  - docs/models/chatcompletionnonstreamingstop.md
+  - docs/models/chatcompletionnonstreamingtoolchoiceenum.md
+  - docs/models/chatcompletionnonstreamingtoolchoiceunion.md
+  - docs/models/chatcompletionpredictioncontentparam.md
+  - docs/models/chatcompletionpredictioncontentparamcontent.md
+  - docs/models/chatcompletionservicetier.md
+  - docs/models/chatcompletionstreaming.md
+  - docs/models/chatcompletionstreamingfunctioncallenum.md
+  - docs/models/chatcompletionstreamingfunctioncallunion.md
+  - docs/models/chatcompletionstreamingmessage.md
+  - docs/models/chatcompletionstreamingmodality.md
+  - docs/models/chatcompletionstreamingreasoningeffort.md
+  - docs/models/chatcompletionstreamingresponseformat.md
+  - docs/models/chatcompletionstreamingservicetier.md
+  - docs/models/chatcompletionstreamingstop.md
+  - docs/models/chatcompletionstreamingtoolchoiceenum.md
+  - docs/models/chatcompletionstreamingtoolchoiceunion.md
+  - docs/models/chatcompletionstreamoptionsparam.md
+  - docs/models/chatcompletionsystemmessageparam.md
+  - docs/models/chatcompletionsystemmessageparamcontent.md
+  - docs/models/chatcompletiontokenlogprob.md
+  - docs/models/chatcompletiontoolmessageparam.md
+  - docs/models/chatcompletiontoolmessageparamcontent.md
+  - docs/models/chatcompletiontoolparam.md
+  - docs/models/chatcompletionusermessageparam.md
+  - docs/models/chatcompletionusermessageparamcontent1.md
+  - docs/models/chatcompletionusermessageparamcontent2.md
+  - docs/models/choice.md
+  - docs/models/choicelogprobs.md
+  - docs/models/completiontokensdetails.md
+  - docs/models/completionusage.md
+  - docs/models/createdatasetentrydatasetsdatasetidpostrequest.md
+  - docs/models/createdatasetentryrequest.md
+  - docs/models/createdatasetentryresponse.md
+  - docs/models/createembeddingrequest.md
+  - docs/models/createembeddingresponse.md
+  - docs/models/createfunctionrequest.md
+  - docs/models/createfunctionresponse.md
+  - docs/models/createknowledgebaserequest.md
+  - docs/models/createknowledgebaseresponse.md
+  - docs/models/createmetricspansspanidmetricspostrequest.md
+  - docs/models/createspanmetricrequest.md
+  - docs/models/createspanmetricresponse.md
+  - docs/models/createspanrequest.md
+  - docs/models/createspanresponse.md
+  - docs/models/deletecustommodelmodelscustommodeliddeleterequest.md
+  - docs/models/deletedatasetentrydatasetsdatasetidentriesentryiddeleterequest.md
+  - docs/models/deletefilefromknowledgebaseknowledgeknowledgebaseidfilesfileiddeleterequest.md
+  - docs/models/deletefunctionfunctionsfunctioniddeleterequest.md
+  - docs/models/deleteknowledgebaseknowledgeknowledgebaseiddeleterequest.md
+  - docs/models/deletemetricspansspanidmetricsmetriciddeleterequest.md
+  - docs/models/deletespanspansspaniddeleterequest.md
+  - docs/models/detail.md
+  - docs/models/example.md
+  - docs/models/examplein.md
+  - docs/models/file.md
+  - docs/models/filefile.md
+  - docs/models/fileprocessconfiguration.md
+  - docs/models/filter_.md
+  - docs/models/finishreason.md
+  - docs/models/functioncallconfiguration.md
+  - docs/models/functioncallinput.md
+  - docs/models/functioncalloutput.md
+  - docs/models/functiondefinition.md
+  - docs/models/functionoutput.md
+  - docs/models/functionstreamcallstreampostdata.md
+  - docs/models/functionstreamcallstreampostresponse.md
+  - docs/models/functionstreamcallstreampostresponsebody.md
+  - docs/models/getcustommodelbynamemodelscustombynamenamegetrequest.md
+  - docs/models/getcustommodelmodelscustommodelidgetrequest.md
+  - docs/models/getcustommodelresponse.md
+  - docs/models/getdatasetentriesresponse.md
+  - docs/models/getdatasetentrydatasetsdatasetidentriesentryidgetrequest.md
+  - docs/models/getdatasetentryresponse.md
+  - docs/models/getfunctionbynamefunctionsbynamenamegetrequest.md
+  - docs/models/getfunctionbyrevisionfunctionsfunctionidrevisionsrevisionidgetrequest.md
+  - docs/models/getfunctionfunctionsfunctionidgetrequest.md
+  - docs/models/getfunctionresponse.md
+  - docs/models/getknowledgebasebynameknowledgebynameknowledgebasenamegetrequest.md
+  - docs/models/getknowledgebaseknowledgeknowledgebaseidgetrequest.md
+  - docs/models/getknowledgebaseresponse.md
+  - docs/models/getmetricspansspanidmetricsmetricidgetrequest.md
+  - docs/models/getspanmetricresponse.md
+  - docs/models/getspanresponse.md
+  - docs/models/getspanspansspanidgetrequest.md
+  - docs/models/gettraceresponse.md
+  - docs/models/gettracetracestraceidgetrequest.md
+  - docs/models/getuploadurlknowledgeknowledgebaseiduploadurlgetrequest.md
+  - docs/models/getuploadurlresponse.md
+  - docs/models/getusageresultitem.md
+  - docs/models/granularity.md
+  - docs/models/imageurl.md
+  - docs/models/input.md
+  - docs/models/inputaudio.md
+  - docs/models/inputaudioformat.md
+  - docs/models/jsonpayload.md
+  - docs/models/jsonschema.md
+  - docs/models/listcustommodelsmodelscustomgetrequest.md
+  - docs/models/listcustommodelsresponseitem.md
+  - docs/models/listdatasetentriesdatasetsdatasetidentriesgetrequest.md
+  - docs/models/listfunctionrevisionresponse.md
+  - docs/models/listfunctionrevisionsfunctionsfunctionidrevisionsgetrequest.md
+  - docs/models/listfunctionsfunctionsgetrequest.md
+  - docs/models/listfunctionsresponseitem.md
+  - docs/models/listknowledgebasesknowledgegetrequest.md
+  - docs/models/listknowledgebasesresponse.md
+  - docs/models/listlanguagemodelsresponse.md
+  - docs/models/listmetricsspansspanidmetricsgetrequest.md
+  - docs/models/listmodelsmodelsgetrequest.md
+  - docs/models/listspanmetricsresponse.md
+  - docs/models/listtracesresponse.md
+  - docs/models/listtracestracesgetrequest.md
+  - docs/models/meta.md
+  - docs/models/model.md
+  - docs/models/op.md
+  - docs/models/openaitypeschatchatcompletionmessagetoolcallparamfunction.md
+  - docs/models/openaitypeschatchatcompletionnamedtoolchoiceparamfunction.md
+  - docs/models/openaitypeschatcompletioncreateparamsfunction.md
+  - docs/models/paginatedresponsegetdatasetentriesresponse.md
+  - docs/models/paginatedresponselistcustommodelsresponseitem.md
+  - docs/models/paginatedresponselistfunctionrevisionresponse.md
+  - docs/models/paginatedresponselistfunctionsresponseitem.md
+  - docs/models/paginatedresponselistknowledgebasesresponse.md
+  - docs/models/paginatedresponselistlanguagemodelsresponse.md
+  - docs/models/paginatedresponselistspanmetricsresponse.md
+  - docs/models/paginatedresponselisttracesresponse.md
+  - docs/models/payload.md
+  - docs/models/pdfprocessorname.md
+  - docs/models/prompttokensdetails.md
+  - docs/models/querydatasetentriesdatasetsdatasetidentriesquerypostrequest.md
+  - docs/models/querydatasetentriesresponse.md
+  - docs/models/queryknowledgebaseknowledgeknowledgebaseidquerypostrequest.md
+  - docs/models/queryknowledgebaserequest.md
+  - docs/models/queryknowledgebaseresponse.md
+  - docs/models/registercustommodelrequest.md
+  - docs/models/registercustommodelresponse.md
+  - docs/models/registerfileuploadknowledgeknowledgebaseidregisterfilepostrequest.md
+  - docs/models/registerfileuploadrequest.md
+  - docs/models/registerfileuploadresponse.md
+  - docs/models/responseformatjsonobject.md
+  - docs/models/responseformatjsonschema.md
+  - docs/models/responseformattext.md
+  - docs/models/savetodatasetresponse.md
+  - docs/models/savetodatasetspansspanidsaveexamplespostrequest.md
+  - docs/models/searchcontextsize.md
+  - docs/models/security.md
+  - docs/models/spandata.md
+  - docs/models/spanmetricdata.md
+  - docs/models/spanschema.md
+  - docs/models/streamfunctionfunctionsfunctionidcallstreampostdata.md
+  - docs/models/streamfunctionfunctionsfunctionidcallstreampostrequest.md
+  - docs/models/streamfunctionfunctionsfunctionidcallstreampostresponse.md
+  - docs/models/streamfunctionfunctionsfunctionidcallstreampostresponsebody.md
+  - docs/models/streamfunctionrevisionfunctionsfunctionidcallstreamrevisionidpostdata.md
+  - docs/models/streamfunctionrevisionfunctionsfunctionidcallstreamrevisionidpostrequest.md
+  - docs/models/streamfunctionrevisionfunctionsfunctionidcallstreamrevisionidpostresponse.md
+  - docs/models/streamfunctionrevisionfunctionsfunctionidcallstreamrevisionidpostresponsebody.md
+  - docs/models/tmodel.md
+  - docs/models/tmodel1.md
+  - docs/models/toplogprob.md
+  - docs/models/updatecustommodelmodelscustommodelidpatchrequest.md
+  - docs/models/updatecustommodelrequest.md
+  - docs/models/updatecustommodelresponse.md
+  - docs/models/updatedatasetentrydatasetsdatasetidentriesentryidpatchrequest.md
+  - docs/models/updatedatasetentryrequest.md
+  - docs/models/updatedatasetentryresponse.md
+  - docs/models/updatefunctionfunctionsfunctionidpatchrequest.md
+  - docs/models/updatefunctionrequest.md
+  - docs/models/updatefunctionresponse.md
+  - docs/models/updatemetricspansspanidmetricsmetricidpatchrequest.md
+  - docs/models/updatespanmetricrequest.md
+  - docs/models/updatespanmetricresponse.md
+  - docs/models/updatespanrequest.md
+  - docs/models/updatespanresponse.md
+  - docs/models/updatespanspansspanidpatchrequest.md
+  - docs/models/usageanalyticsusagegetrequest.md
+  - docs/models/utils/retryconfig.md
+  - docs/models/value1.md
+  - docs/models/value2.md
+  - docs/models/voice.md
+  - docs/models/voiceenum.md
+  - docs/models/websearchoptions.md
+  - docs/models/websearchoptionsuserlocation.md
+  - docs/models/websearchoptionsuserlocationapproximate.md
+  - docs/sdks/analytics/README.md
+  - docs/sdks/datasets/README.md
+  - docs/sdks/embeddings/README.md
+  - docs/sdks/entries/README.md
+  - docs/sdks/functions/README.md
+  - docs/sdks/knowledge/README.md
+  - docs/sdks/languagemodels/README.md
+  - docs/sdks/openai/README.md
+  - docs/sdks/opper/README.md
+  - docs/sdks/revisions/README.md
+  - docs/sdks/spanmetrics/README.md
+  - docs/sdks/spans/README.md
+  - docs/sdks/traces/README.md
+  - poetry.toml
+  - py.typed
+  - pylintrc
+  - pyproject.toml
+  - scripts/publish.sh
+  - src/opperai/__init__.py
+  - src/opperai/_hooks/__init__.py
+  - src/opperai/_hooks/sdkhooks.py
+  - src/opperai/_hooks/types.py
+  - src/opperai/_version.py
+  - src/opperai/analytics.py
+  - src/opperai/basesdk.py
+  - src/opperai/datasets.py
+  - src/opperai/embeddings.py
+  - src/opperai/entries.py
+  - src/opperai/errors/__init__.py
+  - src/opperai/errors/apierror.py
+  - src/opperai/errors/badrequesterror.py
+  - src/opperai/errors/conflicterror.py
+  - src/opperai/errors/error.py
+  - src/opperai/errors/notfounderror.py
+  - src/opperai/errors/requestvalidationerror.py
+  - src/opperai/errors/unauthorizederror.py
+  - src/opperai/functions.py
+  - src/opperai/httpclient.py
+  - src/opperai/knowledge.py
+  - src/opperai/language_models.py
+  - src/opperai/models/__init__.py
+  - src/opperai/models/add_knowledge_knowledge_base_id_index_postop.py
+  - src/opperai/models/addrequest.py
+  - src/opperai/models/annotation.py
+  - src/opperai/models/annotationurlcitation.py
+  - src/opperai/models/app_api_public_v2_function_call_callfunctionrequest.py
+  - src/opperai/models/app_api_public_v2_function_call_callfunctionresponse.py
+  - src/opperai/models/app_api_public_v2_functions_callfunctionrequest.py
+  - src/opperai/models/app_api_public_v2_functions_callfunctionresponse.py
+  - src/opperai/models/audio.py
+  - src/opperai/models/call_function_functions_function_id_call_postop.py
+  - src/opperai/models/call_function_revision_functions_function_id_call_revision_id_postop.py
+  - src/opperai/models/chat_completions_openai_chat_completions_postop.py
+  - src/opperai/models/chatcompletion.py
+  - src/opperai/models/chatcompletionassistantmessageparam.py
+  - src/opperai/models/chatcompletionaudio.py
+  - src/opperai/models/chatcompletionaudioparam.py
+  - src/opperai/models/chatcompletioncontentpartimageparam.py
+  - src/opperai/models/chatcompletioncontentpartinputaudioparam.py
+  - src/opperai/models/chatcompletioncontentpartrefusalparam.py
+  - src/opperai/models/chatcompletioncontentparttextparam.py
+  - src/opperai/models/chatcompletiondevelopermessageparam.py
+  - src/opperai/models/chatcompletionfunctioncalloptionparam.py
+  - src/opperai/models/chatcompletionfunctionmessageparam.py
+  - src/opperai/models/chatcompletionmessage.py
+  - src/opperai/models/chatcompletionmessagetoolcall.py
+  - src/opperai/models/chatcompletionmessagetoolcallparam.py
+  - src/opperai/models/chatcompletionnamedtoolchoiceparam.py
+  - src/opperai/models/chatcompletionnonstreaming.py
+  - src/opperai/models/chatcompletionpredictioncontentparam.py
+  - src/opperai/models/chatcompletionstreaming.py
+  - src/opperai/models/chatcompletionstreamoptionsparam.py
+  - src/opperai/models/chatcompletionsystemmessageparam.py
+  - src/opperai/models/chatcompletiontokenlogprob.py
+  - src/opperai/models/chatcompletiontoolmessageparam.py
+  - src/opperai/models/chatcompletiontoolparam.py
+  - src/opperai/models/chatcompletionusermessageparam.py
+  - src/opperai/models/choice.py
+  - src/opperai/models/choicelogprobs.py
+  - src/opperai/models/completiontokensdetails.py
+  - src/opperai/models/completionusage.py
+  - src/opperai/models/create_dataset_entry_datasets_dataset_id_postop.py
+  - src/opperai/models/create_metric_spans_span_id_metrics_postop.py
+  - src/opperai/models/createdatasetentryrequest.py
+  - src/opperai/models/createdatasetentryresponse.py
+  - src/opperai/models/createembeddingrequest.py
+  - src/opperai/models/createembeddingresponse.py
+  - src/opperai/models/createfunctionrequest.py
+  - src/opperai/models/createfunctionresponse.py
+  - src/opperai/models/createknowledgebaserequest.py
+  - src/opperai/models/createknowledgebaseresponse.py
+  - src/opperai/models/createspanmetricrequest.py
+  - src/opperai/models/createspanmetricresponse.py
+  - src/opperai/models/createspanrequest.py
+  - src/opperai/models/createspanresponse.py
+  - src/opperai/models/delete_custom_model_models_custom_model_id_deleteop.py
+  - src/opperai/models/delete_dataset_entry_datasets_dataset_id_entries_entry_id_deleteop.py
+  - src/opperai/models/delete_file_from_knowledge_base_knowledge_knowledge_base_id_files_file_id_deleteop.py
+  - src/opperai/models/delete_function_functions_function_id_deleteop.py
+  - src/opperai/models/delete_knowledge_base_knowledge_knowledge_base_id_deleteop.py
+  - src/opperai/models/delete_metric_spans_span_id_metrics_metric_id_deleteop.py
+  - src/opperai/models/delete_span_spans_span_id_deleteop.py
+  - src/opperai/models/example.py
+  - src/opperai/models/examplein.py
+  - src/opperai/models/file.py
+  - src/opperai/models/filefile.py
+  - src/opperai/models/fileprocessconfiguration.py
+  - src/opperai/models/filter_.py
+  - src/opperai/models/function_output.py
+  - src/opperai/models/function_stream_call_stream_postop.py
+  - src/opperai/models/functioncall_input.py
+  - src/opperai/models/functioncall_output.py
+  - src/opperai/models/functioncallconfiguration.py
+  - src/opperai/models/functiondefinition.py
+  - src/opperai/models/get_custom_model_by_name_models_custom_by_name_name_getop.py
+  - src/opperai/models/get_custom_model_models_custom_model_id_getop.py
+  - src/opperai/models/get_dataset_entry_datasets_dataset_id_entries_entry_id_getop.py
+  - src/opperai/models/get_function_by_name_functions_by_name_name_getop.py
+  - src/opperai/models/get_function_by_revision_functions_function_id_revisions_revision_id_getop.py
+  - src/opperai/models/get_function_functions_function_id_getop.py
+  - src/opperai/models/get_knowledge_base_by_name_knowledge_by_name_knowledge_base_name_getop.py
+  - src/opperai/models/get_knowledge_base_knowledge_knowledge_base_id_getop.py
+  - src/opperai/models/get_metric_spans_span_id_metrics_metric_id_getop.py
+  - src/opperai/models/get_span_spans_span_id_getop.py
+  - src/opperai/models/get_trace_traces_trace_id_getop.py
+  - src/opperai/models/get_upload_url_knowledge_knowledge_base_id_upload_url_getop.py
+  - src/opperai/models/getcustommodelresponse.py
+  - src/opperai/models/getdatasetentriesresponse.py
+  - src/opperai/models/getdatasetentryresponse.py
+  - src/opperai/models/getfunctionresponse.py
+  - src/opperai/models/getknowledgebaseresponse.py
+  - src/opperai/models/getspanmetricresponse.py
+  - src/opperai/models/getspanresponse.py
+  - src/opperai/models/gettraceresponse.py
+  - src/opperai/models/getuploadurlresponse.py
+  - src/opperai/models/getusageresultitem.py
+  - src/opperai/models/granularity.py
+  - src/opperai/models/imageurl.py
+  - src/opperai/models/inputaudio.py
+  - src/opperai/models/jsonschema.py
+  - src/opperai/models/list_custom_models_models_custom_getop.py
+  - src/opperai/models/list_dataset_entries_datasets_dataset_id_entries_getop.py
+  - src/opperai/models/list_function_revisions_functions_function_id_revisions_getop.py
+  - src/opperai/models/list_functions_functions_getop.py
+  - src/opperai/models/list_knowledge_bases_knowledge_getop.py
+  - src/opperai/models/list_metrics_spans_span_id_metrics_getop.py
+  - src/opperai/models/list_models_models_getop.py
+  - src/opperai/models/list_traces_traces_getop.py
+  - src/opperai/models/listcustommodelsresponseitem.py
+  - src/opperai/models/listfunctionrevisionresponse.py
+  - src/opperai/models/listfunctionsresponseitem.py
+  - src/opperai/models/listknowledgebasesresponse.py
+  - src/opperai/models/listlanguagemodelsresponse.py
+  - src/opperai/models/listspanmetricsresponse.py
+  - src/opperai/models/listtracesresponse.py
+  - src/opperai/models/meta.py
+  - src/opperai/models/model.py
+  - src/opperai/models/op.py
+  - src/opperai/models/openai_types_chat_chat_completion_message_tool_call_param_function.py
+  - src/opperai/models/openai_types_chat_chat_completion_named_tool_choice_param_function.py
+  - src/opperai/models/openai_types_chat_completion_create_params_function.py
+  - src/opperai/models/paginatedresponse_getdatasetentriesresponse_.py
+  - src/opperai/models/paginatedresponse_listcustommodelsresponseitem_.py
+  - src/opperai/models/paginatedresponse_listfunctionrevisionresponse_.py
+  - src/opperai/models/paginatedresponse_listfunctionsresponseitem_.py
+  - src/opperai/models/paginatedresponse_listknowledgebasesresponse_.py
+  - src/opperai/models/paginatedresponse_listlanguagemodelsresponse_.py
+  - src/opperai/models/paginatedresponse_listspanmetricsresponse_.py
+  - src/opperai/models/paginatedresponse_listtracesresponse_.py
+  - src/opperai/models/pdfprocessorname.py
+  - src/opperai/models/prompttokensdetails.py
+  - src/opperai/models/query_dataset_entries_datasets_dataset_id_entries_query_postop.py
+  - src/opperai/models/query_knowledge_base_knowledge_knowledge_base_id_query_postop.py
+  - src/opperai/models/querydatasetentriesresponse.py
+  - src/opperai/models/queryknowledgebaserequest.py
+  - src/opperai/models/queryknowledgebaseresponse.py
+  - src/opperai/models/register_file_upload_knowledge_knowledge_base_id_register_file_postop.py
+  - src/opperai/models/registercustommodelrequest.py
+  - src/opperai/models/registercustommodelresponse.py
+  - src/opperai/models/registerfileuploadrequest.py
+  - src/opperai/models/registerfileuploadresponse.py
+  - src/opperai/models/responseformatjsonobject.py
+  - src/opperai/models/responseformatjsonschema.py
+  - src/opperai/models/responseformattext.py
+  - src/opperai/models/save_to_dataset_spans_span_id_save_examples_postop.py
+  - src/opperai/models/savetodatasetresponse.py
+  - src/opperai/models/security.py
+  - src/opperai/models/spandata.py
+  - src/opperai/models/spanmetricdata.py
+  - src/opperai/models/spanschema.py
+  - src/opperai/models/stream_function_functions_function_id_call_stream_postop.py
+  - src/opperai/models/stream_function_revision_functions_function_id_call_stream_revision_id_postop.py
+  - src/opperai/models/tmodel.py
+  - src/opperai/models/toplogprob.py
+  - src/opperai/models/update_custom_model_models_custom_model_id_patchop.py
+  - src/opperai/models/update_dataset_entry_datasets_dataset_id_entries_entry_id_patchop.py
+  - src/opperai/models/update_function_functions_function_id_patchop.py
+  - src/opperai/models/update_metric_spans_span_id_metrics_metric_id_patchop.py
+  - src/opperai/models/update_span_spans_span_id_patchop.py
+  - src/opperai/models/updatecustommodelrequest.py
+  - src/opperai/models/updatecustommodelresponse.py
+  - src/opperai/models/updatedatasetentryrequest.py
+  - src/opperai/models/updatedatasetentryresponse.py
+  - src/opperai/models/updatefunctionrequest.py
+  - src/opperai/models/updatefunctionresponse.py
+  - src/opperai/models/updatespanmetricrequest.py
+  - src/opperai/models/updatespanmetricresponse.py
+  - src/opperai/models/updatespanrequest.py
+  - src/opperai/models/updatespanresponse.py
+  - src/opperai/models/usage_analytics_usage_getop.py
+  - src/opperai/models/websearchoptions.py
+  - src/opperai/models/websearchoptionsuserlocation.py
+  - src/opperai/models/websearchoptionsuserlocationapproximate.py
+  - src/opperai/openai.py
+  - src/opperai/py.typed
+  - src/opperai/revisions.py
+  - src/opperai/sdk.py
+  - src/opperai/sdkconfiguration.py
+  - src/opperai/spanmetrics.py
+  - src/opperai/spans.py
+  - src/opperai/traces.py
+  - src/opperai/types/__init__.py
+  - src/opperai/types/basemodel.py
+  - src/opperai/utils/__init__.py
+  - src/opperai/utils/annotations.py
+  - src/opperai/utils/datetimes.py
+  - src/opperai/utils/enums.py
+  - src/opperai/utils/eventstreaming.py
+  - src/opperai/utils/forms.py
+  - src/opperai/utils/headers.py
+  - src/opperai/utils/logger.py
+  - src/opperai/utils/metadata.py
+  - src/opperai/utils/queryparams.py
+  - src/opperai/utils/requestbodies.py
+  - src/opperai/utils/retries.py
+  - src/opperai/utils/security.py
+  - src/opperai/utils/serializers.py
+  - src/opperai/utils/url.py
+  - src/opperai/utils/values.py
+  - tests/mockserver/.gitignore
+  - tests/mockserver/Dockerfile
+  - tests/mockserver/Makefile
+  - tests/mockserver/README.md
+  - tests/mockserver/go.mod
+  - tests/mockserver/go.sum
+  - tests/mockserver/internal/handler/assert/contenttype.go
+  - tests/mockserver/internal/handler/assert/header.go
+  - tests/mockserver/internal/handler/assert/parameter.go
+  - tests/mockserver/internal/handler/assert/pointer.go
+  - tests/mockserver/internal/handler/assert/security.go
+  - tests/mockserver/internal/handler/doc.go
+  - tests/mockserver/internal/handler/generated_handler.go
+  - tests/mockserver/internal/handler/generated_handlers.go
+  - tests/mockserver/internal/handler/values/files.go
+  - tests/mockserver/internal/logging/doc.go
+  - tests/mockserver/internal/logging/formats.go
+  - tests/mockserver/internal/logging/http_file.go
+  - tests/mockserver/internal/logging/http_logger.go
+  - tests/mockserver/internal/logging/levels.go
+  - tests/mockserver/internal/logging/logger.go
+  - tests/mockserver/internal/logging/oas_operation.go
+  - tests/mockserver/internal/logging/oas_operation_call.go
+  - tests/mockserver/internal/sdk/models/components/addrequest.go
+  - tests/mockserver/internal/sdk/models/components/annotation.go
+  - tests/mockserver/internal/sdk/models/components/annotationurlcitation.go
+  - tests/mockserver/internal/sdk/models/components/appapipublicv2functioncallcallfunctionrequest.go
+  - tests/mockserver/internal/sdk/models/components/appapipublicv2functioncallcallfunctionresponse.go
+  - tests/mockserver/internal/sdk/models/components/appapipublicv2functionscallfunctionrequest.go
+  - tests/mockserver/internal/sdk/models/components/appapipublicv2functionscallfunctionresponse.go
+  - tests/mockserver/internal/sdk/models/components/audio.go
+  - tests/mockserver/internal/sdk/models/components/chatcompletion.go
+  - tests/mockserver/internal/sdk/models/components/chatcompletionassistantmessageparam.go
+  - tests/mockserver/internal/sdk/models/components/chatcompletionaudio.go
+  - tests/mockserver/internal/sdk/models/components/chatcompletionaudioparam.go
+  - tests/mockserver/internal/sdk/models/components/chatcompletioncontentpartimageparam.go
+  - tests/mockserver/internal/sdk/models/components/chatcompletioncontentpartinputaudioparam.go
+  - tests/mockserver/internal/sdk/models/components/chatcompletioncontentpartrefusalparam.go
+  - tests/mockserver/internal/sdk/models/components/chatcompletioncontentparttextparam.go
+  - tests/mockserver/internal/sdk/models/components/chatcompletiondevelopermessageparam.go
+  - tests/mockserver/internal/sdk/models/components/chatcompletionfunctioncalloptionparam.go
+  - tests/mockserver/internal/sdk/models/components/chatcompletionfunctionmessageparam.go
+  - tests/mockserver/internal/sdk/models/components/chatcompletionmessage.go
+  - tests/mockserver/internal/sdk/models/components/chatcompletionmessagetoolcall.go
+  - tests/mockserver/internal/sdk/models/components/chatcompletionmessagetoolcallparam.go
+  - tests/mockserver/internal/sdk/models/components/chatcompletionnamedtoolchoiceparam.go
+  - tests/mockserver/internal/sdk/models/components/chatcompletionnonstreaming.go
+  - tests/mockserver/internal/sdk/models/components/chatcompletionpredictioncontentparam.go
+  - tests/mockserver/internal/sdk/models/components/chatcompletionstreaming.go
+  - tests/mockserver/internal/sdk/models/components/chatcompletionstreamoptionsparam.go
+  - tests/mockserver/internal/sdk/models/components/chatcompletionsystemmessageparam.go
+  - tests/mockserver/internal/sdk/models/components/chatcompletiontokenlogprob.go
+  - tests/mockserver/internal/sdk/models/components/chatcompletiontoolmessageparam.go
+  - tests/mockserver/internal/sdk/models/components/chatcompletiontoolparam.go
+  - tests/mockserver/internal/sdk/models/components/chatcompletionusermessageparam.go
+  - tests/mockserver/internal/sdk/models/components/choice.go
+  - tests/mockserver/internal/sdk/models/components/choicelogprobs.go
+  - tests/mockserver/internal/sdk/models/components/completiontokensdetails.go
+  - tests/mockserver/internal/sdk/models/components/completionusage.go
+  - tests/mockserver/internal/sdk/models/components/createdatasetentryrequest.go
+  - tests/mockserver/internal/sdk/models/components/createdatasetentryresponse.go
+  - tests/mockserver/internal/sdk/models/components/createembeddingrequest.go
+  - tests/mockserver/internal/sdk/models/components/createembeddingresponse.go
+  - tests/mockserver/internal/sdk/models/components/createfunctionrequest.go
+  - tests/mockserver/internal/sdk/models/components/createfunctionresponse.go
+  - tests/mockserver/internal/sdk/models/components/createknowledgebaserequest.go
+  - tests/mockserver/internal/sdk/models/components/createknowledgebaseresponse.go
+  - tests/mockserver/internal/sdk/models/components/createspanmetricrequest.go
+  - tests/mockserver/internal/sdk/models/components/createspanmetricresponse.go
+  - tests/mockserver/internal/sdk/models/components/createspanrequest.go
+  - tests/mockserver/internal/sdk/models/components/createspanresponse.go
+  - tests/mockserver/internal/sdk/models/components/example.go
+  - tests/mockserver/internal/sdk/models/components/examplein.go
+  - tests/mockserver/internal/sdk/models/components/file.go
+  - tests/mockserver/internal/sdk/models/components/filefile.go
+  - tests/mockserver/internal/sdk/models/components/fileprocessconfiguration.go
+  - tests/mockserver/internal/sdk/models/components/filter.go
+  - tests/mockserver/internal/sdk/models/components/functioncallconfiguration.go
+  - tests/mockserver/internal/sdk/models/components/functioncallinput.go
+  - tests/mockserver/internal/sdk/models/components/functioncalloutput.go
+  - tests/mockserver/internal/sdk/models/components/functiondefinition.go
+  - tests/mockserver/internal/sdk/models/components/functionoutput.go
+  - tests/mockserver/internal/sdk/models/components/getcustommodelresponse.go
+  - tests/mockserver/internal/sdk/models/components/getdatasetentriesresponse.go
+  - tests/mockserver/internal/sdk/models/components/getdatasetentryresponse.go
+  - tests/mockserver/internal/sdk/models/components/getfunctionresponse.go
+  - tests/mockserver/internal/sdk/models/components/getknowledgebaseresponse.go
+  - tests/mockserver/internal/sdk/models/components/getspanmetricresponse.go
+  - tests/mockserver/internal/sdk/models/components/getspanresponse.go
+  - tests/mockserver/internal/sdk/models/components/gettraceresponse.go
+  - tests/mockserver/internal/sdk/models/components/getuploadurlresponse.go
+  - tests/mockserver/internal/sdk/models/components/getusageresultitem.go
+  - tests/mockserver/internal/sdk/models/components/granularity.go
+  - tests/mockserver/internal/sdk/models/components/httpmetadata.go
+  - tests/mockserver/internal/sdk/models/components/imageurl.go
+  - tests/mockserver/internal/sdk/models/components/inputaudio.go
+  - tests/mockserver/internal/sdk/models/components/jsonschema.go
+  - tests/mockserver/internal/sdk/models/components/listcustommodelsresponseitem.go
+  - tests/mockserver/internal/sdk/models/components/listfunctionrevisionresponse.go
+  - tests/mockserver/internal/sdk/models/components/listfunctionsresponseitem.go
+  - tests/mockserver/internal/sdk/models/components/listknowledgebasesresponse.go
+  - tests/mockserver/internal/sdk/models/components/listlanguagemodelsresponse.go
+  - tests/mockserver/internal/sdk/models/components/listspanmetricsresponse.go
+  - tests/mockserver/internal/sdk/models/components/listtracesresponse.go
+  - tests/mockserver/internal/sdk/models/components/meta.go
+  - tests/mockserver/internal/sdk/models/components/model.go
+  - tests/mockserver/internal/sdk/models/components/op.go
+  - tests/mockserver/internal/sdk/models/components/openaitypeschatchatcompletionmessagetoolcallparamfunction.go
+  - tests/mockserver/internal/sdk/models/components/openaitypeschatchatcompletionnamedtoolchoiceparamfunction.go
+  - tests/mockserver/internal/sdk/models/components/openaitypeschatcompletioncreateparamsfunction.go
+  - tests/mockserver/internal/sdk/models/components/paginatedresponsegetdatasetentriesresponse.go
+  - tests/mockserver/internal/sdk/models/components/paginatedresponselistcustommodelsresponseitem.go
+  - tests/mockserver/internal/sdk/models/components/paginatedresponselistfunctionrevisionresponse.go
+  - tests/mockserver/internal/sdk/models/components/paginatedresponselistfunctionsresponseitem.go
+  - tests/mockserver/internal/sdk/models/components/paginatedresponselistknowledgebasesresponse.go
+  - tests/mockserver/internal/sdk/models/components/paginatedresponselistlanguagemodelsresponse.go
+  - tests/mockserver/internal/sdk/models/components/paginatedresponselistspanmetricsresponse.go
+  - tests/mockserver/internal/sdk/models/components/paginatedresponselisttracesresponse.go
+  - tests/mockserver/internal/sdk/models/components/pdfprocessorname.go
+  - tests/mockserver/internal/sdk/models/components/prompttokensdetails.go
+  - tests/mockserver/internal/sdk/models/components/querydatasetentriesresponse.go
+  - tests/mockserver/internal/sdk/models/components/queryknowledgebaserequest.go
+  - tests/mockserver/internal/sdk/models/components/queryknowledgebaseresponse.go
+  - tests/mockserver/internal/sdk/models/components/registercustommodelrequest.go
+  - tests/mockserver/internal/sdk/models/components/registercustommodelresponse.go
+  - tests/mockserver/internal/sdk/models/components/registerfileuploadrequest.go
+  - tests/mockserver/internal/sdk/models/components/registerfileuploadresponse.go
+  - tests/mockserver/internal/sdk/models/components/responseformatjsonobject.go
+  - tests/mockserver/internal/sdk/models/components/responseformatjsonschema.go
+  - tests/mockserver/internal/sdk/models/components/responseformattext.go
+  - tests/mockserver/internal/sdk/models/components/savetodatasetresponse.go
+  - tests/mockserver/internal/sdk/models/components/security.go
+  - tests/mockserver/internal/sdk/models/components/spandata.go
+  - tests/mockserver/internal/sdk/models/components/spanmetricdata.go
+  - tests/mockserver/internal/sdk/models/components/spanschema.go
+  - tests/mockserver/internal/sdk/models/components/tmodel.go
+  - tests/mockserver/internal/sdk/models/components/toplogprob.go
+  - tests/mockserver/internal/sdk/models/components/updatecustommodelrequest.go
+  - tests/mockserver/internal/sdk/models/components/updatecustommodelresponse.go
+  - tests/mockserver/internal/sdk/models/components/updatedatasetentryrequest.go
+  - tests/mockserver/internal/sdk/models/components/updatedatasetentryresponse.go
+  - tests/mockserver/internal/sdk/models/components/updatefunctionrequest.go
+  - tests/mockserver/internal/sdk/models/components/updatefunctionresponse.go
+  - tests/mockserver/internal/sdk/models/components/updatespanmetricrequest.go
+  - tests/mockserver/internal/sdk/models/components/updatespanmetricresponse.go
+  - tests/mockserver/internal/sdk/models/components/updatespanrequest.go
+  - tests/mockserver/internal/sdk/models/components/updatespanresponse.go
+  - tests/mockserver/internal/sdk/models/components/websearchoptions.go
+  - tests/mockserver/internal/sdk/models/components/websearchoptionsuserlocation.go
+  - tests/mockserver/internal/sdk/models/components/websearchoptionsuserlocationapproximate.go
+  - tests/mockserver/internal/sdk/models/operations/addknowledgeknowledgebaseidindexpost.go
+  - tests/mockserver/internal/sdk/models/operations/callfunctionfunctionsfunctionidcallpost.go
+  - tests/mockserver/internal/sdk/models/operations/callfunctionrevisionfunctionsfunctionidcallrevisionidpost.go
+  - tests/mockserver/internal/sdk/models/operations/chatcompletionsopenaichatcompletionspost.go
+  - tests/mockserver/internal/sdk/models/operations/createdatasetentrydatasetsdatasetidpost.go
+  - tests/mockserver/internal/sdk/models/operations/createembeddingembeddingspost.go
+  - tests/mockserver/internal/sdk/models/operations/createfunctionfunctionspost.go
+  - tests/mockserver/internal/sdk/models/operations/createknowledgebaseknowledgepost.go
+  - tests/mockserver/internal/sdk/models/operations/createmetricspansspanidmetricspost.go
+  - tests/mockserver/internal/sdk/models/operations/createspanspanspost.go
+  - tests/mockserver/internal/sdk/models/operations/deletecustommodelmodelscustommodeliddelete.go
+  - tests/mockserver/internal/sdk/models/operations/deletedatasetentrydatasetsdatasetidentriesentryiddelete.go
+  - tests/mockserver/internal/sdk/models/operations/deletefilefromknowledgebaseknowledgeknowledgebaseidfilesfileiddelete.go
+  - tests/mockserver/internal/sdk/models/operations/deletefunctionfunctionsfunctioniddelete.go
+  - tests/mockserver/internal/sdk/models/operations/deleteknowledgebaseknowledgeknowledgebaseiddelete.go
+  - tests/mockserver/internal/sdk/models/operations/deletemetricspansspanidmetricsmetriciddelete.go
+  - tests/mockserver/internal/sdk/models/operations/deletespanspansspaniddelete.go
+  - tests/mockserver/internal/sdk/models/operations/functioncallcallpost.go
+  - tests/mockserver/internal/sdk/models/operations/functionstreamcallstreampost.go
+  - tests/mockserver/internal/sdk/models/operations/getcustommodelbynamemodelscustombynamenameget.go
+  - tests/mockserver/internal/sdk/models/operations/getcustommodelmodelscustommodelidget.go
+  - tests/mockserver/internal/sdk/models/operations/getdatasetentrydatasetsdatasetidentriesentryidget.go
+  - tests/mockserver/internal/sdk/models/operations/getfunctionbynamefunctionsbynamenameget.go
+  - tests/mockserver/internal/sdk/models/operations/getfunctionbyrevisionfunctionsfunctionidrevisionsrevisionidget.go
+  - tests/mockserver/internal/sdk/models/operations/getfunctionfunctionsfunctionidget.go
+  - tests/mockserver/internal/sdk/models/operations/getknowledgebasebynameknowledgebynameknowledgebasenameget.go
+  - tests/mockserver/internal/sdk/models/operations/getknowledgebaseknowledgeknowledgebaseidget.go
+  - tests/mockserver/internal/sdk/models/operations/getmetricspansspanidmetricsmetricidget.go
+  - tests/mockserver/internal/sdk/models/operations/getspanspansspanidget.go
+  - tests/mockserver/internal/sdk/models/operations/gettracetracestraceidget.go
+  - tests/mockserver/internal/sdk/models/operations/getuploadurlknowledgeknowledgebaseiduploadurlget.go
+  - tests/mockserver/internal/sdk/models/operations/listcustommodelsmodelscustomget.go
+  - tests/mockserver/internal/sdk/models/operations/listdatasetentriesdatasetsdatasetidentriesget.go
+  - tests/mockserver/internal/sdk/models/operations/listfunctionrevisionsfunctionsfunctionidrevisionsget.go
+  - tests/mockserver/internal/sdk/models/operations/listfunctionsfunctionsget.go
+  - tests/mockserver/internal/sdk/models/operations/listknowledgebasesknowledgeget.go
+  - tests/mockserver/internal/sdk/models/operations/listmetricsspansspanidmetricsget.go
+  - tests/mockserver/internal/sdk/models/operations/listmodelsmodelsget.go
+  - tests/mockserver/internal/sdk/models/operations/listtracestracesget.go
+  - tests/mockserver/internal/sdk/models/operations/querydatasetentriesdatasetsdatasetidentriesquerypost.go
+  - tests/mockserver/internal/sdk/models/operations/queryknowledgebaseknowledgeknowledgebaseidquerypost.go
+  - tests/mockserver/internal/sdk/models/operations/registercustommodelmodelscustompost.go
+  - tests/mockserver/internal/sdk/models/operations/registerfileuploadknowledgeknowledgebaseidregisterfilepost.go
+  - tests/mockserver/internal/sdk/models/operations/savetodatasetspansspanidsaveexamplespost.go
+  - tests/mockserver/internal/sdk/models/operations/streamfunctionfunctionsfunctionidcallstreampost.go
+  - tests/mockserver/internal/sdk/models/operations/streamfunctionrevisionfunctionsfunctionidcallstreamrevisionidpost.go
+  - tests/mockserver/internal/sdk/models/operations/updatecustommodelmodelscustommodelidpatch.go
+  - tests/mockserver/internal/sdk/models/operations/updatedatasetentrydatasetsdatasetidentriesentryidpatch.go
+  - tests/mockserver/internal/sdk/models/operations/updatefunctionfunctionsfunctionidpatch.go
+  - tests/mockserver/internal/sdk/models/operations/updatemetricspansspanidmetricsmetricidpatch.go
+  - tests/mockserver/internal/sdk/models/operations/updatespanspansspanidpatch.go
+  - tests/mockserver/internal/sdk/models/operations/usageanalyticsusageget.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/badrequesterror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/conflicterror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/error.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/notfounderror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/requestvalidationerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/unauthorizederror.go
+  - tests/mockserver/internal/sdk/types/bigint.go
+  - tests/mockserver/internal/sdk/types/date.go
+  - tests/mockserver/internal/sdk/types/datetime.go
+  - tests/mockserver/internal/sdk/types/decimal.go
+  - tests/mockserver/internal/sdk/types/jsonl/jsonl.go
+  - tests/mockserver/internal/sdk/types/pointers.go
+  - tests/mockserver/internal/sdk/types/stream/stream.go
+  - tests/mockserver/internal/sdk/utils/json.go
+  - tests/mockserver/internal/sdk/utils/reflect.go
+  - tests/mockserver/internal/sdk/utils/sort.go
+  - tests/mockserver/internal/server/doc.go
+  - tests/mockserver/internal/server/generated_handlers.go
+  - tests/mockserver/internal/server/internal_handlers.go
+  - tests/mockserver/internal/server/server.go
+  - tests/mockserver/internal/server/server_option.go
+  - tests/mockserver/internal/server/templates/log/index.html.tmpl
+  - tests/mockserver/internal/server/templates/log/operation.html.tmpl
+  - tests/mockserver/internal/server/templates/log/style.css.tmpl
+  - tests/mockserver/internal/tracking/requesttracker.go
+  - tests/mockserver/main.go
+examples:
+  function_call_call_post:
+    speakeasy-default-function-call-call-post:
+      requestBody:
+        application/json: {"name": "add_numbers", "instructions": "Calculate the sum of two numbers", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "input": {"x": 4, "y": 5}, "examples": [{"input": {"x": 1, "y": 3}, "output": {"sum": 4}, "comment": "Adds two numbers"}], "parent_span_id": "123e4567-e89b-12d3-a456-426614174000", "tags": {"project": "project_456", "user": "company_123"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0}}
+      responses:
+        "200":
+          application/json: {"span_id": "174109ca-ebca-4823-8c0d-08c3789b2fea", "message": "The sum of 1 and 3 is 4", "json_payload": {"sum": 4}, "cached": true, "images": ["image_url"]}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "502":
+          application/json: {"errors": []}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  function_stream_call_stream_post:
+    speakeasy-default-function-stream-call-stream-post:
+      requestBody:
+        application/json: {"name": "add_numbers", "instructions": "Calculate the sum of two numbers", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "input": {"x": 4, "y": 5}, "examples": [{"input": {"x": 1, "y": 3}, "output": {"sum": 4}, "comment": "Adds two numbers"}], "parent_span_id": "123e4567-e89b-12d3-a456-426614174000", "tags": {"project": "project_456", "user": "company_123"}}
+      responses:
+        "422":
+          application/json: {}
+    streaming_response:
+      requestBody:
+        application/json: {"name": "add_numbers", "instructions": "Calculate the sum of two numbers", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "input": {"x": 4, "y": 5}, "examples": [{"input": {"x": 1, "y": 3}, "output": {"sum": 4}, "comment": "Adds two numbers"}], "parent_span_id": "123e4567-e89b-12d3-a456-426614174000", "tags": {"project": "project_456", "user": "company_123"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0}}
+      responses:
+        "200":
+          text/event-stream: {"data": {"delta": "Hello! How can I assist you today?", "span_id": "123e4567-e89b-12d3-a456-426614174000"}}
+  create_knowledge_base_knowledge_post:
+    speakeasy-default-create-knowledge-base-knowledge-post:
+      requestBody:
+        application/json: {"name": "<value>", "embedding_model": "azure/text-embedding-3-large"}
+      responses:
+        "200":
+          application/json: {"id": "25241cb1-662a-459f-9a07-0956f667ef5b", "name": "<value>", "created_at": "2025-02-04T03:28:24.063Z", "embedding_model": "<value>"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  list_knowledge_bases_knowledge_get:
+    speakeasy-default-list-knowledge-bases-knowledge-get:
+      parameters:
+        query:
+          offset: 0
+          limit: 100
+      responses:
+        "200":
+          application/json: {"meta": {"total_count": 1}, "data": [{"id": "a9366f70-0dc0-4578-8f6c-71b466f249aa", "name": "<value>", "created_at": "2023-10-02T20:22:20.076Z", "embedding_model": "<value>"}, {"id": "a9366f70-0dc0-4578-8f6c-71b466f249aa", "name": "<value>", "created_at": "2023-10-02T20:22:20.076Z", "embedding_model": "<value>"}, {"id": "a9366f70-0dc0-4578-8f6c-71b466f249aa", "name": "<value>", "created_at": "2023-10-02T20:22:20.076Z", "embedding_model": "<value>"}]}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  get_knowledge_base_knowledge__index_id__get:
+    speakeasy-default-get-knowledge-base-knowledge-index-id-get:
+      parameters:
+        path:
+          index_id: "41fe3fa7-7006-4707-928c-43720b2549b8"
+      responses:
+        "200":
+          application/json: {"id": "97fb0ddc-0d9f-4b53-98e4-67b37e3455db", "name": "<value>", "created_at": "2025-02-26T07:07:54.822Z", "embedding_model": "<value>"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  delete_knowledge_base_knowledge__index_id__delete:
+    speakeasy-default-delete-knowledge-base-knowledge-index-id-delete:
+      parameters:
+        path:
+          index_id: "6cfa2d85-538b-4045-9bec-f83aac84a726"
+      responses:
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  get_knowledge_base_by_name_knowledge_by_name__index_name__get:
+    speakeasy-default-get-knowledge-base-by-name-knowledge-by-name-index-name-get:
+      parameters:
+        path:
+          index_name: "<value>"
+      responses:
+        "200":
+          application/json: {"id": "a9e765ad-12b9-4a7c-ac43-6dcff68ff4e8", "name": "<value>", "created_at": "2023-12-07T21:25:41.062Z", "embedding_model": "<value>"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  get_upload_url_knowledge__index_id__upload_url_get:
+    speakeasy-default-get-upload-url-knowledge-index-id-upload-url-get:
+      parameters:
+        path:
+          index_id: "bc3b4194-5e25-47e3-9f6f-c29dfbb4b9cd"
+        query:
+          filename: "example.pdf"
+      responses:
+        "200":
+          application/json: {"url": "https://hasty-longboat.biz", "fields": {}, "id": "9b533407-b46b-4c26-af11-7497998ca2a6"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  register_file_upload_knowledge__index_id__register_file_post:
+    speakeasy-default-register-file-upload-knowledge-index-id-register-file-post:
+      parameters:
+        path:
+          index_id: "9656fc3a-802d-456d-bd8f-d23facd0b666"
+      requestBody:
+        application/json: {"filename": "example.pdf", "file_id": "e2f09b57-0aef-4260-962e-e3d9279f3caf", "content_type": "application/pdf"}
+      responses:
+        "201":
+          application/json: {"id": "51e086c7-a7b3-4afa-abd3-ddd0b2fbd268", "key": "<key>", "original_filename": "<value>", "document_id": 443277}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  delete_file_from_knowledge_base_knowledge__index_id__files__file_id__delete:
+    speakeasy-default-delete-file-from-knowledge-base-knowledge-index-id-files-file-id-delete:
+      parameters:
+        path:
+          index_id: "2adaa479-7fc6-474c-a34c-6c141b497c79"
+          file_id: "a3b1bb40-7eb4-4df8-aa53-1eae3d6215ad"
+      responses:
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  query_knowledge_base_knowledge__index_id__query_post:
+    speakeasy-default-query-knowledge-base-knowledge-index-id-query-post:
+      parameters:
+        path:
+          index_id: "3a181967-2541-4acd-b8a2-d00e37c3abb0"
+      requestBody:
+        application/json: {"query": "What is the capital of France?", "prefilter_limit": 10, "top_k": 3, "filters": [{"field": "price", "operation": ">", "value": 100}, {"field": "category", "operation": "in", "value": ["product", "service"]}], "rerank": true}
+      responses:
+        "200":
+          application/json: [{"id": "a9b3c929-e753-471e-9351-1d4a1d91a524", "key": "paris_123", "content": "The capital of France is Paris", "metadata": {"category": "product", "price": 100}, "score": 0.95}, {"id": "a9b3c929-e753-471e-9351-1d4a1d91a524", "key": "paris_123", "content": "The capital of France is Paris", "metadata": {"category": "product", "price": 100}, "score": 0.95}, {"id": "a9b3c929-e753-471e-9351-1d4a1d91a524", "key": "paris_123", "content": "The capital of France is Paris", "metadata": {"category": "product", "price": 100}, "score": 0.95}]
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  add_knowledge__index_id__index_post:
+    speakeasy-default-add-knowledge-index-id-index-post:
+      parameters:
+        path:
+          index_id: "b169baeb-20ba-458a-9ae5-a31afd7e4c8c"
+      requestBody:
+        application/json: {"key": "paris_123", "content": "The capital of France is Paris", "metadata": {"category": "product", "price": 100}}
+      responses:
+        "201":
+          application/json: "<value>"
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  list_traces_traces_get:
+    speakeasy-default-list-traces-traces-get:
+      parameters:
+        query:
+          offset: 0
+          limit: 100
+      responses:
+        "200":
+          application/json: {"meta": {"total_count": 1}, "data": [{"id": "892c6682-00e8-4784-a1d9-e08f8f32f8e4"}]}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  get_trace_with_spans_traces__trace_id__get:
+    speakeasy-default-get-trace-with-spans-traces-trace-id-get:
+      parameters:
+        path:
+          trace_id: "12ad7fea-2072-4515-8dd2-94f7f508ef88"
+      responses:
+        "200":
+          application/json: {"id": "6a05908c-0637-4f3d-a005-dd124984b97c", "org_id": 30212}
+        "422":
+          application/json: {}
+  create_span_spans_post:
+    speakeasy-default-create-span-spans-post:
+      requestBody:
+        application/json: {"name": "my span", "start_time": "2024-03-20T10:00:00+00:00", "id": "123e4567-e89b-12d3-a456-426614174000", "trace_id": "123e4567-e89b-12d3-a456-426614174000", "parent_id": "123e4567-e89b-12d3-a456-426614174000", "type": "email_tool", "end_time": "2024-03-20T10:00:10+00:00", "input": "Hello, world!", "output": "Hello, world!", "error": "Exception: This is an error message", "meta": {"key": "value"}, "score": 10}
+      responses:
+        "200":
+          application/json: {"name": "my span", "start_time": "2024-03-20T10:00:00+00:00", "id": "b707f560-2ed2-48b6-a488-5e3c1f7a907d", "trace_id": "123e4567-e89b-12d3-a456-426614174000", "parent_id": "123e4567-e89b-12d3-a456-426614174000", "type": "email_tool", "end_time": "2024-03-20T10:00:10+00:00", "input": "Hello, world!", "output": "Hello, world!", "error": "Exception: This is an error message", "meta": {"key": "value"}, "score": 10}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  get_span_spans__span_id__get:
+    speakeasy-default-get-span-spans-span-id-get:
+      parameters:
+        path:
+          span_id: "d4a69fe8-e8c8-444b-baeb-0f1eec05cc0b"
+      responses:
+        "200":
+          application/json: {"name": "my span", "start_time": "2024-03-20T10:00:00+00:00", "id": "f6d7438e-c491-4a26-9ed7-076871c5a994", "trace_id": "123e4567-e89b-12d3-a456-426614174000", "parent_id": "123e4567-e89b-12d3-a456-426614174000", "type": "email_tool", "end_time": "2024-03-20T10:00:10+00:00", "input": "Hello, world!", "output": "Hello, world!", "error": "Exception: This is an error message", "meta": {"key": "value"}, "score": 10}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  update_span_spans__span_id__patch:
+    speakeasy-default-update-span-spans-span-id-patch:
+      parameters:
+        path:
+          span_id: "77b258a2-45c1-4b87-a50c-9116bc8ed1d6"
+      requestBody:
+        application/json: {"name": "my span", "start_time": "2025-06-27T08:51:47.800056Z", "type": "email_tool", "end_time": "2025-06-27T08:51:47.800118Z", "input": "Hello, world!", "output": "Hello, world!", "error": "Exception: This is an error message", "meta": {"key": "value"}, "score": 10}
+      responses:
+        "200":
+          application/json: {"name": "my span", "start_time": "2024-03-20T10:00:00+00:00", "id": "84d9ffc8-336c-4953-b92f-fe05d5405951", "trace_id": "123e4567-e89b-12d3-a456-426614174000", "parent_id": "123e4567-e89b-12d3-a456-426614174000", "type": "email_tool", "end_time": "2024-03-20T10:00:10+00:00", "input": "Hello, world!", "output": "Hello, world!", "error": "Exception: This is an error message", "meta": {"key": "value"}, "score": 10}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  delete_span_spans__span_id__delete:
+    speakeasy-default-delete-span-spans-span-id-delete:
+      parameters:
+        path:
+          span_id: "b18ef9c6-59d8-4040-afd8-0f7b26a5c501"
+      responses:
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  save_to_dataset_spans__span_id__save_examples_post:
+    speakeasy-default-save-to-dataset-spans-span-id-save-examples-post:
+      parameters:
+        path:
+          span_id: "347e319f-1453-4279-879f-b88d591d5dd3"
+      responses:
+        "201":
+          application/json: {"dataset_id": "347e319f-1453-4279-879f-b88d591d5dd3", "dataset_entry_id": "26101edd-7c0a-44a0-a4c6-8e01d9b96132"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  create_metric_spans__span_id__metrics_post:
+    speakeasy-default-create-metric-spans-span-id-metrics-post:
+      parameters:
+        path:
+          span_id: "e2dedc7f-a1a2-4eb9-990c-c81f34373ed2"
+      requestBody:
+        application/json: {"dimension": "<value>", "value": 6022.87}
+      responses:
+        "200":
+          application/json: {"dimension": "<value>", "value": 9831.3, "id": "ca806470-79ea-4ed2-ae02-5c5bc5329e86", "span_id": "c0d485dd-d030-4f06-86ff-53dff83305ba", "created_at": "2025-08-27T03:11:05.874Z"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+        "409":
+          application/json: {"type": "ConflictError", "message": "The resource already exists", "detail": "The resource already exists"}
+  list_metrics_spans__span_id__metrics_get:
+    speakeasy-default-list-metrics-spans-span-id-metrics-get:
+      parameters:
+        path:
+          span_id: "65689346-76c0-45f7-a40b-63556c71b1c7"
+        query:
+          offset: 0
+          limit: 100
+      responses:
+        "200":
+          application/json: {"meta": {"total_count": 1}, "data": [{"dimension": "<value>", "value": 1769.46, "id": "092e1050-e7f5-4b93-965f-dd8d3eb4e295", "span_id": "b20ca7bd-38fc-4114-b170-21067a317d68", "created_at": "2025-11-07T00:23:23.133Z"}]}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  get_metric_spans__span_id__metrics__metric_id__get:
+    speakeasy-default-get-metric-spans-span-id-metrics-metric-id-get:
+      parameters:
+        path:
+          span_id: "79eccc0e-04d4-4c88-9b48-e9c1fba622be"
+          metric_id: "f6486ef2-ef7b-4221-8f8f-e12202849ee1"
+      responses:
+        "200":
+          application/json: {"dimension": "<value>", "value": 9053.05, "id": "38a1f74f-40ce-4e5a-95b5-992bbaa67839", "span_id": "7aabf8ee-c7ff-4ffd-8f10-27dff373fecc", "created_at": "2024-10-27T08:20:51.276Z"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  delete_metric_spans__span_id__metrics__metric_id__delete:
+    speakeasy-default-delete-metric-spans-span-id-metrics-metric-id-delete:
+      parameters:
+        path:
+          span_id: "ad9bed87-edf2-4286-9e82-4fe46d9550e2"
+          metric_id: "418572fc-adf1-4a8d-82f0-3ec1e7d7d2cb"
+      responses:
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  create_dataset_entry_datasets__dataset_id__post:
+    speakeasy-default-create-dataset-entry-datasets-dataset-id-post:
+      parameters:
+        path:
+          dataset_id: "50c15d18-6e79-449b-9e59-30324da6de5f"
+      requestBody:
+        application/json: {"input": {"x": 4, "y": 5}, "output": {"sum": 9}, "expected": "This `was` the output to the dataset entry", "comment": "This is an example of how one can edit the output"}
+      responses:
+        "200":
+          application/json: {"id": "5964d36a-8ef0-434b-8e2a-40491aedc5a6", "input": "Given this input, what is the output?", "output": "This is the output to the dataset entry", "expected": "This `was` the output to the dataset entry", "comment": "This is an example of how one can edit the output"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  list_dataset_entries_datasets__dataset_id__entries_get:
+    speakeasy-default-list-dataset-entries-datasets-dataset-id-entries-get:
+      parameters:
+        path:
+          dataset_id: "984b502b-adc1-4c0f-a69a-4733598fbb25"
+        query:
+          offset: 0
+          limit: 100
+      responses:
+        "200":
+          application/json: {"meta": {"total_count": 1}, "data": [{"id": "a013191d-22b6-4807-8d94-0b9e2eeff2a4", "input": "Given this input, what is the output?", "output": "This is the output to the dataset entry", "expected": "This `was` the output to the dataset entry", "comment": "This is an example of how one can edit the output"}, {"id": "a013191d-22b6-4807-8d94-0b9e2eeff2a4", "input": "Given this input, what is the output?", "output": "This is the output to the dataset entry", "expected": "This `was` the output to the dataset entry", "comment": "This is an example of how one can edit the output"}]}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  get_dataset_entry_datasets__dataset_id__entries__entry_id__get:
+    speakeasy-default-get-dataset-entry-datasets-dataset-id-entries-entry-id-get:
+      parameters:
+        path:
+          dataset_id: "9e9ec381-de20-405d-80e0-5a53e2facfd9"
+          entry_id: "fdfd96d0-b56a-45dd-9a48-a4225b217177"
+      responses:
+        "200":
+          application/json: {"id": "bf28de5f-35eb-4f9e-96ae-6c4fd508cc35", "input": "Given this input, what is the output?", "output": "This is the output to the dataset entry", "expected": "This `was` the output to the dataset entry", "comment": "This is an example of how one can edit the output"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  update_dataset_entry_datasets__dataset_id__entries__entry_id__patch:
+    speakeasy-default-update-dataset-entry-datasets-dataset-id-entries-entry-id-patch:
+      parameters:
+        path:
+          dataset_id: "df57581c-3364-4ee6-a9f8-7de20cb937ff"
+          entry_id: "2789b25b-1a98-4360-96ee-67e9af98c53f"
+      requestBody:
+        application/json: {"input": "Given this input, what is the output?", "output": "This is the output to the dataset entry", "expected": "This `was` the output to the dataset entry", "comment": "This is an example of how one can edit the output"}
+      responses:
+        "200":
+          application/json: {"id": "18f288c7-0bdd-42fe-8f90-574b564c2575", "input": "Given this input, what is the output?", "output": "This is the output to the dataset entry", "expected": "This `was` the output to the dataset entry", "comment": "This is an example of how one can edit the output"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  delete_dataset_entry_datasets__dataset_id__entries__entry_id__delete:
+    speakeasy-default-delete-dataset-entry-datasets-dataset-id-entries-entry-id-delete:
+      parameters:
+        path:
+          dataset_id: "28392d52-9541-4ea9-93f0-596438b9d0c1"
+          entry_id: "de374b46-6700-466c-9f46-64f32a3b0c80"
+      responses:
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  create_function_functions_post:
+    speakeasy-default-create-function-functions-post:
+      requestBody:
+        application/json: {"name": "my-function", "description": "This function is used to add two numbers and return the result.", "instructions": "You are a calculator that adds two numbers and returns the result.", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0}}
+      responses:
+        "201":
+          application/json: {"name": "my-function", "description": "This function is used to add two numbers and return the result.", "instructions": "You are a calculator that adds two numbers and returns the result.", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0}, "id": "a246e349-93f1-4ae1-9ed0-d3ca4f954a62"}
+        "409":
+          application/json: {"type": "ConflictError", "message": "The resource already exists", "detail": "The resource already exists"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  list_functions_functions_get:
+    speakeasy-default-list-functions-functions-get:
+      parameters:
+        query:
+          sort: "name"
+          name: "my-function"
+      responses:
+        "200":
+          application/json: {"meta": {"total_count": 1}, "data": [{"id": "2a6a54a3-b337-49b3-b66f-09decd0ef965", "name": "my-function", "revision_id": "c2a6a54a-3b33-479b-9366-f09decd0ef96"}, {"id": "2a6a54a3-b337-49b3-b66f-09decd0ef965", "name": "my-function", "revision_id": "e9e59298-2466-4bb6-8a91-c890fa7d2489"}, {"id": "2a6a54a3-b337-49b3-b66f-09decd0ef965", "name": "my-function", "revision_id": "0941281e-3b10-45bf-8ccb-5e35c377ea1d"}]}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  get_function_functions__function_id__get:
+    speakeasy-default-get-function-functions-function-id-get:
+      parameters:
+        path:
+          function_id: "42016421-16e8-4b50-a2d1-30fc3894763b"
+      responses:
+        "200":
+          application/json: {"name": "my-function", "description": "This function is used to add two numbers and return the result.", "instructions": "You are a calculator that adds two numbers and returns the result.", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0}, "id": "692b28e0-d3e6-4ea4-adf0-c629aeecfdab"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  update_function_functions__function_id__patch:
+    speakeasy-default-update-function-functions-function-id-patch:
+      parameters:
+        path:
+          function_id: "b0f067f3-9aa2-4ce2-aad5-c9832fbf4fa4"
+      requestBody:
+        application/json: {"name": "my-function", "description": "This function is used to add two numbers and return the result.", "instructions": "You are a calculator that adds two numbers and returns the result.", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "configuration": {"beta.evaluation.enabled": true, "invocation.cache.ttl": 0, "invocation.few_shot.count": 0, "invocation.structured_generation.max_attempts": 5}}
+      responses:
+        "200":
+          application/json: {"name": "my-function", "description": "This function is used to add two numbers and return the result.", "instructions": "You are a calculator that adds two numbers and returns the result.", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0}, "id": "7111f9fb-1c8a-4eee-bcaf-a0e751490b7f"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  delete_function_functions__function_id__delete:
+    speakeasy-default-delete-function-functions-function-id-delete:
+      parameters:
+        path:
+          function_id: "0a7a3f2e-ed2e-4c65-9f21-3d4ef7b6b17b"
+      responses:
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  call_function_functions__function_id__call_post:
+    speakeasy-default-call-function-functions-function-id-call-post:
+      parameters:
+        path:
+          function_id: "864c5880-3d87-4091-828c-33cc2c7219a9"
+      requestBody:
+        application/json: {"input": {"x": 4, "y": 5}, "examples": [{"input": {"x": 1, "y": 3}, "output": {"sum": 4}, "comment": "Adds two numbers"}], "tags": {"tag": "value"}}
+      responses:
+        "200":
+          application/json: {"cached": false}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  stream_function_functions__function_id__call_stream_post:
+    speakeasy-default-stream-function-functions-function-id-call-stream-post:
+      parameters:
+        path:
+          function_id: "e35c595b-59f2-40b8-bc8a-d6f71ebd3c63"
+      requestBody:
+        application/json: {"input": {"x": 4, "y": 5}, "examples": [{"input": {"x": 1, "y": 3}, "output": {"sum": 4}, "comment": "Adds two numbers"}], "tags": {"tag": "value"}}
+      responses:
+        "422":
+          application/json: {}
+    streaming_response:
+      parameters:
+        path:
+          function_id: "e35c595b-59f2-40b8-bc8a-d6f71ebd3c63"
+      requestBody:
+        application/json: {"input": {"x": 4, "y": 5}, "examples": [{"input": {"x": 1, "y": 3}, "output": {"sum": 4}, "comment": "Adds two numbers"}], "tags": {"tag": "value"}}
+      responses:
+        "200":
+          text/event-stream: {"data": {"delta": "Hello! How can I assist you today?", "span_id": "123e4567-e89b-12d3-a456-426614174000"}}
+  list_function_revisions_functions__function_id__revisions_get:
+    speakeasy-default-list-function-revisions-functions-function-id-revisions-get:
+      parameters:
+        path:
+          function_id: "197f3203-7e7e-453d-b36a-b1f4e551ebf4"
+      responses:
+        "200":
+          application/json: {"meta": {"total_count": 1}, "data": [{"id": "955e2ab4-a936-41b8-9bbe-eb6de3d5a049", "configuration": {"key": "<value>"}, "created_at": "2023-05-03T21:27:15.539Z"}, {"id": "955e2ab4-a936-41b8-9bbe-eb6de3d5a049", "configuration": {"key": "<value>"}, "created_at": "2023-05-03T21:27:15.539Z"}]}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  call_function_revision_functions__function_id__call__revision_id__post:
+    speakeasy-default-call-function-revision-functions-function-id-call-revision-id-post:
+      parameters:
+        path:
+          function_id: "b7391b0d-f115-4145-ae29-a136ae2d6a7a"
+          revision_id: "de9b5cac-c926-4aa1-a5ab-dc3aa3cd539c"
+      requestBody:
+        application/json: {"input": {"x": 4, "y": 5}, "examples": [{"input": {"x": 1, "y": 3}, "output": {"sum": 4}, "comment": "Adds two numbers"}], "tags": {"tag": "value"}}
+      responses:
+        "200":
+          application/json: {"cached": false}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  stream_function_revision_functions__function_id__call_stream__revision_id__post:
+    speakeasy-default-stream-function-revision-functions-function-id-call-stream-revision-id-post:
+      parameters:
+        path:
+          function_id: "d69e8466-7dba-4eaf-983c-ee6573398ae7"
+          revision_id: "c5701ae3-acaf-40b6-95f8-5c1192d84640"
+      requestBody:
+        application/json: {"input": {"x": 4, "y": 5}, "examples": [{"input": {"x": 1, "y": 3}, "output": {"sum": 4}, "comment": "Adds two numbers"}], "tags": {"tag": "value"}}
+      responses:
+        "200":
+          application/json: {"cached": false}
+        "422":
+          application/json: {}
+    streaming_response:
+      parameters:
+        path:
+          function_id: "d69e8466-7dba-4eaf-983c-ee6573398ae7"
+          revision_id: "c5701ae3-acaf-40b6-95f8-5c1192d84640"
+      requestBody:
+        application/json: {"input": {"x": 4, "y": 5}, "examples": [{"input": {"x": 1, "y": 3}, "output": {"sum": 4}, "comment": "Adds two numbers"}], "tags": {"tag": "value"}}
+      responses:
+        "200":
+          text/event-stream: {"data": {"delta": "Hello! How can I assist you today?", "span_id": "123e4567-e89b-12d3-a456-426614174000"}}
+  create_embedding_embeddings_post:
+    speakeasy-default-create-embedding-embeddings-post:
+      requestBody:
+        application/json: {"input": "Hello, world!"}
+      responses:
+        "200":
+          application/json: {"model": "text-embedding-3-large", "data": [{"embedding": [0.1, 0.2, 0.3], "index": 0}], "usage": {"prompt_tokens": 100, "total_tokens": 100}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "502":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  create_generation_generations_post:
+    speakeasy-default-create-generation-generations-post:
+      requestBody:
+        application/json: {"called_at": "2024-05-13T21:05:24.180Z", "duration_ms": 733628}
+      responses:
+        "201":
+          application/json: {"id": "1ba466a5-4d43-45be-a663-a960012e6c67", "called_at": "2023-12-12T16:41:45.314Z", "duration_ms": 86022, "model": "LeBaron", "messages": []}
+        "422":
+          application/json: {}
+  get_generation_generations__generation_id__get:
+    speakeasy-default-get-generation-generations-generation-id-get:
+      parameters:
+        path:
+          generation_id: "e7bcdd26-f279-4af2-9a5e-b9600a288a76"
+      responses:
+        "200":
+          application/json: {"id": "ec5171c9-6703-429f-8375-719fa661661f", "called_at": "2025-08-01T21:08:22.578Z", "duration_ms": 168462, "model": "Grand Caravan", "messages": [{}, {"key": "<value>", "key1": "<value>", "key2": "<value>"}, {"key": "<value>"}]}
+        "422":
+          application/json: {}
+  get_generations_by_span_generations_by_span__span_id__get:
+    speakeasy-default-get-generations-by-span-generations-by-span-span-id-get:
+      parameters:
+        path:
+          span_id: "bdf8a78b-1aac-49aa-a06d-bfaa50550852"
+      responses:
+        "200":
+          application/json: {"id": "9e11a829-a51d-4c97-92a7-a1e99df80490", "called_at": "2024-03-16T20:48:44.488Z", "duration_ms": 337987, "model": "ATS", "messages": [{"key": "<value>", "key1": "<value>"}, {"key": "<value>"}]}
+        "422":
+          application/json: {}
+  list_models_models_get:
+    speakeasy-default-list-models-models-get:
+      parameters:
+        query:
+          offset: 0
+          limit: 100
+      responses:
+        "200":
+          application/json: {"meta": {"total_count": 1}, "data": [{"hosting_provider": "openai", "name": "gpt-4.1", "location": "us", "input_cost_per_token": 0.00015, "output_cost_per_token": 0.0006}]}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  generate_image_generate_image_post:
+    speakeasy-default-generate-image-generate-image-post:
+      requestBody:
+        application/json: {"model": "Fiesta", "prompt": "<value>", "n": 1}
+      responses:
+        "200":
+          application/json: {"result": {"image_url": "https://miserable-commodity.com/"}}
+        "422":
+          application/json: {}
+  get_function_by_revision_functions__function_id__revisions__revision_id__get:
+    speakeasy-default-get-function-by-revision-functions-function-id-revisions-revision-id-get:
+      parameters:
+        path:
+          function_id: "5265325e-3604-40a9-a29d-2cc303395dab"
+          revision_id: "e60c7090-8545-4e1f-84d5-0d9e4be6c0d1"
+      responses:
+        "200":
+          application/json: {"name": "my-function", "description": "This function is used to add two numbers and return the result.", "instructions": "You are a calculator that adds two numbers and returns the result.", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0}, "id": "1af4e1a9-7f11-4e7c-962d-827d5bc836a1"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  get_generation_for_span_spans__span_id__generation_get:
+    speakeasy-default-get-generation-for-span-spans-span-id-generation-get:
+      parameters:
+        path:
+          span_id: "ce820abf-b25e-48cd-b4c8-95a4e16ac7f0"
+      responses:
+        "200":
+          application/json: {"id": "cca1a8a8-6991-4094-83ae-2082ee48828a", "called_at": "2023-09-30T16:57:09.162Z", "duration_ms": 452451}
+        "422":
+          application/json: {}
+  chat_completions_openai_chat_completions_post:
+    speakeasy-default-chat-completions-openai-chat-completions-post:
+      requestBody:
+        application/json: {"messages": [], "stream": false}
+      responses:
+        "200":
+          application/json: {"id": "<id>", "choices": [{"finish_reason": "tool_calls", "index": 983522, "message": {"role": "assistant"}}], "created": 472603, "model": "Focus", "object": "chat.completion"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  register_custom_model_models_custom_post:
+    speakeasy-default-register-custom-model-models-custom-post:
+      requestBody:
+        application/json: {"name": "<value>", "identifier": "<value>"}
+      responses:
+        "200":
+          application/json: {"id": "c3f68e83-fe45-415e-a56b-79a8370cb8ee", "name": "<value>", "identifier": "<value>"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+        "409":
+          application/json: {"type": "ConflictError", "message": "The resource already exists", "detail": "The resource already exists"}
+  list_custom_models_models_custom_get:
+    speakeasy-default-list-custom-models-models-custom-get:
+      parameters:
+        query:
+          offset: 0
+          limit: 100
+      responses:
+        "200":
+          application/json: {"meta": {"total_count": 1}, "data": [{"id": "ac7616dd-4036-4a40-a2b0-c10c92645c15", "name": "<value>", "identifier": "<value>"}]}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  get_custom_model_models_custom__model_id__get:
+    speakeasy-default-get-custom-model-models-custom-model-id-get:
+      parameters:
+        path:
+          model_id: "44f75e53-0d39-45a8-9fcc-e3f8b42e974f"
+      responses:
+        "200":
+          application/json: {"id": "1526800a-afb1-4737-890b-17e5ac4c00ef", "name": "<value>", "identifier": "<value>"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  update_custom_model_models_custom__model_id__patch:
+    speakeasy-default-update-custom-model-models-custom-model-id-patch:
+      parameters:
+        path:
+          model_id: "df4d7ee8-7295-4163-a08e-76f64619e364"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"id": "892c8aa8-84b7-4364-9f2f-1658493827cb", "name": "<value>", "identifier": "<value>"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  delete_custom_model_models_custom__model_id__delete:
+    speakeasy-default-delete-custom-model-models-custom-model-id-delete:
+      parameters:
+        path:
+          model_id: "0af9c852-1b3f-48d2-a14c-f58fcb425253"
+      responses:
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  get_custom_model_by_name_models_custom_by_name__name__get:
+    speakeasy-default-get-custom-model-by-name-models-custom-by-name-name-get:
+      parameters:
+        path:
+          name: "<value>"
+      responses:
+        "200":
+          application/json: {"id": "44f847c0-f485-4490-882f-cdf0bc27644b", "name": "<value>", "identifier": "<value>"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  _get_streaming_chunk_schema_call__schema_streaming_chunk_get:
+    speakeasy-default-get-streaming-chunk-schema-call-schema-streaming-chunk-get:
+      responses:
+        "200":
+          application/json: {"delta": "Hello", "span_id": "123e4567-e89b-12d3-a456-426614174000"}
+  query_dataset_entries_datasets__dataset_id__entries_query_post:
+    speakeasy-default-query-dataset-entries-datasets-dataset-id-entries-query-post:
+      parameters:
+        path:
+          dataset_id: "67f85e63-b416-44da-aab0-fea4bb316c72"
+        query:
+          query: "<value>"
+          limit: 5
+      responses:
+        "200":
+          application/json: [{"id": "8b579ed5-d001-4db0-a44e-c6d17dec40eb", "input": "Given this input, what is the output?", "output": "This is the output to the dataset entry", "expected": "This `was` the output to the dataset entry", "comment": "This is an example of how one can edit the output"}]
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  usage_analytics_usage_get:
+    speakeasy-default-usage-analytics-usage-get:
+      parameters:
+        query:
+          fields: ["completion_tokens", "total_tokens"]
+          group_by: ["model", "project.name"]
+      responses:
+        "200":
+          application/json: [{"time_bucket": "2023-06-20T14:55:14.081Z", "cost": "434.15"}]
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  _get_server_sent_event_schema_call__schema_server_sent_event_get:
+    speakeasy-default-get-server-sent-event-schema-call-schema-server-sent-event-get:
+      responses:
+        "200":
+          application/json: {"id": "123", "event": "message", "data": {"delta": "Hello", "span_id": "123e4567-e89b-12d3-a456-426614174000"}, "retry": 1000}
+  _get_streaming_schema_functions__schema_streaming_models_get:
+    speakeasy-default-get-streaming-schema-functions-schema-streaming-models-get:
+      responses:
+        "200":
+          application/json: {"id": "1", "event": "chunk", "data": {"delta": "Hello", "span_id": "123e4567-e89b-12d3-a456-426614174000"}, "retry": 1000}
+  _get_streaming_schema_reference_call__schema_streaming_reference_get:
+    speakeasy-default-get-streaming-schema-reference-call-schema-streaming-reference-get:
+      responses:
+        "200":
+          application/json: {"streaming_chunk_example": {"delta": "Hello", "span_id": "123e4567-e89b-12d3-a456-426614174000"}, "server_sent_event_example": {"id": "123", "event": "message", "data": {"delta": "Hello", "span_id": "123e4567-e89b-12d3-a456-426614174000"}, "retry": 1000}}
+  _streaming_schema_reference_call__schema_streaming_get:
+    speakeasy-default-streaming-schema-reference-call-schema-streaming-get:
+      responses:
+        "200":
+          application/json: {"id": "123", "event": "message", "data": {"delta": "Hello", "span_id": "123e4567-e89b-12d3-a456-426614174000"}, "retry": 1000}
+  get_trace_traces__trace_id__get:
+    speakeasy-default-get-trace-traces-trace-id-get:
+      parameters:
+        path:
+          trace_id: "870a0be9-444c-4b11-b6b7-e8812fde066e"
+      responses:
+        "200":
+          application/json: {"id": "be719cf4-17d6-475d-ba15-d66bb19d336b", "spans": null}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  update_metric_spans__span_id__metrics__metric_id__patch:
+    speakeasy-default-update-metric-spans-span-id-metrics-metric-id-patch:
+      parameters:
+        path:
+          span_id: "a6608e7f-16ba-44c7-944b-d024a416ad8b"
+          metric_id: "e5a732b2-6b58-43f9-ab70-e75a98267516"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"dimension": "<value>", "value": 3320.11, "id": "ebbd2074-b1a5-410b-8c01-c22ca6ac0f9a", "span_id": "bbb5d0a3-937b-4a8f-8ad0-bc0d8c60e22e", "created_at": "2024-10-29T17:19:13.438Z"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+  get_function_by_name_functions_by_name__name__get:
+    speakeasy-default-get-function-by-name-functions-by-name-name-get:
+      parameters:
+        path:
+          name: "<value>"
+      responses:
+        "200":
+          application/json: {"name": "my-function", "description": "This function is used to add two numbers and return the result.", "instructions": "You are a calculator that adds two numbers and returns the result.", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0}, "id": "6f887222-2826-417a-ba23-ddd2b6bc4cbf"}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+  get_knowledge_base_knowledge__knowledge_base_id__get:
+    speakeasy-default-get-knowledge-base-knowledge-knowledge-base-id-get:
+      parameters:
+        path:
+          knowledge_base_id: "be4b1ab3-e801-401e-ac5f-bf91dbf857c6"
+      responses:
+        "200":
+          application/json: {"id": "f3cade02-74f8-462d-8a43-9bd3bc422e5e", "name": "<value>", "created_at": "2024-02-19T03:36:51.345Z", "embedding_model": "<value>"}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+  delete_knowledge_base_knowledge__knowledge_base_id__delete:
+    speakeasy-default-delete-knowledge-base-knowledge-knowledge-base-id-delete:
+      parameters:
+        path:
+          knowledge_base_id: "2964306e-df22-4249-9106-5bd153bbbf99"
+      responses:
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+  get_knowledge_base_by_name_knowledge_by_name__knowledge_base_name__get:
+    speakeasy-default-get-knowledge-base-by-name-knowledge-by-name-knowledge-base-name-get:
+      parameters:
+        path:
+          knowledge_base_name: "<value>"
+      responses:
+        "200":
+          application/json: {"id": "c85f92ba-f051-4d93-81f8-ba3de493bc15", "name": "<value>", "created_at": "2024-09-26T09:27:57.581Z", "embedding_model": "<value>"}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+  get_upload_url_knowledge__knowledge_base_id__upload_url_get:
+    speakeasy-default-get-upload-url-knowledge-knowledge-base-id-upload-url-get:
+      parameters:
+        path:
+          knowledge_base_id: "70e60583-3f45-4ab8-9a7f-cce7ab08546e"
+        query:
+          filename: "example.pdf"
+      responses:
+        "200":
+          application/json: {"url": "https://flimsy-complication.info/", "fields": {}, "id": "0a4665b5-9b70-4c6b-995b-f00745ffa418"}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+  register_file_upload_knowledge__knowledge_base_id__register_file_post:
+    speakeasy-default-register-file-upload-knowledge-knowledge-base-id-register-file-post:
+      parameters:
+        path:
+          knowledge_base_id: "3c6931ec-d324-46b6-bec6-bf31a5f0623f"
+      requestBody:
+        application/json: {"filename": "example.pdf", "file_id": "0dff5851-c155-4a46-8450-5b96eb017ae5", "content_type": "application/pdf"}
+      responses:
+        "201":
+          application/json: {"id": "8c8543c2-ed47-4e71-a474-8c7f688fd79c", "key": "<key>", "original_filename": "<value>", "document_id": 667726}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+  delete_file_from_knowledge_base_knowledge__knowledge_base_id__files__file_id__delete:
+    speakeasy-default-delete-file-from-knowledge-base-knowledge-knowledge-base-id-files-file-id-delete:
+      parameters:
+        path:
+          knowledge_base_id: "17be92df-8b1d-4801-96cf-02fc837c4214"
+          file_id: "0ceef03f-4e06-464c-b5e7-be55bcc94e9f"
+      responses:
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+  query_knowledge_base_knowledge__knowledge_base_id__query_post:
+    speakeasy-default-query-knowledge-base-knowledge-knowledge-base-id-query-post:
+      parameters:
+        path:
+          knowledge_base_id: "1944d10d-ea53-4b17-ad7e-d92d98c8620e"
+      requestBody:
+        application/json: {"query": "What is the capital of France?", "prefilter_limit": 10, "top_k": 3, "filters": [{"field": "price", "operation": ">", "value": 100}, {"field": "category", "operation": "in", "value": ["product", "service"]}], "rerank": true}
+      responses:
+        "200":
+          application/json: [{"id": "db659692-9a67-46e2-813d-039e6aacae9e", "key": "paris_123", "content": "The capital of France is Paris", "metadata": {"category": "product", "price": 100}, "score": 0.95}]
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+  add_knowledge__knowledge_base_id__index_post:
+    speakeasy-default-add-knowledge-knowledge-base-id-index-post:
+      parameters:
+        path:
+          knowledge_base_id: "b07d062e-0da0-4feb-9181-eefc10945b3a"
+      requestBody:
+        application/json: {"key": "paris_123", "content": "The capital of France is Paris", "metadata": {"category": "product", "price": 100}}
+      responses:
+        "201":
+          application/json: "<value>"
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+examplesVersion: 1.0.2
+generatedTests: {}

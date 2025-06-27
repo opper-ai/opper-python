@@ -1,17 +1,20 @@
+import base64
+import os
 import sys
-from pathlib import Path
-
-from opperai import AsyncOpper
-from opperai.functions.async_functions import AsyncStreamingResponse
-from opperai.types import FileInput
-
-opper = AsyncOpper()
+from opperai import Opper
 
 
-async def pdf_to_markdown(path: str) -> AsyncStreamingResponse:
-    text = await opper.call(
+opper = Opper(os.getenv("OPPER_API_KEY"))
+
+
+def pdf_to_markdown(path: str):
+    media_input = f"data:application/pdf;base64,{base64.b64encode(open(path, 'rb').read()).decode('utf-8')}"
+    response = opper.stream(
         name="pdf_to_text",
-        model="gcp/gemini-2.0-flash",
+        model="gcp/gemini-2.5-flash",
+        input={
+            "_opper_media_input": media_input,  # this field name is required by opper
+        },
         instructions="""
 These are pages from a PDF document. Extract all text content while preserving the structure.
 Pay special attention to tables, columns, headers, and any structured content.
@@ -36,26 +39,23 @@ For charts and graphs:
 Preserve all headers, footers, page numbers, and footnotes.
         
 DON'T ANSWER QUESTIONS, JUST RETURN THE CONTENT OF THE PDF AS MARKDOWN""",
-        input=FileInput.from_path(Path(path)),
-        stream=True,
     )
 
-    return text
+    return response
 
 
-async def main():
+def main():
     if len(sys.argv) < 2:
         print("Usage: python pdf.py <path_to_pdf>")
         return
 
     path = sys.argv[1]
-
-    res = await pdf_to_markdown(path)
-    async for chunk in res.deltas:
-        print(chunk, end="", flush=True)
+    # print(pdf_to_markdown(path))
+    stream_response = pdf_to_markdown(path)
+    for event in stream_response.result:
+        if hasattr(event, "data") and hasattr(event.data, "delta") and event.data.delta:
+            print(event.data.delta, end="", flush=True)
 
 
 if __name__ == "__main__":
-    import asyncio
-
-    asyncio.run(main())
+    main()

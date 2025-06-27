@@ -1,0 +1,98 @@
+name: Validate PR
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install UV
+        uses: astral-sh/setup-uv@v3
+
+      - name: Install dependencies
+        run: |
+          uv sync --dev
+
+      - name: Run linting
+        run: |
+          uv run pylint src/ || true  # Don't fail on linting issues for now
+
+      - name: Run type checking
+        run: |
+          uv run mypy src/ || true  # Don't fail on type issues for now
+
+      - name: Run tests
+        run: |
+          if [ -f test.py ]; then
+            echo "Running test.py..."
+            uv run python test.py
+          else
+            echo "No test.py found, skipping tests"
+          fi
+
+      - name: Verify examples
+        run: |
+          echo "Checking example files..."
+          for example in examples/*.py; do
+            if [ -f "$example" ]; then
+              echo "Syntax checking $example..."
+              uv run python -m py_compile "$example" || echo "⚠️ Syntax error in $example"
+            fi
+          done
+
+      - name: Check SDK generation readiness
+        run: |
+          # Verify Makefile targets exist
+          make help || echo "⚠️ Makefile help not available"
+          
+          # Check that patch files exist
+          if [ ! -f scripts/apply_schema_patch.py ]; then
+            echo "❌ Missing patch script: scripts/apply_schema_patch.py"
+            exit 1
+          fi
+          
+          echo "✅ SDK generation infrastructure looks good"
+
+      - name: Validate package structure
+        run: |
+          # Check required files exist
+          REQUIRED_FILES=(
+            "pyproject.toml"
+            "src/opperai/__init__.py"
+            "src/opperai/sdk.py"
+            "README.md"
+          )
+          
+          for file in "${REQUIRED_FILES[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "❌ Missing required file: $file"
+              exit 1
+            fi
+          done
+          
+          echo "✅ Package structure validated"
+
+      - name: Summary
+        if: success()
+        run: |
+          echo "✅ All PR validation checks passed!"
+          echo "📋 Summary:"
+          echo "  - Code quality checks completed"
+          echo "  - Package structure validated" 
+          echo "  - Examples syntax checked"
+          echo "  - SDK generation infrastructure verified"
