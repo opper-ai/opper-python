@@ -33,6 +33,11 @@ jobs:
         with:
           python-version: '3.9'
 
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+
       - name: Install UV
         uses: astral-sh/setup-uv@v3
 
