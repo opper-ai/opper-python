@@ -9,7 +9,7 @@ from typing import Any, Dict, List, Mapping, Optional, Union
 
 
 class Knowledge(BaseSDK):
-    def create(
+    def creat(
         self,
         *,
         name: str,
@@ -132,7 +132,7 @@ class Knowledge(BaseSDK):
             http_res,
         )
 
-    async def create_async(
+    async def creat_async(
         self,
         *,
         name: str,
@@ -1444,8 +1444,8 @@ class Knowledge(BaseSDK):
         content_type: str,
         configuration: OptionalNullable[
             Union[
-                models.FileProcessConfiguration,
-                models.FileProcessConfigurationTypedDict,
+                models.TextProcessingConfiguration,
+                models.TextProcessingConfigurationTypedDict,
             ]
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1490,7 +1490,8 @@ class Knowledge(BaseSDK):
                     file_id=file_id,
                     content_type=content_type,
                     configuration=utils.get_pydantic_model(
-                        configuration, OptionalNullable[models.FileProcessConfiguration]
+                        configuration,
+                        OptionalNullable[models.TextProcessingConfiguration],
                     ),
                 ),
             )
@@ -1596,8 +1597,8 @@ class Knowledge(BaseSDK):
         content_type: str,
         configuration: OptionalNullable[
             Union[
-                models.FileProcessConfiguration,
-                models.FileProcessConfigurationTypedDict,
+                models.TextProcessingConfiguration,
+                models.TextProcessingConfigurationTypedDict,
             ]
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1642,7 +1643,8 @@ class Knowledge(BaseSDK):
                     file_id=file_id,
                     content_type=content_type,
                     configuration=utils.get_pydantic_model(
-                        configuration, OptionalNullable[models.FileProcessConfiguration]
+                        configuration,
+                        OptionalNullable[models.TextProcessingConfiguration],
                     ),
                 ),
             )
@@ -2280,8 +2282,8 @@ class Knowledge(BaseSDK):
         metadata: Optional[Dict[str, Any]] = None,
         configuration: OptionalNullable[
             Union[
-                models.FileProcessConfiguration,
-                models.FileProcessConfigurationTypedDict,
+                models.TextProcessingConfiguration,
+                models.TextProcessingConfigurationTypedDict,
             ]
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -2313,21 +2315,21 @@ class Knowledge(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.AddKnowledgeKnowledgeBaseIDIndexPostRequest(
+        request = models.AddKnowledgeKnowledgeBaseIDAddPostRequest(
             knowledge_base_id=knowledge_base_id,
             add_request=models.AddRequest(
                 key=key,
                 content=content,
                 metadata=metadata,
                 configuration=utils.get_pydantic_model(
-                    configuration, OptionalNullable[models.FileProcessConfiguration]
+                    configuration, OptionalNullable[models.TextProcessingConfiguration]
                 ),
             ),
         )
 
         req = self._build_request(
             method="POST",
-            path="/knowledge/{knowledge_base_id}/index",
+            path="/knowledge/{knowledge_base_id}/add",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -2356,7 +2358,7 @@ class Knowledge(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="add_knowledge__knowledge_base_id__index_post",
+                operation_id="add_knowledge__knowledge_base_id__add_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -2419,8 +2421,8 @@ class Knowledge(BaseSDK):
         metadata: Optional[Dict[str, Any]] = None,
         configuration: OptionalNullable[
             Union[
-                models.FileProcessConfiguration,
-                models.FileProcessConfigurationTypedDict,
+                models.TextProcessingConfiguration,
+                models.TextProcessingConfigurationTypedDict,
             ]
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -2452,21 +2454,21 @@ class Knowledge(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.AddKnowledgeKnowledgeBaseIDIndexPostRequest(
+        request = models.AddKnowledgeKnowledgeBaseIDAddPostRequest(
             knowledge_base_id=knowledge_base_id,
             add_request=models.AddRequest(
                 key=key,
                 content=content,
                 metadata=metadata,
                 configuration=utils.get_pydantic_model(
-                    configuration, OptionalNullable[models.FileProcessConfiguration]
+                    configuration, OptionalNullable[models.TextProcessingConfiguration]
                 ),
             ),
         )
 
         req = self._build_request_async(
             method="POST",
-            path="/knowledge/{knowledge_base_id}/index",
+            path="/knowledge/{knowledge_base_id}/add",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -2495,7 +2497,7 @@ class Knowledge(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="add_knowledge__knowledge_base_id__index_post",
+                operation_id="add_knowledge__knowledge_base_id__add_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security

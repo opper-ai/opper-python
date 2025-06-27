@@ -6,40 +6,40 @@ import (
 	"mockserver/internal/sdk/models/components"
 )
 
-type AddKnowledgeKnowledgeBaseIDIndexPostRequest struct {
+type AddKnowledgeKnowledgeBaseIDAddPostRequest struct {
 	// The id of the knowledge base to add the data to
 	KnowledgeBaseID string                `pathParam:"style=simple,explode=false,name=knowledge_base_id"`
 	AddRequest      components.AddRequest `request:"mediaType=application/json"`
 }
 
-func (o *AddKnowledgeKnowledgeBaseIDIndexPostRequest) GetKnowledgeBaseID() string {
+func (o *AddKnowledgeKnowledgeBaseIDAddPostRequest) GetKnowledgeBaseID() string {
 	if o == nil {
 		return ""
 	}
 	return o.KnowledgeBaseID
 }
 
-func (o *AddKnowledgeKnowledgeBaseIDIndexPostRequest) GetAddRequest() components.AddRequest {
+func (o *AddKnowledgeKnowledgeBaseIDAddPostRequest) GetAddRequest() components.AddRequest {
 	if o == nil {
 		return components.AddRequest{}
 	}
 	return o.AddRequest
 }
 
-type AddKnowledgeKnowledgeBaseIDIndexPostResponse struct {
+type AddKnowledgeKnowledgeBaseIDAddPostResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Successful Response
 	Any any
 }
 
-func (o *AddKnowledgeKnowledgeBaseIDIndexPostResponse) GetHTTPMeta() components.HTTPMetadata {
+func (o *AddKnowledgeKnowledgeBaseIDAddPostResponse) GetHTTPMeta() components.HTTPMetadata {
 	if o == nil {
 		return components.HTTPMetadata{}
 	}
 	return o.HTTPMeta
 }
 
-func (o *AddKnowledgeKnowledgeBaseIDIndexPostResponse) GetAny() any {
+func (o *AddKnowledgeKnowledgeBaseIDAddPostResponse) GetAny() any {
 	if o == nil {
 		return nil
 	}

@@ -370,7 +370,7 @@ with Opper(
 
 ### [knowledge](docs/sdks/knowledge/README.md)
 
-* [create](docs/sdks/knowledge/README.md#create) - Create Knowledge Base
+* [creat](docs/sdks/knowledge/README.md#creat) - Create Knowledge Base
 * [list](docs/sdks/knowledge/README.md#list) - List Knowledge Bases
 * [get](docs/sdks/knowledge/README.md#get) - Get Knowledge Base
 * [delete](docs/sdks/knowledge/README.md#delete) - Delete Knowledge Base

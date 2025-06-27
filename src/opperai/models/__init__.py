@@ -4,9 +4,9 @@ from typing import TYPE_CHECKING
 from importlib import import_module
 
 if TYPE_CHECKING:
-    from .add_knowledge_knowledge_base_id_index_postop import (
-        AddKnowledgeKnowledgeBaseIDIndexPostRequest,
-        AddKnowledgeKnowledgeBaseIDIndexPostRequestTypedDict,
+    from .add_knowledge_knowledge_base_id_add_postop import (
+        AddKnowledgeKnowledgeBaseIDAddPostRequest,
+        AddKnowledgeKnowledgeBaseIDAddPostRequestTypedDict,
     )
     from .addrequest import AddRequest, AddRequestTypedDict
     from .annotation import Annotation, AnnotationTypedDict
@@ -280,10 +280,6 @@ if TYPE_CHECKING:
     from .examplein import ExampleIn, ExampleInTypedDict
     from .file import File, FileTypedDict
     from .filefile import FileFile, FileFileTypedDict
-    from .fileprocessconfiguration import (
-        FileProcessConfiguration,
-        FileProcessConfigurationTypedDict,
-    )
     from .filter_ import (
         Filter,
         FilterTypedDict,
@@ -492,7 +488,6 @@ if TYPE_CHECKING:
         PaginatedResponseListTracesResponse,
         PaginatedResponseListTracesResponseTypedDict,
     )
-    from .pdfprocessorname import PdfProcessorName
     from .prompttokensdetails import PromptTokensDetails, PromptTokensDetailsTypedDict
     from .query_dataset_entries_datasets_dataset_id_entries_query_postop import (
         QueryDatasetEntriesDatasetsDatasetIDEntriesQueryPostRequest,
@@ -575,6 +570,10 @@ if TYPE_CHECKING:
         StreamFunctionRevisionFunctionsFunctionIDCallStreamRevisionIDPostResponseBodyTypedDict,
         StreamFunctionRevisionFunctionsFunctionIDCallStreamRevisionIDPostResponseTypedDict,
     )
+    from .textprocessingconfiguration import (
+        TextProcessingConfiguration,
+        TextProcessingConfigurationTypedDict,
+    )
     from .tmodel import TModel, TModel1, TModel1TypedDict, TModelTypedDict
     from .toplogprob import TopLogprob, TopLogprobTypedDict
     from .update_custom_model_models_custom_model_id_patchop import (
@@ -650,8 +649,8 @@ if TYPE_CHECKING:
     )
 
 __all__ = [
-    "AddKnowledgeKnowledgeBaseIDIndexPostRequest",
-    "AddKnowledgeKnowledgeBaseIDIndexPostRequestTypedDict",
+    "AddKnowledgeKnowledgeBaseIDAddPostRequest",
+    "AddKnowledgeKnowledgeBaseIDAddPostRequestTypedDict",
     "AddRequest",
     "AddRequestTypedDict",
     "Annotation",
@@ -826,8 +825,6 @@ __all__ = [
     "File",
     "FileFile",
     "FileFileTypedDict",
-    "FileProcessConfiguration",
-    "FileProcessConfigurationTypedDict",
     "FileTypedDict",
     "Filter",
     "FilterTypedDict",
@@ -963,7 +960,6 @@ __all__ = [
     "PaginatedResponseListTracesResponseTypedDict",
     "Payload",
     "PayloadTypedDict",
-    "PdfProcessorName",
     "PromptTokensDetails",
     "PromptTokensDetailsTypedDict",
     "QueryDatasetEntriesDatasetsDatasetIDEntriesQueryPostRequest",
@@ -1025,6 +1021,8 @@ __all__ = [
     "TModel1",
     "TModel1TypedDict",
     "TModelTypedDict",
+    "TextProcessingConfiguration",
+    "TextProcessingConfigurationTypedDict",
     "TopLogprob",
     "TopLogprobTypedDict",
     "UpdateCustomModelModelsCustomModelIDPatchRequest",
@@ -1075,8 +1073,8 @@ __all__ = [
 ]
 
 _dynamic_imports: dict[str, str] = {
-    "AddKnowledgeKnowledgeBaseIDIndexPostRequest": ".add_knowledge_knowledge_base_id_index_postop",
-    "AddKnowledgeKnowledgeBaseIDIndexPostRequestTypedDict": ".add_knowledge_knowledge_base_id_index_postop",
+    "AddKnowledgeKnowledgeBaseIDAddPostRequest": ".add_knowledge_knowledge_base_id_add_postop",
+    "AddKnowledgeKnowledgeBaseIDAddPostRequestTypedDict": ".add_knowledge_knowledge_base_id_add_postop",
     "AddRequest": ".addrequest",
     "AddRequestTypedDict": ".addrequest",
     "Annotation": ".annotation",
@@ -1261,8 +1259,6 @@ _dynamic_imports: dict[str, str] = {
     "FileTypedDict": ".file",
     "FileFile": ".filefile",
     "FileFileTypedDict": ".filefile",
-    "FileProcessConfiguration": ".fileprocessconfiguration",
-    "FileProcessConfigurationTypedDict": ".fileprocessconfiguration",
     "Filter": ".filter_",
     "FilterTypedDict": ".filter_",
     "Value1": ".filter_",
@@ -1395,7 +1391,6 @@ _dynamic_imports: dict[str, str] = {
     "PaginatedResponseListSpanMetricsResponseTypedDict": ".paginatedresponse_listspanmetricsresponse_",
     "PaginatedResponseListTracesResponse": ".paginatedresponse_listtracesresponse_",
     "PaginatedResponseListTracesResponseTypedDict": ".paginatedresponse_listtracesresponse_",
-    "PdfProcessorName": ".pdfprocessorname",
     "PromptTokensDetails": ".prompttokensdetails",
     "PromptTokensDetailsTypedDict": ".prompttokensdetails",
     "QueryDatasetEntriesDatasetsDatasetIDEntriesQueryPostRequest": ".query_dataset_entries_datasets_dataset_id_entries_query_postop",
@@ -1452,6 +1447,8 @@ _dynamic_imports: dict[str, str] = {
     "StreamFunctionRevisionFunctionsFunctionIDCallStreamRevisionIDPostResponseBody": ".stream_function_revision_functions_function_id_call_stream_revision_id_postop",
     "StreamFunctionRevisionFunctionsFunctionIDCallStreamRevisionIDPostResponseBodyTypedDict": ".stream_function_revision_functions_function_id_call_stream_revision_id_postop",
     "StreamFunctionRevisionFunctionsFunctionIDCallStreamRevisionIDPostResponseTypedDict": ".stream_function_revision_functions_function_id_call_stream_revision_id_postop",
+    "TextProcessingConfiguration": ".textprocessingconfiguration",
+    "TextProcessingConfigurationTypedDict": ".textprocessingconfiguration",
     "TModel": ".tmodel",
     "TModel1": ".tmodel",
     "TModel1TypedDict": ".tmodel",
