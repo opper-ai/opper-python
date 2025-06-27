@@ -5,7 +5,7 @@
 
 ### Available Operations
 
-* [create](#create) - Create Knowledge Base
+* [creat](#creat) - Create Knowledge Base
 * [list](#list) - List Knowledge Bases
 * [get](#get) - Get Knowledge Base
 * [delete](#delete) - Delete Knowledge Base
@@ -14,9 +14,9 @@
 * [register_file_upload](#register_file_upload) - Register File Upload
 * [delete_file](#delete_file) - Delete File From Knowledge Base
 * [query](#query) - Query Knowledge Base
-* [add_knowledge_knowledge_base_id_add_post](#add_knowledge_knowledge_base_id_add_post) - Add
+* [add](#add) - Add
 
-## create
+## creat
 
 Create a knowledge base
 
@@ -31,7 +31,7 @@ with Opper(
     http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
 ) as opper:
 
-    res = opper.knowledge.create(name="<value>", embedding_model="azure/text-embedding-3-large")
+    res = opper.knowledge.creat(name="<value>", embedding_model="azure/text-embedding-3-large")
 
     # Handle response
     print(res)
@@ -431,7 +431,7 @@ with Opper(
 | errors.RequestValidationError | 422                           | application/json              |
 | errors.APIError               | 4XX, 5XX                      | \*/\*                         |
 
-## add_knowledge_knowledge_base_id_add_post
+## add
 
 Add data to a knowledge base
 
@@ -446,7 +446,7 @@ with Opper(
     http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
 ) as opper:
 
-    res = opper.knowledge.add_knowledge_knowledge_base_id_add_post(knowledge_base_id="c441b497-32db-4e24-8f41-ab160e1329fc", content="The capital of France is Paris", key="paris_123", metadata={
+    res = opper.knowledge.add(knowledge_base_id="c441b497-32db-4e24-8f41-ab160e1329fc", content="The capital of France is Paris", key="paris_123", metadata={
         "category": "product",
         "price": 100,
     })

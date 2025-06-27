@@ -409,7 +409,7 @@ with Opper(
     http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
 ) as opper:
 
-    res = opper.functions.call(function_id="864c5880-3d87-4091-828c-33cc2c7219a9", input={
+    res = opper.functions.call(function_id="864c5880-3d87-4091-828c-33cc2c7219a9", input_={
         "x": 4,
         "y": 5,
     }, examples=[
@@ -486,7 +486,7 @@ with Opper(
     http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
 ) as opper:
 
-    res = opper.functions.stream(function_id="e35c595b-59f2-40b8-bc8a-d6f71ebd3c63", input={
+    res = opper.functions.stream(function_id="e35c595b-59f2-40b8-bc8a-d6f71ebd3c63", input_={
         "x": 4,
         "y": 5,
     }, examples=[
@@ -551,7 +551,7 @@ with Opper(
     http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
 ) as opper:
 
-    res = opper.functions.call_revision(function_id="b7391b0d-f115-4145-ae29-a136ae2d6a7a", revision_id="de9b5cac-c926-4aa1-a5ab-dc3aa3cd539c", input={
+    res = opper.functions.call_revision(function_id="b7391b0d-f115-4145-ae29-a136ae2d6a7a", revision_id="de9b5cac-c926-4aa1-a5ab-dc3aa3cd539c", input_={
         "x": 4,
         "y": 5,
     }, examples=[
@@ -629,7 +629,7 @@ with Opper(
     http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
 ) as opper:
 
-    res = opper.functions.stream_revision(function_id="d69e8466-7dba-4eaf-983c-ee6573398ae7", revision_id="c5701ae3-acaf-40b6-95f8-5c1192d84640", input={
+    res = opper.functions.stream_revision(function_id="d69e8466-7dba-4eaf-983c-ee6573398ae7", revision_id="c5701ae3-acaf-40b6-95f8-5c1192d84640", input_={
         "x": 4,
         "y": 5,
     }, examples=[

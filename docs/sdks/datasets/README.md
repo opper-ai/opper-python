@@ -26,7 +26,7 @@ with Opper(
     http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
 ) as opper:
 
-    res = opper.datasets.create_entry(dataset_id="50c15d18-6e79-449b-9e59-30324da6de5f", input={
+    res = opper.datasets.create_entry(dataset_id="50c15d18-6e79-449b-9e59-30324da6de5f", input_={
         "x": 4,
         "y": 5,
     }, output={

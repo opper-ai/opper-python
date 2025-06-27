@@ -2,7 +2,7 @@ overlay: 1.0.0
 x-speakeasy-jsonpath: rfc9535
 info:
   title: Speakeasy Modifications
-  version: 0.0.28
+  version: 0.0.30
   x-speakeasy-metadata:
     after: ""
     before: ""
@@ -709,8 +709,12 @@ actions:
     x-speakeasy-metadata:
       created_at: 1750925230100
       type: user-edit
-  - target: $["paths"]["/knowledge"]["post"]["x-speakeasy-name-override"]
-    update: create
+  - target: $["paths"]["/knowledge/{knowledge_base_id}/add"]["post"]
+    update:
+      x-speakeasy-name-override: add
     x-speakeasy-metadata:
-      created_at: 1750925236399
-      type: user-edit
+      after: sdk.knowledge.add()
+      before: sdk.knowledge.add_knowledge__knowledge_base_id__add_post()
+      created_at: 1751029113444
+      reviewed_at: 1751029118113
+      type: method-name

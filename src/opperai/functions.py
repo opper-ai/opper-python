@@ -67,13 +67,6 @@ class Functions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        # region convert-pydantic-schemas
-        if input_schema is not UNSET and hasattr(input_schema, 'model_json_schema'):
-            input_schema = input_schema.model_json_schema()
-        if output_schema is not UNSET and hasattr(output_schema, 'model_json_schema'):
-            output_schema = output_schema.model_json_schema()
-        # endregion convert-pydantic-schemas
-
         request = models.CreateFunctionRequest(
             name=name,
             description=description,
@@ -221,13 +214,6 @@ class Functions(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-
-        # region convert-pydantic-schemas
-        if input_schema is not UNSET and hasattr(input_schema, 'model_json_schema'):
-            input_schema = input_schema.model_json_schema()
-        if output_schema is not UNSET and hasattr(output_schema, 'model_json_schema'):
-            output_schema = output_schema.model_json_schema()
-        # endregion convert-pydantic-schemas
 
         request = models.CreateFunctionRequest(
             name=name,
@@ -856,13 +842,6 @@ class Functions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        # region convert-pydantic-schemas
-        if input_schema is not UNSET and hasattr(input_schema, 'model_json_schema'):
-            input_schema = input_schema.model_json_schema()
-        if output_schema is not UNSET and hasattr(output_schema, 'model_json_schema'):
-            output_schema = output_schema.model_json_schema()
-        # endregion convert-pydantic-schemas
-
         request = models.UpdateFunctionFunctionsFunctionIDPatchRequest(
             function_id=function_id,
             update_function_request=models.UpdateFunctionRequest(
@@ -1007,13 +986,6 @@ class Functions(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-
-        # region convert-pydantic-schemas
-        if input_schema is not UNSET and hasattr(input_schema, 'model_json_schema'):
-            input_schema = input_schema.model_json_schema()
-        if output_schema is not UNSET and hasattr(output_schema, 'model_json_schema'):
-            output_schema = output_schema.model_json_schema()
-        # endregion convert-pydantic-schemas
 
         request = models.UpdateFunctionFunctionsFunctionIDPatchRequest(
             function_id=function_id,
@@ -1817,7 +1789,7 @@ class Functions(BaseSDK):
         self,
         *,
         function_id: str,
-        input: OptionalNullable[Any] = UNSET,
+        input_: OptionalNullable[Any] = UNSET,
         parent_span_id: OptionalNullable[str] = UNSET,
         examples: OptionalNullable[
             Union[List[models.ExampleIn], List[models.ExampleInTypedDict]]
@@ -1855,7 +1827,7 @@ class Functions(BaseSDK):
         request = models.CallFunctionFunctionsFunctionIDCallPostRequest(
             function_id=function_id,
             app_api_public_v2_functions_call_function_request=models.AppAPIPublicV2FunctionsCallFunctionRequest(
-                input=input,
+                input=input_,
                 parent_span_id=parent_span_id,
                 examples=utils.get_pydantic_model(
                     examples, OptionalNullable[List[models.ExampleIn]]
@@ -1959,7 +1931,7 @@ class Functions(BaseSDK):
         self,
         *,
         function_id: str,
-        input: OptionalNullable[Any] = UNSET,
+        input_: OptionalNullable[Any] = UNSET,
         parent_span_id: OptionalNullable[str] = UNSET,
         examples: OptionalNullable[
             Union[List[models.ExampleIn], List[models.ExampleInTypedDict]]
@@ -1997,7 +1969,7 @@ class Functions(BaseSDK):
         request = models.CallFunctionFunctionsFunctionIDCallPostRequest(
             function_id=function_id,
             app_api_public_v2_functions_call_function_request=models.AppAPIPublicV2FunctionsCallFunctionRequest(
-                input=input,
+                input=input_,
                 parent_span_id=parent_span_id,
                 examples=utils.get_pydantic_model(
                     examples, OptionalNullable[List[models.ExampleIn]]
@@ -2101,7 +2073,7 @@ class Functions(BaseSDK):
         self,
         *,
         function_id: str,
-        input: OptionalNullable[Any] = UNSET,
+        input_: OptionalNullable[Any] = UNSET,
         parent_span_id: OptionalNullable[str] = UNSET,
         examples: OptionalNullable[
             Union[List[models.ExampleIn], List[models.ExampleInTypedDict]]
@@ -2153,7 +2125,7 @@ class Functions(BaseSDK):
         request = models.StreamFunctionFunctionsFunctionIDCallStreamPostRequest(
             function_id=function_id,
             app_api_public_v2_functions_call_function_request=models.AppAPIPublicV2FunctionsCallFunctionRequest(
-                input=input,
+                input=input_,
                 parent_span_id=parent_span_id,
                 examples=utils.get_pydantic_model(
                     examples, OptionalNullable[List[models.ExampleIn]]
@@ -2269,7 +2241,7 @@ class Functions(BaseSDK):
         self,
         *,
         function_id: str,
-        input: OptionalNullable[Any] = UNSET,
+        input_: OptionalNullable[Any] = UNSET,
         parent_span_id: OptionalNullable[str] = UNSET,
         examples: OptionalNullable[
             Union[List[models.ExampleIn], List[models.ExampleInTypedDict]]
@@ -2321,7 +2293,7 @@ class Functions(BaseSDK):
         request = models.StreamFunctionFunctionsFunctionIDCallStreamPostRequest(
             function_id=function_id,
             app_api_public_v2_functions_call_function_request=models.AppAPIPublicV2FunctionsCallFunctionRequest(
-                input=input,
+                input=input_,
                 parent_span_id=parent_span_id,
                 examples=utils.get_pydantic_model(
                     examples, OptionalNullable[List[models.ExampleIn]]
@@ -2438,7 +2410,7 @@ class Functions(BaseSDK):
         *,
         function_id: str,
         revision_id: str,
-        input: OptionalNullable[Any] = UNSET,
+        input_: OptionalNullable[Any] = UNSET,
         parent_span_id: OptionalNullable[str] = UNSET,
         examples: OptionalNullable[
             Union[List[models.ExampleIn], List[models.ExampleInTypedDict]]
@@ -2478,7 +2450,7 @@ class Functions(BaseSDK):
             function_id=function_id,
             revision_id=revision_id,
             app_api_public_v2_functions_call_function_request=models.AppAPIPublicV2FunctionsCallFunctionRequest(
-                input=input,
+                input=input_,
                 parent_span_id=parent_span_id,
                 examples=utils.get_pydantic_model(
                     examples, OptionalNullable[List[models.ExampleIn]]
@@ -2583,7 +2555,7 @@ class Functions(BaseSDK):
         *,
         function_id: str,
         revision_id: str,
-        input: OptionalNullable[Any] = UNSET,
+        input_: OptionalNullable[Any] = UNSET,
         parent_span_id: OptionalNullable[str] = UNSET,
         examples: OptionalNullable[
             Union[List[models.ExampleIn], List[models.ExampleInTypedDict]]
@@ -2623,7 +2595,7 @@ class Functions(BaseSDK):
             function_id=function_id,
             revision_id=revision_id,
             app_api_public_v2_functions_call_function_request=models.AppAPIPublicV2FunctionsCallFunctionRequest(
-                input=input,
+                input=input_,
                 parent_span_id=parent_span_id,
                 examples=utils.get_pydantic_model(
                     examples, OptionalNullable[List[models.ExampleIn]]
@@ -2728,7 +2700,7 @@ class Functions(BaseSDK):
         *,
         function_id: str,
         revision_id: str,
-        input: OptionalNullable[Any] = UNSET,
+        input_: OptionalNullable[Any] = UNSET,
         parent_span_id: OptionalNullable[str] = UNSET,
         examples: OptionalNullable[
             Union[List[models.ExampleIn], List[models.ExampleInTypedDict]]
@@ -2784,7 +2756,7 @@ class Functions(BaseSDK):
             function_id=function_id,
             revision_id=revision_id,
             app_api_public_v2_functions_call_function_request=models.AppAPIPublicV2FunctionsCallFunctionRequest(
-                input=input,
+                input=input_,
                 parent_span_id=parent_span_id,
                 examples=utils.get_pydantic_model(
                     examples, OptionalNullable[List[models.ExampleIn]]
@@ -2901,7 +2873,7 @@ class Functions(BaseSDK):
         *,
         function_id: str,
         revision_id: str,
-        input: OptionalNullable[Any] = UNSET,
+        input_: OptionalNullable[Any] = UNSET,
         parent_span_id: OptionalNullable[str] = UNSET,
         examples: OptionalNullable[
             Union[List[models.ExampleIn], List[models.ExampleInTypedDict]]
@@ -2957,7 +2929,7 @@ class Functions(BaseSDK):
             function_id=function_id,
             revision_id=revision_id,
             app_api_public_v2_functions_call_function_request=models.AppAPIPublicV2FunctionsCallFunctionRequest(
-                input=input,
+                input=input_,
                 parent_span_id=parent_span_id,
                 examples=utils.get_pydantic_model(
                     examples, OptionalNullable[List[models.ExampleIn]]

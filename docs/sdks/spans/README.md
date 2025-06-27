@@ -27,7 +27,7 @@ with Opper(
     http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
 ) as opper:
 
-    res = opper.spans.create(name="my span", start_time=parse_datetime("2024-03-20T10:00:00+00:00"), id="123e4567-e89b-12d3-a456-426614174000", trace_id="123e4567-e89b-12d3-a456-426614174000", parent_id="123e4567-e89b-12d3-a456-426614174000", type="email_tool", end_time=parse_datetime("2024-03-20T10:00:10+00:00"), input="Hello, world!", output="Hello, world!", error="Exception: This is an error message", meta={
+    res = opper.spans.create(name="my span", start_time=parse_datetime("2024-03-20T10:00:00+00:00"), id="123e4567-e89b-12d3-a456-426614174000", trace_id="123e4567-e89b-12d3-a456-426614174000", parent_id="123e4567-e89b-12d3-a456-426614174000", type_="email_tool", end_time=parse_datetime("2024-03-20T10:00:10+00:00"), input_="Hello, world!", output="Hello, world!", error="Exception: This is an error message", meta={
         "key": "value",
     }, score=10)
 
@@ -127,7 +127,7 @@ with Opper(
     http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
 ) as opper:
 
-    res = opper.spans.update(span_id="77b258a2-45c1-4b87-a50c-9116bc8ed1d6", name="my span", start_time=parse_datetime("2025-06-27T11:37:21.302644Z"), type="email_tool", end_time=parse_datetime("2025-06-27T11:37:21.302704Z"), input="Hello, world!", output="Hello, world!", error="Exception: This is an error message", meta={
+    res = opper.spans.update(span_id="77b258a2-45c1-4b87-a50c-9116bc8ed1d6", name="my span", start_time=parse_datetime("2025-06-27T11:37:21.302644Z"), type_="email_tool", end_time=parse_datetime("2025-06-27T11:37:21.302704Z"), input_="Hello, world!", output="Hello, world!", error="Exception: This is an error message", meta={
         "key": "value",
     }, score=10)
 

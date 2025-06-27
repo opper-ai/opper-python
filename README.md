@@ -156,7 +156,7 @@ with Opper(
         ],
         "title": "OpperOutputExample",
         "type": "object",
-    }, input={
+    }, input_={
         "x": 4,
         "y": 5,
     }, examples=[
@@ -223,7 +223,7 @@ async def main():
             ],
             "title": "OpperOutputExample",
             "type": "object",
-        }, input={
+        }, input_={
             "x": 4,
             "y": 5,
         }, examples=[
@@ -299,7 +299,7 @@ with Opper(
         ],
         "title": "OpperOutputExample",
         "type": "object",
-    }, input={
+    }, input_={
         "x": 4,
         "y": 5,
     }, examples=[
@@ -370,7 +370,7 @@ with Opper(
 
 ### [knowledge](docs/sdks/knowledge/README.md)
 
-* [create](docs/sdks/knowledge/README.md#create) - Create Knowledge Base
+* [creat](docs/sdks/knowledge/README.md#creat) - Create Knowledge Base
 * [list](docs/sdks/knowledge/README.md#list) - List Knowledge Bases
 * [get](docs/sdks/knowledge/README.md#get) - Get Knowledge Base
 * [delete](docs/sdks/knowledge/README.md#delete) - Delete Knowledge Base
@@ -379,7 +379,7 @@ with Opper(
 * [register_file_upload](docs/sdks/knowledge/README.md#register_file_upload) - Register File Upload
 * [delete_file](docs/sdks/knowledge/README.md#delete_file) - Delete File From Knowledge Base
 * [query](docs/sdks/knowledge/README.md#query) - Query Knowledge Base
-* [add_knowledge_knowledge_base_id_add_post](docs/sdks/knowledge/README.md#add_knowledge_knowledge_base_id_add_post) - Add
+* [add](docs/sdks/knowledge/README.md#add) - Add
 
 ### [language_models](docs/sdks/languagemodels/README.md)
 
@@ -474,7 +474,7 @@ with Opper(
         ],
         "title": "OpperOutputExample",
         "type": "object",
-    }, input={
+    }, input_={
         "x": 4,
         "y": 5,
     }, examples=[
@@ -550,7 +550,7 @@ with Opper(
         ],
         "title": "OpperOutputExample",
         "type": "object",
-    }, input={
+    }, input_={
         "x": 4,
         "y": 5,
     }, examples=[
@@ -616,7 +616,7 @@ with Opper(
         ],
         "title": "OpperOutputExample",
         "type": "object",
-    }, input={
+    }, input_={
         "x": 4,
         "y": 5,
     }, examples=[
@@ -707,7 +707,7 @@ with Opper(
             ],
             "title": "OpperOutputExample",
             "type": "object",
-        }, input={
+        }, input_={
             "x": 4,
             "y": 5,
         }, examples=[
@@ -792,7 +792,7 @@ with Opper(
         ],
         "title": "OpperOutputExample",
         "type": "object",
-    }, input={
+    }, input_={
         "x": 4,
         "y": 5,
     }, examples=[

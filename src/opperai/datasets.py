@@ -25,7 +25,7 @@ class Datasets(BaseSDK):
         self,
         *,
         dataset_id: str,
-        input: Any,
+        input_: Any,
         output: Any,
         expected: OptionalNullable[Any] = UNSET,
         comment: OptionalNullable[str] = UNSET,
@@ -59,7 +59,7 @@ class Datasets(BaseSDK):
         request = models.CreateDatasetEntryDatasetsDatasetIDPostRequest(
             dataset_id=dataset_id,
             create_dataset_entry_request=models.CreateDatasetEntryRequest(
-                input=input,
+                input=input_,
                 output=output,
                 expected=expected,
                 comment=comment,
@@ -161,7 +161,7 @@ class Datasets(BaseSDK):
         self,
         *,
         dataset_id: str,
-        input: Any,
+        input_: Any,
         output: Any,
         expected: OptionalNullable[Any] = UNSET,
         comment: OptionalNullable[str] = UNSET,
@@ -195,7 +195,7 @@ class Datasets(BaseSDK):
         request = models.CreateDatasetEntryDatasetsDatasetIDPostRequest(
             dataset_id=dataset_id,
             create_dataset_entry_request=models.CreateDatasetEntryRequest(
-                input=input,
+                input=input_,
                 output=output,
                 expected=expected,
                 comment=comment,

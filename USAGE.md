@@ -38,7 +38,7 @@ with Opper(
         ],
         "title": "OpperOutputExample",
         "type": "object",
-    }, input={
+    }, input_={
         "x": 4,
         "y": 5,
     }, examples=[
@@ -105,7 +105,7 @@ async def main():
             ],
             "title": "OpperOutputExample",
             "type": "object",
-        }, input={
+        }, input_={
             "x": 4,
             "y": 5,
         }, examples=[
