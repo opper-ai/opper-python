@@ -10,7 +10,7 @@ type RegisterFileUploadRequest struct {
 	// The content type of the file to register
 	ContentType string `json:"content_type"`
 	// The configuration for the file to register
-	Configuration *FileProcessConfiguration `json:"configuration,omitempty"`
+	Configuration *TextProcessingConfiguration `json:"configuration,omitempty"`
 }
 
 func (o *RegisterFileUploadRequest) GetFilename() string {
@@ -34,7 +34,7 @@ func (o *RegisterFileUploadRequest) GetContentType() string {
 	return o.ContentType
 }
 
-func (o *RegisterFileUploadRequest) GetConfiguration() *FileProcessConfiguration {
+func (o *RegisterFileUploadRequest) GetConfiguration() *TextProcessingConfiguration {
 	if o == nil {
 		return nil
 	}

@@ -9,7 +9,7 @@ type AddRequest struct {
 	// The metadata of the document
 	Metadata map[string]any `json:"metadata,omitempty"`
 	// The configuration for the document
-	Configuration *FileProcessConfiguration `json:"configuration,omitempty"`
+	Configuration *TextProcessingConfiguration `json:"configuration,omitempty"`
 }
 
 func (o *AddRequest) GetKey() *string {
@@ -33,7 +33,7 @@ func (o *AddRequest) GetMetadata() map[string]any {
 	return o.Metadata
 }
 
-func (o *AddRequest) GetConfiguration() *FileProcessConfiguration {
+func (o *AddRequest) GetConfiguration() *TextProcessingConfiguration {
 	if o == nil {
 		return nil
 	}

@@ -12,7 +12,7 @@ class Embeddings(BaseSDK):
     def create(
         self,
         *,
-        input_: Union[models.Input, models.InputTypedDict],
+        input: Union[models.Input, models.InputTypedDict],
         model: OptionalNullable[Union[models.TModel, models.TModelTypedDict]] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -42,7 +42,7 @@ class Embeddings(BaseSDK):
 
         request = models.CreateEmbeddingRequest(
             model=utils.get_pydantic_model(model, OptionalNullable[models.TModel]),
-            input=input_,
+            input=input,
         )
 
         req = self._build_request(
@@ -134,7 +134,7 @@ class Embeddings(BaseSDK):
     async def create_async(
         self,
         *,
-        input_: Union[models.Input, models.InputTypedDict],
+        input: Union[models.Input, models.InputTypedDict],
         model: OptionalNullable[Union[models.TModel, models.TModelTypedDict]] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -164,7 +164,7 @@ class Embeddings(BaseSDK):
 
         request = models.CreateEmbeddingRequest(
             model=utils.get_pydantic_model(model, OptionalNullable[models.TModel]),
-            input=input_,
+            input=input,
         )
 
         req = self._build_request_async(

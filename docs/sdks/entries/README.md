@@ -22,7 +22,7 @@ with Opper(
     http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
 ) as opper:
 
-    res = opper.datasets.entries.update(dataset_id="df57581c-3364-4ee6-a9f8-7de20cb937ff", entry_id="2789b25b-1a98-4360-96ee-67e9af98c53f", input_="Given this input, what is the output?", output="This is the output to the dataset entry", expected="This `was` the output to the dataset entry", comment="This is an example of how one can edit the output")
+    res = opper.datasets.entries.update(dataset_id="df57581c-3364-4ee6-a9f8-7de20cb937ff", entry_id="2789b25b-1a98-4360-96ee-67e9af98c53f", input="Given this input, what is the output?", output="This is the output to the dataset entry", expected="This `was` the output to the dataset entry", comment="This is an example of how one can edit the output")
 
     # Handle response
     print(res)
