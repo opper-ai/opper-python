@@ -5,7 +5,7 @@
 
 ### Available Operations
 
-* [creat](#creat) - Create Knowledge Base
+* [create](#create) - Create Knowledge Base
 * [list](#list) - List Knowledge Bases
 * [get](#get) - Get Knowledge Base
 * [delete](#delete) - Delete Knowledge Base
@@ -16,7 +16,7 @@
 * [query](#query) - Query Knowledge Base
 * [add](#add) - Add
 
-## creat
+## create
 
 Create a knowledge base
 
@@ -31,7 +31,7 @@ with Opper(
     http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
 ) as opper:
 
-    res = opper.knowledge.creat(name="<value>", embedding_model="azure/text-embedding-3-large")
+    res = opper.knowledge.create(name="<value>", embedding_model="azure/text-embedding-3-large")
 
     # Handle response
     print(res)

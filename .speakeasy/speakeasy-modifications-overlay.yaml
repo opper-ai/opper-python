@@ -705,7 +705,7 @@ actions:
       reviewed_at: 1750924722998
       type: method-name
   - target: $["paths"]["/knowledge"]["post"]["x-speakeasy-name-override"]
-    update: creat
+    update: create
     x-speakeasy-metadata:
       created_at: 1750925230100
       type: user-edit
