@@ -135,9 +135,7 @@ jobs:
           EOF
           )" \
             --base "$TARGET_BRANCH" \
-            --head "$BRANCH_NAME" \
-            --label "automated" \
-            --label "sdk-update"
+            --head "$BRANCH_NAME"
 
       - name: Summary
         run: |
