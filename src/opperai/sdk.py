@@ -205,7 +205,7 @@ class Opper(BaseSDK):
         instructions: OptionalNullable[str] = UNSET,
         input_schema: OptionalNullable[Dict[str, Any]] = UNSET,
         output_schema: OptionalNullable[Dict[str, Any]] = UNSET,
-        input_: OptionalNullable[Any] = UNSET,
+        input: OptionalNullable[Any] = UNSET,
         model: Optional[Union[models.TModel, models.TModelTypedDict]] = None,
         examples: OptionalNullable[
             Union[List[models.Example], List[models.ExampleTypedDict]]
@@ -253,12 +253,19 @@ class Opper(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
+        # region convert-pydantic-schemas
+        if input_schema is not UNSET and hasattr(input_schema, 'model_json_schema'):
+            input_schema = input_schema.model_json_schema()
+        if output_schema is not UNSET and hasattr(output_schema, 'model_json_schema'):
+            output_schema = output_schema.model_json_schema()
+        # endregion convert-pydantic-schemas
+
         request = models.AppAPIPublicV2FunctionCallCallFunctionRequest(
             name=name,
             instructions=instructions,
             input_schema=input_schema,
             output_schema=output_schema,
-            input=input_,
+            input=input,
             model=utils.get_pydantic_model(model, Optional[models.TModel]),
             examples=utils.get_pydantic_model(
                 examples, OptionalNullable[List[models.Example]]
@@ -368,7 +375,7 @@ class Opper(BaseSDK):
         instructions: OptionalNullable[str] = UNSET,
         input_schema: OptionalNullable[Dict[str, Any]] = UNSET,
         output_schema: OptionalNullable[Dict[str, Any]] = UNSET,
-        input_: OptionalNullable[Any] = UNSET,
+        input: OptionalNullable[Any] = UNSET,
         model: Optional[Union[models.TModel, models.TModelTypedDict]] = None,
         examples: OptionalNullable[
             Union[List[models.Example], List[models.ExampleTypedDict]]
@@ -416,12 +423,19 @@ class Opper(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
+        # region convert-pydantic-schemas
+        if input_schema is not UNSET and hasattr(input_schema, 'model_json_schema'):
+            input_schema = input_schema.model_json_schema()
+        if output_schema is not UNSET and hasattr(output_schema, 'model_json_schema'):
+            output_schema = output_schema.model_json_schema()
+        # endregion convert-pydantic-schemas
+
         request = models.AppAPIPublicV2FunctionCallCallFunctionRequest(
             name=name,
             instructions=instructions,
             input_schema=input_schema,
             output_schema=output_schema,
-            input=input_,
+            input=input,
             model=utils.get_pydantic_model(model, Optional[models.TModel]),
             examples=utils.get_pydantic_model(
                 examples, OptionalNullable[List[models.Example]]
@@ -531,7 +545,7 @@ class Opper(BaseSDK):
         instructions: OptionalNullable[str] = UNSET,
         input_schema: OptionalNullable[Dict[str, Any]] = UNSET,
         output_schema: OptionalNullable[Dict[str, Any]] = UNSET,
-        input_: OptionalNullable[Any] = UNSET,
+        input: OptionalNullable[Any] = UNSET,
         model: Optional[Union[models.TModel, models.TModelTypedDict]] = None,
         examples: OptionalNullable[
             Union[List[models.Example], List[models.ExampleTypedDict]]
@@ -595,12 +609,19 @@ class Opper(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
+        # region convert-pydantic-schemas
+        if input_schema is not UNSET and hasattr(input_schema, 'model_json_schema'):
+            input_schema = input_schema.model_json_schema()
+        if output_schema is not UNSET and hasattr(output_schema, 'model_json_schema'):
+            output_schema = output_schema.model_json_schema()
+        # endregion convert-pydantic-schemas
+
         request = models.AppAPIPublicV2FunctionCallCallFunctionRequest(
             name=name,
             instructions=instructions,
             input_schema=input_schema,
             output_schema=output_schema,
-            input=input_,
+            input=input,
             model=utils.get_pydantic_model(model, Optional[models.TModel]),
             examples=utils.get_pydantic_model(
                 examples, OptionalNullable[List[models.Example]]
@@ -721,7 +742,7 @@ class Opper(BaseSDK):
         instructions: OptionalNullable[str] = UNSET,
         input_schema: OptionalNullable[Dict[str, Any]] = UNSET,
         output_schema: OptionalNullable[Dict[str, Any]] = UNSET,
-        input_: OptionalNullable[Any] = UNSET,
+        input: OptionalNullable[Any] = UNSET,
         model: Optional[Union[models.TModel, models.TModelTypedDict]] = None,
         examples: OptionalNullable[
             Union[List[models.Example], List[models.ExampleTypedDict]]
@@ -785,12 +806,19 @@ class Opper(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
+        # region convert-pydantic-schemas
+        if input_schema is not UNSET and hasattr(input_schema, 'model_json_schema'):
+            input_schema = input_schema.model_json_schema()
+        if output_schema is not UNSET and hasattr(output_schema, 'model_json_schema'):
+            output_schema = output_schema.model_json_schema()
+        # endregion convert-pydantic-schemas
+
         request = models.AppAPIPublicV2FunctionCallCallFunctionRequest(
             name=name,
             instructions=instructions,
             input_schema=input_schema,
             output_schema=output_schema,
-            input=input_,
+            input=input,
             model=utils.get_pydantic_model(model, Optional[models.TModel]),
             examples=utils.get_pydantic_model(
                 examples, OptionalNullable[List[models.Example]]
