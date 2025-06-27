@@ -89,10 +89,10 @@ jobs:
           # Update version in pyproject.toml
           sed -i 's/^version = ".*"/version = "${{ needs.check-version.outputs.version }}"/' pyproject.toml
           
-          # Commit the version update
+          # Commit the version update and any lock file changes
           git config --global user.name "opper-bot"
           git config --global user.email "bot@opper.ai"
-          git add pyproject.toml
+          git add pyproject.toml uv.lock
           git commit -m "chore: bump version to ${{ needs.check-version.outputs.version }}"
           git push
 
