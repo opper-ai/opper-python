@@ -22,7 +22,7 @@ with Opper(
     http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
 ) as opper:
 
-    res = opper.embeddings.create(input_="Hello, world!")
+    res = opper.embeddings.create(input="Hello, world!")
 
     # Handle response
     print(res)

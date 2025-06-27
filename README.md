@@ -156,7 +156,7 @@ with Opper(
         ],
         "title": "OpperOutputExample",
         "type": "object",
-    }, input_={
+    }, input={
         "x": 4,
         "y": 5,
     }, examples=[
@@ -223,7 +223,7 @@ async def main():
             ],
             "title": "OpperOutputExample",
             "type": "object",
-        }, input_={
+        }, input={
             "x": 4,
             "y": 5,
         }, examples=[
@@ -299,7 +299,7 @@ with Opper(
         ],
         "title": "OpperOutputExample",
         "type": "object",
-    }, input_={
+    }, input={
         "x": 4,
         "y": 5,
     }, examples=[
@@ -474,7 +474,7 @@ with Opper(
         ],
         "title": "OpperOutputExample",
         "type": "object",
-    }, input_={
+    }, input={
         "x": 4,
         "y": 5,
     }, examples=[
@@ -550,7 +550,7 @@ with Opper(
         ],
         "title": "OpperOutputExample",
         "type": "object",
-    }, input_={
+    }, input={
         "x": 4,
         "y": 5,
     }, examples=[
@@ -616,7 +616,7 @@ with Opper(
         ],
         "title": "OpperOutputExample",
         "type": "object",
-    }, input_={
+    }, input={
         "x": 4,
         "y": 5,
     }, examples=[
@@ -707,7 +707,7 @@ with Opper(
             ],
             "title": "OpperOutputExample",
             "type": "object",
-        }, input_={
+        }, input={
             "x": 4,
             "y": 5,
         }, examples=[
@@ -792,7 +792,7 @@ with Opper(
         ],
         "title": "OpperOutputExample",
         "type": "object",
-    }, input_={
+    }, input={
         "x": 4,
         "y": 5,
     }, examples=[
