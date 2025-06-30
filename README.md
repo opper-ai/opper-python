@@ -1,6 +1,6 @@
 # opperai
 
-Developer-friendly & type-safe Python SDK specifically catered to leverage *opperai* API.
+
 
 <div align="left">
     <a href="https://www.speakeasy.com/?utm_source=opperai&utm_campaign=python"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454" /></a>
@@ -10,249 +10,177 @@ Developer-friendly & type-safe Python SDK specifically catered to leverage *oppe
 </div>
 
 
-<br /><br />
-
 <!-- Start Summary [summary] -->
 ## Summary
+[![Sign Up and Start Using Opper](https://img.shields.io/badge/Sign%20Up-Start%20Using%20Opper-blue?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMTUgMzE1Ij48dGl0bGU+T3BwZXI8L3RpdGxlPjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMCkiPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTA1LjA0IDE1Ny41MkMxMjAuNiAxNTcuMzQgMTYwLjUyIDE1MS41NCAxNjAuNTIgOTYuNTYwMUMxNjAuNTIgMTUxLjU0IDIwMC40NCAxNTcuMzQgMjE2IDE1Ny41MkMxNjQuMSAxNjEuNjMgMTYwLjUyIDIxNy45OCAxNjAuNTIgMjE3Ljk4QzE2MC41MiAyMTcuOTggMTU2Ljk0IDE2MS42NSAxMDUuMDQgMTU3LjUyWk0xNTkuNzggMzE1QzcxLjUzIDMxNSAwIDI0NC40OSAwIDE1Ny41QzAgLTE4Ljk0OTkgMTU5Ljc4IDAuNjUwMDc1IDE1OS43OCAwLjY1MDA3NUMxNTkuNzggODcuMjIgODguMzYgMTU3LjQgMC4yIDE1Ny41QzE0OS44IDE1Ny42NCAxNTkuNzggMzE1IDE1OS43OCAzMTVaIiBmaWxsPSJ1cmwoI2dyYWQpIi8+PC9nPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZCIgeDE9IjcyLjM4IiB5MT0iNTQuNzgwMSIgeDI9IjEzOS41MiIgeTI9IjI3MC44IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agc3RvcC1jb2xvcj0iIzhDRUNGMiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0Y5QjU4QyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjwvc3ZnPg==
+)](https://opper.ai/)
+Welcome to the OpperAI python SDK
 
+
+
+Opper is a task completion platform for building reliable AI integrations. The Opper platform builds a happy path for declarative programming with AI models, combined with in context reinforcement learning, observability and cost tracking all in one platform - for reliable results in no time!
+
+This SDK is generated using Speakeasy, read our detailed docs with many guides and examples at 
+[![Explore Docs](https://img.shields.io/badge/Docs-Read%20the%20Docs-black??style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMTUgMzE1Ij48dGl0bGU+T3BwZXI8L3RpdGxlPjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMCkiPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTA1LjA0IDE1Ny41MkMxMjAuNiAxNTcuMzQgMTYwLjUyIDE1MS41NCAxNjAuNTIgOTYuNTYwMUMxNjAuNTIgMTUxLjU0IDIwMC40NCAxNTcuMzQgMjE2IDE1Ny41MkMxNjQuMSAxNjEuNjMgMTYwLjUyIDIxNy45OCAxNjAuNTIgMjE3Ljk4QzE2MC41MiAyMTcuOTggMTU2Ljk0IDE2MS42NSAxMDUuMDQgMTU3LjUyWk0xNTkuNzggMzE1QzcxLjUzIDMxNSAwIDI0NC40OSAwIDE1Ny41QzAgLTE4Ljk0OTkgMTU5Ljc4IDAuNjUwMDc1IDE1OS43OCAwLjY1MDA3NUMxNTkuNzggODcuMjIgODguMzYgMTU3LjQgMC4yIDE1Ny41QzE0OS44IDE1Ny42NCAxNTkuNzggMzE1IDE1OS43OCAzMTVaIiBmaWxsPSJ1cmwoI2dyYWQpIi8+PC9nPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZCIgeDE9IjcyLjM4IiB5MT0iNTQuNzgwMSIgeDI9IjEzOS41MiIgeTI9IjI3MC44IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agc3RvcC1jb2xvcj0iIzhDRUNGMiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0Y5QjU4QyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjwvc3ZnPg==
+)](https://docs.opper.ai)
 
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-* [opperai](#opperai)
-  * [SDK Installation](#sdk-installation)
-  * [IDE Support](#ide-support)
-  * [SDK Example Usage](#sdk-example-usage)
-  * [Authentication](#authentication)
-  * [Available Resources and Operations](#available-resources-and-operations)
-  * [Server-sent event streaming](#server-sent-event-streaming)
-  * [Retries](#retries)
-  * [Error Handling](#error-handling)
-  * [Server Selection](#server-selection)
-  * [Custom HTTP Client](#custom-http-client)
-  * [Resource Management](#resource-management)
-  * [Debugging](#debugging)
-* [Development](#development)
-  * [Maturity](#maturity)
-  * [Contributions](#contributions)
+- [opperai](#opperai)
+  - [Summary](#summary)
+  - [Table of Contents](#table-of-contents)
+  - [SDK Installation](#sdk-installation)
+    - [PIP](#pip)
+    - [Poetry / UV](#poetry--uv)
+  - [SDK Example Usage](#sdk-example-usage)
+    - [First steps](#first-steps)
+    - [Example](#example)
+  - [Authentication](#authentication)
+  - [Available Resources and Operations](#available-resources-and-operations)
+    - [analytics](#analytics)
+    - [datasets](#datasets)
+      - [datasets.entries](#datasetsentries)
+    - [embeddings](#embeddings)
+    - [functions](#functions)
+      - [functions.revisions](#functionsrevisions)
+    - [knowledge](#knowledge)
+    - [language\_models](#language_models)
+    - [Opper SDK](#opper-sdk)
+    - [span\_metrics](#span_metrics)
+    - [spans](#spans)
+    - [traces](#traces)
+  - [Server-sent event streaming](#server-sent-event-streaming)
+  - [Retries](#retries)
+  - [Error Handling](#error-handling)
+    - [Example](#example-1)
+  - [Custom HTTP Client](#custom-http-client)
+  - [Resource Management](#resource-management)
+  - [Debugging](#debugging)
+- [Development](#development)
+  - [Maturity](#maturity)
+  - [Contributions](#contributions)
+    - [SDK Created by Speakeasy](#sdk-created-by-speakeasy)
 
 <!-- End Table of Contents [toc] -->
 
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
-> [!TIP]
-> To finish publishing your SDK to PyPI you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
-
-
-> [!NOTE]
-> **Python version upgrade policy**
->
-> Once a Python version reaches its [official end of life date](https://devguide.python.org/versions/), a 3-month grace period is provided for users to upgrade. Following this grace period, the minimum python version supported in the SDK will be updated.
-
-The SDK can be installed with either *pip* or *poetry* package managers.
 
 ### PIP
 
 *PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
 
 ```bash
-pip install git+<UNSET>.git
+pip install opperai
 ```
 
-### Poetry
+### Poetry / UV
 
-*Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
+If you use [UV](https://docs.astral.sh/uv/)
 
 ```bash
-poetry add git+<UNSET>.git
+uv add opperai
 ```
 
-### Shell and script usage with `uv`
 
-You can use this SDK in a Python shell with [uv](https://docs.astral.sh/uv/) and the `uvx` command that comes with it like so:
+Poetry
 
-```shell
-uvx --from opperai python
+```bash
+poetry add opperai
 ```
 
-It's also possible to write a standalone Python script without needing to set up a whole project like so:
 
-```python
-#!/usr/bin/env -S uv run --script
-# /// script
-# requires-python = ">=3.9"
-# dependencies = [
-#     "opperai",
-# ]
-# ///
 
-from opperai import Opper
 
-sdk = Opper(
-  # SDK arguments
-)
-
-# Rest of script here...
-```
-
-Once that is saved to a file, you can run it with `uv run script.py` where
-`script.py` can be replaced with the actual file name.
-<!-- End SDK Installation [installation] -->
-
-<!-- Start IDE Support [idesupport] -->
-## IDE Support
-
-### PyCharm
-
-Generally, the SDK will work well with most IDEs out of the box. However, when using PyCharm, you can enjoy much better integration with Pydantic by installing an additional plugin.
-
-- [PyCharm Pydantic Plugin](https://docs.pydantic.dev/latest/integrations/pycharm/)
-<!-- End IDE Support [idesupport] -->
-
-<!-- Start SDK Example Usage [usage] -->
 ## SDK Example Usage
+[![Explore Docs](https://img.shields.io/badge/Docs-Read%20the%20Docs-black??style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMTUgMzE1Ij48dGl0bGU+T3BwZXI8L3RpdGxlPjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMCkiPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTA1LjA0IDE1Ny41MkMxMjAuNiAxNTcuMzQgMTYwLjUyIDE1MS41NCAxNjAuNTIgOTYuNTYwMUMxNjAuNTIgMTUxLjU0IDIwMC40NCAxNTcuMzQgMjE2IDE1Ny41MkMxNjQuMSAxNjEuNjMgMTYwLjUyIDIxNy45OCAxNjAuNTIgMjE3Ljk4QzE2MC41MiAyMTcuOTggMTU2Ljk0IDE2MS42NSAxMDUuMDQgMTU3LjUyWk0xNTkuNzggMzE1QzcxLjUzIDMxNSAwIDI0NC40OSAwIDE1Ny41QzAgLTE4Ljk0OTkgMTU5Ljc4IDAuNjUwMDc1IDE1OS43OCAwLjY1MDA3NUMxNTkuNzggODcuMjIgODguMzYgMTU3LjQgMC4yIDE1Ny41QzE0OS44IDE1Ny42NCAxNTkuNzggMzE1IDE1OS43OCAzMTVaIiBmaWxsPSJ1cmwoI2dyYWQpIi8+PC9nPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZCIgeDE9IjcyLjM4IiB5MT0iNTQuNzgwMSIgeDI9IjEzOS41MiIgeTI9IjI3MC44IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agc3RvcC1jb2xvcj0iIzhDRUNGMiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0Y5QjU4QyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjwvc3ZnPg==
+)](https://docs.opper.ai)
+
+### First steps
+Log in at [opper](platform.opper.ai) and create your own API key in the top right menu. Each api key is associated with a project, you will have all calls, functions, indexes and traces associated with this project. There is a default project for each organization but it is recommended to create a new project to better being able to separate the different applications and environments.
+
+
+For many **examples** and **guides** of how to use our sdks check out our examples folder [examples](./examples/)
 
 ### Example
 
 ```python
-# Synchronous Example
 from opperai import Opper
+# Our SDK supports Pydantic to provide structured output
+from pydantic import BaseModel
 import os
 
+# Define the output structure
+class RoomDescription(BaseModel):
+    room_count: int
+    view: str
+    bed_size: str
+    hotel_name: str
 
-with Opper(
-    http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
-) as opper:
+def main():
+    opper = Opper(http_bearer=os.getenv("OPPER_API_KEY"))
 
-    res = opper.call(name="add_numbers", instructions="Calculate the sum of two numbers", input_schema={
-        "properties": {
-            "x": {
-                "title": "X",
-                "type": "integer",
-            },
-            "y": {
-                "title": "Y",
-                "type": "integer",
-            },
-        },
-        "required": [
-            "x",
-            "y",
-        ],
-        "title": "OpperInputExample",
-        "type": "object",
-    }, output_schema={
-        "properties": {
-            "sum": {
-                "title": "Sum",
-                "type": "integer",
-            },
-        },
-        "required": [
-            "sum",
-        ],
-        "title": "OpperOutputExample",
-        "type": "object",
-    }, input={
-        "x": 4,
-        "y": 5,
-    }, examples=[
-        {
-            "input": {
-                "x": 1,
-                "y": 3,
-            },
-            "output": {
-                "sum": 4,
-            },
-            "comment": "Adds two numbers",
-        },
-    ], parent_span_id="123e4567-e89b-12d3-a456-426614174000", tags={
-        "project": "project_456",
-        "user": "company_123",
-    }, configuration={})
+    # Complete a task
+    completion = opper.call(
+        name="extractRoom",
+        instructions="Extract details about the room from the provided text",
+        input="The Grand Hotel offers a luxurious suite with 3 spacious rooms, each providing a breathtaking view of the ocean. The suite includes a king-sized bed, an en-suite bathroom, and a private balcony for an unforgettable stay.",
+        output_schema=RoomDescription,
+    )
 
-    # Handle response
-    print(res)
+    print(completion.json_payload)
+    #{'room_count': 3, 'view': 'ocean', 'bed_size': 'king-sized', 'hotel_name': 'The Grand Hotel'}
+
+main()
 ```
-
 </br>
 
-The same SDK client can also be used to make asychronous requests by importing asyncio.
+The same SDK client can also be used to make asychronous requests by importing asyncio. Just add `_async` to the call
+<details closed>
+<summary>Async example</summary>
+
 ```python
 # Asynchronous Example
 import asyncio
-from opperai import Opper
 import os
+from opperai import Opper
+from pydantic import BaseModel
+
+# Define the output structure
+class RoomDescription(BaseModel):
+    room_count: int
+    view: str
+    bed_size: str
+    hotel_name: str
 
 async def main():
+    opper = Opper(http_bearer=os.getenv("OPPER_API_KEY"))
 
-    async with Opper(
-        http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
-    ) as opper:
+    # Complete a task asynchronously
+    completion = await opper.call_async(
+        name="extractRoom",
+        instructions="Extract details about the room from the provided text",
+        input="The Grand Hotel offers a luxurious suite with 3 spacious rooms, each providing a breathtaking view of the ocean. The suite includes a king-sized bed, an en-suite bathroom, and a private balcony for an unforgettable stay.",
+        output_schema=RoomDescription,
+    )
 
-        res = await opper.call_async(name="add_numbers", instructions="Calculate the sum of two numbers", input_schema={
-            "properties": {
-                "x": {
-                    "title": "X",
-                    "type": "integer",
-                },
-                "y": {
-                    "title": "Y",
-                    "type": "integer",
-                },
-            },
-            "required": [
-                "x",
-                "y",
-            ],
-            "title": "OpperInputExample",
-            "type": "object",
-        }, output_schema={
-            "properties": {
-                "sum": {
-                    "title": "Sum",
-                    "type": "integer",
-                },
-            },
-            "required": [
-                "sum",
-            ],
-            "title": "OpperOutputExample",
-            "type": "object",
-        }, input={
-            "x": 4,
-            "y": 5,
-        }, examples=[
-            {
-                "input": {
-                    "x": 1,
-                    "y": 3,
-                },
-                "output": {
-                    "sum": 4,
-                },
-                "comment": "Adds two numbers",
-            },
-        ], parent_span_id="123e4567-e89b-12d3-a456-426614174000", tags={
-            "project": "project_456",
-            "user": "company_123",
-        }, configuration={})
+    print(completion.json_payload)
+    # {'room_count': 3, 'view': 'ocean', 'bed_size': 'king-sized', 'hotel_name': 'The Grand Hotel'}
 
-        # Handle response
-        print(res)
-
+# Run the async main function
 asyncio.run(main())
 ```
+</details>
 <!-- End SDK Example Usage [usage] -->
 
 <!-- Start Authentication [security] -->
 ## Authentication
 
-### Per-Client Security Schemes
+See our authenthication docs [auth](https://docs.opper.ai/api-reference/authentication)
 
 This SDK supports the following security scheme globally:
 
@@ -265,61 +193,8 @@ To authenticate with the API the `http_bearer` parameter must be set when initia
 from opperai import Opper
 import os
 
-
-with Opper(
-    http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
-) as opper:
-
-    res = opper.call(name="add_numbers", instructions="Calculate the sum of two numbers", input_schema={
-        "properties": {
-            "x": {
-                "title": "X",
-                "type": "integer",
-            },
-            "y": {
-                "title": "Y",
-                "type": "integer",
-            },
-        },
-        "required": [
-            "x",
-            "y",
-        ],
-        "title": "OpperInputExample",
-        "type": "object",
-    }, output_schema={
-        "properties": {
-            "sum": {
-                "title": "Sum",
-                "type": "integer",
-            },
-        },
-        "required": [
-            "sum",
-        ],
-        "title": "OpperOutputExample",
-        "type": "object",
-    }, input={
-        "x": 4,
-        "y": 5,
-    }, examples=[
-        {
-            "input": {
-                "x": 1,
-                "y": 3,
-            },
-            "output": {
-                "sum": 4,
-            },
-            "comment": "Adds two numbers",
-        },
-    ], parent_span_id="123e4567-e89b-12d3-a456-426614174000", tags={
-        "project": "project_456",
-        "user": "company_123",
-    }, configuration={})
-
-    # Handle response
-    print(res)
+http_bearer="YOUR_API_KEY"
+opper = Opper(http_bearer)
 
 ```
 <!-- End Authentication [security] -->
@@ -391,10 +266,6 @@ with Opper(
 * [delete_custom](docs/sdks/languagemodels/README.md#delete_custom) - Delete Custom Model
 * [get_custom_by_name](docs/sdks/languagemodels/README.md#get_custom_by_name) - Get Custom Model By Name
 
-### [openai](docs/sdks/openai/README.md)
-
-* [create_chat_completion](docs/sdks/openai/README.md#create_chat_completion) - Chat Completions
-
 ### [Opper SDK](docs/sdks/opper/README.md)
 
 * [call](docs/sdks/opper/README.md#call) - Function Call
@@ -433,8 +304,38 @@ can be consumed using a simple `for` loop. The loop will
 terminate when the server no longer has any events to send and closes the
 underlying connection.  
 
-The stream is also a [Context Manager][context-manager] and can be used with the `with` statement and will close the
-underlying connection when the context is exited.
+```python
+from opperai import Opper
+import os
+
+
+opper = Opper(http_bearer=os.getenv("OPPER_API_KEY"))
+
+def stream_call():
+    """Print the assistant’s answer as it streams back from Opper."""
+    outer = opper.stream(
+        name="python/sdk/bare-minimum-with-stream",
+        instructions="answer the following question",
+        input="what are some uses of 42",
+    )
+
+    # Pull out the inner EventStream object in one line.
+    stream = next(value for key, value in outer if key == "result")
+
+    # Read each Server-Sent Event and emit the delta text.
+    for event in stream:  # event: ServerSentEvent
+        delta = getattr(event.data, "delta", None)
+        if delta:  # skip keep-alives, etc.
+            print(delta, end="", flush=True)
+
+```
+
+
+
+The stream is also a [Context Manager][context-manager] and can be used with the `with` statement and will close the underlying connection when the context is exited.
+<details closed>
+<summary> Context Manager Stream Example</summary>
+
 
 ```python
 from opperai import Opper
@@ -503,6 +404,7 @@ with Opper(
 [mdn-sse]: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
 [generator]: https://book.pythontips.com/en/latest/generators.html
 [context-manager]: https://book.pythontips.com/en/latest/context_managers.html
+</details>
 <!-- End Server-sent event streaming [eventstream] -->
 
 <!-- Start Retries [retries] -->
@@ -644,6 +546,8 @@ with Opper(
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
+Check our detailed [error handling](https://docs.opper.ai/api-reference/errors)
+
 Handling errors in this SDK should largely match your expectations. All operations return a response object or raise an exception.
 
 By default, an API error will raise a errors.APIError exception, which has the following properties:
@@ -747,77 +651,6 @@ with Opper(
 ```
 <!-- End Error Handling [errors] -->
 
-<!-- Start Server Selection [server] -->
-## Server Selection
-
-### Override Server URL Per-Client
-
-The default server can be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
-```python
-from opperai import Opper
-import os
-
-
-with Opper(
-    server_url="https://api.opper.ai/v2",
-    http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
-) as opper:
-
-    res = opper.call(name="add_numbers", instructions="Calculate the sum of two numbers", input_schema={
-        "properties": {
-            "x": {
-                "title": "X",
-                "type": "integer",
-            },
-            "y": {
-                "title": "Y",
-                "type": "integer",
-            },
-        },
-        "required": [
-            "x",
-            "y",
-        ],
-        "title": "OpperInputExample",
-        "type": "object",
-    }, output_schema={
-        "properties": {
-            "sum": {
-                "title": "Sum",
-                "type": "integer",
-            },
-        },
-        "required": [
-            "sum",
-        ],
-        "title": "OpperOutputExample",
-        "type": "object",
-    }, input={
-        "x": 4,
-        "y": 5,
-    }, examples=[
-        {
-            "input": {
-                "x": 1,
-                "y": 3,
-            },
-            "output": {
-                "sum": 4,
-            },
-            "comment": "Adds two numbers",
-        },
-    ], parent_span_id="123e4567-e89b-12d3-a456-426614174000", tags={
-        "project": "project_456",
-        "user": "company_123",
-    }, configuration={})
-
-    # Handle response
-    print(res)
-
-```
-<!-- End Server Selection [server] -->
-
-<!-- Start Custom HTTP Client [http-client] -->
 ## Custom HTTP Client
 
 The Python SDK makes API calls using the [httpx](https://www.python-httpx.org/) HTTP library.  In order to provide a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration, you can initialize the SDK client with your own HTTP client instance.
