@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c75567cf-9def-4617-8ae7-65af6f367b68
 management:
-  docChecksum: ff2247ed1c3b586f7ee32e12fd43b95b
+  docChecksum: 2f4169b206173f00c8a9c559d76d3113
   docVersion: 2.0.0
-  speakeasyVersion: 1.571.1
+  speakeasyVersion: 1.571.2
   generationVersion: 2.640.2
-  releaseVersion: 1.1.1
-  configChecksum: cc35e17a5271273564bb347b3f72bf56
+  releaseVersion: 1.1.2
+  configChecksum: ce24e5a45dba399e80a71e8f23a62f1b
 features:
   python:
     additionalDependencies: 1.0.0
@@ -766,7 +766,7 @@ examples:
         path:
           span_id: "77b258a2-45c1-4b87-a50c-9116bc8ed1d6"
       requestBody:
-        application/json: {"name": "my span", "start_time": "2025-06-27T11:36:36.696834Z", "type": "email_tool", "end_time": "2025-06-27T11:36:36.696870Z", "input": "Hello, world!", "output": "Hello, world!", "error": "Exception: This is an error message", "meta": {"key": "value"}, "score": 10}
+        application/json: {"name": "my span", "start_time": "2025-06-28T09:49:07.980658Z", "type": "email_tool", "end_time": "2025-06-28T09:49:07.980752Z", "input": "Hello, world!", "output": "Hello, world!", "error": "Exception: This is an error message", "meta": {"key": "value"}, "score": 10}
       responses:
         "200":
           application/json: {"name": "my span", "start_time": "2024-03-20T10:00:00+00:00", "id": "84d9ffc8-336c-4953-b92f-fe05d5405951", "trace_id": "123e4567-e89b-12d3-a456-426614174000", "parent_id": "123e4567-e89b-12d3-a456-426614174000", "type": "email_tool", "end_time": "2024-03-20T10:00:10+00:00", "input": "Hello, world!", "output": "Hello, world!", "error": "Exception: This is an error message", "meta": {"key": "value"}, "score": 10}
