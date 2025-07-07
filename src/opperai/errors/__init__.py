@@ -8,11 +8,14 @@ if TYPE_CHECKING:
     from .badrequesterror import BadRequestError, BadRequestErrorData
     from .conflicterror import ConflictError, ConflictErrorData
     from .error import Error, ErrorData
+    from .no_response_error import NoResponseError
     from .notfounderror import NotFoundError, NotFoundErrorData
+    from .oppererror import OpperError
     from .requestvalidationerror import (
         RequestValidationError,
         RequestValidationErrorData,
     )
+    from .responsevalidationerror import ResponseValidationError
     from .unauthorizederror import UnauthorizedError, UnauthorizedErrorData
 
 __all__ = [
@@ -23,10 +26,13 @@ __all__ = [
     "ConflictErrorData",
     "Error",
     "ErrorData",
+    "NoResponseError",
     "NotFoundError",
     "NotFoundErrorData",
+    "OpperError",
     "RequestValidationError",
     "RequestValidationErrorData",
+    "ResponseValidationError",
     "UnauthorizedError",
     "UnauthorizedErrorData",
 ]
@@ -39,10 +45,13 @@ _dynamic_imports: dict[str, str] = {
     "ConflictErrorData": ".conflicterror",
     "Error": ".error",
     "ErrorData": ".error",
+    "NoResponseError": ".no_response_error",
     "NotFoundError": ".notfounderror",
     "NotFoundErrorData": ".notfounderror",
+    "OpperError": ".oppererror",
     "RequestValidationError": ".requestvalidationerror",
     "RequestValidationErrorData": ".requestvalidationerror",
+    "ResponseValidationError": ".responsevalidationerror",
     "UnauthorizedError": ".unauthorizederror",
     "UnauthorizedErrorData": ".unauthorizederror",
 }

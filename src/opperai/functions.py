@@ -130,51 +130,42 @@ class Functions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.CreateFunctionResponse)
+            return utils.unmarshal_json_response(
+                models.CreateFunctionResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.BadRequestErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.BadRequestErrorData, http_res
             )
-            raise errors.BadRequestError(data=response_data)
+            raise errors.BadRequestError(response_data, http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.UnauthorizedErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.UnauthorizedErrorData, http_res
             )
-            raise errors.UnauthorizedError(data=response_data)
+            raise errors.UnauthorizedError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.NotFoundErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.NotFoundErrorData, http_res
             )
-            raise errors.NotFoundError(data=response_data)
+            raise errors.NotFoundError(response_data, http_res)
         if utils.match_response(http_res, "409", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.ConflictErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.ConflictErrorData, http_res
             )
-            raise errors.ConflictError(data=response_data)
+            raise errors.ConflictError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.RequestValidationErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.RequestValidationErrorData, http_res
             )
-            raise errors.RequestValidationError(data=response_data)
+            raise errors.RequestValidationError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise errors.APIError("Unexpected response received", http_res)
 
     async def create_async(
         self,
@@ -285,51 +276,42 @@ class Functions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.CreateFunctionResponse)
+            return utils.unmarshal_json_response(
+                models.CreateFunctionResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.BadRequestErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.BadRequestErrorData, http_res
             )
-            raise errors.BadRequestError(data=response_data)
+            raise errors.BadRequestError(response_data, http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.UnauthorizedErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.UnauthorizedErrorData, http_res
             )
-            raise errors.UnauthorizedError(data=response_data)
+            raise errors.UnauthorizedError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.NotFoundErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.NotFoundErrorData, http_res
             )
-            raise errors.NotFoundError(data=response_data)
+            raise errors.NotFoundError(response_data, http_res)
         if utils.match_response(http_res, "409", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.ConflictErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.ConflictErrorData, http_res
             )
-            raise errors.ConflictError(data=response_data)
+            raise errors.ConflictError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.RequestValidationErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.RequestValidationErrorData, http_res
             )
-            raise errors.RequestValidationError(data=response_data)
+            raise errors.RequestValidationError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise errors.APIError("Unexpected response received", http_res)
 
     def list(
         self,
@@ -414,48 +396,37 @@ class Functions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.PaginatedResponseListFunctionsResponseItem
+            return utils.unmarshal_json_response(
+                models.PaginatedResponseListFunctionsResponseItem, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.BadRequestErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.BadRequestErrorData, http_res
             )
-            raise errors.BadRequestError(data=response_data)
+            raise errors.BadRequestError(response_data, http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.UnauthorizedErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.UnauthorizedErrorData, http_res
             )
-            raise errors.UnauthorizedError(data=response_data)
+            raise errors.UnauthorizedError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.NotFoundErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.NotFoundErrorData, http_res
             )
-            raise errors.NotFoundError(data=response_data)
+            raise errors.NotFoundError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.RequestValidationErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.RequestValidationErrorData, http_res
             )
-            raise errors.RequestValidationError(data=response_data)
+            raise errors.RequestValidationError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise errors.APIError("Unexpected response received", http_res)
 
     async def list_async(
         self,
@@ -540,48 +511,37 @@ class Functions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.PaginatedResponseListFunctionsResponseItem
+            return utils.unmarshal_json_response(
+                models.PaginatedResponseListFunctionsResponseItem, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.BadRequestErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.BadRequestErrorData, http_res
             )
-            raise errors.BadRequestError(data=response_data)
+            raise errors.BadRequestError(response_data, http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.UnauthorizedErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.UnauthorizedErrorData, http_res
             )
-            raise errors.UnauthorizedError(data=response_data)
+            raise errors.UnauthorizedError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.NotFoundErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.NotFoundErrorData, http_res
             )
-            raise errors.NotFoundError(data=response_data)
+            raise errors.NotFoundError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.RequestValidationErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.RequestValidationErrorData, http_res
             )
-            raise errors.RequestValidationError(data=response_data)
+            raise errors.RequestValidationError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise errors.APIError("Unexpected response received", http_res)
 
     def get(
         self,
@@ -657,46 +617,35 @@ class Functions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.GetFunctionResponse)
+            return utils.unmarshal_json_response(models.GetFunctionResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.BadRequestErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.BadRequestErrorData, http_res
             )
-            raise errors.BadRequestError(data=response_data)
+            raise errors.BadRequestError(response_data, http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.UnauthorizedErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.UnauthorizedErrorData, http_res
             )
-            raise errors.UnauthorizedError(data=response_data)
+            raise errors.UnauthorizedError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.NotFoundErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.NotFoundErrorData, http_res
             )
-            raise errors.NotFoundError(data=response_data)
+            raise errors.NotFoundError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.RequestValidationErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.RequestValidationErrorData, http_res
             )
-            raise errors.RequestValidationError(data=response_data)
+            raise errors.RequestValidationError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise errors.APIError("Unexpected response received", http_res)
 
     async def get_async(
         self,
@@ -772,46 +721,35 @@ class Functions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.GetFunctionResponse)
+            return utils.unmarshal_json_response(models.GetFunctionResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.BadRequestErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.BadRequestErrorData, http_res
             )
-            raise errors.BadRequestError(data=response_data)
+            raise errors.BadRequestError(response_data, http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.UnauthorizedErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.UnauthorizedErrorData, http_res
             )
-            raise errors.UnauthorizedError(data=response_data)
+            raise errors.UnauthorizedError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.NotFoundErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.NotFoundErrorData, http_res
             )
-            raise errors.NotFoundError(data=response_data)
+            raise errors.NotFoundError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.RequestValidationErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.RequestValidationErrorData, http_res
             )
-            raise errors.RequestValidationError(data=response_data)
+            raise errors.RequestValidationError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise errors.APIError("Unexpected response received", http_res)
 
     def update(
         self,
@@ -839,7 +777,7 @@ class Functions(BaseSDK):
         :param instructions: The instructions for the function, this is the prompt that will be sent to the model to complete the task. Recommended to be concise and to the point
         :param input_schema: Optional input schema for the function. Can preferably include field descriptions to allow the model to reason about the input variables. Schema is validated against the input data and issues an error if it does not match. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.
         :param output_schema: Optional output schema for the function. Can preferably include field descriptions to allow the model to reason about the output variables. Schema is validated against the output data and issues an error if it does not match. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.
-        :param model: Optionally provide a model to use for completing the task. If not provided, a default model will be used. Currently the default model is `azure/gpt-4o-eu`
+        :param model: Optionally provide a model to use for completing the task. If not provided, a default model will be used. Currently the default model is `azure/gpt-4o-eu`          To specify options for the model, use a dictionary of key-value pairs. The options are passed to the model on invocation. An example of passing temperature to `gpt-4o-mini` hosted on OpenAI is shown below.          ```json {     \"model\": \"openai/gpt-4o-mini\", # the model name     \"options\": {         \"temperature\": 0.5 # the options for the model     } } ```  To specify a fallback model, use a list of models. The models will then be tried in order. The second model will be used if the first model is not available, and so on.  ```json [     \"openai/gpt-4o-mini\", # first model to try     \"openai/gpt-4.1-nano\", # second model to try ] ```
         :param configuration: Optional configuration for the function.Configuration is a dictionary of key-value pairs that can be used to override the default configuration for the function.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -924,46 +862,37 @@ class Functions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.UpdateFunctionResponse)
+            return utils.unmarshal_json_response(
+                models.UpdateFunctionResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.BadRequestErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.BadRequestErrorData, http_res
             )
-            raise errors.BadRequestError(data=response_data)
+            raise errors.BadRequestError(response_data, http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.UnauthorizedErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.UnauthorizedErrorData, http_res
             )
-            raise errors.UnauthorizedError(data=response_data)
+            raise errors.UnauthorizedError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.NotFoundErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.NotFoundErrorData, http_res
             )
-            raise errors.NotFoundError(data=response_data)
+            raise errors.NotFoundError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.RequestValidationErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.RequestValidationErrorData, http_res
             )
-            raise errors.RequestValidationError(data=response_data)
+            raise errors.RequestValidationError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise errors.APIError("Unexpected response received", http_res)
 
     async def update_async(
         self,
@@ -991,7 +920,7 @@ class Functions(BaseSDK):
         :param instructions: The instructions for the function, this is the prompt that will be sent to the model to complete the task. Recommended to be concise and to the point
         :param input_schema: Optional input schema for the function. Can preferably include field descriptions to allow the model to reason about the input variables. Schema is validated against the input data and issues an error if it does not match. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.
         :param output_schema: Optional output schema for the function. Can preferably include field descriptions to allow the model to reason about the output variables. Schema is validated against the output data and issues an error if it does not match. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.
-        :param model: Optionally provide a model to use for completing the task. If not provided, a default model will be used. Currently the default model is `azure/gpt-4o-eu`
+        :param model: Optionally provide a model to use for completing the task. If not provided, a default model will be used. Currently the default model is `azure/gpt-4o-eu`          To specify options for the model, use a dictionary of key-value pairs. The options are passed to the model on invocation. An example of passing temperature to `gpt-4o-mini` hosted on OpenAI is shown below.          ```json {     \"model\": \"openai/gpt-4o-mini\", # the model name     \"options\": {         \"temperature\": 0.5 # the options for the model     } } ```  To specify a fallback model, use a list of models. The models will then be tried in order. The second model will be used if the first model is not available, and so on.  ```json [     \"openai/gpt-4o-mini\", # first model to try     \"openai/gpt-4.1-nano\", # second model to try ] ```
         :param configuration: Optional configuration for the function.Configuration is a dictionary of key-value pairs that can be used to override the default configuration for the function.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1076,46 +1005,37 @@ class Functions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.UpdateFunctionResponse)
+            return utils.unmarshal_json_response(
+                models.UpdateFunctionResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.BadRequestErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.BadRequestErrorData, http_res
             )
-            raise errors.BadRequestError(data=response_data)
+            raise errors.BadRequestError(response_data, http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.UnauthorizedErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.UnauthorizedErrorData, http_res
             )
-            raise errors.UnauthorizedError(data=response_data)
+            raise errors.UnauthorizedError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.NotFoundErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.NotFoundErrorData, http_res
             )
-            raise errors.NotFoundError(data=response_data)
+            raise errors.NotFoundError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.RequestValidationErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.RequestValidationErrorData, http_res
             )
-            raise errors.RequestValidationError(data=response_data)
+            raise errors.RequestValidationError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise errors.APIError("Unexpected response received", http_res)
 
     def delete(
         self,
@@ -1193,44 +1113,33 @@ class Functions(BaseSDK):
         if utils.match_response(http_res, "204", "*"):
             return
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.BadRequestErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.BadRequestErrorData, http_res
             )
-            raise errors.BadRequestError(data=response_data)
+            raise errors.BadRequestError(response_data, http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.UnauthorizedErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.UnauthorizedErrorData, http_res
             )
-            raise errors.UnauthorizedError(data=response_data)
+            raise errors.UnauthorizedError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.NotFoundErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.NotFoundErrorData, http_res
             )
-            raise errors.NotFoundError(data=response_data)
+            raise errors.NotFoundError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.RequestValidationErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.RequestValidationErrorData, http_res
             )
-            raise errors.RequestValidationError(data=response_data)
+            raise errors.RequestValidationError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise errors.APIError("Unexpected response received", http_res)
 
     async def delete_async(
         self,
@@ -1308,44 +1217,33 @@ class Functions(BaseSDK):
         if utils.match_response(http_res, "204", "*"):
             return
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.BadRequestErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.BadRequestErrorData, http_res
             )
-            raise errors.BadRequestError(data=response_data)
+            raise errors.BadRequestError(response_data, http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.UnauthorizedErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.UnauthorizedErrorData, http_res
             )
-            raise errors.UnauthorizedError(data=response_data)
+            raise errors.UnauthorizedError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.NotFoundErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.NotFoundErrorData, http_res
             )
-            raise errors.NotFoundError(data=response_data)
+            raise errors.NotFoundError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.RequestValidationErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.RequestValidationErrorData, http_res
             )
-            raise errors.RequestValidationError(data=response_data)
+            raise errors.RequestValidationError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise errors.APIError("Unexpected response received", http_res)
 
     def get_by_name(
         self,
@@ -1421,46 +1319,35 @@ class Functions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.GetFunctionResponse)
+            return utils.unmarshal_json_response(models.GetFunctionResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.BadRequestErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.BadRequestErrorData, http_res
             )
-            raise errors.BadRequestError(data=response_data)
+            raise errors.BadRequestError(response_data, http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.UnauthorizedErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.UnauthorizedErrorData, http_res
             )
-            raise errors.UnauthorizedError(data=response_data)
+            raise errors.UnauthorizedError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.NotFoundErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.NotFoundErrorData, http_res
             )
-            raise errors.NotFoundError(data=response_data)
+            raise errors.NotFoundError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.RequestValidationErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.RequestValidationErrorData, http_res
             )
-            raise errors.RequestValidationError(data=response_data)
+            raise errors.RequestValidationError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise errors.APIError("Unexpected response received", http_res)
 
     async def get_by_name_async(
         self,
@@ -1536,46 +1423,35 @@ class Functions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.GetFunctionResponse)
+            return utils.unmarshal_json_response(models.GetFunctionResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.BadRequestErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.BadRequestErrorData, http_res
             )
-            raise errors.BadRequestError(data=response_data)
+            raise errors.BadRequestError(response_data, http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.UnauthorizedErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.UnauthorizedErrorData, http_res
             )
-            raise errors.UnauthorizedError(data=response_data)
+            raise errors.UnauthorizedError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.NotFoundErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.NotFoundErrorData, http_res
             )
-            raise errors.NotFoundError(data=response_data)
+            raise errors.NotFoundError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.RequestValidationErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.RequestValidationErrorData, http_res
             )
-            raise errors.RequestValidationError(data=response_data)
+            raise errors.RequestValidationError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise errors.APIError("Unexpected response received", http_res)
 
     def get_by_revision(
         self,
@@ -1654,46 +1530,35 @@ class Functions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.GetFunctionResponse)
+            return utils.unmarshal_json_response(models.GetFunctionResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.BadRequestErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.BadRequestErrorData, http_res
             )
-            raise errors.BadRequestError(data=response_data)
+            raise errors.BadRequestError(response_data, http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.UnauthorizedErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.UnauthorizedErrorData, http_res
             )
-            raise errors.UnauthorizedError(data=response_data)
+            raise errors.UnauthorizedError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.NotFoundErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.NotFoundErrorData, http_res
             )
-            raise errors.NotFoundError(data=response_data)
+            raise errors.NotFoundError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.RequestValidationErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.RequestValidationErrorData, http_res
             )
-            raise errors.RequestValidationError(data=response_data)
+            raise errors.RequestValidationError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise errors.APIError("Unexpected response received", http_res)
 
     async def get_by_revision_async(
         self,
@@ -1772,46 +1637,35 @@ class Functions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.GetFunctionResponse)
+            return utils.unmarshal_json_response(models.GetFunctionResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.BadRequestErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.BadRequestErrorData, http_res
             )
-            raise errors.BadRequestError(data=response_data)
+            raise errors.BadRequestError(response_data, http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.UnauthorizedErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.UnauthorizedErrorData, http_res
             )
-            raise errors.UnauthorizedError(data=response_data)
+            raise errors.UnauthorizedError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.NotFoundErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.NotFoundErrorData, http_res
             )
-            raise errors.NotFoundError(data=response_data)
+            raise errors.NotFoundError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.RequestValidationErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.RequestValidationErrorData, http_res
             )
-            raise errors.RequestValidationError(data=response_data)
+            raise errors.RequestValidationError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise errors.APIError("Unexpected response received", http_res)
 
     def call(
         self,
@@ -1912,48 +1766,37 @@ class Functions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.AppAPIPublicV2FunctionsCallFunctionResponse
+            return utils.unmarshal_json_response(
+                models.AppAPIPublicV2FunctionsCallFunctionResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.BadRequestErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.BadRequestErrorData, http_res
             )
-            raise errors.BadRequestError(data=response_data)
+            raise errors.BadRequestError(response_data, http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.UnauthorizedErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.UnauthorizedErrorData, http_res
             )
-            raise errors.UnauthorizedError(data=response_data)
+            raise errors.UnauthorizedError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.NotFoundErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.NotFoundErrorData, http_res
             )
-            raise errors.NotFoundError(data=response_data)
+            raise errors.NotFoundError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.RequestValidationErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.RequestValidationErrorData, http_res
             )
-            raise errors.RequestValidationError(data=response_data)
+            raise errors.RequestValidationError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise errors.APIError("Unexpected response received", http_res)
 
     async def call_async(
         self,
@@ -2054,48 +1897,37 @@ class Functions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.AppAPIPublicV2FunctionsCallFunctionResponse
+            return utils.unmarshal_json_response(
+                models.AppAPIPublicV2FunctionsCallFunctionResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.BadRequestErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.BadRequestErrorData, http_res
             )
-            raise errors.BadRequestError(data=response_data)
+            raise errors.BadRequestError(response_data, http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.UnauthorizedErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.UnauthorizedErrorData, http_res
             )
-            raise errors.UnauthorizedError(data=response_data)
+            raise errors.UnauthorizedError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.NotFoundErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.NotFoundErrorData, http_res
             )
-            raise errors.NotFoundError(data=response_data)
+            raise errors.NotFoundError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.RequestValidationErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.RequestValidationErrorData, http_res
             )
-            raise errors.RequestValidationError(data=response_data)
+            raise errors.RequestValidationError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise errors.APIError("Unexpected response received", http_res)
 
     def stream(
         self,
@@ -2223,47 +2055,37 @@ class Functions(BaseSDK):
             )
         if utils.match_response(http_res, "400", "application/json"):
             http_res_text = utils.stream_to_text(http_res)
-            response_data = utils.unmarshal_json(
-                http_res_text, errors.BadRequestErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.BadRequestErrorData, http_res, http_res_text
             )
-            raise errors.BadRequestError(data=response_data)
+            raise errors.BadRequestError(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "401", "application/json"):
             http_res_text = utils.stream_to_text(http_res)
-            response_data = utils.unmarshal_json(
-                http_res_text, errors.UnauthorizedErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.UnauthorizedErrorData, http_res, http_res_text
             )
-            raise errors.UnauthorizedError(data=response_data)
+            raise errors.UnauthorizedError(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "404", "application/json"):
             http_res_text = utils.stream_to_text(http_res)
-            response_data = utils.unmarshal_json(
-                http_res_text, errors.NotFoundErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.NotFoundErrorData, http_res, http_res_text
             )
-            raise errors.NotFoundError(data=response_data)
+            raise errors.NotFoundError(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "422", "application/json"):
             http_res_text = utils.stream_to_text(http_res)
-            response_data = utils.unmarshal_json(
-                http_res_text, errors.RequestValidationErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.RequestValidationErrorData, http_res, http_res_text
             )
-            raise errors.RequestValidationError(data=response_data)
+            raise errors.RequestValidationError(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
         http_res_text = utils.stream_to_text(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise errors.APIError("Unexpected response received", http_res, http_res_text)
 
     async def stream_async(
         self,
@@ -2391,47 +2213,37 @@ class Functions(BaseSDK):
             )
         if utils.match_response(http_res, "400", "application/json"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            response_data = utils.unmarshal_json(
-                http_res_text, errors.BadRequestErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.BadRequestErrorData, http_res, http_res_text
             )
-            raise errors.BadRequestError(data=response_data)
+            raise errors.BadRequestError(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "401", "application/json"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            response_data = utils.unmarshal_json(
-                http_res_text, errors.UnauthorizedErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.UnauthorizedErrorData, http_res, http_res_text
             )
-            raise errors.UnauthorizedError(data=response_data)
+            raise errors.UnauthorizedError(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "404", "application/json"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            response_data = utils.unmarshal_json(
-                http_res_text, errors.NotFoundErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.NotFoundErrorData, http_res, http_res_text
             )
-            raise errors.NotFoundError(data=response_data)
+            raise errors.NotFoundError(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "422", "application/json"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            response_data = utils.unmarshal_json(
-                http_res_text, errors.RequestValidationErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.RequestValidationErrorData, http_res, http_res_text
             )
-            raise errors.RequestValidationError(data=response_data)
+            raise errors.RequestValidationError(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
         http_res_text = await utils.stream_to_text_async(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise errors.APIError("Unexpected response received", http_res, http_res_text)
 
     def call_revision(
         self,
@@ -2535,48 +2347,37 @@ class Functions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.AppAPIPublicV2FunctionsCallFunctionResponse
+            return utils.unmarshal_json_response(
+                models.AppAPIPublicV2FunctionsCallFunctionResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.BadRequestErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.BadRequestErrorData, http_res
             )
-            raise errors.BadRequestError(data=response_data)
+            raise errors.BadRequestError(response_data, http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.UnauthorizedErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.UnauthorizedErrorData, http_res
             )
-            raise errors.UnauthorizedError(data=response_data)
+            raise errors.UnauthorizedError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.NotFoundErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.NotFoundErrorData, http_res
             )
-            raise errors.NotFoundError(data=response_data)
+            raise errors.NotFoundError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.RequestValidationErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.RequestValidationErrorData, http_res
             )
-            raise errors.RequestValidationError(data=response_data)
+            raise errors.RequestValidationError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise errors.APIError("Unexpected response received", http_res)
 
     async def call_revision_async(
         self,
@@ -2680,48 +2481,37 @@ class Functions(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.AppAPIPublicV2FunctionsCallFunctionResponse
+            return utils.unmarshal_json_response(
+                models.AppAPIPublicV2FunctionsCallFunctionResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.BadRequestErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.BadRequestErrorData, http_res
             )
-            raise errors.BadRequestError(data=response_data)
+            raise errors.BadRequestError(response_data, http_res)
         if utils.match_response(http_res, "401", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.UnauthorizedErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.UnauthorizedErrorData, http_res
             )
-            raise errors.UnauthorizedError(data=response_data)
+            raise errors.UnauthorizedError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.NotFoundErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.NotFoundErrorData, http_res
             )
-            raise errors.NotFoundError(data=response_data)
+            raise errors.NotFoundError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.RequestValidationErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.RequestValidationErrorData, http_res
             )
-            raise errors.RequestValidationError(data=response_data)
+            raise errors.RequestValidationError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise errors.APIError("Unexpected response received", http_res)
 
     def stream_revision(
         self,
@@ -2854,47 +2644,37 @@ class Functions(BaseSDK):
             )
         if utils.match_response(http_res, "400", "application/json"):
             http_res_text = utils.stream_to_text(http_res)
-            response_data = utils.unmarshal_json(
-                http_res_text, errors.BadRequestErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.BadRequestErrorData, http_res, http_res_text
             )
-            raise errors.BadRequestError(data=response_data)
+            raise errors.BadRequestError(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "401", "application/json"):
             http_res_text = utils.stream_to_text(http_res)
-            response_data = utils.unmarshal_json(
-                http_res_text, errors.UnauthorizedErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.UnauthorizedErrorData, http_res, http_res_text
             )
-            raise errors.UnauthorizedError(data=response_data)
+            raise errors.UnauthorizedError(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "404", "application/json"):
             http_res_text = utils.stream_to_text(http_res)
-            response_data = utils.unmarshal_json(
-                http_res_text, errors.NotFoundErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.NotFoundErrorData, http_res, http_res_text
             )
-            raise errors.NotFoundError(data=response_data)
+            raise errors.NotFoundError(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "422", "application/json"):
             http_res_text = utils.stream_to_text(http_res)
-            response_data = utils.unmarshal_json(
-                http_res_text, errors.RequestValidationErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.RequestValidationErrorData, http_res, http_res_text
             )
-            raise errors.RequestValidationError(data=response_data)
+            raise errors.RequestValidationError(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
         http_res_text = utils.stream_to_text(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise errors.APIError("Unexpected response received", http_res, http_res_text)
 
     async def stream_revision_async(
         self,
@@ -3027,44 +2807,34 @@ class Functions(BaseSDK):
             )
         if utils.match_response(http_res, "400", "application/json"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            response_data = utils.unmarshal_json(
-                http_res_text, errors.BadRequestErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.BadRequestErrorData, http_res, http_res_text
             )
-            raise errors.BadRequestError(data=response_data)
+            raise errors.BadRequestError(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "401", "application/json"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            response_data = utils.unmarshal_json(
-                http_res_text, errors.UnauthorizedErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.UnauthorizedErrorData, http_res, http_res_text
             )
-            raise errors.UnauthorizedError(data=response_data)
+            raise errors.UnauthorizedError(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "404", "application/json"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            response_data = utils.unmarshal_json(
-                http_res_text, errors.NotFoundErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.NotFoundErrorData, http_res, http_res_text
             )
-            raise errors.NotFoundError(data=response_data)
+            raise errors.NotFoundError(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "422", "application/json"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            response_data = utils.unmarshal_json(
-                http_res_text, errors.RequestValidationErrorData
+            response_data = utils.unmarshal_json_response(
+                errors.RequestValidationErrorData, http_res, http_res_text
             )
-            raise errors.RequestValidationError(data=response_data)
+            raise errors.RequestValidationError(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise errors.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
         http_res_text = await utils.stream_to_text_async(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise errors.APIError("Unexpected response received", http_res, http_res_text)
