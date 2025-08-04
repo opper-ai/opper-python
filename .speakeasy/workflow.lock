@@ -1,20 +1,21 @@
-speakeasyVersion: 1.571.1
+speakeasyVersion: 1.596.0
 sources:
     FastAPI:
         sourceNamespace: fast-api
-        sourceRevisionDigest: sha256:5fc29da1597ef833870ad5b128d4595225e66a8b84ba91159e30d09745db4113
-        sourceBlobDigest: sha256:4c7c977fb9f5815578e7fa96a4ea7d055225f0dbb6e03b9d90c582bcdb433262
+        sourceRevisionDigest: sha256:fd55fc855046cf1fc0d819b1cc170a92d2deb363e037833c37722723df5e7129
+        sourceBlobDigest: sha256:086be7ab5a5ed4cb45a0dabf12a14eab69b1265a7810cd5ea224344fd6274089
         tags:
             - latest
+            - main
             - 2.0.0
 targets:
     opper:
         source: FastAPI
         sourceNamespace: fast-api
-        sourceRevisionDigest: sha256:5fc29da1597ef833870ad5b128d4595225e66a8b84ba91159e30d09745db4113
-        sourceBlobDigest: sha256:4c7c977fb9f5815578e7fa96a4ea7d055225f0dbb6e03b9d90c582bcdb433262
+        sourceRevisionDigest: sha256:fd55fc855046cf1fc0d819b1cc170a92d2deb363e037833c37722723df5e7129
+        sourceBlobDigest: sha256:086be7ab5a5ed4cb45a0dabf12a14eab69b1265a7810cd5ea224344fd6274089
         codeSamplesNamespace: fast-api-python-code-samples
-        codeSamplesRevisionDigest: sha256:edf3a1f2e191af1385a6ff0a43c9491a7d1bcd213a5ca4468e7705da8719b31e
+        codeSamplesRevisionDigest: sha256:6ecee7700babae1c2e2b66a46f5934f66df83a25c19a1e9b065cedada0702091
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

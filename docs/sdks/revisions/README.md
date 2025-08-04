@@ -16,6 +16,7 @@ revisions are sorted by created_at in descending order ergo the latest revision 
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="list_function_revisions_functions__function_id__revisions_get" method="get" path="/functions/{function_id}/revisions" -->
 ```python
 from opperai import Opper
 import os

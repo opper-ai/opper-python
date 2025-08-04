@@ -13,6 +13,7 @@ Create embeddings for a given string or list of strings
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="create_embedding_embeddings_post" method="post" path="/embeddings" -->
 ```python
 from opperai import Opper
 import os

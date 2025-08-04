@@ -17,6 +17,7 @@ Create a new metric for a span
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="create_metric_spans__span_id__metrics_post" method="post" path="/spans/{span_id}/metrics" -->
 ```python
 from opperai import Opper
 import os
@@ -64,6 +65,7 @@ List metrics for a span
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="list_metrics_spans__span_id__metrics_get" method="get" path="/spans/{span_id}/metrics" -->
 ```python
 from opperai import Opper
 import os
@@ -109,6 +111,7 @@ Get a metric for a span
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get_metric_spans__span_id__metrics__metric_id__get" method="get" path="/spans/{span_id}/metrics/{metric_id}" -->
 ```python
 from opperai import Opper
 import os
@@ -153,6 +156,7 @@ Update a metric for a span
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="update_metric_spans__span_id__metrics__metric_id__patch" method="patch" path="/spans/{span_id}/metrics/{metric_id}" -->
 ```python
 from opperai import Opper
 import os
@@ -200,6 +204,7 @@ Delete a metric for a span
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="delete_metric_spans__span_id__metrics__metric_id__delete" method="delete" path="/spans/{span_id}/metrics/{metric_id}" -->
 ```python
 from opperai import Opper
 import os

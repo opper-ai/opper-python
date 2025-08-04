@@ -14,6 +14,7 @@ It is a declarative interface with input and output schemas that supports text, 
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="function_call_call_post" method="post" path="/call" -->
 ```python
 from opperai import Opper
 import os
@@ -129,6 +130,7 @@ cannot be streamed. The response will be unstructured text content.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="function_stream_call_stream_post" method="post" path="/call/stream" -->
 ```python
 from opperai import Opper
 import os
