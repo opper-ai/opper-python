@@ -2,19 +2,22 @@
 
 from __future__ import annotations
 from .model import Model, ModelTypedDict
-from typing import List, Union
+from typing import Any, Dict, List, Union
 from typing_extensions import TypeAliasType
 
 
-TModel1TypedDict = TypeAliasType("TModel1TypedDict", Union[ModelTypedDict, str])
-
-
-TModel1 = TypeAliasType("TModel1", Union[Model, str])
-
-
-TModelTypedDict = TypeAliasType(
-    "TModelTypedDict", Union[ModelTypedDict, str, List[TModel1TypedDict]]
+TModel1TypedDict = TypeAliasType(
+    "TModel1TypedDict", Union[ModelTypedDict, str, Dict[str, Any]]
 )
 
 
-TModel = TypeAliasType("TModel", Union[Model, str, List[TModel1]])
+TModel1 = TypeAliasType("TModel1", Union[Model, str, Dict[str, Any]])
+
+
+TModelTypedDict = TypeAliasType(
+    "TModelTypedDict",
+    Union[ModelTypedDict, str, Dict[str, Any], List[TModel1TypedDict]],
+)
+
+
+TModel = TypeAliasType("TModel", Union[Model, str, Dict[str, Any], List[TModel1]])

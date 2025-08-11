@@ -13,6 +13,7 @@ Chat Completions
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="chat_completions_openai_chat_completions_post" method="post" path="/openai/chat/completions" -->
 ```python
 from opperai import Opper
 import os

@@ -17,6 +17,7 @@ Create a new span
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="create_span_spans_post" method="post" path="/spans" -->
 ```python
 from opperai import Opper
 from opperai.utils import parse_datetime
@@ -74,6 +75,7 @@ Get a span
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get_span_spans__span_id__get" method="get" path="/spans/{span_id}" -->
 ```python
 from opperai import Opper
 import os
@@ -117,6 +119,7 @@ Update a span
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="update_span_spans__span_id__patch" method="patch" path="/spans/{span_id}" -->
 ```python
 from opperai import Opper
 from opperai.utils import parse_datetime
@@ -127,7 +130,7 @@ with Opper(
     http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
 ) as opper:
 
-    res = opper.spans.update(span_id="77b258a2-45c1-4b87-a50c-9116bc8ed1d6", name="my span", start_time=parse_datetime("2025-06-27T11:36:36.696834Z"), type="email_tool", end_time=parse_datetime("2025-06-27T11:36:36.696870Z"), input="Hello, world!", output="Hello, world!", error="Exception: This is an error message", meta={
+    res = opper.spans.update(span_id="77b258a2-45c1-4b87-a50c-9116bc8ed1d6", name="my span", start_time=parse_datetime("2025-08-07T20:01:20.990533Z"), type="email_tool", end_time=parse_datetime("2025-08-07T20:01:20.990597Z"), input="Hello, world!", output="Hello, world!", error="Exception: This is an error message", meta={
         "key": "value",
     }, score=10)
 
@@ -142,9 +145,9 @@ with Opper(
 | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | `span_id`                                                                                                 | *str*                                                                                                     | :heavy_check_mark:                                                                                        | The ID of the span to update                                                                              |                                                                                                           |
 | `name`                                                                                                    | *OptionalNullable[str]*                                                                                   | :heavy_minus_sign:                                                                                        | The name of the span, something descriptive about the span that will be used to identify it when querying | my span                                                                                                   |
-| `start_time`                                                                                              | [date](https://docs.python.org/3/library/datetime.html#date-objects)                                      | :heavy_minus_sign:                                                                                        | The start time of the span in UTC                                                                         | 2025-06-27T11:36:36.696834Z                                                                               |
+| `start_time`                                                                                              | [date](https://docs.python.org/3/library/datetime.html#date-objects)                                      | :heavy_minus_sign:                                                                                        | The start time of the span in UTC                                                                         | 2025-08-07T20:01:20.990533Z                                                                               |
 | `type`                                                                                                    | *OptionalNullable[str]*                                                                                   | :heavy_minus_sign:                                                                                        | The type of the span                                                                                      | email_tool                                                                                                |
-| `end_time`                                                                                                | [date](https://docs.python.org/3/library/datetime.html#date-objects)                                      | :heavy_minus_sign:                                                                                        | The end time of the span in UTC                                                                           | 2025-06-27T11:36:36.696870Z                                                                               |
+| `end_time`                                                                                                | [date](https://docs.python.org/3/library/datetime.html#date-objects)                                      | :heavy_minus_sign:                                                                                        | The end time of the span in UTC                                                                           | 2025-08-07T20:01:20.990597Z                                                                               |
 | `input`                                                                                                   | *OptionalNullable[str]*                                                                                   | :heavy_minus_sign:                                                                                        | The input of the span                                                                                     | Hello, world!                                                                                             |
 | `output`                                                                                                  | *OptionalNullable[str]*                                                                                   | :heavy_minus_sign:                                                                                        | The output of the span                                                                                    | Hello, world!                                                                                             |
 | `error`                                                                                                   | *OptionalNullable[str]*                                                                                   | :heavy_minus_sign:                                                                                        | In case of an error, the error message                                                                    | Exception: This is an error message                                                                       |
@@ -172,6 +175,7 @@ Delete a span by its id
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="delete_span_spans__span_id__delete" method="delete" path="/spans/{span_id}" -->
 ```python
 from opperai import Opper
 import os
@@ -210,6 +214,7 @@ Save all generation spans to the dataset
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="save_to_dataset_spans__span_id__save_examples_post" method="post" path="/spans/{span_id}/save_examples" -->
 ```python
 from opperai import Opper
 import os
