@@ -11,9 +11,9 @@ on:
         description: 'Target branch for PR (default: main)'
         type: string
         default: 'main'
-  schedule:
-    # Run weekly on Mondays at 9 AM UTC
-    - cron: '0 9 * * 1'
+  # schedule:
+  #   # Run weekly on Mondays at 9 AM UTC
+  #   - cron: '0 9 * * 1'
 
 permissions:
   contents: write
