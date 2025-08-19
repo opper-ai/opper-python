@@ -22,6 +22,7 @@ Create a knowledge base
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="create_knowledge_base_knowledge_post" method="post" path="/knowledge" -->
 ```python
 from opperai import Opper
 import os
@@ -66,6 +67,7 @@ List all knowledge bases for the current project
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="list_knowledge_bases_knowledge_get" method="get" path="/knowledge" -->
 ```python
 from opperai import Opper
 import os
@@ -110,6 +112,7 @@ Get a knowledge base by its id
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get_knowledge_base_knowledge__knowledge_base_id__get" method="get" path="/knowledge/{knowledge_base_id}" -->
 ```python
 from opperai import Opper
 import os
@@ -153,6 +156,7 @@ Delete a knowledge base by its id
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="delete_knowledge_base_knowledge__knowledge_base_id__delete" method="delete" path="/knowledge/{knowledge_base_id}" -->
 ```python
 from opperai import Opper
 import os
@@ -191,6 +195,7 @@ Get a knowledge base by its name
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get_knowledge_base_by_name_knowledge_by_name__knowledge_base_name__get" method="get" path="/knowledge/by-name/{knowledge_base_name}" -->
 ```python
 from opperai import Opper
 import os
@@ -239,6 +244,7 @@ Uploading files is a three step process:
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get_upload_url_knowledge__knowledge_base_id__upload_url_get" method="get" path="/knowledge/{knowledge_base_id}/upload_url" -->
 ```python
 from opperai import Opper
 import os
@@ -288,6 +294,7 @@ Registering a file upload is a three step process:
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="register_file_upload_knowledge__knowledge_base_id__register_file_post" method="post" path="/knowledge/{knowledge_base_id}/register_file" -->
 ```python
 from opperai import Opper
 import os
@@ -335,6 +342,7 @@ Delete a file from a knowledge base by its id
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="delete_file_from_knowledge_base_knowledge__knowledge_base_id__files__file_id__delete" method="delete" path="/knowledge/{knowledge_base_id}/files/{file_id}" -->
 ```python
 from opperai import Opper
 import os
@@ -374,6 +382,7 @@ Query a knowledge base by its id
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="query_knowledge_base_knowledge__knowledge_base_id__query_post" method="post" path="/knowledge/{knowledge_base_id}/query" -->
 ```python
 from opperai import Opper, models
 import os
@@ -437,6 +446,7 @@ Add data to a knowledge base
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="add_knowledge__knowledge_base_id__add_post" method="post" path="/knowledge/{knowledge_base_id}/add" -->
 ```python
 from opperai import Opper
 import os

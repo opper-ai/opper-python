@@ -25,7 +25,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 python:
-  version: 1.1.1
+  version: 1.1.2
   additionalDependencies:
     dev: {}
     main: {}
@@ -56,6 +56,7 @@ python:
   methodArguments: infer-optional-args
   moduleName: ""
   outputModelSuffix: output
+  packageManager: poetry
   packageName: opperai
   pytestFilterWarnings: []
   pytestTimeout: 0

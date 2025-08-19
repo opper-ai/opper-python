@@ -7,8 +7,11 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class ChatCompletionStreamOptionsParamTypedDict(TypedDict):
+    include_obfuscation: NotRequired[bool]
     include_usage: NotRequired[bool]
 
 
 class ChatCompletionStreamOptionsParam(BaseModel):
+    include_obfuscation: Optional[bool] = None
+
     include_usage: Optional[bool] = None

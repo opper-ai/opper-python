@@ -3,8 +3,9 @@
 
 ## Values
 
-| Name     | Value    |
-| -------- | -------- |
-| `LOW`    | low      |
-| `MEDIUM` | medium   |
-| `HIGH`   | high     |
+| Name      | Value     |
+| --------- | --------- |
+| `MINIMAL` | minimal   |
+| `LOW`     | low       |
+| `MEDIUM`  | medium    |
+| `HIGH`    | high      |

@@ -3,9 +3,13 @@
 from __future__ import annotations
 from .annotation import Annotation, AnnotationTypedDict
 from .chatcompletionaudio import ChatCompletionAudio, ChatCompletionAudioTypedDict
-from .chatcompletionmessagetoolcall import (
-    ChatCompletionMessageToolCall,
-    ChatCompletionMessageToolCallTypedDict,
+from .chatcompletionmessagecustomtoolcall import (
+    ChatCompletionMessageCustomToolCall,
+    ChatCompletionMessageCustomToolCallTypedDict,
+)
+from .chatcompletionmessagefunctiontoolcall import (
+    ChatCompletionMessageFunctionToolCall,
+    ChatCompletionMessageFunctionToolCallTypedDict,
 )
 from .functioncall_output import FunctionCallOutput, FunctionCallOutputTypedDict
 from opperai.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
@@ -13,8 +17,23 @@ from opperai.utils import validate_const
 import pydantic
 from pydantic import ConfigDict, model_serializer
 from pydantic.functional_validators import AfterValidator
-from typing import Any, Dict, List, Literal
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing import Any, Dict, List, Literal, Union
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+
+
+ChatCompletionMessageToolCallTypedDict = TypeAliasType(
+    "ChatCompletionMessageToolCallTypedDict",
+    Union[
+        ChatCompletionMessageFunctionToolCallTypedDict,
+        ChatCompletionMessageCustomToolCallTypedDict,
+    ],
+)
+
+
+ChatCompletionMessageToolCall = TypeAliasType(
+    "ChatCompletionMessageToolCall",
+    Union[ChatCompletionMessageFunctionToolCall, ChatCompletionMessageCustomToolCall],
+)
 
 
 class ChatCompletionMessageTypedDict(TypedDict):

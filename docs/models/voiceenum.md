@@ -10,9 +10,6 @@
 | `BALLAD`  | ballad    |
 | `CORAL`   | coral     |
 | `ECHO`    | echo      |
-| `FABLE`   | fable     |
-| `ONYX`    | onyx      |
-| `NOVA`    | nova      |
 | `SAGE`    | sage      |
 | `SHIMMER` | shimmer   |
 | `VERSE`   | verse     |

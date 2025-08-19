@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: c75567cf-9def-4617-8ae7-65af6f367b68
 management:
-  docChecksum: ff2247ed1c3b586f7ee32e12fd43b95b
+  docChecksum: 7adf87015a4d3cc3630127529c339757
   docVersion: 2.0.0
-  speakeasyVersion: 1.571.1
-  generationVersion: 2.640.2
-  releaseVersion: 1.1.1
-  configChecksum: cc35e17a5271273564bb347b3f72bf56
+  speakeasyVersion: 1.606.0
+  generationVersion: 2.686.7
+  releaseVersion: 1.1.2
+  configChecksum: 7af52555bf8fd0fef6efff88ec3b8ba5
 features:
   python:
     additionalDependencies: 1.0.0
     additionalProperties: 1.0.1
     constsAndDefaults: 1.0.5
-    core: 5.19.3
+    core: 5.19.9
     customCodeRegions: 0.1.1
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
@@ -38,7 +38,6 @@ generatedFiles:
   - .devcontainer/devcontainer.json
   - .devcontainer/setup.sh
   - .gitattributes
-  - .python-version
   - .vscode/settings.json
   - USAGE.md
   - docs/errors/badrequesterror.md
@@ -59,9 +58,12 @@ generatedFiles:
   - docs/models/callfunctionfunctionsfunctionidcallpostrequest.md
   - docs/models/callfunctionrevisionfunctionsfunctionidcallrevisionidpostrequest.md
   - docs/models/chatcompletion.md
+  - docs/models/chatcompletionallowedtoolchoiceparam.md
+  - docs/models/chatcompletionallowedtoolsparam.md
   - docs/models/chatcompletionassistantmessageparam.md
   - docs/models/chatcompletionassistantmessageparamcontent1.md
   - docs/models/chatcompletionassistantmessageparamcontent2.md
+  - docs/models/chatcompletionassistantmessageparamtoolcall.md
   - docs/models/chatcompletionaudio.md
   - docs/models/chatcompletionaudioparam.md
   - docs/models/chatcompletionaudioparamformat.md
@@ -69,13 +71,19 @@ generatedFiles:
   - docs/models/chatcompletioncontentpartinputaudioparam.md
   - docs/models/chatcompletioncontentpartrefusalparam.md
   - docs/models/chatcompletioncontentparttextparam.md
+  - docs/models/chatcompletioncustomtoolparam.md
   - docs/models/chatcompletiondevelopermessageparam.md
   - docs/models/chatcompletiondevelopermessageparamcontent.md
   - docs/models/chatcompletionfunctioncalloptionparam.md
   - docs/models/chatcompletionfunctionmessageparam.md
+  - docs/models/chatcompletionfunctiontoolparam.md
   - docs/models/chatcompletionmessage.md
+  - docs/models/chatcompletionmessagecustomtoolcall.md
+  - docs/models/chatcompletionmessagecustomtoolcallparam.md
+  - docs/models/chatcompletionmessagefunctiontoolcall.md
+  - docs/models/chatcompletionmessagefunctiontoolcallparam.md
   - docs/models/chatcompletionmessagetoolcall.md
-  - docs/models/chatcompletionmessagetoolcallparam.md
+  - docs/models/chatcompletionnamedtoolchoicecustomparam.md
   - docs/models/chatcompletionnamedtoolchoiceparam.md
   - docs/models/chatcompletionnonstreaming.md
   - docs/models/chatcompletionnonstreamingfunctioncallenum.md
@@ -86,8 +94,10 @@ generatedFiles:
   - docs/models/chatcompletionnonstreamingresponseformat.md
   - docs/models/chatcompletionnonstreamingservicetier.md
   - docs/models/chatcompletionnonstreamingstop.md
+  - docs/models/chatcompletionnonstreamingtool.md
   - docs/models/chatcompletionnonstreamingtoolchoiceenum.md
   - docs/models/chatcompletionnonstreamingtoolchoiceunion.md
+  - docs/models/chatcompletionnonstreamingverbosity.md
   - docs/models/chatcompletionpredictioncontentparam.md
   - docs/models/chatcompletionpredictioncontentparamcontent.md
   - docs/models/chatcompletionservicetier.md
@@ -100,15 +110,16 @@ generatedFiles:
   - docs/models/chatcompletionstreamingresponseformat.md
   - docs/models/chatcompletionstreamingservicetier.md
   - docs/models/chatcompletionstreamingstop.md
+  - docs/models/chatcompletionstreamingtool.md
   - docs/models/chatcompletionstreamingtoolchoiceenum.md
   - docs/models/chatcompletionstreamingtoolchoiceunion.md
+  - docs/models/chatcompletionstreamingverbosity.md
   - docs/models/chatcompletionstreamoptionsparam.md
   - docs/models/chatcompletionsystemmessageparam.md
   - docs/models/chatcompletionsystemmessageparamcontent.md
   - docs/models/chatcompletiontokenlogprob.md
   - docs/models/chatcompletiontoolmessageparam.md
   - docs/models/chatcompletiontoolmessageparamcontent.md
-  - docs/models/chatcompletiontoolparam.md
   - docs/models/chatcompletionusermessageparam.md
   - docs/models/chatcompletionusermessageparamcontent1.md
   - docs/models/chatcompletionusermessageparamcontent2.md
@@ -130,6 +141,10 @@ generatedFiles:
   - docs/models/createspanmetricresponse.md
   - docs/models/createspanrequest.md
   - docs/models/createspanresponse.md
+  - docs/models/customformatgrammar.md
+  - docs/models/customformatgrammargrammar.md
+  - docs/models/customformattext.md
+  - docs/models/customoutput.md
   - docs/models/deletecustommodelmodelscustommodeliddeleterequest.md
   - docs/models/deletedatasetentrydatasetsdatasetidentriesentryiddeleterequest.md
   - docs/models/deletefilefromknowledgebaseknowledgeknowledgebaseidfilesfileiddeleterequest.md
@@ -144,6 +159,7 @@ generatedFiles:
   - docs/models/filefile.md
   - docs/models/filter_.md
   - docs/models/finishreason.md
+  - docs/models/format_.md
   - docs/models/functioncallconfiguration.md
   - docs/models/functioncallinput.md
   - docs/models/functioncalloutput.md
@@ -197,9 +213,13 @@ generatedFiles:
   - docs/models/listtracesresponse.md
   - docs/models/listtracestracesgetrequest.md
   - docs/models/meta.md
+  - docs/models/mode.md
   - docs/models/model.md
   - docs/models/op.md
-  - docs/models/openaitypeschatchatcompletionmessagetoolcallparamfunction.md
+  - docs/models/openaitypeschatchatcompletioncustomtoolparamcustom.md
+  - docs/models/openaitypeschatchatcompletionmessagecustomtoolcallparamcustom.md
+  - docs/models/openaitypeschatchatcompletionmessagefunctiontoolcallparamfunction.md
+  - docs/models/openaitypeschatchatcompletionnamedtoolchoicecustomparamcustom.md
   - docs/models/openaitypeschatchatcompletionnamedtoolchoiceparamfunction.md
   - docs/models/openaitypeschatcompletioncreateparamsfunction.md
   - docs/models/paginatedresponsegetdatasetentriesresponse.md
@@ -240,6 +260,7 @@ generatedFiles:
   - docs/models/streamfunctionrevisionfunctionsfunctionidcallstreamrevisionidpostrequest.md
   - docs/models/streamfunctionrevisionfunctionsfunctionidcallstreamrevisionidpostresponse.md
   - docs/models/streamfunctionrevisionfunctionsfunctionidcallstreamrevisionidpostresponsebody.md
+  - docs/models/syntax.md
   - docs/models/textprocessingconfiguration.md
   - docs/models/tmodel.md
   - docs/models/tmodel1.md
@@ -301,8 +322,11 @@ generatedFiles:
   - src/opperai/errors/badrequesterror.py
   - src/opperai/errors/conflicterror.py
   - src/opperai/errors/error.py
+  - src/opperai/errors/no_response_error.py
   - src/opperai/errors/notfounderror.py
+  - src/opperai/errors/oppererror.py
   - src/opperai/errors/requestvalidationerror.py
+  - src/opperai/errors/responsevalidationerror.py
   - src/opperai/errors/unauthorizederror.py
   - src/opperai/functions.py
   - src/opperai/httpclient.py
@@ -322,6 +346,8 @@ generatedFiles:
   - src/opperai/models/call_function_revision_functions_function_id_call_revision_id_postop.py
   - src/opperai/models/chat_completions_openai_chat_completions_postop.py
   - src/opperai/models/chatcompletion.py
+  - src/opperai/models/chatcompletionallowedtoolchoiceparam.py
+  - src/opperai/models/chatcompletionallowedtoolsparam.py
   - src/opperai/models/chatcompletionassistantmessageparam.py
   - src/opperai/models/chatcompletionaudio.py
   - src/opperai/models/chatcompletionaudioparam.py
@@ -329,12 +355,17 @@ generatedFiles:
   - src/opperai/models/chatcompletioncontentpartinputaudioparam.py
   - src/opperai/models/chatcompletioncontentpartrefusalparam.py
   - src/opperai/models/chatcompletioncontentparttextparam.py
+  - src/opperai/models/chatcompletioncustomtoolparam.py
   - src/opperai/models/chatcompletiondevelopermessageparam.py
   - src/opperai/models/chatcompletionfunctioncalloptionparam.py
   - src/opperai/models/chatcompletionfunctionmessageparam.py
+  - src/opperai/models/chatcompletionfunctiontoolparam.py
   - src/opperai/models/chatcompletionmessage.py
-  - src/opperai/models/chatcompletionmessagetoolcall.py
-  - src/opperai/models/chatcompletionmessagetoolcallparam.py
+  - src/opperai/models/chatcompletionmessagecustomtoolcall.py
+  - src/opperai/models/chatcompletionmessagecustomtoolcallparam.py
+  - src/opperai/models/chatcompletionmessagefunctiontoolcall.py
+  - src/opperai/models/chatcompletionmessagefunctiontoolcallparam.py
+  - src/opperai/models/chatcompletionnamedtoolchoicecustomparam.py
   - src/opperai/models/chatcompletionnamedtoolchoiceparam.py
   - src/opperai/models/chatcompletionnonstreaming.py
   - src/opperai/models/chatcompletionpredictioncontentparam.py
@@ -343,7 +374,6 @@ generatedFiles:
   - src/opperai/models/chatcompletionsystemmessageparam.py
   - src/opperai/models/chatcompletiontokenlogprob.py
   - src/opperai/models/chatcompletiontoolmessageparam.py
-  - src/opperai/models/chatcompletiontoolparam.py
   - src/opperai/models/chatcompletionusermessageparam.py
   - src/opperai/models/choice.py
   - src/opperai/models/choicelogprobs.py
@@ -363,6 +393,10 @@ generatedFiles:
   - src/opperai/models/createspanmetricresponse.py
   - src/opperai/models/createspanrequest.py
   - src/opperai/models/createspanresponse.py
+  - src/opperai/models/custom_output.py
+  - src/opperai/models/customformatgrammar.py
+  - src/opperai/models/customformatgrammargrammar.py
+  - src/opperai/models/customformattext.py
   - src/opperai/models/delete_custom_model_models_custom_model_id_deleteop.py
   - src/opperai/models/delete_dataset_entry_datasets_dataset_id_entries_entry_id_deleteop.py
   - src/opperai/models/delete_file_from_knowledge_base_knowledge_knowledge_base_id_files_file_id_deleteop.py
@@ -425,7 +459,10 @@ generatedFiles:
   - src/opperai/models/meta.py
   - src/opperai/models/model.py
   - src/opperai/models/op.py
-  - src/opperai/models/openai_types_chat_chat_completion_message_tool_call_param_function.py
+  - src/opperai/models/openai_types_chat_chat_completion_custom_tool_param_custom.py
+  - src/opperai/models/openai_types_chat_chat_completion_message_custom_tool_call_param_custom.py
+  - src/opperai/models/openai_types_chat_chat_completion_message_function_tool_call_param_function.py
+  - src/opperai/models/openai_types_chat_chat_completion_named_tool_choice_custom_param_custom.py
   - src/opperai/models/openai_types_chat_chat_completion_named_tool_choice_param_function.py
   - src/opperai/models/openai_types_chat_completion_create_params_function.py
   - src/opperai/models/paginatedresponse_getdatasetentriesresponse_.py
@@ -504,6 +541,7 @@ generatedFiles:
   - src/opperai/utils/retries.py
   - src/opperai/utils/security.py
   - src/opperai/utils/serializers.py
+  - src/opperai/utils/unmarshal_json_response.py
   - src/opperai/utils/url.py
   - src/opperai/utils/values.py
 examples:
@@ -513,7 +551,7 @@ examples:
         application/json: {"name": "add_numbers", "instructions": "Calculate the sum of two numbers", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "input": {"x": 4, "y": 5}, "examples": [{"input": {"x": 1, "y": 3}, "output": {"sum": 4}, "comment": "Adds two numbers"}], "parent_span_id": "123e4567-e89b-12d3-a456-426614174000", "tags": {"project": "project_456", "user": "company_123"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0}}
       responses:
         "200":
-          application/json: {"span_id": "174109ca-ebca-4823-8c0d-08c3789b2fea", "message": "The sum of 1 and 3 is 4", "json_payload": {"sum": 4}, "cached": true, "images": ["image_url"]}
+          application/json: {"span_id": "174109ca-ebca-4823-8c0d-08c3789b2fea", "message": "The sum of 1 and 3 is 4", "json_payload": {"sum": 4}, "cached": true, "images": ["image_url"], "usage": {"input_tokens": 25, "output_tokens": 972, "output_tokens_details": {"reasoning_tokens": 704}, "total_tokens": 997}, "cost": {"generation": 0.0001, "platform": 0.00001, "total": 0.00011}}
         "422":
           application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
         "502":
@@ -766,7 +804,7 @@ examples:
         path:
           span_id: "77b258a2-45c1-4b87-a50c-9116bc8ed1d6"
       requestBody:
-        application/json: {"name": "my span", "start_time": "2025-06-27T11:36:36.696834Z", "type": "email_tool", "end_time": "2025-06-27T11:36:36.696870Z", "input": "Hello, world!", "output": "Hello, world!", "error": "Exception: This is an error message", "meta": {"key": "value"}, "score": 10}
+        application/json: {"name": "my span", "start_time": "2025-08-15T07:25:37.962090Z", "type": "email_tool", "end_time": "2025-08-15T07:25:37.962153Z", "input": "Hello, world!", "output": "Hello, world!", "error": "Exception: This is an error message", "meta": {"key": "value"}, "score": 10}
       responses:
         "200":
           application/json: {"name": "my span", "start_time": "2024-03-20T10:00:00+00:00", "id": "84d9ffc8-336c-4953-b92f-fe05d5405951", "trace_id": "123e4567-e89b-12d3-a456-426614174000", "parent_id": "123e4567-e89b-12d3-a456-426614174000", "type": "email_tool", "end_time": "2024-03-20T10:00:10+00:00", "input": "Hello, world!", "output": "Hello, world!", "error": "Exception: This is an error message", "meta": {"key": "value"}, "score": 10}
@@ -1058,7 +1096,7 @@ examples:
         application/json: {"input": {"x": 4, "y": 5}, "examples": [{"input": {"x": 1, "y": 3}, "output": {"sum": 4}, "comment": "Adds two numbers"}], "tags": {"tag": "value"}}
       responses:
         "200":
-          application/json: {"cached": false}
+          application/json: {"span_id": "864c5880-3d87-4091-828c-33cc2c7219a9", "message": "The sum of 1 and 3 is 4", "json_payload": {"sum": 4}, "cached": true, "images": ["image_url"], "usage": {"input_tokens": 25, "output_tokens": 972, "output_tokens_details": {"reasoning_tokens": 704}, "total_tokens": 997}, "cost": {"generation": 0.0001, "platform": 0.00001, "total": 0.00011}}
         "422":
           application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
         "400":
@@ -1112,7 +1150,7 @@ examples:
         application/json: {"input": {"x": 4, "y": 5}, "examples": [{"input": {"x": 1, "y": 3}, "output": {"sum": 4}, "comment": "Adds two numbers"}], "tags": {"tag": "value"}}
       responses:
         "200":
-          application/json: {"cached": false}
+          application/json: {"span_id": "b7391b0d-f115-4145-ae29-a136ae2d6a7a", "message": "The sum of 1 and 3 is 4", "json_payload": {"sum": 4}, "cached": true, "images": ["image_url"], "usage": {"input_tokens": 25, "output_tokens": 972, "output_tokens_details": {"reasoning_tokens": 704}, "total_tokens": 997}, "cost": {"generation": 0.0001, "platform": 0.00001, "total": 0.00011}}
         "422":
           application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
         "400":

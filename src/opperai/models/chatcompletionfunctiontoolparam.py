@@ -10,12 +10,12 @@ from typing import Literal
 from typing_extensions import Annotated, TypedDict
 
 
-class ChatCompletionToolParamTypedDict(TypedDict):
+class ChatCompletionFunctionToolParamTypedDict(TypedDict):
     function: FunctionDefinitionTypedDict
     type: Literal["function"]
 
 
-class ChatCompletionToolParam(BaseModel):
+class ChatCompletionFunctionToolParam(BaseModel):
     function: FunctionDefinition
 
     TYPE: Annotated[
