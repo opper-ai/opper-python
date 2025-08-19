@@ -57,8 +57,14 @@ jobs:
         env:
           SPEAKEASY_API_KEY: ${{ secrets.SPEAKEASY_API_KEY }}
         run: |
+          # Save the original README.md
+          cp README.md README.md.original
+          
           # Run the full generation process
           make generate
+          
+          # Restore the original README.md
+          mv README.md.original README.md
 
       - name: Check for changes
         id: changes
@@ -113,12 +119,12 @@ jobs:
           - ✅ Speakeasy SDK generation
           - ✅ Parameter name fixes (input_ → input)  
           - ✅ Schema conversion patches applied
+          - ℹ️ README.md intentionally preserved (not updated)
           
           ### Generated Files
           The following files were automatically generated/updated:
           - `src/opperai/`
           - `docs/`
-          - `README.md`
           - `USAGE.md`
           
           ### Review Checklist
