@@ -2,6 +2,7 @@
 
 from typing import TYPE_CHECKING
 from importlib import import_module
+import builtins
 
 if TYPE_CHECKING:
     from .add_knowledge_knowledge_base_id_add_postop import (
@@ -50,12 +51,23 @@ if TYPE_CHECKING:
         ChatCompletionServiceTier,
         ChatCompletionTypedDict,
     )
+    from .chatcompletionallowedtoolchoiceparam import (
+        ChatCompletionAllowedToolChoiceParam,
+        ChatCompletionAllowedToolChoiceParamTypedDict,
+    )
+    from .chatcompletionallowedtoolsparam import (
+        ChatCompletionAllowedToolsParam,
+        ChatCompletionAllowedToolsParamTypedDict,
+        Mode,
+    )
     from .chatcompletionassistantmessageparam import (
         ChatCompletionAssistantMessageParam,
         ChatCompletionAssistantMessageParamContent1,
         ChatCompletionAssistantMessageParamContent1TypedDict,
         ChatCompletionAssistantMessageParamContent2,
         ChatCompletionAssistantMessageParamContent2TypedDict,
+        ChatCompletionAssistantMessageParamToolCall,
+        ChatCompletionAssistantMessageParamToolCallTypedDict,
         ChatCompletionAssistantMessageParamTypedDict,
     )
     from .chatcompletionaudio import ChatCompletionAudio, ChatCompletionAudioTypedDict
@@ -83,6 +95,10 @@ if TYPE_CHECKING:
         ChatCompletionContentPartTextParam,
         ChatCompletionContentPartTextParamTypedDict,
     )
+    from .chatcompletioncustomtoolparam import (
+        ChatCompletionCustomToolParam,
+        ChatCompletionCustomToolParamTypedDict,
+    )
     from .chatcompletiondevelopermessageparam import (
         ChatCompletionDeveloperMessageParam,
         ChatCompletionDeveloperMessageParamContent,
@@ -97,17 +113,35 @@ if TYPE_CHECKING:
         ChatCompletionFunctionMessageParam,
         ChatCompletionFunctionMessageParamTypedDict,
     )
+    from .chatcompletionfunctiontoolparam import (
+        ChatCompletionFunctionToolParam,
+        ChatCompletionFunctionToolParamTypedDict,
+    )
     from .chatcompletionmessage import (
         ChatCompletionMessage,
-        ChatCompletionMessageTypedDict,
-    )
-    from .chatcompletionmessagetoolcall import (
         ChatCompletionMessageToolCall,
         ChatCompletionMessageToolCallTypedDict,
+        ChatCompletionMessageTypedDict,
     )
-    from .chatcompletionmessagetoolcallparam import (
-        ChatCompletionMessageToolCallParam,
-        ChatCompletionMessageToolCallParamTypedDict,
+    from .chatcompletionmessagecustomtoolcall import (
+        ChatCompletionMessageCustomToolCall,
+        ChatCompletionMessageCustomToolCallTypedDict,
+    )
+    from .chatcompletionmessagecustomtoolcallparam import (
+        ChatCompletionMessageCustomToolCallParam,
+        ChatCompletionMessageCustomToolCallParamTypedDict,
+    )
+    from .chatcompletionmessagefunctiontoolcall import (
+        ChatCompletionMessageFunctionToolCall,
+        ChatCompletionMessageFunctionToolCallTypedDict,
+    )
+    from .chatcompletionmessagefunctiontoolcallparam import (
+        ChatCompletionMessageFunctionToolCallParam,
+        ChatCompletionMessageFunctionToolCallParamTypedDict,
+    )
+    from .chatcompletionnamedtoolchoicecustomparam import (
+        ChatCompletionNamedToolChoiceCustomParam,
+        ChatCompletionNamedToolChoiceCustomParamTypedDict,
     )
     from .chatcompletionnamedtoolchoiceparam import (
         ChatCompletionNamedToolChoiceParam,
@@ -127,10 +161,13 @@ if TYPE_CHECKING:
         ChatCompletionNonStreamingServiceTier,
         ChatCompletionNonStreamingStop,
         ChatCompletionNonStreamingStopTypedDict,
+        ChatCompletionNonStreamingTool,
         ChatCompletionNonStreamingToolChoiceEnum,
         ChatCompletionNonStreamingToolChoiceUnion,
         ChatCompletionNonStreamingToolChoiceUnionTypedDict,
+        ChatCompletionNonStreamingToolTypedDict,
         ChatCompletionNonStreamingTypedDict,
+        ChatCompletionNonStreamingVerbosity,
     )
     from .chatcompletionpredictioncontentparam import (
         ChatCompletionPredictionContentParam,
@@ -152,10 +189,13 @@ if TYPE_CHECKING:
         ChatCompletionStreamingServiceTier,
         ChatCompletionStreamingStop,
         ChatCompletionStreamingStopTypedDict,
+        ChatCompletionStreamingTool,
         ChatCompletionStreamingToolChoiceEnum,
         ChatCompletionStreamingToolChoiceUnion,
         ChatCompletionStreamingToolChoiceUnionTypedDict,
+        ChatCompletionStreamingToolTypedDict,
         ChatCompletionStreamingTypedDict,
+        ChatCompletionStreamingVerbosity,
     )
     from .chatcompletionstreamoptionsparam import (
         ChatCompletionStreamOptionsParam,
@@ -176,10 +216,6 @@ if TYPE_CHECKING:
         ChatCompletionToolMessageParamContent,
         ChatCompletionToolMessageParamContentTypedDict,
         ChatCompletionToolMessageParamTypedDict,
-    )
-    from .chatcompletiontoolparam import (
-        ChatCompletionToolParam,
-        ChatCompletionToolParamTypedDict,
     )
     from .chatcompletionusermessageparam import (
         ChatCompletionUserMessageParam,
@@ -248,6 +284,14 @@ if TYPE_CHECKING:
     )
     from .createspanrequest import CreateSpanRequest, CreateSpanRequestTypedDict
     from .createspanresponse import CreateSpanResponse, CreateSpanResponseTypedDict
+    from .custom_output import CustomOutput, CustomOutputTypedDict
+    from .customformatgrammar import CustomFormatGrammar, CustomFormatGrammarTypedDict
+    from .customformatgrammargrammar import (
+        CustomFormatGrammarGrammar,
+        CustomFormatGrammarGrammarTypedDict,
+        Syntax,
+    )
+    from .customformattext import CustomFormatText, CustomFormatTextTypedDict
     from .delete_custom_model_models_custom_model_id_deleteop import (
         DeleteCustomModelModelsCustomModelIDDeleteRequest,
         DeleteCustomModelModelsCustomModelIDDeleteRequestTypedDict,
@@ -444,9 +488,23 @@ if TYPE_CHECKING:
     from .meta import Meta, MetaTypedDict
     from .model import Model, ModelTypedDict
     from .op import Op
-    from .openai_types_chat_chat_completion_message_tool_call_param_function import (
-        OpenaiTypesChatChatCompletionMessageToolCallParamFunction,
-        OpenaiTypesChatChatCompletionMessageToolCallParamFunctionTypedDict,
+    from .openai_types_chat_chat_completion_custom_tool_param_custom import (
+        Format,
+        FormatTypedDict,
+        OpenaiTypesChatChatCompletionCustomToolParamCustom,
+        OpenaiTypesChatChatCompletionCustomToolParamCustomTypedDict,
+    )
+    from .openai_types_chat_chat_completion_message_custom_tool_call_param_custom import (
+        OpenaiTypesChatChatCompletionMessageCustomToolCallParamCustom,
+        OpenaiTypesChatChatCompletionMessageCustomToolCallParamCustomTypedDict,
+    )
+    from .openai_types_chat_chat_completion_message_function_tool_call_param_function import (
+        OpenaiTypesChatChatCompletionMessageFunctionToolCallParamFunction,
+        OpenaiTypesChatChatCompletionMessageFunctionToolCallParamFunctionTypedDict,
+    )
+    from .openai_types_chat_chat_completion_named_tool_choice_custom_param_custom import (
+        OpenaiTypesChatChatCompletionNamedToolChoiceCustomParamCustom,
+        OpenaiTypesChatChatCompletionNamedToolChoiceCustomParamCustomTypedDict,
     )
     from .openai_types_chat_chat_completion_named_tool_choice_param_function import (
         OpenaiTypesChatChatCompletionNamedToolChoiceParamFunction,
@@ -672,11 +730,17 @@ __all__ = [
     "CallFunctionRevisionFunctionsFunctionIDCallRevisionIDPostRequest",
     "CallFunctionRevisionFunctionsFunctionIDCallRevisionIDPostRequestTypedDict",
     "ChatCompletion",
+    "ChatCompletionAllowedToolChoiceParam",
+    "ChatCompletionAllowedToolChoiceParamTypedDict",
+    "ChatCompletionAllowedToolsParam",
+    "ChatCompletionAllowedToolsParamTypedDict",
     "ChatCompletionAssistantMessageParam",
     "ChatCompletionAssistantMessageParamContent1",
     "ChatCompletionAssistantMessageParamContent1TypedDict",
     "ChatCompletionAssistantMessageParamContent2",
     "ChatCompletionAssistantMessageParamContent2TypedDict",
+    "ChatCompletionAssistantMessageParamToolCall",
+    "ChatCompletionAssistantMessageParamToolCallTypedDict",
     "ChatCompletionAssistantMessageParamTypedDict",
     "ChatCompletionAudio",
     "ChatCompletionAudioParam",
@@ -691,6 +755,8 @@ __all__ = [
     "ChatCompletionContentPartRefusalParamTypedDict",
     "ChatCompletionContentPartTextParam",
     "ChatCompletionContentPartTextParamTypedDict",
+    "ChatCompletionCustomToolParam",
+    "ChatCompletionCustomToolParamTypedDict",
     "ChatCompletionDeveloperMessageParam",
     "ChatCompletionDeveloperMessageParamContent",
     "ChatCompletionDeveloperMessageParamContentTypedDict",
@@ -699,12 +765,22 @@ __all__ = [
     "ChatCompletionFunctionCallOptionParamTypedDict",
     "ChatCompletionFunctionMessageParam",
     "ChatCompletionFunctionMessageParamTypedDict",
+    "ChatCompletionFunctionToolParam",
+    "ChatCompletionFunctionToolParamTypedDict",
     "ChatCompletionMessage",
+    "ChatCompletionMessageCustomToolCall",
+    "ChatCompletionMessageCustomToolCallParam",
+    "ChatCompletionMessageCustomToolCallParamTypedDict",
+    "ChatCompletionMessageCustomToolCallTypedDict",
+    "ChatCompletionMessageFunctionToolCall",
+    "ChatCompletionMessageFunctionToolCallParam",
+    "ChatCompletionMessageFunctionToolCallParamTypedDict",
+    "ChatCompletionMessageFunctionToolCallTypedDict",
     "ChatCompletionMessageToolCall",
-    "ChatCompletionMessageToolCallParam",
-    "ChatCompletionMessageToolCallParamTypedDict",
     "ChatCompletionMessageToolCallTypedDict",
     "ChatCompletionMessageTypedDict",
+    "ChatCompletionNamedToolChoiceCustomParam",
+    "ChatCompletionNamedToolChoiceCustomParamTypedDict",
     "ChatCompletionNamedToolChoiceParam",
     "ChatCompletionNamedToolChoiceParamTypedDict",
     "ChatCompletionNonStreaming",
@@ -720,10 +796,13 @@ __all__ = [
     "ChatCompletionNonStreamingServiceTier",
     "ChatCompletionNonStreamingStop",
     "ChatCompletionNonStreamingStopTypedDict",
+    "ChatCompletionNonStreamingTool",
     "ChatCompletionNonStreamingToolChoiceEnum",
     "ChatCompletionNonStreamingToolChoiceUnion",
     "ChatCompletionNonStreamingToolChoiceUnionTypedDict",
+    "ChatCompletionNonStreamingToolTypedDict",
     "ChatCompletionNonStreamingTypedDict",
+    "ChatCompletionNonStreamingVerbosity",
     "ChatCompletionPredictionContentParam",
     "ChatCompletionPredictionContentParamContent",
     "ChatCompletionPredictionContentParamContentTypedDict",
@@ -744,10 +823,13 @@ __all__ = [
     "ChatCompletionStreamingServiceTier",
     "ChatCompletionStreamingStop",
     "ChatCompletionStreamingStopTypedDict",
+    "ChatCompletionStreamingTool",
     "ChatCompletionStreamingToolChoiceEnum",
     "ChatCompletionStreamingToolChoiceUnion",
     "ChatCompletionStreamingToolChoiceUnionTypedDict",
+    "ChatCompletionStreamingToolTypedDict",
     "ChatCompletionStreamingTypedDict",
+    "ChatCompletionStreamingVerbosity",
     "ChatCompletionSystemMessageParam",
     "ChatCompletionSystemMessageParamContent",
     "ChatCompletionSystemMessageParamContentTypedDict",
@@ -758,8 +840,6 @@ __all__ = [
     "ChatCompletionToolMessageParamContent",
     "ChatCompletionToolMessageParamContentTypedDict",
     "ChatCompletionToolMessageParamTypedDict",
-    "ChatCompletionToolParam",
-    "ChatCompletionToolParamTypedDict",
     "ChatCompletionTypedDict",
     "ChatCompletionUserMessageParam",
     "ChatCompletionUserMessageParamContent1",
@@ -803,6 +883,14 @@ __all__ = [
     "CreateSpanRequestTypedDict",
     "CreateSpanResponse",
     "CreateSpanResponseTypedDict",
+    "CustomFormatGrammar",
+    "CustomFormatGrammarGrammar",
+    "CustomFormatGrammarGrammarTypedDict",
+    "CustomFormatGrammarTypedDict",
+    "CustomFormatText",
+    "CustomFormatTextTypedDict",
+    "CustomOutput",
+    "CustomOutputTypedDict",
     "DeleteCustomModelModelsCustomModelIDDeleteRequest",
     "DeleteCustomModelModelsCustomModelIDDeleteRequestTypedDict",
     "DeleteDatasetEntryDatasetsDatasetIDEntriesEntryIDDeleteRequest",
@@ -829,6 +917,8 @@ __all__ = [
     "Filter",
     "FilterTypedDict",
     "FinishReason",
+    "Format",
+    "FormatTypedDict",
     "FunctionCallConfiguration",
     "FunctionCallConfigurationTypedDict",
     "FunctionCallInput",
@@ -933,11 +1023,18 @@ __all__ = [
     "ListTracesTracesGetRequestTypedDict",
     "Meta",
     "MetaTypedDict",
+    "Mode",
     "Model",
     "ModelTypedDict",
     "Op",
-    "OpenaiTypesChatChatCompletionMessageToolCallParamFunction",
-    "OpenaiTypesChatChatCompletionMessageToolCallParamFunctionTypedDict",
+    "OpenaiTypesChatChatCompletionCustomToolParamCustom",
+    "OpenaiTypesChatChatCompletionCustomToolParamCustomTypedDict",
+    "OpenaiTypesChatChatCompletionMessageCustomToolCallParamCustom",
+    "OpenaiTypesChatChatCompletionMessageCustomToolCallParamCustomTypedDict",
+    "OpenaiTypesChatChatCompletionMessageFunctionToolCallParamFunction",
+    "OpenaiTypesChatChatCompletionMessageFunctionToolCallParamFunctionTypedDict",
+    "OpenaiTypesChatChatCompletionNamedToolChoiceCustomParamCustom",
+    "OpenaiTypesChatChatCompletionNamedToolChoiceCustomParamCustomTypedDict",
     "OpenaiTypesChatChatCompletionNamedToolChoiceParamFunction",
     "OpenaiTypesChatChatCompletionNamedToolChoiceParamFunctionTypedDict",
     "OpenaiTypesChatCompletionCreateParamsFunction",
@@ -1017,6 +1114,7 @@ __all__ = [
     "StreamFunctionRevisionFunctionsFunctionIDCallStreamRevisionIDPostResponseBody",
     "StreamFunctionRevisionFunctionsFunctionIDCallStreamRevisionIDPostResponseBodyTypedDict",
     "StreamFunctionRevisionFunctionsFunctionIDCallStreamRevisionIDPostResponseTypedDict",
+    "Syntax",
     "TModel",
     "TModel1",
     "TModel1TypedDict",
@@ -1102,11 +1200,18 @@ _dynamic_imports: dict[str, str] = {
     "ChatCompletion": ".chatcompletion",
     "ChatCompletionServiceTier": ".chatcompletion",
     "ChatCompletionTypedDict": ".chatcompletion",
+    "ChatCompletionAllowedToolChoiceParam": ".chatcompletionallowedtoolchoiceparam",
+    "ChatCompletionAllowedToolChoiceParamTypedDict": ".chatcompletionallowedtoolchoiceparam",
+    "ChatCompletionAllowedToolsParam": ".chatcompletionallowedtoolsparam",
+    "ChatCompletionAllowedToolsParamTypedDict": ".chatcompletionallowedtoolsparam",
+    "Mode": ".chatcompletionallowedtoolsparam",
     "ChatCompletionAssistantMessageParam": ".chatcompletionassistantmessageparam",
     "ChatCompletionAssistantMessageParamContent1": ".chatcompletionassistantmessageparam",
     "ChatCompletionAssistantMessageParamContent1TypedDict": ".chatcompletionassistantmessageparam",
     "ChatCompletionAssistantMessageParamContent2": ".chatcompletionassistantmessageparam",
     "ChatCompletionAssistantMessageParamContent2TypedDict": ".chatcompletionassistantmessageparam",
+    "ChatCompletionAssistantMessageParamToolCall": ".chatcompletionassistantmessageparam",
+    "ChatCompletionAssistantMessageParamToolCallTypedDict": ".chatcompletionassistantmessageparam",
     "ChatCompletionAssistantMessageParamTypedDict": ".chatcompletionassistantmessageparam",
     "ChatCompletionAudio": ".chatcompletionaudio",
     "ChatCompletionAudioTypedDict": ".chatcompletionaudio",
@@ -1124,6 +1229,8 @@ _dynamic_imports: dict[str, str] = {
     "ChatCompletionContentPartRefusalParamTypedDict": ".chatcompletioncontentpartrefusalparam",
     "ChatCompletionContentPartTextParam": ".chatcompletioncontentparttextparam",
     "ChatCompletionContentPartTextParamTypedDict": ".chatcompletioncontentparttextparam",
+    "ChatCompletionCustomToolParam": ".chatcompletioncustomtoolparam",
+    "ChatCompletionCustomToolParamTypedDict": ".chatcompletioncustomtoolparam",
     "ChatCompletionDeveloperMessageParam": ".chatcompletiondevelopermessageparam",
     "ChatCompletionDeveloperMessageParamContent": ".chatcompletiondevelopermessageparam",
     "ChatCompletionDeveloperMessageParamContentTypedDict": ".chatcompletiondevelopermessageparam",
@@ -1132,12 +1239,22 @@ _dynamic_imports: dict[str, str] = {
     "ChatCompletionFunctionCallOptionParamTypedDict": ".chatcompletionfunctioncalloptionparam",
     "ChatCompletionFunctionMessageParam": ".chatcompletionfunctionmessageparam",
     "ChatCompletionFunctionMessageParamTypedDict": ".chatcompletionfunctionmessageparam",
+    "ChatCompletionFunctionToolParam": ".chatcompletionfunctiontoolparam",
+    "ChatCompletionFunctionToolParamTypedDict": ".chatcompletionfunctiontoolparam",
     "ChatCompletionMessage": ".chatcompletionmessage",
+    "ChatCompletionMessageToolCall": ".chatcompletionmessage",
+    "ChatCompletionMessageToolCallTypedDict": ".chatcompletionmessage",
     "ChatCompletionMessageTypedDict": ".chatcompletionmessage",
-    "ChatCompletionMessageToolCall": ".chatcompletionmessagetoolcall",
-    "ChatCompletionMessageToolCallTypedDict": ".chatcompletionmessagetoolcall",
-    "ChatCompletionMessageToolCallParam": ".chatcompletionmessagetoolcallparam",
-    "ChatCompletionMessageToolCallParamTypedDict": ".chatcompletionmessagetoolcallparam",
+    "ChatCompletionMessageCustomToolCall": ".chatcompletionmessagecustomtoolcall",
+    "ChatCompletionMessageCustomToolCallTypedDict": ".chatcompletionmessagecustomtoolcall",
+    "ChatCompletionMessageCustomToolCallParam": ".chatcompletionmessagecustomtoolcallparam",
+    "ChatCompletionMessageCustomToolCallParamTypedDict": ".chatcompletionmessagecustomtoolcallparam",
+    "ChatCompletionMessageFunctionToolCall": ".chatcompletionmessagefunctiontoolcall",
+    "ChatCompletionMessageFunctionToolCallTypedDict": ".chatcompletionmessagefunctiontoolcall",
+    "ChatCompletionMessageFunctionToolCallParam": ".chatcompletionmessagefunctiontoolcallparam",
+    "ChatCompletionMessageFunctionToolCallParamTypedDict": ".chatcompletionmessagefunctiontoolcallparam",
+    "ChatCompletionNamedToolChoiceCustomParam": ".chatcompletionnamedtoolchoicecustomparam",
+    "ChatCompletionNamedToolChoiceCustomParamTypedDict": ".chatcompletionnamedtoolchoicecustomparam",
     "ChatCompletionNamedToolChoiceParam": ".chatcompletionnamedtoolchoiceparam",
     "ChatCompletionNamedToolChoiceParamTypedDict": ".chatcompletionnamedtoolchoiceparam",
     "ChatCompletionNonStreaming": ".chatcompletionnonstreaming",
@@ -1153,10 +1270,13 @@ _dynamic_imports: dict[str, str] = {
     "ChatCompletionNonStreamingServiceTier": ".chatcompletionnonstreaming",
     "ChatCompletionNonStreamingStop": ".chatcompletionnonstreaming",
     "ChatCompletionNonStreamingStopTypedDict": ".chatcompletionnonstreaming",
+    "ChatCompletionNonStreamingTool": ".chatcompletionnonstreaming",
     "ChatCompletionNonStreamingToolChoiceEnum": ".chatcompletionnonstreaming",
     "ChatCompletionNonStreamingToolChoiceUnion": ".chatcompletionnonstreaming",
     "ChatCompletionNonStreamingToolChoiceUnionTypedDict": ".chatcompletionnonstreaming",
+    "ChatCompletionNonStreamingToolTypedDict": ".chatcompletionnonstreaming",
     "ChatCompletionNonStreamingTypedDict": ".chatcompletionnonstreaming",
+    "ChatCompletionNonStreamingVerbosity": ".chatcompletionnonstreaming",
     "ChatCompletionPredictionContentParam": ".chatcompletionpredictioncontentparam",
     "ChatCompletionPredictionContentParamContent": ".chatcompletionpredictioncontentparam",
     "ChatCompletionPredictionContentParamContentTypedDict": ".chatcompletionpredictioncontentparam",
@@ -1174,10 +1294,13 @@ _dynamic_imports: dict[str, str] = {
     "ChatCompletionStreamingServiceTier": ".chatcompletionstreaming",
     "ChatCompletionStreamingStop": ".chatcompletionstreaming",
     "ChatCompletionStreamingStopTypedDict": ".chatcompletionstreaming",
+    "ChatCompletionStreamingTool": ".chatcompletionstreaming",
     "ChatCompletionStreamingToolChoiceEnum": ".chatcompletionstreaming",
     "ChatCompletionStreamingToolChoiceUnion": ".chatcompletionstreaming",
     "ChatCompletionStreamingToolChoiceUnionTypedDict": ".chatcompletionstreaming",
+    "ChatCompletionStreamingToolTypedDict": ".chatcompletionstreaming",
     "ChatCompletionStreamingTypedDict": ".chatcompletionstreaming",
+    "ChatCompletionStreamingVerbosity": ".chatcompletionstreaming",
     "ChatCompletionStreamOptionsParam": ".chatcompletionstreamoptionsparam",
     "ChatCompletionStreamOptionsParamTypedDict": ".chatcompletionstreamoptionsparam",
     "ChatCompletionSystemMessageParam": ".chatcompletionsystemmessageparam",
@@ -1190,8 +1313,6 @@ _dynamic_imports: dict[str, str] = {
     "ChatCompletionToolMessageParamContent": ".chatcompletiontoolmessageparam",
     "ChatCompletionToolMessageParamContentTypedDict": ".chatcompletiontoolmessageparam",
     "ChatCompletionToolMessageParamTypedDict": ".chatcompletiontoolmessageparam",
-    "ChatCompletionToolParam": ".chatcompletiontoolparam",
-    "ChatCompletionToolParamTypedDict": ".chatcompletiontoolparam",
     "ChatCompletionUserMessageParam": ".chatcompletionusermessageparam",
     "ChatCompletionUserMessageParamContent1": ".chatcompletionusermessageparam",
     "ChatCompletionUserMessageParamContent1TypedDict": ".chatcompletionusermessageparam",
@@ -1237,6 +1358,15 @@ _dynamic_imports: dict[str, str] = {
     "CreateSpanRequestTypedDict": ".createspanrequest",
     "CreateSpanResponse": ".createspanresponse",
     "CreateSpanResponseTypedDict": ".createspanresponse",
+    "CustomOutput": ".custom_output",
+    "CustomOutputTypedDict": ".custom_output",
+    "CustomFormatGrammar": ".customformatgrammar",
+    "CustomFormatGrammarTypedDict": ".customformatgrammar",
+    "CustomFormatGrammarGrammar": ".customformatgrammargrammar",
+    "CustomFormatGrammarGrammarTypedDict": ".customformatgrammargrammar",
+    "Syntax": ".customformatgrammargrammar",
+    "CustomFormatText": ".customformattext",
+    "CustomFormatTextTypedDict": ".customformattext",
     "DeleteCustomModelModelsCustomModelIDDeleteRequest": ".delete_custom_model_models_custom_model_id_deleteop",
     "DeleteCustomModelModelsCustomModelIDDeleteRequestTypedDict": ".delete_custom_model_models_custom_model_id_deleteop",
     "DeleteDatasetEntryDatasetsDatasetIDEntriesEntryIDDeleteRequest": ".delete_dataset_entry_datasets_dataset_id_entries_entry_id_deleteop",
@@ -1369,8 +1499,16 @@ _dynamic_imports: dict[str, str] = {
     "Model": ".model",
     "ModelTypedDict": ".model",
     "Op": ".op",
-    "OpenaiTypesChatChatCompletionMessageToolCallParamFunction": ".openai_types_chat_chat_completion_message_tool_call_param_function",
-    "OpenaiTypesChatChatCompletionMessageToolCallParamFunctionTypedDict": ".openai_types_chat_chat_completion_message_tool_call_param_function",
+    "Format": ".openai_types_chat_chat_completion_custom_tool_param_custom",
+    "FormatTypedDict": ".openai_types_chat_chat_completion_custom_tool_param_custom",
+    "OpenaiTypesChatChatCompletionCustomToolParamCustom": ".openai_types_chat_chat_completion_custom_tool_param_custom",
+    "OpenaiTypesChatChatCompletionCustomToolParamCustomTypedDict": ".openai_types_chat_chat_completion_custom_tool_param_custom",
+    "OpenaiTypesChatChatCompletionMessageCustomToolCallParamCustom": ".openai_types_chat_chat_completion_message_custom_tool_call_param_custom",
+    "OpenaiTypesChatChatCompletionMessageCustomToolCallParamCustomTypedDict": ".openai_types_chat_chat_completion_message_custom_tool_call_param_custom",
+    "OpenaiTypesChatChatCompletionMessageFunctionToolCallParamFunction": ".openai_types_chat_chat_completion_message_function_tool_call_param_function",
+    "OpenaiTypesChatChatCompletionMessageFunctionToolCallParamFunctionTypedDict": ".openai_types_chat_chat_completion_message_function_tool_call_param_function",
+    "OpenaiTypesChatChatCompletionNamedToolChoiceCustomParamCustom": ".openai_types_chat_chat_completion_named_tool_choice_custom_param_custom",
+    "OpenaiTypesChatChatCompletionNamedToolChoiceCustomParamCustomTypedDict": ".openai_types_chat_chat_completion_named_tool_choice_custom_param_custom",
     "OpenaiTypesChatChatCompletionNamedToolChoiceParamFunction": ".openai_types_chat_chat_completion_named_tool_choice_param_function",
     "OpenaiTypesChatChatCompletionNamedToolChoiceParamFunctionTypedDict": ".openai_types_chat_chat_completion_named_tool_choice_param_function",
     "OpenaiTypesChatCompletionCreateParamsFunction": ".openai_types_chat_completion_create_params_function",
@@ -1519,5 +1657,5 @@ def __getattr__(attr_name: str) -> object:
 
 
 def __dir__():
-    lazy_attrs = list(_dynamic_imports.keys())
-    return sorted(lazy_attrs)
+    lazy_attrs = builtins.list(_dynamic_imports.keys())
+    return builtins.sorted(lazy_attrs)

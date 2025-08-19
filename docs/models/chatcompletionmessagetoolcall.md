@@ -1,11 +1,17 @@
 # ChatCompletionMessageToolCall
 
 
-## Fields
+## Supported Types
 
-| Field                                                | Type                                                 | Required                                             | Description                                          |
-| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
-| `id`                                                 | *str*                                                | :heavy_check_mark:                                   | N/A                                                  |
-| `function`                                           | [models.FunctionOutput](../models/functionoutput.md) | :heavy_check_mark:                                   | N/A                                                  |
-| `type`                                               | *Literal["function"]*                                | :heavy_check_mark:                                   | N/A                                                  |
-| `__pydantic_extra__`                                 | Dict[str, *Any*]                                     | :heavy_minus_sign:                                   | N/A                                                  |
+### `models.ChatCompletionMessageFunctionToolCall`
+
+```python
+value: models.ChatCompletionMessageFunctionToolCall = /* values here */
+```
+
+### `models.ChatCompletionMessageCustomToolCall`
+
+```python
+value: models.ChatCompletionMessageCustomToolCall = /* values here */
+```
+

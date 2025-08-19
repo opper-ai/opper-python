@@ -17,6 +17,8 @@ class ChatCompletionServiceTier(str, Enum):
     AUTO = "auto"
     DEFAULT = "default"
     FLEX = "flex"
+    SCALE = "scale"
+    PRIORITY = "priority"
 
 
 class ChatCompletionTypedDict(TypedDict):

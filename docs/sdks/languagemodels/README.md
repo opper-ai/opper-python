@@ -21,6 +21,7 @@ For more information on the models available, see the [Opper Models](https://doc
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="list_models_models_get" method="get" path="/models" -->
 ```python
 from opperai import Opper
 import os
@@ -65,6 +66,7 @@ Register a custom language model with the organization that owns the API key.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="register_custom_model_models_custom_post" method="post" path="/models/custom" -->
 ```python
 from opperai import Opper
 import os
@@ -112,6 +114,7 @@ List all custom language models for the organization that owns the API key.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="list_custom_models_models_custom_get" method="get" path="/models/custom" -->
 ```python
 from opperai import Opper
 import os
@@ -156,6 +159,7 @@ Get a custom language model by its ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get_custom_model_models_custom__model_id__get" method="get" path="/models/custom/{model_id}" -->
 ```python
 from opperai import Opper
 import os
@@ -199,6 +203,7 @@ Update a custom language model.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="update_custom_model_models_custom__model_id__patch" method="patch" path="/models/custom/{model_id}" -->
 ```python
 from opperai import Opper
 import os
@@ -246,6 +251,7 @@ Delete a custom language model.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="delete_custom_model_models_custom__model_id__delete" method="delete" path="/models/custom/{model_id}" -->
 ```python
 from opperai import Opper
 import os
@@ -284,6 +290,7 @@ Get a custom language model by its name.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get_custom_model_by_name_models_custom_by_name__name__get" method="get" path="/models/custom/by-name/{name}" -->
 ```python
 from opperai import Opper
 import os

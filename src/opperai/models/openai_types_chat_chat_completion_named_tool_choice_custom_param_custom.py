@@ -5,12 +5,9 @@ from opperai.types import BaseModel
 from typing_extensions import TypedDict
 
 
-class OpenaiTypesChatChatCompletionMessageToolCallParamFunctionTypedDict(TypedDict):
-    arguments: str
+class OpenaiTypesChatChatCompletionNamedToolChoiceCustomParamCustomTypedDict(TypedDict):
     name: str
 
 
-class OpenaiTypesChatChatCompletionMessageToolCallParamFunction(BaseModel):
-    arguments: str
-
+class OpenaiTypesChatChatCompletionNamedToolChoiceCustomParamCustom(BaseModel):
     name: str

@@ -13,6 +13,7 @@ Usage
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="usage_analytics_usage_get" method="get" path="/analytics/usage" -->
 ```python
 from opperai import Opper
 import os

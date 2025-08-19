@@ -14,6 +14,7 @@ List traces
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="list_traces_traces_get" method="get" path="/traces" -->
 ```python
 from opperai import Opper
 import os
@@ -59,6 +60,7 @@ Get a trace by its id
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get_trace_traces__trace_id__get" method="get" path="/traces/{trace_id}" -->
 ```python
 from opperai import Opper
 import os

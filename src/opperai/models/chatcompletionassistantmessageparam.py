@@ -10,9 +10,13 @@ from .chatcompletioncontentparttextparam import (
     ChatCompletionContentPartTextParam,
     ChatCompletionContentPartTextParamTypedDict,
 )
-from .chatcompletionmessagetoolcallparam import (
-    ChatCompletionMessageToolCallParam,
-    ChatCompletionMessageToolCallParamTypedDict,
+from .chatcompletionmessagecustomtoolcallparam import (
+    ChatCompletionMessageCustomToolCallParam,
+    ChatCompletionMessageCustomToolCallParamTypedDict,
+)
+from .chatcompletionmessagefunctiontoolcallparam import (
+    ChatCompletionMessageFunctionToolCallParam,
+    ChatCompletionMessageFunctionToolCallParamTypedDict,
 )
 from .functioncall_input import FunctionCallInput, FunctionCallInputTypedDict
 from opperai.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
@@ -51,6 +55,24 @@ ChatCompletionAssistantMessageParamContent2 = TypeAliasType(
 )
 
 
+ChatCompletionAssistantMessageParamToolCallTypedDict = TypeAliasType(
+    "ChatCompletionAssistantMessageParamToolCallTypedDict",
+    Union[
+        ChatCompletionMessageFunctionToolCallParamTypedDict,
+        ChatCompletionMessageCustomToolCallParamTypedDict,
+    ],
+)
+
+
+ChatCompletionAssistantMessageParamToolCall = TypeAliasType(
+    "ChatCompletionAssistantMessageParamToolCall",
+    Union[
+        ChatCompletionMessageFunctionToolCallParam,
+        ChatCompletionMessageCustomToolCallParam,
+    ],
+)
+
+
 class ChatCompletionAssistantMessageParamTypedDict(TypedDict):
     role: Literal["assistant"]
     audio: NotRequired[Nullable[AudioTypedDict]]
@@ -58,7 +80,7 @@ class ChatCompletionAssistantMessageParamTypedDict(TypedDict):
     function_call: NotRequired[Nullable[FunctionCallInputTypedDict]]
     name: NotRequired[str]
     refusal: NotRequired[Nullable[str]]
-    tool_calls: NotRequired[List[ChatCompletionMessageToolCallParamTypedDict]]
+    tool_calls: NotRequired[List[ChatCompletionAssistantMessageParamToolCallTypedDict]]
 
 
 class ChatCompletionAssistantMessageParam(BaseModel):
@@ -77,7 +99,7 @@ class ChatCompletionAssistantMessageParam(BaseModel):
 
     refusal: OptionalNullable[str] = UNSET
 
-    tool_calls: Optional[List[ChatCompletionMessageToolCallParam]] = None
+    tool_calls: Optional[List[ChatCompletionAssistantMessageParamToolCall]] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
