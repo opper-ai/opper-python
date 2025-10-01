@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: c75567cf-9def-4617-8ae7-65af6f367b68
 management:
-  docChecksum: 7adf87015a4d3cc3630127529c339757
+  docChecksum: cd8e6875316cdef22f1400d7339c86a7
   docVersion: 2.0.0
-  speakeasyVersion: 1.606.0
-  generationVersion: 2.686.7
-  releaseVersion: 1.1.2
-  configChecksum: 7af52555bf8fd0fef6efff88ec3b8ba5
+  speakeasyVersion: 1.631.5
+  generationVersion: 2.716.16
+  releaseVersion: 1.2.0
+  configChecksum: dcc790a6b453295b6b12b7a4babd2df6
 features:
   python:
     additionalDependencies: 1.0.0
     additionalProperties: 1.0.1
     constsAndDefaults: 1.0.5
-    core: 5.19.9
+    core: 5.22.0
     customCodeRegions: 0.1.1
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
@@ -20,7 +20,7 @@ features:
     envVarSecurityUsage: 0.3.2
     flatRequests: 1.0.1
     flattening: 3.1.1
-    globalSecurity: 3.0.3
+    globalSecurity: 3.0.4
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
     globalServerURLs: 3.1.1
@@ -31,8 +31,8 @@ features:
     responseFormat: 1.0.1
     retries: 3.0.2
     sdkHooks: 1.1.0
-    serverEvents: 1.0.7
-    unions: 3.0.4
+    serverEvents: 1.0.10
+    unions: 3.0.5
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -137,6 +137,8 @@ generatedFiles:
   - docs/models/createknowledgebaserequest.md
   - docs/models/createknowledgebaseresponse.md
   - docs/models/createmetricspansspanidmetricspostrequest.md
+  - docs/models/createmodelaliasrequest.md
+  - docs/models/createmodelaliasresponse.md
   - docs/models/createspanmetricrequest.md
   - docs/models/createspanmetricresponse.md
   - docs/models/createspanrequest.md
@@ -147,12 +149,17 @@ generatedFiles:
   - docs/models/customoutput.md
   - docs/models/deletecustommodelmodelscustommodeliddeleterequest.md
   - docs/models/deletedatasetentrydatasetsdatasetidentriesentryiddeleterequest.md
+  - docs/models/deletedocumentsknowledgeknowledgebaseidquerydeleterequest.md
   - docs/models/deletefilefromknowledgebaseknowledgeknowledgebaseidfilesfileiddeleterequest.md
   - docs/models/deletefunctionfunctionsfunctioniddeleterequest.md
   - docs/models/deleteknowledgebaseknowledgeknowledgebaseiddeleterequest.md
+  - docs/models/deleteknowledgebaserequest.md
+  - docs/models/deleteknowledgebaseresponse.md
   - docs/models/deletemetricspansspanidmetricsmetriciddeleterequest.md
+  - docs/models/deletemodelaliasmodelsaliasesaliasiddeleterequest.md
   - docs/models/deletespanspansspaniddeleterequest.md
   - docs/models/detail.md
+  - docs/models/evaluationconfig.md
   - docs/models/example.md
   - docs/models/examplein.md
   - docs/models/file.md
@@ -182,6 +189,9 @@ generatedFiles:
   - docs/models/getknowledgebaseknowledgeknowledgebaseidgetrequest.md
   - docs/models/getknowledgebaseresponse.md
   - docs/models/getmetricspansspanidmetricsmetricidgetrequest.md
+  - docs/models/getmodelaliasbynamemodelsaliasesbynamenamegetrequest.md
+  - docs/models/getmodelaliasmodelsaliasesaliasidgetrequest.md
+  - docs/models/getmodelaliasresponse.md
   - docs/models/getspanmetricresponse.md
   - docs/models/getspanresponse.md
   - docs/models/getspanspansspanidgetrequest.md
@@ -208,6 +218,8 @@ generatedFiles:
   - docs/models/listknowledgebasesresponse.md
   - docs/models/listlanguagemodelsresponse.md
   - docs/models/listmetricsspansspanidmetricsgetrequest.md
+  - docs/models/listmodelaliasesmodelsaliasesgetrequest.md
+  - docs/models/listmodelaliasesresponseitem.md
   - docs/models/listmodelsmodelsgetrequest.md
   - docs/models/listspanmetricsresponse.md
   - docs/models/listtracesresponse.md
@@ -228,6 +240,7 @@ generatedFiles:
   - docs/models/paginatedresponselistfunctionsresponseitem.md
   - docs/models/paginatedresponselistknowledgebasesresponse.md
   - docs/models/paginatedresponselistlanguagemodelsresponse.md
+  - docs/models/paginatedresponselistmodelaliasesresponseitem.md
   - docs/models/paginatedresponselistspanmetricsresponse.md
   - docs/models/paginatedresponselisttracesresponse.md
   - docs/models/payload.md
@@ -247,6 +260,10 @@ generatedFiles:
   - docs/models/responseformattext.md
   - docs/models/savetodatasetresponse.md
   - docs/models/savetodatasetspansspanidsaveexamplespostrequest.md
+  - docs/models/scorersenum1.md
+  - docs/models/scorersenum2.md
+  - docs/models/scorersunion1.md
+  - docs/models/scorersunion2.md
   - docs/models/searchcontextsize.md
   - docs/models/security.md
   - docs/models/spandata.md
@@ -275,6 +292,9 @@ generatedFiles:
   - docs/models/updatefunctionrequest.md
   - docs/models/updatefunctionresponse.md
   - docs/models/updatemetricspansspanidmetricsmetricidpatchrequest.md
+  - docs/models/updatemodelaliasmodelsaliasesaliasidpatchrequest.md
+  - docs/models/updatemodelaliasrequest.md
+  - docs/models/updatemodelaliasresponse.md
   - docs/models/updatespanmetricrequest.md
   - docs/models/updatespanmetricresponse.md
   - docs/models/updatespanrequest.md
@@ -296,6 +316,7 @@ generatedFiles:
   - docs/sdks/functions/README.md
   - docs/sdks/knowledge/README.md
   - docs/sdks/languagemodels/README.md
+  - docs/sdks/models/README.md
   - docs/sdks/openai/README.md
   - docs/sdks/opper/README.md
   - docs/sdks/revisions/README.md
@@ -389,6 +410,8 @@ generatedFiles:
   - src/opperai/models/createfunctionresponse.py
   - src/opperai/models/createknowledgebaserequest.py
   - src/opperai/models/createknowledgebaseresponse.py
+  - src/opperai/models/createmodelaliasrequest.py
+  - src/opperai/models/createmodelaliasresponse.py
   - src/opperai/models/createspanmetricrequest.py
   - src/opperai/models/createspanmetricresponse.py
   - src/opperai/models/createspanrequest.py
@@ -399,11 +422,16 @@ generatedFiles:
   - src/opperai/models/customformattext.py
   - src/opperai/models/delete_custom_model_models_custom_model_id_deleteop.py
   - src/opperai/models/delete_dataset_entry_datasets_dataset_id_entries_entry_id_deleteop.py
+  - src/opperai/models/delete_documents_knowledge_knowledge_base_id_query_deleteop.py
   - src/opperai/models/delete_file_from_knowledge_base_knowledge_knowledge_base_id_files_file_id_deleteop.py
   - src/opperai/models/delete_function_functions_function_id_deleteop.py
   - src/opperai/models/delete_knowledge_base_knowledge_knowledge_base_id_deleteop.py
   - src/opperai/models/delete_metric_spans_span_id_metrics_metric_id_deleteop.py
+  - src/opperai/models/delete_model_alias_models_aliases_alias_id_deleteop.py
   - src/opperai/models/delete_span_spans_span_id_deleteop.py
+  - src/opperai/models/deleteknowledgebaserequest.py
+  - src/opperai/models/deleteknowledgebaseresponse.py
+  - src/opperai/models/evaluationconfig.py
   - src/opperai/models/example.py
   - src/opperai/models/examplein.py
   - src/opperai/models/file.py
@@ -424,6 +452,8 @@ generatedFiles:
   - src/opperai/models/get_knowledge_base_by_name_knowledge_by_name_knowledge_base_name_getop.py
   - src/opperai/models/get_knowledge_base_knowledge_knowledge_base_id_getop.py
   - src/opperai/models/get_metric_spans_span_id_metrics_metric_id_getop.py
+  - src/opperai/models/get_model_alias_by_name_models_aliases_by_name_name_getop.py
+  - src/opperai/models/get_model_alias_models_aliases_alias_id_getop.py
   - src/opperai/models/get_span_spans_span_id_getop.py
   - src/opperai/models/get_trace_traces_trace_id_getop.py
   - src/opperai/models/get_upload_url_knowledge_knowledge_base_id_upload_url_getop.py
@@ -432,6 +462,7 @@ generatedFiles:
   - src/opperai/models/getdatasetentryresponse.py
   - src/opperai/models/getfunctionresponse.py
   - src/opperai/models/getknowledgebaseresponse.py
+  - src/opperai/models/getmodelaliasresponse.py
   - src/opperai/models/getspanmetricresponse.py
   - src/opperai/models/getspanresponse.py
   - src/opperai/models/gettraceresponse.py
@@ -447,6 +478,7 @@ generatedFiles:
   - src/opperai/models/list_functions_functions_getop.py
   - src/opperai/models/list_knowledge_bases_knowledge_getop.py
   - src/opperai/models/list_metrics_spans_span_id_metrics_getop.py
+  - src/opperai/models/list_model_aliases_models_aliases_getop.py
   - src/opperai/models/list_models_models_getop.py
   - src/opperai/models/list_traces_traces_getop.py
   - src/opperai/models/listcustommodelsresponseitem.py
@@ -454,6 +486,7 @@ generatedFiles:
   - src/opperai/models/listfunctionsresponseitem.py
   - src/opperai/models/listknowledgebasesresponse.py
   - src/opperai/models/listlanguagemodelsresponse.py
+  - src/opperai/models/listmodelaliasesresponseitem.py
   - src/opperai/models/listspanmetricsresponse.py
   - src/opperai/models/listtracesresponse.py
   - src/opperai/models/meta.py
@@ -471,6 +504,7 @@ generatedFiles:
   - src/opperai/models/paginatedresponse_listfunctionsresponseitem_.py
   - src/opperai/models/paginatedresponse_listknowledgebasesresponse_.py
   - src/opperai/models/paginatedresponse_listlanguagemodelsresponse_.py
+  - src/opperai/models/paginatedresponse_listmodelaliasesresponseitem_.py
   - src/opperai/models/paginatedresponse_listspanmetricsresponse_.py
   - src/opperai/models/paginatedresponse_listtracesresponse_.py
   - src/opperai/models/prompttokensdetails.py
@@ -502,6 +536,7 @@ generatedFiles:
   - src/opperai/models/update_dataset_entry_datasets_dataset_id_entries_entry_id_patchop.py
   - src/opperai/models/update_function_functions_function_id_patchop.py
   - src/opperai/models/update_metric_spans_span_id_metrics_metric_id_patchop.py
+  - src/opperai/models/update_model_alias_models_aliases_alias_id_patchop.py
   - src/opperai/models/update_span_spans_span_id_patchop.py
   - src/opperai/models/updatecustommodelrequest.py
   - src/opperai/models/updatecustommodelresponse.py
@@ -509,6 +544,8 @@ generatedFiles:
   - src/opperai/models/updatedatasetentryresponse.py
   - src/opperai/models/updatefunctionrequest.py
   - src/opperai/models/updatefunctionresponse.py
+  - src/opperai/models/updatemodelaliasrequest.py
+  - src/opperai/models/updatemodelaliasresponse.py
   - src/opperai/models/updatespanmetricrequest.py
   - src/opperai/models/updatespanmetricresponse.py
   - src/opperai/models/updatespanrequest.py
@@ -517,6 +554,7 @@ generatedFiles:
   - src/opperai/models/websearchoptions.py
   - src/opperai/models/websearchoptionsuserlocation.py
   - src/opperai/models/websearchoptionsuserlocationapproximate.py
+  - src/opperai/models_.py
   - src/opperai/openai.py
   - src/opperai/py.typed
   - src/opperai/revisions.py
@@ -548,7 +586,7 @@ examples:
   function_call_call_post:
     speakeasy-default-function-call-call-post:
       requestBody:
-        application/json: {"name": "add_numbers", "instructions": "Calculate the sum of two numbers", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "input": {"x": 4, "y": 5}, "examples": [{"input": {"x": 1, "y": 3}, "output": {"sum": 4}, "comment": "Adds two numbers"}], "parent_span_id": "123e4567-e89b-12d3-a456-426614174000", "tags": {"project": "project_456", "user": "company_123"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0}}
+        application/json: {"name": "add_numbers", "instructions": "Calculate the sum of two numbers", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "input": {"x": 4, "y": 5}, "examples": [{"input": {"x": 1, "y": 3}, "output": {"sum": 4}, "comment": "Adds two numbers"}], "parent_span_id": "123e4567-e89b-12d3-a456-426614174000", "tags": {"project": "project_456", "user": "company_123"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "beta.evaluation": {"enabled": true, "scorers": "base"}, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0, "beta.invocation.input_validation.enabled": false, "beta.invocation.xml_mode.enabled": false}}
       responses:
         "200":
           application/json: {"span_id": "174109ca-ebca-4823-8c0d-08c3789b2fea", "message": "The sum of 1 and 3 is 4", "json_payload": {"sum": 4}, "cached": true, "images": ["image_url"], "usage": {"input_tokens": 25, "output_tokens": 972, "output_tokens_details": {"reasoning_tokens": 704}, "total_tokens": 997}, "cost": {"generation": 0.0001, "platform": 0.00001, "total": 0.00011}}
@@ -575,6 +613,24 @@ examples:
       responses:
         "200":
           text/event-stream: {"data": {"delta": "Hello! How can I assist you today?", "span_id": "123e4567-e89b-12d3-a456-426614174000"}}
+    span_id_only:
+      requestBody:
+        application/json: {"name": "add_numbers", "instructions": "Calculate the sum of two numbers", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "input": {"x": 4, "y": 5}, "examples": [{"input": {"x": 1, "y": 3}, "output": {"sum": 4}, "comment": "Adds two numbers"}], "parent_span_id": "123e4567-e89b-12d3-a456-426614174000", "tags": {"project": "project_456", "user": "company_123"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "beta.evaluation": {"enabled": true, "scorers": "base"}, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0, "beta.invocation.input_validation.enabled": false, "beta.invocation.xml_mode.enabled": false}}
+      responses:
+        "200":
+          text/event-stream: {"data": {"span_id": "123e4567-e89b-12d3-a456-426614174000"}}
+    text_streaming_content:
+      requestBody:
+        application/json: {"name": "add_numbers", "instructions": "Calculate the sum of two numbers", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "input": {"x": 4, "y": 5}, "examples": [{"input": {"x": 1, "y": 3}, "output": {"sum": 4}, "comment": "Adds two numbers"}], "parent_span_id": "123e4567-e89b-12d3-a456-426614174000", "tags": {"project": "project_456", "user": "company_123"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "beta.evaluation": {"enabled": true, "scorers": "base"}, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0, "beta.invocation.input_validation.enabled": false, "beta.invocation.xml_mode.enabled": false}}
+      responses:
+        "200":
+          text/event-stream: {"data": {"delta": "Hello! How can I assist you today?", "chunk_type": "text"}}
+    structured_streaming_content:
+      requestBody:
+        application/json: {"name": "add_numbers", "instructions": "Calculate the sum of two numbers", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "input": {"x": 4, "y": 5}, "examples": [{"input": {"x": 1, "y": 3}, "output": {"sum": 4}, "comment": "Adds two numbers"}], "parent_span_id": "123e4567-e89b-12d3-a456-426614174000", "tags": {"project": "project_456", "user": "company_123"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "beta.evaluation": {"enabled": true, "scorers": "base"}, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0, "beta.invocation.input_validation.enabled": false, "beta.invocation.xml_mode.enabled": false}}
+      responses:
+        "200":
+          text/event-stream: {"data": {"delta": "John Doe", "json_path": "people[0].name", "chunk_type": "json"}}
   create_knowledge_base_knowledge_post:
     speakeasy-default-create-knowledge-base-knowledge-post:
       requestBody:
@@ -804,7 +860,7 @@ examples:
         path:
           span_id: "77b258a2-45c1-4b87-a50c-9116bc8ed1d6"
       requestBody:
-        application/json: {"name": "my span", "start_time": "2025-08-15T07:25:37.962090Z", "type": "email_tool", "end_time": "2025-08-15T07:25:37.962153Z", "input": "Hello, world!", "output": "Hello, world!", "error": "Exception: This is an error message", "meta": {"key": "value"}, "score": 10}
+        application/json: {"name": "my span", "start_time": "2025-10-01T07:05:46.262162Z", "type": "email_tool", "end_time": "2025-10-01T07:05:46.262259Z", "input": "Hello, world!", "output": "Hello, world!", "error": "Exception: This is an error message", "meta": {"key": "value"}, "score": 10}
       responses:
         "200":
           application/json: {"name": "my span", "start_time": "2024-03-20T10:00:00+00:00", "id": "84d9ffc8-336c-4953-b92f-fe05d5405951", "trace_id": "123e4567-e89b-12d3-a456-426614174000", "parent_id": "123e4567-e89b-12d3-a456-426614174000", "type": "email_tool", "end_time": "2024-03-20T10:00:10+00:00", "input": "Hello, world!", "output": "Hello, world!", "error": "Exception: This is an error message", "meta": {"key": "value"}, "score": 10}
@@ -1008,10 +1064,10 @@ examples:
   create_function_functions_post:
     speakeasy-default-create-function-functions-post:
       requestBody:
-        application/json: {"name": "my-function", "description": "This function is used to add two numbers and return the result.", "instructions": "You are a calculator that adds two numbers and returns the result.", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0}}
+        application/json: {"name": "my-function", "description": "This function is used to add two numbers and return the result.", "instructions": "You are a calculator that adds two numbers and returns the result.", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "beta.evaluation": {"enabled": true, "scorers": "base"}, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0, "beta.invocation.input_validation.enabled": false, "beta.invocation.xml_mode.enabled": false}}
       responses:
         "201":
-          application/json: {"name": "my-function", "description": "This function is used to add two numbers and return the result.", "instructions": "You are a calculator that adds two numbers and returns the result.", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0}, "id": "a246e349-93f1-4ae1-9ed0-d3ca4f954a62"}
+          application/json: {"name": "my-function", "description": "This function is used to add two numbers and return the result.", "instructions": "You are a calculator that adds two numbers and returns the result.", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "beta.evaluation": {"enabled": true, "scorers": "base"}, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0, "beta.invocation.input_validation.enabled": false, "beta.invocation.xml_mode.enabled": false}, "id": "a246e349-93f1-4ae1-9ed0-d3ca4f954a62"}
         "409":
           application/json: {"type": "ConflictError", "message": "The resource already exists", "detail": "The resource already exists"}
         "422":
@@ -1046,7 +1102,7 @@ examples:
           function_id: "42016421-16e8-4b50-a2d1-30fc3894763b"
       responses:
         "200":
-          application/json: {"name": "my-function", "description": "This function is used to add two numbers and return the result.", "instructions": "You are a calculator that adds two numbers and returns the result.", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0}, "id": "692b28e0-d3e6-4ea4-adf0-c629aeecfdab"}
+          application/json: {"name": "my-function", "description": "This function is used to add two numbers and return the result.", "instructions": "You are a calculator that adds two numbers and returns the result.", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "beta.evaluation": {"enabled": true, "scorers": "base"}, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0, "beta.invocation.input_validation.enabled": false, "beta.invocation.xml_mode.enabled": false}, "id": "692b28e0-d3e6-4ea4-adf0-c629aeecfdab"}
         "422":
           application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
         "400":
@@ -1061,10 +1117,10 @@ examples:
         path:
           function_id: "b0f067f3-9aa2-4ce2-aad5-c9832fbf4fa4"
       requestBody:
-        application/json: {"name": "my-function", "description": "This function is used to add two numbers and return the result.", "instructions": "You are a calculator that adds two numbers and returns the result.", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "configuration": {"beta.evaluation.enabled": true, "invocation.cache.ttl": 0, "invocation.few_shot.count": 0, "invocation.structured_generation.max_attempts": 5}}
+        application/json: {"name": "my-function", "description": "This function is used to add two numbers and return the result.", "instructions": "You are a calculator that adds two numbers and returns the result.", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "configuration": {"beta.evaluation": {"enabled": true, "scorers": "base"}, "beta.evaluation.enabled": true, "beta.invocation.input_validation.enabled": false, "beta.invocation.xml_mode.enabled": false, "invocation.cache.ttl": 0, "invocation.few_shot.count": 0, "invocation.structured_generation.max_attempts": 5}}
       responses:
         "200":
-          application/json: {"name": "my-function", "description": "This function is used to add two numbers and return the result.", "instructions": "You are a calculator that adds two numbers and returns the result.", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0}, "id": "7111f9fb-1c8a-4eee-bcaf-a0e751490b7f"}
+          application/json: {"name": "my-function", "description": "This function is used to add two numbers and return the result.", "instructions": "You are a calculator that adds two numbers and returns the result.", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "beta.evaluation": {"enabled": true, "scorers": "base"}, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0, "beta.invocation.input_validation.enabled": false, "beta.invocation.xml_mode.enabled": false}, "id": "7111f9fb-1c8a-4eee-bcaf-a0e751490b7f"}
         "422":
           application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
         "400":
@@ -1262,7 +1318,7 @@ examples:
           revision_id: "e60c7090-8545-4e1f-84d5-0d9e4be6c0d1"
       responses:
         "200":
-          application/json: {"name": "my-function", "description": "This function is used to add two numbers and return the result.", "instructions": "You are a calculator that adds two numbers and returns the result.", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0}, "id": "1af4e1a9-7f11-4e7c-962d-827d5bc836a1"}
+          application/json: {"name": "my-function", "description": "This function is used to add two numbers and return the result.", "instructions": "You are a calculator that adds two numbers and returns the result.", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "beta.evaluation": {"enabled": true, "scorers": "base"}, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0, "beta.invocation.input_validation.enabled": false, "beta.invocation.xml_mode.enabled": false}, "id": "1af4e1a9-7f11-4e7c-962d-827d5bc836a1"}
         "422":
           application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
         "400":
@@ -1497,7 +1553,7 @@ examples:
           name: "<value>"
       responses:
         "200":
-          application/json: {"name": "my-function", "description": "This function is used to add two numbers and return the result.", "instructions": "You are a calculator that adds two numbers and returns the result.", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0}, "id": "6f887222-2826-417a-ba23-ddd2b6bc4cbf"}
+          application/json: {"name": "my-function", "description": "This function is used to add two numbers and return the result.", "instructions": "You are a calculator that adds two numbers and returns the result.", "input_schema": {"properties": {"x": {"title": "X", "type": "integer"}, "y": {"title": "Y", "type": "integer"}}, "required": ["x", "y"], "title": "OpperInputExample", "type": "object"}, "output_schema": {"properties": {"sum": {"title": "Sum", "type": "integer"}}, "required": ["sum"], "title": "OpperOutputExample", "type": "object"}, "configuration": {"invocation.few_shot.count": 0, "beta.evaluation.enabled": true, "beta.evaluation": {"enabled": true, "scorers": "base"}, "invocation.structured_generation.max_attempts": 5, "invocation.cache.ttl": 0, "beta.invocation.input_validation.enabled": false, "beta.invocation.xml_mode.enabled": false}, "id": "6f887222-2826-417a-ba23-ddd2b6bc4cbf"}
         "400":
           application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
         "401":
@@ -1513,7 +1569,7 @@ examples:
           knowledge_base_id: "be4b1ab3-e801-401e-ac5f-bf91dbf857c6"
       responses:
         "200":
-          application/json: {"id": "f3cade02-74f8-462d-8a43-9bd3bc422e5e", "name": "<value>", "created_at": "2024-02-19T03:36:51.345Z", "embedding_model": "<value>"}
+          application/json: {"id": "f3cade02-74f8-462d-8a43-9bd3bc422e5e", "name": "<value>", "created_at": "2024-02-19T03:36:51.345Z", "embedding_model": "<value>", "count": 697616}
         "400":
           application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
         "401":
@@ -1543,7 +1599,7 @@ examples:
           knowledge_base_name: "<value>"
       responses:
         "200":
-          application/json: {"id": "c85f92ba-f051-4d93-81f8-ba3de493bc15", "name": "<value>", "created_at": "2024-09-26T09:27:57.581Z", "embedding_model": "<value>"}
+          application/json: {"id": "c85f92ba-f051-4d93-81f8-ba3de493bc15", "name": "<value>", "created_at": "2024-09-26T09:27:57.581Z", "embedding_model": "<value>", "count": 758873}
         "400":
           application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
         "401":
@@ -1649,6 +1705,122 @@ examples:
       responses:
         "201":
           application/json: "<value>"
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+  delete_documents_knowledge__knowledge_base_id__query_delete:
+    speakeasy-default-delete-documents-knowledge-knowledge-base-id-query-delete:
+      parameters:
+        path:
+          knowledge_base_id: "7418a0c9-d40d-4761-8b00-e8948f7d8426"
+      requestBody:
+        application/json: null
+      responses:
+        "200":
+          application/json: {"deleted_count": 5}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+  create_model_alias_models_aliases_post:
+    speakeasy-default-create-model-alias-models-aliases-post:
+      requestBody:
+        application/json: {"name": "<value>", "fallback_models": ["<value 1>"]}
+      responses:
+        "200":
+          application/json: {"id": "d1233a9e-30ed-4a83-a60f-70a5a5d44724", "name": "<value>", "fallback_models": ["<value 1>", "<value 2>", "<value 3>"]}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+        "409":
+          application/json: {"type": "ConflictError", "message": "The resource already exists", "detail": "The resource already exists"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+  list_model_aliases_models_aliases_get:
+    speakeasy-default-list-model-aliases-models-aliases-get:
+      parameters:
+        query:
+          offset: 0
+          limit: 100
+      responses:
+        "200":
+          application/json: {"meta": {"total_count": 1}, "data": [{"id": "56a3330c-9ec4-4231-8238-9f8abf0835b6", "name": "<value>", "fallback_models": ["<value 1>"]}]}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+  get_model_alias_models_aliases__alias_id__get:
+    speakeasy-default-get-model-alias-models-aliases-alias-id-get:
+      parameters:
+        path:
+          alias_id: "1fb8ddb6-7ed4-4b09-ba67-90a8c5d1692e"
+      responses:
+        "200":
+          application/json: {"id": "817b5a2f-8a6e-4f77-8c88-9ba9f0a12be6", "name": "<value>", "fallback_models": ["<value 1>", "<value 2>"]}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+  update_model_alias_models_aliases__alias_id__patch:
+    speakeasy-default-update-model-alias-models-aliases-alias-id-patch:
+      parameters:
+        path:
+          alias_id: "15f4454f-0437-4e37-8149-48504d2ca755"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"id": "ecf5b627-47a3-4a8d-b3fa-172509cafc79", "name": "<value>", "fallback_models": ["<value 1>"]}
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+  delete_model_alias_models_aliases__alias_id__delete:
+    speakeasy-default-delete-model-alias-models-aliases-alias-id-delete:
+      parameters:
+        path:
+          alias_id: "69def0be-de07-4128-ac25-11c907d9c302"
+      responses:
+        "400":
+          application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
+        "401":
+          application/json: {"type": "UnauthorizedError", "message": "The request is unauthorized", "detail": "The API key is invalid"}
+        "404":
+          application/json: {"type": "NotFoundError", "message": "The resource was not found", "detail": "Span 123e4567-e89b-12d3-a456-426614174000 not found"}
+        "422":
+          application/json: {"type": "RequestValidationError", "message": "The request is invalid", "detail": {"input": "input value", "loc": ["path", "to", "error"], "msg": "error message", "type": "type of error"}}
+  get_model_alias_by_name_models_aliases_by_name__name__get:
+    speakeasy-default-get-model-alias-by-name-models-aliases-by-name-name-get:
+      parameters:
+        path:
+          name: "<value>"
+      responses:
+        "200":
+          application/json: {"id": "aa643f83-7979-4c73-8382-fa6d10384a41", "name": "<value>", "fallback_models": ["<value 1>", "<value 2>", "<value 3>"]}
         "400":
           application/json: {"type": "BadRequestError", "message": "The request is invalid", "detail": "The request is invalid"}
         "401":

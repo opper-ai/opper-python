@@ -14,6 +14,7 @@
 * [register_file_upload](#register_file_upload) - Register File Upload
 * [delete_file](#delete_file) - Delete File From Knowledge Base
 * [query](#query) - Query Knowledge Base
+* [delete_documents_knowledge_knowledge_base_id_query_delete](#delete_documents_knowledge_knowledge_base_id_query_delete) - Delete Documents
 * [add](#add) - Add
 
 ## create
@@ -152,7 +153,7 @@ with Opper(
 
 ## delete
 
-Delete a knowledge base by its id
+Delete a knowledge base
 
 ### Example Usage
 
@@ -176,7 +177,7 @@ with Opper(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `knowledge_base_id`                                                 | *str*                                                               | :heavy_check_mark:                                                  | The id of the knowledge base to delete                              |
+| `knowledge_base_id`                                                 | *str*                                                               | :heavy_check_mark:                                                  | The id of the knowledge base to delete or delete documents from     |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Errors
@@ -429,6 +430,62 @@ with Opper(
 ### Response
 
 **[List[models.QueryKnowledgeBaseResponse]](../../models/.md)**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.BadRequestError        | 400                           | application/json              |
+| errors.UnauthorizedError      | 401                           | application/json              |
+| errors.NotFoundError          | 404                           | application/json              |
+| errors.RequestValidationError | 422                           | application/json              |
+| errors.APIError               | 4XX, 5XX                      | \*/\*                         |
+
+## delete_documents_knowledge_knowledge_base_id_query_delete
+
+Delete documents from a knowledge base based on filters
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="delete_documents_knowledge__knowledge_base_id__query_delete" method="delete" path="/knowledge/{knowledge_base_id}/query" -->
+```python
+from opperai import Opper, models
+import os
+
+
+with Opper(
+    http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
+) as opper:
+
+    res = opper.knowledge.delete_documents_knowledge_knowledge_base_id_query_delete(knowledge_base_id="7418a0c9-d40d-4761-8b00-e8948f7d8426", filters=[
+        {
+            "field": "category",
+            "operation": models.Op.EQUAL_,
+            "value": "outdated",
+        },
+        {
+            "field": "version",
+            "operation": models.Op.LESS_THAN_,
+            "value": 2,
+        },
+    ])
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                     | Type                                                                                                                          | Required                                                                                                                      | Description                                                                                                                   | Example                                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `knowledge_base_id`                                                                                                           | *str*                                                                                                                         | :heavy_check_mark:                                                                                                            | The id of the knowledge base to delete or delete documents from                                                               |                                                                                                                               |
+| `filters`                                                                                                                     | List[[models.Filter](../../models/filter_.md)]                                                                                | :heavy_minus_sign:                                                                                                            | Filters to apply for deletion. If no filters are provided, the entire knowledge base will be deleted.                         | [<br/>{<br/>"field": "category",<br/>"operation": "=",<br/>"value": "outdated"<br/>},<br/>{<br/>"field": "version",<br/>"operation": "\u003c",<br/>"value": 2<br/>}<br/>] |
+| `retries`                                                                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                              | :heavy_minus_sign:                                                                                                            | Configuration to override the default retry behavior of the client.                                                           |                                                                                                                               |
+
+### Response
+
+**[models.DeleteKnowledgeBaseResponse](../../models/deleteknowledgebaseresponse.md)**
 
 ### Errors
 
