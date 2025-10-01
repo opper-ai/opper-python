@@ -11,8 +11,6 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class FunctionCallConfigurationTypedDict(TypedDict):
     invocation_few_shot_count: NotRequired[int]
     r"""The number of few-shot examples to use for the call. The examples are selected using nearest neighbor search of the function's dataset for items that are similar to the input."""
-    beta_evaluation_enabled: NotRequired[bool]
-    r"""[Deprecated] Use 'beta.evaluation' object. Whether to enable evaluation for the call. Evaluation is a beta feature and is enabled by default."""
     beta_evaluation: NotRequired[EvaluationConfigTypedDict]
     r"""Configuration for evaluation features stored under 'beta.evaluation'.
 
@@ -38,11 +36,6 @@ class FunctionCallConfiguration(BaseModel):
         Optional[int], pydantic.Field(alias="invocation.few_shot.count")
     ] = 0
     r"""The number of few-shot examples to use for the call. The examples are selected using nearest neighbor search of the function's dataset for items that are similar to the input."""
-
-    beta_evaluation_enabled: Annotated[
-        Optional[bool], pydantic.Field(alias="beta.evaluation.enabled")
-    ] = True
-    r"""[Deprecated] Use 'beta.evaluation' object. Whether to enable evaluation for the call. Evaluation is a beta feature and is enabled by default."""
 
     beta_evaluation: Annotated[
         Optional[EvaluationConfig], pydantic.Field(alias="beta.evaluation")
