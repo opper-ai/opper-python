@@ -12,6 +12,7 @@ from opperai._hooks import HookContext, SDKHooks
 from opperai.types import OptionalNullable, UNSET
 from opperai.utils import eventstreaming, get_security_from_env
 from opperai.utils.unmarshal_json_response import unmarshal_json_response
+import sys
 from typing import (
     Any,
     Callable,
@@ -32,6 +33,7 @@ if TYPE_CHECKING:
     from opperai.functions import Functions
     from opperai.knowledge import Knowledge
     from opperai.language_models import LanguageModels
+    from opperai.models_ import Models
     from opperai.openai import Openai
     from opperai.spanmetrics import SpanMetrics
     from opperai.spans import Spans
@@ -47,6 +49,7 @@ class Opper(BaseSDK):
     functions: "Functions"
     embeddings: "Embeddings"
     language_models: "LanguageModels"
+    models: "Models"
     openai: "Openai"
     analytics: "Analytics"
     _sub_sdk_map = {
@@ -58,6 +61,7 @@ class Opper(BaseSDK):
         "functions": ("opperai.functions", "Functions"),
         "embeddings": ("opperai.embeddings", "Embeddings"),
         "language_models": ("opperai.language_models", "LanguageModels"),
+        "models": ("opperai.models_", "Models"),
         "openai": ("opperai.openai", "Openai"),
         "analytics": ("opperai.analytics", "Analytics"),
     }
@@ -87,7 +91,7 @@ class Opper(BaseSDK):
         """
         client_supplied = True
         if client is None:
-            client = httpx.Client()
+            client = httpx.Client(follow_redirects=True)
             client_supplied = False
 
         assert issubclass(
@@ -96,7 +100,7 @@ class Opper(BaseSDK):
 
         async_client_supplied = True
         if async_client is None:
-            async_client = httpx.AsyncClient()
+            async_client = httpx.AsyncClient(follow_redirects=True)
             async_client_supplied = False
 
         if debug_logger is None:
@@ -131,6 +135,7 @@ class Opper(BaseSDK):
                 timeout_ms=timeout_ms,
                 debug_logger=debug_logger,
             ),
+            parent_ref=self,
         )
 
         hooks = SDKHooks()
@@ -150,13 +155,24 @@ class Opper(BaseSDK):
             self.sdk_configuration.async_client_supplied,
         )
 
+    def dynamic_import(self, modname, retries=3):
+        for attempt in range(retries):
+            try:
+                return importlib.import_module(modname)
+            except KeyError:
+                # Clear any half-initialized module and retry
+                sys.modules.pop(modname, None)
+                if attempt == retries - 1:
+                    break
+        raise KeyError(f"Failed to import module '{modname}' after {retries} attempts")
+
     def __getattr__(self, name: str):
         if name in self._sub_sdk_map:
             module_path, class_name = self._sub_sdk_map[name]
             try:
-                module = importlib.import_module(module_path)
+                module = self.dynamic_import(module_path)
                 klass = getattr(module, class_name)
-                instance = klass(self.sdk_configuration)
+                instance = klass(self.sdk_configuration, parent_ref=self)
                 setattr(self, name, instance)
                 return instance
             except ImportError as e:
@@ -232,7 +248,7 @@ class Opper(BaseSDK):
         :param name: Provide a unique name of the task. A function with this name will be created in the project. Functions configuration is overridden by the request parameters.
         :param instructions: Optionally provide an instruction for the model to complete the task. Recommended to be concise and to the point
         :param input_schema: Optionally provide an input schema for the task. Can preferably include field descriptions to allow the model to reason about the input variables. Schema is validated against the input data and issues an error if it does not match. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.
-        :param output_schema: Optionally provide an output schema for the task. Response is guaranteed to match the schema or throw an error. Can preferably include field descriptions to allow the model to reason about the output variables. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.
+        :param output_schema: Optionally provide an output schema for the task. Response is guaranteed to match the schema or throw an error. Can preferably include field descriptions to allow the model to reason about the output variables. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.   **Streaming with output_schema:** When used with streaming endpoints, enables precise field tracking via json_path. Each streaming chunk includes the exact schema field being populated (e.g., 'response.people[0].name'), allowing real-time UI updates by routing content to specific components.
         :param input: Optionally provide input data as context to complete the task. Could be a text, image, audio or a combination of these.
         :param model:
         :param examples: Optionally provide examples of successful task completions. Will be added to the prompt to help the model understand the task from examples.
@@ -389,7 +405,7 @@ class Opper(BaseSDK):
         :param name: Provide a unique name of the task. A function with this name will be created in the project. Functions configuration is overridden by the request parameters.
         :param instructions: Optionally provide an instruction for the model to complete the task. Recommended to be concise and to the point
         :param input_schema: Optionally provide an input schema for the task. Can preferably include field descriptions to allow the model to reason about the input variables. Schema is validated against the input data and issues an error if it does not match. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.
-        :param output_schema: Optionally provide an output schema for the task. Response is guaranteed to match the schema or throw an error. Can preferably include field descriptions to allow the model to reason about the output variables. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.
+        :param output_schema: Optionally provide an output schema for the task. Response is guaranteed to match the schema or throw an error. Can preferably include field descriptions to allow the model to reason about the output variables. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.   **Streaming with output_schema:** When used with streaming endpoints, enables precise field tracking via json_path. Each streaming chunk includes the exact schema field being populated (e.g., 'response.people[0].name'), allowing real-time UI updates by routing content to specific components.
         :param input: Optionally provide input data as context to complete the task. Could be a text, image, audio or a combination of these.
         :param model:
         :param examples: Optionally provide examples of successful task completions. Will be added to the prompt to help the model understand the task from examples.
@@ -542,27 +558,77 @@ class Opper(BaseSDK):
 
         Stream a function call execution in real-time using Server-Sent Events (SSE).
 
-        This endpoint returns a continuous stream of ServerSentEvent objects as the function executes,
-        allowing for real-time streaming of responses. The response follows the Server-Sent Events
-        specification with proper event structure for SDK compatibility.
+        This endpoint provides continuous streaming of function execution results, supporting both
+        unstructured text streaming and structured JSON streaming with precise field tracking.
 
-        Each ServerSentEvent contains:
+        ## Streaming Modes
+
+        **Text Mode (no output_schema):**
+        - Streams incremental text content via the `delta` field
+        - `chunk_type` will be \"text\"
+        - Best for conversational AI, creative writing, open-ended responses
+
+        **Structured Mode (with output_schema):**
+        - Streams structured JSON with precise field tracking via `json_path`
+        - `chunk_type` will be \"json\"
+        - Enables real-time UI updates by showing which schema field is being populated
+        - Perfect for forms, dashboards, structured data display
+
+        ## JSON Path Feature
+
+        When using `output_schema`, each streaming chunk includes a `json_path` field showing exactly
+        which field in your schema is being populated:
+
+        - `response.summary` → Top-level string field
+        - `response.people[0].name` → Name of first person in array
+        - `response.people[1].role` → Role of second person
+        - `response.metadata.created_at` → Nested object field
+
+        This enables precise UI updates where you can route streaming content to specific components
+        based on the path, creating responsive real-time interfaces.
+
+        ## Response Structure
+
+        Each Server-Sent Event contains:
         - `id`: Optional event identifier
-        - `event`: Optional event type
-        - `data`: StreamingChunk with actual content
-        - `retry`: Optional retry interval
+        - `event`: Optional event type (typically \"message\")
+        - `data`: StreamingChunk with the actual streaming content
+        - `retry`: Optional retry interval for reconnection
 
-        The StreamingChunk data payload includes:
-        - `delta`: Incremental text content (if any)
-        - `span_id`: Unique identifier for the execution span (when available)
+        The StreamingChunk data payload varies by mode:
 
-        Note: When streaming is enabled, any output_schema will be ignored as structured output
-        cannot be streamed. The response will be unstructured text content.
+        **Text Mode:**
+        - `delta`: Incremental text content
+        - `span_id`: Execution span ID (first chunk)
+        - `chunk_type`: \"text\"
+
+        **Structured Mode:**
+        - `delta`: Actual field values being streamed
+        - `json_path`: Dot-notation path to current field
+        - `span_id`: Execution span ID (first chunk)
+        - `chunk_type`: \"json\"
+
+        ## Examples
+
+        Text streaming events:
+        ```
+        data: {\"span_id\": \"123e4567-e89b-12d3-a456-426614174000\"}
+        data: {\"delta\": \"Hello\", \"chunk_type\": \"text\"}
+        data: {\"delta\": \" world\", \"chunk_type\": \"text\"}
+        ```
+
+        Structured streaming events:
+        ```
+        data: {\"span_id\": \"123e4567-e89b-12d3-a456-426614174000\"}
+        data: {\"delta\": \"John\", \"json_path\": \"response.name\", \"chunk_type\": \"json\"}
+        data: {\"delta\": \" Doe\", \"json_path\": \"response.name\", \"chunk_type\": \"json\"}
+        data: {\"delta\": \"Engineer\", \"json_path\": \"response.role\", \"chunk_type\": \"json\"}
+        ```
 
         :param name: Provide a unique name of the task. A function with this name will be created in the project. Functions configuration is overridden by the request parameters.
         :param instructions: Optionally provide an instruction for the model to complete the task. Recommended to be concise and to the point
         :param input_schema: Optionally provide an input schema for the task. Can preferably include field descriptions to allow the model to reason about the input variables. Schema is validated against the input data and issues an error if it does not match. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.
-        :param output_schema: Optionally provide an output schema for the task. Response is guaranteed to match the schema or throw an error. Can preferably include field descriptions to allow the model to reason about the output variables. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.
+        :param output_schema: Optionally provide an output schema for the task. Response is guaranteed to match the schema or throw an error. Can preferably include field descriptions to allow the model to reason about the output variables. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.   **Streaming with output_schema:** When used with streaming endpoints, enables precise field tracking via json_path. Each streaming chunk includes the exact schema field being populated (e.g., 'response.people[0].name'), allowing real-time UI updates by routing content to specific components.
         :param input: Optionally provide input data as context to complete the task. Could be a text, image, audio or a combination of these.
         :param model:
         :param examples: Optionally provide examples of successful task completions. Will be added to the prompt to help the model understand the task from examples.
@@ -663,6 +729,7 @@ class Opper(BaseSDK):
                     lambda raw: utils.unmarshal_json(
                         raw, models.FunctionStreamCallStreamPostResponseBody
                     ),
+                    client_ref=self,
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
@@ -729,27 +796,77 @@ class Opper(BaseSDK):
 
         Stream a function call execution in real-time using Server-Sent Events (SSE).
 
-        This endpoint returns a continuous stream of ServerSentEvent objects as the function executes,
-        allowing for real-time streaming of responses. The response follows the Server-Sent Events
-        specification with proper event structure for SDK compatibility.
+        This endpoint provides continuous streaming of function execution results, supporting both
+        unstructured text streaming and structured JSON streaming with precise field tracking.
 
-        Each ServerSentEvent contains:
+        ## Streaming Modes
+
+        **Text Mode (no output_schema):**
+        - Streams incremental text content via the `delta` field
+        - `chunk_type` will be \"text\"
+        - Best for conversational AI, creative writing, open-ended responses
+
+        **Structured Mode (with output_schema):**
+        - Streams structured JSON with precise field tracking via `json_path`
+        - `chunk_type` will be \"json\"
+        - Enables real-time UI updates by showing which schema field is being populated
+        - Perfect for forms, dashboards, structured data display
+
+        ## JSON Path Feature
+
+        When using `output_schema`, each streaming chunk includes a `json_path` field showing exactly
+        which field in your schema is being populated:
+
+        - `response.summary` → Top-level string field
+        - `response.people[0].name` → Name of first person in array
+        - `response.people[1].role` → Role of second person
+        - `response.metadata.created_at` → Nested object field
+
+        This enables precise UI updates where you can route streaming content to specific components
+        based on the path, creating responsive real-time interfaces.
+
+        ## Response Structure
+
+        Each Server-Sent Event contains:
         - `id`: Optional event identifier
-        - `event`: Optional event type
-        - `data`: StreamingChunk with actual content
-        - `retry`: Optional retry interval
+        - `event`: Optional event type (typically \"message\")
+        - `data`: StreamingChunk with the actual streaming content
+        - `retry`: Optional retry interval for reconnection
 
-        The StreamingChunk data payload includes:
-        - `delta`: Incremental text content (if any)
-        - `span_id`: Unique identifier for the execution span (when available)
+        The StreamingChunk data payload varies by mode:
 
-        Note: When streaming is enabled, any output_schema will be ignored as structured output
-        cannot be streamed. The response will be unstructured text content.
+        **Text Mode:**
+        - `delta`: Incremental text content
+        - `span_id`: Execution span ID (first chunk)
+        - `chunk_type`: \"text\"
+
+        **Structured Mode:**
+        - `delta`: Actual field values being streamed
+        - `json_path`: Dot-notation path to current field
+        - `span_id`: Execution span ID (first chunk)
+        - `chunk_type`: \"json\"
+
+        ## Examples
+
+        Text streaming events:
+        ```
+        data: {\"span_id\": \"123e4567-e89b-12d3-a456-426614174000\"}
+        data: {\"delta\": \"Hello\", \"chunk_type\": \"text\"}
+        data: {\"delta\": \" world\", \"chunk_type\": \"text\"}
+        ```
+
+        Structured streaming events:
+        ```
+        data: {\"span_id\": \"123e4567-e89b-12d3-a456-426614174000\"}
+        data: {\"delta\": \"John\", \"json_path\": \"response.name\", \"chunk_type\": \"json\"}
+        data: {\"delta\": \" Doe\", \"json_path\": \"response.name\", \"chunk_type\": \"json\"}
+        data: {\"delta\": \"Engineer\", \"json_path\": \"response.role\", \"chunk_type\": \"json\"}
+        ```
 
         :param name: Provide a unique name of the task. A function with this name will be created in the project. Functions configuration is overridden by the request parameters.
         :param instructions: Optionally provide an instruction for the model to complete the task. Recommended to be concise and to the point
         :param input_schema: Optionally provide an input schema for the task. Can preferably include field descriptions to allow the model to reason about the input variables. Schema is validated against the input data and issues an error if it does not match. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.
-        :param output_schema: Optionally provide an output schema for the task. Response is guaranteed to match the schema or throw an error. Can preferably include field descriptions to allow the model to reason about the output variables. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.
+        :param output_schema: Optionally provide an output schema for the task. Response is guaranteed to match the schema or throw an error. Can preferably include field descriptions to allow the model to reason about the output variables. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.   **Streaming with output_schema:** When used with streaming endpoints, enables precise field tracking via json_path. Each streaming chunk includes the exact schema field being populated (e.g., 'response.people[0].name'), allowing real-time UI updates by routing content to specific components.
         :param input: Optionally provide input data as context to complete the task. Could be a text, image, audio or a combination of these.
         :param model:
         :param examples: Optionally provide examples of successful task completions. Will be added to the prompt to help the model understand the task from examples.
@@ -850,6 +967,7 @@ class Opper(BaseSDK):
                     lambda raw: utils.unmarshal_json(
                         raw, models.FunctionStreamCallStreamPostResponseBody
                     ),
+                    client_ref=self,
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )

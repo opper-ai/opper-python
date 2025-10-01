@@ -1,7 +1,7 @@
 <!-- Start SDK Example Usage [usage] -->
 ```python
 # Synchronous Example
-from opperai import Opper
+from opperai import Opper, models
 import os
 
 
@@ -55,7 +55,11 @@ with Opper(
     ], parent_span_id="123e4567-e89b-12d3-a456-426614174000", tags={
         "project": "project_456",
         "user": "company_123",
-    }, configuration={})
+    }, configuration=models.FunctionCallConfiguration(
+        beta_evaluation=models.EvaluationConfig(
+            scorers=models.ScorersEnum1.BASE,
+        ),
+    ))
 
     # Handle response
     print(res)
@@ -64,10 +68,11 @@ with Opper(
 </br>
 
 The same SDK client can also be used to make asynchronous requests by importing asyncio.
+
 ```python
 # Asynchronous Example
 import asyncio
-from opperai import Opper
+from opperai import Opper, models
 import os
 
 async def main():
@@ -122,7 +127,11 @@ async def main():
         ], parent_span_id="123e4567-e89b-12d3-a456-426614174000", tags={
             "project": "project_456",
             "user": "company_123",
-        }, configuration={})
+        }, configuration=models.FunctionCallConfiguration(
+            beta_evaluation=models.EvaluationConfig(
+                scorers=models.ScorersEnum1.BASE,
+            ),
+        ))
 
         # Handle response
         print(res)

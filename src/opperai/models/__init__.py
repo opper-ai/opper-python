@@ -3,6 +3,7 @@
 from typing import TYPE_CHECKING
 from importlib import import_module
 import builtins
+import sys
 
 if TYPE_CHECKING:
     from .add_knowledge_knowledge_base_id_add_postop import (
@@ -274,6 +275,14 @@ if TYPE_CHECKING:
         CreateKnowledgeBaseResponse,
         CreateKnowledgeBaseResponseTypedDict,
     )
+    from .createmodelaliasrequest import (
+        CreateModelAliasRequest,
+        CreateModelAliasRequestTypedDict,
+    )
+    from .createmodelaliasresponse import (
+        CreateModelAliasResponse,
+        CreateModelAliasResponseTypedDict,
+    )
     from .createspanmetricrequest import (
         CreateSpanMetricRequest,
         CreateSpanMetricRequestTypedDict,
@@ -300,6 +309,10 @@ if TYPE_CHECKING:
         DeleteDatasetEntryDatasetsDatasetIDEntriesEntryIDDeleteRequest,
         DeleteDatasetEntryDatasetsDatasetIDEntriesEntryIDDeleteRequestTypedDict,
     )
+    from .delete_documents_knowledge_knowledge_base_id_query_deleteop import (
+        DeleteDocumentsKnowledgeKnowledgeBaseIDQueryDeleteRequest,
+        DeleteDocumentsKnowledgeKnowledgeBaseIDQueryDeleteRequestTypedDict,
+    )
     from .delete_file_from_knowledge_base_knowledge_knowledge_base_id_files_file_id_deleteop import (
         DeleteFileFromKnowledgeBaseKnowledgeKnowledgeBaseIDFilesFileIDDeleteRequest,
         DeleteFileFromKnowledgeBaseKnowledgeKnowledgeBaseIDFilesFileIDDeleteRequestTypedDict,
@@ -316,9 +329,31 @@ if TYPE_CHECKING:
         DeleteMetricSpansSpanIDMetricsMetricIDDeleteRequest,
         DeleteMetricSpansSpanIDMetricsMetricIDDeleteRequestTypedDict,
     )
+    from .delete_model_alias_models_aliases_alias_id_deleteop import (
+        DeleteModelAliasModelsAliasesAliasIDDeleteRequest,
+        DeleteModelAliasModelsAliasesAliasIDDeleteRequestTypedDict,
+    )
     from .delete_span_spans_span_id_deleteop import (
         DeleteSpanSpansSpanIDDeleteRequest,
         DeleteSpanSpansSpanIDDeleteRequestTypedDict,
+    )
+    from .deleteknowledgebaserequest import (
+        DeleteKnowledgeBaseRequest,
+        DeleteKnowledgeBaseRequestTypedDict,
+    )
+    from .deleteknowledgebaseresponse import (
+        DeleteKnowledgeBaseResponse,
+        DeleteKnowledgeBaseResponseTypedDict,
+    )
+    from .evaluationconfig import (
+        EvaluationConfig,
+        EvaluationConfigTypedDict,
+        ScorersEnum1,
+        ScorersEnum2,
+        ScorersUnion1,
+        ScorersUnion1TypedDict,
+        ScorersUnion2,
+        ScorersUnion2TypedDict,
     )
     from .example import Example, ExampleTypedDict
     from .examplein import ExampleIn, ExampleInTypedDict
@@ -384,6 +419,14 @@ if TYPE_CHECKING:
         GetMetricSpansSpanIDMetricsMetricIDGetRequest,
         GetMetricSpansSpanIDMetricsMetricIDGetRequestTypedDict,
     )
+    from .get_model_alias_by_name_models_aliases_by_name_name_getop import (
+        GetModelAliasByNameModelsAliasesByNameNameGetRequest,
+        GetModelAliasByNameModelsAliasesByNameNameGetRequestTypedDict,
+    )
+    from .get_model_alias_models_aliases_alias_id_getop import (
+        GetModelAliasModelsAliasesAliasIDGetRequest,
+        GetModelAliasModelsAliasesAliasIDGetRequestTypedDict,
+    )
     from .get_span_spans_span_id_getop import (
         GetSpanSpansSpanIDGetRequest,
         GetSpanSpansSpanIDGetRequestTypedDict,
@@ -412,6 +455,10 @@ if TYPE_CHECKING:
     from .getknowledgebaseresponse import (
         GetKnowledgeBaseResponse,
         GetKnowledgeBaseResponseTypedDict,
+    )
+    from .getmodelaliasresponse import (
+        GetModelAliasResponse,
+        GetModelAliasResponseTypedDict,
     )
     from .getspanmetricresponse import (
         GetSpanMetricResponse,
@@ -452,6 +499,10 @@ if TYPE_CHECKING:
         ListMetricsSpansSpanIDMetricsGetRequest,
         ListMetricsSpansSpanIDMetricsGetRequestTypedDict,
     )
+    from .list_model_aliases_models_aliases_getop import (
+        ListModelAliasesModelsAliasesGetRequest,
+        ListModelAliasesModelsAliasesGetRequestTypedDict,
+    )
     from .list_models_models_getop import (
         ListModelsModelsGetRequest,
         ListModelsModelsGetRequestTypedDict,
@@ -479,6 +530,10 @@ if TYPE_CHECKING:
     from .listlanguagemodelsresponse import (
         ListLanguageModelsResponse,
         ListLanguageModelsResponseTypedDict,
+    )
+    from .listmodelaliasesresponseitem import (
+        ListModelAliasesResponseItem,
+        ListModelAliasesResponseItemTypedDict,
     )
     from .listspanmetricsresponse import (
         ListSpanMetricsResponse,
@@ -537,6 +592,10 @@ if TYPE_CHECKING:
     from .paginatedresponse_listlanguagemodelsresponse_ import (
         PaginatedResponseListLanguageModelsResponse,
         PaginatedResponseListLanguageModelsResponseTypedDict,
+    )
+    from .paginatedresponse_listmodelaliasesresponseitem_ import (
+        PaginatedResponseListModelAliasesResponseItem,
+        PaginatedResponseListModelAliasesResponseItemTypedDict,
     )
     from .paginatedresponse_listspanmetricsresponse_ import (
         PaginatedResponseListSpanMetricsResponse,
@@ -650,6 +709,10 @@ if TYPE_CHECKING:
         UpdateMetricSpansSpanIDMetricsMetricIDPatchRequest,
         UpdateMetricSpansSpanIDMetricsMetricIDPatchRequestTypedDict,
     )
+    from .update_model_alias_models_aliases_alias_id_patchop import (
+        UpdateModelAliasModelsAliasesAliasIDPatchRequest,
+        UpdateModelAliasModelsAliasesAliasIDPatchRequestTypedDict,
+    )
     from .update_span_spans_span_id_patchop import (
         UpdateSpanSpansSpanIDPatchRequest,
         UpdateSpanSpansSpanIDPatchRequestTypedDict,
@@ -677,6 +740,14 @@ if TYPE_CHECKING:
     from .updatefunctionresponse import (
         UpdateFunctionResponse,
         UpdateFunctionResponseTypedDict,
+    )
+    from .updatemodelaliasrequest import (
+        UpdateModelAliasRequest,
+        UpdateModelAliasRequestTypedDict,
+    )
+    from .updatemodelaliasresponse import (
+        UpdateModelAliasResponse,
+        UpdateModelAliasResponseTypedDict,
     )
     from .updatespanmetricrequest import (
         UpdateSpanMetricRequest,
@@ -875,6 +946,10 @@ __all__ = [
     "CreateKnowledgeBaseResponseTypedDict",
     "CreateMetricSpansSpanIDMetricsPostRequest",
     "CreateMetricSpansSpanIDMetricsPostRequestTypedDict",
+    "CreateModelAliasRequest",
+    "CreateModelAliasRequestTypedDict",
+    "CreateModelAliasResponse",
+    "CreateModelAliasResponseTypedDict",
     "CreateSpanMetricRequest",
     "CreateSpanMetricRequestTypedDict",
     "CreateSpanMetricResponse",
@@ -895,17 +970,27 @@ __all__ = [
     "DeleteCustomModelModelsCustomModelIDDeleteRequestTypedDict",
     "DeleteDatasetEntryDatasetsDatasetIDEntriesEntryIDDeleteRequest",
     "DeleteDatasetEntryDatasetsDatasetIDEntriesEntryIDDeleteRequestTypedDict",
+    "DeleteDocumentsKnowledgeKnowledgeBaseIDQueryDeleteRequest",
+    "DeleteDocumentsKnowledgeKnowledgeBaseIDQueryDeleteRequestTypedDict",
     "DeleteFileFromKnowledgeBaseKnowledgeKnowledgeBaseIDFilesFileIDDeleteRequest",
     "DeleteFileFromKnowledgeBaseKnowledgeKnowledgeBaseIDFilesFileIDDeleteRequestTypedDict",
     "DeleteFunctionFunctionsFunctionIDDeleteRequest",
     "DeleteFunctionFunctionsFunctionIDDeleteRequestTypedDict",
     "DeleteKnowledgeBaseKnowledgeKnowledgeBaseIDDeleteRequest",
     "DeleteKnowledgeBaseKnowledgeKnowledgeBaseIDDeleteRequestTypedDict",
+    "DeleteKnowledgeBaseRequest",
+    "DeleteKnowledgeBaseRequestTypedDict",
+    "DeleteKnowledgeBaseResponse",
+    "DeleteKnowledgeBaseResponseTypedDict",
     "DeleteMetricSpansSpanIDMetricsMetricIDDeleteRequest",
     "DeleteMetricSpansSpanIDMetricsMetricIDDeleteRequestTypedDict",
+    "DeleteModelAliasModelsAliasesAliasIDDeleteRequest",
+    "DeleteModelAliasModelsAliasesAliasIDDeleteRequestTypedDict",
     "DeleteSpanSpansSpanIDDeleteRequest",
     "DeleteSpanSpansSpanIDDeleteRequestTypedDict",
     "Detail",
+    "EvaluationConfig",
+    "EvaluationConfigTypedDict",
     "Example",
     "ExampleIn",
     "ExampleInTypedDict",
@@ -963,6 +1048,12 @@ __all__ = [
     "GetKnowledgeBaseResponseTypedDict",
     "GetMetricSpansSpanIDMetricsMetricIDGetRequest",
     "GetMetricSpansSpanIDMetricsMetricIDGetRequestTypedDict",
+    "GetModelAliasByNameModelsAliasesByNameNameGetRequest",
+    "GetModelAliasByNameModelsAliasesByNameNameGetRequestTypedDict",
+    "GetModelAliasModelsAliasesAliasIDGetRequest",
+    "GetModelAliasModelsAliasesAliasIDGetRequestTypedDict",
+    "GetModelAliasResponse",
+    "GetModelAliasResponseTypedDict",
     "GetSpanMetricResponse",
     "GetSpanMetricResponseTypedDict",
     "GetSpanResponse",
@@ -1013,6 +1104,10 @@ __all__ = [
     "ListLanguageModelsResponseTypedDict",
     "ListMetricsSpansSpanIDMetricsGetRequest",
     "ListMetricsSpansSpanIDMetricsGetRequestTypedDict",
+    "ListModelAliasesModelsAliasesGetRequest",
+    "ListModelAliasesModelsAliasesGetRequestTypedDict",
+    "ListModelAliasesResponseItem",
+    "ListModelAliasesResponseItemTypedDict",
     "ListModelsModelsGetRequest",
     "ListModelsModelsGetRequestTypedDict",
     "ListSpanMetricsResponse",
@@ -1051,6 +1146,8 @@ __all__ = [
     "PaginatedResponseListKnowledgeBasesResponseTypedDict",
     "PaginatedResponseListLanguageModelsResponse",
     "PaginatedResponseListLanguageModelsResponseTypedDict",
+    "PaginatedResponseListModelAliasesResponseItem",
+    "PaginatedResponseListModelAliasesResponseItemTypedDict",
     "PaginatedResponseListSpanMetricsResponse",
     "PaginatedResponseListSpanMetricsResponseTypedDict",
     "PaginatedResponseListTracesResponse",
@@ -1089,6 +1186,12 @@ __all__ = [
     "SaveToDatasetResponseTypedDict",
     "SaveToDatasetSpansSpanIDSaveExamplesPostRequest",
     "SaveToDatasetSpansSpanIDSaveExamplesPostRequestTypedDict",
+    "ScorersEnum1",
+    "ScorersEnum2",
+    "ScorersUnion1",
+    "ScorersUnion1TypedDict",
+    "ScorersUnion2",
+    "ScorersUnion2TypedDict",
     "SearchContextSize",
     "Security",
     "SecurityTypedDict",
@@ -1143,6 +1246,12 @@ __all__ = [
     "UpdateFunctionResponseTypedDict",
     "UpdateMetricSpansSpanIDMetricsMetricIDPatchRequest",
     "UpdateMetricSpansSpanIDMetricsMetricIDPatchRequestTypedDict",
+    "UpdateModelAliasModelsAliasesAliasIDPatchRequest",
+    "UpdateModelAliasModelsAliasesAliasIDPatchRequestTypedDict",
+    "UpdateModelAliasRequest",
+    "UpdateModelAliasRequestTypedDict",
+    "UpdateModelAliasResponse",
+    "UpdateModelAliasResponseTypedDict",
     "UpdateSpanMetricRequest",
     "UpdateSpanMetricRequestTypedDict",
     "UpdateSpanMetricResponse",
@@ -1350,6 +1459,10 @@ _dynamic_imports: dict[str, str] = {
     "CreateKnowledgeBaseRequestTypedDict": ".createknowledgebaserequest",
     "CreateKnowledgeBaseResponse": ".createknowledgebaseresponse",
     "CreateKnowledgeBaseResponseTypedDict": ".createknowledgebaseresponse",
+    "CreateModelAliasRequest": ".createmodelaliasrequest",
+    "CreateModelAliasRequestTypedDict": ".createmodelaliasrequest",
+    "CreateModelAliasResponse": ".createmodelaliasresponse",
+    "CreateModelAliasResponseTypedDict": ".createmodelaliasresponse",
     "CreateSpanMetricRequest": ".createspanmetricrequest",
     "CreateSpanMetricRequestTypedDict": ".createspanmetricrequest",
     "CreateSpanMetricResponse": ".createspanmetricresponse",
@@ -1371,6 +1484,8 @@ _dynamic_imports: dict[str, str] = {
     "DeleteCustomModelModelsCustomModelIDDeleteRequestTypedDict": ".delete_custom_model_models_custom_model_id_deleteop",
     "DeleteDatasetEntryDatasetsDatasetIDEntriesEntryIDDeleteRequest": ".delete_dataset_entry_datasets_dataset_id_entries_entry_id_deleteop",
     "DeleteDatasetEntryDatasetsDatasetIDEntriesEntryIDDeleteRequestTypedDict": ".delete_dataset_entry_datasets_dataset_id_entries_entry_id_deleteop",
+    "DeleteDocumentsKnowledgeKnowledgeBaseIDQueryDeleteRequest": ".delete_documents_knowledge_knowledge_base_id_query_deleteop",
+    "DeleteDocumentsKnowledgeKnowledgeBaseIDQueryDeleteRequestTypedDict": ".delete_documents_knowledge_knowledge_base_id_query_deleteop",
     "DeleteFileFromKnowledgeBaseKnowledgeKnowledgeBaseIDFilesFileIDDeleteRequest": ".delete_file_from_knowledge_base_knowledge_knowledge_base_id_files_file_id_deleteop",
     "DeleteFileFromKnowledgeBaseKnowledgeKnowledgeBaseIDFilesFileIDDeleteRequestTypedDict": ".delete_file_from_knowledge_base_knowledge_knowledge_base_id_files_file_id_deleteop",
     "DeleteFunctionFunctionsFunctionIDDeleteRequest": ".delete_function_functions_function_id_deleteop",
@@ -1379,8 +1494,22 @@ _dynamic_imports: dict[str, str] = {
     "DeleteKnowledgeBaseKnowledgeKnowledgeBaseIDDeleteRequestTypedDict": ".delete_knowledge_base_knowledge_knowledge_base_id_deleteop",
     "DeleteMetricSpansSpanIDMetricsMetricIDDeleteRequest": ".delete_metric_spans_span_id_metrics_metric_id_deleteop",
     "DeleteMetricSpansSpanIDMetricsMetricIDDeleteRequestTypedDict": ".delete_metric_spans_span_id_metrics_metric_id_deleteop",
+    "DeleteModelAliasModelsAliasesAliasIDDeleteRequest": ".delete_model_alias_models_aliases_alias_id_deleteop",
+    "DeleteModelAliasModelsAliasesAliasIDDeleteRequestTypedDict": ".delete_model_alias_models_aliases_alias_id_deleteop",
     "DeleteSpanSpansSpanIDDeleteRequest": ".delete_span_spans_span_id_deleteop",
     "DeleteSpanSpansSpanIDDeleteRequestTypedDict": ".delete_span_spans_span_id_deleteop",
+    "DeleteKnowledgeBaseRequest": ".deleteknowledgebaserequest",
+    "DeleteKnowledgeBaseRequestTypedDict": ".deleteknowledgebaserequest",
+    "DeleteKnowledgeBaseResponse": ".deleteknowledgebaseresponse",
+    "DeleteKnowledgeBaseResponseTypedDict": ".deleteknowledgebaseresponse",
+    "EvaluationConfig": ".evaluationconfig",
+    "EvaluationConfigTypedDict": ".evaluationconfig",
+    "ScorersEnum1": ".evaluationconfig",
+    "ScorersEnum2": ".evaluationconfig",
+    "ScorersUnion1": ".evaluationconfig",
+    "ScorersUnion1TypedDict": ".evaluationconfig",
+    "ScorersUnion2": ".evaluationconfig",
+    "ScorersUnion2TypedDict": ".evaluationconfig",
     "Example": ".example",
     "ExampleTypedDict": ".example",
     "ExampleIn": ".examplein",
@@ -1429,6 +1558,10 @@ _dynamic_imports: dict[str, str] = {
     "GetKnowledgeBaseKnowledgeKnowledgeBaseIDGetRequestTypedDict": ".get_knowledge_base_knowledge_knowledge_base_id_getop",
     "GetMetricSpansSpanIDMetricsMetricIDGetRequest": ".get_metric_spans_span_id_metrics_metric_id_getop",
     "GetMetricSpansSpanIDMetricsMetricIDGetRequestTypedDict": ".get_metric_spans_span_id_metrics_metric_id_getop",
+    "GetModelAliasByNameModelsAliasesByNameNameGetRequest": ".get_model_alias_by_name_models_aliases_by_name_name_getop",
+    "GetModelAliasByNameModelsAliasesByNameNameGetRequestTypedDict": ".get_model_alias_by_name_models_aliases_by_name_name_getop",
+    "GetModelAliasModelsAliasesAliasIDGetRequest": ".get_model_alias_models_aliases_alias_id_getop",
+    "GetModelAliasModelsAliasesAliasIDGetRequestTypedDict": ".get_model_alias_models_aliases_alias_id_getop",
     "GetSpanSpansSpanIDGetRequest": ".get_span_spans_span_id_getop",
     "GetSpanSpansSpanIDGetRequestTypedDict": ".get_span_spans_span_id_getop",
     "GetTraceTracesTraceIDGetRequest": ".get_trace_traces_trace_id_getop",
@@ -1445,6 +1578,8 @@ _dynamic_imports: dict[str, str] = {
     "GetFunctionResponseTypedDict": ".getfunctionresponse",
     "GetKnowledgeBaseResponse": ".getknowledgebaseresponse",
     "GetKnowledgeBaseResponseTypedDict": ".getknowledgebaseresponse",
+    "GetModelAliasResponse": ".getmodelaliasresponse",
+    "GetModelAliasResponseTypedDict": ".getmodelaliasresponse",
     "GetSpanMetricResponse": ".getspanmetricresponse",
     "GetSpanMetricResponseTypedDict": ".getspanmetricresponse",
     "GetSpanResponse": ".getspanresponse",
@@ -1476,6 +1611,8 @@ _dynamic_imports: dict[str, str] = {
     "ListKnowledgeBasesKnowledgeGetRequestTypedDict": ".list_knowledge_bases_knowledge_getop",
     "ListMetricsSpansSpanIDMetricsGetRequest": ".list_metrics_spans_span_id_metrics_getop",
     "ListMetricsSpansSpanIDMetricsGetRequestTypedDict": ".list_metrics_spans_span_id_metrics_getop",
+    "ListModelAliasesModelsAliasesGetRequest": ".list_model_aliases_models_aliases_getop",
+    "ListModelAliasesModelsAliasesGetRequestTypedDict": ".list_model_aliases_models_aliases_getop",
     "ListModelsModelsGetRequest": ".list_models_models_getop",
     "ListModelsModelsGetRequestTypedDict": ".list_models_models_getop",
     "ListTracesTracesGetRequest": ".list_traces_traces_getop",
@@ -1490,6 +1627,8 @@ _dynamic_imports: dict[str, str] = {
     "ListKnowledgeBasesResponseTypedDict": ".listknowledgebasesresponse",
     "ListLanguageModelsResponse": ".listlanguagemodelsresponse",
     "ListLanguageModelsResponseTypedDict": ".listlanguagemodelsresponse",
+    "ListModelAliasesResponseItem": ".listmodelaliasesresponseitem",
+    "ListModelAliasesResponseItemTypedDict": ".listmodelaliasesresponseitem",
     "ListSpanMetricsResponse": ".listspanmetricsresponse",
     "ListSpanMetricsResponseTypedDict": ".listspanmetricsresponse",
     "ListTracesResponse": ".listtracesresponse",
@@ -1525,6 +1664,8 @@ _dynamic_imports: dict[str, str] = {
     "PaginatedResponseListKnowledgeBasesResponseTypedDict": ".paginatedresponse_listknowledgebasesresponse_",
     "PaginatedResponseListLanguageModelsResponse": ".paginatedresponse_listlanguagemodelsresponse_",
     "PaginatedResponseListLanguageModelsResponseTypedDict": ".paginatedresponse_listlanguagemodelsresponse_",
+    "PaginatedResponseListModelAliasesResponseItem": ".paginatedresponse_listmodelaliasesresponseitem_",
+    "PaginatedResponseListModelAliasesResponseItemTypedDict": ".paginatedresponse_listmodelaliasesresponseitem_",
     "PaginatedResponseListSpanMetricsResponse": ".paginatedresponse_listspanmetricsresponse_",
     "PaginatedResponseListSpanMetricsResponseTypedDict": ".paginatedresponse_listspanmetricsresponse_",
     "PaginatedResponseListTracesResponse": ".paginatedresponse_listtracesresponse_",
@@ -1601,6 +1742,8 @@ _dynamic_imports: dict[str, str] = {
     "UpdateFunctionFunctionsFunctionIDPatchRequestTypedDict": ".update_function_functions_function_id_patchop",
     "UpdateMetricSpansSpanIDMetricsMetricIDPatchRequest": ".update_metric_spans_span_id_metrics_metric_id_patchop",
     "UpdateMetricSpansSpanIDMetricsMetricIDPatchRequestTypedDict": ".update_metric_spans_span_id_metrics_metric_id_patchop",
+    "UpdateModelAliasModelsAliasesAliasIDPatchRequest": ".update_model_alias_models_aliases_alias_id_patchop",
+    "UpdateModelAliasModelsAliasesAliasIDPatchRequestTypedDict": ".update_model_alias_models_aliases_alias_id_patchop",
     "UpdateSpanSpansSpanIDPatchRequest": ".update_span_spans_span_id_patchop",
     "UpdateSpanSpansSpanIDPatchRequestTypedDict": ".update_span_spans_span_id_patchop",
     "UpdateCustomModelRequest": ".updatecustommodelrequest",
@@ -1615,6 +1758,10 @@ _dynamic_imports: dict[str, str] = {
     "UpdateFunctionRequestTypedDict": ".updatefunctionrequest",
     "UpdateFunctionResponse": ".updatefunctionresponse",
     "UpdateFunctionResponseTypedDict": ".updatefunctionresponse",
+    "UpdateModelAliasRequest": ".updatemodelaliasrequest",
+    "UpdateModelAliasRequestTypedDict": ".updatemodelaliasrequest",
+    "UpdateModelAliasResponse": ".updatemodelaliasresponse",
+    "UpdateModelAliasResponseTypedDict": ".updatemodelaliasresponse",
     "UpdateSpanMetricRequest": ".updatespanmetricrequest",
     "UpdateSpanMetricRequestTypedDict": ".updatespanmetricrequest",
     "UpdateSpanMetricResponse": ".updatespanmetricresponse",
@@ -1635,6 +1782,18 @@ _dynamic_imports: dict[str, str] = {
 }
 
 
+def dynamic_import(modname, retries=3):
+    for attempt in range(retries):
+        try:
+            return import_module(modname, __package__)
+        except KeyError:
+            # Clear any half-initialized module and retry
+            sys.modules.pop(modname, None)
+            if attempt == retries - 1:
+                break
+    raise KeyError(f"Failed to import module '{modname}' after {retries} attempts")
+
+
 def __getattr__(attr_name: str) -> object:
     module_name = _dynamic_imports.get(attr_name)
     if module_name is None:
@@ -1643,7 +1802,7 @@ def __getattr__(attr_name: str) -> object:
         )
 
     try:
-        module = import_module(module_name, __package__)
+        module = dynamic_import(module_name)
         result = getattr(module, attr_name)
         return result
     except ImportError as e:

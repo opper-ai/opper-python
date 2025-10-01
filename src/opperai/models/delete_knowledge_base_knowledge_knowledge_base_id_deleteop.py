@@ -8,11 +8,11 @@ from typing_extensions import Annotated, TypedDict
 
 class DeleteKnowledgeBaseKnowledgeKnowledgeBaseIDDeleteRequestTypedDict(TypedDict):
     knowledge_base_id: str
-    r"""The id of the knowledge base to delete"""
+    r"""The id of the knowledge base to delete or delete documents from"""
 
 
 class DeleteKnowledgeBaseKnowledgeKnowledgeBaseIDDeleteRequest(BaseModel):
     knowledge_base_id: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
-    r"""The id of the knowledge base to delete"""
+    r"""The id of the knowledge base to delete or delete documents from"""

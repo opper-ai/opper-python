@@ -11,6 +11,7 @@ class GetKnowledgeBaseResponseTypedDict(TypedDict):
     name: str
     created_at: datetime
     embedding_model: str
+    count: int
 
 
 class GetKnowledgeBaseResponse(BaseModel):
@@ -21,3 +22,5 @@ class GetKnowledgeBaseResponse(BaseModel):
     created_at: datetime
 
     embedding_model: str
+
+    count: int
