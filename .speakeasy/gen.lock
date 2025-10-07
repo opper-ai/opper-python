@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: c75567cf-9def-4617-8ae7-65af6f367b68
 management:
-  docChecksum: 48cd936770458449cc844b569a22f7e8
+  docChecksum: 2708188f6b0d7f57e65458a739069779
   docVersion: 2.0.0
-  speakeasyVersion: 1.631.5
-  generationVersion: 2.716.16
-  releaseVersion: 1.2.1
-  configChecksum: cc51cd8283da5c8db2c1071ed0b07050
+  speakeasyVersion: 1.635.1
+  generationVersion: 2.722.2
+  releaseVersion: 1.3.0
+  configChecksum: bcf5568c877247dd91d99325a08aa512
 features:
   python:
     additionalDependencies: 1.0.0
     additionalProperties: 1.0.1
     constsAndDefaults: 1.0.5
-    core: 5.22.0
+    core: 5.22.1
     customCodeRegions: 0.1.1
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
@@ -32,7 +32,7 @@ features:
     retries: 3.0.2
     sdkHooks: 1.1.0
     serverEvents: 1.0.10
-    unions: 3.0.5
+    unions: 3.1.0
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -861,7 +861,7 @@ examples:
         path:
           span_id: "77b258a2-45c1-4b87-a50c-9116bc8ed1d6"
       requestBody:
-        application/json: {"name": "my span", "start_time": "2025-10-01T12:35:05.695370Z", "type": "email_tool", "end_time": "2025-10-01T12:35:05.695523Z", "input": "Hello, world!", "output": "Hello, world!", "error": "Exception: This is an error message", "meta": {"key": "value"}, "score": 10}
+        application/json: {"name": "my span", "start_time": "2025-10-06T16:05:03.988919Z", "type": "email_tool", "end_time": "2025-10-06T16:05:03.989013Z", "input": "Hello, world!", "output": "Hello, world!", "error": "Exception: This is an error message", "meta": {"key": "value"}, "score": 10}
       responses:
         "200":
           application/json: {"name": "my span", "start_time": "2024-03-20T10:00:00+00:00", "id": "84d9ffc8-336c-4953-b92f-fe05d5405951", "trace_id": "123e4567-e89b-12d3-a456-426614174000", "parent_id": "123e4567-e89b-12d3-a456-426614174000", "type": "email_tool", "end_time": "2024-03-20T10:00:10+00:00", "input": "Hello, world!", "output": "Hello, world!", "error": "Exception: This is an error message", "meta": {"key": "value"}, "score": 10}

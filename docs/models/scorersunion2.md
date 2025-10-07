@@ -1,6 +1,6 @@
 # ScorersUnion2
 
-Evaluation scorers to run: 'base', 'rubrics', or a list of them.
+Evaluation scorers to run: 'base', 'rubrics', 'toxicity', 'hallucination', 'qa', 'agent_tool_selection', 'regex', 'max_length', or a list of them.
 
 
 ## Supported Types

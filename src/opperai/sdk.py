@@ -9,6 +9,11 @@ import httpx
 import importlib
 from opperai import errors, models, utils
 from opperai._hooks import HookContext, SDKHooks
+from opperai.models import (
+    example as models_example,
+    functioncallconfiguration as models_functioncallconfiguration,
+    tmodel as models_tmodel,
+)
 from opperai.types import OptionalNullable, UNSET
 from opperai.utils import eventstreaming, get_security_from_env
 from opperai.utils.unmarshal_json_response import unmarshal_json_response
@@ -223,16 +228,18 @@ class Opper(BaseSDK):
         input_schema: OptionalNullable[Dict[str, Any]] = UNSET,
         output_schema: OptionalNullable[Dict[str, Any]] = UNSET,
         input: OptionalNullable[Any] = UNSET,
-        model: Optional[Union[models.TModel, models.TModelTypedDict]] = None,
+        model: Optional[
+            Union[models_tmodel.TModel, models_tmodel.TModelTypedDict]
+        ] = None,
         examples: OptionalNullable[
-            Union[List[models.Example], List[models.ExampleTypedDict]]
+            Union[List[models_example.Example], List[models_example.ExampleTypedDict]]
         ] = UNSET,
         parent_span_id: OptionalNullable[str] = UNSET,
         tags: OptionalNullable[Dict[str, str]] = UNSET,
         configuration: OptionalNullable[
             Union[
-                models.FunctionCallConfiguration,
-                models.FunctionCallConfigurationTypedDict,
+                models_functioncallconfiguration.FunctionCallConfiguration,
+                models_functioncallconfiguration.FunctionCallConfigurationTypedDict,
             ]
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -380,16 +387,18 @@ class Opper(BaseSDK):
         input_schema: OptionalNullable[Dict[str, Any]] = UNSET,
         output_schema: OptionalNullable[Dict[str, Any]] = UNSET,
         input: OptionalNullable[Any] = UNSET,
-        model: Optional[Union[models.TModel, models.TModelTypedDict]] = None,
+        model: Optional[
+            Union[models_tmodel.TModel, models_tmodel.TModelTypedDict]
+        ] = None,
         examples: OptionalNullable[
-            Union[List[models.Example], List[models.ExampleTypedDict]]
+            Union[List[models_example.Example], List[models_example.ExampleTypedDict]]
         ] = UNSET,
         parent_span_id: OptionalNullable[str] = UNSET,
         tags: OptionalNullable[Dict[str, str]] = UNSET,
         configuration: OptionalNullable[
             Union[
-                models.FunctionCallConfiguration,
-                models.FunctionCallConfigurationTypedDict,
+                models_functioncallconfiguration.FunctionCallConfiguration,
+                models_functioncallconfiguration.FunctionCallConfigurationTypedDict,
             ]
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -537,16 +546,18 @@ class Opper(BaseSDK):
         input_schema: OptionalNullable[Dict[str, Any]] = UNSET,
         output_schema: OptionalNullable[Dict[str, Any]] = UNSET,
         input: OptionalNullable[Any] = UNSET,
-        model: Optional[Union[models.TModel, models.TModelTypedDict]] = None,
+        model: Optional[
+            Union[models_tmodel.TModel, models_tmodel.TModelTypedDict]
+        ] = None,
         examples: OptionalNullable[
-            Union[List[models.Example], List[models.ExampleTypedDict]]
+            Union[List[models_example.Example], List[models_example.ExampleTypedDict]]
         ] = UNSET,
         parent_span_id: OptionalNullable[str] = UNSET,
         tags: OptionalNullable[Dict[str, str]] = UNSET,
         configuration: OptionalNullable[
             Union[
-                models.FunctionCallConfiguration,
-                models.FunctionCallConfigurationTypedDict,
+                models_functioncallconfiguration.FunctionCallConfiguration,
+                models_functioncallconfiguration.FunctionCallConfigurationTypedDict,
             ]
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -775,16 +786,18 @@ class Opper(BaseSDK):
         input_schema: OptionalNullable[Dict[str, Any]] = UNSET,
         output_schema: OptionalNullable[Dict[str, Any]] = UNSET,
         input: OptionalNullable[Any] = UNSET,
-        model: Optional[Union[models.TModel, models.TModelTypedDict]] = None,
+        model: Optional[
+            Union[models_tmodel.TModel, models_tmodel.TModelTypedDict]
+        ] = None,
         examples: OptionalNullable[
-            Union[List[models.Example], List[models.ExampleTypedDict]]
+            Union[List[models_example.Example], List[models_example.ExampleTypedDict]]
         ] = UNSET,
         parent_span_id: OptionalNullable[str] = UNSET,
         tags: OptionalNullable[Dict[str, str]] = UNSET,
         configuration: OptionalNullable[
             Union[
-                models.FunctionCallConfiguration,
-                models.FunctionCallConfigurationTypedDict,
+                models_functioncallconfiguration.FunctionCallConfiguration,
+                models_functioncallconfiguration.FunctionCallConfigurationTypedDict,
             ]
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,

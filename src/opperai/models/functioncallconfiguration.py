@@ -16,7 +16,7 @@ class FunctionCallConfigurationTypedDict(TypedDict):
 
     - enabled: master switch
     - scorers: which evaluators to run. Accepts:
-    - string: \"base\" | \"rubrics\" 
+    - string: \"base\" | \"rubrics\" | \"toxicity\" | \"hallucination\" | \"qa\" 
     - dict: { \"rubrics\": RubricDefinition-like payload }
     - list[str | dict]
     \"base\" is the default scorer.
@@ -44,7 +44,7 @@ class FunctionCallConfiguration(BaseModel):
 
     - enabled: master switch
     - scorers: which evaluators to run. Accepts:
-    - string: \"base\" | \"rubrics\" 
+    - string: \"base\" | \"rubrics\" | \"toxicity\" | \"hallucination\" | \"qa\" 
     - dict: { \"rubrics\": RubricDefinition-like payload }
     - list[str | dict]
     \"base\" is the default scorer.
