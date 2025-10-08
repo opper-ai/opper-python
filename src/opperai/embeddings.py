@@ -3,6 +3,10 @@
 from .basesdk import BaseSDK
 from opperai import errors, models, utils
 from opperai._hooks import HookContext
+from opperai.models import (
+    createembeddingrequest as models_createembeddingrequest,
+    tmodel as models_tmodel,
+)
 from opperai.types import OptionalNullable, UNSET
 from opperai.utils import get_security_from_env
 from opperai.utils.unmarshal_json_response import unmarshal_json_response
@@ -13,8 +17,13 @@ class Embeddings(BaseSDK):
     def create(
         self,
         *,
-        input: Union[models.Input, models.InputTypedDict],
-        model: OptionalNullable[Union[models.TModel, models.TModelTypedDict]] = UNSET,
+        input_: Union[
+            models_createembeddingrequest.Input,
+            models_createembeddingrequest.InputTypedDict,
+        ],
+        model: OptionalNullable[
+            Union[models_tmodel.TModel, models_tmodel.TModelTypedDict]
+        ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -122,8 +131,13 @@ class Embeddings(BaseSDK):
     async def create_async(
         self,
         *,
-        input: Union[models.Input, models.InputTypedDict],
-        model: OptionalNullable[Union[models.TModel, models.TModelTypedDict]] = UNSET,
+        input_: Union[
+            models_createembeddingrequest.Input,
+            models_createembeddingrequest.InputTypedDict,
+        ],
+        model: OptionalNullable[
+            Union[models_tmodel.TModel, models_tmodel.TModelTypedDict]
+        ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,

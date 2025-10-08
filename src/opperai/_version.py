@@ -3,10 +3,10 @@
 import importlib.metadata
 
 __title__: str = "opperai"
-__version__: str = "1.2.1"
+__version__: str = "1.3.0"
 __openapi_doc_version__: str = "2.0.0"
-__gen_version__: str = "2.716.16"
-__user_agent__: str = "speakeasy-sdk/python 1.2.1 2.716.16 2.0.0 opperai"
+__gen_version__: str = "2.722.2"
+__user_agent__: str = "speakeasy-sdk/python 1.3.0 2.722.2 2.0.0 opperai"
 
 try:
     if __package__ is not None:

@@ -12,6 +12,12 @@ from typing_extensions import NotRequired, TypeAliasType, TypedDict
 class ScorersEnum2(str, Enum):
     BASE = "base"
     RUBRICS = "rubrics"
+    TOXICITY = "toxicity"
+    HALLUCINATION = "hallucination"
+    QA = "qa"
+    AGENT_TOOL_SELECTION = "agent_tool_selection"
+    REGEX = "regex"
+    MAX_LENGTH = "max_length"
 
 
 ScorersUnion1TypedDict = TypeAliasType(
@@ -25,19 +31,25 @@ ScorersUnion1 = TypeAliasType("ScorersUnion1", Union[ScorersEnum2, Dict[str, Any
 class ScorersEnum1(str, Enum):
     BASE = "base"
     RUBRICS = "rubrics"
+    TOXICITY = "toxicity"
+    HALLUCINATION = "hallucination"
+    QA = "qa"
+    AGENT_TOOL_SELECTION = "agent_tool_selection"
+    REGEX = "regex"
+    MAX_LENGTH = "max_length"
 
 
 ScorersUnion2TypedDict = TypeAliasType(
     "ScorersUnion2TypedDict",
     Union[ScorersEnum1, Dict[str, Any], List[ScorersUnion1TypedDict]],
 )
-r"""Evaluation scorers to run: 'base', 'rubrics', or a list of them."""
+r"""Evaluation scorers to run: 'base', 'rubrics', 'toxicity', 'hallucination', 'qa', 'agent_tool_selection', 'regex', 'max_length', or a list of them."""
 
 
 ScorersUnion2 = TypeAliasType(
     "ScorersUnion2", Union[ScorersEnum1, Dict[str, Any], List[ScorersUnion1]]
 )
-r"""Evaluation scorers to run: 'base', 'rubrics', or a list of them."""
+r"""Evaluation scorers to run: 'base', 'rubrics', 'toxicity', 'hallucination', 'qa', 'agent_tool_selection', 'regex', 'max_length', or a list of them."""
 
 
 class EvaluationConfigTypedDict(TypedDict):
@@ -45,7 +57,7 @@ class EvaluationConfigTypedDict(TypedDict):
 
     - enabled: master switch
     - scorers: which evaluators to run. Accepts:
-    - string: \"base\" | \"rubrics\"
+    - string: \"base\" | \"rubrics\" | \"toxicity\" | \"hallucination\" | \"qa\"
     - dict: { \"rubrics\": RubricDefinition-like payload }
     - list[str | dict]
     \"base\" is the default scorer.
@@ -54,7 +66,7 @@ class EvaluationConfigTypedDict(TypedDict):
     enabled: NotRequired[bool]
     r"""Enable evaluation features (base or rubrics)."""
     scorers: NotRequired[ScorersUnion2TypedDict]
-    r"""Evaluation scorers to run: 'base', 'rubrics', or a list of them."""
+    r"""Evaluation scorers to run: 'base', 'rubrics', 'toxicity', 'hallucination', 'qa', 'agent_tool_selection', 'regex', 'max_length', or a list of them."""
 
 
 class EvaluationConfig(BaseModel):
@@ -62,7 +74,7 @@ class EvaluationConfig(BaseModel):
 
     - enabled: master switch
     - scorers: which evaluators to run. Accepts:
-    - string: \"base\" | \"rubrics\"
+    - string: \"base\" | \"rubrics\" | \"toxicity\" | \"hallucination\" | \"qa\"
     - dict: { \"rubrics\": RubricDefinition-like payload }
     - list[str | dict]
     \"base\" is the default scorer.
@@ -77,7 +89,7 @@ class EvaluationConfig(BaseModel):
     r"""Enable evaluation features (base or rubrics)."""
 
     scorers: Optional[ScorersUnion2] = None
-    r"""Evaluation scorers to run: 'base', 'rubrics', or a list of them."""
+    r"""Evaluation scorers to run: 'base', 'rubrics', 'toxicity', 'hallucination', 'qa', 'agent_tool_selection', 'regex', 'max_length', or a list of them."""
 
     @property
     def additional_properties(self):
