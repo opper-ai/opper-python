@@ -6,28 +6,43 @@ from opperai._hooks import HookContext
 from opperai.types import OptionalNullable, UNSET
 from opperai.utils import get_security_from_env
 from opperai.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Mapping, Optional
+from typing import Any, List, Mapping, Optional, Union
 
 
-class Traces(BaseSDK):
-    def list(
+class Rerank(BaseSDK):
+    def documents(
         self,
         *,
-        name: OptionalNullable[str] = UNSET,
-        offset: Optional[int] = 0,
-        limit: Optional[int] = 100,
+        query: str,
+        documents: Union[
+            List[models.RerankDocument], List[models.RerankDocumentTypedDict]
+        ],
+        model: str,
+        top_k: OptionalNullable[int] = UNSET,
+        return_documents: Optional[bool] = True,
+        max_chunks_per_doc: OptionalNullable[int] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.PaginatedResponseListTracesResponse:
-        r"""List Traces
+    ) -> models.RerankResponseModel:
+        r"""Rerank Documents
 
-        List traces
+        Rerank documents based on relevance to a query.
 
-        :param name: The name of the trace to filter by, the name of a trace is the name of the root span of the trace
-        :param offset: The offset to start the list from
-        :param limit: The number of traces to return
+        This endpoint allows you to rerank a list of documents based on their relevance
+        to a given query using state-of-the-art reranking models.
+
+        The documents will be returned in order of relevance, with the most relevant
+        documents first. Each result includes the original document index and a
+        relevance score.
+
+        :param query: The search query to rank documents against
+        :param documents: List of documents to rerank
+        :param model: The reranking model to use
+        :param top_k: Number of top documents to return. Defaults to all documents.
+        :param return_documents: Whether to return document content in the response
+        :param max_chunks_per_doc: Maximum number of chunks per document
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -43,25 +58,31 @@ class Traces(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListTracesTracesGetRequest(
-            name=name,
-            offset=offset,
-            limit=limit,
+        request = models.RerankRequestModel(
+            query=query,
+            documents=utils.get_pydantic_model(documents, List[models.RerankDocument]),
+            model=model,
+            top_k=top_k,
+            return_documents=return_documents,
+            max_chunks_per_doc=max_chunks_per_doc,
         )
 
         req = self._build_request(
-            method="GET",
-            path="/traces",
+            method="POST",
+            path="/rerank",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.RerankRequestModel
+            ),
             timeout_ms=timeout_ms,
         )
 
@@ -77,7 +98,7 @@ class Traces(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="list_traces_traces_get",
+                operation_id="rerank_documents_rerank_post",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -90,9 +111,7 @@ class Traces(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.PaginatedResponseListTracesResponse, http_res
-            )
+            return unmarshal_json_response(models.RerankResponseModel, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.BadRequestErrorData, http_res
@@ -120,24 +139,39 @@ class Traces(BaseSDK):
 
         raise errors.APIError("Unexpected response received", http_res)
 
-    async def list_async(
+    async def documents_async(
         self,
         *,
-        name: OptionalNullable[str] = UNSET,
-        offset: Optional[int] = 0,
-        limit: Optional[int] = 100,
+        query: str,
+        documents: Union[
+            List[models.RerankDocument], List[models.RerankDocumentTypedDict]
+        ],
+        model: str,
+        top_k: OptionalNullable[int] = UNSET,
+        return_documents: Optional[bool] = True,
+        max_chunks_per_doc: OptionalNullable[int] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.PaginatedResponseListTracesResponse:
-        r"""List Traces
+    ) -> models.RerankResponseModel:
+        r"""Rerank Documents
 
-        List traces
+        Rerank documents based on relevance to a query.
 
-        :param name: The name of the trace to filter by, the name of a trace is the name of the root span of the trace
-        :param offset: The offset to start the list from
-        :param limit: The number of traces to return
+        This endpoint allows you to rerank a list of documents based on their relevance
+        to a given query using state-of-the-art reranking models.
+
+        The documents will be returned in order of relevance, with the most relevant
+        documents first. Each result includes the original document index and a
+        relevance score.
+
+        :param query: The search query to rank documents against
+        :param documents: List of documents to rerank
+        :param model: The reranking model to use
+        :param top_k: Number of top documents to return. Defaults to all documents.
+        :param return_documents: Whether to return document content in the response
+        :param max_chunks_per_doc: Maximum number of chunks per document
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -153,25 +187,31 @@ class Traces(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListTracesTracesGetRequest(
-            name=name,
-            offset=offset,
-            limit=limit,
+        request = models.RerankRequestModel(
+            query=query,
+            documents=utils.get_pydantic_model(documents, List[models.RerankDocument]),
+            model=model,
+            top_k=top_k,
+            return_documents=return_documents,
+            max_chunks_per_doc=max_chunks_per_doc,
         )
 
         req = self._build_request_async(
-            method="GET",
-            path="/traces",
+            method="POST",
+            path="/rerank",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.RerankRequestModel
+            ),
             timeout_ms=timeout_ms,
         )
 
@@ -187,7 +227,7 @@ class Traces(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="list_traces_traces_get",
+                operation_id="rerank_documents_rerank_post",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -200,9 +240,7 @@ class Traces(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.PaginatedResponseListTracesResponse, http_res
-            )
+            return unmarshal_json_response(models.RerankResponseModel, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.BadRequestErrorData, http_res
@@ -230,20 +268,21 @@ class Traces(BaseSDK):
 
         raise errors.APIError("Unexpected response received", http_res)
 
-    def get(
+    def list_models(
         self,
         *,
-        trace_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetTraceResponse:
-        r"""Get Trace
+    ) -> models.PaginatedResponseListRerankModelsResponse:
+        r"""List Rerank Models
 
-        Get a trace by its id
+        List all available reranking models.
 
-        :param trace_id: The id of the trace to get
+        Returns a list of all reranking models available on the Opper platform,
+        including their hosting providers, locations, and pricing information.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -258,19 +297,14 @@ class Traces(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-
-        request = models.GetTraceTracesTraceIDGetRequest(
-            trace_id=trace_id,
-        )
-
         req = self._build_request(
             method="GET",
-            path="/traces/{trace_id}",
+            path="/rerank/models",
             base_url=base_url,
             url_variables=url_variables,
-            request=request,
+            request=None,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
@@ -291,7 +325,7 @@ class Traces(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="get_trace_traces__trace_id__get",
+                operation_id="list_rerank_models_rerank_models_get",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -304,7 +338,9 @@ class Traces(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.GetTraceResponse, http_res)
+            return unmarshal_json_response(
+                models.PaginatedResponseListRerankModelsResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.BadRequestErrorData, http_res
@@ -332,20 +368,21 @@ class Traces(BaseSDK):
 
         raise errors.APIError("Unexpected response received", http_res)
 
-    async def get_async(
+    async def list_models_async(
         self,
         *,
-        trace_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetTraceResponse:
-        r"""Get Trace
+    ) -> models.PaginatedResponseListRerankModelsResponse:
+        r"""List Rerank Models
 
-        Get a trace by its id
+        List all available reranking models.
 
-        :param trace_id: The id of the trace to get
+        Returns a list of all reranking models available on the Opper platform,
+        including their hosting providers, locations, and pricing information.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -360,19 +397,14 @@ class Traces(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-
-        request = models.GetTraceTracesTraceIDGetRequest(
-            trace_id=trace_id,
-        )
-
         req = self._build_request_async(
             method="GET",
-            path="/traces/{trace_id}",
+            path="/rerank/models",
             base_url=base_url,
             url_variables=url_variables,
-            request=request,
+            request=None,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
@@ -393,7 +425,7 @@ class Traces(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="get_trace_traces__trace_id__get",
+                operation_id="list_rerank_models_rerank_models_get",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -406,7 +438,9 @@ class Traces(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.GetTraceResponse, http_res)
+            return unmarshal_json_response(
+                models.PaginatedResponseListRerankModelsResponse, http_res
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.BadRequestErrorData, http_res

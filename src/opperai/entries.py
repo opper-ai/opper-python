@@ -94,7 +94,7 @@ class Entries(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update_dataset_entry_datasets__dataset_id__entries__entry_id__patch",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -218,7 +218,7 @@ class Entries(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update_dataset_entry_datasets__dataset_id__entries__entry_id__patch",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

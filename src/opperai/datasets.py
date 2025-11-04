@@ -105,7 +105,7 @@ class Datasets(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_dataset_entry_datasets__dataset_id__post",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -226,7 +226,7 @@ class Datasets(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_dataset_entry_datasets__dataset_id__post",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -332,7 +332,7 @@ class Datasets(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_dataset_entries_datasets__dataset_id__entries_get",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -440,7 +440,7 @@ class Datasets(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_dataset_entries_datasets__dataset_id__entries_get",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -545,7 +545,7 @@ class Datasets(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_dataset_entry_datasets__dataset_id__entries__entry_id__get",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -648,7 +648,7 @@ class Datasets(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_dataset_entry_datasets__dataset_id__entries__entry_id__get",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -751,7 +751,7 @@ class Datasets(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_dataset_entry_datasets__dataset_id__entries__entry_id__delete",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -854,7 +854,7 @@ class Datasets(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_dataset_entry_datasets__dataset_id__entries__entry_id__delete",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -960,7 +960,7 @@ class Datasets(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="query_dataset_entries_datasets__dataset_id__entries_query_post",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1068,7 +1068,7 @@ class Datasets(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="query_dataset_entries_datasets__dataset_id__entries_query_post",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

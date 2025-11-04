@@ -17,7 +17,7 @@ class BadRequestErrorData(BaseModel):
     message: Optional[str] = "The request is invalid"
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class BadRequestError(OpperError):
     data: BadRequestErrorData = field(hash=False)
 

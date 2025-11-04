@@ -78,7 +78,7 @@ class Knowledge(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_knowledge_base_knowledge_post",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -186,7 +186,7 @@ class Knowledge(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_knowledge_base_knowledge_post",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -291,7 +291,7 @@ class Knowledge(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_knowledge_bases_knowledge_get",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -398,7 +398,7 @@ class Knowledge(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_knowledge_bases_knowledge_get",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -502,7 +502,7 @@ class Knowledge(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_knowledge_base_knowledge__knowledge_base_id__get",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -604,7 +604,7 @@ class Knowledge(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_knowledge_base_knowledge__knowledge_base_id__get",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -706,7 +706,7 @@ class Knowledge(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_knowledge_base_knowledge__knowledge_base_id__delete",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -808,7 +808,7 @@ class Knowledge(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_knowledge_base_knowledge__knowledge_base_id__delete",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -912,7 +912,7 @@ class Knowledge(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_knowledge_base_by_name_knowledge_by_name__knowledge_base_name__get",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1016,7 +1016,7 @@ class Knowledge(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_knowledge_base_by_name_knowledge_by_name__knowledge_base_name__get",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1126,7 +1126,7 @@ class Knowledge(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_upload_url_knowledge__knowledge_base_id__upload_url_get",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1236,7 +1236,7 @@ class Knowledge(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_upload_url_knowledge__knowledge_base_id__upload_url_get",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1374,7 +1374,7 @@ class Knowledge(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="register_file_upload_knowledge__knowledge_base_id__register_file_post",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1512,7 +1512,7 @@ class Knowledge(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="register_file_upload_knowledge__knowledge_base_id__register_file_post",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1617,7 +1617,7 @@ class Knowledge(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_file_from_knowledge_base_knowledge__knowledge_base_id__files__file_id__delete",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1722,7 +1722,7 @@ class Knowledge(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_file_from_knowledge_base_knowledge__knowledge_base_id__files__file_id__delete",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1855,7 +1855,7 @@ class Knowledge(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="query_knowledge_base_knowledge__knowledge_base_id__query_post",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1990,7 +1990,7 @@ class Knowledge(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="query_knowledge_base_knowledge__knowledge_base_id__query_post",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -2032,7 +2032,7 @@ class Knowledge(BaseSDK):
 
         raise errors.APIError("Unexpected response received", http_res)
 
-    def delete_documents_knowledge_knowledge_base_id_query_delete(
+    def delete_documents(
         self,
         *,
         knowledge_base_id: str,
@@ -2110,7 +2110,7 @@ class Knowledge(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_documents_knowledge__knowledge_base_id__query_delete",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -2150,7 +2150,7 @@ class Knowledge(BaseSDK):
 
         raise errors.APIError("Unexpected response received", http_res)
 
-    async def delete_documents_knowledge_knowledge_base_id_query_delete_async(
+    async def delete_documents_async(
         self,
         *,
         knowledge_base_id: str,
@@ -2228,7 +2228,7 @@ class Knowledge(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_documents_knowledge__knowledge_base_id__query_delete",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -2354,7 +2354,7 @@ class Knowledge(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="add_knowledge__knowledge_base_id__add_post",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -2480,7 +2480,7 @@ class Knowledge(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="add_knowledge__knowledge_base_id__add_post",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
