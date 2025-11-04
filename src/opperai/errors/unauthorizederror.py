@@ -17,7 +17,7 @@ class UnauthorizedErrorData(BaseModel):
     message: Optional[str] = "The request is unauthorized"
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class UnauthorizedError(OpperError):
     data: UnauthorizedErrorData = field(hash=False)
 

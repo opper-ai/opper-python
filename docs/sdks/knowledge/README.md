@@ -14,7 +14,7 @@
 * [register_file_upload](#register_file_upload) - Register File Upload
 * [delete_file](#delete_file) - Delete File From Knowledge Base
 * [query](#query) - Query Knowledge Base
-* [delete_documents_knowledge_knowledge_base_id_query_delete](#delete_documents_knowledge_knowledge_base_id_query_delete) - Delete Documents
+* [delete_documents](#delete_documents) - Delete Documents
 * [add](#add) - Add
 
 ## create
@@ -441,7 +441,7 @@ with Opper(
 | errors.RequestValidationError | 422                           | application/json              |
 | errors.APIError               | 4XX, 5XX                      | \*/\*                         |
 
-## delete_documents_knowledge_knowledge_base_id_query_delete
+## delete_documents
 
 Delete documents from a knowledge base based on filters
 
@@ -457,7 +457,7 @@ with Opper(
     http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
 ) as opper:
 
-    res = opper.knowledge.delete_documents_knowledge_knowledge_base_id_query_delete(knowledge_base_id="7418a0c9-d40d-4761-8b00-e8948f7d8426", filters=[
+    res = opper.knowledge.delete_documents(knowledge_base_id="7418a0c9-d40d-4761-8b00-e8948f7d8426", filters=[
         {
             "field": "category",
             "operation": models.Op.EQUAL_,

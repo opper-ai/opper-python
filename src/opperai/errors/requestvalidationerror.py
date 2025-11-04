@@ -17,7 +17,7 @@ class RequestValidationErrorData(BaseModel):
     message: Optional[str] = "The request is invalid"
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class RequestValidationError(OpperError):
     data: RequestValidationErrorData = field(hash=False)
 

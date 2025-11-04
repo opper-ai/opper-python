@@ -16,7 +16,7 @@ class ErrorData(BaseModel):
     detail: Any
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class Error(OpperError):
     data: ErrorData = field(hash=False)
 

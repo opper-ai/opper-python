@@ -9,11 +9,6 @@ import httpx
 import importlib
 from opperai import errors, models, utils
 from opperai._hooks import HookContext, SDKHooks
-from opperai.models import (
-    example as models_example,
-    functioncallconfiguration as models_functioncallconfiguration,
-    tmodel as models_tmodel,
-)
 from opperai.types import OptionalNullable, UNSET
 from opperai.utils import eventstreaming, get_security_from_env
 from opperai.utils.unmarshal_json_response import unmarshal_json_response
@@ -38,8 +33,8 @@ if TYPE_CHECKING:
     from opperai.functions import Functions
     from opperai.knowledge import Knowledge
     from opperai.language_models import LanguageModels
-    from opperai.models_ import Models
     from opperai.openai import Openai
+    from opperai.rerank import Rerank
     from opperai.spanmetrics import SpanMetrics
     from opperai.spans import Spans
     from opperai.traces import Traces
@@ -54,8 +49,8 @@ class Opper(BaseSDK):
     functions: "Functions"
     embeddings: "Embeddings"
     language_models: "LanguageModels"
-    models: "Models"
     openai: "Openai"
+    rerank: "Rerank"
     analytics: "Analytics"
     _sub_sdk_map = {
         "knowledge": ("opperai.knowledge", "Knowledge"),
@@ -66,8 +61,8 @@ class Opper(BaseSDK):
         "functions": ("opperai.functions", "Functions"),
         "embeddings": ("opperai.embeddings", "Embeddings"),
         "language_models": ("opperai.language_models", "LanguageModels"),
-        "models": ("opperai.models_", "Models"),
         "openai": ("opperai.openai", "Openai"),
+        "rerank": ("opperai.rerank", "Rerank"),
         "analytics": ("opperai.analytics", "Analytics"),
     }
 
@@ -228,18 +223,16 @@ class Opper(BaseSDK):
         input_schema: OptionalNullable[Dict[str, Any]] = UNSET,
         output_schema: OptionalNullable[Dict[str, Any]] = UNSET,
         input: OptionalNullable[Any] = UNSET,
-        model: Optional[
-            Union[models_tmodel.TModel, models_tmodel.TModelTypedDict]
-        ] = None,
+        model: Optional[Union[models.TModel, models.TModelTypedDict]] = None,
         examples: OptionalNullable[
-            Union[List[models_example.Example], List[models_example.ExampleTypedDict]]
+            Union[List[models.Example], List[models.ExampleTypedDict]]
         ] = UNSET,
         parent_span_id: OptionalNullable[str] = UNSET,
         tags: OptionalNullable[Dict[str, str]] = UNSET,
         configuration: OptionalNullable[
             Union[
-                models_functioncallconfiguration.FunctionCallConfiguration,
-                models_functioncallconfiguration.FunctionCallConfigurationTypedDict,
+                models.FunctionCallConfiguration,
+                models.FunctionCallConfigurationTypedDict,
             ]
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -337,7 +330,7 @@ class Opper(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="function_call_call_post",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -387,18 +380,16 @@ class Opper(BaseSDK):
         input_schema: OptionalNullable[Dict[str, Any]] = UNSET,
         output_schema: OptionalNullable[Dict[str, Any]] = UNSET,
         input: OptionalNullable[Any] = UNSET,
-        model: Optional[
-            Union[models_tmodel.TModel, models_tmodel.TModelTypedDict]
-        ] = None,
+        model: Optional[Union[models.TModel, models.TModelTypedDict]] = None,
         examples: OptionalNullable[
-            Union[List[models_example.Example], List[models_example.ExampleTypedDict]]
+            Union[List[models.Example], List[models.ExampleTypedDict]]
         ] = UNSET,
         parent_span_id: OptionalNullable[str] = UNSET,
         tags: OptionalNullable[Dict[str, str]] = UNSET,
         configuration: OptionalNullable[
             Union[
-                models_functioncallconfiguration.FunctionCallConfiguration,
-                models_functioncallconfiguration.FunctionCallConfigurationTypedDict,
+                models.FunctionCallConfiguration,
+                models.FunctionCallConfigurationTypedDict,
             ]
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -496,7 +487,7 @@ class Opper(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="function_call_call_post",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -546,18 +537,16 @@ class Opper(BaseSDK):
         input_schema: OptionalNullable[Dict[str, Any]] = UNSET,
         output_schema: OptionalNullable[Dict[str, Any]] = UNSET,
         input: OptionalNullable[Any] = UNSET,
-        model: Optional[
-            Union[models_tmodel.TModel, models_tmodel.TModelTypedDict]
-        ] = None,
+        model: Optional[Union[models.TModel, models.TModelTypedDict]] = None,
         examples: OptionalNullable[
-            Union[List[models_example.Example], List[models_example.ExampleTypedDict]]
+            Union[List[models.Example], List[models.ExampleTypedDict]]
         ] = UNSET,
         parent_span_id: OptionalNullable[str] = UNSET,
         tags: OptionalNullable[Dict[str, str]] = UNSET,
         configuration: OptionalNullable[
             Union[
-                models_functioncallconfiguration.FunctionCallConfiguration,
-                models_functioncallconfiguration.FunctionCallConfigurationTypedDict,
+                models.FunctionCallConfiguration,
+                models.FunctionCallConfigurationTypedDict,
             ]
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -721,7 +710,7 @@ class Opper(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="function_stream_call_stream_post",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -786,18 +775,16 @@ class Opper(BaseSDK):
         input_schema: OptionalNullable[Dict[str, Any]] = UNSET,
         output_schema: OptionalNullable[Dict[str, Any]] = UNSET,
         input: OptionalNullable[Any] = UNSET,
-        model: Optional[
-            Union[models_tmodel.TModel, models_tmodel.TModelTypedDict]
-        ] = None,
+        model: Optional[Union[models.TModel, models.TModelTypedDict]] = None,
         examples: OptionalNullable[
-            Union[List[models_example.Example], List[models_example.ExampleTypedDict]]
+            Union[List[models.Example], List[models.ExampleTypedDict]]
         ] = UNSET,
         parent_span_id: OptionalNullable[str] = UNSET,
         tags: OptionalNullable[Dict[str, str]] = UNSET,
         configuration: OptionalNullable[
             Union[
-                models_functioncallconfiguration.FunctionCallConfiguration,
-                models_functioncallconfiguration.FunctionCallConfigurationTypedDict,
+                models.FunctionCallConfiguration,
+                models.FunctionCallConfigurationTypedDict,
             ]
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -961,7 +948,7 @@ class Opper(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="function_stream_call_stream_post",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

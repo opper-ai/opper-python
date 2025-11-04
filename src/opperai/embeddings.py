@@ -3,10 +3,6 @@
 from .basesdk import BaseSDK
 from opperai import errors, models, utils
 from opperai._hooks import HookContext
-from opperai.models import (
-    createembeddingrequest as models_createembeddingrequest,
-    tmodel as models_tmodel,
-)
 from opperai.types import OptionalNullable, UNSET
 from opperai.utils import get_security_from_env
 from opperai.utils.unmarshal_json_response import unmarshal_json_response
@@ -17,13 +13,8 @@ class Embeddings(BaseSDK):
     def create(
         self,
         *,
-        input_: Union[
-            models_createembeddingrequest.Input,
-            models_createembeddingrequest.InputTypedDict,
-        ],
-        model: OptionalNullable[
-            Union[models_tmodel.TModel, models_tmodel.TModelTypedDict]
-        ] = UNSET,
+        input: Union[models.Input, models.InputTypedDict],
+        model: OptionalNullable[Union[models.TModel, models.TModelTypedDict]] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -87,7 +78,7 @@ class Embeddings(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_embedding_embeddings_post",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -131,13 +122,8 @@ class Embeddings(BaseSDK):
     async def create_async(
         self,
         *,
-        input_: Union[
-            models_createembeddingrequest.Input,
-            models_createembeddingrequest.InputTypedDict,
-        ],
-        model: OptionalNullable[
-            Union[models_tmodel.TModel, models_tmodel.TModelTypedDict]
-        ] = UNSET,
+        input: Union[models.Input, models.InputTypedDict],
+        model: OptionalNullable[Union[models.TModel, models.TModelTypedDict]] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -201,7 +187,7 @@ class Embeddings(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_embedding_embeddings_post",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

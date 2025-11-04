@@ -17,7 +17,7 @@ class NotFoundErrorData(BaseModel):
     message: Optional[str] = "The resource was not found"
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class NotFoundError(OpperError):
     data: NotFoundErrorData = field(hash=False)
 

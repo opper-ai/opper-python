@@ -17,7 +17,7 @@ class ConflictErrorData(BaseModel):
     message: Optional[str] = "The resource already exists"
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class ConflictError(OpperError):
     data: ConflictErrorData = field(hash=False)
 
