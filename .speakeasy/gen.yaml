@@ -23,12 +23,13 @@ generation:
   sdkHooksConfigAccess: true
   schemas:
     allOfMergeStrategy: shallowMerge
+  requestBodyFieldName: ""
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 python:
-  version: 1.6.4
+  version: 1.6.5
   additionalDependencies:
     dev: {}
     main: {}
@@ -60,6 +61,7 @@ python:
       webhooks: ""
   inputModelSuffix: input
   legacyPyright: true
+  license: ""
   maxMethodParams: 999
   methodArguments: infer-optional-args
   moduleName: ""

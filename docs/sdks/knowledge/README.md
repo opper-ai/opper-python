@@ -13,6 +13,7 @@
 * [get_upload_url](#get_upload_url) - Get Upload Url
 * [register_file_upload](#register_file_upload) - Register File Upload
 * [delete_file](#delete_file) - Delete File From Knowledge Base
+* [list_files_knowledge_knowledge_base_id_files_get](#list_files_knowledge_knowledge_base_id_files_get) - List Files
 * [query](#query) - Query Knowledge Base
 * [delete_documents](#delete_documents) - Delete Documents
 * [add](#add) - Add
@@ -366,6 +367,52 @@ with Opper(
 | `knowledge_base_id`                                                 | *str*                                                               | :heavy_check_mark:                                                  | The id of the knowledge base                                        |
 | `file_id`                                                           | *str*                                                               | :heavy_check_mark:                                                  | The id of the file to delete                                        |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.BadRequestError        | 400                           | application/json              |
+| errors.UnauthorizedError      | 401                           | application/json              |
+| errors.NotFoundError          | 404                           | application/json              |
+| errors.RequestValidationError | 422                           | application/json              |
+| errors.APIError               | 4XX, 5XX                      | \*/\*                         |
+
+## list_files_knowledge_knowledge_base_id_files_get
+
+List all files in a knowledge base
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="list_files_knowledge__knowledge_base_id__files_get" method="get" path="/knowledge/{knowledge_base_id}/files" -->
+```python
+from opperai import Opper
+import os
+
+
+with Opper(
+    http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
+) as opper:
+
+    res = opper.knowledge.list_files_knowledge_knowledge_base_id_files_get(knowledge_base_id="53b2ef93-22ff-4826-aac5-a53c7fa8e075", offset=0, limit=100)
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `knowledge_base_id`                                                 | *str*                                                               | :heavy_check_mark:                                                  | The id of the knowledge base to list files from                     |
+| `offset`                                                            | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | The offset to start the list from                                   |
+| `limit`                                                             | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | The number of files to return                                       |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.PaginatedResponseListFilesResponse](../../models/paginatedresponselistfilesresponse.md)**
 
 ### Errors
 

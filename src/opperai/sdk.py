@@ -231,8 +231,8 @@ class Opper(BaseSDK):
         tags: OptionalNullable[Dict[str, str]] = UNSET,
         configuration: OptionalNullable[
             Union[
-                models.FunctionCallConfiguration,
-                models.FunctionCallConfigurationTypedDict,
+                models.FunctionCallConfigurationInput,
+                models.FunctionCallConfigurationInputTypedDict,
             ]
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -248,7 +248,9 @@ class Opper(BaseSDK):
         :param name: Provide a unique name of the task. A function with this name will be created in the project. Functions configuration is overridden by the request parameters.
         :param instructions: Optionally provide an instruction for the model to complete the task. Recommended to be concise and to the point
         :param input_schema: Optionally provide an input schema for the task. Can preferably include field descriptions to allow the model to reason about the input variables. Schema is validated against the input data and issues an error if it does not match. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.
-        :param output_schema: Optionally provide an output schema for the task. Response is guaranteed to match the schema or throw an error. Can preferably include field descriptions to allow the model to reason about the output variables. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.   **Streaming with output_schema:** When used with streaming endpoints, enables precise field tracking via json_path. Each streaming chunk includes the exact schema field being populated (e.g., 'response.people[0].name'), allowing real-time UI updates by routing content to specific components.
+        :param output_schema: Optionally provide an output schema for the task. Response is guaranteed to match the schema or throw an error. Can preferably include field descriptions to allow the model to reason about the output variables. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.
+
+            **Streaming with output_schema:** When used with streaming endpoints, enables precise field tracking via json_path. Each streaming chunk includes the exact schema field being populated (e.g., 'response.people[0].name'), allowing real-time UI updates by routing content to specific components.
         :param input: Optionally provide input data as context to complete the task. Could be a text, image, audio or a combination of these.
         :param model:
         :param examples: Optionally provide examples of successful task completions. Will be added to the prompt to help the model understand the task from examples.
@@ -290,7 +292,7 @@ class Opper(BaseSDK):
             parent_span_id=parent_span_id,
             tags=tags,
             configuration=utils.get_pydantic_model(
-                configuration, OptionalNullable[models.FunctionCallConfiguration]
+                configuration, OptionalNullable[models.FunctionCallConfigurationInput]
             ),
         )
 
@@ -388,8 +390,8 @@ class Opper(BaseSDK):
         tags: OptionalNullable[Dict[str, str]] = UNSET,
         configuration: OptionalNullable[
             Union[
-                models.FunctionCallConfiguration,
-                models.FunctionCallConfigurationTypedDict,
+                models.FunctionCallConfigurationInput,
+                models.FunctionCallConfigurationInputTypedDict,
             ]
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -405,7 +407,9 @@ class Opper(BaseSDK):
         :param name: Provide a unique name of the task. A function with this name will be created in the project. Functions configuration is overridden by the request parameters.
         :param instructions: Optionally provide an instruction for the model to complete the task. Recommended to be concise and to the point
         :param input_schema: Optionally provide an input schema for the task. Can preferably include field descriptions to allow the model to reason about the input variables. Schema is validated against the input data and issues an error if it does not match. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.
-        :param output_schema: Optionally provide an output schema for the task. Response is guaranteed to match the schema or throw an error. Can preferably include field descriptions to allow the model to reason about the output variables. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.   **Streaming with output_schema:** When used with streaming endpoints, enables precise field tracking via json_path. Each streaming chunk includes the exact schema field being populated (e.g., 'response.people[0].name'), allowing real-time UI updates by routing content to specific components.
+        :param output_schema: Optionally provide an output schema for the task. Response is guaranteed to match the schema or throw an error. Can preferably include field descriptions to allow the model to reason about the output variables. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.
+
+            **Streaming with output_schema:** When used with streaming endpoints, enables precise field tracking via json_path. Each streaming chunk includes the exact schema field being populated (e.g., 'response.people[0].name'), allowing real-time UI updates by routing content to specific components.
         :param input: Optionally provide input data as context to complete the task. Could be a text, image, audio or a combination of these.
         :param model:
         :param examples: Optionally provide examples of successful task completions. Will be added to the prompt to help the model understand the task from examples.
@@ -447,7 +451,7 @@ class Opper(BaseSDK):
             parent_span_id=parent_span_id,
             tags=tags,
             configuration=utils.get_pydantic_model(
-                configuration, OptionalNullable[models.FunctionCallConfiguration]
+                configuration, OptionalNullable[models.FunctionCallConfigurationInput]
             ),
         )
 
@@ -545,8 +549,8 @@ class Opper(BaseSDK):
         tags: OptionalNullable[Dict[str, str]] = UNSET,
         configuration: OptionalNullable[
             Union[
-                models.FunctionCallConfiguration,
-                models.FunctionCallConfigurationTypedDict,
+                models.FunctionCallConfigurationInput,
+                models.FunctionCallConfigurationInputTypedDict,
             ]
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -628,7 +632,9 @@ class Opper(BaseSDK):
         :param name: Provide a unique name of the task. A function with this name will be created in the project. Functions configuration is overridden by the request parameters.
         :param instructions: Optionally provide an instruction for the model to complete the task. Recommended to be concise and to the point
         :param input_schema: Optionally provide an input schema for the task. Can preferably include field descriptions to allow the model to reason about the input variables. Schema is validated against the input data and issues an error if it does not match. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.
-        :param output_schema: Optionally provide an output schema for the task. Response is guaranteed to match the schema or throw an error. Can preferably include field descriptions to allow the model to reason about the output variables. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.   **Streaming with output_schema:** When used with streaming endpoints, enables precise field tracking via json_path. Each streaming chunk includes the exact schema field being populated (e.g., 'response.people[0].name'), allowing real-time UI updates by routing content to specific components.
+        :param output_schema: Optionally provide an output schema for the task. Response is guaranteed to match the schema or throw an error. Can preferably include field descriptions to allow the model to reason about the output variables. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.
+
+            **Streaming with output_schema:** When used with streaming endpoints, enables precise field tracking via json_path. Each streaming chunk includes the exact schema field being populated (e.g., 'response.people[0].name'), allowing real-time UI updates by routing content to specific components.
         :param input: Optionally provide input data as context to complete the task. Could be a text, image, audio or a combination of these.
         :param model:
         :param examples: Optionally provide examples of successful task completions. Will be added to the prompt to help the model understand the task from examples.
@@ -670,7 +676,7 @@ class Opper(BaseSDK):
             parent_span_id=parent_span_id,
             tags=tags,
             configuration=utils.get_pydantic_model(
-                configuration, OptionalNullable[models.FunctionCallConfiguration]
+                configuration, OptionalNullable[models.FunctionCallConfigurationInput]
             ),
         )
 
@@ -783,8 +789,8 @@ class Opper(BaseSDK):
         tags: OptionalNullable[Dict[str, str]] = UNSET,
         configuration: OptionalNullable[
             Union[
-                models.FunctionCallConfiguration,
-                models.FunctionCallConfigurationTypedDict,
+                models.FunctionCallConfigurationInput,
+                models.FunctionCallConfigurationInputTypedDict,
             ]
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -866,7 +872,9 @@ class Opper(BaseSDK):
         :param name: Provide a unique name of the task. A function with this name will be created in the project. Functions configuration is overridden by the request parameters.
         :param instructions: Optionally provide an instruction for the model to complete the task. Recommended to be concise and to the point
         :param input_schema: Optionally provide an input schema for the task. Can preferably include field descriptions to allow the model to reason about the input variables. Schema is validated against the input data and issues an error if it does not match. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.
-        :param output_schema: Optionally provide an output schema for the task. Response is guaranteed to match the schema or throw an error. Can preferably include field descriptions to allow the model to reason about the output variables. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.   **Streaming with output_schema:** When used with streaming endpoints, enables precise field tracking via json_path. Each streaming chunk includes the exact schema field being populated (e.g., 'response.people[0].name'), allowing real-time UI updates by routing content to specific components.
+        :param output_schema: Optionally provide an output schema for the task. Response is guaranteed to match the schema or throw an error. Can preferably include field descriptions to allow the model to reason about the output variables. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.
+
+            **Streaming with output_schema:** When used with streaming endpoints, enables precise field tracking via json_path. Each streaming chunk includes the exact schema field being populated (e.g., 'response.people[0].name'), allowing real-time UI updates by routing content to specific components.
         :param input: Optionally provide input data as context to complete the task. Could be a text, image, audio or a combination of these.
         :param model:
         :param examples: Optionally provide examples of successful task completions. Will be added to the prompt to help the model understand the task from examples.
@@ -908,7 +916,7 @@ class Opper(BaseSDK):
             parent_span_id=parent_span_id,
             tags=tags,
             configuration=utils.get_pydantic_model(
-                configuration, OptionalNullable[models.FunctionCallConfiguration]
+                configuration, OptionalNullable[models.FunctionCallConfigurationInput]
             ),
         )
 
