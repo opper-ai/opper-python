@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 from .example import Example, ExampleTypedDict
-from .functioncallconfiguration import (
-    FunctionCallConfiguration,
-    FunctionCallConfigurationTypedDict,
+from .functioncallconfiguration_input import (
+    FunctionCallConfigurationInput,
+    FunctionCallConfigurationInputTypedDict,
 )
 from .tmodel import TModel, TModelTypedDict
 from opperai.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
@@ -34,7 +34,7 @@ class AppAPIPublicV2FunctionCallCallFunctionRequestTypedDict(TypedDict):
     r"""Optionally provide the parent span ID to add to the call event. This will automatically tie the call to a parent span in the UI."""
     tags: NotRequired[Nullable[Dict[str, str]]]
     r"""Optionally provide a list of tags to add to the call event. Useful for being able to understand aggregate analytics on some dimension."""
-    configuration: NotRequired[Nullable[FunctionCallConfigurationTypedDict]]
+    configuration: NotRequired[Nullable[FunctionCallConfigurationInputTypedDict]]
     r"""Optional configuration for the function.Configuration is a dictionary of key-value pairs that can be used to override the default configuration for the function."""
 
 
@@ -68,7 +68,7 @@ class AppAPIPublicV2FunctionCallCallFunctionRequest(BaseModel):
     tags: OptionalNullable[Dict[str, str]] = UNSET
     r"""Optionally provide a list of tags to add to the call event. Useful for being able to understand aggregate analytics on some dimension."""
 
-    configuration: OptionalNullable[FunctionCallConfiguration] = UNSET
+    configuration: OptionalNullable[FunctionCallConfigurationInput] = UNSET
     r"""Optional configuration for the function.Configuration is a dictionary of key-value pairs that can be used to override the default configuration for the function."""
 
     @model_serializer(mode="wrap")

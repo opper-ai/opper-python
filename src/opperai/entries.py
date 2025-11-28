@@ -78,6 +78,7 @@ class Entries(BaseSDK):
                 "json",
                 models.UpdateDatasetEntryRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -202,6 +203,7 @@ class Entries(BaseSDK):
                 "json",
                 models.UpdateDatasetEntryRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

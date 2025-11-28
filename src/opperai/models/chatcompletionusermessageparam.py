@@ -15,8 +15,9 @@ from .chatcompletioncontentparttextparam import (
 )
 from .file import File, FileTypedDict
 from opperai.types import BaseModel
-from opperai.utils import validate_const
+from opperai.utils import get_discriminator, validate_const
 import pydantic
+from pydantic import Discriminator, Tag
 from pydantic.functional_validators import AfterValidator
 from typing import List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
@@ -33,15 +34,15 @@ ChatCompletionUserMessageParamContent1TypedDict = TypeAliasType(
 )
 
 
-ChatCompletionUserMessageParamContent1 = TypeAliasType(
-    "ChatCompletionUserMessageParamContent1",
+ChatCompletionUserMessageParamContent1 = Annotated[
     Union[
-        ChatCompletionContentPartTextParam,
-        ChatCompletionContentPartImageParam,
-        ChatCompletionContentPartInputAudioParam,
-        File,
+        Annotated[ChatCompletionContentPartTextParam, Tag("text")],
+        Annotated[ChatCompletionContentPartImageParam, Tag("image_url")],
+        Annotated[ChatCompletionContentPartInputAudioParam, Tag("input_audio")],
+        Annotated[File, Tag("file")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 ChatCompletionUserMessageParamContent2TypedDict = TypeAliasType(

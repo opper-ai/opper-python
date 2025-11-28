@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 from opperai.types import BaseModel
-from typing_extensions import TypedDict
+from typing import Any, Dict, Optional
+from typing_extensions import NotRequired, TypedDict
 
 
 class RegisterFileUploadResponseTypedDict(TypedDict):
@@ -10,6 +11,7 @@ class RegisterFileUploadResponseTypedDict(TypedDict):
     key: str
     original_filename: str
     document_id: int
+    metadata: NotRequired[Dict[str, Any]]
 
 
 class RegisterFileUploadResponse(BaseModel):
@@ -20,3 +22,5 @@ class RegisterFileUploadResponse(BaseModel):
     original_filename: str
 
     document_id: int
+
+    metadata: Optional[Dict[str, Any]] = None

@@ -78,9 +78,9 @@ from .tmodel import TModel, TModelTypedDict
 from .websearchoptions import WebSearchOptions, WebSearchOptionsTypedDict
 from enum import Enum
 from opperai.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
-from opperai.utils import validate_const
+from opperai.utils import get_discriminator, validate_const
 import pydantic
-from pydantic import model_serializer
+from pydantic import Discriminator, Tag, model_serializer
 from pydantic.functional_validators import AfterValidator
 from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
@@ -99,17 +99,17 @@ ChatCompletionNonStreamingMessageTypedDict = TypeAliasType(
 )
 
 
-ChatCompletionNonStreamingMessage = TypeAliasType(
-    "ChatCompletionNonStreamingMessage",
+ChatCompletionNonStreamingMessage = Annotated[
     Union[
-        ChatCompletionDeveloperMessageParam,
-        ChatCompletionSystemMessageParam,
-        ChatCompletionUserMessageParam,
-        ChatCompletionToolMessageParam,
-        ChatCompletionFunctionMessageParam,
-        ChatCompletionAssistantMessageParam,
+        Annotated[ChatCompletionDeveloperMessageParam, Tag("developer")],
+        Annotated[ChatCompletionSystemMessageParam, Tag("system")],
+        Annotated[ChatCompletionUserMessageParam, Tag("user")],
+        Annotated[ChatCompletionAssistantMessageParam, Tag("assistant")],
+        Annotated[ChatCompletionToolMessageParam, Tag("tool")],
+        Annotated[ChatCompletionFunctionMessageParam, Tag("function")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "role", "role")),
+]
 
 
 class ChatCompletionNonStreamingFunctionCallEnum(str, Enum):
@@ -157,10 +157,14 @@ ChatCompletionNonStreamingResponseFormatTypedDict = TypeAliasType(
 )
 
 
-ChatCompletionNonStreamingResponseFormat = TypeAliasType(
-    "ChatCompletionNonStreamingResponseFormat",
-    Union[ResponseFormatText, ResponseFormatJSONObject, ResponseFormatJSONSchema],
-)
+ChatCompletionNonStreamingResponseFormat = Annotated[
+    Union[
+        Annotated[ResponseFormatText, Tag("text")],
+        Annotated[ResponseFormatJSONSchema, Tag("json_schema")],
+        Annotated[ResponseFormatJSONObject, Tag("json_object")],
+    ],
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class ChatCompletionNonStreamingServiceTier(str, Enum):
@@ -217,10 +221,13 @@ ChatCompletionNonStreamingToolTypedDict = TypeAliasType(
 )
 
 
-ChatCompletionNonStreamingTool = TypeAliasType(
-    "ChatCompletionNonStreamingTool",
-    Union[ChatCompletionFunctionToolParam, ChatCompletionCustomToolParam],
-)
+ChatCompletionNonStreamingTool = Annotated[
+    Union[
+        Annotated[ChatCompletionFunctionToolParam, Tag("function")],
+        Annotated[ChatCompletionCustomToolParam, Tag("custom")],
+    ],
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class ChatCompletionNonStreamingVerbosity(str, Enum):

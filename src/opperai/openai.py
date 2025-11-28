@@ -57,6 +57,7 @@ class Openai(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.Payload
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -160,6 +161,7 @@ class Openai(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.Payload
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
