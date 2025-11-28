@@ -13,9 +13,9 @@ from .chatcompletionmessagefunctiontoolcall import (
 )
 from .functioncall_output import FunctionCallOutput, FunctionCallOutputTypedDict
 from opperai.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
-from opperai.utils import validate_const
+from opperai.utils import get_discriminator, validate_const
 import pydantic
-from pydantic import ConfigDict, model_serializer
+from pydantic import ConfigDict, Discriminator, Tag, model_serializer
 from pydantic.functional_validators import AfterValidator
 from typing import Any, Dict, List, Literal, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
@@ -30,10 +30,13 @@ ChatCompletionMessageToolCallTypedDict = TypeAliasType(
 )
 
 
-ChatCompletionMessageToolCall = TypeAliasType(
-    "ChatCompletionMessageToolCall",
-    Union[ChatCompletionMessageFunctionToolCall, ChatCompletionMessageCustomToolCall],
-)
+ChatCompletionMessageToolCall = Annotated[
+    Union[
+        Annotated[ChatCompletionMessageFunctionToolCall, Tag("function")],
+        Annotated[ChatCompletionMessageCustomToolCall, Tag("custom")],
+    ],
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class ChatCompletionMessageTypedDict(TypedDict):

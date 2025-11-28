@@ -62,6 +62,7 @@ class Embeddings(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.CreateEmbeddingRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -171,6 +172,7 @@ class Embeddings(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.CreateEmbeddingRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
