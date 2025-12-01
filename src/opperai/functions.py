@@ -35,8 +35,8 @@ class Functions(BaseSDK):
         model: Optional[Union[models.TModel, models.TModelTypedDict]] = None,
         configuration: OptionalNullable[
             Union[
-                models.FunctionCallConfiguration,
-                models.FunctionCallConfigurationTypedDict,
+                models.FunctionCallConfigurationInput,
+                models.FunctionCallConfigurationInputTypedDict,
             ]
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -85,7 +85,7 @@ class Functions(BaseSDK):
             output_schema=output_schema,
             model=utils.get_pydantic_model(model, Optional[models.TModel]),
             configuration=utils.get_pydantic_model(
-                configuration, OptionalNullable[models.FunctionCallConfiguration]
+                configuration, OptionalNullable[models.FunctionCallConfigurationInput]
             ),
         )
 
@@ -105,6 +105,7 @@ class Functions(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.CreateFunctionRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -175,8 +176,8 @@ class Functions(BaseSDK):
         model: Optional[Union[models.TModel, models.TModelTypedDict]] = None,
         configuration: OptionalNullable[
             Union[
-                models.FunctionCallConfiguration,
-                models.FunctionCallConfigurationTypedDict,
+                models.FunctionCallConfigurationInput,
+                models.FunctionCallConfigurationInputTypedDict,
             ]
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -225,7 +226,7 @@ class Functions(BaseSDK):
             output_schema=output_schema,
             model=utils.get_pydantic_model(model, Optional[models.TModel]),
             configuration=utils.get_pydantic_model(
-                configuration, OptionalNullable[models.FunctionCallConfiguration]
+                configuration, OptionalNullable[models.FunctionCallConfigurationInput]
             ),
         )
 
@@ -245,6 +246,7 @@ class Functions(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.CreateFunctionRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -359,6 +361,7 @@ class Functions(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -472,6 +475,7 @@ class Functions(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -576,6 +580,7 @@ class Functions(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -678,6 +683,7 @@ class Functions(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -760,7 +766,31 @@ class Functions(BaseSDK):
         :param instructions: The instructions for the function, this is the prompt that will be sent to the model to complete the task. Recommended to be concise and to the point
         :param input_schema: Optional input schema for the function. Can preferably include field descriptions to allow the model to reason about the input variables. Schema is validated against the input data and issues an error if it does not match. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.
         :param output_schema: Optional output schema for the function. Can preferably include field descriptions to allow the model to reason about the output variables. Schema is validated against the output data and issues an error if it does not match. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.
-        :param model: Optionally provide a model to use for completing the task. If not provided, a default model will be used. Currently the default model is `azure/gpt-4o-eu`          To specify options for the model, use a dictionary of key-value pairs. The options are passed to the model on invocation. An example of passing temperature to `gpt-4o-mini` hosted on OpenAI is shown below.          ```json {     \"model\": \"openai/gpt-4o-mini\", # the model name     \"options\": {         \"temperature\": 0.5 # the options for the model     } } ```  To specify a fallback model, use a list of models. The models will then be tried in order. The second model will be used if the first model is not available, and so on.  ```json [     \"openai/gpt-4o-mini\", # first model to try     \"openai/gpt-4.1-nano\", # second model to try ] ```
+        :param model: Optionally provide a model to use for completing the task.
+            If not provided, a default model will be used. Currently the default model is `azure/gpt-4o-eu`
+
+            To specify options for the model, use a dictionary of key-value pairs. The options are passed to the model on invocation.
+            An example of passing temperature to `gpt-4o-mini` hosted on OpenAI is shown below.
+
+            ```json
+            {
+            \"model\": \"openai/gpt-4o-mini\", # the model name
+            \"options\": {
+            \"temperature\": 0.5 # the options for the model
+            }
+            }
+            ```
+
+            To specify a fallback model, use a list of models. The models will then be tried in order.
+            The second model will be used if the first model is not available, and so on.
+
+            ```json
+            [
+            \"openai/gpt-4o-mini\", # first model to try
+            \"openai/gpt-4.1-nano\", # second model to try
+            ]
+            ```
+
         :param configuration: Optional configuration for the function.Configuration is a dictionary of key-value pairs that can be used to override the default configuration for the function.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -817,6 +847,7 @@ class Functions(BaseSDK):
                 "json",
                 models.UpdateFunctionRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -899,7 +930,31 @@ class Functions(BaseSDK):
         :param instructions: The instructions for the function, this is the prompt that will be sent to the model to complete the task. Recommended to be concise and to the point
         :param input_schema: Optional input schema for the function. Can preferably include field descriptions to allow the model to reason about the input variables. Schema is validated against the input data and issues an error if it does not match. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.
         :param output_schema: Optional output schema for the function. Can preferably include field descriptions to allow the model to reason about the output variables. Schema is validated against the output data and issues an error if it does not match. With the Opper SDKs you can define these schemas through libraries like Pydantic and Zod. For schemas with definitions, prefer using '$defs' and '#/$defs/...' references.
-        :param model: Optionally provide a model to use for completing the task. If not provided, a default model will be used. Currently the default model is `azure/gpt-4o-eu`          To specify options for the model, use a dictionary of key-value pairs. The options are passed to the model on invocation. An example of passing temperature to `gpt-4o-mini` hosted on OpenAI is shown below.          ```json {     \"model\": \"openai/gpt-4o-mini\", # the model name     \"options\": {         \"temperature\": 0.5 # the options for the model     } } ```  To specify a fallback model, use a list of models. The models will then be tried in order. The second model will be used if the first model is not available, and so on.  ```json [     \"openai/gpt-4o-mini\", # first model to try     \"openai/gpt-4.1-nano\", # second model to try ] ```
+        :param model: Optionally provide a model to use for completing the task.
+            If not provided, a default model will be used. Currently the default model is `azure/gpt-4o-eu`
+
+            To specify options for the model, use a dictionary of key-value pairs. The options are passed to the model on invocation.
+            An example of passing temperature to `gpt-4o-mini` hosted on OpenAI is shown below.
+
+            ```json
+            {
+            \"model\": \"openai/gpt-4o-mini\", # the model name
+            \"options\": {
+            \"temperature\": 0.5 # the options for the model
+            }
+            }
+            ```
+
+            To specify a fallback model, use a list of models. The models will then be tried in order.
+            The second model will be used if the first model is not available, and so on.
+
+            ```json
+            [
+            \"openai/gpt-4o-mini\", # first model to try
+            \"openai/gpt-4.1-nano\", # second model to try
+            ]
+            ```
+
         :param configuration: Optional configuration for the function.Configuration is a dictionary of key-value pairs that can be used to override the default configuration for the function.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -956,6 +1011,7 @@ class Functions(BaseSDK):
                 "json",
                 models.UpdateFunctionRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1058,6 +1114,7 @@ class Functions(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1160,6 +1217,7 @@ class Functions(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1262,6 +1320,7 @@ class Functions(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1364,6 +1423,7 @@ class Functions(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1469,6 +1529,7 @@ class Functions(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1574,6 +1635,7 @@ class Functions(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1701,6 +1763,7 @@ class Functions(BaseSDK):
                 "json",
                 models.AppAPIPublicV2FunctionsCallFunctionRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1830,6 +1893,7 @@ class Functions(BaseSDK):
                 "json",
                 models.AppAPIPublicV2FunctionsCallFunctionRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1973,6 +2037,7 @@ class Functions(BaseSDK):
                 "json",
                 models.AppAPIPublicV2FunctionsCallFunctionRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2132,6 +2197,7 @@ class Functions(BaseSDK):
                 "json",
                 models.AppAPIPublicV2FunctionsCallFunctionRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2280,6 +2346,7 @@ class Functions(BaseSDK):
                 "json",
                 models.AppAPIPublicV2FunctionsCallFunctionRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2412,6 +2479,7 @@ class Functions(BaseSDK):
                 "json",
                 models.AppAPIPublicV2FunctionsCallFunctionRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2560,6 +2628,7 @@ class Functions(BaseSDK):
                 "json",
                 models.AppAPIPublicV2FunctionsCallFunctionRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2724,6 +2793,7 @@ class Functions(BaseSDK):
                 "json",
                 models.AppAPIPublicV2FunctionsCallFunctionRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

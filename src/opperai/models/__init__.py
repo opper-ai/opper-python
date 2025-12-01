@@ -345,19 +345,13 @@ if TYPE_CHECKING:
         DeleteKnowledgeBaseResponse,
         DeleteKnowledgeBaseResponseTypedDict,
     )
-    from .evaluationconfig import (
-        EvaluationConfig,
-        EvaluationConfigTypedDict,
-        ScorersEnum1,
-        ScorersEnum2,
-        ScorersUnion1,
-        ScorersUnion1TypedDict,
-        ScorersUnion2,
-        ScorersUnion2TypedDict,
-    )
     from .example import Example, ExampleTypedDict
     from .examplein import ExampleIn, ExampleInTypedDict
     from .file import File, FileTypedDict
+    from .filedownloadurlresponse import (
+        FileDownloadURLResponse,
+        FileDownloadURLResponseTypedDict,
+    )
     from .filefile import FileFile, FileFileTypedDict
     from .filter_ import (
         Filter,
@@ -380,9 +374,13 @@ if TYPE_CHECKING:
     )
     from .functioncall_input import FunctionCallInput, FunctionCallInputTypedDict
     from .functioncall_output import FunctionCallOutput, FunctionCallOutputTypedDict
-    from .functioncallconfiguration import (
-        FunctionCallConfiguration,
-        FunctionCallConfigurationTypedDict,
+    from .functioncallconfiguration_input import (
+        FunctionCallConfigurationInput,
+        FunctionCallConfigurationInputTypedDict,
+    )
+    from .functioncallconfiguration_output import (
+        FunctionCallConfigurationOutput,
+        FunctionCallConfigurationOutputTypedDict,
     )
     from .functiondefinition import FunctionDefinition, FunctionDefinitionTypedDict
     from .get_custom_model_by_name_models_custom_by_name_name_getop import (
@@ -396,6 +394,10 @@ if TYPE_CHECKING:
     from .get_dataset_entry_datasets_dataset_id_entries_entry_id_getop import (
         GetDatasetEntryDatasetsDatasetIDEntriesEntryIDGetRequest,
         GetDatasetEntryDatasetsDatasetIDEntriesEntryIDGetRequestTypedDict,
+    )
+    from .get_file_download_url_knowledge_knowledge_base_id_files_file_id_download_url_getop import (
+        GetFileDownloadURLKnowledgeKnowledgeBaseIDFilesFileIDDownloadURLGetRequest,
+        GetFileDownloadURLKnowledgeKnowledgeBaseIDFilesFileIDDownloadURLGetRequestTypedDict,
     )
     from .get_function_by_name_functions_by_name_name_getop import (
         GetFunctionByNameFunctionsByNameNameGetRequest,
@@ -485,6 +487,10 @@ if TYPE_CHECKING:
         ListDatasetEntriesDatasetsDatasetIDEntriesGetRequest,
         ListDatasetEntriesDatasetsDatasetIDEntriesGetRequestTypedDict,
     )
+    from .list_files_knowledge_knowledge_base_id_files_getop import (
+        ListFilesKnowledgeKnowledgeBaseIDFilesGetRequest,
+        ListFilesKnowledgeKnowledgeBaseIDFilesGetRequestTypedDict,
+    )
     from .list_function_revisions_functions_function_id_revisions_getop import (
         ListFunctionRevisionsFunctionsFunctionIDRevisionsGetRequest,
         ListFunctionRevisionsFunctionsFunctionIDRevisionsGetRequestTypedDict,
@@ -517,6 +523,7 @@ if TYPE_CHECKING:
         ListCustomModelsResponseItem,
         ListCustomModelsResponseItemTypedDict,
     )
+    from .listfilesresponse import ListFilesResponse, ListFilesResponseTypedDict
     from .listfunctionrevisionresponse import (
         ListFunctionRevisionResponse,
         ListFunctionRevisionResponseTypedDict,
@@ -582,6 +589,10 @@ if TYPE_CHECKING:
     from .paginatedresponse_listcustommodelsresponseitem_ import (
         PaginatedResponseListCustomModelsResponseItem,
         PaginatedResponseListCustomModelsResponseItemTypedDict,
+    )
+    from .paginatedresponse_listfilesresponse_ import (
+        PaginatedResponseListFilesResponse,
+        PaginatedResponseListFilesResponseTypedDict,
     )
     from .paginatedresponse_listfunctionrevisionresponse_ import (
         PaginatedResponseListFunctionRevisionResponse,
@@ -1006,13 +1017,13 @@ __all__ = [
     "Delta",
     "DeltaTypedDict",
     "Detail",
-    "EvaluationConfig",
-    "EvaluationConfigTypedDict",
     "Example",
     "ExampleIn",
     "ExampleInTypedDict",
     "ExampleTypedDict",
     "File",
+    "FileDownloadURLResponse",
+    "FileDownloadURLResponseTypedDict",
     "FileFile",
     "FileFileTypedDict",
     "FileTypedDict",
@@ -1021,8 +1032,10 @@ __all__ = [
     "FinishReason",
     "Format",
     "FormatTypedDict",
-    "FunctionCallConfiguration",
-    "FunctionCallConfigurationTypedDict",
+    "FunctionCallConfigurationInput",
+    "FunctionCallConfigurationInputTypedDict",
+    "FunctionCallConfigurationOutput",
+    "FunctionCallConfigurationOutputTypedDict",
     "FunctionCallInput",
     "FunctionCallInputTypedDict",
     "FunctionCallOutput",
@@ -1047,6 +1060,8 @@ __all__ = [
     "GetDatasetEntryDatasetsDatasetIDEntriesEntryIDGetRequestTypedDict",
     "GetDatasetEntryResponse",
     "GetDatasetEntryResponseTypedDict",
+    "GetFileDownloadURLKnowledgeKnowledgeBaseIDFilesFileIDDownloadURLGetRequest",
+    "GetFileDownloadURLKnowledgeKnowledgeBaseIDFilesFileIDDownloadURLGetRequestTypedDict",
     "GetFunctionByNameFunctionsByNameNameGetRequest",
     "GetFunctionByNameFunctionsByNameNameGetRequestTypedDict",
     "GetFunctionByRevisionFunctionsFunctionIDRevisionsRevisionIDGetRequest",
@@ -1103,6 +1118,10 @@ __all__ = [
     "ListCustomModelsResponseItemTypedDict",
     "ListDatasetEntriesDatasetsDatasetIDEntriesGetRequest",
     "ListDatasetEntriesDatasetsDatasetIDEntriesGetRequestTypedDict",
+    "ListFilesKnowledgeKnowledgeBaseIDFilesGetRequest",
+    "ListFilesKnowledgeKnowledgeBaseIDFilesGetRequestTypedDict",
+    "ListFilesResponse",
+    "ListFilesResponseTypedDict",
     "ListFunctionRevisionResponse",
     "ListFunctionRevisionResponseTypedDict",
     "ListFunctionRevisionsFunctionsFunctionIDRevisionsGetRequest",
@@ -1155,6 +1174,8 @@ __all__ = [
     "PaginatedResponseGetDatasetEntriesResponseTypedDict",
     "PaginatedResponseListCustomModelsResponseItem",
     "PaginatedResponseListCustomModelsResponseItemTypedDict",
+    "PaginatedResponseListFilesResponse",
+    "PaginatedResponseListFilesResponseTypedDict",
     "PaginatedResponseListFunctionRevisionResponse",
     "PaginatedResponseListFunctionRevisionResponseTypedDict",
     "PaginatedResponseListFunctionsResponseItem",
@@ -1215,12 +1236,6 @@ __all__ = [
     "SaveToDatasetResponseTypedDict",
     "SaveToDatasetSpansSpanIDSaveExamplesPostRequest",
     "SaveToDatasetSpansSpanIDSaveExamplesPostRequestTypedDict",
-    "ScorersEnum1",
-    "ScorersEnum2",
-    "ScorersUnion1",
-    "ScorersUnion1TypedDict",
-    "ScorersUnion2",
-    "ScorersUnion2TypedDict",
     "SearchContextSize",
     "Security",
     "SecurityTypedDict",
@@ -1533,20 +1548,14 @@ _dynamic_imports: dict[str, str] = {
     "DeleteKnowledgeBaseRequestTypedDict": ".deleteknowledgebaserequest",
     "DeleteKnowledgeBaseResponse": ".deleteknowledgebaseresponse",
     "DeleteKnowledgeBaseResponseTypedDict": ".deleteknowledgebaseresponse",
-    "EvaluationConfig": ".evaluationconfig",
-    "EvaluationConfigTypedDict": ".evaluationconfig",
-    "ScorersEnum1": ".evaluationconfig",
-    "ScorersEnum2": ".evaluationconfig",
-    "ScorersUnion1": ".evaluationconfig",
-    "ScorersUnion1TypedDict": ".evaluationconfig",
-    "ScorersUnion2": ".evaluationconfig",
-    "ScorersUnion2TypedDict": ".evaluationconfig",
     "Example": ".example",
     "ExampleTypedDict": ".example",
     "ExampleIn": ".examplein",
     "ExampleInTypedDict": ".examplein",
     "File": ".file",
     "FileTypedDict": ".file",
+    "FileDownloadURLResponse": ".filedownloadurlresponse",
+    "FileDownloadURLResponseTypedDict": ".filedownloadurlresponse",
     "FileFile": ".filefile",
     "FileFileTypedDict": ".filefile",
     "Filter": ".filter_",
@@ -1569,8 +1578,10 @@ _dynamic_imports: dict[str, str] = {
     "FunctionCallInputTypedDict": ".functioncall_input",
     "FunctionCallOutput": ".functioncall_output",
     "FunctionCallOutputTypedDict": ".functioncall_output",
-    "FunctionCallConfiguration": ".functioncallconfiguration",
-    "FunctionCallConfigurationTypedDict": ".functioncallconfiguration",
+    "FunctionCallConfigurationInput": ".functioncallconfiguration_input",
+    "FunctionCallConfigurationInputTypedDict": ".functioncallconfiguration_input",
+    "FunctionCallConfigurationOutput": ".functioncallconfiguration_output",
+    "FunctionCallConfigurationOutputTypedDict": ".functioncallconfiguration_output",
     "FunctionDefinition": ".functiondefinition",
     "FunctionDefinitionTypedDict": ".functiondefinition",
     "GetCustomModelByNameModelsCustomByNameNameGetRequest": ".get_custom_model_by_name_models_custom_by_name_name_getop",
@@ -1579,6 +1590,8 @@ _dynamic_imports: dict[str, str] = {
     "GetCustomModelModelsCustomModelIDGetRequestTypedDict": ".get_custom_model_models_custom_model_id_getop",
     "GetDatasetEntryDatasetsDatasetIDEntriesEntryIDGetRequest": ".get_dataset_entry_datasets_dataset_id_entries_entry_id_getop",
     "GetDatasetEntryDatasetsDatasetIDEntriesEntryIDGetRequestTypedDict": ".get_dataset_entry_datasets_dataset_id_entries_entry_id_getop",
+    "GetFileDownloadURLKnowledgeKnowledgeBaseIDFilesFileIDDownloadURLGetRequest": ".get_file_download_url_knowledge_knowledge_base_id_files_file_id_download_url_getop",
+    "GetFileDownloadURLKnowledgeKnowledgeBaseIDFilesFileIDDownloadURLGetRequestTypedDict": ".get_file_download_url_knowledge_knowledge_base_id_files_file_id_download_url_getop",
     "GetFunctionByNameFunctionsByNameNameGetRequest": ".get_function_by_name_functions_by_name_name_getop",
     "GetFunctionByNameFunctionsByNameNameGetRequestTypedDict": ".get_function_by_name_functions_by_name_name_getop",
     "GetFunctionByRevisionFunctionsFunctionIDRevisionsRevisionIDGetRequest": ".get_function_by_revision_functions_function_id_revisions_revision_id_getop",
@@ -1636,6 +1649,8 @@ _dynamic_imports: dict[str, str] = {
     "ListCustomModelsModelsCustomGetRequestTypedDict": ".list_custom_models_models_custom_getop",
     "ListDatasetEntriesDatasetsDatasetIDEntriesGetRequest": ".list_dataset_entries_datasets_dataset_id_entries_getop",
     "ListDatasetEntriesDatasetsDatasetIDEntriesGetRequestTypedDict": ".list_dataset_entries_datasets_dataset_id_entries_getop",
+    "ListFilesKnowledgeKnowledgeBaseIDFilesGetRequest": ".list_files_knowledge_knowledge_base_id_files_getop",
+    "ListFilesKnowledgeKnowledgeBaseIDFilesGetRequestTypedDict": ".list_files_knowledge_knowledge_base_id_files_getop",
     "ListFunctionRevisionsFunctionsFunctionIDRevisionsGetRequest": ".list_function_revisions_functions_function_id_revisions_getop",
     "ListFunctionRevisionsFunctionsFunctionIDRevisionsGetRequestTypedDict": ".list_function_revisions_functions_function_id_revisions_getop",
     "ListFunctionsFunctionsGetRequest": ".list_functions_functions_getop",
@@ -1652,6 +1667,8 @@ _dynamic_imports: dict[str, str] = {
     "ListTracesTracesGetRequestTypedDict": ".list_traces_traces_getop",
     "ListCustomModelsResponseItem": ".listcustommodelsresponseitem",
     "ListCustomModelsResponseItemTypedDict": ".listcustommodelsresponseitem",
+    "ListFilesResponse": ".listfilesresponse",
+    "ListFilesResponseTypedDict": ".listfilesresponse",
     "ListFunctionRevisionResponse": ".listfunctionrevisionresponse",
     "ListFunctionRevisionResponseTypedDict": ".listfunctionrevisionresponse",
     "ListFunctionsResponseItem": ".listfunctionsresponseitem",
@@ -1691,6 +1708,8 @@ _dynamic_imports: dict[str, str] = {
     "PaginatedResponseGetDatasetEntriesResponseTypedDict": ".paginatedresponse_getdatasetentriesresponse_",
     "PaginatedResponseListCustomModelsResponseItem": ".paginatedresponse_listcustommodelsresponseitem_",
     "PaginatedResponseListCustomModelsResponseItemTypedDict": ".paginatedresponse_listcustommodelsresponseitem_",
+    "PaginatedResponseListFilesResponse": ".paginatedresponse_listfilesresponse_",
+    "PaginatedResponseListFilesResponseTypedDict": ".paginatedresponse_listfilesresponse_",
     "PaginatedResponseListFunctionRevisionResponse": ".paginatedresponse_listfunctionrevisionresponse_",
     "PaginatedResponseListFunctionRevisionResponseTypedDict": ".paginatedresponse_listfunctionrevisionresponse_",
     "PaginatedResponseListFunctionsResponseItem": ".paginatedresponse_listfunctionsresponseitem_",

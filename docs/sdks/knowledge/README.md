@@ -13,6 +13,8 @@
 * [get_upload_url](#get_upload_url) - Get Upload Url
 * [register_file_upload](#register_file_upload) - Register File Upload
 * [delete_file](#delete_file) - Delete File From Knowledge Base
+* [get_file_download_url](#get_file_download_url) - Get File Download Url
+* [list_files](#list_files) - List Files
 * [query](#query) - Query Knowledge Base
 * [delete_documents](#delete_documents) - Delete Documents
 * [add](#add) - Add
@@ -305,7 +307,10 @@ with Opper(
     http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
 ) as opper:
 
-    res = opper.knowledge.register_file_upload(knowledge_base_id="3c6931ec-d324-46b6-bec6-bf31a5f0623f", filename="example.pdf", file_id="0dff5851-c155-4a46-8450-5b96eb017ae5", content_type="application/pdf")
+    res = opper.knowledge.register_file_upload(knowledge_base_id="3c6931ec-d324-46b6-bec6-bf31a5f0623f", filename="example.pdf", file_id="0dff5851-c155-4a46-8450-5b96eb017ae5", content_type="application/pdf", metadata={
+        "category": "legal",
+        "client": "acme",
+    })
 
     # Handle response
     print(res)
@@ -321,6 +326,7 @@ with Opper(
 | `file_id`                                                                                           | *str*                                                                                               | :heavy_check_mark:                                                                                  | The id of the file to register                                                                      |                                                                                                     |
 | `content_type`                                                                                      | *str*                                                                                               | :heavy_check_mark:                                                                                  | The content type of the file to register                                                            | application/pdf                                                                                     |
 | `configuration`                                                                                     | [OptionalNullable[models.TextProcessingConfiguration]](../../models/textprocessingconfiguration.md) | :heavy_minus_sign:                                                                                  | The configuration for the file to register                                                          |                                                                                                     |
+| `metadata`                                                                                          | Dict[str, *Any*]                                                                                    | :heavy_minus_sign:                                                                                  | Optional metadata to attach to the file                                                             | {<br/>"category": "legal",<br/>"client": "acme"<br/>}                                               |
 | `retries`                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                    | :heavy_minus_sign:                                                                                  | Configuration to override the default retry behavior of the client.                                 |                                                                                                     |
 
 ### Response
@@ -366,6 +372,97 @@ with Opper(
 | `knowledge_base_id`                                                 | *str*                                                               | :heavy_check_mark:                                                  | The id of the knowledge base                                        |
 | `file_id`                                                           | *str*                                                               | :heavy_check_mark:                                                  | The id of the file to delete                                        |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.BadRequestError        | 400                           | application/json              |
+| errors.UnauthorizedError      | 401                           | application/json              |
+| errors.NotFoundError          | 404                           | application/json              |
+| errors.RequestValidationError | 422                           | application/json              |
+| errors.APIError               | 4XX, 5XX                      | \*/\*                         |
+
+## get_file_download_url
+
+Get a presigned URL to download a file from a knowledge base
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="get_file_download_url_knowledge__knowledge_base_id__files__file_id__download_url_get" method="get" path="/knowledge/{knowledge_base_id}/files/{file_id}/download_url" -->
+```python
+from opperai import Opper
+import os
+
+
+with Opper(
+    http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
+) as opper:
+
+    res = opper.knowledge.get_file_download_url(knowledge_base_id="3d6f9cb0-cbf2-4c9a-8995-331034439b8d", file_id="d917ff5b-acf0-4e5c-943a-7d584204a9f3")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `knowledge_base_id`                                                 | *str*                                                               | :heavy_check_mark:                                                  | The id of the knowledge base                                        |
+| `file_id`                                                           | *str*                                                               | :heavy_check_mark:                                                  | The id of the file                                                  |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.FileDownloadURLResponse](../../models/filedownloadurlresponse.md)**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.BadRequestError        | 400                           | application/json              |
+| errors.UnauthorizedError      | 401                           | application/json              |
+| errors.NotFoundError          | 404                           | application/json              |
+| errors.RequestValidationError | 422                           | application/json              |
+| errors.APIError               | 4XX, 5XX                      | \*/\*                         |
+
+## list_files
+
+List all files in a knowledge base
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="list_files_knowledge__knowledge_base_id__files_get" method="get" path="/knowledge/{knowledge_base_id}/files" -->
+```python
+from opperai import Opper
+import os
+
+
+with Opper(
+    http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
+) as opper:
+
+    res = opper.knowledge.list_files(knowledge_base_id="53b2ef93-22ff-4826-aac5-a53c7fa8e075", offset=0, limit=100)
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `knowledge_base_id`                                                 | *str*                                                               | :heavy_check_mark:                                                  | The id of the knowledge base to list files from                     |
+| `offset`                                                            | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | The offset to start the list from                                   |
+| `limit`                                                             | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | The number of files to return                                       |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.PaginatedResponseListFilesResponse](../../models/paginatedresponselistfilesresponse.md)**
 
 ### Errors
 

@@ -20,9 +20,9 @@ from .chatcompletionmessagefunctiontoolcallparam import (
 )
 from .functioncall_input import FunctionCallInput, FunctionCallInputTypedDict
 from opperai.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
-from opperai.utils import validate_const
+from opperai.utils import get_discriminator, validate_const
 import pydantic
-from pydantic import model_serializer
+from pydantic import Discriminator, Tag, model_serializer
 from pydantic.functional_validators import AfterValidator
 from typing import List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
@@ -37,10 +37,13 @@ ChatCompletionAssistantMessageParamContent1TypedDict = TypeAliasType(
 )
 
 
-ChatCompletionAssistantMessageParamContent1 = TypeAliasType(
-    "ChatCompletionAssistantMessageParamContent1",
-    Union[ChatCompletionContentPartTextParam, ChatCompletionContentPartRefusalParam],
-)
+ChatCompletionAssistantMessageParamContent1 = Annotated[
+    Union[
+        Annotated[ChatCompletionContentPartTextParam, Tag("text")],
+        Annotated[ChatCompletionContentPartRefusalParam, Tag("refusal")],
+    ],
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 ChatCompletionAssistantMessageParamContent2TypedDict = TypeAliasType(
@@ -64,13 +67,13 @@ ChatCompletionAssistantMessageParamToolCallTypedDict = TypeAliasType(
 )
 
 
-ChatCompletionAssistantMessageParamToolCall = TypeAliasType(
-    "ChatCompletionAssistantMessageParamToolCall",
+ChatCompletionAssistantMessageParamToolCall = Annotated[
     Union[
-        ChatCompletionMessageFunctionToolCallParam,
-        ChatCompletionMessageCustomToolCallParam,
+        Annotated[ChatCompletionMessageFunctionToolCallParam, Tag("function")],
+        Annotated[ChatCompletionMessageCustomToolCallParam, Tag("custom")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class ChatCompletionAssistantMessageParamTypedDict(TypedDict):

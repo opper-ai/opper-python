@@ -7,6 +7,7 @@ from .textprocessingconfiguration import (
 )
 from opperai.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
+from typing import Any, Dict
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -19,6 +20,8 @@ class RegisterFileUploadRequestTypedDict(TypedDict):
     r"""The content type of the file to register"""
     configuration: NotRequired[Nullable[TextProcessingConfigurationTypedDict]]
     r"""The configuration for the file to register"""
+    metadata: NotRequired[Nullable[Dict[str, Any]]]
+    r"""Optional metadata to attach to the file"""
 
 
 class RegisterFileUploadRequest(BaseModel):
@@ -34,10 +37,13 @@ class RegisterFileUploadRequest(BaseModel):
     configuration: OptionalNullable[TextProcessingConfiguration] = UNSET
     r"""The configuration for the file to register"""
 
+    metadata: OptionalNullable[Dict[str, Any]] = UNSET
+    r"""Optional metadata to attach to the file"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["configuration"]
-        nullable_fields = ["configuration"]
+        optional_fields = ["configuration", "metadata"]
+        nullable_fields = ["configuration", "metadata"]
         null_default_fields = []
 
         serialized = handler(self)
