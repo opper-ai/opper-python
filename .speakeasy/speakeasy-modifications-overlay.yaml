@@ -804,6 +804,7 @@ actions:
       before: sdk.knowledge.delete_documents_knowledge__knowledge_base_id__query_delete()
       created_at: 1762265966139
       reviewed_at: 1762265978991
+      type: method-name
   - target: $["paths"]["/knowledge/{knowledge_base_id}/query"]["delete"]
     update:
       x-speakeasy-name-override: deleteDocuments
