@@ -22,7 +22,7 @@ from .functioncall_input import FunctionCallInput, FunctionCallInputTypedDict
 from opperai.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from opperai.utils import get_discriminator, validate_const
 import pydantic
-from pydantic import Discriminator, Tag, model_serializer
+from pydantic import Discriminator, Field, Tag, model_serializer
 from pydantic.functional_validators import AfterValidator
 from typing import List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
@@ -69,10 +69,10 @@ ChatCompletionAssistantMessageParamToolCallTypedDict = TypeAliasType(
 
 ChatCompletionAssistantMessageParamToolCall = Annotated[
     Union[
-        Annotated[ChatCompletionMessageFunctionToolCallParam, Tag("function")],
-        Annotated[ChatCompletionMessageCustomToolCallParam, Tag("custom")],
+        ChatCompletionMessageFunctionToolCallParam,
+        ChatCompletionMessageCustomToolCallParam,
     ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+    Field(discriminator="TYPE"),
 ]
 
 

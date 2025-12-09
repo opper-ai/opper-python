@@ -2,7 +2,7 @@ overlay: 1.0.0
 x-speakeasy-jsonpath: rfc9535
 info:
   title: Speakeasy Modifications
-  version: 0.0.32
+  version: 0.0.34
   x-speakeasy-metadata:
     after: ""
     before: ""
@@ -720,8 +720,8 @@ actions:
       type: method-name
   - target: $["paths"]["/models/aliases/{alias_id}"]["delete"]
     update:
-      x-speakeasy-name-override: delete_alias
       x-speakeasy-group: language_models
+      x-speakeasy-name-override: delete_alias
     x-speakeasy-metadata:
       after: sdk.models.delete_alias()
       before: sdk.models.delete_model_alias_models_aliases__alias_id__delete()
@@ -730,8 +730,8 @@ actions:
       type: method-name
   - target: $["paths"]["/models/aliases"]["get"]
     update:
-      x-speakeasy-name-override: list_aliases
       x-speakeasy-group: language_models
+      x-speakeasy-name-override: list_aliases
     x-speakeasy-metadata:
       after: sdk.models.list_aliases()
       before: sdk.models.list_model_aliases_models_aliases_get()
@@ -740,8 +740,8 @@ actions:
       type: method-name
   - target: $["paths"]["/models/aliases/{alias_id}"]["patch"]
     update:
-      x-speakeasy-name-override: update_alias
       x-speakeasy-group: language_models
+      x-speakeasy-name-override: update_alias
     x-speakeasy-metadata:
       after: sdk.models.update_alias()
       before: sdk.models.update_model_alias_models_aliases__alias_id__patch()
@@ -750,8 +750,8 @@ actions:
       type: method-name
   - target: $["paths"]["/models/aliases/by-name/{name}"]["get"]
     update:
-      x-speakeasy-name-override: get_alias_by_name
       x-speakeasy-group: language_models
+      x-speakeasy-name-override: get_alias_by_name
     x-speakeasy-metadata:
       after: sdk.models.get_alias_by_name()
       before: sdk.models.get_model_alias_by_name_models_aliases_by_name__name__get()
@@ -760,8 +760,8 @@ actions:
       type: method-name
   - target: $["paths"]["/models/aliases"]["post"]
     update:
-      x-speakeasy-name-override: create_alias
       x-speakeasy-group: language_models
+      x-speakeasy-name-override: create_alias
     x-speakeasy-metadata:
       after: sdk.models.create_alias()
       before: sdk.models.create_model_alias_models_aliases_post()
@@ -788,8 +788,8 @@ actions:
       type: method-name
   - target: $["paths"]["/models/aliases/{alias_id}"]["get"]
     update:
-      x-speakeasy-name-override: get_alias
       x-speakeasy-group: language_models
+      x-speakeasy-name-override: get_alias
     x-speakeasy-metadata:
       after: sdk.models.get_alias()
       before: sdk.models.get_model_alias_models_aliases__alias_id__get()
@@ -804,15 +804,6 @@ actions:
       before: sdk.knowledge.delete_documents_knowledge__knowledge_base_id__query_delete()
       created_at: 1762265966139
       reviewed_at: 1762265978991
-      type: method-name
-  - target: $["paths"]["/knowledge/{knowledge_base_id}/query"]["delete"]
-    update:
-      x-speakeasy-name-override: deleteDocuments
-    x-speakeasy-metadata:
-      after: sdk.knowledge.deleteDocuments()
-      before: sdk.knowledge.deleteDocumentsKnowledgeKnowledgeBaseIdQueryDelete()
-      created_at: 1751029113444
-      reviewed_at: 1751029118113
       type: method-name
   - target: $["paths"]["/knowledge/{knowledge_base_id}/files"]["get"]
     update:
@@ -831,4 +822,21 @@ actions:
       before: sdk.knowledge.get_file_download_url_knowledge__knowledge_base_id__files__file_id__download_url_get()
       created_at: 1732872000000
       reviewed_at: 1732872000000
+      type: method-name
+  - target: $["paths"]["/knowledge/{knowledge_base_id}/upload"]["post"]
+    update:
+      x-speakeasy-name-override: upload_file
+    x-speakeasy-metadata:
+      after: sdk.knowledge.upload_file()
+      before: sdk.knowledge.upload_file_knowledge__knowledge_base_id__upload_post()
+      created_at: 1765275433136
+      type: method-name
+  - target: $["paths"]["/spans/{span_id}/feedback"]["post"]
+    update:
+      x-speakeasy-name-override: submit_feedback
+    x-speakeasy-metadata:
+      after: sdk.spans.submit_feedback()
+      before: sdk.spans.submit_span_feedback_spans__span_id__feedback_post()
+      created_at: 1765275433136
+      reviewed_at: 1765276561875
       type: method-name

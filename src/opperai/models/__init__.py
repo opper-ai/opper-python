@@ -35,6 +35,12 @@ if TYPE_CHECKING:
         AppAPIPublicV2FunctionsCallFunctionResponseTypedDict,
     )
     from .audio import Audio, AudioTypedDict
+    from .body_upload_file_knowledge_knowledge_base_id_upload_post import (
+        BodyUploadFileKnowledgeKnowledgeBaseIDUploadPost,
+        BodyUploadFileKnowledgeKnowledgeBaseIDUploadPostFile,
+        BodyUploadFileKnowledgeKnowledgeBaseIDUploadPostFileTypedDict,
+        BodyUploadFileKnowledgeKnowledgeBaseIDUploadPostTypedDict,
+    )
     from .call_function_functions_function_id_call_postop import (
         CallFunctionFunctionsFunctionIDCallPostRequest,
         CallFunctionFunctionsFunctionIDCallPostRequestTypedDict,
@@ -347,6 +353,7 @@ if TYPE_CHECKING:
     )
     from .example import Example, ExampleTypedDict
     from .examplein import ExampleIn, ExampleInTypedDict
+    from .feedbackinfo import FeedbackInfo, FeedbackInfoTypedDict
     from .file import File, FileTypedDict
     from .filedownloadurlresponse import (
         FileDownloadURLResponse,
@@ -713,6 +720,18 @@ if TYPE_CHECKING:
         StreamFunctionRevisionFunctionsFunctionIDCallStreamRevisionIDPostResponseBodyTypedDict,
         StreamFunctionRevisionFunctionsFunctionIDCallStreamRevisionIDPostResponseTypedDict,
     )
+    from .submit_span_feedback_spans_span_id_feedback_postop import (
+        SubmitSpanFeedbackSpansSpanIDFeedbackPostRequest,
+        SubmitSpanFeedbackSpansSpanIDFeedbackPostRequestTypedDict,
+    )
+    from .submitfeedbackrequest import (
+        SubmitFeedbackRequest,
+        SubmitFeedbackRequestTypedDict,
+    )
+    from .submitfeedbackresponse import (
+        SubmitFeedbackResponse,
+        SubmitFeedbackResponseTypedDict,
+    )
     from .textprocessingconfiguration import (
         TextProcessingConfiguration,
         TextProcessingConfigurationTypedDict,
@@ -785,6 +804,11 @@ if TYPE_CHECKING:
     )
     from .updatespanrequest import UpdateSpanRequest, UpdateSpanRequestTypedDict
     from .updatespanresponse import UpdateSpanResponse, UpdateSpanResponseTypedDict
+    from .upload_file_knowledge_knowledge_base_id_upload_postop import (
+        UploadFileKnowledgeKnowledgeBaseIDUploadPostRequest,
+        UploadFileKnowledgeKnowledgeBaseIDUploadPostRequestTypedDict,
+    )
+    from .uploadfileresponse import UploadFileResponse, UploadFileResponseTypedDict
     from .usage_analytics_usage_getop import (
         UsageAnalyticsUsageGetRequest,
         UsageAnalyticsUsageGetRequestTypedDict,
@@ -822,6 +846,10 @@ __all__ = [
     "AppAPIPublicV2FunctionsCallFunctionResponseTypedDict",
     "Audio",
     "AudioTypedDict",
+    "BodyUploadFileKnowledgeKnowledgeBaseIDUploadPost",
+    "BodyUploadFileKnowledgeKnowledgeBaseIDUploadPostFile",
+    "BodyUploadFileKnowledgeKnowledgeBaseIDUploadPostFileTypedDict",
+    "BodyUploadFileKnowledgeKnowledgeBaseIDUploadPostTypedDict",
     "CallFunctionFunctionsFunctionIDCallPostRequest",
     "CallFunctionFunctionsFunctionIDCallPostRequestTypedDict",
     "CallFunctionRevisionFunctionsFunctionIDCallRevisionIDPostRequest",
@@ -1021,6 +1049,8 @@ __all__ = [
     "ExampleIn",
     "ExampleInTypedDict",
     "ExampleTypedDict",
+    "FeedbackInfo",
+    "FeedbackInfoTypedDict",
     "File",
     "FileDownloadURLResponse",
     "FileDownloadURLResponseTypedDict",
@@ -1263,6 +1293,12 @@ __all__ = [
     "StreamFunctionRevisionFunctionsFunctionIDCallStreamRevisionIDPostResponseTypedDict",
     "StreamingChunk",
     "StreamingChunkTypedDict",
+    "SubmitFeedbackRequest",
+    "SubmitFeedbackRequestTypedDict",
+    "SubmitFeedbackResponse",
+    "SubmitFeedbackResponseTypedDict",
+    "SubmitSpanFeedbackSpansSpanIDFeedbackPostRequest",
+    "SubmitSpanFeedbackSpansSpanIDFeedbackPostRequestTypedDict",
     "Syntax",
     "TModel",
     "TModel1",
@@ -1308,6 +1344,10 @@ __all__ = [
     "UpdateSpanResponseTypedDict",
     "UpdateSpanSpansSpanIDPatchRequest",
     "UpdateSpanSpansSpanIDPatchRequestTypedDict",
+    "UploadFileKnowledgeKnowledgeBaseIDUploadPostRequest",
+    "UploadFileKnowledgeKnowledgeBaseIDUploadPostRequestTypedDict",
+    "UploadFileResponse",
+    "UploadFileResponseTypedDict",
     "UsageAnalyticsUsageGetRequest",
     "UsageAnalyticsUsageGetRequestTypedDict",
     "Value1",
@@ -1346,6 +1386,10 @@ _dynamic_imports: dict[str, str] = {
     "AppAPIPublicV2FunctionsCallFunctionResponseTypedDict": ".app_api_public_v2_functions_callfunctionresponse",
     "Audio": ".audio",
     "AudioTypedDict": ".audio",
+    "BodyUploadFileKnowledgeKnowledgeBaseIDUploadPost": ".body_upload_file_knowledge_knowledge_base_id_upload_post",
+    "BodyUploadFileKnowledgeKnowledgeBaseIDUploadPostFile": ".body_upload_file_knowledge_knowledge_base_id_upload_post",
+    "BodyUploadFileKnowledgeKnowledgeBaseIDUploadPostFileTypedDict": ".body_upload_file_knowledge_knowledge_base_id_upload_post",
+    "BodyUploadFileKnowledgeKnowledgeBaseIDUploadPostTypedDict": ".body_upload_file_knowledge_knowledge_base_id_upload_post",
     "CallFunctionFunctionsFunctionIDCallPostRequest": ".call_function_functions_function_id_call_postop",
     "CallFunctionFunctionsFunctionIDCallPostRequestTypedDict": ".call_function_functions_function_id_call_postop",
     "CallFunctionRevisionFunctionsFunctionIDCallRevisionIDPostRequest": ".call_function_revision_functions_function_id_call_revision_id_postop",
@@ -1552,6 +1596,8 @@ _dynamic_imports: dict[str, str] = {
     "ExampleTypedDict": ".example",
     "ExampleIn": ".examplein",
     "ExampleInTypedDict": ".examplein",
+    "FeedbackInfo": ".feedbackinfo",
+    "FeedbackInfoTypedDict": ".feedbackinfo",
     "File": ".file",
     "FileTypedDict": ".file",
     "FileDownloadURLResponse": ".filedownloadurlresponse",
@@ -1792,6 +1838,12 @@ _dynamic_imports: dict[str, str] = {
     "StreamFunctionRevisionFunctionsFunctionIDCallStreamRevisionIDPostResponseBody": ".stream_function_revision_functions_function_id_call_stream_revision_id_postop",
     "StreamFunctionRevisionFunctionsFunctionIDCallStreamRevisionIDPostResponseBodyTypedDict": ".stream_function_revision_functions_function_id_call_stream_revision_id_postop",
     "StreamFunctionRevisionFunctionsFunctionIDCallStreamRevisionIDPostResponseTypedDict": ".stream_function_revision_functions_function_id_call_stream_revision_id_postop",
+    "SubmitSpanFeedbackSpansSpanIDFeedbackPostRequest": ".submit_span_feedback_spans_span_id_feedback_postop",
+    "SubmitSpanFeedbackSpansSpanIDFeedbackPostRequestTypedDict": ".submit_span_feedback_spans_span_id_feedback_postop",
+    "SubmitFeedbackRequest": ".submitfeedbackrequest",
+    "SubmitFeedbackRequestTypedDict": ".submitfeedbackrequest",
+    "SubmitFeedbackResponse": ".submitfeedbackresponse",
+    "SubmitFeedbackResponseTypedDict": ".submitfeedbackresponse",
     "TextProcessingConfiguration": ".textprocessingconfiguration",
     "TextProcessingConfigurationTypedDict": ".textprocessingconfiguration",
     "TModel": ".tmodel",
@@ -1836,6 +1888,10 @@ _dynamic_imports: dict[str, str] = {
     "UpdateSpanRequestTypedDict": ".updatespanrequest",
     "UpdateSpanResponse": ".updatespanresponse",
     "UpdateSpanResponseTypedDict": ".updatespanresponse",
+    "UploadFileKnowledgeKnowledgeBaseIDUploadPostRequest": ".upload_file_knowledge_knowledge_base_id_upload_postop",
+    "UploadFileKnowledgeKnowledgeBaseIDUploadPostRequestTypedDict": ".upload_file_knowledge_knowledge_base_id_upload_postop",
+    "UploadFileResponse": ".uploadfileresponse",
+    "UploadFileResponseTypedDict": ".uploadfileresponse",
     "UsageAnalyticsUsageGetRequest": ".usage_analytics_usage_getop",
     "UsageAnalyticsUsageGetRequestTypedDict": ".usage_analytics_usage_getop",
     "SearchContextSize": ".websearchoptions",
