@@ -10,7 +10,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class FunctionCallConfigurationInputTypedDict(TypedDict):
     invocation_few_shot_count: NotRequired[int]
-    r"""The number of few-shot examples to use for the call. The examples are selected using nearest neighbor search of the function's dataset for items that are similar to the input."""
+    r"""[DEPRECATED via /call] This field is ignored when passed via /call endpoint. The system enforces a default of 3. Configure via PATCH /v2/functions/{uuid} or the Platform UI instead. The number of few-shot examples to use for the call, selected using nearest neighbor search of the function's dataset."""
     beta_evaluation: NotRequired[Nullable[Any]]
     r"""[DEPRECATED] This field is ignored. Evaluation is controlled by observer_enabled."""
     invocation_structured_generation_max_attempts: NotRequired[int]
@@ -25,9 +25,13 @@ class FunctionCallConfigurationInputTypedDict(TypedDict):
 
 class FunctionCallConfigurationInput(BaseModel):
     invocation_few_shot_count: Annotated[
-        Optional[int], pydantic.Field(alias="invocation.few_shot.count")
-    ] = 0
-    r"""The number of few-shot examples to use for the call. The examples are selected using nearest neighbor search of the function's dataset for items that are similar to the input."""
+        Optional[int],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="invocation.few_shot.count",
+        ),
+    ] = 3
+    r"""[DEPRECATED via /call] This field is ignored when passed via /call endpoint. The system enforces a default of 3. Configure via PATCH /v2/functions/{uuid} or the Platform UI instead. The number of few-shot examples to use for the call, selected using nearest neighbor search of the function's dataset."""
 
     beta_evaluation: Annotated[
         OptionalNullable[Any], pydantic.Field(alias="beta.evaluation")

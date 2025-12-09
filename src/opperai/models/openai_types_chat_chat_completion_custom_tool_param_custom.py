@@ -4,9 +4,8 @@ from __future__ import annotations
 from .customformatgrammar import CustomFormatGrammar, CustomFormatGrammarTypedDict
 from .customformattext import CustomFormatText, CustomFormatTextTypedDict
 from opperai.types import BaseModel
-from opperai.utils import get_discriminator
 import pydantic
-from pydantic import Discriminator, Tag
+from pydantic import Field
 from typing import Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -17,11 +16,7 @@ FormatTypedDict = TypeAliasType(
 
 
 Format = Annotated[
-    Union[
-        Annotated[CustomFormatText, Tag("text")],
-        Annotated[CustomFormatGrammar, Tag("grammar")],
-    ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+    Union[CustomFormatText, CustomFormatGrammar], Field(discriminator="TYPE")
 ]
 
 

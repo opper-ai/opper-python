@@ -24,12 +24,13 @@ generation:
   schemas:
     allOfMergeStrategy: shallowMerge
   requestBodyFieldName: ""
+  persistentEdits: {}
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 python:
-  version: 1.6.5
+  version: 1.7.1
   additionalDependencies:
     dev: {}
     main: {}
@@ -70,6 +71,7 @@ python:
   outputModelSuffix: output
   packageManager: poetry
   packageName: opperai
+  preApplyUnionDiscriminators: false
   pytestFilterWarnings: []
   pytestTimeout: 0
   responseFormat: flat

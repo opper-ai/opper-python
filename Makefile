@@ -84,10 +84,9 @@ clean:
 		echo "❌ Error: This is not a git repository. Cannot clean safely."; \
 		exit 1; \
 	fi
-	git checkout HEAD -- src/ docs/ USAGE.md README.md README-PYPI.md test.py test_example_app.py || { \
-		echo "❌ Error: Failed to reset files. Make sure you're in a git repository with committed changes."; \
-		exit 1; \
-	}
+	@git checkout HEAD -- src/ docs/ USAGE.md README.md 2>/dev/null || true
+	@git checkout HEAD -- README-PYPI.md 2>/dev/null || true
+	@git checkout HEAD -- test.py test_example_app.py 2>/dev/null || true
 	@echo "✅ Cleaned successfully - files reset to last committed state"
 
 # Run tests

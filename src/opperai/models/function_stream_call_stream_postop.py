@@ -44,7 +44,11 @@ class StreamingChunkTypedDict(TypedDict):
     span_id: NotRequired[Nullable[str]]
     r"""Unique identifier for the execution span, included in the first streaming chunk for tracing"""
     chunk_type: NotRequired[Nullable[str]]
-    r"""Indicates the streaming mode: 'text' for unstructured streaming, 'json' for structured streaming with output_schema. Only present when delta content is included."""
+    r"""Indicates the streaming mode: 'text' for unstructured streaming, 'json' for structured streaming with output_schema, 'error' for error events. Only present when delta content is included."""
+    error_type: NotRequired[Nullable[str]]
+    r"""Error type when chunk_type is 'error'"""
+    error_message: NotRequired[Nullable[str]]
+    r"""Error message when chunk_type is 'error'"""
 
 
 class StreamingChunk(BaseModel):
@@ -78,12 +82,32 @@ class StreamingChunk(BaseModel):
     r"""Unique identifier for the execution span, included in the first streaming chunk for tracing"""
 
     chunk_type: OptionalNullable[str] = UNSET
-    r"""Indicates the streaming mode: 'text' for unstructured streaming, 'json' for structured streaming with output_schema. Only present when delta content is included."""
+    r"""Indicates the streaming mode: 'text' for unstructured streaming, 'json' for structured streaming with output_schema, 'error' for error events. Only present when delta content is included."""
+
+    error_type: OptionalNullable[str] = UNSET
+    r"""Error type when chunk_type is 'error'"""
+
+    error_message: OptionalNullable[str] = UNSET
+    r"""Error message when chunk_type is 'error'"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["delta", "json_path", "span_id", "chunk_type"]
-        nullable_fields = ["delta", "json_path", "span_id", "chunk_type"]
+        optional_fields = [
+            "delta",
+            "json_path",
+            "span_id",
+            "chunk_type",
+            "error_type",
+            "error_message",
+        ]
+        nullable_fields = [
+            "delta",
+            "json_path",
+            "span_id",
+            "chunk_type",
+            "error_type",
+            "error_message",
+        ]
         null_default_fields = []
 
         serialized = handler(self)
