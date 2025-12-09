@@ -1,5 +1,4 @@
 # LanguageModels
-(*language_models*)
 
 ## Overview
 

@@ -1,5 +1,4 @@
 # Knowledge
-(*knowledge*)
 
 ## Overview
 
@@ -12,6 +11,7 @@
 * [get_by_name](#get_by_name) - Get Knowledge Base By Name
 * [get_upload_url](#get_upload_url) - Get Upload Url
 * [register_file_upload](#register_file_upload) - Register File Upload
+* [upload_file_knowledge_knowledge_base_id_upload_post](#upload_file_knowledge_knowledge_base_id_upload_post) - Upload File
 * [delete_file](#delete_file) - Delete File From Knowledge Base
 * [get_file_download_url](#get_file_download_url) - Get File Download Url
 * [list_files](#list_files) - List Files
@@ -332,6 +332,63 @@ with Opper(
 ### Response
 
 **[models.RegisterFileUploadResponse](../../models/registerfileuploadresponse.md)**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.BadRequestError        | 400                           | application/json              |
+| errors.UnauthorizedError      | 401                           | application/json              |
+| errors.NotFoundError          | 404                           | application/json              |
+| errors.RequestValidationError | 422                           | application/json              |
+| errors.APIError               | 4XX, 5XX                      | \*/\*                         |
+
+## upload_file_knowledge_knowledge_base_id_upload_post
+
+Upload a file directly to a knowledge base.
+
+This is a simplified alternative to the three-step upload process
+(get_upload_url -> upload to S3 -> register_file). Use this endpoint
+for smaller files or when you prefer a simpler API.
+
+The file will be uploaded to S3 and queued for processing automatically.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="upload_file_knowledge__knowledge_base_id__upload_post" method="post" path="/knowledge/{knowledge_base_id}/upload" -->
+```python
+from opperai import Opper
+import os
+
+
+with Opper(
+    http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
+) as opper:
+
+    res = opper.knowledge.upload_file_knowledge_knowledge_base_id_upload_post(knowledge_base_id="68275f14-e70f-4536-be7e-03a877ce8be8", file={
+        "file_name": "example.file",
+        "content": open("example.file", "rb"),
+    }, chunk_size=2000, chunk_overlap=200, metadata="{\"category\": \"legal\", \"client\": \"acme\"}")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                           | Type                                                                                                                                | Required                                                                                                                            | Description                                                                                                                         | Example                                                                                                                             |
+| ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `knowledge_base_id`                                                                                                                 | *str*                                                                                                                               | :heavy_check_mark:                                                                                                                  | The id of the knowledge base to upload the file to                                                                                  |                                                                                                                                     |
+| `file`                                                                                                                              | [models.BodyUploadFileKnowledgeKnowledgeBaseIDUploadPostFile](../../models/bodyuploadfileknowledgeknowledgebaseiduploadpostfile.md) | :heavy_check_mark:                                                                                                                  | The file to upload                                                                                                                  |                                                                                                                                     |
+| `chunk_size`                                                                                                                        | *Optional[int]*                                                                                                                     | :heavy_minus_sign:                                                                                                                  | The chunk size to use for the document (number of characters)                                                                       |                                                                                                                                     |
+| `chunk_overlap`                                                                                                                     | *Optional[int]*                                                                                                                     | :heavy_minus_sign:                                                                                                                  | The chunk overlap to use for the document (number of characters)                                                                    |                                                                                                                                     |
+| `metadata`                                                                                                                          | *OptionalNullable[str]*                                                                                                             | :heavy_minus_sign:                                                                                                                  | Optional JSON object metadata to attach to the file                                                                                 | {"category": "legal", "client": "acme"}                                                                                             |
+| `retries`                                                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                    | :heavy_minus_sign:                                                                                                                  | Configuration to override the default retry behavior of the client.                                                                 |                                                                                                                                     |
+
+### Response
+
+**[models.UploadFileResponse](../../models/uploadfileresponse.md)**
 
 ### Errors
 

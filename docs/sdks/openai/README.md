@@ -1,5 +1,4 @@
 # Openai
-(*openai*)
 
 ## Overview
 

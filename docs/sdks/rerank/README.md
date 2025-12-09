@@ -1,5 +1,4 @@
 # Rerank
-(*rerank*)
 
 ## Overview
 

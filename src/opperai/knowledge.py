@@ -1572,6 +1572,276 @@ class Knowledge(BaseSDK):
 
         raise errors.APIError("Unexpected response received", http_res)
 
+    def upload_file_knowledge_knowledge_base_id_upload_post(
+        self,
+        *,
+        knowledge_base_id: str,
+        file: Union[
+            models.BodyUploadFileKnowledgeKnowledgeBaseIDUploadPostFile,
+            models.BodyUploadFileKnowledgeKnowledgeBaseIDUploadPostFileTypedDict,
+        ],
+        chunk_size: Optional[int] = 2000,
+        chunk_overlap: Optional[int] = 200,
+        metadata: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.UploadFileResponse:
+        r"""Upload File
+
+        Upload a file directly to a knowledge base.
+
+        This is a simplified alternative to the three-step upload process
+        (get_upload_url -> upload to S3 -> register_file). Use this endpoint
+        for smaller files or when you prefer a simpler API.
+
+        The file will be uploaded to S3 and queued for processing automatically.
+
+        :param knowledge_base_id: The id of the knowledge base to upload the file to
+        :param file: The file to upload
+        :param chunk_size: The chunk size to use for the document (number of characters)
+        :param chunk_overlap: The chunk overlap to use for the document (number of characters)
+        :param metadata: Optional JSON object metadata to attach to the file
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UploadFileKnowledgeKnowledgeBaseIDUploadPostRequest(
+            knowledge_base_id=knowledge_base_id,
+            body_upload_file_knowledge_knowledge_base_id_upload_post=models.BodyUploadFileKnowledgeKnowledgeBaseIDUploadPost(
+                file=utils.get_pydantic_model(
+                    file, models.BodyUploadFileKnowledgeKnowledgeBaseIDUploadPostFile
+                ),
+                chunk_size=chunk_size,
+                chunk_overlap=chunk_overlap,
+                metadata=metadata,
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/knowledge/{knowledge_base_id}/upload",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body_upload_file_knowledge_knowledge_base_id_upload_post,
+                False,
+                False,
+                "multipart",
+                models.BodyUploadFileKnowledgeKnowledgeBaseIDUploadPost,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="upload_file_knowledge__knowledge_base_id__upload_post",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["400", "401", "404", "422", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "201", "application/json"):
+            return unmarshal_json_response(models.UploadFileResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorData, http_res
+            )
+            raise errors.BadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorData, http_res
+            )
+            raise errors.UnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(errors.NotFoundErrorData, http_res)
+            raise errors.NotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RequestValidationErrorData, http_res
+            )
+            raise errors.RequestValidationError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def upload_file_knowledge_knowledge_base_id_upload_post_async(
+        self,
+        *,
+        knowledge_base_id: str,
+        file: Union[
+            models.BodyUploadFileKnowledgeKnowledgeBaseIDUploadPostFile,
+            models.BodyUploadFileKnowledgeKnowledgeBaseIDUploadPostFileTypedDict,
+        ],
+        chunk_size: Optional[int] = 2000,
+        chunk_overlap: Optional[int] = 200,
+        metadata: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.UploadFileResponse:
+        r"""Upload File
+
+        Upload a file directly to a knowledge base.
+
+        This is a simplified alternative to the three-step upload process
+        (get_upload_url -> upload to S3 -> register_file). Use this endpoint
+        for smaller files or when you prefer a simpler API.
+
+        The file will be uploaded to S3 and queued for processing automatically.
+
+        :param knowledge_base_id: The id of the knowledge base to upload the file to
+        :param file: The file to upload
+        :param chunk_size: The chunk size to use for the document (number of characters)
+        :param chunk_overlap: The chunk overlap to use for the document (number of characters)
+        :param metadata: Optional JSON object metadata to attach to the file
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UploadFileKnowledgeKnowledgeBaseIDUploadPostRequest(
+            knowledge_base_id=knowledge_base_id,
+            body_upload_file_knowledge_knowledge_base_id_upload_post=models.BodyUploadFileKnowledgeKnowledgeBaseIDUploadPost(
+                file=utils.get_pydantic_model(
+                    file, models.BodyUploadFileKnowledgeKnowledgeBaseIDUploadPostFile
+                ),
+                chunk_size=chunk_size,
+                chunk_overlap=chunk_overlap,
+                metadata=metadata,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/knowledge/{knowledge_base_id}/upload",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body_upload_file_knowledge_knowledge_base_id_upload_post,
+                False,
+                False,
+                "multipart",
+                models.BodyUploadFileKnowledgeKnowledgeBaseIDUploadPost,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="upload_file_knowledge__knowledge_base_id__upload_post",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["400", "401", "404", "422", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "201", "application/json"):
+            return unmarshal_json_response(models.UploadFileResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestErrorData, http_res
+            )
+            raise errors.BadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedErrorData, http_res
+            )
+            raise errors.UnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(errors.NotFoundErrorData, http_res)
+            raise errors.NotFoundError(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RequestValidationErrorData, http_res
+            )
+            raise errors.RequestValidationError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
     def delete_file(
         self,
         *,

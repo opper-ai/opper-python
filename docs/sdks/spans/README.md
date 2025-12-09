@@ -1,5 +1,4 @@
 # Spans
-(*spans*)
 
 ## Overview
 
@@ -10,6 +9,7 @@
 * [update](#update) - Update Span
 * [delete](#delete) - Delete Span
 * [save_examples](#save_examples) - Save To Dataset
+* [submit_span_feedback_spans_span_id_feedback_post](#submit_span_feedback_spans_span_id_feedback_post) - Submit Span Feedback
 
 ## create
 
@@ -130,7 +130,7 @@ with Opper(
     http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
 ) as opper:
 
-    res = opper.spans.update(span_id="77b258a2-45c1-4b87-a50c-9116bc8ed1d6", name="my span", start_time=parse_datetime("2025-11-28T13:52:31.359105Z"), type="email_tool", end_time=parse_datetime("2025-11-28T13:52:31.359201Z"), input="Hello, world!", output="Hello, world!", error="Exception: This is an error message", meta={
+    res = opper.spans.update(span_id="77b258a2-45c1-4b87-a50c-9116bc8ed1d6", name="my span", start_time=parse_datetime("2025-12-09T09:01:59.132568Z"), type="email_tool", end_time=parse_datetime("2025-12-09T09:01:59.132628Z"), input="Hello, world!", output="Hello, world!", error="Exception: This is an error message", meta={
         "key": "value",
     }, score=10)
 
@@ -145,9 +145,9 @@ with Opper(
 | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | `span_id`                                                                                                 | *str*                                                                                                     | :heavy_check_mark:                                                                                        | The ID of the span to update                                                                              |                                                                                                           |
 | `name`                                                                                                    | *OptionalNullable[str]*                                                                                   | :heavy_minus_sign:                                                                                        | The name of the span, something descriptive about the span that will be used to identify it when querying | my span                                                                                                   |
-| `start_time`                                                                                              | [date](https://docs.python.org/3/library/datetime.html#date-objects)                                      | :heavy_minus_sign:                                                                                        | The start time of the span in UTC                                                                         | 2025-11-28T13:52:31.359105Z                                                                               |
+| `start_time`                                                                                              | [date](https://docs.python.org/3/library/datetime.html#date-objects)                                      | :heavy_minus_sign:                                                                                        | The start time of the span in UTC                                                                         | 2025-12-09T09:01:59.132568Z                                                                               |
 | `type`                                                                                                    | *OptionalNullable[str]*                                                                                   | :heavy_minus_sign:                                                                                        | The type of the span                                                                                      | email_tool                                                                                                |
-| `end_time`                                                                                                | [date](https://docs.python.org/3/library/datetime.html#date-objects)                                      | :heavy_minus_sign:                                                                                        | The end time of the span in UTC                                                                           | 2025-11-28T13:52:31.359201Z                                                                               |
+| `end_time`                                                                                                | [date](https://docs.python.org/3/library/datetime.html#date-objects)                                      | :heavy_minus_sign:                                                                                        | The end time of the span in UTC                                                                           | 2025-12-09T09:01:59.132628Z                                                                               |
 | `input`                                                                                                   | *OptionalNullable[str]*                                                                                   | :heavy_minus_sign:                                                                                        | The input of the span                                                                                     | Hello, world!                                                                                             |
 | `output`                                                                                                  | *OptionalNullable[str]*                                                                                   | :heavy_minus_sign:                                                                                        | The output of the span                                                                                    | Hello, world!                                                                                             |
 | `error`                                                                                                   | *OptionalNullable[str]*                                                                                   | :heavy_minus_sign:                                                                                        | In case of an error, the error message                                                                    | Exception: This is an error message                                                                       |
@@ -241,6 +241,61 @@ with Opper(
 ### Response
 
 **[models.SaveToDatasetResponse](../../models/savetodatasetresponse.md)**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.BadRequestError        | 400                           | application/json              |
+| errors.UnauthorizedError      | 401                           | application/json              |
+| errors.NotFoundError          | 404                           | application/json              |
+| errors.RequestValidationError | 422                           | application/json              |
+| errors.APIError               | 4XX, 5XX                      | \*/\*                         |
+
+## submit_span_feedback_spans_span_id_feedback_post
+
+Submit human feedback for a span.
+
+This endpoint allows you to provide feedback (thumbs up/down) on a span's output.
+The feedback is stored on the associated generation and can trigger auto-save
+to the function's dataset based on the observer's configuration.
+
+- score=1.0: Positive feedback (thumbs up)
+- score=0.0: Negative feedback (thumbs down)
+- Intermediate values (e.g., 0.5) are supported for nuanced feedback
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="submit_span_feedback_spans__span_id__feedback_post" method="post" path="/spans/{span_id}/feedback" -->
+```python
+from opperai import Opper
+import os
+
+
+with Opper(
+    http_bearer=os.getenv("OPPER_HTTP_BEARER", ""),
+) as opper:
+
+    res = opper.spans.submit_span_feedback_spans_span_id_feedback_post(span_id="c1be9633-665b-418c-a08f-19cb9734dd23", score=1, comment="Great output, exactly what I needed")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          | Example                                                                              |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `span_id`                                                                            | *str*                                                                                | :heavy_check_mark:                                                                   | The ID of the span to provide feedback on                                            |                                                                                      |
+| `score`                                                                              | *float*                                                                              | :heavy_check_mark:                                                                   | Feedback score (0.0=negative, 1.0=positive)                                          | 1                                                                                    |
+| `comment`                                                                            | *OptionalNullable[str]*                                                              | :heavy_minus_sign:                                                                   | Optional comment explaining the feedback                                             | Great output, exactly what I needed                                                  |
+| `save_to_dataset`                                                                    | *OptionalNullable[bool]*                                                             | :heavy_minus_sign:                                                                   | Force save to dataset (True=force save, False=never save, None=use auto-save config) |                                                                                      |
+| `retries`                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                     | :heavy_minus_sign:                                                                   | Configuration to override the default retry behavior of the client.                  |                                                                                      |
+
+### Response
+
+**[models.SubmitFeedbackResponse](../../models/submitfeedbackresponse.md)**
 
 ### Errors
 
