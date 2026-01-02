@@ -33,6 +33,7 @@ if TYPE_CHECKING:
     from opperai.functions import Functions
     from opperai.knowledge import Knowledge
     from opperai.language_models import LanguageModels
+    from opperai.ocr import Ocr
     from opperai.openai import Openai
     from opperai.rerank import Rerank
     from opperai.spanmetrics import SpanMetrics
@@ -49,6 +50,7 @@ class Opper(BaseSDK):
     functions: "Functions"
     embeddings: "Embeddings"
     language_models: "LanguageModels"
+    ocr: "Ocr"
     openai: "Openai"
     rerank: "Rerank"
     analytics: "Analytics"
@@ -61,6 +63,7 @@ class Opper(BaseSDK):
         "functions": ("opperai.functions", "Functions"),
         "embeddings": ("opperai.embeddings", "Embeddings"),
         "language_models": ("opperai.language_models", "LanguageModels"),
+        "ocr": ("opperai.ocr", "Ocr"),
         "openai": ("opperai.openai", "Openai"),
         "rerank": ("opperai.rerank", "Rerank"),
         "analytics": ("opperai.analytics", "Analytics"),

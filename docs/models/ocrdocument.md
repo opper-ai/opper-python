@@ -1,0 +1,14 @@
+# OCRDocument
+
+Document specification for OCR processing.
+
+
+## Fields
+
+| Field                                                                       | Type                                                                        | Required                                                                    | Description                                                                 | Example                                                                     |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `type`                                                                      | *str*                                                                       | :heavy_check_mark:                                                          | Document type: 'document_url', 'image_url', or 'base64'                     | document_url                                                                |
+| `document_url`                                                              | *OptionalNullable[str]*                                                     | :heavy_minus_sign:                                                          | URL to the document (PDF or image) to process. Use with type='document_url' |                                                                             |
+| `image_url`                                                                 | *OptionalNullable[str]*                                                     | :heavy_minus_sign:                                                          | URL to an image to process. Use with type='image_url'                       |                                                                             |
+| `document_name`                                                             | *OptionalNullable[str]*                                                     | :heavy_minus_sign:                                                          | Name of the document. Use with type='base64'                                |                                                                             |
+| `content`                                                                   | *OptionalNullable[str]*                                                     | :heavy_minus_sign:                                                          | Base64-encoded content of the document. Use with type='base64'              |                                                                             |

@@ -11,9 +11,7 @@ from typing import Any, Optional
 class RequestValidationErrorData(BaseModel):
     detail: Any
     r"""Where the error occurred and the error message"""
-
     type: Optional[str] = "RequestValidationError"
-
     message: Optional[str] = "The request is invalid"
 
 

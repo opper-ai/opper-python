@@ -11,9 +11,7 @@ from typing import Any, Optional
 class NotFoundErrorData(BaseModel):
     detail: Any
     r"""The detail of the error"""
-
     type: Optional[str] = "NotFoundError"
-
     message: Optional[str] = "The resource was not found"
 
 

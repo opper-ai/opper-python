@@ -37,9 +37,9 @@ class BodyUploadFileKnowledgeKnowledgeBaseIDUploadPostFile(BaseModel):
 class BodyUploadFileKnowledgeKnowledgeBaseIDUploadPostTypedDict(TypedDict):
     file: BodyUploadFileKnowledgeKnowledgeBaseIDUploadPostFileTypedDict
     r"""The file to upload"""
-    chunk_size: NotRequired[int]
+    text_processing_chunk_size: NotRequired[int]
     r"""The chunk size to use for the document (number of characters)"""
-    chunk_overlap: NotRequired[int]
+    text_processing_chunk_overlap: NotRequired[int]
     r"""The chunk overlap to use for the document (number of characters)"""
     metadata: NotRequired[Nullable[str]]
     r"""Optional JSON object metadata to attach to the file"""
@@ -52,10 +52,18 @@ class BodyUploadFileKnowledgeKnowledgeBaseIDUploadPost(BaseModel):
     ]
     r"""The file to upload"""
 
-    chunk_size: Annotated[Optional[int], FieldMetadata(multipart=True)] = 2000
+    text_processing_chunk_size: Annotated[
+        Optional[int],
+        pydantic.Field(alias="text_processing.chunk_size"),
+        FieldMetadata(multipart=True),
+    ] = 2000
     r"""The chunk size to use for the document (number of characters)"""
 
-    chunk_overlap: Annotated[Optional[int], FieldMetadata(multipart=True)] = 200
+    text_processing_chunk_overlap: Annotated[
+        Optional[int],
+        pydantic.Field(alias="text_processing.chunk_overlap"),
+        FieldMetadata(multipart=True),
+    ] = 200
     r"""The chunk overlap to use for the document (number of characters)"""
 
     metadata: Annotated[OptionalNullable[str], FieldMetadata(multipart=True)] = UNSET
@@ -63,7 +71,11 @@ class BodyUploadFileKnowledgeKnowledgeBaseIDUploadPost(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["chunk_size", "chunk_overlap", "metadata"]
+        optional_fields = [
+            "text_processing.chunk_size",
+            "text_processing.chunk_overlap",
+            "metadata",
+        ]
         nullable_fields = ["metadata"]
         null_default_fields = []
 

@@ -351,6 +351,7 @@ if TYPE_CHECKING:
         DeleteKnowledgeBaseResponse,
         DeleteKnowledgeBaseResponseTypedDict,
     )
+    from .documentsegment import DocumentSegment, DocumentSegmentTypedDict
     from .example import Example, ExampleTypedDict
     from .examplein import ExampleIn, ExampleInTypedDict
     from .feedbackinfo import FeedbackInfo, FeedbackInfoTypedDict
@@ -401,6 +402,10 @@ if TYPE_CHECKING:
     from .get_dataset_entry_datasets_dataset_id_entries_entry_id_getop import (
         GetDatasetEntryDatasetsDatasetIDEntriesEntryIDGetRequest,
         GetDatasetEntryDatasetsDatasetIDEntriesEntryIDGetRequestTypedDict,
+    )
+    from .get_document_by_key_knowledge_knowledge_base_id_documents_document_key_getop import (
+        GetDocumentByKeyKnowledgeKnowledgeBaseIDDocumentsDocumentKeyGetRequest,
+        GetDocumentByKeyKnowledgeKnowledgeBaseIDDocumentsDocumentKeyGetRequestTypedDict,
     )
     from .get_file_download_url_knowledge_knowledge_base_id_files_file_id_download_url_getop import (
         GetFileDownloadURLKnowledgeKnowledgeBaseIDFilesFileIDDownloadURLGetRequest,
@@ -462,6 +467,7 @@ if TYPE_CHECKING:
         GetDatasetEntryResponse,
         GetDatasetEntryResponseTypedDict,
     )
+    from .getdocumentresponse import GetDocumentResponse, GetDocumentResponseTypedDict
     from .getfunctionresponse import GetFunctionResponse, GetFunctionResponseTypedDict
     from .getknowledgebaseresponse import (
         GetKnowledgeBaseResponse,
@@ -551,6 +557,10 @@ if TYPE_CHECKING:
         ListModelAliasesResponseItem,
         ListModelAliasesResponseItemTypedDict,
     )
+    from .listocrmodelsresponse import (
+        ListOCRModelsResponse,
+        ListOCRModelsResponseTypedDict,
+    )
     from .listrerankmodelsresponse import (
         ListRerankModelsResponse,
         ListRerankModelsResponseTypedDict,
@@ -561,7 +571,16 @@ if TYPE_CHECKING:
     )
     from .listtracesresponse import ListTracesResponse, ListTracesResponseTypedDict
     from .meta import Meta, MetaTypedDict
+    from .mistralocrextra import MistralOCRExtra, MistralOCRExtraTypedDict
     from .model import Model, ModelTypedDict
+    from .ocrcost import OCRCost, OCRCostTypedDict
+    from .ocrdocument import OCRDocument, OCRDocumentTypedDict
+    from .ocrpagedimensions import OCRPageDimensions, OCRPageDimensionsTypedDict
+    from .ocrpageimage import OCRPageImage, OCRPageImageTypedDict
+    from .ocrpageresult import OCRPageResult, OCRPageResultTypedDict
+    from .ocrrequestmodel import OCRRequestModel, OCRRequestModelTypedDict
+    from .ocrresponsemodel import OCRResponseModel, OCRResponseModelTypedDict
+    from .ocrusageinfo import OCRUsageInfo, OCRUsageInfoTypedDict
     from .op import Op
     from .openai_types_chat_chat_completion_custom_tool_param_custom import (
         Format,
@@ -620,6 +639,10 @@ if TYPE_CHECKING:
     from .paginatedresponse_listmodelaliasesresponseitem_ import (
         PaginatedResponseListModelAliasesResponseItem,
         PaginatedResponseListModelAliasesResponseItemTypedDict,
+    )
+    from .paginatedresponse_listocrmodelsresponse_ import (
+        PaginatedResponseListOCRModelsResponse,
+        PaginatedResponseListOCRModelsResponseTypedDict,
     )
     from .paginatedresponse_listrerankmodelsresponse_ import (
         PaginatedResponseListRerankModelsResponse,
@@ -1045,6 +1068,8 @@ __all__ = [
     "Delta",
     "DeltaTypedDict",
     "Detail",
+    "DocumentSegment",
+    "DocumentSegmentTypedDict",
     "Example",
     "ExampleIn",
     "ExampleInTypedDict",
@@ -1090,6 +1115,10 @@ __all__ = [
     "GetDatasetEntryDatasetsDatasetIDEntriesEntryIDGetRequestTypedDict",
     "GetDatasetEntryResponse",
     "GetDatasetEntryResponseTypedDict",
+    "GetDocumentByKeyKnowledgeKnowledgeBaseIDDocumentsDocumentKeyGetRequest",
+    "GetDocumentByKeyKnowledgeKnowledgeBaseIDDocumentsDocumentKeyGetRequestTypedDict",
+    "GetDocumentResponse",
+    "GetDocumentResponseTypedDict",
     "GetFileDownloadURLKnowledgeKnowledgeBaseIDFilesFileIDDownloadURLGetRequest",
     "GetFileDownloadURLKnowledgeKnowledgeBaseIDFilesFileIDDownloadURLGetRequestTypedDict",
     "GetFunctionByNameFunctionsByNameNameGetRequest",
@@ -1174,6 +1203,8 @@ __all__ = [
     "ListModelAliasesResponseItemTypedDict",
     "ListModelsModelsGetRequest",
     "ListModelsModelsGetRequestTypedDict",
+    "ListOCRModelsResponse",
+    "ListOCRModelsResponseTypedDict",
     "ListRerankModelsResponse",
     "ListRerankModelsResponseTypedDict",
     "ListSpanMetricsResponse",
@@ -1184,9 +1215,27 @@ __all__ = [
     "ListTracesTracesGetRequestTypedDict",
     "Meta",
     "MetaTypedDict",
+    "MistralOCRExtra",
+    "MistralOCRExtraTypedDict",
     "Mode",
     "Model",
     "ModelTypedDict",
+    "OCRCost",
+    "OCRCostTypedDict",
+    "OCRDocument",
+    "OCRDocumentTypedDict",
+    "OCRPageDimensions",
+    "OCRPageDimensionsTypedDict",
+    "OCRPageImage",
+    "OCRPageImageTypedDict",
+    "OCRPageResult",
+    "OCRPageResultTypedDict",
+    "OCRRequestModel",
+    "OCRRequestModelTypedDict",
+    "OCRResponseModel",
+    "OCRResponseModelTypedDict",
+    "OCRUsageInfo",
+    "OCRUsageInfoTypedDict",
     "Op",
     "OpenaiTypesChatChatCompletionCustomToolParamCustom",
     "OpenaiTypesChatChatCompletionCustomToolParamCustomTypedDict",
@@ -1216,6 +1265,8 @@ __all__ = [
     "PaginatedResponseListLanguageModelsResponseTypedDict",
     "PaginatedResponseListModelAliasesResponseItem",
     "PaginatedResponseListModelAliasesResponseItemTypedDict",
+    "PaginatedResponseListOCRModelsResponse",
+    "PaginatedResponseListOCRModelsResponseTypedDict",
     "PaginatedResponseListRerankModelsResponse",
     "PaginatedResponseListRerankModelsResponseTypedDict",
     "PaginatedResponseListSpanMetricsResponse",
@@ -1592,6 +1643,8 @@ _dynamic_imports: dict[str, str] = {
     "DeleteKnowledgeBaseRequestTypedDict": ".deleteknowledgebaserequest",
     "DeleteKnowledgeBaseResponse": ".deleteknowledgebaseresponse",
     "DeleteKnowledgeBaseResponseTypedDict": ".deleteknowledgebaseresponse",
+    "DocumentSegment": ".documentsegment",
+    "DocumentSegmentTypedDict": ".documentsegment",
     "Example": ".example",
     "ExampleTypedDict": ".example",
     "ExampleIn": ".examplein",
@@ -1636,6 +1689,8 @@ _dynamic_imports: dict[str, str] = {
     "GetCustomModelModelsCustomModelIDGetRequestTypedDict": ".get_custom_model_models_custom_model_id_getop",
     "GetDatasetEntryDatasetsDatasetIDEntriesEntryIDGetRequest": ".get_dataset_entry_datasets_dataset_id_entries_entry_id_getop",
     "GetDatasetEntryDatasetsDatasetIDEntriesEntryIDGetRequestTypedDict": ".get_dataset_entry_datasets_dataset_id_entries_entry_id_getop",
+    "GetDocumentByKeyKnowledgeKnowledgeBaseIDDocumentsDocumentKeyGetRequest": ".get_document_by_key_knowledge_knowledge_base_id_documents_document_key_getop",
+    "GetDocumentByKeyKnowledgeKnowledgeBaseIDDocumentsDocumentKeyGetRequestTypedDict": ".get_document_by_key_knowledge_knowledge_base_id_documents_document_key_getop",
     "GetFileDownloadURLKnowledgeKnowledgeBaseIDFilesFileIDDownloadURLGetRequest": ".get_file_download_url_knowledge_knowledge_base_id_files_file_id_download_url_getop",
     "GetFileDownloadURLKnowledgeKnowledgeBaseIDFilesFileIDDownloadURLGetRequestTypedDict": ".get_file_download_url_knowledge_knowledge_base_id_files_file_id_download_url_getop",
     "GetFunctionByNameFunctionsByNameNameGetRequest": ".get_function_by_name_functions_by_name_name_getop",
@@ -1666,6 +1721,8 @@ _dynamic_imports: dict[str, str] = {
     "GetDatasetEntriesResponseTypedDict": ".getdatasetentriesresponse",
     "GetDatasetEntryResponse": ".getdatasetentryresponse",
     "GetDatasetEntryResponseTypedDict": ".getdatasetentryresponse",
+    "GetDocumentResponse": ".getdocumentresponse",
+    "GetDocumentResponseTypedDict": ".getdocumentresponse",
     "GetFunctionResponse": ".getfunctionresponse",
     "GetFunctionResponseTypedDict": ".getfunctionresponse",
     "GetKnowledgeBaseResponse": ".getknowledgebaseresponse",
@@ -1725,6 +1782,8 @@ _dynamic_imports: dict[str, str] = {
     "ListLanguageModelsResponseTypedDict": ".listlanguagemodelsresponse",
     "ListModelAliasesResponseItem": ".listmodelaliasesresponseitem",
     "ListModelAliasesResponseItemTypedDict": ".listmodelaliasesresponseitem",
+    "ListOCRModelsResponse": ".listocrmodelsresponse",
+    "ListOCRModelsResponseTypedDict": ".listocrmodelsresponse",
     "ListRerankModelsResponse": ".listrerankmodelsresponse",
     "ListRerankModelsResponseTypedDict": ".listrerankmodelsresponse",
     "ListSpanMetricsResponse": ".listspanmetricsresponse",
@@ -1733,8 +1792,26 @@ _dynamic_imports: dict[str, str] = {
     "ListTracesResponseTypedDict": ".listtracesresponse",
     "Meta": ".meta",
     "MetaTypedDict": ".meta",
+    "MistralOCRExtra": ".mistralocrextra",
+    "MistralOCRExtraTypedDict": ".mistralocrextra",
     "Model": ".model",
     "ModelTypedDict": ".model",
+    "OCRCost": ".ocrcost",
+    "OCRCostTypedDict": ".ocrcost",
+    "OCRDocument": ".ocrdocument",
+    "OCRDocumentTypedDict": ".ocrdocument",
+    "OCRPageDimensions": ".ocrpagedimensions",
+    "OCRPageDimensionsTypedDict": ".ocrpagedimensions",
+    "OCRPageImage": ".ocrpageimage",
+    "OCRPageImageTypedDict": ".ocrpageimage",
+    "OCRPageResult": ".ocrpageresult",
+    "OCRPageResultTypedDict": ".ocrpageresult",
+    "OCRRequestModel": ".ocrrequestmodel",
+    "OCRRequestModelTypedDict": ".ocrrequestmodel",
+    "OCRResponseModel": ".ocrresponsemodel",
+    "OCRResponseModelTypedDict": ".ocrresponsemodel",
+    "OCRUsageInfo": ".ocrusageinfo",
+    "OCRUsageInfoTypedDict": ".ocrusageinfo",
     "Op": ".op",
     "Format": ".openai_types_chat_chat_completion_custom_tool_param_custom",
     "FormatTypedDict": ".openai_types_chat_chat_completion_custom_tool_param_custom",
@@ -1766,6 +1843,8 @@ _dynamic_imports: dict[str, str] = {
     "PaginatedResponseListLanguageModelsResponseTypedDict": ".paginatedresponse_listlanguagemodelsresponse_",
     "PaginatedResponseListModelAliasesResponseItem": ".paginatedresponse_listmodelaliasesresponseitem_",
     "PaginatedResponseListModelAliasesResponseItemTypedDict": ".paginatedresponse_listmodelaliasesresponseitem_",
+    "PaginatedResponseListOCRModelsResponse": ".paginatedresponse_listocrmodelsresponse_",
+    "PaginatedResponseListOCRModelsResponseTypedDict": ".paginatedresponse_listocrmodelsresponse_",
     "PaginatedResponseListRerankModelsResponse": ".paginatedresponse_listrerankmodelsresponse_",
     "PaginatedResponseListRerankModelsResponseTypedDict": ".paginatedresponse_listrerankmodelsresponse_",
     "PaginatedResponseListSpanMetricsResponse": ".paginatedresponse_listspanmetricsresponse_",

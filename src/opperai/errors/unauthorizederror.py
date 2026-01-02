@@ -11,9 +11,7 @@ from typing import Any, Optional
 class UnauthorizedErrorData(BaseModel):
     detail: Any
     r"""The detail of the error"""
-
     type: Optional[str] = "UnauthorizedError"
-
     message: Optional[str] = "The request is unauthorized"
 
 
