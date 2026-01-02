@@ -11,9 +11,7 @@ from typing import Any, Optional
 class BadRequestErrorData(BaseModel):
     detail: Any
     r"""The detail of the error"""
-
     type: Optional[str] = "BadRequestError"
-
     message: Optional[str] = "The request is invalid"
 
 

@@ -6,34 +6,38 @@ from pydantic import model_serializer
 from typing_extensions import NotRequired, TypedDict
 
 
-class SubmitFeedbackResponseTypedDict(TypedDict):
-    span_id: str
-    r"""The ID of the span"""
-    score: float
-    r"""The feedback score that was submitted"""
-    example_saved: bool
-    r"""Whether the example was saved to the dataset"""
-    comment: NotRequired[Nullable[str]]
-    r"""The feedback comment that was submitted"""
+class ListOCRModelsResponseTypedDict(TypedDict):
+    r"""Response model for listing OCR models."""
+
+    hosting_provider: str
+    r"""The hosting provider of the model"""
+    name: str
+    r"""The name of the model"""
+    location: str
+    r"""The location of the model"""
+    cost_per_page: NotRequired[Nullable[float]]
+    r"""The cost in USD per page processed"""
 
 
-class SubmitFeedbackResponse(BaseModel):
-    span_id: str
-    r"""The ID of the span"""
+class ListOCRModelsResponse(BaseModel):
+    r"""Response model for listing OCR models."""
 
-    score: float
-    r"""The feedback score that was submitted"""
+    hosting_provider: str
+    r"""The hosting provider of the model"""
 
-    example_saved: bool
-    r"""Whether the example was saved to the dataset"""
+    name: str
+    r"""The name of the model"""
 
-    comment: OptionalNullable[str] = UNSET
-    r"""The feedback comment that was submitted"""
+    location: str
+    r"""The location of the model"""
+
+    cost_per_page: OptionalNullable[float] = UNSET
+    r"""The cost in USD per page processed"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["comment"]
-        nullable_fields = ["comment"]
+        optional_fields = ["cost_per_page"]
+        nullable_fields = ["cost_per_page"]
         null_default_fields = []
 
         serialized = handler(self)

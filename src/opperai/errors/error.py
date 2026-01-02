@@ -10,9 +10,7 @@ from typing import Any, Optional
 
 class ErrorData(BaseModel):
     type: str
-
     message: str
-
     detail: Any
 
 

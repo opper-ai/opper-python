@@ -6,34 +6,28 @@ from pydantic import model_serializer
 from typing_extensions import NotRequired, TypedDict
 
 
-class SubmitFeedbackResponseTypedDict(TypedDict):
-    span_id: str
-    r"""The ID of the span"""
-    score: float
-    r"""The feedback score that was submitted"""
-    example_saved: bool
-    r"""Whether the example was saved to the dataset"""
-    comment: NotRequired[Nullable[str]]
-    r"""The feedback comment that was submitted"""
+class OCRUsageInfoTypedDict(TypedDict):
+    r"""Usage information for OCR processing."""
+
+    pages_processed: int
+    r"""Number of pages processed"""
+    doc_size_bytes: NotRequired[Nullable[int]]
+    r"""Size of the document in bytes"""
 
 
-class SubmitFeedbackResponse(BaseModel):
-    span_id: str
-    r"""The ID of the span"""
+class OCRUsageInfo(BaseModel):
+    r"""Usage information for OCR processing."""
 
-    score: float
-    r"""The feedback score that was submitted"""
+    pages_processed: int
+    r"""Number of pages processed"""
 
-    example_saved: bool
-    r"""Whether the example was saved to the dataset"""
-
-    comment: OptionalNullable[str] = UNSET
-    r"""The feedback comment that was submitted"""
+    doc_size_bytes: OptionalNullable[int] = UNSET
+    r"""Size of the document in bytes"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["comment"]
-        nullable_fields = ["comment"]
+        optional_fields = ["doc_size_bytes"]
+        nullable_fields = ["doc_size_bytes"]
         null_default_fields = []
 
         serialized = handler(self)

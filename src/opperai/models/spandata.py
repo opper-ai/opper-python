@@ -3,7 +3,7 @@
 from __future__ import annotations
 from opperai.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List
+from typing import Any, Dict, List
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -28,6 +28,8 @@ class SpanDataTypedDict(TypedDict):
     r"""The id of the generation of the span"""
     observations: NotRequired[Nullable[str]]
     r"""The observations of the span in case of a generation span"""
+    scorer_context: NotRequired[Nullable[Dict[str, Any]]]
+    r"""Detailed scorer breakdown with individual scorer results for expandable view"""
 
 
 class SpanData(BaseModel):
@@ -61,6 +63,9 @@ class SpanData(BaseModel):
     observations: OptionalNullable[str] = UNSET
     r"""The observations of the span in case of a generation span"""
 
+    scorer_context: OptionalNullable[Dict[str, Any]] = UNSET
+    r"""Detailed scorer breakdown with individual scorer results for expandable view"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -74,6 +79,7 @@ class SpanData(BaseModel):
             "score",
             "generation_id",
             "observations",
+            "scorer_context",
         ]
         nullable_fields = [
             "input",
@@ -86,6 +92,7 @@ class SpanData(BaseModel):
             "score",
             "generation_id",
             "observations",
+            "scorer_context",
         ]
         null_default_fields = []
 

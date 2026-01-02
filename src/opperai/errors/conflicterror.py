@@ -11,9 +11,7 @@ from typing import Any, Optional
 class ConflictErrorData(BaseModel):
     detail: Any
     r"""The detail of the error"""
-
     type: Optional[str] = "ConflictError"
-
     message: Optional[str] = "The resource already exists"
 
 

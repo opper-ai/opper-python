@@ -6,34 +6,33 @@ from pydantic import model_serializer
 from typing_extensions import NotRequired, TypedDict
 
 
-class SubmitFeedbackResponseTypedDict(TypedDict):
-    span_id: str
-    r"""The ID of the span"""
-    score: float
-    r"""The feedback score that was submitted"""
-    example_saved: bool
-    r"""Whether the example was saved to the dataset"""
-    comment: NotRequired[Nullable[str]]
-    r"""The feedback comment that was submitted"""
+class OCRPageDimensionsTypedDict(TypedDict):
+    r"""Dimensions of a processed page."""
+
+    dpi: NotRequired[Nullable[int]]
+    r"""DPI of the page"""
+    height: NotRequired[Nullable[int]]
+    r"""Height in pixels"""
+    width: NotRequired[Nullable[int]]
+    r"""Width in pixels"""
 
 
-class SubmitFeedbackResponse(BaseModel):
-    span_id: str
-    r"""The ID of the span"""
+class OCRPageDimensions(BaseModel):
+    r"""Dimensions of a processed page."""
 
-    score: float
-    r"""The feedback score that was submitted"""
+    dpi: OptionalNullable[int] = UNSET
+    r"""DPI of the page"""
 
-    example_saved: bool
-    r"""Whether the example was saved to the dataset"""
+    height: OptionalNullable[int] = UNSET
+    r"""Height in pixels"""
 
-    comment: OptionalNullable[str] = UNSET
-    r"""The feedback comment that was submitted"""
+    width: OptionalNullable[int] = UNSET
+    r"""Width in pixels"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["comment"]
-        nullable_fields = ["comment"]
+        optional_fields = ["dpi", "height", "width"]
+        nullable_fields = ["dpi", "height", "width"]
         null_default_fields = []
 
         serialized = handler(self)
