@@ -1,9 +1,8 @@
 # Opper Python SDK
 
 > [!IMPORTANT]
-> **This SDK is no longer maintained.** Use `opperai` 2.x or later (`pip install -U opperai`).
-> See **https://docs.opper.ai** for current best practices on using Opper. The SDKs now live at https://github.com/opper-ai/opper-sdks.
-> This repository is archived and will not receive new patches or releases.
+> **This SDK is no longer maintained.** It is archived and will not receive new patches or releases.
+> See **https://docs.opper.ai** for current best practices on using Opper.
 
 This is the Opper Python SDK. See below for getting started, and the [docs](https://docs.opper.ai) for more information. The SDK has builtin documentation and examples in function docstrings, which should be visible in your code editor as you are using the functions.
 
